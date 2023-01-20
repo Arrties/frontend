@@ -1,16 +1,10 @@
 import Layout from '@components/common/Layout';
-import React, { useState, useEffect } from 'react';
 import Navigate from '@components/common/Navigate';
 import tw from 'tailwind-styled-components';
 import { useRouter } from 'next/router';
 import PickArtist from '@components/profile/pick/PickArtist';
 import useGetPick from '@hooks/queries/useGetPick';
-
-interface PickArtistForm {
-  id: string;
-  nickname: string;
-  education: string;
-}
+import Button from 'stories/Button';
 
 interface defaultProps {
   [key: string]: any;
@@ -22,9 +16,7 @@ w-full flex-col divide-y-[1px] divide-[#EDEDED]
 
 export default function Pick() {
   const router = useRouter();
-
   const { pickList } = useGetPick();
-  console.log(pickList);
 
   return (
     <Layout>
@@ -35,16 +27,27 @@ export default function Pick() {
           router.back();
         }}
       />
-
       <PickContainer>
-        {pickList?.map((pickArtist: PickArtistForm) => (
-          <PickArtist
-            key={pickArtist?.id}
-            id={pickArtist?.id}
-            nickname={pickArtist?.nickname}
-            education={pickArtist?.education}
-          />
-        ))}
+        {pickList?.length ? (
+          pickList.map((pick: Member) => (
+            <PickArtist
+              key={pick.userId}
+              id={pick.userId}
+              nickname={pick.nickname}
+              education={pick.education}
+            />
+          ))
+        ) : (
+          <div>
+            <div className="w-full h-[98px] flex justify-center items-center text-14">
+              픽한 작가가 없습니다.
+            </div>
+            <Button
+              text="작가 픽 하러 가기"
+              onClick={() => router.push('/home')}
+            />
+          </div>
+        )}
       </PickContainer>
     </Layout>
   );

@@ -46,7 +46,7 @@ export default function Input({
         {...register}
         {...rest}
       />
-      {unit && <span className="absolute right-4 top-3">{unit}</span>}
+      {unit && <span className="absolute right-4 bottom-4">{unit}</span>}
     </InputBox>
   );
 }

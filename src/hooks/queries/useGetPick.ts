@@ -1,10 +1,9 @@
 import { useQuery } from 'react-query';
 import { useState } from 'react';
-import { Member } from 'types/user';
 import instance from '@apis/_axios/instance';
 
 const useGetPick = () => {
-  const [pickList, setPickList] = useState<Member>();
+  const [pickList, setPickList] = useState<Member[]>();
 
   const query = useQuery(
     'useGetPick',

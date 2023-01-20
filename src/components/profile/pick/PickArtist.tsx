@@ -6,13 +6,11 @@ import { useRouter } from 'next/router';
 interface DefaultProps {
   [key: string]: any;
 }
-interface PickArtistProps {
-  key: string;
 
 interface PickArtistForm {
   id: string;
-  nickname: string;
-  education: string;
+  nickname?: string;
+  education?: string;
 }
 
 const PickArtistContainer = tw.div<DefaultProps>`

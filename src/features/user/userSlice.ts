@@ -1,5 +1,4 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { Artist, User } from 'types/user';
 
 interface UserState extends User, Artist {
   isApprovePromotion: boolean;

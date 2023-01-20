@@ -5,11 +5,12 @@ import { useRouter } from 'next/router';
 import Image from 'next/image';
 import { useForm } from 'react-hook-form';
 import authApi from '@apis/auth/authApi';
+import { getToken, setToken } from '@utils/localStorage/token';
 
 interface FileForm {
   file: any;
   fileName: string;
-  fileSize: number;
+  fileSize: string;
 }
 
 const formatBytes = (bytes, decimals = 1) => {
@@ -23,28 +24,33 @@ const formatBytes = (bytes, decimals = 1) => {
 
 export default function Register() {
   const router = useRouter();
-  const {
-    register,
-    formState: { errors },
-    watch,
-  } = useForm<FileForm>();
+  const { register, watch } = useForm<FileForm>();
   const [fileState, setFileState] = useState<FileForm[]>([]);
   const handleLeftButton = () => {
     router.back();
   };
+
   const handleRightButton = async () => {
-    if (!fileState.file) return;
+    if (!fileState) return;
     const res = await authApi.patchRole();
-    if (res.status === 200) router.push('/profile/register/complete');
+    if (res.status === 200) {
+      const token = getToken();
+      token.roles = 'ROLE_ARTIST';
+      if (token) setToken(token);
+      router.push('/profile/register/complete');
+    }
   };
   const file = watch('file');
   useEffect(() => {
     if (file?.length > 0) {
-      setFileState({
-        file: file[0],
-        fileName: file[0].name,
-        fileSize: formatBytes(file[0].size),
-      });
+      setFileState((prev) => [
+        ...prev,
+        {
+          file: file[0],
+          fileName: file[0].name,
+          fileSize: formatBytes(file[0].size),
+        },
+      ]);
     }
   }, [file]);
   const handleDelete = () => {
@@ -76,7 +82,7 @@ export default function Register() {
       </section>
       <section className="mt-[9rem] ">
         <p className="text-16 font-bold">아띠즈 작가 인증</p>
-        {fileState.file ? (
+        {fileState[0]?.file ? (
           <div className="my-3 w-full h-[6rem] border border-[#DBDBDB] rounded-xl flex items-center px-3">
             <Image
               alt="document_upload"
@@ -86,8 +92,8 @@ export default function Register() {
               className="mr-3"
             />
             <div className="flex  flex-col">
-              <p className="text-14 ">{fileState?.fileName}</p>
-              <p className="text-10">{fileState?.fileSize}/15MB</p>
+              <p className="text-14 ">{fileState[0]?.fileName}</p>
+              <p className="text-10">{fileState[0]?.fileSize}/15MB</p>
             </div>
             <Image
               alt="trash_can"

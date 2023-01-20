@@ -2,7 +2,6 @@ import { useMutation } from 'react-query';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import instance from '@apis/_axios/instance';
-import { Member } from 'types/user';
 
 const useUserJoin = () => {
   const router = useRouter();
