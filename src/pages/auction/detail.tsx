@@ -1,18 +1,17 @@
-import Button from '@components/common/Button'
-import DivisionBar from '@components/common/DivisionBar'
-import ErrorMessage from '@components/common/ErrorMessage'
-import Input from '@components/common/Input'
-import Layout from '@components/common/Layout'
-import Navigate from '@components/common/Navigate'
-import Image from 'next/image'
-import React from 'react'
-import tw from 'tailwind-styled-components'
-import { useRouter } from 'next/router'
-import { useForm } from 'react-hook-form'
+import Button from '@components/common/Button';
+import DivisionBar from '@components/common/DivisionBar';
+import ErrorMessage from '@components/common/ErrorMessage';
+import Input from '@components/common/Input';
+import Layout from '@components/common/Layout';
+import Navigate from '@components/common/Navigate';
+import Image from 'next/image';
+import React from 'react';
+import { useRouter } from 'next/router';
+import { useForm } from 'react-hook-form';
 
 interface inputForm {
+  singlePrice: number;
   autoPrice: number;
-  firstPrice: number;
 }
 
 export default function Detail() {
@@ -21,13 +20,11 @@ export default function Detail() {
     register,
     handleSubmit,
     formState: { errors },
-    watch,
-    setValue,
   } = useForm<inputForm>();
 
-  const onSubmit = (form: inputForm) => {};
-  // watch('name')
-  // onSubmit={handleSubmit(onSubmit)}
+  const onSubmit = (form: inputForm) => {
+    console.log(form);
+  };
 
   const handleRightButton = () => {
     router.push('/auction');
@@ -84,8 +81,8 @@ export default function Detail() {
             호가표
           </span>
         </article>
-        <article>
-          <table className="w-full text-center text-14">
+        <table>
+          <tbody className="w-full text-center text-14">
             <tr className="h-7">
               <td>이름</td>
               <td className="font-bold">금액</td>
@@ -116,11 +113,11 @@ export default function Detail() {
               <td>2022-12-16</td>
               <td>11:38:02</td>
             </tr>
-          </table>
-        </article>
+          </tbody>
+        </table>
       </section>
       <DivisionBar className="mt-10" />
-      <section className="my-[30px]">
+      <form className="my-[30px]" onSubmit={handleSubmit(onSubmit)}>
         <article>
           <p className="text-14 font-bold">응찰하기</p>
           <p className="text-[#FF3120] text-10">
@@ -133,18 +130,14 @@ export default function Detail() {
               type="text"
               placeholder="금액을 입력해주세요."
               register={{
-                ...register('singleOrder', {
+                ...register('singlePrice', {
                   required: false,
-                  pattern: {
-                    value: '',
-                    message: 'dd',
-                  },
                 }),
               }}
               className="h-[42px]"
             />
-            {errors.confirmPassword && (
-              <ErrorMessage message={errors.password.message} />
+            {errors.singlePrice && (
+              <ErrorMessage message={errors.singlePrice.message} />
             )}
           </div>
           <div className="w-4/12 border border-[#D8D8D8] h-[42px] text-14 rounded-[4px] flex items-center box-border justify-center font-bold ">
@@ -159,26 +152,20 @@ export default function Detail() {
               register={{
                 ...register('autoPrice', {
                   required: false,
-                  pattern: {
-                    value: '',
-                    message: 'dd',
-                  },
                 }),
               }}
               className="h-[42px]"
             />
-            {errors.confirmPassword && (
-              <ErrorMessage message={errors.password.message} />
+            {errors.autoPrice && (
+              <ErrorMessage message={errors.autoPrice.message} />
             )}
           </div>
           <div className="w-4/12 border border-[#D8D8D8] h-[42px] text-14 rounded-[4px] flex items-center box-border justify-center font-bold ">
             자동 응찰
           </div>
         </article>
-      </section>
-      <section>
-        <Button text="확인" />
-      </section>
+        <Button text="확인" className="mt-7" />
+      </form>
     </Layout>
   );
 }
