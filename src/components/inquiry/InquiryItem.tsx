@@ -1,5 +1,5 @@
-import { Disclosure } from '@headlessui/react';
-import Image from 'next/image';
+import Image from 'next/image'
+import { Disclosure } from '@headlessui/react'
 
 interface InquiryItemForm {
   key: string;
