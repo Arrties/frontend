@@ -16,6 +16,7 @@
     "incremental": true,
     "isolatedModules": true,
     "baseUrl": "src",
+    "typeRoots": ["node_modules/@types", "src/@types"],
     "paths": {
       "@components/*": ["./components/*"],
       "@apis/*": ["./apis/*"],
