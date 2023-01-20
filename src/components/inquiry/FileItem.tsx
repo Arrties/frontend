@@ -1,6 +1,6 @@
-import { makeBlob } from '@utils/makeBlob';
-import Image from 'next/image';
-import React, { useState } from 'react';
+import Image from 'next/image'
+import { makeBlob } from '@utils/makeBlob'
+
 interface FileItemForm {
   file: any;
   key: string;
