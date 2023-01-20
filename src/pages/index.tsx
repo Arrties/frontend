@@ -8,6 +8,6 @@ if (process.env.NEXT_PUBLIC_API_MOCKING === 'enabled') {
 export default function Home() {
   const router = useRouter();
 
-  router.replace('/auth/login');
+  router.replace('/begin');
   return <Layout></Layout>;
 }
