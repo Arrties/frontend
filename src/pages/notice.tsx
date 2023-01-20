@@ -1,9 +1,9 @@
-import Image from 'next/image';
-import Layout from '@components/common/Layout';
-import Navigate from '@components/common/Navigate';
-import NoticeItem from '@components/notice/NoticeItem';
-import { useRouter } from 'next/router';
-import { useState } from 'react';
+import Layout from '@components/common/Layout'
+import Navigate from '@components/common/Navigate'
+import NoticeItem from '@components/notice/NoticeItem'
+import Image from 'next/image'
+import { useRouter } from 'next/router'
+import { useState } from 'react'
 
 interface NoticeForm {
   id: string;

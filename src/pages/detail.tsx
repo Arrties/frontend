@@ -1,7 +1,7 @@
-import Layout from '@components/common/Layout';
-import React, { useEffect } from 'react';
-import Image from 'next/image';
-import Button from 'stories/Button';
+import Layout from '@components/common/Layout'
+import Image from 'next/image'
+import React from 'react'
+import Button from 'stories/Button'
 
 export default function Detail() {
   const handleChat = () => {

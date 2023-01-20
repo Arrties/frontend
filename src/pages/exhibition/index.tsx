@@ -1,13 +1,14 @@
-import 'swiper/css';
-import tw from 'tailwind-styled-components';
-import Modal from '@components/exhibition/Modal';
-import Navigate from '@components/common/Navigate';
-import { useRef, useState } from 'react';
-import Image from 'next/image';
-import React from 'react';
-import { Navigation } from 'swiper';
-import { Swiper, SwiperSlide, useSwiper } from 'swiper/react';
-import { useRouter } from 'next/router';
+import 'swiper/css'
+
+import Navigate from '@components/common/Navigate'
+import Modal from '@components/exhibition/Modal'
+import Image from 'next/image'
+import React from 'react'
+import tw from 'tailwind-styled-components'
+import { useRef, useState } from 'react'
+import { Navigation } from 'swiper'
+import { Swiper, SwiperSlide, useSwiper } from 'swiper/react'
+import { useRouter } from 'next/router'
 
 const DUMP_ART_LISTS = [
   {

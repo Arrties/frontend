@@ -1,9 +1,10 @@
-import tw from 'tailwind-styled-components';
-import Modal from '@components/common/Modal';
-import Navigate from '@components/common/Navigate';
-import { useState } from 'react';
-import Button from '../../components/common/Button';
-import { useRouter } from 'next/router';
+import Modal from '@components/common/Modal'
+import Navigate from '@components/common/Navigate'
+import tw from 'tailwind-styled-components'
+import { useState } from 'react'
+import { useRouter } from 'next/router'
+
+import Button from '../../components/common/Button'
 
 interface KeywordForm {
   id: string;

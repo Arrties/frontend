@@ -1,5 +1,5 @@
-import { useRef } from 'react';
-import tw from 'tailwind-styled-components';
+import tw from 'tailwind-styled-components'
+
 interface Genre {
   id: string;
   name: string;

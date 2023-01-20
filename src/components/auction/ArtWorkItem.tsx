@@ -1,5 +1,5 @@
-import tw from 'tailwind-styled-components';
-import Image from 'next/image';
+import Image from 'next/image'
+import tw from 'tailwind-styled-components'
 
 interface ArtWorkItemProps {
   [key: string]: any;

@@ -1,14 +1,14 @@
-import Layout from '@components/common/Layout';
-import React from 'react';
-import { useRouter } from 'next/router';
-import Navigate from '@components/common/Navigate';
-import Image from 'next/image';
-import Input from '@components/common/Input';
-import { useForm } from 'react-hook-form';
-import ErrorMessage from '@components/common/ErrorMessage';
-import Button from '@components/common/Button';
-import tw from 'tailwind-styled-components';
-import DivisionBar from '@components/common/DivisionBar';
+import Button from '@components/common/Button'
+import DivisionBar from '@components/common/DivisionBar'
+import ErrorMessage from '@components/common/ErrorMessage'
+import Input from '@components/common/Input'
+import Layout from '@components/common/Layout'
+import Navigate from '@components/common/Navigate'
+import Image from 'next/image'
+import React from 'react'
+import tw from 'tailwind-styled-components'
+import { useRouter } from 'next/router'
+import { useForm } from 'react-hook-form'
 
 interface inputForm {
   autoPrice: number;

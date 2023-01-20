@@ -1,20 +1,20 @@
-import Input from '@components/common/Input';
-import Layout from '@components/common/Layout';
-import Navigate from '@components/common/Navigate';
-import Image from 'next/image';
-import React, { useEffect, useState } from 'react';
-import { useForm } from 'react-hook-form';
-import Select from '@components/common/Select';
-import { Artwork } from 'types/artwork';
-import FileItem from '@components/inquiry/FileItem';
-import GuaranteeModal from '@components/home/post/GuaranteeModal';
-import KeywordModal from '@components/home/post/KeywordModal.tsx';
-import GenreModal from '@components/home/post/GenreModal';
-import ErrorMessage from '@components/common/ErrorMessage';
-import { useRouter } from 'next/router';
-import Modal from '@components/common/Modal';
-import artworkApi from '@apis/artwork/artworkApi';
-import { getToken } from '@utils/localStorage/token';
+import artworkApi from '@apis/artwork/artworkApi'
+import ErrorMessage from '@components/common/ErrorMessage'
+import Input from '@components/common/Input'
+import Layout from '@components/common/Layout'
+import Modal from '@components/common/Modal'
+import Navigate from '@components/common/Navigate'
+import Select from '@components/common/Select'
+import GenreModal from '@components/home/post/GenreModal'
+import GuaranteeModal from '@components/home/post/GuaranteeModal'
+import KeywordModal from '@components/home/post/KeywordModal.tsx'
+import FileItem from '@components/inquiry/FileItem'
+import Image from 'next/image'
+import React, { useEffect, useState } from 'react'
+import { useForm } from 'react-hook-form'
+import { Artwork } from 'types/artwork'
+import { useRouter } from 'next/router'
+import { getToken } from '@utils/localStorage/token'
 
 const ARTWORK_STATUS = [
   { value: '매우 좋음' },
