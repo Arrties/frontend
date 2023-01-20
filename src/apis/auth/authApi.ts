@@ -9,7 +9,7 @@ export class AuthApi {
     if (axios) this.axios = axios;
   }
 
-  async postLogin(body: { userId: string; password: string }) {
+  async postLogin(body: { userId: string | null; password: string }) {
     try {
       return await axios.post(
         `${process.env.NEXT_PUBLIC_API_BASE_URL}/members/login`,
@@ -27,19 +27,30 @@ export class AuthApi {
     return data;
   }
 
-  async postFindId(body: string) {
+  async postFindId(email: string) {
     try {
-      const res = await this.axios({
-        method: 'POST',
-        url: `/members/id`,
-        data: body,
+      return await this.axios.post(`/members/id`, {
+        email,
       });
-      return res;
     } catch (error: any) {
       if (error) {
-        return error.response;
+        return error;
       }
     }
+  }
+
+  async postNewPassword(email: string) {
+    try {
+      return await this.axios.post(`/members/new-password`, {
+        email,
+      });
+    } catch (error: any) {
+      return error;
+    }
+  }
+
+  async postLogout() {
+    await this.axios.post('/members/logout');
   }
 
   async postPassword(password: string) {
@@ -52,10 +63,6 @@ export class AuthApi {
         return error;
       }
     }
-  }
-
-  async postLogout() {
-    await this.axios.post('/members/logout');
   }
 
   async patchUserInfo(formData: any) {
