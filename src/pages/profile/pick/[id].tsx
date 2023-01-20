@@ -1,33 +1,12 @@
 import Layout from '@components/common/Layout';
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Navigate from '@components/common/Navigate';
 import tw from 'tailwind-styled-components';
 import { useRouter } from 'next/router';
-import avatar from '@public/svg/icons/profile/icon_avatar.svg';
 import Image from 'next/image';
-import Button from '@components/common/Button';
 import { Tab } from '@headlessui/react';
 import PickArtistWork from '@components/profile/pick/PickArtistWork';
 import useGetPickDetail from '@hooks/queries/useGetPickDetail';
-
-interface PickArtistForm {
-  id: string;
-  title: string;
-  status: string;
-}
-
-const DUMMY_PICKARTIST: PickArtistForm[] = [
-  {
-    id: '1',
-    title: '퓨처리즘 자연과 공생하는 미래',
-    status: '입찰중',
-  },
-  {
-    id: '2',
-    title: '퓨처리즘 자연과 공생하는 미래',
-    status: '입찰 완료',
-  },
-];
 
 interface defaultProps {
   [key: string]: any;
@@ -42,8 +21,6 @@ w-[60px] mr-[10px] aspect-square flex justify-center items-center rounded-full b
 `;
 
 export default function PickDetail() {
-  const [pickArtistList, setPickArtistList] =
-    useState<PickArtistForm>(DUMMY_PICKARTIST);
   const router = useRouter();
   const handleChat = () => {
     // 채팅하러 가기
@@ -53,7 +30,7 @@ export default function PickDetail() {
   };
   const id = 1;
   const { pickDetail } = useGetPickDetail(id);
-  const members = pickDetail?.members;
+  const members = pickDetail?.member;
   const artworks = pickDetail?.artworks;
 
   return (
@@ -65,9 +42,11 @@ export default function PickDetail() {
         }}
       />
       <PickDetailContainer>
-        <PickDetailProfile>
-          <Image src={members?.image} alt="avatar" width={34} height={34} />
-        </PickDetailProfile>
+        {members && members.image && (
+          <PickDetailProfile>
+            <Image src={members?.image} alt="avatar" width={34} height={34} />
+          </PickDetailProfile>
+        )}
         <div className="flex flex-col h-10">
           <span className="text-18 font-semibold">{members?.nickname}</span>
           <span className="text-14">{members?.education}</span>
@@ -124,12 +103,11 @@ export default function PickDetail() {
             </div>
           </Tab.Panel>
           <Tab.Panel className="space-y-6">
-            {artworks?.map((pickArtist: PickArtistForm) => (
+            {artworks?.map((artwork: Artwork, index) => (
               <PickArtistWork
-                id={pickArtist?.id}
-                key={pickArtist?.id}
-                title={pickArtist?.title}
-                status={pickArtist?.status}
+                key={index}
+                title={artwork?.title}
+                status={artwork?.status}
                 onClick={handleArtistWork}
               />
             ))}
