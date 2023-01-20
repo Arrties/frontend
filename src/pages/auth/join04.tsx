@@ -2,7 +2,6 @@ import ErrorMessage from '@components/common/ErrorMessage';
 import Layout from '@components/common/Layout';
 import { useAppSelector } from '@features/hooks';
 import { useState } from 'react';
-import { Member } from 'types/user';
 import useUserJoin from '../../hooks/queries/useUserJoin';
 import SelectKeyword from '@components/common/Selectkeyword';
 
