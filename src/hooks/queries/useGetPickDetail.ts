@@ -2,13 +2,13 @@ import { useQuery } from 'react-query';
 import { useState } from 'react';
 import instance from '@apis/_axios/instance';
 
-interface PickDeatil {
+interface PickDetail {
   member: Member;
   artworks: Artwork[];
 }
 
 const useGetPickDetail = (artistId: number) => {
-  const [pickDetail, setPickDetail] = useState<PickDeatil>();
+  const [pickDetail, setPickDetail] = useState<PickDetail>();
 
   const query = useQuery(
     'useGetPickDetail',
