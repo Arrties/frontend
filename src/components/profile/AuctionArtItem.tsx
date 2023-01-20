@@ -1,13 +1,14 @@
-import tw from 'tailwind-styled-components';
-import Image from 'next/image';
-import React from 'react';
+import Image from 'next/image'
+import React from 'react'
+import tw from 'tailwind-styled-components'
+
 interface AuctionArtItemProps {
   [key: string]: any;
   lastChild?: React.ReactNode;
   handleOption?: () => void;
 }
 
-const AuctionArtItemTag = tw.section`
+const AuctionArtItemTag = tw.section<AuctionArtItemProps>`
 flex mt-5 border-b last:border-none border-[#EDEDED] pb-5 relative
 `;
 
