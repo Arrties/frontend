@@ -1,9 +1,6 @@
-import { CONFIG } from '@config';
-import {
-  getLocalStorage,
-  removeLocalStorage,
-  setLocalStorage,
-} from '../helper';
+import { CONFIG } from '@config'
+
+import { getLocalStorage, removeLocalStorage, setLocalStorage } from '../helper'
 
 const TOKEN_KEY = CONFIG.AUTH_TOKEN_KEY || '@token';
 

@@ -1,6 +1,8 @@
-import instance from '@apis/_axios/instance';
-import { AxiosInstance } from 'axios';
-import { ChatDTOType, ChatParamGetType, ChatRoomDTOType } from './chatApi.type';
+import instance from '@apis/_axios/instance'
+import { AxiosInstance } from 'axios'
+
+import { ChatDTOType, ChatParamGetType, ChatRoomDTOType } from './chatApi.type'
+
 export class ChatApi {
   axios: AxiosInstance = instance;
   constructor(axios?: AxiosInstance) {

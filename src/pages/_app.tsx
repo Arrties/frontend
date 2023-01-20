@@ -14,8 +14,6 @@ const queryClient = new QueryClient();
 const persistor = persistStore(store);
 
 export default function App({ Component, pageProps }: AppProps) {
-  const router = useRouter();
-
   // useEffect(() => {
   //   if (router.pathname.includes('auth')) return;
   //   const token = getToken();

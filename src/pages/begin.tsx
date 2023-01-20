@@ -6,7 +6,6 @@ import Image from 'next/image'
 import tw from 'tailwind-styled-components'
 import React, { useRef } from 'react'
 import { useRouter } from 'next/router'
-import { useState } from 'react'
 import { Navigation } from 'swiper'
 import { Swiper, SwiperSlide } from 'swiper/react'
 
