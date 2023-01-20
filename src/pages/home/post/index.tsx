@@ -12,7 +12,6 @@ import FileItem from '@components/inquiry/FileItem'
 import Image from 'next/image'
 import React, { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
-import { Artwork } from 'types/artwork'
 import { useRouter } from 'next/router'
 import { getToken } from '@utils/localStorage/token'
 
