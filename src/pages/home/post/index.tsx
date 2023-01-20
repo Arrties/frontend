@@ -11,12 +11,23 @@ import GuaranteeModal from '@components/home/post/GuaranteeModal';
 import KeywordModal from '@components/home/post/KeywordModal.tsx';
 import GenreModal from '@components/home/post/GenreModal';
 import ErrorMessage from '@components/common/ErrorMessage';
+import { useRouter } from 'next/router';
+import Modal from '@components/common/Modal';
+import artworkApi from '@apis/artwork/artworkApi';
+import { getToken } from '@utils/localStorage/token';
 
 const ARTWORK_STATUS = [
   { value: '매우 좋음' },
   { value: '좋음' },
   { value: '보통' },
 ];
+
+const dataURLtoFile = (dataurl: string, name: string) => {
+  const decodedURL = dataurl.replace(/^data:image\/\w+;base64,/, '');
+  const buf = Buffer.from(decodedURL, 'base64');
+  const blob = new Blob([buf], { type: 'image/png' });
+  return new File([blob], `${name}.png`, { type: 'image/png' });
+};
 
 const IS_FRAME = [{ value: '있음' }, { value: '없음' }];
 
@@ -48,18 +59,27 @@ const CANVAS_SIZE = [
 ];
 
 export default function Post() {
-  const [isGuaranteeModal, setIsGuaranteeModal] = useState<Boolean>(false);
-  const [isKeywordModal, setIsKeywordModal] = useState<Boolean>(false);
-  const [isGenreModal, setIsGenreModal] = useState<Boolean>(false);
+  const [isGuaranteeModal, setIsGuaranteeModal] = useState<boolean>(false);
+  const [isKeywordModal, setIsKeywordModal] = useState<boolean>(false);
+  const [isGenreModal, setIsGenreModal] = useState<boolean>(false);
+  const [isModal, setIsModal] = useState<boolean>(false);
   const [signature, setSignature] = useState<string>('');
   const [keywordList, setKeywordList] = useState<string[]>([]);
   const [genre, setGenre] = useState<string>('');
   const [fileLists, setFileLists] = useState<File[]>([]);
+
+  const router = useRouter();
+
+  if (getToken().role !== 'ARTIST') {
+    router.push('/home');
+  }
+
   const handleRemoveFile = (targetName: string): void => {
     const newFileLists = fileLists.filter((file) => {
       return file.name !== targetName;
     });
     setFileLists(newFileLists);
+    setValue('image', newFileLists as any);
   };
 
   const {
@@ -93,7 +113,7 @@ export default function Post() {
     }
   }, [keywordList, setValue, genre, signature]);
 
-  const onSubmit = (form: Artwork) => {
+  const onSubmit = async (form: Artwork) => {
     const {
       title,
       productionYear,
@@ -109,23 +129,45 @@ export default function Post() {
       statusDescription,
     } = form;
     const formData = new FormData();
-
     formData.append('title', title);
     formData.append('productionYear', productionYear + '');
     formData.append('description', description);
     formData.append('material', material);
     if (frame + '' === '있음') {
-      formData.append('frame', 'true');
+      formData.append('frame', true as any);
     } else {
-      formData.append('frame', 'false');
+      formData.append('frame', false as any);
     }
-    formData.append('width', width + '');
-    formData.append('length', length + '');
-    formData.append('height', height + '');
-    formData.append('productionYear', size);
-    formData.append('productionYear', price + '');
-    formData.append('productionYear', status);
-    formData.append('productionYear', statusDescription);
+    formData.append('width', width as any);
+    formData.append('length', length as any);
+    formData.append('height', height as any);
+    formData.append('size', size);
+    formData.append('price', price as any);
+    formData.append('status', status);
+    formData.append('statusDescription', statusDescription);
+    formData.append('keywords', keywordList as any);
+
+    if (file.length == 1) {
+      formData.append('image', file[0]);
+    } else {
+      const fileArray: string[] = [];
+      for (const i of file) {
+        fileArray.push(i);
+      }
+      formData.append('image', fileArray as any);
+    }
+
+    if (genre) {
+      formData.append('genre', genre);
+    }
+
+    if (signature) {
+      const file = dataURLtoFile(signature, 'guaranteeImage');
+      formData.append('guaranteeImage', file);
+    }
+
+    const data = await artworkApi.postArtwork(formData);
+    console.log('성공', data);
   };
 
   if (isGuaranteeModal)
@@ -156,6 +198,19 @@ export default function Post() {
 
   return (
     <Layout>
+      <Modal
+        message="등록이 완료되었습니다.
+마이페이지>판매활동>등록된 작품에서 작품내역을 확인해보세요."
+        isModal={isModal}
+        onCloseModal={() => {
+          setIsModal(false);
+          // router.push('/home');
+        }}
+        onAccept={() => {
+          setIsModal(false);
+          // router.push('/home');
+        }}
+      />
       <form className="w-full space-y-3" onSubmit={handleSubmit(onSubmit)}>
         <Navigate right_message="완료" />
         <div className="flex">
@@ -304,6 +359,7 @@ export default function Post() {
           </article>
           <article className="w-[calc((100%-2rem)/3)]">
             <Input
+              defaultChec
               type="number"
               placeholder="10"
               unit="호"
@@ -320,6 +376,7 @@ export default function Post() {
           label="작품 판매가"
           placeholder="작품 최소 가격을 설정해주세요."
           register={register('price', { required: true })}
+          unit="원"
         />
         <Select
           name="status"

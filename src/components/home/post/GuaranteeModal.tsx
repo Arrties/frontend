@@ -48,7 +48,9 @@ export default function GuaranteeModal({
               height: 183,
             }}
             onEnd={() => {
-              const dataURL = canvasRef.current.getTrimmedCanvas().toDataURL();
+              const dataURL = canvasRef.current
+                .getTrimmedCanvas()
+                .toDataURL('image/png');
               setSignature(dataURL);
             }}
           />
