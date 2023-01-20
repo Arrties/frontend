@@ -98,7 +98,8 @@ export default function Join02() {
     router.push('/auth/join03');
   };
 
-  const handleValidateCheck = async (e: { target: { id: any } }) => {
+  const handleValidateCheck = async (e: { target: { id: string } }) => {
+    console.log(e.target.id);
     let data: { status: number };
     switch (e.target.id) {
       case 'id':
@@ -221,7 +222,7 @@ export default function Join02() {
             $valid={!isValidate.nickname}
             onClick={handleValidateCheck}
             id="nickname"
-            text={isValidate.nicknaame ? '사용가능' : '중복확인'}
+            text={isValidate.nickname ? '사용가능' : '중복확인'}
           />
           {errors.nickname && (
             <ErrorMessage message={errors.nickname.message} />

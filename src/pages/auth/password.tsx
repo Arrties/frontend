@@ -21,11 +21,10 @@ function Password() {
     formState: { errors },
   } = useForm<NewPasswordForm>();
   const [isModal, setIsModal] = useState(false);
+
   const onSubmit = async ({ email }: NewPasswordForm) => {
     if (email) {
-      const res = await authApi.postNewPassword({
-        email,
-      });
+      const res = await authApi.postNewPassword(email);
       if (res.status === 200) {
         setIsModal(true);
       } else if (res.status === 404 && res.data.code === 'NOT_FOUND_EMAIL') {
