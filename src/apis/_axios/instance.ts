@@ -65,7 +65,7 @@ instance.interceptors.response.use(
     if (isUnAuthError) {
       try {
         const token = await refreshToken();
-        token['role'] = getToken().role;
+        token['roles'] = getToken().roles;
         token['refreshToken'] = getToken().refreshToken;
         if (token?.accessToken) {
           setToken(token);

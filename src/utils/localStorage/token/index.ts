@@ -10,14 +10,14 @@ const TOKEN_KEY = CONFIG.AUTH_TOKEN_KEY || '@token';
 export type Token = {
   accessToken: string | null;
   refreshToken: string | null;
-  role: string | null;
-}; 
+  roles: string | null;
+};
 
 export const getToken = () => {
   const token = getLocalStorage<Token>(TOKEN_KEY, {
     accessToken: null,
     refreshToken: null,
-    role: null,
+    roles: null,
   });
   return token;
 };

@@ -1,6 +1,5 @@
 import { useQuery } from 'react-query';
 import { useState } from 'react';
-import { Member } from 'types/user';
 import instance from '@apis/_axios/instance';
 
 const useGetProfile = () => {

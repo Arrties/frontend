@@ -17,7 +17,7 @@ export default function KakaoCallback() {
         const token: Token = {
           accessToken: res.data.accessToken,
           refreshToken: res.data.refreshToken,
-          role: 'ROLE_USER',
+          roles: res.data.roles,
         };
         if (token) setToken(token);
       })
