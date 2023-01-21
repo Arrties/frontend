@@ -4,7 +4,7 @@ import tw from 'tailwind-styled-components'
 import { useState } from 'react'
 import { useRouter } from 'next/router'
 
-import Button from '@components/common/Button'
+import Button from '../common/Button'
 
 interface KeywordForm {
   id: string;

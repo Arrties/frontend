@@ -123,31 +123,29 @@ export default function Post() {
     } = form;
     const formData = new FormData();
     formData.append('title', title);
-    formData.append('productionYear', productionYear + '');
+    formData.append('productionYear', JSON.stringify(productionYear));
     formData.append('description', description);
     formData.append('material', material);
     if (frame + '' === '있음') {
-      formData.append('frame', true as any);
+      formData.append('frame', JSON.stringify(true));
     } else {
-      formData.append('frame', false as any);
+      formData.append('frame', JSON.stringify(false));
     }
-    formData.append('width', width as any);
-    formData.append('length', length as any);
-    formData.append('height', height as any);
+    formData.append('width', JSON.stringify(width));
+    formData.append('length', JSON.stringify(length));
+    formData.append('height', JSON.stringify(height));
     formData.append('size', size);
-    formData.append('price', price as any);
+    formData.append('price', JSON.stringify(price));
     formData.append('status', status);
     formData.append('statusDescription', statusDescription);
-    formData.append('keywords', keywordList as any);
+    formData.append('keywords', JSON.stringify(keywordList));
 
     if (file.length == 1) {
       formData.append('image', file[0]);
     } else {
-      const fileArray: string[] = [];
       for (const i of file) {
-        fileArray.push(i);
+        formData.append('image', i);
       }
-      formData.append('image', fileArray as any);
     }
 
     if (genre) {
