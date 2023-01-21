@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-import { getToken } from './../../utils/localStorage/token/index'
+import { getToken } from '@utils/localStorage/token/index'
 import { ArtworkDTOType } from './artworkApi.type'
 
 export class ArtworkApi {
