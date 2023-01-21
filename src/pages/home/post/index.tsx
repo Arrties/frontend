@@ -69,7 +69,7 @@ export default function Post() {
 
   const router = useRouter();
 
-  if (getToken().roles !== 'ARTIST') {
+  if (getToken().role !== 'ARTIST') {
     router.push('/home');
   }
 
@@ -226,14 +226,16 @@ export default function Post() {
               </div>
             </div>
           </label>
-          {fileLists.length ? (
+          {fileLists.length && (
             <div className="flex flex-wrap">
               {fileLists.map((file, idx) => (
-                <FileItem handler={handleRemoveFile} key={idx} file={file} />
+                <FileItem
+                  handler={handleRemoveFile}
+                  key={'' + idx}
+                  file={file}
+                />
               ))}
             </div>
-          ) : (
-            ''
           )}
           <input
             multiple
@@ -358,7 +360,6 @@ export default function Post() {
           </article>
           <article className="w-[calc((100%-2rem)/3)]">
             <Input
-              defaultChec
               type="number"
               placeholder="10"
               unit="호"
