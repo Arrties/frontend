@@ -16,7 +16,7 @@ import { makeBlob } from '@utils/makeBlob';
 export default function Edit() {
   const [isNicknameValidate, setIsNicknameValidate] = useState<boolean>(true);
   const [isEmailValidate, setIsEmailValidate] = useState<boolean>(true);
-  const { isLoading, userInfo, setUserInfo, isSuccess } = useGetProfile();
+  const { isLoading, userInfo, setUserInfo } = useGetProfile();
   const {
     register,
     handleSubmit,
@@ -45,7 +45,7 @@ export default function Edit() {
 
   const handleDoubleCheckNickName = async () => {
     const data = await authApi.getCheckNickname(nickname);
-    if (data.status === 409 && nickname !== userInfo.nickname) {
+    if (data.status === 409 && nickname !== userInfo?.nickname) {
       setError('nickname', {
         type: 'nickname duplicate',
         message: '중복되는 닉네임 입니다.',
@@ -59,7 +59,7 @@ export default function Edit() {
 
   const handleDoubleCheckEmail = async () => {
     const response = await authApi.getCheckEmail(email);
-    if (response.status === 409 && email !== userInfo.email) {
+    if (response.status === 409 && email !== userInfo?.email) {
       setError('email', {
         type: 'email duplicate',
         message: '이미 가입된 이메일 입니다.',
@@ -80,14 +80,14 @@ export default function Edit() {
     }
   }, [profile]);
   const onSubmit = async (form: any) => {
-    if (!isNicknameValidate && userInfo.nickname !== form.nickname) {
+    if (!isNicknameValidate && userInfo?.nickname !== form.nickname) {
       setError('nickname', {
         type: 'need nickname duplicate',
         message: '닉네임 중복체크를 해주세요',
       });
       return;
     }
-    if (!isEmailValidate && userInfo.email !== form.email) {
+    if (!isEmailValidate && userInfo?.email !== form.email) {
       setError('email', {
         type: 'need email duplicate',
         message: '이메일 중복체크를 해주세요',
@@ -97,7 +97,7 @@ export default function Edit() {
     formData.append('nickname', form.nickname);
     formData.append('email', form.email);
     formData.append('address', '');
-    formData.append('keywords', userInfo?.keywords);
+    formData.append('keywords', '' + userInfo?.keywords);
     if (profile.length) {
       //유저가 프로필을 변환하였다면
       formData.append('isChanged', 'true');

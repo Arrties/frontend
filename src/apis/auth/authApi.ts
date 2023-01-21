@@ -1,9 +1,9 @@
-import instance from '@apis/_axios/instance'
-import axios from 'axios'
-import { AxiosInstance } from 'axios'
-import { getToken } from '@utils/localStorage/token'
+import instance from '@apis/_axios/instance';
+import axios from 'axios';
+import { AxiosInstance } from 'axios';
+import { getToken } from '@utils/localStorage/token';
 
-import { AuthDTOType } from './authApi.type'
+import { AuthDTOType } from './authApi.type';
 
 export class AuthApi {
   axios: AxiosInstance = instance;
@@ -113,7 +113,7 @@ export class AuthApi {
     return res;
   }
 
-  async getCheckEmail(email: string) {
+  async getCheckEmail(email: string | undefined) {
     const res = await this.axios(`/members/check-email?email=${email}`);
     return res;
   }
@@ -127,7 +127,7 @@ export class AuthApi {
     }
   }
 
-  async getCheckNickname(nickname: string) {
+  async getCheckNickname(nickname: string | undefined) {
     try {
       const res = await this.axios(
         `/members/check-nickname?nickname=${nickname}`,
