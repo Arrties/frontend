@@ -9,7 +9,6 @@ import { useForm } from 'react-hook-form';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { isUser } from '@utils/isUser';
-import { Member } from 'types/user';
 import useGetProfile from '@hooks/queries/useGetProfile';
 import Loader from '@components/common/Loader';
 import { makeBlob } from '@utils/makeBlob';
