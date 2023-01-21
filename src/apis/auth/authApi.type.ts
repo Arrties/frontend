@@ -1,4 +1,4 @@
-import { Member } from 'types/user';
+import { Member } from 'types/user'
 
 export type AuthDTOType = Member;
 export type AuthParamGetType = {};

@@ -1,6 +1,7 @@
-import Layout from '@components/common/Layout';
-import Navigate from '@components/common/Navigate';
-import GenreSelect from './GenreSelect';
+import Layout from '@components/common/Layout'
+import Navigate from '@components/common/Navigate'
+
+import GenreSelect from './GenreSelect'
 
 interface GenreModalProps {
   onCloseModal: () => void;

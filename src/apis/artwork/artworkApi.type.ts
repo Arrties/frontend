@@ -1,4 +1,4 @@
-import { Artwork } from 'types/artwork';
+import { Artwork } from 'types/artwork'
 
 export type ArtworkDTOType = Artwork;
 export type ArtworkParamGetType = {};
