@@ -1,11 +1,11 @@
-import Layout from '@components/common/Layout';
-import Navigate from '@components/common/Navigate';
-import React, { useState, useEffect } from 'react';
-import { useRouter } from 'next/router';
-import Image from 'next/image';
-import { useForm } from 'react-hook-form';
-import authApi from '@apis/auth/authApi';
-import { getToken, setToken } from '@utils/localStorage/token';
+import authApi from '@apis/auth/authApi'
+import Layout from '@components/common/Layout'
+import Navigate from '@components/common/Navigate'
+import Image from 'next/image'
+import React, { useEffect, useState } from 'react'
+import { useRouter } from 'next/router'
+import { useForm } from 'react-hook-form'
+import { getToken, setToken } from '@utils/localStorage/token'
 
 interface FileForm {
   file: any;

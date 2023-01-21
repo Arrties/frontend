@@ -1,17 +1,17 @@
-import ErrorMessage from '@components/common/ErrorMessage';
-import Input from '@components/common/Input';
-import Layout from '@components/common/Layout';
-import Navigate from '@components/common/Navigate';
-import DoubleCheckButton from '@components/common/DoubleCheckButton';
-import authApi from '@apis/auth/authApi';
-import React, { useState, useEffect } from 'react';
-import { useForm } from 'react-hook-form';
-import Image from 'next/image';
-import { useRouter } from 'next/router';
-import { isUser } from '@utils/isUser';
-import useGetProfile from '@hooks/queries/useGetProfile';
-import Loader from '@components/common/Loader';
-import { makeBlob } from '@utils/makeBlob';
+import authApi from '@apis/auth/authApi'
+import DoubleCheckButton from '@components/common/DoubleCheckButton'
+import ErrorMessage from '@components/common/ErrorMessage'
+import Input from '@components/common/Input'
+import Layout from '@components/common/Layout'
+import Loader from '@components/common/Loader'
+import Navigate from '@components/common/Navigate'
+import useGetProfile from '@hooks/queries/useGetProfile'
+import Image from 'next/image'
+import React, { useEffect, useState } from 'react'
+import { useForm } from 'react-hook-form'
+import { useRouter } from 'next/router'
+import { isUser } from '@utils/isUser'
+import { makeBlob } from '@utils/makeBlob'
 
 export default function Edit() {
   const [isNicknameValidate, setIsNicknameValidate] = useState<boolean>(true);

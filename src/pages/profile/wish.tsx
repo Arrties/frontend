@@ -1,9 +1,9 @@
-import Layout from '@components/common/Layout';
-import React, { useState } from 'react';
-import Navigate from '@components/common/Navigate';
-import tw from 'tailwind-styled-components';
-import WishCard from '@components/profile/wish/WishCard';
-import { useRouter } from 'next/router';
+import Layout from '@components/common/Layout'
+import Navigate from '@components/common/Navigate'
+import WishCard from '@components/profile/wish/WishCard'
+import tw from 'tailwind-styled-components'
+import React, { useState } from 'react'
+import { useRouter } from 'next/router'
 
 interface defaultProps {
   [key: string]: any;

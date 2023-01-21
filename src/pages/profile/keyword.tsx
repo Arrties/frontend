@@ -1,9 +1,9 @@
-import Layout from '@components/common/Layout';
-import Modal from '@components/common/Modal';
-import { useRouter } from 'next/router';
-import { useState } from 'react';
-import SelectKeyword from '@components/common/Selectkeyword';
-import authApi from '@apis/auth/authApi';
+import authApi from '@apis/auth/authApi'
+import Layout from '@components/common/Layout'
+import Modal from '@components/common/Modal'
+import SelectKeyword from '@components/common/Selectkeyword'
+import { useRouter } from 'next/router'
+import { useState } from 'react'
 
 export default function Keyword() {
   const [keywordList, setKeywordList] = useState<string[]>([]);

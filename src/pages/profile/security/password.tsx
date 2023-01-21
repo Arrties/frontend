@@ -1,12 +1,11 @@
-import authApi from '@apis/auth/authApi';
-import ErrorMessage from '@components/common/ErrorMessage';
-import Input from '@components/common/Input';
-import Layout from '@components/common/Layout';
-import Navigate from '@components/common/Navigate';
-import Image from 'next/image';
-import { useRouter } from 'next/router';
-import React, { useState, useEffect } from 'react';
-import { useForm } from 'react-hook-form';
+import authApi from '@apis/auth/authApi'
+import ErrorMessage from '@components/common/ErrorMessage'
+import Input from '@components/common/Input'
+import Layout from '@components/common/Layout'
+import Navigate from '@components/common/Navigate'
+import Image from 'next/image'
+import React, { useEffect, useState } from 'react'
+import { useForm } from 'react-hook-form'
 
 interface passwordForm {
   password: string;
@@ -14,7 +13,6 @@ interface passwordForm {
 }
 
 export default function Password() {
-  const router = useRouter();
   const {
     register,
     handleSubmit,

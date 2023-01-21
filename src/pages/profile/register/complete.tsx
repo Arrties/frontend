@@ -1,7 +1,7 @@
-import Layout from '@components/common/Layout';
-import { useRouter } from 'next/router';
-import React from 'react';
-import Navigate from '@components/common/Navigate';
+import Layout from '@components/common/Layout'
+import Navigate from '@components/common/Navigate'
+import React from 'react'
+import { useRouter } from 'next/router'
 
 export default function Complete() {
   const router = useRouter();

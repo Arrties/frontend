@@ -1,10 +1,10 @@
-import Layout from '@components/common/Layout';
-import Navigate from '@components/common/Navigate';
-import tw from 'tailwind-styled-components';
-import { useRouter } from 'next/router';
-import PickArtist from '@components/profile/pick/PickArtist';
-import useGetPick from '@hooks/queries/useGetPick';
-import Button from 'stories/Button';
+import Layout from '@components/common/Layout'
+import Navigate from '@components/common/Navigate'
+import PickArtist from '@components/profile/pick/PickArtist'
+import useGetPick from '@hooks/queries/useGetPick'
+import Button from 'stories/Button'
+import tw from 'tailwind-styled-components'
+import { useRouter } from 'next/router'
 
 interface defaultProps {
   [key: string]: any;

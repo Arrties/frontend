@@ -1,10 +1,10 @@
-import ArtWorkItem from '@components/auction/ArtWorkItem';
-import AuctionNavigate from '@components/auction/AuctionNavigate';
-import Layout from '@components/common/Layout';
-import Tab from '@components/common/Tab';
-import Image from 'next/image';
-import React from 'react';
-import tw from 'tailwind-styled-components';
+import ArtWorkItem from '@components/auction/ArtWorkItem'
+import AuctionNavigate from '@components/auction/AuctionNavigate'
+import Layout from '@components/common/Layout'
+import Tab from '@components/common/Tab'
+import Image from 'next/image'
+import React from 'react'
+import tw from 'tailwind-styled-components'
 
 const ArtworkList = tw.div<DefaultProps>``;
 

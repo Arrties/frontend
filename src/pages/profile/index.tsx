@@ -1,16 +1,15 @@
-import authApi from '@apis/auth/authApi';
-import DivisionBar from '@components/common/DivisionBar';
-import Layout from '@components/common/Layout';
-import Loader from '@components/common/Loader';
-import Navigate from '@components/common/Navigate';
-import Tab from '@components/common/Tab';
-import Activity from '@components/mypage/Activity';
-import SettingItem from '@components/mypage/SettingItem';
-import useGetProfile from '@hooks/queries/useGetProfile';
-import { isUser } from '@utils/isUser';
-import Image from 'next/image';
-import { useRouter } from 'next/router';
-import tw from 'tailwind-styled-components';
+import DivisionBar from '@components/common/DivisionBar'
+import Layout from '@components/common/Layout'
+import Loader from '@components/common/Loader'
+import Navigate from '@components/common/Navigate'
+import Tab from '@components/common/Tab'
+import Activity from '@components/mypage/Activity'
+import SettingItem from '@components/mypage/SettingItem'
+import useGetProfile from '@hooks/queries/useGetProfile'
+import Image from 'next/image'
+import tw from 'tailwind-styled-components'
+import { isUser } from '@utils/isUser'
+import { useRouter } from 'next/router'
 
 interface defaultProps {
   [key: string]: any;
