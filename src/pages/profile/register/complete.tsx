@@ -1,6 +1,6 @@
 import Layout from '@components/common/Layout';
-import React from 'react';
 import { useRouter } from 'next/router';
+import React from 'react';
 import Navigate from '@components/common/Navigate';
 
 export default function Complete() {
