@@ -123,7 +123,6 @@ export default function Search() {
   const handleDeleteAll = () => {
     setRecentKeywordList([]);
   };
-  // console.log(recentKeywordList);
   const handleRecommendKeyword = (e: any) => {
     console.log(e.target.id);
   };

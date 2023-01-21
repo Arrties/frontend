@@ -99,7 +99,6 @@ export default function Join02() {
   };
 
   const handleValidateCheck = async (e: { target: { id: string } }) => {
-    console.log(e.target.id);
     let data: { status: number };
     switch (e.target.id) {
       case 'id':

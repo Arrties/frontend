@@ -77,7 +77,6 @@ export default function Inquiry() {
   });
 
   const handleRemoveFile = (targetName: string, targetSize: number): void => {
-    console.log(targetName, targetSize);
     const newFileLists = fileLists.filter((file) => {
       return file.name !== targetName;
     });
@@ -95,7 +94,6 @@ export default function Inquiry() {
   const file = watch('image');
 
   useEffect(() => {
-    console.log(file);
     if (fileLists?.length <= 5 && fileLists?.length + file?.length <= 5) {
       const newFileList: any = [];
       for (const i of file) {
@@ -107,7 +105,6 @@ export default function Inquiry() {
       setFileSize((prev) => prev + sum);
       setFileLists((prev) => prev.concat(newFileList));
     }
-    console.log(fileLists);
   }, [file]);
 
   const onSubmit = async (form: InquiryForm) => {
