@@ -5,7 +5,7 @@ import { useRouter } from 'next/router';
 import Image from 'next/image';
 import Modal from '@components/common/Modal';
 import authApi from '@apis/auth/authApi';
-import { getToken, deleteToken } from '@utils/localStorage/token';
+import { deleteToken } from '@utils/localStorage/token';
 
 export default function Security() {
   const [isModal, setIsModal] = useState(false);
