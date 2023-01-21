@@ -105,8 +105,12 @@ export class AuthApi {
   }
 
   async getCheckEmail(email: string) {
-    const res = await this.axios(`/members/check-email?email=${email}`);
-    return res;
+    try {
+      const res = await this.axios(`/members/check-email?email=${email}`);
+      return res;
+    } catch (error: any) {
+      return error;
+    }
   }
 
   async getCheckId(userId: string) {
