@@ -72,7 +72,7 @@ export class AuthApi {
         },
       );
       return res;
-    } catch (err) {
+    } catch (err: any) {
       return err;
     }
   }
