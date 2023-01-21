@@ -9,7 +9,6 @@ import { useForm } from 'react-hook-form';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { isUser } from '@utils/isUser';
-import { Member } from 'types/user';
 import useGetProfile from '@hooks/queries/useGetProfile';
 import Loader from '@components/common/Loader';
 import { makeBlob } from '@utils/makeBlob';
@@ -17,7 +16,7 @@ import { makeBlob } from '@utils/makeBlob';
 export default function Edit() {
   const [isNicknameValidate, setIsNicknameValidate] = useState<boolean>(true);
   const [isEmailValidate, setIsEmailValidate] = useState<boolean>(true);
-  const { isLoading, userInfo, setUserInfo, isSuccess } = useGetProfile();
+  const { isLoading, userInfo, setUserInfo } = useGetProfile();
   const {
     register,
     handleSubmit,
@@ -26,9 +25,8 @@ export default function Edit() {
     setError,
     clearErrors,
   } = useForm<Member>();
-  const nickname: string | undefined = watch('nickname');
-  const email: string | undefined = watch('email');
-  const profile: any = watch('profile');
+  const nickname = watch('nickname');
+  const email = watch('email');
   const router = useRouter();
 
   const handleLeftButton = () => {
@@ -44,7 +42,23 @@ export default function Edit() {
     clearErrors('nickname');
   }, [nickname]);
 
+  const profile = watch('image');
+
+  console.log(userInfo);
+
+  useEffect(() => {
+    if (!profile) return;
+    setUserInfo(
+      (prev) =>
+        ({
+          ...prev,
+          image: makeBlob(profile[0]),
+        } as User),
+    );
+  }, [profile]);
+
   const handleDoubleCheckNickName = async () => {
+    if (!nickname || !userInfo) return;
     const data = await authApi.getCheckNickname(nickname);
     if (data.status === 409 && nickname !== userInfo.nickname) {
       setError('nickname', {
@@ -59,7 +73,11 @@ export default function Edit() {
   };
 
   const handleDoubleCheckEmail = async () => {
+    if (!email || !userInfo) return;
     const response = await authApi.getCheckEmail(email);
+
+    console.log(response);
+
     if (response.status === 409 && email !== userInfo.email) {
       setError('email', {
         type: 'email duplicate',
@@ -67,20 +85,18 @@ export default function Edit() {
       });
       return;
     } else {
+      console.log('이메일 중복체크 성공');
       setIsEmailValidate(true);
       clearErrors('email');
     }
   };
 
-  useEffect(() => {
-    if (typeof profile !== 'string' && profile?.length > 0) {
-      setUserInfo({
-        ...userInfo,
-        image: makeBlob(profile[0]),
-      });
-    }
-  }, [profile]);
-  const onSubmit = async (form: any) => {
+  console.log(userInfo);
+
+  const onSubmit = async (form: Member) => {
+    const { nickname, email, instagram, behance } = form;
+    if (!nickname || !email) return;
+    if (!userInfo) return;
     if (!isNicknameValidate && userInfo.nickname !== form.nickname) {
       setError('nickname', {
         type: 'need nickname duplicate',
@@ -95,11 +111,11 @@ export default function Edit() {
       });
     }
     const formData = new FormData();
-    formData.append('nickname', form.nickname);
-    formData.append('email', form.email);
-    formData.append('address', '');
-    formData.append('keywords', userInfo?.keywords);
-    if (profile.length) {
+
+    formData.append('nickname', nickname);
+    formData.append('email', email);
+
+    if (profile && profile.length) {
       //유저가 프로필을 변환하였다면
       formData.append('isChanged', 'true');
       formData.append('image', profile[0]);
@@ -108,6 +124,10 @@ export default function Edit() {
       formData.append('isChanged', 'false');
       formData.append('image', new File([''], ''));
     }
+
+    if (instagram) formData.append('instagram', instagram);
+    if (behance) formData.append('behance', behance);
+
     const response = await authApi.patchUserInfo(formData);
     console.log(response);
   };
@@ -130,7 +150,7 @@ export default function Edit() {
       />
       <label className="flex justify-center h-[150px]" htmlFor="profile">
         {userInfo?.image ? (
-          <img
+          <Image
             src={userInfo?.image}
             width="120"
             height="0"
@@ -161,7 +181,7 @@ export default function Edit() {
         accept="image/*"
         id="profile"
         className="hidden"
-        {...register('profile')}
+        {...register('image')}
       />
 
       <section className="relative">
@@ -252,15 +272,16 @@ export default function Edit() {
           )}
 
           <article className="flex items-center mt-3">
-            <label htmlFor="instagram">
+            <label htmlFor="instagram" className="w-8 h-8">
               <Image
                 src="/svg/icons/icon_instagram_gray.svg"
-                width="22"
-                height="10"
+                width="20"
+                height="20"
                 className="mr-1"
                 alt="instagram"
               />
             </label>
+
             <input
               placeholder="인스타그램 추가하기"
               {...register('instagram')}
@@ -273,7 +294,7 @@ export default function Edit() {
               <Image
                 src="/svg/icons/icon_behance_gray.svg"
                 width="20"
-                height="0"
+                height="20"
                 className="mr-1"
                 alt="behance"
               />
