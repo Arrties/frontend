@@ -1,6 +1,6 @@
 import Layout from '@components/common/Layout'
 import Navigate from '@components/common/Navigate'
-import WishCard from '@components/profile/wish/WishCard'
+import WishCard from '@components/profile/WishCard'
 import tw from 'tailwind-styled-components'
 import React, { useState } from 'react'
 import { useRouter } from 'next/router'
