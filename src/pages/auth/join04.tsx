@@ -1,6 +1,6 @@
 import ErrorMessage from '@components/common/ErrorMessage'
 import Layout from '@components/common/Layout'
-import SelectKeyword from '@components/common/Selectkeyword'
+import SelectKeyword from '@components/profile/Selectkeyword'
 import { useAppSelector } from '@features/hooks'
 import { useState } from 'react'
 
