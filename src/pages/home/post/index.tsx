@@ -14,19 +14,13 @@ import React, { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { useRouter } from 'next/router'
 import { getToken } from '@utils/localStorage/token'
+import { dataURLtoFile } from '@utils/dataURLtoFile'
 
 const ARTWORK_STATUS = [
   { value: '매우 좋음' },
   { value: '좋음' },
   { value: '보통' },
 ];
-
-const dataURLtoFile = (dataurl: string, name: string) => {
-  const decodedURL = dataurl.replace(/^data:image\/\w+;base64,/, '');
-  const buf = Buffer.from(decodedURL, 'base64');
-  const blob = new Blob([buf], { type: 'image/png' });
-  return new File([blob], `${name}.png`, { type: 'image/png' });
-};
 
 const IS_FRAME = [{ value: '있음' }, { value: '없음' }];
 

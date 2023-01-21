@@ -27,7 +27,7 @@ export default function Edit() {
   } = useForm<Member>();
   const nickname: string | undefined = watch('nickname');
   const email: string | undefined = watch('email');
-  const profile: any = watch('profile');
+  const image: any = watch('image');
   const router = useRouter();
 
   const handleLeftButton = () => {
@@ -72,13 +72,13 @@ export default function Edit() {
   };
 
   useEffect(() => {
-    if (typeof profile !== 'string' && profile?.length > 0) {
+    if (typeof image !== 'string' && image?.length > 0) {
       setUserInfo({
         ...userInfo,
-        image: makeBlob(profile[0]),
+        image: makeBlob(image[0]),
       });
     }
-  }, [profile]);
+  }, [image]);
   const onSubmit = async (form: any) => {
     if (!isNicknameValidate && userInfo?.nickname !== form.nickname) {
       setError('nickname', {
@@ -98,10 +98,10 @@ export default function Edit() {
     formData.append('email', form.email);
     formData.append('address', '');
     formData.append('keywords', '' + userInfo?.keywords);
-    if (profile.length) {
+    if (image?.length) {
       //유저가 프로필을 변환하였다면
       formData.append('isChanged', 'true');
-      formData.append('image', profile[0]);
+      formData.append('image', image[0]);
     } else {
       // 유저가 프로필을 변경하지 않았다면
       formData.append('isChanged', 'false');
@@ -127,14 +127,14 @@ export default function Edit() {
         handleLeftButton={handleLeftButton}
         handleRightButton={handleSubmit(onSubmit)}
       />
-      <label className="flex justify-center h-[150px]" htmlFor="profile">
+      <label className="flex justify-center h-[150px]" htmlFor="image">
         {userInfo?.image ? (
-          <img
+          <Image
             src={userInfo?.image}
             width="120"
             height="0"
             className="rounded-full w-[120px] h-[120px]"
-            alt="profile"
+            alt="image"
           />
         ) : (
           <div className=" flex justify-center items-center w-[99px] h-[99px] rounded-full border-2 border-[#999999] bg-[#FFFFFF] relative">
@@ -142,14 +142,14 @@ export default function Edit() {
               src="/svg/icons/icon_avatar.svg"
               width="60"
               height="0"
-              alt="profile"
+              alt="image"
             />
             <div className="w-[26px] h-[26px] rounded-full bg-[#575757] flex justify-center items-center absolute right-0 bottom-0">
               <Image
                 src="/svg/icons/icon_camera.svg"
                 width="15"
                 height="0"
-                alt="profile"
+                alt="image"
               />
             </div>
           </div>
@@ -158,9 +158,9 @@ export default function Edit() {
       <input
         type="file"
         accept="image/*"
-        id="profile"
+        id="image"
         className="hidden"
-        {...register('profile')}
+        {...register('image')}
       />
 
       <section className="relative">
