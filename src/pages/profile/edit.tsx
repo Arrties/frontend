@@ -43,6 +43,7 @@ export default function Edit() {
     clearErrors('nickname');
   }, [nickname]);
 
+  console.log(profile)
   useEffect(() => {
     if (!profile) return;
     setUserInfo(

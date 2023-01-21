@@ -1,6 +1,6 @@
 import Layout from '@components/common/Layout'
 import Navigate from '@components/common/Navigate'
-import ArtWorkItem from '@components/profile/AuctionArtItem'
+import ArtWorkItem from '@components/profile/ArtItem'
 import React from 'react'
 
 export default function Buying() {

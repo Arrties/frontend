@@ -1,4 +1,4 @@
-export const makeBlob = (file: File): string | any => {
+export const makeBlob = (file: File): any => {
   if (!file) return;
   const fileURL = URL.createObjectURL(file);
   return fileURL;
