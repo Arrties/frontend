@@ -44,8 +44,6 @@ export default function Edit() {
 
   const profile = watch('image');
 
-  console.log(userInfo);
-
   useEffect(() => {
     if (!profile) return;
     setUserInfo(
@@ -76,8 +74,6 @@ export default function Edit() {
     if (!email || !userInfo) return;
     const response = await authApi.getCheckEmail(email);
 
-    console.log(response);
-
     if (response.status === 409 && email !== userInfo.email) {
       setError('email', {
         type: 'email duplicate',
@@ -85,16 +81,21 @@ export default function Edit() {
       });
       return;
     } else {
-      console.log('이메일 중복체크 성공');
       setIsEmailValidate(true);
       clearErrors('email');
     }
   };
 
-  console.log(userInfo);
-
   const onSubmit = async (form: Member) => {
-    const { nickname, email, instagram, behance } = form;
+    const {
+      nickname,
+      email,
+      instagram,
+      behance,
+      education,
+      history,
+      description,
+    } = form;
     if (!nickname || !email) return;
     if (!userInfo) return;
     if (!isNicknameValidate && userInfo.nickname !== form.nickname) {
@@ -128,8 +129,16 @@ export default function Edit() {
     if (instagram) formData.append('instagram', instagram);
     if (behance) formData.append('behance', behance);
 
+    if (!isUser) {
+      if (education) formData.append('education', education);
+      if (history) formData.append('history', history);
+      if (description) formData.append('description', description);
+    }
+
     const response = await authApi.patchUserInfo(formData);
-    console.log(response);
+    if (response.status === 200) {
+      router.push('/home');
+    }
   };
 
   if (isLoading) return <Loader />;
@@ -152,13 +161,13 @@ export default function Edit() {
         {userInfo?.image ? (
           <Image
             src={userInfo?.image}
-            width="120"
+            width="60"
             height="0"
-            className="rounded-full w-[120px] h-[120px]"
+            className="rounded-full w-[99px] h-[99px]"
             alt="profile"
           />
         ) : (
-          <div className=" flex justify-center items-center w-[99px] h-[99px] rounded-full border-2 border-[#999999] bg-[#FFFFFF] relative">
+          <div className=" flex justify-center items-center w-[99px] h-[99px] cursor-pointer rounded-full border-2 border-[#999999] bg-[#FFFFFF] relative">
             <Image
               src="/svg/icons/icon_avatar.svg"
               width="60"
@@ -245,7 +254,6 @@ export default function Edit() {
           {errors.education && (
             <ErrorMessage message={errors.education.message} />
           )}
-
           <Input
             type="text"
             label="이력"
@@ -270,42 +278,43 @@ export default function Edit() {
           {errors.description && (
             <ErrorMessage message={errors.description.message} />
           )}
-
-          <article className="flex items-center mt-3">
-            <label htmlFor="instagram" className="w-8 h-8">
-              <Image
-                src="/svg/icons/icon_instagram_gray.svg"
-                width="20"
-                height="20"
-                className="mr-1"
-                alt="instagram"
+          <article className="flex items-center justify-between mt-3">
+            <div className="flex items-center">
+              <label htmlFor="instagram">
+                <Image
+                  src="/svg/icons/icon_instagram_gray.svg"
+                  width="20"
+                  height="20"
+                  className="mr-1"
+                  alt="instagram"
+                />
+              </label>
+              <input
+                placeholder="인스타그램 추가하기"
+                {...register('instagram')}
+                id="instagram"
+                defaultValue={userInfo?.instagram}
+                className="w-[calc(100%-32px)] h-[30px] placeholder:text-[#999] text-12 indent-1 "
               />
-            </label>
-
-            <input
-              placeholder="인스타그램 추가하기"
-              {...register('instagram')}
-              id="instagram"
-              defaultValue={userInfo?.instagram}
-              className="h-[30px] placeholder:text-[#999] text-12 indent-1 "
-            />
-
-            <label htmlFor="behance">
-              <Image
-                src="/svg/icons/icon_behance_gray.svg"
-                width="20"
-                height="20"
-                className="mr-1"
-                alt="behance"
+            </div>
+            <div className="flex items-center">
+              <label htmlFor="behance">
+                <Image
+                  src="/svg/icons/icon_behance_gray.svg"
+                  width="20"
+                  height="20"
+                  className="mr-1"
+                  alt="behance"
+                />
+              </label>
+              <input
+                placeholder="비헨스 추가하기"
+                {...register('behance')}
+                id="behance"
+                defaultValue={userInfo?.behance}
+                className="w-[calc(100%-32px)] h-[30px] placeholder:text-[#999] text-12 indent-1"
               />
-            </label>
-            <input
-              placeholder="비헨스 추가하기"
-              {...register('behance')}
-              id="behance"
-              defaultValue={userInfo?.behance}
-              className="h-[30px] placeholder:text-[#999] text-12 indent-1"
-            />
+            </div>
           </article>
         </section>
       )}
