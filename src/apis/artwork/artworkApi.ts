@@ -1,6 +1,8 @@
-import { getToken } from './../../utils/localStorage/token/index';
-import { ArtworkDTOType } from './artworkApi.type';
-import axios from 'axios';
+import axios from 'axios'
+
+import { getToken } from '@utils/localStorage/token/index'
+import { ArtworkDTOType } from './artworkApi.type'
+
 export class ArtworkApi {
   async postArtwork(body: FormData): Promise<ArtworkDTOType> {
     try {

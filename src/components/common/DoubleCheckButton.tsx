@@ -1,9 +1,9 @@
-import tw from 'tailwind-styled-components';
+import tw from 'tailwind-styled-components'
 
 interface ButtonProps {
   text: string;
   $valid?: boolean;
-  onClick?: (e: { target: { id: any; }; }) => void;
+  onClick?: (e: { target: { id: any } }) => void;
   [key: string]: any;
 }
 

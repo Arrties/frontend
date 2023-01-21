@@ -1,6 +1,6 @@
-import React from 'react';
-import Image from 'next/image';
-import { useRouter } from 'next/router';
+import Image from 'next/image'
+import React from 'react'
+import { useRouter } from 'next/router'
 
 interface ChatRoomForm {
   id: string;

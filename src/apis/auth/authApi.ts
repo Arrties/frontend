@@ -1,8 +1,10 @@
-import instance from '@apis/_axios/instance';
-import { AxiosInstance } from 'axios';
-import { AuthDTOType } from './authApi.type';
-import { getToken } from '@utils/localStorage/token';
-import axios from 'axios';
+import instance from '@apis/_axios/instance'
+import axios from 'axios'
+import { AxiosInstance } from 'axios'
+import { getToken } from '@utils/localStorage/token'
+
+import { AuthDTOType } from './authApi.type'
+
 export class AuthApi {
   axios: AxiosInstance = instance;
   constructor(axios?: AxiosInstance) {

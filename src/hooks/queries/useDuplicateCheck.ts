@@ -1,15 +1,8 @@
-import { useQuery } from 'react-query';
-import authApi from '@apis/auth/authApi';
-import { useState } from 'react';
-
-interface ErrorForm {
-  id: '';
-  email: '';
-  nickname: '';
-}
+import authApi from '@apis/auth/authApi'
+import { useQuery } from 'react-query'
+import { useState } from 'react'
 
 const useDuplicateCheck = (type: string, data: string) => {
-  const [errorMessage, setErrorMessage] = useState<ErrorForm>({});
   const [isDuplicate, setIsDuplicate] = useState<boolean>(false);
   const query = useQuery([type, data], authApi.getDuplicateCheck, {
     retry: 0,
@@ -21,12 +14,11 @@ const useDuplicateCheck = (type: string, data: string) => {
     },
     onError: (error: any) => {
       if (error.status === 409) {
-        setErrorMessage();
         return error;
       }
     },
   });
-  return { ...query, isDuplicate, errorMessage };
+  return { ...query, isDuplicate };
 };
 
 export default useDuplicateCheck;

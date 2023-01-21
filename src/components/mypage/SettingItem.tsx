@@ -1,8 +1,9 @@
-import Image from 'next/image';
-import arrow from '@public/svg/icons/icon_arrow_light_gray.svg';
-import { useRouter } from 'next/router';
-import { deleteToken } from '@utils/localStorage/token';
-import authApi from '@apis/auth/authApi';
+import authApi from '@apis/auth/authApi'
+import arrow from '@public/svg/icons/icon_arrow_light_gray.svg'
+import Image from 'next/image'
+import { useRouter } from 'next/router'
+import { deleteToken } from '@utils/localStorage/token'
+
 interface SettingBoxProps {
   key: string;
   text: string;

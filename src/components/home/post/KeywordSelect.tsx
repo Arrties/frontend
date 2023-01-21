@@ -1,4 +1,5 @@
-import tw from 'tailwind-styled-components';
+import tw from 'tailwind-styled-components'
+
 interface Keyword {
   id: string;
   name: string;

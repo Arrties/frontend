@@ -1,8 +1,8 @@
-import Layout from '@components/common/Layout';
-import Navigate from '@components/common/Navigate';
-import Image from 'next/image';
-import React, { useRef } from 'react';
-import SignatureCanvas from 'react-signature-canvas';
+import Layout from '@components/common/Layout'
+import Navigate from '@components/common/Navigate'
+import Image from 'next/image'
+import SignatureCanvas from 'react-signature-canvas'
+import React, { useRef } from 'react'
 
 interface GuaranteeModalProps {
   onCloseModal: () => void;

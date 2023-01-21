@@ -1,13 +1,13 @@
-import { Fragment, useEffect, useState } from 'react';
-import { Listbox, Transition } from '@headlessui/react';
+import Image from 'next/image'
+import { Fragment, useEffect, useState } from 'react'
+import { Listbox, Transition } from '@headlessui/react'
+
 import type {
   FieldPath,
   UseFormSetValue,
   FieldPathValue,
   FieldValues,
 } from 'react-hook-form';
-import Image from 'next/image';
-
 interface SelectProps<T extends FieldValues> {
   name: FieldPath<T>;
   setValue: UseFormSetValue<T>;

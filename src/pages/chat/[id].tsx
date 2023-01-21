@@ -1,10 +1,11 @@
-import Layout from '@components/common/Layout';
-import React, { useState, useEffect } from 'react';
-import { useRouter } from 'next/router';
-import { useForm } from 'react-hook-form';
-import ChattingMessage from '@components/chat/ChatMessage';
-import Image from 'next/image';
-import Modal from '@components/common/Modal';
+import ChattingMessage from '@components/chat/ChatMessage'
+import Layout from '@components/common/Layout'
+import Modal from '@components/common/Modal'
+import Image from 'next/image'
+import React, { useEffect, useState } from 'react'
+import { useRouter } from 'next/router'
+import { useForm } from 'react-hook-form'
+
 interface ChatRoomProps {
   params: any;
 }

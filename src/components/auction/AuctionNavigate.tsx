@@ -1,7 +1,7 @@
-import Navigate from '@components/common/Navigate';
-import tw from 'tailwind-styled-components';
-import Image from 'next/image';
-import { useRouter } from 'next/router';
+import Navigate from '@components/common/Navigate'
+import Image from 'next/image'
+import tw from 'tailwind-styled-components'
+import { useRouter } from 'next/router'
 
 interface AuctionNavigateProps {
   [key: string]: any;
@@ -24,7 +24,7 @@ export default function AuctionNavigate({ ...rest }: AuctionNavigateProps) {
     <AuctionNavigateTag {...rest}>
       <Navigate
         left_message={
-          <Image alt="" src="/svg/icons/icon_logo.svg" width="80" height="0" />
+          <Image alt="" src="/svg/icons/icon_logo.svg" width="90" height="0" />
         }
         right_message={
           <div className="flex w-[50px] justify-between">
@@ -46,18 +46,6 @@ export default function AuctionNavigate({ ...rest }: AuctionNavigateProps) {
         }
         handleLeftButton={handleLeftButton}
       />
-      <div className="relative flex justify-between mb-3">
-        <div className=" left-0 text-12 ">작품 17,029</div>
-        <div className=" right-0 text-12 flex cursor-pointer ">
-          인기순
-          <Image
-            alt=""
-            src="/svg/icons/icon_arrow_sort.svg"
-            width="18"
-            height="0"
-          />
-        </div>
-      </div>
     </AuctionNavigateTag>
   );
 }

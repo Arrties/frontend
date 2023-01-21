@@ -1,12 +1,13 @@
-import Layout from '@components/common/Layout';
-import Input from '@components/common/Input';
-import back from '@public/svg/icons/icon_back.svg';
-import close from '@public/svg/icons/icon_grayClose.svg';
-import tw from 'tailwind-styled-components';
-import Image from 'next/image';
-import { useRouter } from 'next/router';
-import { useState } from 'react';
-import { useForm } from 'react-hook-form';
+import Input from '@components/common/Input'
+import Layout from '@components/common/Layout'
+import back from '@public/svg/icons/icon_back.svg'
+import close from '@public/svg/icons/icon_grayClose.svg'
+import Image from 'next/image'
+import tw from 'tailwind-styled-components'
+import { useRouter } from 'next/router'
+import { useState } from 'react'
+import { useForm } from 'react-hook-form'
+
 interface DefaultProps {
   [key: string]: any;
 }
