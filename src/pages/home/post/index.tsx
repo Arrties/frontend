@@ -69,7 +69,7 @@ export default function Post() {
 
   const router = useRouter();
 
-  if (getToken().role !== 'ARTIST') {
+  if (getToken().roles !== 'ARTIST') {
     router.push('/home');
   }
 

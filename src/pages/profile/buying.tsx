@@ -2,7 +2,6 @@ import Layout from '@components/common/Layout'
 import Navigate from '@components/common/Navigate'
 import ArtWorkItem from '@components/profile/AuctionArtItem'
 import React from 'react'
-import { useRouter } from 'next/router'
 
 export default function Buying() {
   return (

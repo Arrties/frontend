@@ -5,7 +5,7 @@ import Navigate from '@components/common/Navigate'
 import Image from 'next/image'
 import { useState } from 'react'
 import { useRouter } from 'next/router'
-import { deleteToken, getToken } from '@utils/localStorage/token'
+import { deleteToken } from '@utils/localStorage/token'
 
 export default function Security() {
   const [isModal, setIsModal] = useState(false);
