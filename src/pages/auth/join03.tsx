@@ -1,11 +1,11 @@
-import Image from 'next/image';
-import ErrorMessage from '@components/common/ErrorMessage';
-import Layout from '@components/common/Layout';
-import { useAppSelector } from '@features/hooks';
-import { useRouter } from 'next/router';
+import ErrorMessage from '@components/common/ErrorMessage'
+import Layout from '@components/common/Layout'
+import Image from 'next/image'
+import { useAppSelector } from '@features/hooks'
+import { useRouter } from 'next/router'
 
-import Button from '../../components/common/Button';
-import useUserJoin from '../../hooks/queries/useUserJoin';
+import Button from '../../components/common/Button'
+import useUserJoin from '../../hooks/queries/useUserJoin'
 
 interface Member extends User {
   keywords: string[];

@@ -1,13 +1,13 @@
-import { useForm } from 'react-hook-form';
-import Layout from '@components/common/Layout';
-import Navigate from '@components/common/Navigate';
-import Input from '@components/common/Input';
-import Button from '@components/common/Button';
-import { useRouter } from 'next/router';
-import React, { useState } from 'react';
-import Modal from '@components/common/Modal';
-import ErrorMessage from '@components/common/ErrorMessage';
-import authApi from '@apis/auth/authApi';
+import authApi from '@apis/auth/authApi'
+import Button from '@components/common/Button'
+import ErrorMessage from '@components/common/ErrorMessage'
+import Input from '@components/common/Input'
+import Layout from '@components/common/Layout'
+import Modal from '@components/common/Modal'
+import Navigate from '@components/common/Navigate'
+import React, { useState } from 'react'
+import { useForm } from 'react-hook-form'
+import { useRouter } from 'next/router'
 
 interface NewPasswordForm {
   email: string;

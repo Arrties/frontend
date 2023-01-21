@@ -1,15 +1,15 @@
-import Button from '@components/common/Button';
-import CheckBox from '@components/common/Checkbox';
-import Layout from '@components/common/Layout';
-import Navigate from '@components/common/Navigate';
-import { useAppDispatch } from '@features/hooks';
-import { setIsApprovePromotion } from '@features/user/userSlice';
-import arrowBtn from '@public/svg/icons/icon_arrow.svg';
-import Image from 'next/image';
-import { useRouter } from 'next/router';
-import { useState } from 'react';
-import { useForm } from 'react-hook-form';
-import tw from 'tailwind-styled-components';
+import Button from '@components/common/Button'
+import CheckBox from '@components/common/Checkbox'
+import Layout from '@components/common/Layout'
+import Navigate from '@components/common/Navigate'
+import arrowBtn from '@public/svg/icons/icon_arrow.svg'
+import Image from 'next/image'
+import tw from 'tailwind-styled-components'
+import { useAppDispatch } from '@features/hooks'
+import { setIsApprovePromotion } from '@features/user/userSlice'
+import { useRouter } from 'next/router'
+import { useState } from 'react'
+import { useForm } from 'react-hook-form'
 
 interface DefaultProps {
   [key: string]: any;
