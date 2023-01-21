@@ -1,17 +1,17 @@
-import ErrorMessage from '@components/common/ErrorMessage';
-import Input from '@components/common/Input';
-import Layout from '@components/common/Layout';
-import Navigate from '@components/common/Navigate';
-import DoubleCheckButton from '@components/common/DoubleCheckButton';
-import authApi from '@apis/auth/authApi';
-import React, { useState, useEffect } from 'react';
-import { useForm } from 'react-hook-form';
-import Image from 'next/image';
-import { useRouter } from 'next/router';
-import { isUser } from '@utils/isUser';
-import useGetProfile from '@hooks/queries/useGetProfile';
-import Loader from '@components/common/Loader';
-import { makeBlob } from '@utils/makeBlob';
+import authApi from '@apis/auth/authApi'
+import DoubleCheckButton from '@components/common/DoubleCheckButton'
+import ErrorMessage from '@components/common/ErrorMessage'
+import Input from '@components/common/Input'
+import Layout from '@components/common/Layout'
+import Loader from '@components/common/Loader'
+import Navigate from '@components/common/Navigate'
+import useGetProfile from '@hooks/queries/useGetProfile'
+import Image from 'next/image'
+import React, { useEffect, useState } from 'react'
+import { useForm } from 'react-hook-form'
+import { useRouter } from 'next/router'
+import { isUser } from '@utils/isUser'
+import { makeBlob } from '@utils/makeBlob'
 
 export default function Edit() {
   const [isNicknameValidate, setIsNicknameValidate] = useState<boolean>(true);
@@ -28,6 +28,7 @@ export default function Edit() {
   const nickname = watch('nickname');
   const email = watch('email');
   const router = useRouter();
+  const profile = watch('image');
 
   const handleLeftButton = () => {
     router.push('/profile');
@@ -41,8 +42,6 @@ export default function Edit() {
     setIsNicknameValidate(false);
     clearErrors('nickname');
   }, [nickname]);
-
-  const profile = watch('image');
 
   useEffect(() => {
     if (!profile) return;
@@ -58,7 +57,7 @@ export default function Edit() {
   const handleDoubleCheckNickName = async () => {
     if (!nickname || !userInfo) return;
     const data = await authApi.getCheckNickname(nickname);
-    if (data.status === 409 && nickname !== userInfo.nickname) {
+    if (data.status === 409 && nickname !== userInfo?.nickname) {
       setError('nickname', {
         type: 'nickname duplicate',
         message: '중복되는 닉네임 입니다.',
@@ -73,8 +72,7 @@ export default function Edit() {
   const handleDoubleCheckEmail = async () => {
     if (!email || !userInfo) return;
     const response = await authApi.getCheckEmail(email);
-
-    if (response.status === 409 && email !== userInfo.email) {
+    if (response.status === 409 && email !== userInfo?.email) {
       setError('email', {
         type: 'email duplicate',
         message: '이미 가입된 이메일 입니다.',
@@ -105,7 +103,7 @@ export default function Edit() {
       });
       return;
     }
-    if (!isEmailValidate && userInfo.email !== form.email) {
+    if (!isEmailValidate && userInfo?.email !== form.email) {
       setError('email', {
         type: 'need email duplicate',
         message: '이메일 중복체크를 해주세요',
@@ -157,7 +155,7 @@ export default function Edit() {
         handleLeftButton={handleLeftButton}
         handleRightButton={handleSubmit(onSubmit)}
       />
-      <label className="flex justify-center h-[150px]" htmlFor="profile">
+      <label className="flex justify-center h-[150px]" htmlFor="image">
         {userInfo?.image ? (
           <Image
             src={userInfo?.image}
@@ -172,14 +170,14 @@ export default function Edit() {
               src="/svg/icons/icon_avatar.svg"
               width="60"
               height="0"
-              alt="profile"
+              alt="image"
             />
             <div className="w-[26px] h-[26px] rounded-full bg-[#575757] flex justify-center items-center absolute right-0 bottom-0">
               <Image
                 src="/svg/icons/icon_camera.svg"
                 width="15"
                 height="0"
-                alt="profile"
+                alt="image"
               />
             </div>
           </div>
@@ -188,7 +186,7 @@ export default function Edit() {
       <input
         type="file"
         accept="image/*"
-        id="profile"
+        id="image"
         className="hidden"
         {...register('image')}
       />

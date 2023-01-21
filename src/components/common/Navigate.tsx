@@ -1,7 +1,7 @@
-import tw from 'tailwind-styled-components';
-import Image from 'next/image';
-import React from 'react';
-import Router from 'next/router';
+import Image from 'next/image'
+import Router from 'next/router'
+import React from 'react'
+import tw from 'tailwind-styled-components'
 
 interface NavigateProps {
   left_message?: React.ReactNode;

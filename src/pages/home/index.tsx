@@ -1,15 +1,17 @@
-import 'swiper/css';
-import { useRouter } from 'next/router';
-import Layout from '@components/common/Layout';
-import Tab from '@components/common/Tab';
-import ExhibitionItem from '@components/home/ExhibitionItem';
-import ScheduleItem from '@components/home/ScheduleItem';
-import Calendar from '@components/home/Calendar';
-import React from 'react';
-import Image from 'next/image';
-import { Autoplay, Navigation, Scrollbar } from 'swiper';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import AuctionItem from '@components/home/AuctionItem';
+import 'swiper/css'
+
+import AuctionNavigate from '@components/auction/AuctionNavigate'
+import Layout from '@components/common/Layout'
+import Tab from '@components/common/Tab'
+import AuctionItem from '@components/home/AuctionItem'
+import Calendar from '@components/home/Calendar'
+import ExhibitionItem from '@components/home/ExhibitionItem'
+import ScheduleItem from '@components/home/ScheduleItem'
+import Image from 'next/image'
+import React from 'react'
+import { useRouter } from 'next/router'
+import { Autoplay, Navigation, Scrollbar } from 'swiper'
+import { Swiper, SwiperSlide } from 'swiper/react'
 
 const DUMP_KEYWORD_LISTS = ['사진', '소묘', '파스텔', '추상화'];
 const DUMP_ART_LISTS = [
@@ -64,35 +66,8 @@ export default function Home() {
   return (
     <>
       <Layout>
-        <section className="flex justify-between items-center">
-          <div>
-            <Image
-              src="/svg/icons/icon_logo.svg"
-              alt="logo"
-              width={95}
-              height={0}
-            />
-          </div>
-          <div className="flex">
-            <span className="pr-3">
-              <Image
-                src="/svg/icons/icon_search.svg"
-                alt="search"
-                width={27}
-                height={0}
-              />
-            </span>
-            <span>
-              <Image
-                src="/svg/icons/icon_notification.svg"
-                alt="notification"
-                width={27}
-                height={0}
-              />
-            </span>
-          </div>
-        </section>
-        <section className="mt-8">
+        <AuctionNavigate />
+        <section className="">
           <div className="text-[#767676] text-14">영서님 취향의</div>
           <div className="flex justify-between">
             <span className="text-20 font-bold">이번 주 전시작품</span>

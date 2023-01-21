@@ -1,11 +1,9 @@
-import Layout from '@components/common/Layout';
-import React from 'react';
-import { useRouter } from 'next/router';
-import ArtWorkItem from '@components/profile/AuctionArtItem';
-import Navigate from '@components/common/Navigate';
+import Layout from '@components/common/Layout'
+import Navigate from '@components/common/Navigate'
+import ArtWorkItem from '@components/profile/AuctionArtItem'
+import React from 'react'
 
 export default function Buying() {
-  const router = useRouter();
   return (
     <Layout>
       <Navigate isRightButton={false} message="구매작품  " />

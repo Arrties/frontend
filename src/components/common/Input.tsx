@@ -1,6 +1,7 @@
-import tw from 'tailwind-styled-components';
-import type { UseFormRegisterReturn } from 'react-hook-form';
+import React from 'react'
+import tw from 'tailwind-styled-components'
 
+import type { UseFormRegisterReturn } from 'react-hook-form';
 interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   type: string;
   label?: string;

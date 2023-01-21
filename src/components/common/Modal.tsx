@@ -1,4 +1,4 @@
-import tw from 'tailwind-styled-components';
+import tw from 'tailwind-styled-components'
 
 interface ModalProps {
   message: string;
@@ -17,10 +17,10 @@ interface DefaultProps {
 const ModalTag = tw.div<DefaultProps>``;
 
 const ModalBackground = tw.div`
-  absolute inset-0 bg-[#767676] opacity-80 backdrop-blur-3xl
+  absolute inset-0 bg-[#767676] opacity-80 backdrop-blur-3xl z-10
 `;
 const ModalInner = tw.div<DefaultProps>`
-  z-10 w-[327px] h-[156px] absolute inset-0 m-auto
+  z-20 w-[327px] h-[156px] absolute inset-0 m-auto
 `;
 const ModalMessage = tw.div`
 h-[104px] bg-white text-[#191919] text-14 rounded-t-[4px] flex items-center justify-center font-bold 

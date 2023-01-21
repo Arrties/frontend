@@ -1,11 +1,13 @@
-import tw from 'tailwind-styled-components';
 import Image from 'next/image';
+import tw from 'tailwind-styled-components';
 
 interface ArtWorkItemProps {
   [key: string]: any;
 }
-
-const ArtWorkItemTag = tw.div`
+interface defaultProps {
+  [key: string]: any;
+}
+const ArtWorkItemTag = tw.div<defaultProps>`
 w-full h-[264px] bg-[#FFFFFF] rounded-xl relative shadow-lg shadow-slate-100 mb-5
 `;
 export default function ArtWorkItem({ ...rest }: ArtWorkItemProps) {

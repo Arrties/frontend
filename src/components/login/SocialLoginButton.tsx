@@ -1,24 +1,15 @@
-import Image from 'next/image';
-import tw from 'tailwind-styled-components';
-import kakao from '@public/svg/social/kakao_logo.svg';
-import naver from '@public/svg/social/naver_logo.svg';
-import Link from 'next/link';
-import { CONFIG } from '@config';
+import kakao from '@public/svg/social/kakao_logo.svg'
+import naver from '@public/svg/social/naver_logo.svg'
+import Image from 'next/image'
+import Link from 'next/link'
+import tw from 'tailwind-styled-components'
+import { CONFIG } from '@config'
+import { randomString } from '@utils/randomString'
+
 export interface SocialLoginButtonProps {
   kind: 'kakao' | 'naver';
   [key: string]: any;
 }
-
-const randomString = (length: number) => {
-  let result = '';
-  const characters =
-    'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-  const charactersLength = characters.length;
-  for (let i = 0; i < length; i++) {
-    result += characters.charAt(Math.floor(Math.random() * charactersLength));
-  }
-  return result;
-};
 
 const STATESTRING = randomString(20);
 

@@ -1,7 +1,7 @@
-import Layout from '@components/common/Layout';
-import { useState } from 'react';
-import SelectKeyword from '@components/profile/Selectkeyword';
-import authApi from '@apis/auth/authApi';
+import authApi from '@apis/auth/authApi'
+import Layout from '@components/common/Layout'
+import SelectKeyword from '@components/profile/Selectkeyword'
+import { useState } from 'react'
 
 export default function Keyword() {
   const [keywordList, setKeywordList] = useState<string[]>([]);

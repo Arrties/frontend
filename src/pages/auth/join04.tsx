@@ -1,10 +1,10 @@
-import ErrorMessage from '@components/common/ErrorMessage';
-import Layout from '@components/common/Layout';
-import { useAppSelector } from '@features/hooks';
-import { useState } from 'react';
-import { Member } from 'types/user';
-import useUserJoin from '../../hooks/queries/useUserJoin';
-import SelectKeyword from '@components/common/Selectkeyword';
+import ErrorMessage from '@components/common/ErrorMessage'
+import Layout from '@components/common/Layout'
+import SelectKeyword from '@components/common/Selectkeyword'
+import { useAppSelector } from '@features/hooks'
+import { useState } from 'react'
+
+import useUserJoin from '../../hooks/queries/useUserJoin'
 
 export default function Join04() {
   const [keywordList, setKeywordList] = useState<string[]>([]);

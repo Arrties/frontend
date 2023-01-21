@@ -1,32 +1,26 @@
-import Input from '@components/common/Input';
-import Layout from '@components/common/Layout';
-import Navigate from '@components/common/Navigate';
-import Image from 'next/image';
-import React, { useEffect, useState } from 'react';
-import { useForm } from 'react-hook-form';
-import Select from '@components/common/Select';
-import FileItem from '@components/inquiry/FileItem';
-import GuaranteeModal from '@components/home/post/GuaranteeModal';
-import KeywordModal from '@components/home/post/KeywordModal.tsx';
-import GenreModal from '@components/home/post/GenreModal';
-import ErrorMessage from '@components/common/ErrorMessage';
-import { useRouter } from 'next/router';
-import Modal from '@components/common/Modal';
-import artworkApi from '@apis/artwork/artworkApi';
-import { getToken } from '@utils/localStorage/token';
+import artworkApi from '@apis/artwork/artworkApi'
+import ErrorMessage from '@components/common/ErrorMessage'
+import Input from '@components/common/Input'
+import Layout from '@components/common/Layout'
+import Modal from '@components/common/Modal'
+import Navigate from '@components/common/Navigate'
+import Select from '@components/common/Select'
+import GenreModal from '@components/home/post/GenreModal'
+import GuaranteeModal from '@components/home/post/GuaranteeModal'
+import KeywordModal from '@components/home/post/KeywordModal.tsx'
+import FileItem from '@components/inquiry/FileItem'
+import Image from 'next/image'
+import React, { useEffect, useState } from 'react'
+import { useForm } from 'react-hook-form'
+import { useRouter } from 'next/router'
+import { getToken } from '@utils/localStorage/token'
+import { dataURLtoFile } from '@utils/dataURLtoFile'
 
 const ARTWORK_STATUS = [
   { value: '매우 좋음' },
   { value: '좋음' },
   { value: '보통' },
 ];
-
-const dataURLtoFile = (dataurl: string, name: string) => {
-  const decodedURL = dataurl.replace(/^data:image\/\w+;base64,/, '');
-  const buf = Buffer.from(decodedURL, 'base64');
-  const blob = new Blob([buf], { type: 'image/png' });
-  return new File([blob], `${name}.png`, { type: 'image/png' });
-};
 
 const IS_FRAME = [{ value: '있음' }, { value: '없음' }];
 
@@ -224,18 +218,16 @@ export default function Post() {
               </div>
             </div>
           </label>
-          {fileLists.length ? (
+          {fileLists.length && (
             <div className="flex flex-wrap">
               {fileLists.map((file, idx) => (
                 <FileItem
                   handler={handleRemoveFile}
-                  key={idx + ''}
+                  key={'' + idx}
                   file={file}
                 />
               ))}
             </div>
-          ) : (
-            ''
           )}
           <input
             multiple
@@ -360,7 +352,6 @@ export default function Post() {
           </article>
           <article className="w-[calc((100%-2rem)/3)]">
             <Input
-              defaultChec
               type="number"
               placeholder="10"
               unit="호"

@@ -1,12 +1,12 @@
-import Layout from '@components/common/Layout';
-import React, { useState } from 'react';
-import Navigate from '@components/common/Navigate';
-import tw from 'tailwind-styled-components';
-import { useRouter } from 'next/router';
-import Image from 'next/image';
-import { Tab } from '@headlessui/react';
-import PickArtistWork from '@components/profile/pick/PickArtistWork';
-import useGetPickDetail from '@hooks/queries/useGetPickDetail';
+import Layout from '@components/common/Layout'
+import Navigate from '@components/common/Navigate'
+import PickArtistWork from '@components/profile/pick/PickArtistWork'
+import useGetPickDetail from '@hooks/queries/useGetPickDetail'
+import Image from 'next/image'
+import React from 'react'
+import tw from 'tailwind-styled-components'
+import { useRouter } from 'next/router'
+import { Tab } from '@headlessui/react'
 
 interface defaultProps {
   [key: string]: any;

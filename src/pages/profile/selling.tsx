@@ -1,13 +1,11 @@
-import Layout from '@components/common/Layout';
-import React, { useState } from 'react';
-import { useRouter } from 'next/router';
-import AuctionArtItem from '@components/profile/AuctionArtItem';
-import Navigate from '@components/common/Navigate';
-import { Tab } from '@headlessui/react';
-import Modal from '@components/common/Modal';
+import Layout from '@components/common/Layout'
+import Modal from '@components/common/Modal'
+import Navigate from '@components/common/Navigate'
+import AuctionArtItem from '@components/profile/AuctionArtItem'
+import React, { useState } from 'react'
+import { Tab } from '@headlessui/react'
 
 export default function Selling() {
-  const router = useRouter();
   const [isModal, setIsModal] = useState<boolean>(false);
   const handleOption = () => {
     setIsModal(true);

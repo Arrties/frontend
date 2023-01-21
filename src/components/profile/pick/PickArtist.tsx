@@ -1,7 +1,7 @@
-import Image from 'next/image';
-import avatar from '@public/svg/icons/profile/icon_avatar.svg';
-import tw from 'tailwind-styled-components';
-import { useRouter } from 'next/router';
+import avatar from '@public/svg/icons/profile/icon_avatar.svg'
+import Image from 'next/image'
+import tw from 'tailwind-styled-components'
+import { useRouter } from 'next/router'
 
 interface DefaultProps {
   [key: string]: any;

@@ -1,20 +1,20 @@
-import authApi from '@apis/auth/authApi';
-import Button from '@components/common/Button';
-import CheckBox from '@components/common/Checkbox';
-import ErrorMessage from '@components/common/ErrorMessage';
-import Input from '@components/common/Input';
-import Layout from '@components/common/Layout';
-import SocialLoginButton from '@components/login/SocialLoginButton';
-import { setToken, Token } from '@utils/localStorage/token';
-import { setLocalStorage, getLocalStorage } from '@utils/localStorage/helper';
-import Image from 'next/image';
-import Link from 'next/link';
-import { useRouter } from 'next/router';
-import React, { useState, useEffect } from 'react';
-import { useForm } from 'react-hook-form';
+import authApi from '@apis/auth/authApi'
+import Button from '@components/common/Button'
+import CheckBox from '@components/common/Checkbox'
+import ErrorMessage from '@components/common/ErrorMessage'
+import Input from '@components/common/Input'
+import Layout from '@components/common/Layout'
+import SocialLoginButton from '@components/login/SocialLoginButton'
+import Image from 'next/image'
+import Link from 'next/link'
+import React, { useEffect, useState } from 'react'
+import { setToken, Token } from '@utils/localStorage/token'
+import { getLocalStorage, removeLocalStorage, setLocalStorage } from '@utils/localStorage/helper'
+import { useRouter } from 'next/router'
+import { useForm } from 'react-hook-form'
 
 interface LoginForm {
-  userId: string;
+  userId: string | null;
   password: string;
 }
 
@@ -30,6 +30,7 @@ function Login() {
     },
   });
   const [checkedTerm, setCheckedTerm] = useState<string[]>([]);
+  console.log(checkedTerm);
   useEffect(() => {
     if (getLocalStorage('idSave') === 'true') {
       setCheckedTerm(['idSave']);
@@ -40,6 +41,7 @@ function Login() {
       setLocalStorage('idSave', 'true');
     } else {
       setLocalStorage('idSave', 'false');
+      removeLocalStorage('savedId');
     }
   }, [checkedTerm]);
 
@@ -64,7 +66,7 @@ function Login() {
       const token: Token = {
         accessToken: res.data.accessToken,
         refreshToken: res.data.refreshToken,
-        role: res.data.roles,
+        roles: res.data.roles,
       };
       if (token) setToken(token);
       router.push('/home');

@@ -1,44 +1,46 @@
-import Layout from '@components/common/Layout';
-import React from 'react';
-import { useRouter } from 'next/router';
-import Navigate from '../components/common/Navigate';
-import Button from '@components/common/Button';
-import { useState } from 'react';
-import { Navigation } from 'swiper';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import tw from 'tailwind-styled-components';
-import 'swiper/css';
-import Image from 'next/image';
+import 'swiper/css'
 
-const ImageWrapper = tw.div`h-[340px] pt-[100px] `;
+import Button from '@components/common/Button'
+import Layout from '@components/common/Layout'
+import Navigate from '@components/common/Navigate'
+import Image from 'next/image'
+import tw from 'tailwind-styled-components'
+import React, { useRef } from 'react'
+import { useRouter } from 'next/router'
+import { Navigation } from 'swiper'
+import { Swiper, SwiperSlide } from 'swiper/react'
+
+interface defaultProps {
+  [key: string]: any;
+}
+
+const ImageWrapper = tw.div<defaultProps>`h-[340px] pt-[100px] `;
 const Title = tw.p`
 text-20 font-bold mt-16
 `;
-const Content = tw.p`text-10 text-[#767676] mt-2 leading-4`;
+const Content = tw.p<defaultProps>`text-10 text-[#767676] mt-2 leading-4`;
 const Line = tw.span``;
 
 export default function Begin() {
-  const [swiper, setSwiper] = useState(null);
+  const swiperRef = useRef<any>(null);
   const router = useRouter();
-  const handleRightButton = () => {
-    swiper.slideTo(2);
-  };
-
   return (
     <Layout>
-      <Navigate
-        isLeftButton={false}
-        right_message="건너뛰기"
-        handleRightButton={handleRightButton}
-      />
       <div>
         <Swiper
           navigation={true}
           modules={[Navigation]}
           className="mySwiper"
-          onSwiper={setSwiper}
+          ref={swiperRef}
         >
           <SwiperSlide>
+            <Navigate
+              isLeftButton={false}
+              right_message="건너뛰기"
+              handleRightButton={() =>
+                swiperRef.current.swiper.slideTo(2, 1000)
+              }
+            />
             <ImageWrapper>
               <Image
                 alt="begin"
@@ -63,6 +65,13 @@ export default function Begin() {
             </div>
           </SwiperSlide>
           <SwiperSlide>
+            <Navigate
+              isLeftButton={false}
+              right_message="건너뛰기"
+              handleRightButton={() =>
+                swiperRef.current.swiper.slideTo(2, 1000)
+              }
+            />
             <ImageWrapper>
               <Image
                 alt="begin"
@@ -101,7 +110,7 @@ export default function Begin() {
                 <Line>현대미술의 장점! 채팅으로 컬렉터분들과 소통해요.</Line>
               </Content>
             </div>
-            <div className="space-x-3 flex justify-center mt-6">
+            <div className="space-x-3 flex justify-center mt-10">
               <div className="w-2 rounded-full aspect-square bg-[#D9D9D9]"></div>
               <div className="w-2 rounded-full aspect-square bg-[#D9D9D9]"></div>
               <div className="w-2 rounded-full aspect-square bg-[#F5535D]"></div>

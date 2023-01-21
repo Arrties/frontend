@@ -1,6 +1,6 @@
-import moment, { Moment as MomentTypes } from 'moment';
-import Image from 'next/image';
-import { ReactElement, useEffect, useState } from 'react';
+import moment from 'moment'
+import Image from 'next/image'
+import { ReactElement, useState } from 'react'
 
 const days = ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'];
 const DUMP_AUCTION_DATE_LISTS = [
