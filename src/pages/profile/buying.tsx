@@ -1,8 +1,8 @@
 import Layout from '@components/common/Layout';
 import React from 'react';
 import { useRouter } from 'next/router';
-import Navigate from '@components/common/Navigate';
 import ArtWorkItem from '@components/profile/AuctionArtItem';
+import Navigate from '@components/common/Navigate';
 
 export default function Buying() {
   const router = useRouter();

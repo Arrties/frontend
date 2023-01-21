@@ -8,7 +8,7 @@ import Modal from '@components/common/Modal';
 
 export default function Selling() {
   const router = useRouter();
-  const [isModal, setIsModal] = useState<Boolean>(false);
+  const [isModal, setIsModal] = useState<boolean>(false);
   const handleOption = () => {
     setIsModal(true);
   };

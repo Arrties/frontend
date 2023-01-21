@@ -3,13 +3,13 @@ import arrow from '@public/svg/icons/icon_arrow_light_gray.svg';
 import { useRouter } from 'next/router';
 import { deleteToken } from '@utils/localStorage/token';
 import authApi from '@apis/auth/authApi';
-interface SettingBoxProps {
+interface SettingItemProps {
   key: string;
   text: string;
   path: string;
 }
 
-export default function SettingItem({ text, path }: SettingBoxProps) {
+export default function SettingItem({ text, path }: SettingItemProps) {
   const router = useRouter();
   const handleNavigate = async () => {
     if (text === '로그아웃') {

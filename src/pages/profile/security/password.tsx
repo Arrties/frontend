@@ -4,8 +4,7 @@ import Input from '@components/common/Input';
 import Layout from '@components/common/Layout';
 import Navigate from '@components/common/Navigate';
 import Image from 'next/image';
-import { useRouter } from 'next/router';
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 
 interface passwordForm {
@@ -14,7 +13,6 @@ interface passwordForm {
 }
 
 export default function Password() {
-  const router = useRouter();
   const {
     register,
     handleSubmit,
