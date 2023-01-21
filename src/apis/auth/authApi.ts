@@ -100,7 +100,6 @@ export class AuthApi {
   async getDuplicateCheck(params) {
     const type = params.queryKey[0];
     const data = params.queryKey[1];
-    console.log(type, data);
     let uri = '';
     if (type === 'email') {
       uri = '/members/check-email?email=';
