@@ -27,7 +27,7 @@ interface User {
   email?: string;
   nickname?: string;
   telephone?: string;
-  image?: string | File;
+  image?: any;
 }
 
 interface Artist {

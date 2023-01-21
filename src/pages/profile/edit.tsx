@@ -43,7 +43,7 @@ export default function Edit() {
     clearErrors('nickname');
   }, [nickname]);
 
-  console.log(profile)
+  console.log(profile);
   useEffect(() => {
     if (!profile) return;
     setUserInfo(
@@ -115,7 +115,7 @@ export default function Edit() {
     formData.append('nickname', nickname);
     formData.append('email', email);
 
-    if (profile && profile.length) {
+    if (profile && profile?.length) {
       //유저가 프로필을 변환하였다면
       formData.append('isChanged', 'true');
       formData.append('image', profile[0]);

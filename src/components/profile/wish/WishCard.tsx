@@ -1,6 +1,6 @@
-import Image from 'next/image';
-import favorite from '@public/svg/icons/icon_favorite.svg';
-import tw from 'tailwind-styled-components';
+import favorite from '@public/svg/icons/icon_favorite.svg'
+import Image from 'next/image'
+import tw from 'tailwind-styled-components'
 
 interface DefaultProps {
   [key: string]: any;
@@ -26,7 +26,6 @@ export default function WishCard({ wish }) {
       status: wish.status2,
     },
   ];
-  console.log(statusList);
   return (
     <WishCardContainer>
       <div className="h-28 bg-gray-300 rounded-t-lg relative">
