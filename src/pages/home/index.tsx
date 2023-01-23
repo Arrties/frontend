@@ -67,7 +67,6 @@ export default function Home() {
   const router = useRouter();
 
   const { keywordArtWork } = useGetKeywordArtWork();
-  console.log(keywordArtWork);
 
   return (
     <>
@@ -78,7 +77,14 @@ export default function Home() {
           <div className="flex justify-between">
             <span className="text-20 font-bold">이번 주 전시작품</span>
             <div className="flex justify-between items-center">
-              <span className="text-12 text-[#999999] pr-1">전체보기</span>
+              <span
+                className="text-12 text-[#999999] pr-1 cursor-pointer"
+                onClick={() => {
+                  router.push('home/view');
+                }}
+              >
+                전체보기
+              </span>
               <Image
                 src="/svg/icons/icon_arrow.svg"
                 alt="arrow"
