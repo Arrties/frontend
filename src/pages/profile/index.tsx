@@ -107,7 +107,6 @@ export default function Profile() {
   };
   const { isLoading, userInfo } = useGetProfile();
 
-  const url = userInfo?.image;
   if (isLoading) return <Loader />;
   return (
     <Layout>
