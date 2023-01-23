@@ -123,18 +123,18 @@ export default function Post() {
     } = form;
     const formData = new FormData();
     formData.append('title', title);
-    formData.append('productionYear', productionYear);
+    formData.append('productionYear', productionYear + '');
     formData.append('description', description);
     formData.append('material', material);
-    formData.append('frame', frame + '' === '있음');
-    formData.append('width', width);
-    formData.append('length', length);
-    formData.append('height', height);
+    formData.append('frame', (frame + '' === '있음') + '');
+    formData.append('width', JSON.stringify(width));
+    formData.append('length', length + '');
+    formData.append('height', height + '');
     formData.append('size', size);
-    formData.append('price', price);
+    formData.append('price', price + '');
     formData.append('status', status);
     formData.append('statusDescription', statusDescription);
-    formData.append('keywords', keywordList);
+    formData.append('keywords', keywordList + '');
 
     if (file.length == 1) {
       formData.append('image', file[0]);
@@ -414,7 +414,7 @@ export default function Post() {
           )}
         </div>
         <div className="h-[336px] relative">
-          <div className="w-[375px] h-[376px] absolute -left-6 bottom-0">
+          <div className="w-[375px] h-[376px] absolute -left-6 -bottom-10">
             <div className="mt-12 h-4 bg-[#F8F8FA]"></div>
             <div className="text-12 px-6">
               <p className="font-medium mt-8">
