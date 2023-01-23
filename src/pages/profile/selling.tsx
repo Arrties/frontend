@@ -1,9 +1,10 @@
-import Layout from '@components/common/Layout'
-import Modal from '@components/common/Modal'
-import Navigate from '@components/common/Navigate'
-import ArtItem from '@components/profile/ArtItem'
-import React, { useState } from 'react'
-import { Tab } from '@headlessui/react'
+import Layout from '@components/common/Layout';
+import Modal from '@components/common/Modal';
+import Navigate from '@components/common/Navigate';
+import ArtItem from '@components/profile/ArtItem';
+import React, { useState } from 'react';
+import { Tab } from '@headlessui/react';
+import useGetSellingArtWork from '@hooks/queries/useGetSellingArtWork';
 
 export default function Selling() {
   const [isModal, setIsModal] = useState<boolean>(false);
@@ -16,6 +17,8 @@ export default function Selling() {
   const handleAccept = () => {
     console.log('수정/삭제');
   };
+  const { sellingArtWork } = useGetSellingArtWork();
+  console.log(sellingArtWork);
   return (
     <Layout>
       <Modal
