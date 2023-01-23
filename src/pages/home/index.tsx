@@ -1,17 +1,18 @@
-import 'swiper/css'
+import 'swiper/css';
 
-import AuctionNavigate from '@components/auction/AuctionNavigate'
-import Layout from '@components/common/Layout'
-import Tab from '@components/common/Tab'
-import AuctionItem from '@components/home/AuctionItem'
-import Calendar from '@components/home/Calendar'
-import ExhibitionItem from '@components/home/ExhibitionItem'
-import ScheduleItem from '@components/home/ScheduleItem'
-import Image from 'next/image'
-import React from 'react'
-import { useRouter } from 'next/router'
-import { Autoplay, Navigation, Scrollbar } from 'swiper'
-import { Swiper, SwiperSlide } from 'swiper/react'
+import AuctionNavigate from '@components/auction/AuctionNavigate';
+import Layout from '@components/common/Layout';
+import Tab from '@components/common/Tab';
+import AuctionItem from '@components/home/AuctionItem';
+import Calendar from '@components/home/Calendar';
+import ExhibitionItem from '@components/home/ExhibitionItem';
+import ScheduleItem from '@components/home/ScheduleItem';
+import Image from 'next/image';
+import React from 'react';
+import { useRouter } from 'next/router';
+import { Autoplay, Navigation, Scrollbar } from 'swiper';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import useGetKeywordArtWork from '@hooks/queries/useGetKeywordArtWork';
 
 const DUMP_KEYWORD_LISTS = ['사진', '소묘', '파스텔', '추상화'];
 const DUMP_ART_LISTS = [
@@ -63,6 +64,10 @@ const DUMP_PREV_AUCTION_LISTS = [
 
 export default function Home() {
   const router = useRouter();
+
+  const { keywordArtWork } = useGetKeywordArtWork();
+  console.log(keywordArtWork);
+
   return (
     <>
       <Layout>
