@@ -1,17 +1,21 @@
-import authApi from '@apis/auth/authApi'
-import Button from '@components/common/Button'
-import CheckBox from '@components/common/Checkbox'
-import ErrorMessage from '@components/common/ErrorMessage'
-import Input from '@components/common/Input'
-import Layout from '@components/common/Layout'
-import SocialLoginButton from '@components/login/SocialLoginButton'
-import Image from 'next/image'
-import Link from 'next/link'
-import React, { useEffect, useState } from 'react'
-import { setToken, Token } from '@utils/localStorage/token'
-import { getLocalStorage, removeLocalStorage, setLocalStorage } from '@utils/localStorage/helper'
-import { useRouter } from 'next/router'
-import { useForm } from 'react-hook-form'
+import authApi from '@apis/auth/authApi';
+import Button from '@components/common/Button';
+import CheckBox from '@components/common/Checkbox';
+import ErrorMessage from '@components/common/ErrorMessage';
+import Input from '@components/common/Input';
+import Layout from '@components/common/Layout';
+import SocialLoginButton from '@components/login/SocialLoginButton';
+import Image from 'next/image';
+import Link from 'next/link';
+import React, { useEffect, useState } from 'react';
+import { setToken, Token } from '@utils/localStorage/token';
+import {
+  getLocalStorage,
+  removeLocalStorage,
+  setLocalStorage,
+} from '@utils/localStorage/helper';
+import { useRouter } from 'next/router';
+import { useForm } from 'react-hook-form';
 
 interface LoginForm {
   userId: string | null;
@@ -88,9 +92,11 @@ function Login() {
   return (
     <Layout>
       <div className="mx-auto w-full">
-        <div className="text-center text-2xl font-light mt-12">LOGO</div>
+        <div className="text-center text-2xl font-light flex items-center justify-center h-48">
+          LOGO
+        </div>
         <form onSubmit={handleSubmit(onSubmit)}>
-          <div className="flex flex-col mt-36 ">
+          <div className="flex flex-col ">
             <Input
               type="text"
               id="id"
@@ -149,7 +155,7 @@ function Login() {
               비밀번호 찾기
             </Link>
           </p>
-          <p className="flex justify-center items-center w-full text-12 mt-44">
+          <p className="flex justify-center items-center w-full text-12 mt-24">
             <span className="text-[#999999]">아직 회원이 아니신가요?</span>
             <Link className="ml-[2px]" href="/auth/join01">
               회원가입
