@@ -1,27 +1,24 @@
-import moment from 'moment'
-import Image from 'next/image'
-import { ReactElement, useState } from 'react'
+import moment from 'moment';
+import Image from 'next/image';
+import { ReactElement, useState } from 'react';
 
-const days = ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'];
+const days = ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'];
 const DUMP_AUCTION_DATE_LISTS = [
-  '20230212',
   '20230213',
   '20230214',
   '20230215',
   '20230216',
   '20230217',
   '20230218',
-  '20230226',
+  '20230219',
   '20230227',
   '20230228',
-  '20230301',
-  '20230302',
 ];
 export default function Calendar() {
   const [date, setDate] = useState<moment.Moment>(() => moment());
-
   const today = date;
-
+  console.log(today.clone().startOf('month').week());
+  console.log(today.clone().startOf('isoWeek').week());
   const firstWeek = today.clone().startOf('month').week();
   const lastWeek =
     today.clone().endOf('month').week() === 1
@@ -30,7 +27,7 @@ export default function Calendar() {
 
   const calendarArr = () => {
     const calendar: ReactElement[] = [];
-    for (let week = firstWeek; week <= lastWeek; week++) {
+    for (let week = firstWeek - 1; week <= lastWeek; week++) {
       calendar.push(
         <tr key={week}>
           {Array(7)
@@ -39,20 +36,11 @@ export default function Calendar() {
               const current = today
                 .clone()
                 .week(week)
-                .startOf('week')
+                .startOf('isoWeek')
                 .add(data + index, 'day');
-              if (moment().format('YYYYMMDD') === current.format('YYYYMMDD')) {
+              if (current.format('MM') !== today.format('MM')) {
                 return (
-                  <td
-                    className="p-2 text-[#FC6554] text-14 font-bold"
-                    key={index}
-                  >
-                    <span>{current.format('D')}</span>
-                  </td>
-                );
-              } else if (current.format('MM') !== today.format('MM')) {
-                return (
-                  <td className="p-2" key={index}>
+                  <td className="" key={index}>
                     <span></span>
                   </td>
                 );
@@ -64,6 +52,17 @@ export default function Calendar() {
                 return (
                   <td
                     className="p-2 bg-[#FFC961] text-[#FFFFFF] text-14 font-bold"
+                    key={index}
+                  >
+                    <span>{current.format('D')}</span>
+                  </td>
+                );
+              } else if (
+                moment().format('YYYYMMDD') === current.format('YYYYMMDD')
+              ) {
+                return (
+                  <td
+                    className="p-2 text-[#FC6554] text-14 font-bold"
                     key={index}
                   >
                     <span>{current.format('D')}</span>
