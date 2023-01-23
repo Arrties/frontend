@@ -42,7 +42,15 @@ const DUMP_AUCTION_LISTS = [
   { time: 2, start: '12:00', end: '19:00' },
 ];
 
-const DUMP_PREV_AUCTION_LISTS = [
+interface AuctionListForm {
+  src: string;
+  date: string;
+  artRegister: number;
+  auctionRegister: number;
+  id: number;
+}
+
+const DUMP_PREV_AUCTION_LISTS: AuctionListForm[] = [
   {
     src: '/svg/example/exhibition.svg',
     date: '2022.12.21',
@@ -80,9 +88,9 @@ const DUMP_PREV_AUCTION_LISTS = [
   },
 ];
 const makeThreeEach = (auctionList) => {
-  const afterArr = [];
-  let arr = [];
-  auctionList.forEach((it, idx) => {
+  const afterArr: AuctionListForm[][] = [];
+  let arr: AuctionListForm[] = [];
+  auctionList.forEach((it: any, idx: number) => {
     arr.push(it);
     if (arr.length === 3) {
       afterArr.push(arr);
@@ -100,7 +108,6 @@ export default function Home() {
   const router = useRouter();
 
   const { keywordArtWork } = useGetKeywordArtWork();
-  console.log(DUMP_AFTER_AUCTION_LIST);
 
   return (
     <>
@@ -195,23 +202,27 @@ export default function Home() {
             pagination={true}
             className="h-[360px]"
           >
-            {DUMP_AFTER_AUCTION_LIST.map((auctionList, index) => (
-              <SwiperSlide key={'' + index}>
-                {auctionList.map((auctionItem, idx: number) => (
-                  <AuctionItem
-                    key={'' + idx}
-                    src={auctionItem.src}
-                    date={auctionItem.date}
-                    artRegister={auctionItem.artRegister}
-                    auctionRegister={auctionItem.auctionRegister}
-                    id={auctionItem.id}
-                    onClick={() => {
-                      router.push('/home/history');
-                    }}
-                  />
-                ))}
-              </SwiperSlide>
-            ))}
+            {DUMP_AFTER_AUCTION_LIST.map(
+              (auctionList: AuctionListForm[], index: number) => (
+                <SwiperSlide key={'' + index}>
+                  {auctionList.map(
+                    (auctionItem: AuctionListForm, idx: number) => (
+                      <AuctionItem
+                        key={'' + idx}
+                        src={auctionItem.src}
+                        date={auctionItem.date}
+                        artRegister={auctionItem.artRegister}
+                        auctionRegister={auctionItem.auctionRegister}
+                        id={auctionItem.id}
+                        onClick={() => {
+                          router.push('/home/history');
+                        }}
+                      />
+                    ),
+                  )}
+                </SwiperSlide>
+              ),
+            )}
           </Swiper>
         </section>
         {!isUser && (
