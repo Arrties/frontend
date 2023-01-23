@@ -9,14 +9,14 @@ export default function Keyword() {
   const { userInfo } = useGetProfile();
 
   useEffect(() => {
-    setKeywordList(userInfo?.keywords);
+    setKeywordList(userInfo?.keywords || []);
   }, [userInfo]);
 
   console.log(userInfo);
   const handleSubmit = async (e: any) => {
     let response;
     if (e.target.id === 'skip') {
-      response = await authApi.patchKeyword(userInfo?.keywords);
+      response = await authApi.patchKeyword(userInfo?.keywords || []);
     } else {
       response = await authApi.patchKeyword(keywordList);
     }
