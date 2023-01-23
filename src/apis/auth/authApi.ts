@@ -81,7 +81,7 @@ export class AuthApi {
         },
       );
       return res;
-    } catch (err) {
+    } catch (err: any) {
       return err;
     }
   }
@@ -100,7 +100,6 @@ export class AuthApi {
   async getDuplicateCheck(params) {
     const type = params.queryKey[0];
     const data = params.queryKey[1];
-    console.log(type, data);
     let uri = '';
     if (type === 'email') {
       uri = '/members/check-email?email=';
@@ -114,8 +113,12 @@ export class AuthApi {
   }
 
   async getCheckEmail(email: string) {
-    const res = await this.axios(`/members/check-email?email=${email}`);
-    return res;
+    try {
+      const res = await this.axios(`/members/check-email?email=${email}`);
+      return res;
+    } catch (error: any) {
+      return error;
+    }
   }
 
   async getCheckId(userId: string) {
@@ -127,7 +130,7 @@ export class AuthApi {
     }
   }
 
-  async getCheckNickname(nickname: string) {
+  async getCheckNickname(nickname: string | undefined) {
     try {
       const res = await this.axios(
         `/members/check-nickname?nickname=${nickname}`,

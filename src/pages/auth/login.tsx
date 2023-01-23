@@ -30,7 +30,6 @@ function Login() {
     },
   });
   const [checkedTerm, setCheckedTerm] = useState<string[]>([]);
-  console.log(checkedTerm);
   useEffect(() => {
     if (getLocalStorage('idSave') === 'true') {
       setCheckedTerm(['idSave']);

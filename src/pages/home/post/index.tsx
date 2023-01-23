@@ -1,32 +1,26 @@
-import artworkApi from '@apis/artwork/artworkApi';
-import ErrorMessage from '@components/common/ErrorMessage';
-import Input from '@components/common/Input';
-import Layout from '@components/common/Layout';
-import Modal from '@components/common/Modal';
-import Navigate from '@components/common/Navigate';
-import Select from '@components/common/Select';
-import GenreModal from '@components/home/post/GenreModal';
-import GuaranteeModal from '@components/home/post/GuaranteeModal';
-import KeywordModal from '@components/home/post/KeywordModal.tsx';
-import FileItem from '@components/inquiry/FileItem';
-import Image from 'next/image';
-import React, { useEffect, useState } from 'react';
-import { useForm } from 'react-hook-form';
-import { useRouter } from 'next/router';
-import { getToken } from '@utils/localStorage/token';
+import artworkApi from '@apis/artwork/artworkApi'
+import ErrorMessage from '@components/common/ErrorMessage'
+import Input from '@components/common/Input'
+import Layout from '@components/common/Layout'
+import Modal from '@components/common/Modal'
+import Navigate from '@components/common/Navigate'
+import Select from '@components/common/Select'
+import GenreModal from '@components/home/post/GenreModal'
+import GuaranteeModal from '@components/home/post/GuaranteeModal'
+import KeywordModal from '@components/home/post/KeywordModal.tsx'
+import FileItem from '@components/inquiry/FileItem'
+import Image from 'next/image'
+import React, { useEffect, useState } from 'react'
+import { useForm } from 'react-hook-form'
+import { useRouter } from 'next/router'
+import { getToken } from '@utils/localStorage/token'
+import { dataURLtoFile } from '@utils/dataURLtoFile'
 
 const ARTWORK_STATUS = [
   { value: '매우 좋음' },
   { value: '좋음' },
   { value: '보통' },
 ];
-
-const dataURLtoFile = (dataurl: string, name: string) => {
-  const decodedURL = dataurl.replace(/^data:image\/\w+;base64,/, '');
-  const buf = Buffer.from(decodedURL, 'base64');
-  const blob = new Blob([buf], { type: 'image/png' });
-  return new File([blob], `${name}.png`, { type: 'image/png' });
-};
 
 const IS_FRAME = [{ value: '있음' }, { value: '없음' }];
 
@@ -69,7 +63,7 @@ export default function Post() {
 
   const router = useRouter();
 
-  if (getToken().role !== 'ARTIST') {
+  if (getToken().roles !== 'ARTIST') {
     router.push('/home');
   }
 
@@ -129,31 +123,29 @@ export default function Post() {
     } = form;
     const formData = new FormData();
     formData.append('title', title);
-    formData.append('productionYear', productionYear + '');
+    formData.append('productionYear', JSON.stringify(productionYear));
     formData.append('description', description);
     formData.append('material', material);
     if (frame + '' === '있음') {
-      formData.append('frame', true as any);
+      formData.append('frame', JSON.stringify(true));
     } else {
-      formData.append('frame', false as any);
+      formData.append('frame', JSON.stringify(false));
     }
-    formData.append('width', width as any);
-    formData.append('length', length as any);
-    formData.append('height', height as any);
+    formData.append('width', JSON.stringify(width));
+    formData.append('length', JSON.stringify(length));
+    formData.append('height', JSON.stringify(height));
     formData.append('size', size);
-    formData.append('price', price as any);
+    formData.append('price', JSON.stringify(price));
     formData.append('status', status);
     formData.append('statusDescription', statusDescription);
-    formData.append('keywords', keywordList as any);
+    formData.append('keywords', JSON.stringify(keywordList));
 
     if (file.length == 1) {
       formData.append('image', file[0]);
     } else {
-      const fileArray: string[] = [];
       for (const i of file) {
-        fileArray.push(i);
+        formData.append('image', i);
       }
-      formData.append('image', fileArray as any);
     }
 
     if (genre) {
@@ -226,14 +218,16 @@ export default function Post() {
               </div>
             </div>
           </label>
-          {fileLists.length ? (
+          {fileLists.length && (
             <div className="flex flex-wrap">
               {fileLists.map((file, idx) => (
-                <FileItem handler={handleRemoveFile} key={idx} file={file} />
+                <FileItem
+                  handler={handleRemoveFile}
+                  key={'' + idx}
+                  file={file}
+                />
               ))}
             </div>
-          ) : (
-            ''
           )}
           <input
             multiple
@@ -358,7 +352,6 @@ export default function Post() {
           </article>
           <article className="w-[calc((100%-2rem)/3)]">
             <Input
-              defaultChec
               type="number"
               placeholder="10"
               unit="호"

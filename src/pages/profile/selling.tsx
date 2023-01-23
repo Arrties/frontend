@@ -1,14 +1,12 @@
-import Layout from '@components/common/Layout';
-import React, { useState } from 'react';
-import { useRouter } from 'next/router';
-import AuctionArtItem from '@components/profile/AuctionArtItem';
-import Navigate from '@components/common/Navigate';
-import { Tab } from '@headlessui/react';
-import Modal from '@components/common/Modal';
+import Layout from '@components/common/Layout'
+import Modal from '@components/common/Modal'
+import Navigate from '@components/common/Navigate'
+import ArtItem from '@components/profile/ArtItem'
+import React, { useState } from 'react'
+import { Tab } from '@headlessui/react'
 
 export default function Selling() {
-  const router = useRouter();
-  const [isModal, setIsModal] = useState<Boolean>(false);
+  const [isModal, setIsModal] = useState<boolean>(false);
   const handleOption = () => {
     setIsModal(true);
   };
@@ -44,13 +42,13 @@ export default function Selling() {
         </Tab.List>
         <Tab.Panels>
           <Tab.Panel>
-            <AuctionArtItem handleOption={handleOption} />
-            <AuctionArtItem handleOption={handleOption} />
+            <ArtItem handleOption={handleOption} />
+            <ArtItem handleOption={handleOption} />
           </Tab.Panel>
         </Tab.Panels>
         <Tab.Panels>
           <Tab.Panel>
-            <AuctionArtItem
+            <ArtItem
               lastChild={
                 <span className="text-[#FC6554] text-14 font-bold">
                   입찰 현황 : 450,000원
@@ -58,7 +56,7 @@ export default function Selling() {
               }
               handleOption={handleOption}
             />
-            <AuctionArtItem
+            <ArtItem
               lastChild={
                 <span className="text-[#FC6554] text-14 font-bold">
                   입찰 현황 : 입찰없음
@@ -70,7 +68,7 @@ export default function Selling() {
         </Tab.Panels>
         <Tab.Panels>
           <Tab.Panel>
-            <AuctionArtItem
+            <ArtItem
               lastChild={
                 <p>
                   <span className="text-10 text-[#FFF] bg-[#767676] px-1 py-0.5 rounded">

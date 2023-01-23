@@ -25,6 +25,7 @@ export default function Activity({ text, path, icon }: ActivityBoxProps) {
         router.push(`${path}`);
       }}
     >
+      
       <Image src={icon} alt={`${icon}`} width={20} height={20} />
       <span className="text-[#767676] pt-[12px] text-12">{text}</span>
     </ActivityBox>

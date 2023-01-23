@@ -1,16 +1,15 @@
-import authApi from '@apis/auth/authApi';
-import DivisionBar from '@components/common/DivisionBar';
-import Layout from '@components/common/Layout';
-import Loader from '@components/common/Loader';
-import Navigate from '@components/common/Navigate';
-import Tab from '@components/common/Tab';
-import Activity from '@components/mypage/Activity';
-import SettingItem from '@components/mypage/SettingItem';
-import useGetProfile from '@hooks/queries/useGetProfile';
-import { isUser } from '@utils/isUser';
-import Image from 'next/image';
-import { useRouter } from 'next/router';
-import tw from 'tailwind-styled-components';
+import DivisionBar from '@components/common/DivisionBar'
+import Layout from '@components/common/Layout'
+import Loader from '@components/common/Loader'
+import Navigate from '@components/common/Navigate'
+import Tab from '@components/common/Tab'
+import Activity from '@components/profile/Activity'
+import SettingItem from '@components/profile/SettingItem'
+import useGetProfile from '@hooks/queries/useGetProfile'
+import Image from 'next/image'
+import tw from 'tailwind-styled-components'
+import { isUser } from '@utils/isUser'
+import { useRouter } from 'next/router'
 
 interface defaultProps {
   [key: string]: any;
@@ -20,14 +19,14 @@ const WelcomeBox = tw.div<defaultProps>`
 bg-[#F5535D] rounded-lg h-[90px] flex justify-between items-center px-4
 `;
 
-interface ActivityListForm {
+interface ActivityList {
   id: string;
   text: string;
   icon: string;
   path: string;
 }
 
-let ActivityLists: ActivityListForm[] = [
+let ActivityLists: ActivityList[] = [
   {
     id: '1',
     text: '관심목록',
@@ -68,13 +67,13 @@ ActivityLists = isUser
       },
     ];
 
-interface SettingListForm {
+interface SettingList {
   id: string;
   text: string;
   path: string;
 }
 
-const SettingLists: SettingListForm[] = [
+const SettingLists: SettingList[] = [
   {
     id: '1',
     text: '1:1문의',
@@ -176,7 +175,7 @@ export default function Profile() {
         )}
       </section>
       <section className="flex justify-between gap-2">
-        {ActivityLists.map((activity: ActivityListForm) => (
+        {ActivityLists.map((activity: ActivityList) => (
           <Activity
             key={activity.id}
             text={activity.text}
@@ -190,7 +189,7 @@ export default function Profile() {
         <div className="my-4 relative">
           <span className="text-14 text-[#191919] font-bold">
             취향 목록
-            {userInfo?.keywords?.length > 0 && (
+            {userInfo && userInfo.keywords && userInfo.keywords.length ? (
               <Image
                 src="/svg/icons/icon_pencil_black.svg"
                 alt="edit_keywords"
@@ -198,11 +197,13 @@ export default function Profile() {
                 height="0"
                 className="absolute left-[4rem] top-1"
               />
+            ) : (
+              ''
             )}
           </span>
         </div>
         <DivisionBar className="my-5" />
-        {userInfo?.keywords?.length > 0 ? (
+        {userInfo && userInfo.keywords && userInfo?.keywords?.length ? (
           <div className="flex flex-wrap mb-8">
             {userInfo?.keywords?.map((keyword) => (
               <span
@@ -232,12 +233,12 @@ export default function Profile() {
           </div>
         )}
       </section>
-      <section className="">
-        {SettingLists.map((settingItem): SettingListForm[] => (
+      <section>
+        {SettingLists.map((setting: SettingList) => (
           <SettingItem
-            key={settingItem.id}
-            text={settingItem.text}
-            path={settingItem.path}
+            key={setting.id}
+            text={setting.text}
+            path={setting.path}
           />
         ))}
       </section>

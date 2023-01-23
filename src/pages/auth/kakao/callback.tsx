@@ -1,10 +1,10 @@
-import Layout from '@components/common/Layout';
-import { useEffect } from 'react';
-import instance from '@apis/_axios/instance';
-import { setToken } from '@utils/localStorage/token';
-import { Token } from '@utils/localStorage/token';
-import { useRouter } from 'next/router';
-import Loader from '@components/common/Loader';
+import instance from '@apis/_axios/instance'
+import Layout from '@components/common/Layout'
+import Loader from '@components/common/Loader'
+import { useEffect } from 'react'
+import { setToken } from '@utils/localStorage/token'
+import { Token } from '@utils/localStorage/token'
+import { useRouter } from 'next/router'
 
 export default function KakaoCallback() {
   const router = useRouter();

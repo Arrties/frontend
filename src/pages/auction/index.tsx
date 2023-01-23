@@ -6,7 +6,11 @@ import Image from 'next/image'
 import React from 'react'
 import tw from 'tailwind-styled-components'
 
-const ArtworkList = tw.div``;
+const ArtworkList = tw.div<DefaultProps>``;
+
+interface DefaultProps {
+  [key: string]: any;
+}
 
 export default function Auction() {
   return (

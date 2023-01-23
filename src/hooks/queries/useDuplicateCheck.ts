@@ -9,7 +9,6 @@ const useDuplicateCheck = (type: string, data: string) => {
     refetchOnWindowFocus: false,
     enabled: false,
     onSuccess: (res: any) => {
-      console.log(res);
       return res;
     },
     onError: (error: any) => {
