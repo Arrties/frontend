@@ -1,19 +1,15 @@
-import axios from 'axios'
-
-import { getToken } from '@utils/localStorage/token/index'
-import { ArtworkDTOType } from './artworkApi.type'
+import { ArtworkDTOType } from './artworkApi.type';
+import instance from '@apis/_axios/instance';
 
 export class ArtworkApi {
   async postArtwork(body: FormData): Promise<ArtworkDTOType> {
     try {
-      const token = getToken();
-      const { data } = await axios.post(
+      const { data } = await instance.post(
         `${process.env.NEXT_PUBLIC_API_BASE_URL}/art-works`,
         body,
         {
           headers: {
             'Content-Type': 'multipart/form-data',
-            Authorization: token.accessToken,
           },
         },
       );
