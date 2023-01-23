@@ -8,7 +8,7 @@ const instance = axios.create({
 const refreshToken = async () => {
   const refresh = getToken().refreshToken;
   try {
-    const res = await axios.post('/members/token', {
+    const res = await instance.post('/members/token', {
       refreshToken: refresh,
     });
     return res?.data;
@@ -69,7 +69,5 @@ instance.interceptors.response.use(
     }
   },
 );
-
-// export { setAuthorHeader, unsetAuthorHeader };
 
 export default instance;

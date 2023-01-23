@@ -114,6 +114,8 @@ export default function Edit() {
 
     formData.append('nickname', nickname);
     formData.append('email', email);
+    formData.append('address', '');
+    formData.append('keywords', ''); // 아직 서버측에서 keywords 제외 안함
 
     if (profile && profile?.length) {
       //유저가 프로필을 변환하였다면
@@ -162,20 +164,13 @@ export default function Edit() {
       />
       <label className="flex justify-center h-[150px]" htmlFor="image">
         {userInfo?.image ? (
-          <Image
-            src={userInfo?.image}
-            width="60"
-            height="0"
-            className="rounded-full w-[99px] h-[99px]"
-            alt="profile"
-          />
-        ) : (
           <div className=" flex justify-center items-center w-[99px] h-[99px] cursor-pointer rounded-full border-2 border-[#999999] bg-[#FFFFFF] relative">
-            <Image
-              src="/svg/icons/icon_avatar.svg"
+            <img
+              src={userInfo?.image}
               width="60"
               height="0"
-              alt="image"
+              className="rounded-full w-[99px] h-[99px]"
+              alt="profile"
             />
             <div className="w-[26px] h-[26px] rounded-full bg-[#575757] flex justify-center items-center absolute right-0 bottom-0">
               <Image
@@ -183,6 +178,23 @@ export default function Edit() {
                 width="15"
                 height="0"
                 alt="image"
+              />
+            </div>
+          </div>
+        ) : (
+          <div className=" flex justify-center items-center w-[99px] h-[99px] cursor-pointer rounded-full border-2 border-[#999999] bg-[#FFFFFF] relative">
+            <Image
+              src="/svg/icons/icon_avatar.svg"
+              width="60"
+              height="0"
+              alt="profile"
+            />
+            <div className="w-[26px] h-[26px] rounded-full bg-[#575757] flex justify-center items-center absolute right-0 bottom-0">
+              <Image
+                src="/svg/icons/icon_camera.svg"
+                width="15"
+                height="0"
+                alt="profileEdit"
               />
             </div>
           </div>

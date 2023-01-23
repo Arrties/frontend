@@ -1,17 +1,21 @@
-import 'swiper/css'
+import 'swiper/css';
 
-import AuctionNavigate from '@components/auction/AuctionNavigate'
-import Layout from '@components/common/Layout'
-import Tab from '@components/common/Tab'
-import AuctionItem from '@components/home/AuctionItem'
-import Calendar from '@components/home/Calendar'
-import ExhibitionItem from '@components/home/ExhibitionItem'
-import ScheduleItem from '@components/home/ScheduleItem'
-import Image from 'next/image'
-import React from 'react'
-import { useRouter } from 'next/router'
-import { Autoplay, Navigation, Scrollbar } from 'swiper'
-import { Swiper, SwiperSlide } from 'swiper/react'
+import AuctionNavigate from '@components/auction/AuctionNavigate';
+import Layout from '@components/common/Layout';
+import Tab from '@components/common/Tab';
+import AuctionItem from '@components/home/AuctionItem';
+import Calendar from '@components/home/Calendar';
+import ExhibitionItem from '@components/home/ExhibitionItem';
+import ScheduleItem from '@components/home/ScheduleItem';
+import Image from 'next/image';
+import React from 'react';
+import { useRouter } from 'next/router';
+import { Autoplay, Navigation, Scrollbar } from 'swiper';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import useGetKeywordArtWork from '@hooks/queries/useGetKeywordArtWork';
+import { isUser } from '@utils/isUser';
+import 'swiper/css/pagination';
+import { Pagination } from 'swiper';
 
 const DUMP_KEYWORD_LISTS = ['사진', '소묘', '파스텔', '추상화'];
 const DUMP_ART_LISTS = [
@@ -37,7 +41,16 @@ const DUMP_AUCTION_LISTS = [
   { time: 1, start: '12:00', end: '14:00' },
   { time: 2, start: '12:00', end: '19:00' },
 ];
-const DUMP_PREV_AUCTION_LISTS = [
+
+interface AuctionListForm {
+  src: string;
+  date: string;
+  artRegister: number;
+  auctionRegister: number;
+  id: number;
+}
+
+const DUMP_PREV_AUCTION_LISTS: AuctionListForm[] = [
   {
     src: '/svg/example/exhibition.svg',
     date: '2022.12.21',
@@ -59,10 +72,43 @@ const DUMP_PREV_AUCTION_LISTS = [
     auctionRegister: 18,
     id: 3,
   },
+  {
+    src: '/svg/example/exhibition.svg',
+    date: '2022.12.21',
+    artRegister: 20,
+    auctionRegister: 18,
+    id: 4,
+  },
+  {
+    src: '/svg/example/exhibition.svg',
+    date: '2022.12.21',
+    artRegister: 20,
+    auctionRegister: 18,
+    id: 5,
+  },
 ];
+const makeThreeEach = (auctionList) => {
+  const afterArr: AuctionListForm[][] = [];
+  let arr: AuctionListForm[] = [];
+  auctionList.forEach((it: any, idx: number) => {
+    arr.push(it);
+    if (arr.length === 3) {
+      afterArr.push(arr);
+      arr = [];
+    }
+    if (idx === auctionList.length - 1) {
+      afterArr.push(arr);
+    }
+  });
+  return afterArr;
+};
+const DUMP_AFTER_AUCTION_LIST = makeThreeEach(DUMP_PREV_AUCTION_LISTS);
 
 export default function Home() {
   const router = useRouter();
+
+  const { keywordArtWork } = useGetKeywordArtWork();
+
   return (
     <>
       <Layout>
@@ -72,7 +118,14 @@ export default function Home() {
           <div className="flex justify-between">
             <span className="text-20 font-bold">이번 주 전시작품</span>
             <div className="flex justify-between items-center">
-              <span className="text-12 text-[#999999] pr-1">전체보기</span>
+              <span
+                className="text-12 text-[#999999] pr-1 cursor-pointer"
+                onClick={() => {
+                  router.push('home/view');
+                }}
+              >
+                전체보기
+              </span>
               <Image
                 src="/svg/icons/icon_arrow.svg"
                 alt="arrow"
@@ -141,22 +194,38 @@ export default function Home() {
               지난 경매 리스트
             </span>
           </div>
-          <Swiper spaceBetween={20} slidesPerGroup={1} slidesPerView={1}>
-            <SwiperSlide>
-              {DUMP_PREV_AUCTION_LISTS.map((auction, idx) => (
-                <AuctionItem
-                  key={'' + idx}
-                  src={auction.src}
-                  date={auction.date}
-                  artRegister={auction.artRegister}
-                  auctionRegister={auction.auctionRegister}
-                  id={auction.id}
-                />
-              ))}
-            </SwiperSlide>
+          <Swiper
+            spaceBetween={20}
+            slidesPerGroup={1}
+            slidesPerView={1}
+            modules={[Pagination]}
+            pagination={true}
+            className="h-[360px]"
+          >
+            {DUMP_AFTER_AUCTION_LIST.map(
+              (auctionList: AuctionListForm[], index: number) => (
+                <SwiperSlide key={'' + index}>
+                  {auctionList.map(
+                    (auctionItem: AuctionListForm, idx: number) => (
+                      <AuctionItem
+                        key={'' + idx}
+                        src={auctionItem.src}
+                        date={auctionItem.date}
+                        artRegister={auctionItem.artRegister}
+                        auctionRegister={auctionItem.auctionRegister}
+                        id={auctionItem.id}
+                        onClick={() => {
+                          router.push('/home/history');
+                        }}
+                      />
+                    ),
+                  )}
+                </SwiperSlide>
+              ),
+            )}
           </Swiper>
         </section>
-        <div className="w-[72px] h-[72px] m-auto mr-0 sticky bottom-[10px] z-50 cursor-pointer">
+        {!isUser && (
           <Image
             src="/svg/icons/icon_registration.svg"
             alt="register"
@@ -165,8 +234,9 @@ export default function Home() {
             onClick={() => {
               router.push('/home/post');
             }}
+            className="w-[72px] h-[72px] m-auto mr-0 sticky bottom-[10px] z-50 cursor-pointer"
           />
-        </div>
+        )}
       </Layout>
       <Tab />
     </>

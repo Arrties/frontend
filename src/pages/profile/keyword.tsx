@@ -12,7 +12,6 @@ export default function Keyword() {
     setKeywordList(userInfo?.keywords || []);
   }, [userInfo]);
 
-  console.log(userInfo);
   const handleSubmit = async (e: any) => {
     let response;
     if (e.target.id === 'skip') {

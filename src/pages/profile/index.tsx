@@ -105,8 +105,8 @@ export default function Profile() {
   const handleRegister = () => {
     router.push('/profile/register');
   };
-
   const { isLoading, userInfo } = useGetProfile();
+
   if (isLoading) return <Loader />;
   return (
     <Layout>
@@ -126,13 +126,21 @@ export default function Profile() {
       <section>
         <WelcomeBox>
           <div className="w-[54px] h-[54px] rounded-full bg-[#EDEDED] flex items-center">
-            <Image
-              src="/svg/icons/icon_user_gray.svg"
-              alt="user"
-              width="12"
-              height="0"
-              className="w-[27px] h-[27px] m-auto rounded-full bg-[#EDEDED]"
-            />
+            {userInfo?.image ? (
+              <img
+                src={userInfo?.image}
+                className="rounded-full "
+                alt="profile"
+              />
+            ) : (
+              <Image
+                src="/svg/icons/icon_user_gray.svg"
+                alt="user"
+                width="12"
+                height="0"
+                className="w-[27px] h-[27px] m-auto rounded-full bg-[#EDEDED]"
+              />
+            )}
           </div>
           <div className="flex flex-col text-[#FFFFFF] mr-3">
             <span className="font-medium">{userInfo?.nickname}님,</span>
