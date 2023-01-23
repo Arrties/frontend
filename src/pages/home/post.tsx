@@ -127,7 +127,7 @@ export default function Post() {
     formData.append('description', description);
     formData.append('material', material);
     formData.append('frame', (frame + '' === '있음') + '');
-    formData.append('width', JSON.stringify(width));
+    formData.append('width', width + '');
     formData.append('length', length + '');
     formData.append('height', height + '');
     formData.append('size', size);
