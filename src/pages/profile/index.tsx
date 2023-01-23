@@ -1,15 +1,15 @@
-import DivisionBar from '@components/common/DivisionBar'
-import Layout from '@components/common/Layout'
-import Loader from '@components/common/Loader'
-import Navigate from '@components/common/Navigate'
-import Tab from '@components/common/Tab'
-import Activity from '@components/profile/Activity'
-import SettingItem from '@components/profile/SettingItem'
-import useGetProfile from '@hooks/queries/useGetProfile'
-import Image from 'next/image'
-import tw from 'tailwind-styled-components'
-import { isUser } from '@utils/isUser'
-import { useRouter } from 'next/router'
+import DivisionBar from '@components/common/DivisionBar';
+import Layout from '@components/common/Layout';
+import Loader from '@components/common/Loader';
+import Navigate from '@components/common/Navigate';
+import Tab from '@components/common/Tab';
+import Activity from '@components/profile/Activity';
+import SettingItem from '@components/profile/SettingItem';
+import useGetProfile from '@hooks/queries/useGetProfile';
+import Image from 'next/image';
+import tw from 'tailwind-styled-components';
+import { isUser } from '@utils/isUser';
+import { useRouter } from 'next/router';
 
 interface defaultProps {
   [key: string]: any;
@@ -189,23 +189,23 @@ export default function Profile() {
         <div className="my-4 relative">
           <span className="text-14 text-[#191919] font-bold">
             취향 목록
-            {userInfo && userInfo.keywords && userInfo.keywords.length ? (
+            {userInfo?.keywords?.length && (
               <Image
                 src="/svg/icons/icon_pencil_black.svg"
                 alt="edit_keywords"
                 width="18"
                 height="0"
-                className="absolute left-[4rem] top-1"
+                className="absolute left-[4rem] top-1 cursor-pointer"
+                onClick={() => {
+                  router.push('/profile/keyword');
+                }}
               />
-            ) : (
-              ''
             )}
           </span>
         </div>
-        <DivisionBar className="my-5" />
-        {userInfo && userInfo.keywords && userInfo?.keywords?.length ? (
+        {userInfo?.keywords?.length ? (
           <div className="flex flex-wrap mb-8">
-            {userInfo?.keywords?.map((keyword) => (
+            {userInfo?.keywords?.map((keyword: string) => (
               <span
                 className="border-[1px] border-[#DBDBDB] rounded-[19px] px-3 py-1 mr-2 mb-1 last:mr-0 text-14 text-[#767676] "
                 key={keyword}
@@ -233,6 +233,7 @@ export default function Profile() {
           </div>
         )}
       </section>
+      <DivisionBar className="my-5" />
       <section>
         {SettingLists.map((setting: SettingList) => (
           <SettingItem
