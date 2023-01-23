@@ -13,6 +13,7 @@ import { useRouter } from 'next/router';
 import { Autoplay, Navigation, Scrollbar } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import useGetKeywordArtWork from '@hooks/queries/useGetKeywordArtWork';
+import { isUser } from '@utils/isUser';
 
 const DUMP_KEYWORD_LISTS = ['사진', '소묘', '파스텔', '추상화'];
 const DUMP_ART_LISTS = [
@@ -161,7 +162,7 @@ export default function Home() {
             </SwiperSlide>
           </Swiper>
         </section>
-        <div className="w-[72px] h-[72px] m-auto mr-0 sticky bottom-[10px] z-50 cursor-pointer">
+        {!isUser && (
           <Image
             src="/svg/icons/icon_registration.svg"
             alt="register"
@@ -170,8 +171,9 @@ export default function Home() {
             onClick={() => {
               router.push('/home/post');
             }}
+            className="w-[72px] h-[72px] m-auto mr-0 sticky bottom-[10px] z-50 cursor-pointer"
           />
-        </div>
+        )}
       </Layout>
       <Tab />
     </>
