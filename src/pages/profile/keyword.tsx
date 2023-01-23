@@ -1,18 +1,26 @@
-import authApi from '@apis/auth/authApi'
-import Layout from '@components/common/Layout'
-import SelectKeyword from '@components/profile/Selectkeyword'
-import { useState } from 'react'
+import authApi from '@apis/auth/authApi';
+import Layout from '@components/common/Layout';
+import SelectKeyword from '@components/profile/Selectkeyword';
+import useGetProfile from '@hooks/queries/useGetProfile';
+import { useState, useEffect } from 'react';
 
 export default function Keyword() {
   const [keywordList, setKeywordList] = useState<string[]>([]);
-  const handleSubmit = async (e: { target: { id: string } }) => {
-    const formData = new FormData();
+  const { userInfo } = useGetProfile();
+
+  useEffect(() => {
+    setKeywordList(userInfo?.keywords);
+  }, [userInfo]);
+
+  console.log(userInfo);
+  const handleSubmit = async (e: any) => {
+    let response;
     if (e.target.id === 'skip') {
-      formData.append('keywords', JSON.stringify([]));
+      response = await authApi.patchKeyword(userInfo?.keywords);
     } else {
-      formData.append('keywords', JSON.stringify(keywordList));
+      response = await authApi.patchKeyword(keywordList);
     }
-    const res = await authApi.patchUserInfo(formData);
+    console.log(response);
   };
   return (
     <Layout>
