@@ -1,9 +1,9 @@
-import instance from '@apis/_axios/instance'
-import axios from 'axios'
-import { AxiosInstance } from 'axios'
-import { getToken } from '@utils/localStorage/token'
+import instance from '@apis/_axios/instance';
+import axios from 'axios';
+import { AxiosInstance } from 'axios';
+import { getToken } from '@utils/localStorage/token';
 
-import { AuthDTOType } from './authApi.type'
+import { AuthDTOType } from './authApi.type';
 
 export class AuthApi {
   axios: AxiosInstance = instance;
@@ -69,16 +69,41 @@ export class AuthApi {
 
   async patchUserInfo(formData: any) {
     try {
-      const token = getToken();
-      const res = await axios.patch(
+      const res = await instance.patch(
         `${process.env.NEXT_PUBLIC_API_BASE_URL}/members`,
         formData,
         {
           headers: {
             'Content-Type': 'multipart/form-data',
-            Authorization: token.accessToken,
           },
         },
+      );
+      return res;
+    } catch (err: any) {
+      return err;
+    }
+  }
+  async patchArtistInfo(formData: any) {
+    try {
+      const res = await instance.patch(
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/artists`,
+        formData,
+        {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        },
+      );
+      return res;
+    } catch (err: any) {
+      return err;
+    }
+  }
+  async patchKeyword(body: string[]) {
+    try {
+      const res = await instance.patch(
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/members/keywords`,
+        body,
       );
       return res;
     } catch (err: any) {

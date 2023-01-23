@@ -1,20 +1,20 @@
-import artworkApi from '@apis/artwork/artworkApi'
-import ErrorMessage from '@components/common/ErrorMessage'
-import Input from '@components/common/Input'
-import Layout from '@components/common/Layout'
-import Modal from '@components/common/Modal'
-import Navigate from '@components/common/Navigate'
-import Select from '@components/common/Select'
-import GenreModal from '@components/home/post/GenreModal'
-import GuaranteeModal from '@components/home/post/GuaranteeModal'
-import KeywordModal from '@components/home/post/KeywordModal.tsx'
-import FileItem from '@components/inquiry/FileItem'
-import Image from 'next/image'
-import React, { useEffect, useState } from 'react'
-import { useForm } from 'react-hook-form'
-import { useRouter } from 'next/router'
-import { getToken } from '@utils/localStorage/token'
-import { dataURLtoFile } from '@utils/dataURLtoFile'
+import artworkApi from '@apis/artwork/artworkApi';
+import ErrorMessage from '@components/common/ErrorMessage';
+import Input from '@components/common/Input';
+import Layout from '@components/common/Layout';
+import Modal from '@components/common/Modal';
+import Navigate from '@components/common/Navigate';
+import Select from '@components/common/Select';
+import GenreModal from '@components/home/post/GenreModal';
+import GuaranteeModal from '@components/home/post/GuaranteeModal';
+import KeywordModal from '@components/home/post/KeywordModal.tsx';
+import FileItem from '@components/inquiry/FileItem';
+import Image from 'next/image';
+import React, { useEffect, useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { useRouter } from 'next/router';
+import { getToken } from '@utils/localStorage/token';
+import { dataURLtoFile } from '@utils/dataURLtoFile';
 
 const ARTWORK_STATUS = [
   { value: '매우 좋음' },
@@ -63,7 +63,7 @@ export default function Post() {
 
   const router = useRouter();
 
-  if (getToken().roles !== 'ARTIST') {
+  if (getToken().roles !== 'ROLE_ARTIST') {
     router.push('/home');
   }
 
@@ -123,22 +123,18 @@ export default function Post() {
     } = form;
     const formData = new FormData();
     formData.append('title', title);
-    formData.append('productionYear', JSON.stringify(productionYear));
+    formData.append('productionYear', productionYear + '');
     formData.append('description', description);
     formData.append('material', material);
-    if (frame + '' === '있음') {
-      formData.append('frame', JSON.stringify(true));
-    } else {
-      formData.append('frame', JSON.stringify(false));
-    }
-    formData.append('width', JSON.stringify(width));
-    formData.append('length', JSON.stringify(length));
-    formData.append('height', JSON.stringify(height));
+    formData.append('frame', (frame + '' === '있음') + '');
+    formData.append('width', width + '');
+    formData.append('length', length + '');
+    formData.append('height', height + '');
     formData.append('size', size);
-    formData.append('price', JSON.stringify(price));
+    formData.append('price', price + '');
     formData.append('status', status);
     formData.append('statusDescription', statusDescription);
-    formData.append('keywords', JSON.stringify(keywordList));
+    formData.append('keywords', keywordList + '');
 
     if (file.length == 1) {
       formData.append('image', file[0]);
@@ -214,11 +210,11 @@ export default function Post() {
                 height={17}
               />
               <div className="text-12 text-[#999999]">
-                {fileLists.length ? `${fileLists.length}/5` : '0/5'}
+                {fileLists.length > 0 ? `${fileLists.length}/5` : '0/5'}
               </div>
             </div>
           </label>
-          {fileLists.length && (
+          {fileLists.length > 0 && (
             <div className="flex flex-wrap">
               {fileLists.map((file, idx) => (
                 <FileItem
@@ -418,7 +414,7 @@ export default function Post() {
           )}
         </div>
         <div className="h-[336px] relative">
-          <div className="w-[375px] h-[376px] absolute -left-6 bottom-0">
+          <div className="w-[375px] h-[376px] absolute -left-6 -bottom-10">
             <div className="mt-12 h-4 bg-[#F8F8FA]"></div>
             <div className="text-12 px-6">
               <p className="font-medium mt-8">

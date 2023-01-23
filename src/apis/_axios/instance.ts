@@ -1,16 +1,9 @@
-import axios from 'axios'
-import { deleteToken, getToken, setToken } from '@utils/localStorage/token'
+import axios from 'axios';
+import { deleteToken, getToken, setToken } from '@utils/localStorage/token';
 
 const instance = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_BASE_URL,
 });
-
-const setAuthorHeader = (token: string) => {
-  if (token) instance.defaults.headers.common['Authorization'] = token;
-};
-const unsetAuthorHeader = () => {
-  delete instance.defaults.headers.common['Authorization'];
-};
 
 const refreshToken = async () => {
   const refresh = getToken().refreshToken;
@@ -28,13 +21,10 @@ const refreshToken = async () => {
 instance.interceptors.request.use(
   (config) => {
     const token = getToken();
-    const isAccess = !!token && !!token.accessToken;
-    if (isAccess) {
-      config.headers = {
-        'Content-Type': 'application/json',
-        Authorization: token.accessToken,
-      };
-    }
+    config.headers = {
+      ...config.headers,
+      Authorization: token.accessToken,
+    };
     return config;
   },
   (error) => {
@@ -69,7 +59,6 @@ instance.interceptors.response.use(
         token['refreshToken'] = getToken().refreshToken;
         if (token?.accessToken) {
           setToken(token);
-          setAuthorHeader(token.accessToken);
           reqData.headers.Authorization = token?.access;
           return instance(reqData);
         }
@@ -81,6 +70,6 @@ instance.interceptors.response.use(
   },
 );
 
-export { setAuthorHeader, unsetAuthorHeader };
+// export { setAuthorHeader, unsetAuthorHeader };
 
 export default instance;
