@@ -1,17 +1,17 @@
-import authApi from '@apis/auth/authApi'
-import DoubleCheckButton from '@components/common/DoubleCheckButton'
-import ErrorMessage from '@components/common/ErrorMessage'
-import Input from '@components/common/Input'
-import Layout from '@components/common/Layout'
-import Loader from '@components/common/Loader'
-import Navigate from '@components/common/Navigate'
-import useGetProfile from '@hooks/queries/useGetProfile'
-import Image from 'next/image'
-import React, { useEffect, useState } from 'react'
-import { useForm } from 'react-hook-form'
-import { useRouter } from 'next/router'
-import { isUser } from '@utils/isUser'
-import { makeBlob } from '@utils/makeBlob'
+import authApi from '@apis/auth/authApi';
+import DoubleCheckButton from '@components/common/DoubleCheckButton';
+import ErrorMessage from '@components/common/ErrorMessage';
+import Input from '@components/common/Input';
+import Layout from '@components/common/Layout';
+import Loader from '@components/common/Loader';
+import Navigate from '@components/common/Navigate';
+import useGetProfile from '@hooks/queries/useGetProfile';
+import Image from 'next/image';
+import React, { useEffect, useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { useRouter } from 'next/router';
+import { isUser } from '@utils/isUser';
+import { makeBlob } from '@utils/makeBlob';
 
 export default function Edit() {
   const [isNicknameValidate, setIsNicknameValidate] = useState<boolean>(true);
@@ -44,6 +44,7 @@ export default function Edit() {
   }, [nickname]);
 
   useEffect(() => {
+    console.log(profile);
     if (!profile) return;
     setUserInfo(
       (prev) =>
@@ -124,17 +125,21 @@ export default function Edit() {
       formData.append('image', new File([''], ''));
     }
 
-    if (instagram) formData.append('instagram', instagram);
-    if (behance) formData.append('behance', behance);
-
     if (!isUser) {
       if (education) formData.append('education', education);
       if (history) formData.append('history', history);
       if (description) formData.append('description', description);
-    }
 
-    const response = await authApi.patchUserInfo(formData);
-    if (response.status === 200) {
+      if (instagram) formData.append('instagram', instagram);
+      if (behance) formData.append('behance', behance);
+    }
+    let response;
+    if (isUser) {
+      response = await authApi.patchUserInfo(formData);
+    } else {
+      response = await authApi.patchArtistInfo(formData);
+    }
+    if (response?.status === 200) {
       router.push('/home');
     }
   };
