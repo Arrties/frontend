@@ -14,6 +14,8 @@ import { Autoplay, Navigation, Scrollbar } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import useGetKeywordArtWork from '@hooks/queries/useGetKeywordArtWork';
 import { isUser } from '@utils/isUser';
+import 'swiper/css/pagination';
+import { Pagination } from 'swiper';
 
 const DUMP_KEYWORD_LISTS = ['사진', '소묘', '파스텔', '추상화'];
 const DUMP_ART_LISTS = [
@@ -39,6 +41,7 @@ const DUMP_AUCTION_LISTS = [
   { time: 1, start: '12:00', end: '14:00' },
   { time: 2, start: '12:00', end: '19:00' },
 ];
+
 const DUMP_PREV_AUCTION_LISTS = [
   {
     src: '/svg/example/exhibition.svg',
@@ -61,12 +64,43 @@ const DUMP_PREV_AUCTION_LISTS = [
     auctionRegister: 18,
     id: 3,
   },
+  {
+    src: '/svg/example/exhibition.svg',
+    date: '2022.12.21',
+    artRegister: 20,
+    auctionRegister: 18,
+    id: 4,
+  },
+  {
+    src: '/svg/example/exhibition.svg',
+    date: '2022.12.21',
+    artRegister: 20,
+    auctionRegister: 18,
+    id: 5,
+  },
 ];
+const makeThreeEach = (auctionList) => {
+  const afterArr = [];
+  let arr = [];
+  auctionList.forEach((it, idx) => {
+    arr.push(it);
+    if (arr.length === 3) {
+      afterArr.push(arr);
+      arr = [];
+    }
+    if (idx === auctionList.length - 1) {
+      afterArr.push(arr);
+    }
+  });
+  return afterArr;
+};
+const DUMP_AFTER_AUCTION_LIST = makeThreeEach(DUMP_PREV_AUCTION_LISTS);
 
 export default function Home() {
   const router = useRouter();
 
   const { keywordArtWork } = useGetKeywordArtWork();
+  console.log(DUMP_AFTER_AUCTION_LIST);
 
   return (
     <>
@@ -153,19 +187,31 @@ export default function Home() {
               지난 경매 리스트
             </span>
           </div>
-          <Swiper spaceBetween={20} slidesPerGroup={1} slidesPerView={1}>
-            <SwiperSlide>
-              {DUMP_PREV_AUCTION_LISTS.map((auction, idx) => (
-                <AuctionItem
-                  key={'' + idx}
-                  src={auction.src}
-                  date={auction.date}
-                  artRegister={auction.artRegister}
-                  auctionRegister={auction.auctionRegister}
-                  id={auction.id}
-                />
-              ))}
-            </SwiperSlide>
+          <Swiper
+            spaceBetween={20}
+            slidesPerGroup={1}
+            slidesPerView={1}
+            modules={[Pagination]}
+            pagination={true}
+            className="h-[360px]"
+          >
+            {DUMP_AFTER_AUCTION_LIST.map((auctionList, index) => (
+              <SwiperSlide key={'' + index}>
+                {auctionList.map((auctionItem, idx: number) => (
+                  <AuctionItem
+                    key={'' + idx}
+                    src={auctionItem.src}
+                    date={auctionItem.date}
+                    artRegister={auctionItem.artRegister}
+                    auctionRegister={auctionItem.auctionRegister}
+                    id={auctionItem.id}
+                    onClick={() => {
+                      router.push('/home/history');
+                    }}
+                  />
+                ))}
+              </SwiperSlide>
+            ))}
           </Swiper>
         </section>
         {!isUser && (
