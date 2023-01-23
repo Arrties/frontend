@@ -1,4 +1,4 @@
-import Image from 'next/image'
+import Image from 'next/image';
 
 interface AuctionItemForm {
   key?: string;
@@ -7,6 +7,7 @@ interface AuctionItemForm {
   artRegister: number;
   auctionRegister: number;
   id: number;
+  [key: string]: any;
 }
 
 export default function AuctionItem({
@@ -15,9 +16,10 @@ export default function AuctionItem({
   artRegister,
   auctionRegister,
   id,
+  ...rest
 }: AuctionItemForm) {
   return (
-    <div className="flex mb-5 last:mb-0">
+    <div className="flex mb-5 last:mb-0" {...rest}>
       <div className="w-[82px] h-[90px] rounded mr-2 relative">
         <Image
           src={src}
