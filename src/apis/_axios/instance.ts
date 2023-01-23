@@ -70,6 +70,4 @@ instance.interceptors.response.use(
   },
 );
 
-// export { setAuthorHeader, unsetAuthorHeader };
-
 export default instance;
