@@ -8,15 +8,15 @@ export default function useGetSellingArtWork() {
   const query = useQuery(
     'useSellingArtWork',
     async () => {
-      const res = await instance('/art-works/me');
-      console.log(res);
-      return res;
+      const response = await instance('/art-works/me');
+      console.log(response);
+      return response;
     },
     {
       retry: 0,
       refetchOnWindowFocus: false,
-      onSuccess: (res: any) => {
-        setSellingArtWork(res?.data);
+      onSuccess: (response: any) => {
+        setSellingArtWork(response?.data);
       },
       onError: (error: any) => {
         console.log(error);
