@@ -1,9 +1,6 @@
 import instance from '@apis/_axios/instance';
-import axios from 'axios';
 import { AxiosInstance } from 'axios';
-import { getToken } from '@utils/localStorage/token';
-
-import { AuthDTOType } from './authApi.type';
+import { deleteToken, getToken, setToken } from '@utils/localStorage/token';
 
 export class AuthApi {
   axios: AxiosInstance = instance;
@@ -12,43 +9,35 @@ export class AuthApi {
   }
 
   async postLogin(body: { userId: string | null; password: string }) {
-    try {
-      return await axios.post(
-        `${process.env.NEXT_PUBLIC_API_BASE_URL}/members/login`,
-        body,
-      );
-    } catch (error: any) {
-      if (error) {
-        return error.response;
-      }
-    }
+    return await instance.post(
+      `${process.env.NEXT_PUBLIC_API_BASE_URL}/members/login`,
+      body,
+    );
   }
 
-  async postAccessToken(body: AuthDTOType): Promise<AuthDTOType> {
-    const { data } = await this.axios.post('/members/token', body);
-    return data;
+  async postRefreshToken(): Promise<any> {
+    const refreshToken = getToken().refreshToken;
+    try {
+      const response = await instance.post('/members/token', {
+        refreshToken,
+      });
+      return response.data;
+    } catch (error) {
+      deleteToken();
+      window.location.href = '/auth/login';
+    }
   }
 
   async postFindId(email: string) {
-    try {
-      return await this.axios.post(`/members/id`, {
-        email,
-      });
-    } catch (error: any) {
-      if (error) {
-        return error;
-      }
-    }
+    return await this.axios.post(`/members/id`, {
+      email,
+    });
   }
 
   async postNewPassword(email: string) {
-    try {
-      return await this.axios.post(`/members/new-password`, {
-        email,
-      });
-    } catch (error: any) {
-      return error;
-    }
+    return await this.axios.post(`/members/new-password`, {
+      email,
+    });
   }
 
   async postLogout() {
@@ -56,70 +45,45 @@ export class AuthApi {
   }
 
   async postPassword(password: string) {
-    try {
-      return await this.axios.patch(`/members/password`, {
-        password,
-      });
-    } catch (error: any) {
-      if (error) {
-        return error;
-      }
-    }
+    return await this.axios.patch(`/members/password`, {
+      password,
+    });
   }
 
   async patchUserInfo(formData: any) {
-    try {
-      const res = await instance.patch(
-        `${process.env.NEXT_PUBLIC_API_BASE_URL}/members`,
-        formData,
-        {
-          headers: {
-            'Content-Type': 'multipart/form-data',
-          },
+    return await instance.patch(
+      `${process.env.NEXT_PUBLIC_API_BASE_URL}/members`,
+      formData,
+      {
+        headers: {
+          'Content-Type': 'multipart/form-data',
         },
-      );
-      return res;
-    } catch (err: any) {
-      return err;
-    }
+      },
+    );
   }
   async patchArtistInfo(formData: any) {
-    try {
-      const res = await instance.patch(
-        `${process.env.NEXT_PUBLIC_API_BASE_URL}/artists`,
-        formData,
-        {
-          headers: {
-            'Content-Type': 'multipart/form-data',
-          },
+    const res = await instance.patch(
+      `${process.env.NEXT_PUBLIC_API_BASE_URL}/artists`,
+      formData,
+      {
+        headers: {
+          'Content-Type': 'multipart/form-data',
         },
-      );
-      return res;
-    } catch (err: any) {
-      return err;
-    }
+      },
+    );
+    return res;
   }
   async patchKeyword(body: string[]) {
-    try {
-      const res = await instance.patch(
-        `${process.env.NEXT_PUBLIC_API_BASE_URL}/members/keywords`,
-        body,
-      );
-      return res;
-    } catch (err: any) {
-      return err;
-    }
+    const res = await instance.patch(
+      `${process.env.NEXT_PUBLIC_API_BASE_URL}/members/keywords`,
+      body,
+    );
+    return res;
   }
 
   async deleteUser() {
-    try {
-      const res = await this.axios.delete('/members');
-      return res;
-    } catch (error: any) {
-      if (error) {
-        return error.response;
-      }
-    }
+    const res = await this.axios.delete('/members');
+    return res;
   }
 
   async getDuplicateCheck(params) {
@@ -138,41 +102,25 @@ export class AuthApi {
   }
 
   async getCheckEmail(email: string) {
-    try {
-      const res = await this.axios(`/members/check-email?email=${email}`);
-      return res;
-    } catch (error: any) {
-      return error;
-    }
+    const res = await this.axios(`/members/check-email?email=${email}`);
+    return res;
   }
 
   async getCheckId(userId: string) {
-    try {
-      const res = await this.axios(`/members/check-id?userId=${userId}`);
-      return res;
-    } catch (error: any) {
-      return error;
-    }
+    const res = await this.axios(`/members/check-id?userId=${userId}`);
+    return res;
   }
 
   async getCheckNickname(nickname: string | undefined) {
-    try {
-      const res = await this.axios(
-        `/members/check-nickname?nickname=${nickname}`,
-      );
-      return res;
-    } catch (error: any) {
-      return error;
-    }
+    const res = await this.axios(
+      `/members/check-nickname?nickname=${nickname}`,
+    );
+    return res;
   }
 
   async patchRole() {
-    try {
-      const res = await this.axios.patch('/members/roles');
-      return res;
-    } catch (error: any) {
-      return error;
-    }
+    const res = await this.axios.patch('/members/roles');
+    return res;
   }
 }
 
