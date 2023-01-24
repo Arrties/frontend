@@ -1,6 +1,6 @@
-import instance from '@apis/_axios/instance'
-import { useQuery } from 'react-query'
-import { useState } from 'react'
+import instance from '@apis/_axios/instance';
+import { useQuery } from 'react-query';
+import { useState } from 'react';
 
 interface PickDetail {
   member: Member;
@@ -13,14 +13,14 @@ const useGetPickDetail = (artistId: number) => {
   const query = useQuery(
     'useGetPickDetail',
     async () => {
-      const res = await instance(`/artists/${artistId}`);
-      return res;
+      const response = await instance(`/artists/${artistId}`);
+      return response;
     },
     {
       retry: 0,
       refetchOnWindowFocus: false,
-      onSuccess: (res: any) => {
-        setPickDetail(res?.data);
+      onSuccess: (response: any) => {
+        setPickDetail(response?.data);
       },
       onError: (error: any) => {
         console.log(error);

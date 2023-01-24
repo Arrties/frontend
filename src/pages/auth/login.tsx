@@ -60,27 +60,30 @@ function Login() {
     if (checkedTerm.includes('idSave')) {
       setLocalStorage('savedId', userId);
     }
-    const res = await authApi.postLogin({
+    const response = await authApi.postLogin({
       userId,
       password,
     });
 
-    if (res?.status === 200) {
+    if (response?.status === 200) {
       const token: Token = {
-        accessToken: res.data.accessToken,
-        refreshToken: res.data.refreshToken,
-        roles: res.data.roles,
+        accessToken: response.data.accessToken,
+        refreshToken: response.data.refreshToken,
+        roles: response.data.roles,
       };
       if (token) setToken(token);
       router.push('/home');
-    } else if (res?.status === 401 && res?.data.code === 'UNAUTHORIZED_ID') {
+    } else if (
+      response?.status === 401 &&
+      response?.data.code === 'UNAUTHORIZED_ID'
+    ) {
       setError('userId', {
         type: 'unauthorized',
         message: '존재하지 않는 아이디입니다.',
       });
     } else if (
-      res.status === 401 &&
-      res.data.code === 'UNAUTHORIZED_PASSWORD'
+      response.status === 401 &&
+      response.data.code === 'UNAUTHORIZED_PASSWORD'
     ) {
       setError('password', {
         type: 'unauthorized',

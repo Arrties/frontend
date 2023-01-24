@@ -1,11 +1,11 @@
-import authApi from '@apis/auth/authApi'
-import Layout from '@components/common/Layout'
-import Modal from '@components/common/Modal'
-import Navigate from '@components/common/Navigate'
-import Image from 'next/image'
-import { useState } from 'react'
-import { useRouter } from 'next/router'
-import { deleteToken } from '@utils/localStorage/token'
+import authApi from '@apis/auth/authApi';
+import Layout from '@components/common/Layout';
+import Modal from '@components/common/Modal';
+import Navigate from '@components/common/Navigate';
+import Image from 'next/image';
+import { useState } from 'react';
+import { useRouter } from 'next/router';
+import { deleteToken } from '@utils/localStorage/token';
 
 export default function Security() {
   const [isModal, setIsModal] = useState(false);
@@ -24,8 +24,8 @@ export default function Security() {
     setIsModal(false);
   };
   const handleAcceptWithdrawal = async () => {
-    const res = await authApi.deleteUser();
-    if (res?.status === 200) {
+    const response = await authApi.deleteUser();
+    if (response?.status === 200) {
       deleteToken();
       router.push('/auth/login');
     }

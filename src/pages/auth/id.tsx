@@ -1,13 +1,13 @@
-import authApi from '@apis/auth/authApi'
-import Button from '@components/common/Button'
-import ErrorMessage from '@components/common/ErrorMessage'
-import Input from '@components/common/Input'
-import Layout from '@components/common/Layout'
-import Modal from '@components/common/Modal'
-import Navigate from '@components/common/Navigate'
-import React, { useState } from 'react'
-import { useForm } from 'react-hook-form'
-import { useRouter } from 'next/router'
+import authApi from '@apis/auth/authApi';
+import Button from '@components/common/Button';
+import ErrorMessage from '@components/common/ErrorMessage';
+import Input from '@components/common/Input';
+import Layout from '@components/common/Layout';
+import Modal from '@components/common/Modal';
+import Navigate from '@components/common/Navigate';
+import React, { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { useRouter } from 'next/router';
 
 interface FindIdForm {
   email: string;
@@ -24,13 +24,16 @@ function Id() {
 
   const onSubmit = async ({ email }: FindIdForm) => {
     if (email) {
-      const res = await authApi.postFindId(email);
-      if (res.status === 200) {
+      const response = await authApi.postFindId(email);
+      if (response.status === 200) {
         setIsModal(true);
-      } else if (res.status === 404 && res.data.code === 'NOT_FOUND_EMAIL') {
+      } else if (
+        response.status === 404 &&
+        response.data.code === 'NOT_FOUND_EMAIL'
+      ) {
         setError('email', {
           type: 'not found',
-          message: res.data.detail,
+          message: response.data.detail,
         });
       }
     }

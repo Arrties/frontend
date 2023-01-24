@@ -1,6 +1,6 @@
 import instance from '@apis/_axios/instance';
 import { AxiosInstance } from 'axios';
-import { deleteToken, getToken, setToken } from '@utils/localStorage/token';
+import { deleteToken, getToken } from '@utils/localStorage/token';
 
 export class AuthApi {
   axios: AxiosInstance = instance;
@@ -62,7 +62,7 @@ export class AuthApi {
     );
   }
   async patchArtistInfo(formData: any) {
-    const res = await instance.patch(
+    const response = await instance.patch(
       `${process.env.NEXT_PUBLIC_API_BASE_URL}/artists`,
       formData,
       {
@@ -71,19 +71,19 @@ export class AuthApi {
         },
       },
     );
-    return res;
+    return response;
   }
   async patchKeyword(body: string[]) {
-    const res = await instance.patch(
+    const response = await instance.patch(
       `${process.env.NEXT_PUBLIC_API_BASE_URL}/members/keywords`,
       body,
     );
-    return res;
+    return response;
   }
 
   async deleteUser() {
-    const res = await this.axios.delete('/members');
-    return res;
+    const response = await this.axios.delete('/members');
+    return response;
   }
 
   async getDuplicateCheck(params) {
@@ -97,30 +97,30 @@ export class AuthApi {
     } else if (type === 'nickname') {
       uri = '/members/check-nickname?nickname=';
     }
-    const res = await instance(`${uri}${data}`);
-    return res;
+    const response = await instance(`${uri}${data}`);
+    return response;
   }
 
   async getCheckEmail(email: string) {
-    const res = await this.axios(`/members/check-email?email=${email}`);
-    return res;
+    const response = await this.axios(`/members/check-email?email=${email}`);
+    return response;
   }
 
   async getCheckId(userId: string) {
-    const res = await this.axios(`/members/check-id?userId=${userId}`);
-    return res;
+    const response = await this.axios(`/members/check-id?userId=${userId}`);
+    return response;
   }
 
   async getCheckNickname(nickname: string | undefined) {
-    const res = await this.axios(
+    const response = await this.axios(
       `/members/check-nickname?nickname=${nickname}`,
     );
-    return res;
+    return response;
   }
 
   async patchRole() {
-    const res = await this.axios.patch('/members/roles');
-    return res;
+    const response = await this.axios.patch('/members/roles');
+    return response;
   }
 }
 
