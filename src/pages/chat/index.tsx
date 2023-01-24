@@ -1,11 +1,11 @@
-import * as StompJs from '@stomp/stompjs';
-import Chatroom from '@components/chat/ChatRoom';
-import Layout from '@components/common/Layout';
-import Tab from '@components/common/Tab';
-import Image from 'next/image';
-import React, { useEffect, useRef, useState } from 'react';
-import { useRouter } from 'next/router';
-import { createClient } from '@apis/chat/socketConnect';
+import * as StompJs from '@stomp/stompjs'
+import Chatroom from '@components/chat/ChatRoom'
+import Layout from '@components/common/Layout'
+import Tab from '@components/common/Tab'
+import Image from 'next/image'
+import React, { useEffect, useRef, useState } from 'react'
+import { useRouter } from 'next/router'
+import { createClient } from '@apis/chat/socketConnect'
 
 interface ChatRoomListForm {
   id: string;
@@ -71,26 +71,28 @@ export default function Chat() {
   }, []);
 
   return (
-    <Layout>
-      <section className="font-bold text-16">채팅</section>
+    <>
+      <Layout>
+        <section className="text-16 font-bold">채팅</section>
 
-      {chatRoomList.length ? (
-        <div className="mt-5 absolute w-full inset-x-0 ">
-          {chatRoomList.map((chatRoom: ChatRoomListForm) => (
-            <Chatroom chatRoom={chatRoom} key={chatRoom.id} />
-          ))}
-        </div>
-      ) : (
-        <section className="flex justify-center items-center h-[650px]">
-          <Image
-            src={'/svg/icons/icon_chat_main.svg'}
-            width="150"
-            height="0"
-            alt="chat"
-          />
-        </section>
-      )}
+        {chatRoomList.length ? (
+          <div className="absolute inset-x-0 mt-5 w-full ">
+            {chatRoomList.map((chatRoom: ChatRoomListForm) => (
+              <Chatroom chatRoom={chatRoom} key={chatRoom.id} />
+            ))}
+          </div>
+        ) : (
+          <section className="flex h-[650px] items-center justify-center">
+            <Image
+              src={'/svg/icons/icon_chat_main.svg'}
+              width="150"
+              height="0"
+              alt="chat"
+            />
+          </section>
+        )}
+      </Layout>{' '}
       <Tab />
-    </Layout>
+    </>
   );
 }

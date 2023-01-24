@@ -102,7 +102,7 @@ export default function Exhibition() {
             style={{
               objectFit: 'contain',
             }}
-            className="scale-[1.8] top-[240px] right-[-3px] absolute"
+            className="absolute top-[240px] right-[-3px] scale-[1.8]"
           />
           <Image
             alt="canvas"
@@ -114,7 +114,7 @@ export default function Exhibition() {
             style={{
               objectFit: 'contain',
             }}
-            className="scale-[1.8] top-[240px] right-[-3px] absolute"
+            className="absolute top-[240px] right-[-3px] scale-[1.8]"
           />
         </>
       ) : (
@@ -144,7 +144,7 @@ export default function Exhibition() {
       <Navigate message="전시회" isRightButton={false} />
       <Swiper className="h-full" ref={swiperRef} spaceBetween={50}>
         {!isExpansion && !isOpen && (
-          <div className="flex justify-between w-[99%] absolute top-[180px] z-50">
+          <div className="absolute top-[180px] z-50 flex w-[99%] justify-between">
             <SwiperButtonDiv
               onClick={() => swiperRef.current.swiper.slidePrev()}
             >
@@ -171,7 +171,7 @@ export default function Exhibition() {
           <SwiperSlide key={idx}>
             {isExpansion ? (
               <div>
-                <div className="mt-[80px] relative">
+                <div className="relative mt-[80px]">
                   <Image
                     src="/svg/example/exhibition.svg"
                     alt="image"
@@ -193,7 +193,7 @@ export default function Exhibition() {
               </div>
             ) : (
               <div>
-                <div className="w-[240px] h-[348px] mr-[44px] mt-[35px] m-auto flex justify-center relative">
+                <div className="relative m-auto mr-[44px] mt-[35px] flex h-[348px] w-[240px] justify-center">
                   <Image
                     src="/svg/example/exhibition.svg"
                     alt="image"
