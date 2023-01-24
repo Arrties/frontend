@@ -19,17 +19,17 @@ export default function InquiryItem({ inquiry, handler }: InquiryItemForm) {
   return (
     <div className="border-b-[1px] pb-6">
       <Disclosure>
-        <div className="flex justify-between mt-5">
+        <div className="mt-5 flex justify-between">
           <div className="flex justify-start">
-            <span className="w-[70px] mr-2 border-[1px] border-[#DBDBDB] rounded-[39px] text-14 text-[#767676] text-center font-semibold py-[1px]">
-              {inquiry.status}
+            <span className="mr-2 w-[70px] rounded-[39px] border-[1px] border-[#DBDBDB] py-[1px] text-center text-12 font-semibold text-[#767676] ">
+              {inquiry.status === 'WAITING' && '대기중'}
             </span>
-            <span className="text-[#999999] text-14">
+            <span className="text-14 text-[#999999]">
               {inquiry.date} {inquiry.time}
             </span>
           </div>
-          {inquiry.status === '대기중' && (
-            <div className="text-[#999999] text-12">
+          {inquiry.status === 'WAITING' && (
+            <div className="text-12 text-[#999999]">
               <span className="cursor-pointer">수정</span>
               <span className="mx-2 text-[#DBDBDB]">|</span>
               <span
@@ -41,8 +41,8 @@ export default function InquiryItem({ inquiry, handler }: InquiryItemForm) {
             </div>
           )}
         </div>
-        <div className="flex justify-between mt-2 text-[#767676] ">
-          <span className="font-bold text-14">{inquiry.title}</span>
+        <div className="mt-2 flex justify-between text-[#767676] ">
+          <span className="text-14 font-bold">{inquiry.title}</span>
           <Disclosure.Button>
             <Image
               src="/svg/icons/icon_arrow_down.svg"
@@ -52,10 +52,15 @@ export default function InquiryItem({ inquiry, handler }: InquiryItemForm) {
             />
           </Disclosure.Button>
         </div>
-        <Disclosure.Panel className="text-gray-500 pt-5 text-14">
+        <Disclosure.Panel className="pt-5 text-14 text-gray-500">
           <div className="w-[320px] bg-[#F8F8FA] py-4 px-2">
+<<<<<<< Updated upstream
             <section className="flex mb-4">
               <div className="w-6 h-6 bg-[#F5535D] rounded-full flex items-center justify-center mr-2">
+=======
+            <section className="mb-4 flex">
+              <div className="mr-2 flex h-6 w-6 items-center justify-center rounded-full bg-brand">
+>>>>>>> Stashed changes
                 <Image
                   src="/svg/icons/icon_search_white.svg"
                   alt="search"
@@ -67,7 +72,11 @@ export default function InquiryItem({ inquiry, handler }: InquiryItemForm) {
             </section>
             {inquiry.answer && (
               <section className="flex">
+<<<<<<< Updated upstream
                 <div className="w-6 h-6 bg-[#F5535D] rounded-full flex items-center justify-center mr-2">
+=======
+                <div className="mr-2 flex h-6 w-6 items-center justify-center rounded-full bg-brand">
+>>>>>>> Stashed changes
                   <Image
                     src="/svg/icons/icon_logo_brand.svg"
                     alt="logo"

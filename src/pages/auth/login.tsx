@@ -92,7 +92,7 @@ function Login() {
   return (
     <Layout>
       <div className="mx-auto w-full">
-        <div className="text-center text-2xl font-light flex items-center justify-center h-48">
+        <div className="flex h-48 items-center justify-center text-center text-2xl font-light">
           LOGO
         </div>
         <form onSubmit={handleSubmit(onSubmit)}>
@@ -105,7 +105,7 @@ function Login() {
             />
             {errors.userId && <ErrorMessage message={errors.userId.message} />}
           </div>
-          <div className="flex flex-col mt-[10px] justify-start">
+          <div className="mt-[10px] flex flex-col justify-start">
             <Input
               type="password"
               id="password"
@@ -118,7 +118,7 @@ function Login() {
               <ErrorMessage message={errors.password.message} />
             )}
           </div>
-          <div className="flex space-x-[22px] mt-[14px]">
+          <div className="mt-[14px] flex space-x-[22px]">
             <CheckBox
               kind="radio"
               id="autoSave"
@@ -145,7 +145,7 @@ function Login() {
               <SocialLoginButton kind="naver" />
             </div>
           </div>
-          <p className="w-full text-center text-12 mt-3">
+          <p className="mt-3 w-full text-center text-12">
             계정을 잊으셨나요?&nbsp;
             <Link className="text-[#0099FF]" href="/auth/id">
               ID찾기
@@ -155,7 +155,7 @@ function Login() {
               비밀번호 찾기
             </Link>
           </p>
-          <p className="flex justify-center items-center w-full text-12 mt-24">
+          <p className="mt-24 flex w-full items-center justify-center text-12">
             <span className="text-[#999999]">아직 회원이 아니신가요?</span>
             <Link className="ml-[2px]" href="/auth/join01">
               회원가입
