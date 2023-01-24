@@ -37,3 +37,14 @@ interface Artist {
   instagram?: string;
   behance?: string;
 }
+
+interface LoginForm {
+  userId: string;
+  password: string;
+}
+
+interface Error {
+  status: number;
+  code: string;
+  detail: string;
+}
