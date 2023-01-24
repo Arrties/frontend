@@ -37,7 +37,7 @@ export default function InquiryItem({ inquiry, handler }: InquiryItemForm) {
     mode: 'onTouched',
   });
 
-  const { inquiryList, refetch: inquiryRefetch } = useGetInquiry();
+  const { refetch: inquiryRefetch } = useGetInquiry();
 
   const handleRemoveFile = (targetName: string, targetSize: number): void => {
     const newFileLists = fileLists.filter((file) => {
@@ -72,6 +72,7 @@ export default function InquiryItem({ inquiry, handler }: InquiryItemForm) {
       formData.append('image', image[i]);
     }
     const response = await authApi.patchInquiry(inquiry.id, formData);
+    setIsSelected(false);
     inquiryRefetch();
   };
   return (
@@ -94,7 +95,6 @@ export default function InquiryItem({ inquiry, handler }: InquiryItemForm) {
                   } else {
                     setIsSelected(true);
                   }
-                  console.log(inquiry.id);
                 }}
               >
                 {isSelected ? '취소' : '수정'}
@@ -112,7 +112,7 @@ export default function InquiryItem({ inquiry, handler }: InquiryItemForm) {
         {isSelected ? (
           <form autoComplete="off" onSubmit={handleSubmit(onSubmit)}>
             <section className="mb-5 flex flex-col">
-              <div className="mb-3 flex justify-between">
+              <div className="mb-3 mt-3 flex justify-between">
                 <label htmlFor="title" className="text-14 font-bold leading-8">
                   제목
                 </label>
@@ -230,7 +230,7 @@ export default function InquiryItem({ inquiry, handler }: InquiryItemForm) {
               />
             </section>
             <section className="mt-[75px] w-full">
-              <Button type="submit" text="문의접수" className="h-[48px]" />
+              <Button type="submit" text="수정" className="h-[48px]" />
             </section>
           </form>
         ) : (
