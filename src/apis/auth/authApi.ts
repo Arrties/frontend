@@ -1,13 +1,7 @@
 import instance from '@apis/_axios/instance';
-import { AxiosInstance } from 'axios';
 import { deleteToken, getToken } from '@utils/localStorage/token';
 
 export class AuthApi {
-  axios: AxiosInstance = instance;
-  constructor(axios?: AxiosInstance) {
-    if (axios) this.axios = axios;
-  }
-
   async postLogin(body: { userId: string | null; password: string }) {
     return await instance.post(
       `${process.env.NEXT_PUBLIC_API_BASE_URL}/members/login`,
@@ -29,23 +23,23 @@ export class AuthApi {
   }
 
   async postFindId(email: string) {
-    return await this.axios.post(`/members/id`, {
+    return await instance.post(`/members/id`, {
       email,
     });
   }
 
   async postNewPassword(email: string) {
-    return await this.axios.post(`/members/new-password`, {
+    return await instance.post(`/members/new-password`, {
       email,
     });
   }
 
   async postLogout() {
-    await this.axios.post('/members/logout');
+    await instance.post('/members/logout');
   }
 
   async postPassword(password: string) {
-    return await this.axios.patch(`/members/password`, {
+    return await instance.patch(`/members/password`, {
       password,
     });
   }
@@ -82,7 +76,7 @@ export class AuthApi {
   }
 
   async deleteUser() {
-    const response = await this.axios.delete('/members');
+    const response = await instance.delete('/members');
     return response;
   }
 
@@ -102,24 +96,24 @@ export class AuthApi {
   }
 
   async getCheckEmail(email: string) {
-    const response = await this.axios(`/members/check-email?email=${email}`);
+    const response = await instance(`/members/check-email?email=${email}`);
     return response;
   }
 
   async getCheckId(userId: string) {
-    const response = await this.axios(`/members/check-id?userId=${userId}`);
+    const response = await instance(`/members/check-id?userId=${userId}`);
     return response;
   }
 
   async getCheckNickname(nickname: string | undefined) {
-    const response = await this.axios(
+    const response = await instance(
       `/members/check-nickname?nickname=${nickname}`,
     );
     return response;
   }
 
   async patchRole() {
-    const response = await this.axios.patch('/members/roles');
+    const response = await instance.patch('/members/roles');
     return response;
   }
 }
