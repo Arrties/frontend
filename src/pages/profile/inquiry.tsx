@@ -10,6 +10,7 @@ import { useForm } from 'react-hook-form';
 import { useEffect, useState } from 'react';
 import instance from '@apis/_axios/instance';
 import useGetInquiry from '@hooks/queries/useGetInquiry';
+import { formatBytes } from '@utils/formatBytes';
 
 interface InquiryForm {
   title: string;
@@ -27,19 +28,10 @@ interface InquiryForm {
   id: number;
 }
 
-const formatBytes = (bytes: number, decimals = 1): string => {
-  if (!bytes) return '0';
-  const k = 1024;
-  const dm = decimals < 0 ? 0 : decimals;
-  const sizes = ['Bytes', 'KB', 'MB'];
-  const i = Math.floor(Math.log(bytes) / Math.log(k));
-  return `${parseFloat((bytes / Math.pow(k, i)).toFixed(dm))} ${sizes[i]}`;
-};
-
 export default function Inquiry() {
   const [fileLists, setFileLists] = useState<File[]>([]);
   const [fileSize, setFileSize] = useState<number>(0);
-  const { inquiryList, refetch: inqueryRefetch } = useGetInquiry();
+  const { inquiryList, refetch: inquiryRefetch } = useGetInquiry();
 
   const router = useRouter();
   const handleLeftButton = () => {
@@ -60,7 +52,7 @@ export default function Inquiry() {
 
   const handleRemoveInquiry = async (targetId: number) => {
     const response = await instance.delete(`/members/ask/${targetId}`);
-    inqueryRefetch();
+    inquiryRefetch();
 
     return;
   };
@@ -90,7 +82,7 @@ export default function Inquiry() {
       formData.append('image', image[i]);
     }
     const response = await instance.post('/members/ask', formData);
-    inqueryRefetch();
+    inquiryRefetch();
   };
 
   return (

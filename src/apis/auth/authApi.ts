@@ -116,6 +116,11 @@ export class AuthApi {
     const response = await instance.patch('/members/roles');
     return response;
   }
+
+  async patchInquiry(askId: number, formData: any) {
+    const response = await instance.patch(`/members/ask/${askId}`, formData);
+    return response;
+  }
 }
 
 const authApi = new AuthApi();
