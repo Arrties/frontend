@@ -43,7 +43,7 @@ export default function Password() {
     if (response.status === 409) {
       setError('passwordConfirm', {
         type: 'password same',
-        message: response.detail,
+        message: response.data.detail,
       });
     } else {
       setSuccessMessage('비밀번호 변경이 완료되었습니다.');
@@ -110,7 +110,7 @@ export default function Password() {
         />
       </div>
       {successMessage && (
-        <p className="text-[#5a82f1] text-14">비밀번호 변경 성공</p>
+        <p className="text-14 text-[#5a82f1]">비밀번호 변경 성공</p>
       )}
     </Layout>
   );
