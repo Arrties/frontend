@@ -1,15 +1,3 @@
-<<<<<<< Updated upstream
-import Button from '@components/common/Button'
-import Layout from '@components/common/Layout'
-import Navigate from '@components/common/Navigate'
-import FileItem from '@components/inquiry/FileItem'
-import InquiryItem from '@components/inquiry/InquiryItem'
-import Image from 'next/image'
-import { useRouter } from 'next/router'
-import { Tab } from '@headlessui/react'
-import { useForm } from 'react-hook-form'
-import { useEffect, useState } from 'react'
-=======
 import Button from '@components/common/Button';
 import Layout from '@components/common/Layout';
 import Navigate from '@components/common/Navigate';
@@ -22,7 +10,6 @@ import { useForm } from 'react-hook-form';
 import { useEffect, useState } from 'react';
 import instance from '@apis/_axios/instance';
 import useGetInquiry from '@hooks/queries/useGetInquiry';
->>>>>>> Stashed changes
 
 interface InquiryForm {
   title: string;
@@ -197,7 +184,7 @@ export default function Inquiry() {
                         />
                         {fileLists.length > 0 && (
                           <div className="text-12">
-                            <span className="text-[#F5535D]">
+                            <span className="text-brand">
                               {fileLists.length}
                             </span>
                             /5

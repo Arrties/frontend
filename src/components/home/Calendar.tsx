@@ -17,8 +17,6 @@ const DUMP_AUCTION_DATE_LISTS = [
 export default function Calendar() {
   const [date, setDate] = useState<moment.Moment>(() => moment());
   const today = date;
-  console.log(today.clone().startOf('month').week());
-  console.log(today.clone().startOf('isoWeek').week());
   const firstWeek = today.clone().startOf('month').week();
   const lastWeek =
     today.clone().endOf('month').week() === 1

@@ -67,7 +67,7 @@ function Password() {
       <section className="py-5">
         <p className="text-16 font-semibold">
           소중한 개인정보를 위하여 <br />
-          <span className="text-[#F5535D]">본인확인</span>이 필요합니다.
+          <span className="text-brand">본인확인</span>이 필요합니다.
         </p>
       </section>
       <form onSubmit={handleSubmit(onSubmit)}>

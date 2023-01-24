@@ -11,7 +11,6 @@ export default function useGetKeywordArtWork() {
       const response = await instance(
         '/members/customized-artworks?page=1&limit=5',
       );
-      console.log(response);
       return response;
     },
     {
