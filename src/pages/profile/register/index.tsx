@@ -1,11 +1,11 @@
-import authApi from '@apis/auth/authApi'
-import Layout from '@components/common/Layout'
-import Navigate from '@components/common/Navigate'
-import Image from 'next/image'
-import React, { useEffect, useState } from 'react'
-import { useRouter } from 'next/router'
-import { useForm } from 'react-hook-form'
-import { getToken, setToken } from '@utils/localStorage/token'
+import authApi from '@apis/auth/authApi';
+import Layout from '@components/common/Layout';
+import Navigate from '@components/common/Navigate';
+import Image from 'next/image';
+import React, { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
+import { useForm } from 'react-hook-form';
+import { getToken, setToken } from '@utils/localStorage/token';
 
 interface FileForm {
   file: any;
@@ -32,8 +32,8 @@ export default function Register() {
 
   const handleRightButton = async () => {
     if (!fileState) return;
-    const res = await authApi.patchRole();
-    if (res.status === 200) {
+    const response = await authApi.patchRole();
+    if (response.status === 200) {
       const token = getToken();
       token.roles = 'ROLE_ARTIST';
       if (token) setToken(token);

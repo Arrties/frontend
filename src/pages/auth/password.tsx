@@ -24,13 +24,16 @@ function Password() {
 
   const onSubmit = async ({ email }: NewPasswordForm) => {
     if (email) {
-      const res = await authApi.postNewPassword(email);
-      if (res.status === 200) {
+      const response = await authApi.postNewPassword(email);
+      if (response.status === 200) {
         setIsModal(true);
-      } else if (res.status === 404 && res.data.code === 'NOT_FOUND_EMAIL') {
+      } else if (
+        response.status === 404 &&
+        response.data.code === 'NOT_FOUND_EMAIL'
+      ) {
         setError('email', {
           type: 'not found',
-          message: res.data.detail,
+          message: response.data.detail,
         });
       }
     }

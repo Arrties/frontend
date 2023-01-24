@@ -1,22 +1,10 @@
 import axios from 'axios';
-import { deleteToken, getToken, setToken } from '@utils/localStorage/token';
+import {  getToken, setToken } from '@utils/localStorage/token';
+import authApi from '@apis/auth/authApi';
 
 const instance = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_BASE_URL,
 });
-
-const refreshToken = async () => {
-  const refresh = getToken().refreshToken;
-  try {
-    const res = await instance.post('/members/token', {
-      refreshToken: refresh,
-    });
-    return res?.data;
-  } catch (error) {
-    deleteToken();
-    window.location.href = '/auth/login';
-  }
-};
 
 instance.interceptors.request.use(
   (config) => {
@@ -33,13 +21,12 @@ instance.interceptors.request.use(
 );
 
 instance.interceptors.response.use(
-  (res) => {
-    return res;
+  (response) => {
+    return response;
   },
   async (error) => {
-    const originalRequest = error.config;
-    const { response: res, config: reqData } = error || {};
-    const { status } = res || {};
+    const { config: originalRequest, response } = error;
+    const { status, data } = response;
     const isUnAuthError = status === 401;
     const isNotFoundError = status === 404;
     const isDuplicateError = status === 409;
@@ -53,19 +40,18 @@ instance.interceptors.response.use(
     }
 
     if (isUnAuthError) {
-      try {
-        const token = await refreshToken();
-        token['roles'] = getToken().roles;
-        token['refreshToken'] = getToken().refreshToken;
-        if (token?.accessToken) {
-          setToken(token);
-          reqData.headers.Authorization = token?.access;
-          return instance(reqData);
-        }
-        return instance.request(originalRequest);
-      } catch (error) {
+      if (data?.code === 'TOKEN_INVALID') {
         alert('세션이 만료되었습니다. 다시 로그인해 주시기 바랍니다.');
+        window.location.href = `${process.env.NEXT_PUBLIC_CLIENT_BASE_URL}/auth/login`;
+        return;
       }
+      const { accessToken } = await authApi.postRefreshToken();
+      setToken({
+        accessToken,
+        refreshToken: getToken().refreshToken,
+        roles: getToken().roles,
+      });
+      return instance.request(originalRequest);
     }
   },
 );

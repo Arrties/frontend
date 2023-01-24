@@ -8,14 +8,16 @@ export default function useGetKeywordArtWork() {
   const query = useQuery(
     'useKeywordArtWork',
     async () => {
-      const res = await instance('/members/customized-artworks?page=1&limit=5');
-      return res;
+      const response = await instance(
+        '/members/customized-artworks?page=1&limit=5',
+      );
+      return response;
     },
     {
       retry: 0,
       refetchOnWindowFocus: false,
-      onSuccess: (res: any) => {
-        setKeywordArtWork(res?.data);
+      onSuccess: (response: any) => {
+        setKeywordArtWork(response?.data);
       },
       onError: (error: any) => {
         console.log(error);

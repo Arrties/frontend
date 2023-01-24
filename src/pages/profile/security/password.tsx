@@ -1,11 +1,11 @@
-import authApi from '@apis/auth/authApi'
-import ErrorMessage from '@components/common/ErrorMessage'
-import Input from '@components/common/Input'
-import Layout from '@components/common/Layout'
-import Navigate from '@components/common/Navigate'
-import Image from 'next/image'
-import { useEffect, useState } from 'react'
-import { useForm } from 'react-hook-form'
+import authApi from '@apis/auth/authApi';
+import ErrorMessage from '@components/common/ErrorMessage';
+import Input from '@components/common/Input';
+import Layout from '@components/common/Layout';
+import Navigate from '@components/common/Navigate';
+import Image from 'next/image';
+import { useEffect, useState } from 'react';
+import { useForm } from 'react-hook-form';
 
 interface passwordForm {
   password: string;
@@ -39,11 +39,11 @@ export default function Password() {
       );
       return;
     }
-    const res = await authApi.postPassword(watch('password'));
-    if (res.status === 409) {
+    const response = await authApi.postPassword(watch('password'));
+    if (response.status === 409) {
       setError('passwordConfirm', {
         type: 'password same',
-        message: res.detail,
+        message: response.data.detail,
       });
     } else {
       setSuccessMessage('비밀번호 변경이 완료되었습니다.');
@@ -110,7 +110,7 @@ export default function Password() {
         />
       </div>
       {successMessage && (
-        <p className="text-[#5a82f1] text-14">비밀번호 변경 성공</p>
+        <p className="text-14 text-[#5a82f1]">비밀번호 변경 성공</p>
       )}
     </Layout>
   );

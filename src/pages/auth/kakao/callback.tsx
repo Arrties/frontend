@@ -1,10 +1,10 @@
-import instance from '@apis/_axios/instance'
-import Layout from '@components/common/Layout'
-import Loader from '@components/common/Loader'
-import { useEffect } from 'react'
-import { setToken } from '@utils/localStorage/token'
-import { Token } from '@utils/localStorage/token'
-import { useRouter } from 'next/router'
+import instance from '@apis/_axios/instance';
+import Layout from '@components/common/Layout';
+import Loader from '@components/common/Loader';
+import { useEffect } from 'react';
+import { setToken } from '@utils/localStorage/token';
+import { Token } from '@utils/localStorage/token';
+import { useRouter } from 'next/router';
 
 export default function KakaoCallback() {
   const router = useRouter();
@@ -13,11 +13,11 @@ export default function KakaoCallback() {
     const code = new URL(window.location.href).searchParams.get('code');
     instance
       .get(`/oauth2/kakao?code=${code}`)
-      .then((res) => {
+      .then((response) => {
         const token: Token = {
-          accessToken: res.data.accessToken,
-          refreshToken: res.data.refreshToken,
-          roles: res.data.roles,
+          accessToken: response.data.accessToken,
+          refreshToken: response.data.refreshToken,
+          roles: response.data.roles,
         };
         if (token) setToken(token);
       })
