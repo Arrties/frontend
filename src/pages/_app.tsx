@@ -1,12 +1,12 @@
-import '../styles/globals.css'
+import '../styles/globals.css';
 
-import store from '@features/store'
-import Head from 'next/head'
-import { Provider } from 'react-redux'
-import { PersistGate } from 'redux-persist/integration/react'
-import { persistStore } from 'redux-persist'
-import { QueryClient, QueryClientProvider } from 'react-query'
-import { ReactQueryDevtools } from 'react-query/devtools'
+import store from '@features/store';
+import Head from 'next/head';
+import { Provider } from 'react-redux';
+import { PersistGate } from 'redux-persist/integration/react';
+import { persistStore } from 'redux-persist';
+import { QueryClient, QueryClientProvider } from 'react-query';
+import { ReactQueryDevtools } from 'react-query/devtools';
 
 import type { AppProps } from 'next/app';
 const queryClient = new QueryClient();
@@ -20,7 +20,7 @@ export default function App({ Component, pageProps }: AppProps) {
   // }, [router]);
 
   return (
-    <div className="mx-auto w-full max-w-[375px]">
+    <div className="relative mx-auto h-screen w-full max-w-[375px] overflow-y-scroll border border-gray-500 font-Pretendard">
       <Head>
         <link rel="shortcut icon" href="/static/favicon.ico" />
       </Head>
