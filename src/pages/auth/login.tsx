@@ -1,26 +1,18 @@
-import authApi from '@apis/auth/authApi';
-import Button from '@components/common/Button';
-import CheckBox from '@components/common/Checkbox';
-import ErrorMessage from '@components/common/ErrorMessage';
-import Input from '@components/common/Input';
-import Layout from '@components/common/Layout';
-import SocialLoginButton from '@components/login/SocialLoginButton';
-import Image from 'next/image';
-import Link from 'next/link';
-import React, { useEffect, useState } from 'react';
-import { setToken, Token } from '@utils/localStorage/token';
-import {
-  getLocalStorage,
-  removeLocalStorage,
-  setLocalStorage,
-} from '@utils/localStorage/helper';
-import { useRouter } from 'next/router';
-import { useForm } from 'react-hook-form';
-
-interface LoginForm {
-  userId: string | null;
-  password: string;
-}
+import authApi from '@apis/auth/authApi'
+import Button from '@components/common/Button'
+import CheckBox from '@components/common/Checkbox'
+import ErrorMessage from '@components/common/ErrorMessage'
+import Input from '@components/common/Input'
+import Layout from '@components/common/Layout'
+import SocialLoginButton from '@components/login/SocialLoginButton'
+import useLoginMutation from '@hooks/mutation/useLoginMutation'
+import Image from 'next/image'
+import Link from 'next/link'
+import React, { useEffect, useState } from 'react'
+import { setToken, Token } from '@utils/localStorage/token'
+import { getLocalStorage, removeLocalStorage, setLocalStorage } from '@utils/localStorage/helper'
+import { useRouter } from 'next/router'
+import { useForm } from 'react-hook-form'
 
 function Login() {
   const {
@@ -30,10 +22,12 @@ function Login() {
     setError,
   } = useForm<LoginForm>({
     defaultValues: {
-      userId: getLocalStorage('savedId'),
+      userId: getLocalStorage('savedId') || '',
     },
   });
   const [checkedTerm, setCheckedTerm] = useState<string[]>([]);
+  const { mutate, data, error } = useLoginMutation();
+
   useEffect(() => {
     if (getLocalStorage('idSave') === 'true') {
       setCheckedTerm(['idSave']);
@@ -60,37 +54,37 @@ function Login() {
     if (checkedTerm.includes('idSave')) {
       setLocalStorage('savedId', userId);
     }
-    const response = await authApi.postLogin({
-      userId,
-      password,
-    });
 
-    if (response?.status === 200) {
+    mutate({ userId, password });
+  };
+
+  useEffect(() => {
+    if (data) {
       const token: Token = {
-        accessToken: response.data.accessToken,
-        refreshToken: response.data.refreshToken,
-        roles: response.data.roles,
+        accessToken: data.accessToken,
+        refreshToken: data.refreshToken,
+        roles: data.roles,
       };
       if (token) setToken(token);
       router.push('/home');
-    } else if (
-      response?.status === 401 &&
-      response?.data.code === 'UNAUTHORIZED_ID'
-    ) {
-      setError('userId', {
-        type: 'unauthorized',
-        message: '존재하지 않는 아이디입니다.',
-      });
-    } else if (
-      response.status === 401 &&
-      response.data.code === 'UNAUTHORIZED_PASSWORD'
-    ) {
-      setError('password', {
-        type: 'unauthorized',
-        message: '비밀번호가 일치하지 않습니다.',
-      });
     }
-  };
+  }, [data]);
+
+  useEffect(() => {
+    if (error) {
+      if (error.code === 'UNAUTHORIZED_ID') {
+        setError('userId', {
+          type: 'unauthorized',
+          message: error.detail,
+        });
+      } else if (error.code === 'UNAUTHORIZED_PASSWORD') {
+        setError('password', {
+          type: 'unauthorized',
+          message: error.detail,
+        });
+      }
+    }
+  }, [error]);
 
   return (
     <Layout>
