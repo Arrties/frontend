@@ -6,7 +6,6 @@ module.exports = {
     'prettier',
     'plugin:storybook/recommended',
     'prettier/prettier',
-    'plugin:tailwindcss/recommended',
   ],
   rules: {
     // ESLint 규칙을 지정합니다. extends에서 지정된 규칙을 덮어 쓸수도 있습니다.
