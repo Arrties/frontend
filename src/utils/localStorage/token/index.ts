@@ -1,20 +1,24 @@
-import { CONFIG } from '@config'
+import { CONFIG } from '@config';
 
-import { getLocalStorage, removeLocalStorage, setLocalStorage } from '../helper'
+import {
+  getLocalStorage,
+  removeLocalStorage,
+  setLocalStorage,
+} from '../helper';
+
+export interface Token {
+  accessToken: string | undefined;
+  refreshToken: string | undefined;
+  roles: string | undefined;
+}
 
 const TOKEN_KEY = CONFIG.AUTH_TOKEN_KEY || '@token';
 
-export type Token = {
-  accessToken: string | null;
-  refreshToken: string | null;
-  roles: string | null;
-};
-
-export const getToken = () => {
+export const getToken = (): Token => {
   const token = getLocalStorage<Token>(TOKEN_KEY, {
-    accessToken: null,
-    refreshToken: null,
-    roles: null,
+    accessToken: undefined,
+    refreshToken: undefined,
+    roles: undefined,
   });
   return token;
 };
