@@ -1,10 +1,22 @@
-import authApi from '@apis/auth/authApi'
-import axios from 'axios'
-import { getToken, setToken } from '@utils/localStorage/token'
+import axios from 'axios';
+import { deleteToken, getToken, setToken } from '@utils/localStorage/token';
 
 const instance = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_BASE_URL,
 });
+
+const refreshToken = async () => {
+  const refreshToken = getToken().refreshToken;
+  try {
+    const response = await instance.post('/members/token', {
+      refreshToken,
+    });
+    return response.data;
+  } catch (error) {
+    deleteToken();
+    window.location.href = '/auth/login';
+  }
+};
 
 instance.interceptors.request.use(
   (config) => {
@@ -45,13 +57,18 @@ instance.interceptors.response.use(
         window.location.href = `${process.env.NEXT_PUBLIC_CLIENT_BASE_URL}/auth/login`;
         return;
       }
-      const { accessToken } = await authApi.postRefreshToken();
-      setToken({
-        accessToken,
-        refreshToken: getToken().refreshToken,
-        roles: getToken().roles,
-      });
-      return instance.request(originalRequest);
+
+      if (data?.code === 'TOKEN_EXPIRED') {
+        const { accessToken } = await refreshToken();
+        setToken({
+          accessToken,
+          refreshToken: getToken().refreshToken,
+          roles: getToken().roles,
+        });
+        return instance.request(originalRequest);
+      }
+
+      return Promise.reject(error.response.data);
     }
   },
 );
