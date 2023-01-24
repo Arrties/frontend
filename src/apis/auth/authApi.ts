@@ -119,6 +119,7 @@ export class AuthApi {
 
   async patchInquiry(askId: number, formData: any) {
     const response = await instance.patch(`/members/ask/${askId}`, formData);
+    return response;
   }
 }
 
