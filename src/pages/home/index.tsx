@@ -1,21 +1,21 @@
-import 'swiper/css';
+import 'swiper/css'
+import 'swiper/css/pagination'
 
-import AuctionNavigate from '@components/auction/AuctionNavigate';
-import Layout from '@components/common/Layout';
-import Tab from '@components/common/Tab';
-import AuctionItem from '@components/home/AuctionItem';
-import Calendar from '@components/home/Calendar';
-import ExhibitionItem from '@components/home/ExhibitionItem';
-import ScheduleItem from '@components/home/ScheduleItem';
-import Image from 'next/image';
-import React from 'react';
-import { useRouter } from 'next/router';
-import { Autoplay, Navigation, Scrollbar } from 'swiper';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import useGetKeywordArtWork from '@hooks/queries/useGetKeywordArtWork';
-import { isUser } from '@utils/isUser';
-import 'swiper/css/pagination';
-import { Pagination } from 'swiper';
+import AuctionNavigate from '@components/auction/AuctionNavigate'
+import Layout from '@components/common/Layout'
+import Tab from '@components/common/Tab'
+import AuctionItem from '@components/home/AuctionItem'
+import Calendar from '@components/home/Calendar'
+import ExhibitionItem from '@components/home/ExhibitionItem'
+import ScheduleItem from '@components/home/ScheduleItem'
+import useGetKeywordArtWork from '@hooks/queries/useGetKeywordArtWork'
+import Image from 'next/image'
+import React from 'react'
+import { useRouter } from 'next/router'
+import { Autoplay, Navigation, Scrollbar } from 'swiper'
+import { Swiper, SwiperSlide } from 'swiper/react'
+import { isUser } from '@utils/isUser'
+import { Pagination } from 'swiper'
 
 const DUMP_KEYWORD_LISTS = ['사진', '소묘', '파스텔', '추상화'];
 const DUMP_ART_LISTS = [
@@ -114,12 +114,12 @@ export default function Home() {
       <Layout>
         <AuctionNavigate />
         <section className="">
-          <div className="text-[#767676] text-14">영서님 취향의</div>
+          <div className="text-14 text-[#767676]">영서님 취향의</div>
           <div className="flex justify-between">
             <span className="text-20 font-bold">이번 주 전시작품</span>
-            <div className="flex justify-between items-center">
+            <div className="flex items-center justify-between">
               <span
-                className="text-12 text-[#999999] pr-1 cursor-pointer"
+                className="cursor-pointer pr-1 text-12 text-[#999999]"
                 onClick={() => {
                   router.push('home/view');
                 }}
@@ -138,7 +138,7 @@ export default function Home() {
         <section className="my-4">
           {DUMP_KEYWORD_LISTS.map((keyword) => (
             <span
-              className="border-[1px] border-[#DBDBDB] rounded-[19px] px-2 py-1 mr-2 mb-1 last:mr-0 text-12 text-[#767676] "
+              className="mr-2 mb-1 rounded-[19px] border-[1px] border-[#DBDBDB] px-2 py-1 text-12 text-[#767676] last:mr-0 "
               key={keyword}
             >
               {keyword}
@@ -170,7 +170,7 @@ export default function Home() {
             <span className="text-14 text-[#767676]">
               놓치지 말고 참여하세요
             </span>
-            <span className="text-20 text-[#191919] font-bold">
+            <span className="text-20 font-bold text-[#191919]">
               아띠즈 경매 캘린더
             </span>
           </div>
@@ -188,9 +188,9 @@ export default function Home() {
           ))}
         </section>
         <section>
-          <div className="flex flex-col mb-5">
+          <div className="mb-5 flex flex-col">
             <span className="text-14 text-[#767676]">아쉽지만 끝난</span>
-            <span className="text-20 text-[#191919] font-bold">
+            <span className="text-20 font-bold text-[#191919]">
               지난 경매 리스트
             </span>
           </div>
@@ -234,9 +234,9 @@ export default function Home() {
             onClick={() => {
               router.push('/home/post');
             }}
-            className="w-[72px] h-[72px] m-auto mr-0 sticky bottom-[10px] z-50 cursor-pointer"
+            className="sticky bottom-[10px] z-50 m-auto mr-0 h-[72px] w-[72px] cursor-pointer"
           />
-        )}
+        )}{' '}
       </Layout>
       <Tab />
     </>
