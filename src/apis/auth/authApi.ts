@@ -1,12 +1,13 @@
-import instance from '@apis/_axios/instance';
-import { deleteToken, getToken } from '@utils/localStorage/token';
+import instance from '@apis/_axios/instance'
+import { deleteToken, getToken, Token } from '@utils/localStorage/token'
 
 export class AuthApi {
-  async postLogin(body: { userId: string | null; password: string }) {
-    return await instance.post(
+  async postLogin(body: LoginForm): Promise<Token> {
+    const { data } = await instance.post(
       `${process.env.NEXT_PUBLIC_API_BASE_URL}/members/login`,
       body,
     );
+    return data;
   }
 
   async postRefreshToken(): Promise<any> {
@@ -20,6 +21,11 @@ export class AuthApi {
       deleteToken();
       window.location.href = '/auth/login';
     }
+  }
+
+  async getMemberProfile(): Promise<Member> {
+    const { data } = await instance.get(`/members/me`);
+    return data;
   }
 
   async postFindId(email: string) {

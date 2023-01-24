@@ -1,6 +1,6 @@
-import axios from 'axios';
-import {  getToken, setToken } from '@utils/localStorage/token';
-import authApi from '@apis/auth/authApi';
+import authApi from '@apis/auth/authApi'
+import axios from 'axios'
+import { getToken, setToken } from '@utils/localStorage/token'
 
 const instance = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_BASE_URL,
