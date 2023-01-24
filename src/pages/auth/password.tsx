@@ -1,13 +1,13 @@
-import authApi from '@apis/auth/authApi'
-import Button from '@components/common/Button'
-import ErrorMessage from '@components/common/ErrorMessage'
-import Input from '@components/common/Input'
-import Layout from '@components/common/Layout'
-import Modal from '@components/common/Modal'
-import Navigate from '@components/common/Navigate'
-import React, { useState } from 'react'
-import { useForm } from 'react-hook-form'
-import { useRouter } from 'next/router'
+import authApi from '@apis/auth/authApi';
+import Button from '@components/common/Button';
+import ErrorMessage from '@components/common/ErrorMessage';
+import Input from '@components/common/Input';
+import Layout from '@components/common/Layout';
+import Modal from '@components/common/Modal';
+import Navigate from '@components/common/Navigate';
+import React, { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { useRouter } from 'next/router';
 
 interface NewPasswordForm {
   email: string;
@@ -64,7 +64,7 @@ function Password() {
       <section className="py-5">
         <p className="text-16 font-semibold">
           소중한 개인정보를 위하여 <br />
-          <span className="text-[#F5535D]">본인확인</span>이 필요합니다.
+          <span className="text-brand">본인확인</span>이 필요합니다.
         </p>
       </section>
       <form onSubmit={handleSubmit(onSubmit)}>

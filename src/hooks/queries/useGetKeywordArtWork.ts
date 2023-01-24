@@ -9,7 +9,6 @@ export default function useGetKeywordArtWork() {
     'useKeywordArtWork',
     async () => {
       const res = await instance('/members/customized-artworks?page=1&limit=5');
-      console.log(res);
       return res;
     },
     {

@@ -1,4 +1,4 @@
-import tw from 'tailwind-styled-components'
+import tw from 'tailwind-styled-components';
 
 interface Genre {
   id: string;
@@ -42,9 +42,7 @@ export default function GenreSelect({
             key={genreObject.id}
             id={genreObject.id}
             className={`${
-              genre === genreObject.name
-                ? 'border-[#F5535D]'
-                : 'border-[#CECECE]'
+              genre === genreObject.name ? 'border-brand' : 'border-[#CECECE]'
             } w rounded flex-col text-black leading-5 px-3 py-[11px] justify-center items-center border cursor-pointer text-14 `}
             onClick={() => onGenreClick(genreObject.name)}
           >
@@ -54,7 +52,7 @@ export default function GenreSelect({
         ))}
         <div
           className={`${
-            genre === '기타' ? 'border-[#F5535D]' : 'border-[#CECECE]'
+            genre === '기타' ? 'border-brand' : 'border-[#CECECE]'
           }  rounded flex text-black  px-3 py-[11px] justify-start items-center border cursor-pointer text-14 `}
           onClick={() => onGenreClick('기타')}
         >

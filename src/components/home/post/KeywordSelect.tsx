@@ -1,5 +1,5 @@
-import tw from 'tailwind-styled-components'
-import { KEYWORDLIST } from '@utils/keywordList'
+import tw from 'tailwind-styled-components';
+import { KEYWORDLIST } from '@utils/keywordList';
 
 interface SelectKeywordProps {
   keywordList: string[];
@@ -33,7 +33,7 @@ export default function KeywordSelect({
             id={keyword.id}
             className={`${
               keywordList?.includes(keyword.name)
-                ? 'border-[#F5535D] text-[#767676]'
+                ? 'border-brand text-[#767676]'
                 : 'border-[#CECECE] text-[#767676]'
             } w rounded-full flex justify-center items-center px-3 py-1 border mr-2 mb-2.5 cursor-pointer text-14 text-[#767676]`}
             onClick={() => onKeywordClick(keyword.name)}

@@ -1,31 +1,31 @@
 ## 설치 및 설정
 
-프로젝트 환경 : nextjs12, tailwindcss, yarn-berry  
-
+프로젝트 환경 : nextjs12, tailwindcss, yarn-berry
 
 현재 프로젝트에서 storybook 적용하기
+
 ```bash
 npx storybook init
 
-```  
-
+```
 
 중간에 eslint에 추가할거냐고 물어보면 yes 누르고 진행합니다.
+
 ```bash
 √ Do you want to run the 'eslintPlugin' migration on your project? ... yes
 ✅ Adding dependencies: eslint-plugin-storybook
 
-```  
+```
 
+storybook에서도 tailwindcss가 반영되러면 postcss를 사용할 수 있게 다음 dependency를 추가해야합니다.
 
-storybook에서도 tailwindcss가 반영되러면 postcss를 사용할 수 있게 다음 dependency를 추가해야합니다.  
 ```bash
 yarn add -D @storybook/addon-postcss
 
-```  
-
+```
 
 storybook 서버 build시 webpack을 사용하는데 버전 조건을 지정해야 합니다
+
 ```bash
 // package.json
 
@@ -35,14 +35,12 @@ storybook 서버 build시 webpack을 사용하는데 버전 조건을 지정해�
 
 ```
 
-
 프로젝트에 스토리북을 초기화합니다. ( webpack 5를 사용해서 build)
 
 ```bash
 npx sb init --builder webpack5
 
 ```
-
 
 .storybook에 main.js와 preview.js 각각에서 설정을 추가로 해주어야 합니다.
 
@@ -124,14 +122,12 @@ export const parameters = {
 };
 ```
 
-
 모든 설정이 끝난 후에 storybook을 실행합니다.
 
 ```bash
 yarn storybook
 
 ```
-
 
 ## story 등록하기
 
@@ -151,12 +147,12 @@ export interface ButtonProps {
 
 const FilledButton = tw.button<ButtonProps>`
 ${({ disabled }) => disabled && 'opacity-50 cursor-not-allowed'}
-w-full transition h-[52px] text-sm rounded-[4px] hover:opacity-90 border border-transparent hover:[#F5535D]-2 bg-[#F5535D] px-0 text-white leading-3 font-normal shadow-xl shadow-gray
+w-full transition h-[52px] text-sm rounded-[4px] hover:opacity-90 border border-transparent hover:brand-2 bg-brand px-0 text-white leading-3 font-normal shadow-xl shadow-gray
 `;
 
 const OutlinedButton = tw.button<ButtonProps>`
 ${({ disabled }) => disabled && 'opacity-50 cursor-not-allowed'}
-w-full transition h-[52px] text-sm rounded-[4px] border border-[#F5535D] hover:[#F5535D]-2 bg-white px-0 text-[#F5535D] leading-3 font-normal
+w-full transition h-[52px] text-sm rounded-[4px] border border-brand hover:brand-2 bg-white px-0 text-brand leading-3 font-normal
 `;
 
 export default function Button({
@@ -178,8 +174,6 @@ export default function Button({
 }
 
 ```
-
-
 
 [컴포넌트이름].stories.tsx와 같이 스토리 파일을 만듭니다.
 
@@ -245,16 +239,12 @@ DisabledOutlined.args = {
 };
 ```
 
-
-
 storybook을 실행합니다.
 
 ```bash
 yarn storybook
 
 ```
-
-
 
 좌측의 Template 패널과 아래 Control 패널을 사용하여 UI를 변경할 수 있습니다.
 ![image](https://user-images.githubusercontent.com/92621861/210474043-3ff2166f-7291-4e0b-b8a8-62f3fadeb227.png)

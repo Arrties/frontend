@@ -59,7 +59,7 @@ export default function Begin() {
               </Content>
             </div>
             <div className="space-x-3 flex justify-center mt-6">
-              <div className="w-2 rounded-full aspect-square bg-[#F5535D]"></div>
+              <div className="w-2 rounded-full aspect-square bg-brand"></div>
               <div className="w-2 rounded-full aspect-square bg-[#D9D9D9]"></div>
               <div className="w-2 rounded-full aspect-square bg-[#D9D9D9]"></div>
             </div>
@@ -87,7 +87,7 @@ export default function Begin() {
             </div>
             <div className="space-x-3 flex justify-center mt-6">
               <div className="w-2 rounded-full aspect-square bg-[#D9D9D9]"></div>
-              <div className="w-2 rounded-full aspect-square bg-[#F5535D]"></div>
+              <div className="w-2 rounded-full aspect-square bg-brand"></div>
               <div className="w-2 rounded-full aspect-square bg-[#D9D9D9]"></div>
             </div>
           </SwiperSlide>
@@ -110,7 +110,7 @@ export default function Begin() {
             <div className="space-x-3 flex justify-center mt-6">
               <div className="w-2 rounded-full aspect-square bg-[#D9D9D9]"></div>
               <div className="w-2 rounded-full aspect-square bg-[#D9D9D9]"></div>
-              <div className="w-2 rounded-full aspect-square bg-[#F5535D]"></div>
+              <div className="w-2 rounded-full aspect-square bg-brand"></div>
             </div>
             <Button
               onClick={() => router.push('/auth/login')}

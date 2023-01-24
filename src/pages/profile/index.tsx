@@ -16,7 +16,7 @@ interface defaultProps {
 }
 
 const WelcomeBox = tw.div<defaultProps>`
-bg-[#F5535D] rounded-lg h-[90px] flex justify-between items-center px-4
+bg-brand rounded-lg h-[90px] flex justify-between items-center px-4
 `;
 
 interface ActivityList {
@@ -129,7 +129,7 @@ export default function Profile() {
             {userInfo?.image ? (
               <img
                 src={userInfo?.image}
-                className="rounded-full "
+                className="rounded-full"
                 alt="profile"
               />
             ) : (
@@ -160,7 +160,7 @@ export default function Profile() {
         {isUser && (
           <div
             onClick={handleRegister}
-            className="flex justify-between border-[1px] rounded border-[#F5535D] p-4 cursor-pointer mt-4"
+            className="flex justify-between border-[1px] rounded border-brand p-4 cursor-pointer mt-4"
           >
             <div className="flex">
               <Image
@@ -226,7 +226,7 @@ export default function Profile() {
           <div className="mt-6 text-center mb-12 flex justify-center">
             <button
               onClick={handleKeywords}
-              className="w-[100px] h-[36px] border-[1px] border-[#F5535D] rounded-[19px] text-xs text-[#F5535D] flex items-center justify-center"
+              className="w-[100px] h-[36px] border-[1px] border-brand rounded-[19px] text-xs text-brand flex items-center justify-center"
             >
               <div>
                 <Image
