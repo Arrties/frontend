@@ -21,7 +21,7 @@ module.exports = {
         24: '1.5rem',
       },
       colors: {
-        brand: '#F5535D',
+        brand: '#FC6554',
         font: {
           1: '#191919',
           2: '#767676',

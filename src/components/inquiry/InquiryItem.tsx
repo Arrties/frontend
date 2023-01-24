@@ -1,5 +1,5 @@
-import Image from 'next/image'
-import { Disclosure } from '@headlessui/react'
+import Image from 'next/image';
+import { Disclosure } from '@headlessui/react';
 
 interface InquiryItemForm {
   key: string;
@@ -55,7 +55,7 @@ export default function InquiryItem({ inquiry, handler }: InquiryItemForm) {
         <Disclosure.Panel className="text-gray-500 pt-5 text-14">
           <div className="w-[320px] bg-[#F8F8FA] py-4 px-2">
             <section className="flex mb-4">
-              <div className="w-6 h-6 bg-[#F5535D] rounded-full flex items-center justify-center mr-2">
+              <div className="w-6 h-6 bg-brand rounded-full flex items-center justify-center mr-2">
                 <Image
                   src="/svg/icons/icon_search_white.svg"
                   alt="search"
@@ -67,7 +67,7 @@ export default function InquiryItem({ inquiry, handler }: InquiryItemForm) {
             </section>
             {inquiry.answer && (
               <section className="flex">
-                <div className="w-6 h-6 bg-[#F5535D] rounded-full flex items-center justify-center mr-2">
+                <div className="w-6 h-6 bg-brand rounded-full flex items-center justify-center mr-2">
                   <Image
                     src="/svg/icons/icon_logo_brand.svg"
                     alt="logo"

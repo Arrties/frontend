@@ -1,10 +1,10 @@
-import kakao from '@public/svg/social/kakao_logo.svg'
-import naver from '@public/svg/social/naver_logo.svg'
-import Image from 'next/image'
-import Link from 'next/link'
-import tw from 'tailwind-styled-components'
-import { CONFIG } from '@config'
-import { randomString } from '@utils/randomString'
+import kakao from '@public/svg/social/kakao_logo.svg';
+import naver from '@public/svg/social/naver_logo.svg';
+import Image from 'next/image';
+import Link from 'next/link';
+import tw from 'tailwind-styled-components';
+import { CONFIG } from '@config';
+import { randomString } from '@utils/randomString';
 
 export interface SocialLoginButtonProps {
   kind: 'kakao' | 'naver';
@@ -14,11 +14,11 @@ export interface SocialLoginButtonProps {
 const STATESTRING = randomString(20);
 
 const KaKaoButton = tw.div<SocialLoginButtonProps>`
-w-full h-[52px] flex items-center justify-center text-sm rounded-[4px] hover:opacity-90 border border-transparent hover:[#F5535D]-2 bg-[#F9E000] px-0 text-white leading-3 font-normal
+w-full h-[52px] flex items-center justify-center text-sm rounded-[4px] hover:opacity-90 border border-transparent hover:brand-2 bg-[#F9E000] px-0 text-white leading-3 font-normal
 `;
 
 const NaverButton = tw.div<SocialLoginButtonProps>`
-w-full h-[52px] flex items-center justify-center text-sm rounded-[4px] hover:opacity-90 border border-transparent text-[#38B1E1E] hover:[#F5535D]-2 bg-[#02C75A] px-0 text-white leading-3 font-normal
+w-full h-[52px] flex items-center justify-center text-sm rounded-[4px] hover:opacity-90 border border-transparent text-[#38B1E1E] hover:brand-2 bg-[#02C75A] px-0 text-white leading-3 font-normal
 `;
 
 export default function SocialLoginButton({

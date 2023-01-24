@@ -1,11 +1,11 @@
-import ErrorMessage from '@components/common/ErrorMessage'
-import Layout from '@components/common/Layout'
-import Image from 'next/image'
-import { useAppSelector } from '@features/hooks'
-import { useRouter } from 'next/router'
+import ErrorMessage from '@components/common/ErrorMessage';
+import Layout from '@components/common/Layout';
+import Image from 'next/image';
+import { useAppSelector } from '@features/hooks';
+import { useRouter } from 'next/router';
 
-import Button from '../../components/common/Button'
-import useUserJoin from '../../hooks/queries/useUserJoin'
+import Button from '../../components/common/Button';
+import useUserJoin from '../../hooks/queries/useUserJoin';
 
 interface Member extends User {
   keywords: string[];
@@ -38,7 +38,7 @@ function Join03() {
         />
       )}
       <div className="text-18 ">
-        <span className="text-[#F5535D] font-bold ">취향 분석</span>을 통해
+        <span className="text-brand font-bold ">취향 분석</span>을 통해
         <br />
         나에게 <span className="font-bold">딱 맞는</span> <br />
         작품을 추천 받아보세요
@@ -57,7 +57,7 @@ function Join03() {
         onClick={handleNextButton}
       />
       <button
-        className="w-full transition text-xs underline hover:[#F5535D]-2 text-[#999999]  font-normal absolute bottom-[60px] inset-x-0 m-auto "
+        className="w-full transition text-xs underline hover:brand-2 text-[#999999]  font-normal absolute bottom-[60px] inset-x-0 m-auto "
         onClick={handleSkipButton}
       >
         다음에 할래요

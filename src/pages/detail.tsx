@@ -1,7 +1,7 @@
-import Layout from '@components/common/Layout'
-import Image from 'next/image'
-import React from 'react'
-import Button from 'stories/Button'
+import Layout from '@components/common/Layout';
+import Image from 'next/image';
+import React from 'react';
+import Button from 'stories/Button';
 
 export default function Detail() {
   const handleChat = () => {
@@ -29,10 +29,10 @@ export default function Detail() {
               <div className="mt-1">홍익대학교 예술학과</div>
             </div>
             <p className="absolute right-5 top-5">
-              <span className="text-[#F5535D] bg-[#F8F8FA] text-12 py-0.5 px-1 font-bold">
+              <span className="text-brand bg-[#F8F8FA] text-12 py-0.5 px-1 font-bold">
                 마감까지
               </span>
-              <span className="text-12 text-[#FFFFFF] bg-[#F5535D] py-0.5 px-1 font-bold">
+              <span className="text-12 text-[#FFFFFF] bg-brand py-0.5 px-1 font-bold">
                 D-3
               </span>
             </p>
@@ -81,7 +81,7 @@ export default function Detail() {
           </article>
           <article className="py-5 border-b">
             <div className="text-18 font-bold">작품 설명</div>
-            <div className="text-[#F5535D] text-12 py-2">
+            <div className="text-brand text-12 py-2">
               세부 사항 등 궁금한 점은 채팅으로 작가와 소통 할 수 있어요.
             </div>
             <div className="py-5">

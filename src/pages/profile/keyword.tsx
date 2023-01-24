@@ -13,7 +13,7 @@ export default function Keyword() {
   }, [userInfo]);
 
   const handleSubmit = async (e: any) => {
-    let response;
+    let response: any;
     if (e.target.id === 'skip') {
       response = await authApi.patchKeyword(userInfo?.keywords || []);
     } else {

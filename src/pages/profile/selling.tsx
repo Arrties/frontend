@@ -77,7 +77,7 @@ export default function Selling() {
                   <span className="text-10 text-[#FFF] bg-[#767676] px-1 py-0.5 rounded">
                     배송완료
                   </span>
-                  <span className="text-14 text-[#F5535D] font-bold ml-1">
+                  <span className="text-14 text-brand font-bold ml-1">
                     입찰없음
                   </span>
                 </p>

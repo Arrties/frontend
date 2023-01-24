@@ -1,11 +1,11 @@
-import Modal from '@components/common/Modal'
-import Navigate from '@components/common/Navigate'
-import tw from 'tailwind-styled-components'
-import { useState } from 'react'
-import { useRouter } from 'next/router'
-import { KEYWORDLIST } from '@utils/keywordList'
+import Modal from '@components/common/Modal';
+import Navigate from '@components/common/Navigate';
+import tw from 'tailwind-styled-components';
+import { useState } from 'react';
+import { useRouter } from 'next/router';
+import { KEYWORDLIST } from '@utils/keywordList';
 
-import Button from '../common/Button'
+import Button from '../common/Button';
 
 interface SelectKeywordProps {
   handleSubmit: (e: any) => void;
@@ -60,7 +60,7 @@ export default function SelectKeyword({
             id={keyword.id}
             className={`${
               keywordList?.includes(keyword.name)
-                ? 'border-[#F5535D] text-[#767676]'
+                ? 'border-brand text-[#767676]'
                 : 'border-[#CECECE] text-[#767676]'
             } w rounded-full flex justify-center items-center px-3 py-1 border mr-2 mb-2.5 cursor-pointer text-14 text-[#767676]`}
             onClick={() => onKeywordClick(keyword.name)}
@@ -78,7 +78,7 @@ export default function SelectKeyword({
         className="absolute bottom-[100px] inset-x-0 m-auto w-[327px]"
       />
       <button
-        className="w-full transition text-xs underline  hover:[#F5535D]-2 px-0 text-[#999999] font-normal absolute bottom-[60px] inset-x-0 m-auto"
+        className="w-full transition text-xs underline  hover:brand-2 px-0 text-[#999999] font-normal absolute bottom-[60px] inset-x-0 m-auto"
         onClick={handleSubmit}
       >
         다음에 할래요

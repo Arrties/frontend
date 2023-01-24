@@ -1,15 +1,15 @@
-import authApi from '@apis/auth/authApi'
-import Button from '@components/common/Button'
-import DoubleCheckButton from '@components/common/DoubleCheckButton'
-import ErrorMessage from '@components/common/ErrorMessage'
-import Input from '@components/common/Input'
-import Layout from '@components/common/Layout'
-import Navigate from '@components/common/Navigate'
-import React, { useEffect, useState } from 'react'
-import { useAppDispatch } from '@features/hooks'
-import { setUserInfo } from '@features/user/userSlice'
-import { useRouter } from 'next/router'
-import { useForm } from 'react-hook-form'
+import authApi from '@apis/auth/authApi';
+import Button from '@components/common/Button';
+import DoubleCheckButton from '@components/common/DoubleCheckButton';
+import ErrorMessage from '@components/common/ErrorMessage';
+import Input from '@components/common/Input';
+import Layout from '@components/common/Layout';
+import Navigate from '@components/common/Navigate';
+import React, { useEffect, useState } from 'react';
+import { useAppDispatch } from '@features/hooks';
+import { setUserInfo } from '@features/user/userSlice';
+import { useRouter } from 'next/router';
+import { useForm } from 'react-hook-form';
 
 interface JoinForm {
   userId: string;
@@ -177,7 +177,7 @@ export default function Join02() {
       />
       <section className="mt-8">
         <p className="mb-[12px]">
-          <span className="text-[#F5535D]">회원정보</span>를 입력해주세요
+          <span className="text-brand">회원정보</span>를 입력해주세요
         </p>
       </section>
       <form autoComplete="off" onSubmit={handleSubmit(onSubmit)}>
