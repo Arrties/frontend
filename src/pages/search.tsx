@@ -1,12 +1,12 @@
-import Input from '@components/common/Input'
-import Layout from '@components/common/Layout'
-import back from '@public/svg/icons/icon_back.svg'
-import close from '@public/svg/icons/icon_grayClose.svg'
-import Image from 'next/image'
-import tw from 'tailwind-styled-components'
-import { useRouter } from 'next/router'
-import { useState } from 'react'
-import { useForm } from 'react-hook-form'
+import Input from '@components/common/Input';
+import Layout from '@components/common/Layout';
+import back from '@public/svg/icons/icon_back.svg';
+import close from '@public/svg/icons/icon_grayClose.svg';
+import Image from 'next/image';
+import tw from 'tailwind-styled-components';
+import { useRouter } from 'next/router';
+import { useState } from 'react';
+import { useForm } from 'react-hook-form';
 
 interface DefaultProps {
   [key: string]: any;
@@ -135,7 +135,7 @@ export default function Search() {
         </div>
         <form className="grow-[5]" onSubmit={handleSubmit(onSubmit)}>
           <Input
-            className="h-[42px] bg-[#F1F1F5] border-none"
+            className="h-[42px] border-none bg-[#F1F1F5]"
             type="text"
             placeholder="검색어를 입력해주세요"
             register={register('word')}
@@ -147,7 +147,7 @@ export default function Search() {
           <span className="text-base font-semibold">최근 검색어</span>
           {!!recentKeywordList.length && (
             <span
-              className="text-xs leading-6 text-[#999999] cursor-pointer"
+              className="cursor-pointer text-xs leading-6 text-[#999999]"
               onClick={handleDeleteAll}
             >
               모두 지우기
@@ -155,7 +155,7 @@ export default function Search() {
           )}
         </div>
         <div className="mt-[15px]">
-          <ul className="flex m-auto flex-wrap">
+          <ul className="m-auto flex flex-wrap">
             {recentKeywordList.length ? (
               recentKeywordList.map((recentKeyword: RecentKeywordForm) => (
                 <RecentKeywordBox
@@ -164,7 +164,7 @@ export default function Search() {
                   onClick={handleRecentKeyword}
                 >
                   <span>{recentKeyword.word}</span>
-                  <span className="flex align-middle ml-2">
+                  <span className="ml-2 flex align-middle">
                     <Image
                       src={close}
                       alt="close"
@@ -183,14 +183,14 @@ export default function Search() {
         </div>
       </section>
       <section>
-        <div className="flex justify-between mt-6 flex-col">
+        <div className="mt-6 flex flex-col justify-between">
           <div className="text-base font-semibold ">취향 분석 맞춤 키워드</div>
-          <div className="flex flex-wrap mt-2">
+          <div className="mt-2 flex flex-wrap">
             {DUMP_RECOMMEND_KEYWORD.map((keyword) => (
               <div
                 key={keyword.id}
                 id={keyword.word}
-                className="py-1 px-3 border  rounded-[19px] mr-3 my-[6px] cursor-pointer text-14 text-[#767676] font-bold"
+                className="my-[6px] mr-3 cursor-pointer  rounded-[19px] border py-1 px-3 text-14 font-bold text-[#767676]"
                 onClick={handleRecommendKeyword}
               >
                 {keyword.word}

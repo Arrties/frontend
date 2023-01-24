@@ -50,7 +50,7 @@ export default function Begin() {
               />
             </ImageWrapper>
             <div className="pl-6">
-              <Title className="text-20 font-bold mt-16">
+              <Title className="mt-16 text-20 font-bold">
                 버려지는 작품을 판매해보세요.
               </Title>
               <Content>
@@ -58,10 +58,10 @@ export default function Begin() {
                 <Line>버려지고 방치되는게 아깝지 않으신가요?</Line>
               </Content>
             </div>
-            <div className="space-x-3 flex justify-center mt-6">
-              <div className="w-2 rounded-full aspect-square bg-brand"></div>
-              <div className="w-2 rounded-full aspect-square bg-[#D9D9D9]"></div>
-              <div className="w-2 rounded-full aspect-square bg-[#D9D9D9]"></div>
+            <div className="mt-6 flex justify-center space-x-3">
+              <div className="aspect-square w-2 rounded-full bg-brand"></div>
+              <div className="aspect-square w-2 rounded-full bg-[#D9D9D9]"></div>
+              <div className="aspect-square w-2 rounded-full bg-[#D9D9D9]"></div>
             </div>
           </SwiperSlide>
           <SwiperSlide>
@@ -85,10 +85,10 @@ export default function Begin() {
                 <Line>다양한 작품을 확인할 수 있습니다. </Line>
               </Content>
             </div>
-            <div className="space-x-3 flex justify-center mt-6">
-              <div className="w-2 rounded-full aspect-square bg-[#D9D9D9]"></div>
-              <div className="w-2 rounded-full aspect-square bg-brand"></div>
-              <div className="w-2 rounded-full aspect-square bg-[#D9D9D9]"></div>
+            <div className="mt-6 flex justify-center space-x-3">
+              <div className="aspect-square w-2 rounded-full bg-[#D9D9D9]"></div>
+              <div className="aspect-square w-2 rounded-full bg-brand"></div>
+              <div className="aspect-square w-2 rounded-full bg-[#D9D9D9]"></div>
             </div>
           </SwiperSlide>
           <SwiperSlide>
@@ -107,10 +107,10 @@ export default function Begin() {
                 <Line>현대미술의 장점! 채팅으로 컬렉터분들과 소통해요.</Line>
               </Content>
             </div>
-            <div className="space-x-3 flex justify-center mt-6">
-              <div className="w-2 rounded-full aspect-square bg-[#D9D9D9]"></div>
-              <div className="w-2 rounded-full aspect-square bg-[#D9D9D9]"></div>
-              <div className="w-2 rounded-full aspect-square bg-brand"></div>
+            <div className="mt-6 flex justify-center space-x-3">
+              <div className="aspect-square w-2 rounded-full bg-[#D9D9D9]"></div>
+              <div className="aspect-square w-2 rounded-full bg-[#D9D9D9]"></div>
+              <div className="aspect-square w-2 rounded-full bg-brand"></div>
             </div>
             <Button
               onClick={() => router.push('/auth/login')}
