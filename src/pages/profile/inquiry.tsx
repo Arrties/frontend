@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 import Button from '@components/common/Button'
 import Layout from '@components/common/Layout'
 import Navigate from '@components/common/Navigate'
@@ -8,6 +9,20 @@ import { useRouter } from 'next/router'
 import { Tab } from '@headlessui/react'
 import { useForm } from 'react-hook-form'
 import { useEffect, useState } from 'react'
+=======
+import Button from '@components/common/Button';
+import Layout from '@components/common/Layout';
+import Navigate from '@components/common/Navigate';
+import FileItem from '@components/inquiry/FileItem';
+import InquiryItem from '@components/inquiry/InquiryItem';
+import Image from 'next/image';
+import { useRouter } from 'next/router';
+import { Tab } from '@headlessui/react';
+import { useForm } from 'react-hook-form';
+import { useEffect, useState } from 'react';
+import instance from '@apis/_axios/instance';
+import useGetInquiry from '@hooks/queries/useGetInquiry';
+>>>>>>> Stashed changes
 
 interface InquiryForm {
   title: string;
@@ -15,7 +30,7 @@ interface InquiryForm {
   image: string;
 }
 
-interface DumpInquiryListsForm {
+interface InquiryForm {
   date: string;
   time: string;
   title: string;
@@ -25,34 +40,7 @@ interface DumpInquiryListsForm {
   id: number;
 }
 
-interface FileForm {
-  file: any;
-  size: number;
-}
-
-const DUMP_INQUIRY_LISTS: DumpInquiryListsForm[] = [
-  {
-    date: '2023.01.05',
-    time: '18:40',
-    title: '[녹아내리는 고드름] 작품 관련 질문입니다.',
-    content: '얼마인가요?',
-    status: '대기중',
-    answer: '',
-    id: 1,
-  },
-  {
-    date: '2023.01.02',
-    time: '18:40',
-    title: '[녹아내리는 고드름] 작품 관련 질문입니다.',
-    content:
-      '안녕하세요. 다음 경매 시작일을 알고 싶습니다.안녕하세요다음 경매 시작일을 알고 싶습니다.안녕하세요. 다음 경매 시작일을 알고 싶습니다.안녕하세요. 다음 경매 시작일을 알고 싶습니다.',
-    status: '답변완료',
-    answer: '안녕하세요. 아띠즈입니다. 다음 경매는 1주 내로 진행될 예정입니다.',
-    id: 2,
-  },
-];
-
-const formatBytes = (bytes, decimals = 1) => {
+const formatBytes = (bytes: number, decimals = 1): string => {
   if (!bytes) return '0';
   const k = 1024;
   const dm = decimals < 0 ? 0 : decimals;
@@ -62,10 +50,9 @@ const formatBytes = (bytes, decimals = 1) => {
 };
 
 export default function Inquiry() {
-  const [inquiries, setInquiries] =
-    useState<DumpInquiryListsForm[]>(DUMP_INQUIRY_LISTS);
   const [fileLists, setFileLists] = useState<File[]>([]);
   const [fileSize, setFileSize] = useState<number>(0);
+  const { inquiryList, refetch: inqueryRefetch } = useGetInquiry();
 
   const router = useRouter();
   const handleLeftButton = () => {
@@ -84,11 +71,11 @@ export default function Inquiry() {
     setFileSize((prev) => prev - targetSize);
   };
 
-  const handleRemoveInquiry = (targetId: number): void => {
-    const newInquiries = inquiries.filter((inquiry) => {
-      return inquiry.id !== targetId;
-    });
-    setInquiries(newInquiries);
+  const handleRemoveInquiry = async (targetId: number) => {
+    const response = await instance.delete(`/members/ask/${targetId}`);
+    inqueryRefetch();
+
+    return;
   };
 
   const file = watch('image');
@@ -100,20 +87,23 @@ export default function Inquiry() {
         newFileList.push(i);
       }
       const sum = newFileList
-        ?.map((file) => file.size)
-        ?.reduce((a, b) => a + b, 0);
+        ?.map((file: File) => file.size)
+        ?.reduce((a: number, b: number) => a + b, 0);
       setFileSize((prev) => prev + sum);
       setFileLists((prev) => prev.concat(newFileList));
     }
   }, [file]);
 
   const onSubmit = async (form: InquiryForm) => {
-    // 문의 API
-    // const { title, content } = form;
-    // const formData = new FormData()
-    // formData.append('title', title)
-    // formData.append('content', content)
-    // formData.append('image', fileImages)
+    const { content, image, title } = form;
+    const formData = new FormData();
+    formData.append('title', title);
+    formData.append('content', content);
+    for (let i = 0; i < image.length; i++) {
+      formData.append('image', image[i]);
+    }
+    const response = await instance.post('/members/ask', formData);
+    inqueryRefetch();
   };
 
   return (
@@ -125,21 +115,21 @@ export default function Inquiry() {
       />
       <Tab.Group>
         <Tab.List>
-          <Tab className="w-1/2 h-[32px] font-bold text-16 ui-selected:border-b-[2px] border-[#191919] ui-selected:text-[#191919] ui-not-selected:border-[#EDEDED] ui-not-selected:border-b-[1px] ui-not-selected:text-[#999999] mb-[28px]">
+          <Tab className="mb-[28px] h-[32px] w-1/2 border-[#191919] text-16 font-bold ui-selected:border-b-[2px] ui-selected:text-[#191919] ui-not-selected:border-b-[1px] ui-not-selected:border-[#EDEDED] ui-not-selected:text-[#999999]">
             문의하기
           </Tab>
-          <Tab className="w-1/2 h-[32px] font-bold text-16 ui-selected:border-b-[2px] border-[#191919] ui-selected:text-[#191919] ui-not-selected:border-[#EDEDED] ui-not-selected:border-b-[1px] ui-not-selected:text-[#999999] ">
+          <Tab className="h-[32px] w-1/2 border-[#191919] text-16 font-bold ui-selected:border-b-[2px] ui-selected:text-[#191919] ui-not-selected:border-b-[1px] ui-not-selected:border-[#EDEDED] ui-not-selected:text-[#999999] ">
             문의내역확인
           </Tab>
         </Tab.List>
         <Tab.Panels>
           <Tab.Panel>
             <form autoComplete="off" onSubmit={handleSubmit(onSubmit)}>
-              <section className="flex flex-col mb-5">
-                <div className="flex justify-between mb-3">
+              <section className="mb-5 flex flex-col">
+                <div className="mb-3 flex justify-between">
                   <label
                     htmlFor="title"
-                    className="text-14 leading-8 font-bold"
+                    className="text-14 font-bold leading-8"
                   >
                     제목
                   </label>
@@ -159,17 +149,17 @@ export default function Inquiry() {
                   type="text"
                   maxLength={20}
                   placeholder="문의 제목을 입력해주세요."
-                  className="w-full h-[52px] placeholder-[#999999] text-[13px] rounded-[4px] border-[#D8D8D8] appearance-none"
+                  className="h-[52px] w-full appearance-none rounded-[4px] border-[#D8D8D8] text-[13px] placeholder-[#999999]"
                   {...register('title', {
                     required: true,
                   })}
                 />
               </section>
               <section>
-                <div className="flex justify-between mb-3">
+                <div className="mb-3 flex justify-between">
                   <label
                     htmlFor="content"
-                    className="text-14 leading-8 font-bold"
+                    className="text-14 font-bold leading-8"
                   >
                     문의 사항
                   </label>
@@ -188,17 +178,17 @@ export default function Inquiry() {
                   id="content"
                   maxLength={1000}
                   placeholder="정확한 상담을 위하여 자세한 문의사항을 작성 부탁드립니다."
-                  className="w-full h-[150px] placeholder:absolute placeholder:text-14 overflow-hidden resize-none placeholder-[#999999] text-[13px] rounded-[4px] border-[#D8D8D8] "
+                  className="h-[150px] w-full resize-none overflow-hidden rounded-[4px] border-[#D8D8D8] text-[13px] placeholder-[#999999] placeholder:absolute placeholder:text-14 "
                   {...register('content', {
                     required: true,
                   })}
-                ></textarea>
+                />
               </section>
               <section className="mt-4">
                 <div>
                   <div className="flex">
                     <label htmlFor="fileImage">
-                      <div className="w-[60px] h-[60px] border-[1px] border-[#DBDBDB] rounded flex flex-col justify-center items-center mr-0">
+                      <div className="mr-0 flex h-[60px] w-[60px] flex-col items-center justify-center rounded border-[1px] border-[#DBDBDB]">
                         <Image
                           src="/svg/icons/icon_camera_black.svg"
                           alt="camera"
@@ -252,36 +242,36 @@ export default function Inquiry() {
                   {...register('image')}
                 />
               </section>
-              <section className="w-full flex justify-between mt-[120px]">
+              <section className="mt-[75px] flex w-full justify-between">
                 <Button
                   kind="outlined"
                   text="취소"
-                  className="w-[150px] h-[48px]"
+                  className="h-[48px] w-[150px]"
                 />
                 <Button
                   type="submit"
                   text="문의접수"
-                  className="w-[150px] h-[48px]"
+                  className="h-[48px] w-[150px]"
                 />
               </section>
             </form>
           </Tab.Panel>
           <Tab.Panel>
-            {inquiries ? (
+            {inquiryList?.length ? (
               <div>
-                {inquiries.map((inquiry, idx) => (
+                {inquiryList?.map((inquiry, idx) => (
                   <InquiryItem
                     key={'' + idx}
                     inquiry={inquiry}
                     handler={handleRemoveInquiry}
                   />
                 ))}
-                <div className="mt-[14px] text-[#999999] text-14 text-center">
+                <div className="mt-[14px] text-center text-14 text-[#999999]">
                   최근 1년간 문의내역만 조회 가능합니다.
                 </div>
               </div>
             ) : (
-              <div className="mt-[200px] m-auto flex flex-col justify-center items-center text-14 text-[#999999]">
+              <div className="m-auto mt-[200px] flex flex-col items-center justify-center text-14 text-[#999999]">
                 1:1문의 내역이 존재하지 않습니다.
               </div>
             )}
