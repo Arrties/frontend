@@ -13,7 +13,7 @@ interface LayoutProps {
 
 export default function Layout({ children }: LayoutProps) {
   return (
-    <LayoutBox className="relative h-[calc(100vh-80px)] w-full overflow-scroll px-6 pt-[45px] pb-20">
+    <LayoutBox className="relative h-[calc(100vh-80px)] w-full overflow-scroll px-6 py-[45px]">
       {children}
     </LayoutBox>
   );

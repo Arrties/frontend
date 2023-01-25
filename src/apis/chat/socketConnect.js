@@ -12,7 +12,7 @@ const createClient = (endpoint) => {
   if (!access) return;
   const headers = { Authorization: access };
   const client = new StompJs.Client({
-    brokerURL: `ws://44.193.163.114:8080${endpoint}`,
+    brokerURL: `wss://atties.shop${endpoint}`,
     connectHeaders: headers,
     onStompError: (frame) => {
       console.log(frame);
@@ -27,7 +27,6 @@ const createClient = (endpoint) => {
     heartbeatIncoming: 4000,
     heartbeatOutgoing: 4000,
   });
-
   client.webSocketFactory = () => {
     const socketIn = new SockJS(
       `${process.env.NEXT_PUBLIC_API_BASE_URL}${endpoint}`,
