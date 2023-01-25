@@ -1,15 +1,15 @@
+import instance from '@apis/_axios/instance';
 import Button from '@components/common/Button';
 import Layout from '@components/common/Layout';
 import Navigate from '@components/common/Navigate';
 import FileItem from '@components/inquiry/FileItem';
 import InquiryItem from '@components/inquiry/InquiryItem';
+import useGetInquiry from '@hooks/queries/useGetInquiry';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { Tab } from '@headlessui/react';
 import { useForm } from 'react-hook-form';
 import { useEffect, useState } from 'react';
-import instance from '@apis/_axios/instance';
-import useGetInquiry from '@hooks/queries/useGetInquiry';
 import { formatBytes } from '@utils/formatBytes';
 
 interface InquiryForm {
