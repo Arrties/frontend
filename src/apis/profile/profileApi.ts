@@ -30,7 +30,7 @@ export class ProfileApi {
     const { data } = await instance.get('/members/ask');
     return data;
   }
-  async patchRole(): Promise<RoleForm> {
+  async patchRole(): Promise<any> {
     const { data } = await instance.patch('/members/roles');
     return data;
   }
