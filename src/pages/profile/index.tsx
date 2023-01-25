@@ -112,7 +112,7 @@ export default function Profile() {
     <>
       <Layout>
         <Navigate
-          left_message=" "
+          left_message={false}
           message="프로필"
           right_message={
             <Image
