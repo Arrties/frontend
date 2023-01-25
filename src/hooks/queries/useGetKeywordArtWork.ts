@@ -1,28 +1,15 @@
-import instance from '@apis/_axios/instance';
+import homeApi from '@apis/home/homeApi';
 import { useQuery } from 'react-query';
-import { useState } from 'react';
+
+interface KeywordArtwork {
+  id: string;
+  image: string;
+  title: string;
+  education: string;
+}
 
 export default function useGetKeywordArtWork() {
-  const [keywordArtWork, setKeywordArtWork] = useState<Member[]>();
-
-  const query = useQuery(
-    'useKeywordArtWork',
-    async () => {
-      const response = await instance(
-        '/members/customized-artworks?page=1&limit=5',
-      );
-      return response;
-    },
-    {
-      retry: 0,
-      refetchOnWindowFocus: false,
-      onSuccess: (response: any) => {
-        setKeywordArtWork(response?.data);
-      },
-      onError: (error: any) => {
-        console.log(error);
-      },
-    },
+  return useQuery<KeywordArtwork[], Error>('useKeywordArtWork', () =>
+    homeApi.getKeywordArtWork(),
   );
-  return { ...query, keywordArtWork };
 }
