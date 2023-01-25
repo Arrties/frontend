@@ -1,11 +1,12 @@
 import * as StompJs from '@stomp/stompjs';
 import Chatroom from '@components/chat/ChatRoom';
 import Layout from '@components/common/Layout';
-import Tab from '@components/common/Tab';
 import Image from 'next/image';
 import React, { useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/router';
 import { createClient } from '@apis/chat/socketConnect';
+import Tab from '@components/common/Tab';
+import useGetChatRoom from '@hooks/queries/chat/useGetChatRoom';
 
 interface ChatRoomListForm {
   id: string;
@@ -16,39 +17,10 @@ interface ChatRoomListForm {
   notifyCnt: number;
 }
 
-const DUMP_CHAT_ROOM_LIST: ChatRoomListForm[] = [
-  {
-    id: '1',
-    profileImage: '/svg/icons/icon_basic_profile.svg',
-    name: '온주',
-    time: '오전 10:33',
-    message: '작품에 대해 설명 드릴게요.',
-    notifyCnt: 0,
-  },
-  {
-    id: '2',
-    profileImage: '/svg/icons/icon_basic_profile.svg',
-    name: '온주',
-    time: '오전 10:33',
-    message: '작품에 대해 설명 드릴게요.',
-    notifyCnt: 4,
-  },
-  {
-    id: '3',
-    profileImage: '/svg/icons/icon_basic_profile.svg',
-    name: '온주',
-    time: '오전 10:33',
-    message: '작품에 대해 설명 드릴게요.',
-    notifyCnt: 6,
-  },
-];
-
 export default function Chat() {
-  const [chatRoomList, setChatRoomList] =
-    useState<ChatRoomListForm[]>(DUMP_CHAT_ROOM_LIST);
-
-  const client: any = useRef({}) as React.MutableRefObject<StompJs.Client>;
   const router = useRouter();
+  const client: any = useRef({}) as React.MutableRefObject<StompJs.Client>;
+  const { data: chatRoomList } = useGetChatRoom();
 
   const connect = () => {
     client.current = createClient('/ws-connection');
@@ -65,10 +37,6 @@ export default function Chat() {
   const disconnect = () => {
     client.current.deactivate();
   };
-
-  useEffect(() => {
-    // 채팅방 GET API
-  }, []);
 
   return (
     <>
@@ -91,7 +59,7 @@ export default function Chat() {
             />
           </section>
         )}
-      </Layout>{' '}
+      </Layout>
       <Tab />
     </>
   );
