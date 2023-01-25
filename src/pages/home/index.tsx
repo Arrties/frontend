@@ -225,19 +225,19 @@ export default function Home() {
             )}
           </Swiper>
         </section>
-        {!isUser && (
-          <Image
-            src="/svg/icons/icon_registration.svg"
-            alt="register"
-            width={80}
-            height={0}
-            onClick={() => {
-              router.push('/home/post');
-            }}
-            className="sticky bottom-[10px] z-50 m-auto mr-0 h-[72px] w-[72px] cursor-pointer"
-          />
-        )}{' '}
       </Layout>
+      {!isUser && (
+        <Image
+          src="/svg/icons/icon_registration.svg"
+          alt="register"
+          width={80}
+          height={0}
+          onClick={() => {
+            router.push('/home/post');
+          }}
+          className="sticky bottom-24 right-6 z-50 m-auto mr-0 h-[72px] w-[72px] cursor-pointer"
+        />
+      )}
       <Tab />
     </>
   );
