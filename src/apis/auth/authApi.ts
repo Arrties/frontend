@@ -1,5 +1,5 @@
-import instance from '@apis/_axios/instance'
-import { deleteToken, getToken, Token } from '@utils/localStorage/token'
+import instance from '@apis/_axios/instance';
+import { Token } from '@utils/localStorage/token';
 
 export class AuthApi {
   async getMemberProfile(): Promise<Member> {
