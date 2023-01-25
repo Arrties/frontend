@@ -52,7 +52,6 @@ export default function Edit() {
   }, [nickname]);
 
   useEffect(() => {
-    console.log(profile);
     if (!profile) return;
     setUserInfo(
       (prev) =>
@@ -155,6 +154,7 @@ export default function Edit() {
   };
 
   if (isLoading) return <Loader />;
+
   return (
     <Layout>
       <Navigate
@@ -172,12 +172,28 @@ export default function Edit() {
       />
       <label className="flex h-[150px] justify-center" htmlFor="image">
         {userInfo?.image ? (
-          <div className=" relative flex h-[99px] w-[99px] cursor-pointer items-center justify-center rounded-full border-2 border-[#999999] bg-[#FFFFFF]">
-            <img
+          <div className="relative flex h-[99px] w-[99px] cursor-pointer items-center justify-center rounded-full bg-[#FFFFFF]            ">
+            <Image
               src={userInfo?.image}
-              width="60"
-              height="0"
-              className="h-[99px] w-[99px] rounded-full"
+              className="rounded-full object-cover"
+              fill
+              alt="profile"
+            />
+            <div className="absolute right-0 bottom-0 flex h-[26px] w-[26px] items-center justify-center rounded-full bg-[#575757]">
+              <Image
+                src="/svg/icons/icon_camera.svg"
+                width="15"
+                height="0"
+                alt="image"
+              />
+            </div>
+          </div>
+        ) : data?.image ? (
+          <div className="relative flex h-[99px] w-[99px] cursor-pointer items-center justify-center rounded-full bg-[#FFFFFF]            ">
+            <Image
+              src={data?.image}
+              className="rounded-full object-cover"
+              fill
               alt="profile"
             />
             <div className="absolute right-0 bottom-0 flex h-[26px] w-[26px] items-center justify-center rounded-full bg-[#575757]">
@@ -317,7 +333,7 @@ export default function Edit() {
                 {...register('instagram')}
                 id="instagram"
                 defaultValue={userInfo?.instagram}
-                className="h-[30px] w-[calc(100%-32px)] indent-1 text-12 placeholder:text-[#999] "
+                className="h-[30px] w-[calc(100%-32px)] indent-1 text-12 placeholder:text-[#999]"
               />
             </div>
             <div className="flex items-center">
