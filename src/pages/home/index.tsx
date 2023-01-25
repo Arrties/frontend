@@ -1,21 +1,21 @@
-import 'swiper/css'
-import 'swiper/css/pagination'
+import 'swiper/css';
+import 'swiper/css/pagination';
 
-import AuctionNavigate from '@components/auction/AuctionNavigate'
-import Layout from '@components/common/Layout'
-import Tab from '@components/common/Tab'
-import AuctionItem from '@components/home/AuctionItem'
-import Calendar from '@components/home/Calendar'
-import ExhibitionItem from '@components/home/ExhibitionItem'
-import ScheduleItem from '@components/home/ScheduleItem'
-import useGetKeywordArtWork from '@hooks/queries/useGetKeywordArtWork'
-import Image from 'next/image'
-import React from 'react'
-import { useRouter } from 'next/router'
-import { Autoplay, Navigation, Scrollbar } from 'swiper'
-import { Swiper, SwiperSlide } from 'swiper/react'
-import { isUser } from '@utils/isUser'
-import { Pagination } from 'swiper'
+import AuctionNavigate from '@components/auction/AuctionNavigate';
+import Layout from '@components/common/Layout';
+import Tab from '@components/common/Tab';
+import AuctionItem from '@components/home/AuctionItem';
+import Calendar from '@components/home/Calendar';
+import ExhibitionItem from '@components/home/ExhibitionItem';
+import ScheduleItem from '@components/home/ScheduleItem';
+import useGetKeywordArtWork from '@hooks/queries/useGetKeywordArtWork';
+import Image from 'next/image';
+import React from 'react';
+import { useRouter } from 'next/router';
+import { Autoplay, Navigation, Scrollbar } from 'swiper';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { isUser } from '@utils/isUser';
+import { Pagination } from 'swiper';
 
 const DUMP_KEYWORD_LISTS = ['사진', '소묘', '파스텔', '추상화'];
 const DUMP_ART_LISTS = [
@@ -107,7 +107,7 @@ const DUMP_AFTER_AUCTION_LIST = makeThreeEach(DUMP_PREV_AUCTION_LISTS);
 export default function Home() {
   const router = useRouter();
 
-  const { keywordArtWork } = useGetKeywordArtWork();
+  const { data } = useGetKeywordArtWork();
 
   return (
     <>
@@ -225,19 +225,19 @@ export default function Home() {
             )}
           </Swiper>
         </section>
+        {!isUser && (
+          <Image
+            src="/svg/icons/icon_registration.svg"
+            alt="register"
+            width={80}
+            height={0}
+            onClick={() => {
+              router.push('/home/post');
+            }}
+            className="sticky bottom-[10px] z-50 m-auto mr-0 h-[72px] w-[72px] cursor-pointer"
+          />
+        )}
       </Layout>
-      {!isUser && (
-        <Image
-          src="/svg/icons/icon_registration.svg"
-          alt="register"
-          width={80}
-          height={0}
-          onClick={() => {
-            router.push('/home/post');
-          }}
-          className="sticky bottom-24 right-6 z-50 m-auto mr-0 h-[72px] w-[72px] cursor-pointer"
-        />
-      )}
       <Tab />
     </>
   );

@@ -13,7 +13,6 @@ interface InquiryForm {
 export class ProfileApi {
   async getInquiry(): Promise<InquiryForm> {
     const { data } = await instance.get('/members/ask');
-    console.log(data);
     return data;
   }
 }
