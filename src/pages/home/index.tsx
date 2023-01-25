@@ -148,8 +148,8 @@ export default function Home() {
               <SwiperSlide key={idx}>
                 <ExhibitionItem
                   src={art.image}
-                  school={art.education}
-                  name={art.title}
+                  education={art.education}
+                  title={art.title}
                 />
               </SwiperSlide>
             ))}
