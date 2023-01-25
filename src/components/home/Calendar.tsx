@@ -34,12 +34,23 @@ export default function Calendar() {
               const current = today
                 .clone()
                 .week(week)
-                .startOf('isoWeek')
-                .add(data + index, 'day');
+                .startOf('week')
+                .add(data + index + 1, 'day');
               if (current.format('MM') !== today.format('MM')) {
                 return (
                   <td className="" key={index}>
                     <span></span>
+                  </td>
+                );
+              } else if (
+                moment().format('YYYYMMDD') === current.format('YYYYMMDD')
+              ) {
+                return (
+                  <td
+                    className="p-2 text-14 font-bold text-[#FC6554]"
+                    key={index}
+                  >
+                    <span>{current.format('D')}</span>
                   </td>
                 );
               } else if (
@@ -49,18 +60,7 @@ export default function Calendar() {
               ) {
                 return (
                   <td
-                    className="p-2 bg-[#FFC961] text-[#FFFFFF] text-14 font-bold"
-                    key={index}
-                  >
-                    <span>{current.format('D')}</span>
-                  </td>
-                );
-              } else if (
-                moment().format('YYYYMMDD') === current.format('YYYYMMDD')
-              ) {
-                return (
-                  <td
-                    className="p-2 text-[#FC6554] text-14 font-bold"
+                    className="bg-[#FFC961] p-2 text-14 font-bold text-[#FFFFFF]"
                     key={index}
                   >
                     <span>{current.format('D')}</span>
@@ -69,7 +69,7 @@ export default function Calendar() {
               } else {
                 return (
                   <td
-                    className="p-2 text-[#767676] text-14 font-bold"
+                    className="p-2 text-14 font-bold text-[#767676]"
                     key={index}
                   >
                     <span>{current.format('D')}</span>
@@ -85,7 +85,7 @@ export default function Calendar() {
 
   return (
     <>
-      <div className="mt-3 h-[50px] bg-[#F8F8FA] flex justify-evenly m-auto items-center">
+      <div className="m-auto mt-3 flex h-[50px] items-center justify-evenly bg-[#F8F8FA]">
         <button onClick={() => setDate(date.clone().subtract(1, 'month'))}>
           <Image
             src="/svg/icons/icon_back.svg"
@@ -94,7 +94,7 @@ export default function Calendar() {
             height={0}
           />
         </button>
-        <span className="text-15 text-[#333333] font-bold">
+        <span className="text-15 font-bold text-[#333333]">
           {date.format('MMMM YYYY')}
         </span>
         <button onClick={() => setDate(date.clone().add(1, 'month'))}>
@@ -106,9 +106,9 @@ export default function Calendar() {
           />
         </button>
       </div>
-      <table className="w-full text-center mt-3">
+      <table className="mt-3 w-full text-center">
         <tbody>
-          <tr className="text-[#FC6554] text-14 font-semibold">
+          <tr className="text-14 font-semibold text-[#FC6554]">
             {days.map((day, idx) => (
               <td key={idx}>{day}</td>
             ))}
