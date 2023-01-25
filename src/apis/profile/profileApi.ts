@@ -1,18 +1,6 @@
 import instance from '@apis/_axios/instance';
+import { InquiryForm, RoleForm } from './profileApi.type';
 
-interface InquiryForm {
-  date: string;
-  time: string;
-  title: string;
-  content: string;
-  status: string;
-  answer: string;
-  id: number;
-}
-
-interface RoleForm {
-  roles: string;
-}
 export class ProfileApi {
   async patchUserInfo(formData: any) {
     return await instance.patch(
