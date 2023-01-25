@@ -32,7 +32,7 @@ export default function Inquiry() {
   const [fileLists, setFileLists] = useState<File[]>([]);
   const [fileSize, setFileSize] = useState<number>(0);
   const [selectedIndex, setSelectedIndex] = useState<number>(0);
-  const { data } = useGetInquiry();
+  const { data, refetch: inquiryRefetch } = useGetInquiry();
 
   const router = useRouter();
   const handleLeftButton = () => {
