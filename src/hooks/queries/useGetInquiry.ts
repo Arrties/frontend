@@ -1,7 +1,7 @@
 import { useQuery } from 'react-query';
 import profileApi from '@apis/profile/profileApi';
 
-interface InquiryForm {
+interface Inquiry {
   date: string;
   time: string;
   title: string;
@@ -12,7 +12,5 @@ interface InquiryForm {
 }
 
 export default function useGetInquiry() {
-  return useQuery<InquiryForm, Error>('useInquiry', () =>
-    profileApi.getInquiry(),
-  );
+  return useQuery<any, Error>('useInquiry', () => profileApi.getInquiry());
 }
