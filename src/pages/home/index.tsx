@@ -75,7 +75,7 @@ const DUMP_PREV_AUCTION_LISTS: AuctionListForm[] = [
     id: 5,
   },
 ];
-const makeThreeEach = (auctionList) => {
+const makeThreeEach = (auctionList: AuctionListForm[]) => {
   const afterArr: AuctionListForm[][] = [];
   let arr: AuctionListForm[] = [];
   auctionList.forEach((it: any, idx: number) => {
