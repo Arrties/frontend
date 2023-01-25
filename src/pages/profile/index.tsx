@@ -105,7 +105,7 @@ export default function Profile() {
   const handleRegister = () => {
     router.push('/profile/register');
   };
-  const { isLoading, userInfo } = useGetProfile();
+  const { isLoading, data } = useGetProfile();
 
   if (isLoading) return <Loader />;
   return (
@@ -125,25 +125,21 @@ export default function Profile() {
       />
       <section>
         <WelcomeBox>
-          <div className="w-[54px] h-[54px] rounded-full bg-[#EDEDED] flex items-center">
-            {userInfo?.image ? (
-              <img
-                src={userInfo?.image}
-                className="rounded-full"
-                alt="profile"
-              />
+          <div className="flex h-[54px] w-[54px] items-center rounded-full bg-[#EDEDED]">
+            {data?.image ? (
+              <img src={data?.image} className="rounded-full" alt="profile" />
             ) : (
               <Image
                 src="/svg/icons/icon_user_gray.svg"
                 alt="user"
                 width="12"
                 height="0"
-                className="w-[27px] h-[27px] m-auto rounded-full bg-[#EDEDED]"
+                className="m-auto h-[27px] w-[27px] rounded-full bg-[#EDEDED]"
               />
             )}
           </div>
-          <div className="flex flex-col text-[#FFFFFF] mr-3">
-            <span className="font-medium">{userInfo?.nickname}님,</span>
+          <div className="mr-3 flex flex-col text-[#FFFFFF]">
+            <span className="font-medium">{data?.nickname}님,</span>
             <span className="text-xs">아띠즈에 오신 걸 환영합니다.</span>
           </div>
           <div className="mr-3">
@@ -160,7 +156,7 @@ export default function Profile() {
         {isUser && (
           <div
             onClick={handleRegister}
-            className="flex justify-between border-[1px] rounded border-brand p-4 cursor-pointer mt-4"
+            className="mt-4 flex cursor-pointer justify-between rounded border-[1px] border-brand p-4"
           >
             <div className="flex">
               <Image
@@ -169,7 +165,7 @@ export default function Profile() {
                 width="23"
                 height="0"
               />
-              <span className="text-14 leading-6 ml-3">
+              <span className="ml-3 text-14 leading-6">
                 작가 프로필 전환하기
               </span>
             </div>
@@ -194,10 +190,10 @@ export default function Profile() {
       </section>
       <DivisionBar className="my-5" />
       <section className="my-4">
-        <div className="my-4 relative">
-          <span className="text-14 text-[#191919] font-bold">
+        <div className="relative my-4">
+          <span className="text-14 font-bold text-[#191919]">
             취향 목록
-            {userInfo?.keywords?.length && (
+            {data?.keywords?.length && (
               <Image
                 src="/svg/icons/icon_pencil_black.svg"
                 alt="edit_keywords"
@@ -211,11 +207,11 @@ export default function Profile() {
             )}
           </span>
         </div>
-        {userInfo?.keywords?.length ? (
-          <div className="flex flex-wrap mb-8">
-            {userInfo?.keywords?.map((keyword: string) => (
+        {data?.keywords?.length ? (
+          <div className="mb-8 flex flex-wrap">
+            {data?.keywords?.map((keyword: string) => (
               <span
-                className="border-[1px] border-[#DBDBDB] rounded-[19px] px-3 py-1 mr-2 mb-1 last:mr-0 text-14 text-[#767676] "
+                className="mr-2 mb-1 rounded-[19px] border-[1px] border-[#DBDBDB] px-3 py-1 text-14 text-[#767676] last:mr-0 "
                 key={keyword}
               >
                 {keyword}
@@ -223,10 +219,10 @@ export default function Profile() {
             ))}
           </div>
         ) : (
-          <div className="mt-6 text-center mb-12 flex justify-center">
+          <div className="mt-6 mb-12 flex justify-center text-center">
             <button
               onClick={handleKeywords}
-              className="w-[100px] h-[36px] border-[1px] border-brand rounded-[19px] text-xs text-brand flex items-center justify-center"
+              className="flex h-[36px] w-[100px] items-center justify-center rounded-[19px] border-[1px] border-brand text-xs text-brand"
             >
               <div>
                 <Image

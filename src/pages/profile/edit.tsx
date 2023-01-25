@@ -16,7 +16,14 @@ import { makeBlob } from '@utils/makeBlob';
 export default function Edit() {
   const [isNicknameValidate, setIsNicknameValidate] = useState<boolean>(true);
   const [isEmailValidate, setIsEmailValidate] = useState<boolean>(true);
-  const { isLoading, userInfo, setUserInfo } = useGetProfile();
+  const { isLoading, data } = useGetProfile();
+  const [userInfo, setUserInfo] = useState<Member | null>(null);
+
+  useEffect(() => {
+    if (!data) return;
+    setUserInfo(data);
+  }, [data]);
+
   const {
     register,
     handleSubmit,
@@ -162,17 +169,17 @@ export default function Edit() {
         handleLeftButton={handleLeftButton}
         handleRightButton={handleSubmit(onSubmit)}
       />
-      <label className="flex justify-center h-[150px]" htmlFor="image">
+      <label className="flex h-[150px] justify-center" htmlFor="image">
         {userInfo?.image ? (
-          <div className=" flex justify-center items-center w-[99px] h-[99px] cursor-pointer rounded-full border-2 border-[#999999] bg-[#FFFFFF] relative">
+          <div className=" relative flex h-[99px] w-[99px] cursor-pointer items-center justify-center rounded-full border-2 border-[#999999] bg-[#FFFFFF]">
             <img
               src={userInfo?.image}
               width="60"
               height="0"
-              className="rounded-full w-[99px] h-[99px]"
+              className="h-[99px] w-[99px] rounded-full"
               alt="profile"
             />
-            <div className="w-[26px] h-[26px] rounded-full bg-[#575757] flex justify-center items-center absolute right-0 bottom-0">
+            <div className="absolute right-0 bottom-0 flex h-[26px] w-[26px] items-center justify-center rounded-full bg-[#575757]">
               <Image
                 src="/svg/icons/icon_camera.svg"
                 width="15"
@@ -182,14 +189,14 @@ export default function Edit() {
             </div>
           </div>
         ) : (
-          <div className=" flex justify-center items-center w-[99px] h-[99px] cursor-pointer rounded-full border-2 border-[#999999] bg-[#FFFFFF] relative">
+          <div className=" relative flex h-[99px] w-[99px] cursor-pointer items-center justify-center rounded-full border-2 border-[#999999] bg-[#FFFFFF]">
             <Image
               src="/svg/icons/icon_avatar.svg"
               width="60"
               height="0"
               alt="profile"
             />
-            <div className="w-[26px] h-[26px] rounded-full bg-[#575757] flex justify-center items-center absolute right-0 bottom-0">
+            <div className="absolute right-0 bottom-0 flex h-[26px] w-[26px] items-center justify-center rounded-full bg-[#575757]">
               <Image
                 src="/svg/icons/icon_camera.svg"
                 width="15"
@@ -293,7 +300,7 @@ export default function Edit() {
           {errors.description && (
             <ErrorMessage message={errors.description.message} />
           )}
-          <article className="flex items-center justify-between mt-3">
+          <article className="mt-3 flex items-center justify-between">
             <div className="flex items-center">
               <label htmlFor="instagram">
                 <Image
@@ -309,7 +316,7 @@ export default function Edit() {
                 {...register('instagram')}
                 id="instagram"
                 defaultValue={userInfo?.instagram}
-                className="w-[calc(100%-32px)] h-[30px] placeholder:text-[#999] text-12 indent-1 "
+                className="h-[30px] w-[calc(100%-32px)] indent-1 text-12 placeholder:text-[#999] "
               />
             </div>
             <div className="flex items-center">
@@ -327,7 +334,7 @@ export default function Edit() {
                 {...register('behance')}
                 id="behance"
                 defaultValue={userInfo?.behance}
-                className="w-[calc(100%-32px)] h-[30px] placeholder:text-[#999] text-12 indent-1"
+                className="h-[30px] w-[calc(100%-32px)] indent-1 text-12 placeholder:text-[#999]"
               />
             </div>
           </article>

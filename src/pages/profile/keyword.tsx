@@ -6,16 +6,16 @@ import { useState, useEffect } from 'react';
 
 export default function Keyword() {
   const [keywordList, setKeywordList] = useState<string[]>([]);
-  const { userInfo } = useGetProfile();
+  const { data } = useGetProfile();
 
   useEffect(() => {
-    setKeywordList(userInfo?.keywords || []);
-  }, [userInfo]);
+    setKeywordList(data?.keywords || []);
+  }, [data]);
 
   const handleSubmit = async (e: any) => {
     let response: any;
     if (e.target.id === 'skip') {
-      response = await authApi.patchKeyword(userInfo?.keywords || []);
+      response = await authApi.patchKeyword(data?.keywords || []);
     } else {
       response = await authApi.patchKeyword(keywordList);
     }
