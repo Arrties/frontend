@@ -3,6 +3,9 @@
 module.exports = {
   reactStrictMode: true,
   swcMinify: true,
+  images: {
+    domains: ['atties-bucket.s3.ap-northeast-2.amazonaws.com'],
+  },
   async headers() {
     return [
       {
