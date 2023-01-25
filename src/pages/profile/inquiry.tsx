@@ -31,6 +31,7 @@ interface InquiryForm {
 export default function Inquiry() {
   const [fileLists, setFileLists] = useState<File[]>([]);
   const [fileSize, setFileSize] = useState<number>(0);
+  const [selectedIndex, setSelectedIndex] = useState<number>(0);
   const { inquiryList, refetch: inquiryRefetch } = useGetInquiry();
 
   const router = useRouter();
@@ -38,7 +39,7 @@ export default function Inquiry() {
     router.back();
   };
 
-  const { register, handleSubmit, watch, resetField } = useForm<InquiryForm>({
+  const { register, handleSubmit, watch, reset } = useForm<InquiryForm>({
     mode: 'onTouched',
   });
 
@@ -58,9 +59,7 @@ export default function Inquiry() {
   };
 
   const clearForm = () => {
-    resetField('title');
-    resetField('content');
-    resetField('image');
+    reset({ title: '', content: '', image: '' });
     setFileLists([]);
     setFileSize(0);
   };
@@ -92,6 +91,7 @@ export default function Inquiry() {
     const response = await instance.post('/members/ask', formData);
     clearForm();
     inquiryRefetch();
+    setSelectedIndex(1);
   };
 
   return (
@@ -101,7 +101,7 @@ export default function Inquiry() {
         message="1:1문의"
         isRightButton={false}
       />
-      <Tab.Group>
+      <Tab.Group selectedIndex={selectedIndex} onChange={setSelectedIndex}>
         <Tab.List>
           <Tab className="mb-[28px] h-[32px] w-1/2 border-[#191919] text-16 font-bold ui-selected:border-b-[2px] ui-selected:text-[#191919] ui-not-selected:border-b-[1px] ui-not-selected:border-[#EDEDED] ui-not-selected:text-[#999999]">
             문의하기
