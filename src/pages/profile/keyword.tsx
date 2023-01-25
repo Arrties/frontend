@@ -1,4 +1,4 @@
-import authApi from '@apis/auth/authApi';
+import profileApi from '@apis/profile/profileApi';
 import Layout from '@components/common/Layout';
 import SelectKeyword from '@components/profile/Selectkeyword';
 import useGetProfile from '@hooks/queries/useGetProfile';
@@ -15,9 +15,9 @@ export default function Keyword() {
   const handleSubmit = async (e: any) => {
     let response: any;
     if (e.target.id === 'skip') {
-      response = await authApi.patchKeyword(data?.keywords || []);
+      response = await profileApi.patchKeyword(data?.keywords || []);
     } else {
-      response = await authApi.patchKeyword(keywordList);
+      response = await profileApi.patchKeyword(keywordList);
     }
     console.log(response);
   };

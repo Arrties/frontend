@@ -7,6 +7,7 @@ import useGetInquiry from '@hooks/queries/useGetInquiry';
 import authApi from '@apis/auth/authApi';
 import FileItem from '@components/inquiry/FileItem';
 import { formatBytes } from '@utils/formatBytes';
+import profileApi from '@apis/profile/profileApi';
 
 interface InquiryForm {
   title: string;
@@ -71,7 +72,7 @@ export default function InquiryItem({ inquiry, handler }: InquiryItemForm) {
     for (let i = 0; i < image?.length; i++) {
       formData.append('image', image[i]);
     }
-    const response = await authApi.patchInquiry(inquiry.id, formData);
+    const response = await profileApi.patchInquiry(inquiry.id, formData);
     setIsSelected(false);
     inquiryRefetch();
   };

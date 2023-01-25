@@ -12,6 +12,7 @@ import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/router';
 import { isUser } from '@utils/isUser';
 import { makeBlob } from '@utils/makeBlob';
+import profileApi from '@apis/profile/profileApi';
 
 export default function Edit() {
   const [isNicknameValidate, setIsNicknameValidate] = useState<boolean>(true);
@@ -144,9 +145,9 @@ export default function Edit() {
     }
     let response;
     if (isUser) {
-      response = await authApi.patchUserInfo(formData);
+      response = await profileApi.patchUserInfo(formData);
     } else {
-      response = await authApi.patchArtistInfo(formData);
+      response = await profileApi.patchArtistInfo(formData);
     }
     if (response?.status === 200) {
       router.push('/home');

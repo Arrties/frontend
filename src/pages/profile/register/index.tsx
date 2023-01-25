@@ -1,4 +1,3 @@
-import authApi from '@apis/auth/authApi';
 import Layout from '@components/common/Layout';
 import Navigate from '@components/common/Navigate';
 import Image from 'next/image';
@@ -6,6 +5,7 @@ import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
 import { getToken, setToken } from '@utils/localStorage/token';
+import profileApi from '@apis/profile/profileApi';
 
 interface FileForm {
   file: any;
@@ -13,7 +13,7 @@ interface FileForm {
   fileSize: string;
 }
 
-const formatBytes = (bytes, decimals = 1) => {
+const formatBytes = (bytes: number, decimals = 1) => {
   if (!bytes) return '0';
   const k = 1024;
   const dm = decimals < 0 ? 0 : decimals;
@@ -32,7 +32,7 @@ export default function Register() {
 
   const handleRightButton = async () => {
     if (!fileState) return;
-    const response = await authApi.patchRole();
+    const response = await profileApi.patchRole();
     if (response.status === 200) {
       const token = getToken();
       token.roles = 'ROLE_ARTIST';
@@ -64,7 +64,7 @@ export default function Register() {
         handleRightButton={handleRightButton}
         message="작가 등록"
       />
-      <section className="flex items-start absolute inset-x-0 px-4 py-6 bg-[#F8F8FA]">
+      <section className="absolute inset-x-0 flex items-start bg-[#F8F8FA] px-4 py-6">
         <Image
           alt="speaker"
           src="/svg/icons/icon_speaker.svg"
@@ -83,7 +83,7 @@ export default function Register() {
       <section className="mt-[9rem] ">
         <p className="text-16 font-bold">아띠즈 작가 인증</p>
         {fileState[0]?.file ? (
-          <div className="my-3 w-full h-[6rem] border border-[#DBDBDB] rounded-xl flex items-center px-3">
+          <div className="my-3 flex h-[6rem] w-full items-center rounded-xl border border-[#DBDBDB] px-3">
             <Image
               alt="document_upload"
               src="/svg/icons/icon_document_upload.svg"
@@ -100,12 +100,12 @@ export default function Register() {
               src="/svg/icons/icon_trash_can.svg"
               width="25"
               height="0"
-              className="mr-3 absolute right-7 cursor-pointer"
+              className="absolute right-7 mr-3 cursor-pointer"
               onClick={handleDelete}
             />
           </div>
         ) : (
-          <div className="my-3 w-full h-[6rem] border border-[#DBDBDB] rounded-xl flex flex-col items-center justify-center ">
+          <div className="my-3 flex h-[6rem] w-full flex-col items-center justify-center rounded-xl border border-[#DBDBDB] ">
             <label htmlFor="fileImage">
               <Image
                 alt="document_upload"
