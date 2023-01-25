@@ -38,10 +38,9 @@ export default function Inquiry() {
     router.back();
   };
 
-  const { register, handleSubmit, watch, resetField, reset } =
-    useForm<InquiryForm>({
-      mode: 'onTouched',
-    });
+  const { register, handleSubmit, watch, resetField } = useForm<InquiryForm>({
+    mode: 'onTouched',
+  });
 
   const handleRemoveFile = (targetName: string, targetSize: number): void => {
     const newFileLists = fileLists.filter((file) => {
