@@ -11,9 +11,8 @@ interface InquiryForm {
   id: number;
 }
 
-const useGetInquiry = () => {
+export default function useGetInquiry() {
   return useQuery<InquiryForm, Error>('useInquiry', () =>
     profileApi.getInquiry(),
   );
-};
-export default useGetInquiry;
+}
