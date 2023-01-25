@@ -20,14 +20,13 @@ export default function App({ Component, pageProps }: AppProps) {
   // }, [router]);
 
   return (
-    <div className="relative mx-auto h-screen w-full max-w-[375px] overflow-y-scroll border border-gray-500 font-Pretendard">
+    <div className="relative mx-auto h-screen w-full max-w-[375px] overflow-y-auto border border-gray-500 font-Pretendard">
       <Head>
         <link rel="shortcut icon" href="/static/favicon.ico" />
       </Head>
       <Provider store={store}>
         <QueryClientProvider client={queryClient}>
           <PersistGate loading={null} persistor={persistor}>
-            <ReactQueryDevtools initialIsOpen={true} />
             <Component {...pageProps} />
           </PersistGate>
         </QueryClientProvider>

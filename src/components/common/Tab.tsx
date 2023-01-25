@@ -1,32 +1,32 @@
-import Image from 'next/image';
-import tw from 'tailwind-styled-components';
-import { useRouter } from 'next/router';
+import Image from 'next/image'
+import tw from 'tailwind-styled-components'
+import { useRouter } from 'next/router'
 
 const TABLIST = [
   {
     id: 1,
     name: 'home',
-    hangle: '홈',
+    word: '홈',
   },
   {
     id: 2,
     name: 'auction',
-    hangle: '경매',
+    word: '경매',
   },
   {
     id: 3,
     name: 'exhibition',
-    hangle: '전시회',
+    word: '전시회',
   },
   {
     id: 4,
     name: 'chat',
-    hangle: '채팅',
+    word: '채팅',
   },
   {
     id: 5,
     name: 'profile',
-    hangle: '프로필',
+    word: '프로필',
   },
 ];
 
@@ -35,7 +35,7 @@ interface DefaultProps {
 }
 
 const TabBox = tw.footer<DefaultProps>`
- fixed bottom-0 bg-white w-full max-w-[375px] flex justify-center z-50 py-4 rounded-t-2xl
+ fixed bottom-0 bg-white w-full max-w-[375px] flex justify-center z-50 py-4 inset-x-0 m-auto
 `;
 
 const TabList = tw.div<DefaultProps>`flex w-[327px]`;
@@ -43,7 +43,7 @@ const TabList = tw.div<DefaultProps>`flex w-[327px]`;
 interface TabItemProps {
   id: number;
   name: string;
-  hangle: string;
+  word: string;
   [key: string]: any;
 }
 
@@ -80,7 +80,7 @@ export default function Tab() {
                     : 'text-[#767676]'
                 } `}
               >
-                {tabItem.hangle}
+                {tabItem.word}
               </div>
             </div>
           </div>
