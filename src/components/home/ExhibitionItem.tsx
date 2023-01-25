@@ -1,4 +1,4 @@
-import Image from 'next/image'
+import Image from 'next/image';
 
 interface ExhibitionItemForm {
   src: string;
@@ -12,18 +12,18 @@ export default function ExhibitionItem({
   name,
 }: ExhibitionItemForm) {
   return (
-    <div className="w-[158px] h-[197px] rounded relative">
-      <Image
+    <div className="relative h-[197px] w-[158px] rounded">
+      <img
         src={src}
         alt="notification"
-        fill
+        // fill
         style={{
           objectFit: 'cover',
         }}
         className="rounded"
-        quality={100}
+        // quality={100}
       />
-      <div className="bg-gradient-to-b from-[rgba(0,0,0,0)] via-[rgba(0,0,0,0)] to-[rgba(0,0,0,0.5)] absolute w-full h-full rounded">
+      <div className="absolute h-full w-full rounded bg-gradient-to-b from-[rgba(0,0,0,0)] via-[rgba(0,0,0,0)] to-[rgba(0,0,0,0.5)]">
         <div className="absolute bottom-1 left-2 flex flex-col text-[#FFFFFF]">
           <div className="text-12">{school}</div>
           <div className="text-14 font-bold">{name}</div>
