@@ -140,7 +140,9 @@ export default function Profile() {
               )}
             </div>
             <div className="mr-3 flex flex-col text-[#FFFFFF]">
-              <span className="font-medium">{data?.nickname}님,</span>
+              <span className="font-medium">
+                {data?.nickname ? data?.nickname : '회원'}님,
+              </span>
               <span className="text-xs">아띠즈에 오신 걸 환영합니다.</span>
             </div>
             <div className="mr-3">
