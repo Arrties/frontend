@@ -38,9 +38,10 @@ export default function Inquiry() {
     router.back();
   };
 
-  const { register, handleSubmit, watch } = useForm<InquiryForm>({
-    mode: 'onTouched',
-  });
+  const { register, handleSubmit, watch, resetField, reset } =
+    useForm<InquiryForm>({
+      mode: 'onTouched',
+    });
 
   const handleRemoveFile = (targetName: string, targetSize: number): void => {
     const newFileLists = fileLists.filter((file) => {
@@ -55,6 +56,14 @@ export default function Inquiry() {
     inquiryRefetch();
 
     return;
+  };
+
+  const clearForm = () => {
+    resetField('title');
+    resetField('content');
+    resetField('image');
+    setFileLists([]);
+    setFileSize(0);
   };
 
   const file = watch('image');
@@ -82,6 +91,7 @@ export default function Inquiry() {
       formData.append('image', image[i]);
     }
     const response = await instance.post('/members/ask', formData);
+    clearForm();
     inquiryRefetch();
   };
 
