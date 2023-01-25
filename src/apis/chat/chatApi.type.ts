@@ -2,7 +2,6 @@ export type ChatDTOType = {
   artistId: number;
   artWorkId: number;
 };
-export type ChatParamGetType = {};
 export type ChatParamPutType = {
   id: string;
   data: ChatDTOType;
