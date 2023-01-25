@@ -7,15 +7,10 @@ const instance = axios.create({
 
 const refreshToken = async () => {
   const refreshToken = getToken().refreshToken;
-  try {
-    const response = await instance.post('/members/token', {
-      refreshToken,
-    });
-    return response.data;
-  } catch (error) {
-    deleteToken();
-    window.location.href = '/auth/login';
-  }
+  const response = await instance.post('/members/token', {
+    refreshToken,
+  });
+  return response.data;
 };
 
 instance.interceptors.request.use(
