@@ -32,7 +32,7 @@ export default function Inquiry() {
   const [fileLists, setFileLists] = useState<File[]>([]);
   const [fileSize, setFileSize] = useState<number>(0);
   const [selectedIndex, setSelectedIndex] = useState<number>(0);
-  const { inquiryList, refetch: inquiryRefetch } = useGetInquiry();
+  const { data } = useGetInquiry();
 
   const router = useRouter();
   const handleLeftButton = () => {
@@ -245,9 +245,9 @@ export default function Inquiry() {
             </form>
           </Tab.Panel>
           <Tab.Panel>
-            {inquiryList?.length ? (
+            {data?.length ? (
               <div>
-                {inquiryList?.map((inquiry, idx) => (
+                {data?.map((inquiry, idx) => (
                   <InquiryItem
                     key={'' + idx}
                     inquiry={inquiry}
