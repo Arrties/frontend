@@ -47,7 +47,7 @@ export default function Chat() {
   const [chatRoomList, setChatRoomList] =
     useState<ChatRoomListForm[]>(DUMP_CHAT_ROOM_LIST);
 
-  const client = useRef({}) as React.MutableRefObject<StompJs.Client>;
+  const client: any = useRef({}) as React.MutableRefObject<StompJs.Client>;
   const router = useRouter();
 
   const connect = () => {
