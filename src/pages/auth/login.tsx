@@ -1,18 +1,22 @@
-import authApi from '@apis/auth/authApi'
-import Button from '@components/common/Button'
-import CheckBox from '@components/common/Checkbox'
-import ErrorMessage from '@components/common/ErrorMessage'
-import Input from '@components/common/Input'
-import Layout from '@components/common/Layout'
-import SocialLoginButton from '@components/login/SocialLoginButton'
-import useLoginMutation from '@hooks/mutation/useLoginMutation'
-import Image from 'next/image'
-import Link from 'next/link'
-import React, { useEffect, useState } from 'react'
-import { setToken, Token } from '@utils/localStorage/token'
-import { getLocalStorage, removeLocalStorage, setLocalStorage } from '@utils/localStorage/helper'
-import { useRouter } from 'next/router'
-import { useForm } from 'react-hook-form'
+import authApi from '@apis/auth/authApi';
+import Button from '@components/common/Button';
+import CheckBox from '@components/common/Checkbox';
+import ErrorMessage from '@components/common/ErrorMessage';
+import Input from '@components/common/Input';
+import Layout from '@components/common/Layout';
+import SocialLoginButton from '@components/login/SocialLoginButton';
+import useLoginMutation from '@hooks/mutation/useLoginMutation';
+import Image from 'next/image';
+import Link from 'next/link';
+import React, { useEffect, useState } from 'react';
+import { deleteToken, setToken, Token } from '@utils/localStorage/token';
+import {
+  getLocalStorage,
+  removeLocalStorage,
+  setLocalStorage,
+} from '@utils/localStorage/helper';
+import { useRouter } from 'next/router';
+import { useForm } from 'react-hook-form';
 
 function Login() {
   const {
@@ -29,6 +33,7 @@ function Login() {
   const { mutate, data, error } = useLoginMutation();
 
   useEffect(() => {
+    deleteToken();
     if (getLocalStorage('idSave') === 'true') {
       setCheckedTerm(['idSave']);
     }

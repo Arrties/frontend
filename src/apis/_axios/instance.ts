@@ -1,5 +1,5 @@
-import axios from 'axios'
-import { deleteToken, getToken, setToken } from '@utils/localStorage/token'
+import axios from 'axios';
+import { getToken, setToken } from '@utils/localStorage/token';
 
 const instance = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_BASE_URL,
@@ -7,7 +7,7 @@ const instance = axios.create({
 
 const refreshToken = async () => {
   const refreshToken = getToken().refreshToken;
-  const response = await instance.post('/members/token', {
+  const response = await axios.post('/members/token', {
     refreshToken,
   });
   return response.data;
@@ -54,7 +54,6 @@ instance.interceptors.response.use(
       }
 
       if (data?.code === 'TOKEN_EXPIRED') {
-        // code 백엔드에 물어봐야함
         const { accessToken } = await refreshToken();
         setToken({
           accessToken,
