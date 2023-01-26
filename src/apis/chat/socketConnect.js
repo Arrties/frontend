@@ -6,20 +6,14 @@ import { getToken } from '@utils/localStorage/token';
  * @param {String} endpoint
  * @returns
  */
+const access = getToken().accessToken;
+const headers = { Authorization: access };
 const createClient = (endpoint) => {
   // 토큰 헤더에 담기
-  const access = getToken().accessToken;
   if (!access) return;
-  const headers = { Authorization: access };
   const client = new StompJs.Client({
     brokerURL: `wss://atties.shop${endpoint}`,
     connectHeaders: headers,
-    onStompError: (frame) => {
-      console.log(frame);
-    },
-    onConnect: () => {
-      console.log('connected');
-    },
     debug: (str) => {
       console.log(str);
     },
@@ -45,17 +39,17 @@ const createClient = (endpoint) => {
  *
  */
 const subscribe = (client, roomId, subscribeCallback) => {
-  client.subscribe(`/sub/chat/room/${roomId}`, subscribeCallback);
+  client.subscribe(`/queue/chat-rooms/${roomId}`, subscribeCallback);
 };
 
-const publish = (client, roomId, nickname, chat) => {
+const publish = (client, roomId, senderId, chat) => {
   client.publish({
-    destination: '/pub/chat/message',
-    body: JSON.stringify({
-      roomId: roomId,
-      sender: nickname,
-      message: `${chat}`,
-    }),
+    destination: '/app/send',
+    body: {
+      chatRoomId: roomId,
+      sender: senderId,
+      message: chat,
+    },
   });
 };
 

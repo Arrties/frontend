@@ -7,7 +7,7 @@ export class ChatApi {
     return data;
   }
 
-  async getChatById(id: string): Promise<ChatDTOType> {
+  async getChatRoom(id: number): Promise<ChatDTOType> {
     const { data } = await instance.get(`/chat-rooms/${id}`);
     return data;
   }

@@ -1,10 +1,11 @@
-import ChattingMessage from '@components/chat/ChatMessage'
-import Layout from '@components/common/Layout'
-import Modal from '@components/common/Modal'
-import Image from 'next/image'
-import React, { useEffect, useState } from 'react'
-import { useRouter } from 'next/router'
-import { useForm } from 'react-hook-form'
+import ChattingMessage from '@components/chat/ChatMessage';
+import Layout from '@components/common/Layout';
+import Modal from '@components/common/Modal';
+import Image from 'next/image';
+import React, { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
+import { useForm } from 'react-hook-form';
+import useGetChatRoom from '@hooks/queries/chat/useGetChatRoom';
 
 interface ChatRoomProps {
   params: any;
@@ -46,10 +47,7 @@ export default function ChatRoom({ params }: ChatRoomProps) {
   const { id } = router.query;
   const [isModal, setIsModal] = useState(false);
   const [chatList, setChatList] = useState<ChatRoomForm[]>(DUMP_CHATLIST);
-
-  const handleBack = () => {
-    router.push('/chat');
-  };
+  const { data: chatRoom } = useGetChatRoom(Number(id));
 
   const handleOption = () => {
     console.log('option');
@@ -64,6 +62,8 @@ export default function ChatRoom({ params }: ChatRoomProps) {
   };
 
   const onSubmit = (form: MessageForm) => {
+    console.log(form);
+    console.log(chatRoom);
     // publish(form.message);
   };
 
@@ -86,8 +86,8 @@ export default function ChatRoom({ params }: ChatRoomProps) {
         denyMessage="나가기"
         onAccept={onAccept}
       />
-      <header className="absolute top-0 inset-x-0 w-full h-[145px] bg-[#FC6554]">
-        <article className="relative flex w-full mt-[70px] px-5 text-white">
+      <header className="absolute inset-x-0 top-0 h-[145px] w-full bg-[#FC6554]">
+        <article className="relative mt-[70px] flex w-full px-5 text-white">
           <Image
             src="/svg/icons/icon_back_white.svg"
             alt="back"
@@ -96,8 +96,8 @@ export default function ChatRoom({ params }: ChatRoomProps) {
             onClick={() => router.back()}
             className="cursor-pointer"
           />
-          <div className="text-16 px-5 ">온주</div>
-          <div className="text-12 flex items-center">응답시간 : 1시간 이내</div>
+          <div className="px-5 text-16 ">온주</div>
+          <div className="flex items-center text-12">응답시간 : 1시간 이내</div>
           <Image
             src="/svg/icons/icon_option.svg"
             alt="option"
@@ -108,8 +108,8 @@ export default function ChatRoom({ params }: ChatRoomProps) {
           />
         </article>
       </header>
-      <section className="absolute top-[120px] inset-x-0 w-full bg-white rounded-xl p-5">
-        <article className="flex items-center justify-center text-center text-[#767676] text-14 h-[40px] font-bold">
+      <section className="absolute inset-x-0 top-[120px] w-full rounded-xl bg-white p-5">
+        <article className="flex h-[40px] items-center justify-center text-center text-14 font-bold text-[#767676]">
           2022년 12월 23일
         </article>
         <article className="mt-4">
@@ -124,12 +124,12 @@ export default function ChatRoom({ params }: ChatRoomProps) {
         </article>
       </section>
       <form
-        className="absolute w-[327px] h-[50px] rounded-[24.5px] bg-[#F8F8FA] bottom-[30px] flex items-center px-[10px]"
+        className="absolute bottom-[30px] flex h-[50px] w-[327px] items-center rounded-[24.5px] bg-[#F8F8FA] px-[10px]"
         onSubmit={handleSubmit(onSubmit)}
       >
         <input
           type="text"
-          className="border-none bg-[#F8F8FA] w-[200px] h-[23px] placeholder:text-[#999999] text-14 font-semibold "
+          className="h-[23px] w-[200px] border-none bg-[#F8F8FA] text-14 font-semibold placeholder:text-[#999999] "
           placeholder="메세지를 입력해주세요."
           {...register('message', { required: true })}
         />
@@ -151,7 +151,7 @@ export default function ChatRoom({ params }: ChatRoomProps) {
               className="absolute right-14 cursor-pointer"
             />
             <label
-              className="flex justify-center items-center"
+              className="flex items-center justify-center"
               htmlFor="profileImage"
             >
               <Image
@@ -171,8 +171,6 @@ export default function ChatRoom({ params }: ChatRoomProps) {
             />
           </>
         )}
-
-        {/* 임시버튼 */}
       </form>
     </Layout>
   );

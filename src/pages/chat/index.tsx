@@ -4,8 +4,9 @@ import Layout from '@components/common/Layout';
 import Image from 'next/image';
 import React, { useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/router';
-import { createClient } from '@apis/chat/socketConnect';
+import { createClient, publish, subscribe } from '@apis/chat/socketConnect';
 import Tab from '@components/common/Tab';
+import useGetChatRoomList from '@hooks/queries/chat/useGetChatRoomList';
 import useGetChatRoom from '@hooks/queries/chat/useGetChatRoom';
 
 interface ChatRoomListForm {
@@ -23,20 +24,38 @@ interface ChatRoomListForm {
 export default function Chat() {
   const router = useRouter();
   const client: any = useRef({}) as React.MutableRefObject<StompJs.Client>;
-  const { data } = useGetChatRoom();
-  const chatRoomList = data?.chatRooms || [];
-  console.log(chatRoomList);
+  // const { data } = useGetChatRoom();
+  // const chatRoomList = data?.chatRooms || [];
+  // console.log(chatRoomList);
+  const { data: chatRoom, refetch: refetchChatRoom } = useGetChatRoom(1);
 
+  // const { data: chatRoomList } = useGetChatRoomList();
   const connect = () => {
     client.current = createClient('/ws-connection');
+    client.current.onConnect = onConnected;
     client.current.activate();
+  };
+  const sendChat = () => {
+    if (!client.current.connected) return;
+    publish(client.current, 1, '박규성', 'abcde');
+    // refetchChatRoom();
+  };
+
+  const onConnected = () => {
+    subscribe(client.current, 1, subscribeCallback);
+  };
+
+  const subscribeCallback = (response) => {
+    console.log(response);
+    const responseBody = JSON.parse(response.body);
+    console.log(responseBody);
   };
 
   useEffect(() => {
     connect();
-    () => {
-      disconnect();
-    };
+    // () => {
+    //   disconnect();
+    // };
   }, []);
 
   const disconnect = () => {
@@ -45,13 +64,23 @@ export default function Chat() {
 
   return (
     <>
+      <button onClick={sendChat}>눌러</button>
       <Layout>
-        <section className="text-16 font-bold">채팅</section>
-
+        <section className="flex h-20 items-center text-16 font-bold">
+          채팅
+        </section>
         {chatRoomList?.length ? (
           <div className="absolute inset-x-0 mt-5 w-full ">
             {chatRoomList.map((chatRoom: ChatRoomListForm) => (
-              <Chatroom chatRoom={chatRoom} key={chatRoom.chatRoomId} />
+              // <Chatroom chatRoom={chatRoom} key={chatRoom.chatRoomId} />
+              <Chatroom
+                chatRoom={chatRoom}
+                // key={chatRoom.id}
+                // id={chatRoom.id}
+                onClick={(e) => {
+                  router.push(`/chat/${e.target.id}`);
+                }}
+              />
             ))}
           </div>
         ) : (
