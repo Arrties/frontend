@@ -181,7 +181,7 @@ export default function Join02() {
         </p>
       </section>
       <form autoComplete="off" onSubmit={handleSubmit(onSubmit)}>
-        <section className="mb-3 relative">
+        <section className="relative mb-3">
           <Input
             type="text"
             label="ID"
@@ -203,7 +203,7 @@ export default function Join02() {
           />
           {errors.userId && <ErrorMessage message={errors.userId.message} />}
         </section>
-        <section className="mb-3 relative">
+        <section className="relative mb-3">
           <Input
             type="text"
             label="닉네임"
@@ -279,7 +279,7 @@ export default function Join02() {
             <ErrorMessage message={errors.telephone.message} />
           )}
         </section>
-        <section className="mb-3 relative">
+        <section className="relative mb-3">
           <Input
             type="email"
             label="이메일"
@@ -305,9 +305,11 @@ export default function Join02() {
         </section>
 
         <div className="h-[30px]" />
-        <section>
-          <Button text="확인" type="submit" />
-        </section>
+
+        <Button
+          text="확인"
+          className="absolute inset-x-0 bottom-[100px] m-auto"
+        />
       </form>
     </Layout>
   );

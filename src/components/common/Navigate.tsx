@@ -1,7 +1,7 @@
-import Image from 'next/image'
-import Router from 'next/router'
-import React from 'react'
-import tw from 'tailwind-styled-components'
+import Image from 'next/image';
+import Router from 'next/router';
+import React from 'react';
+import tw from 'tailwind-styled-components';
 
 interface NavigateProps {
   left_message?: React.ReactNode;
@@ -26,7 +26,7 @@ interface RightButtonProps extends DefaultProps {
 }
 
 const NavigateBox = tw.header<DefaultProps>`
-flex items-center font-semibold relative h-[64px] 
+flex items-end font-semibold relative h-[60px] pb-[10px]
 `;
 
 const LeftButton = tw.div<LeftButtonProps>`cursor-pointer z-10 absolute left-0
