@@ -6,7 +6,10 @@ import arrowBtn from '@public/svg/icons/icon_arrow.svg';
 import Image from 'next/image';
 import tw from 'tailwind-styled-components';
 import { useAppDispatch } from '@features/hooks';
-import { setIsApproveEmailPromotion, setIsApproveSMSPromotion } from '@features/user/userSlice';
+import {
+  setIsApproveEmailPromotion,
+  setIsApproveSMSPromotion,
+} from '@features/user/userSlice';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
@@ -199,7 +202,7 @@ export default function Join01() {
               : true
           }
           text="확인"
-          className="absolute bottom-[83px] w-[325px]"
+          className="absolute inset-x-0 bottom-[100px] m-auto"
         />
       </form>
     </Layout>

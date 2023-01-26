@@ -137,7 +137,7 @@ function Login() {
             />
           </div>
           <div className="mt-[34px]">
-            <Button text="로그인" />
+            <Button text="로그인" className="w-full" />
           </div>
           <div className="mt-6 space-y-3">
             <div>

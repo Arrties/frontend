@@ -62,7 +62,7 @@ export default function SelectKeyword({
               keywordList?.includes(keyword.name)
                 ? 'border-brand text-[#767676]'
                 : 'border-[#CECECE] text-[#767676]'
-            } w rounded-full flex justify-center items-center px-3 py-1 border mr-2 mb-2.5 cursor-pointer text-14 text-[#767676]`}
+            } w mr-2 mb-2.5 flex cursor-pointer items-center justify-center rounded-full border px-3 py-1 text-14 text-[#767676]`}
             onClick={() => onKeywordClick(keyword.name)}
           >
             {keyword.name}
@@ -75,10 +75,10 @@ export default function SelectKeyword({
           setIsModal(true);
         }}
         disabled={keywordList?.length === 0}
-        className="absolute bottom-[100px] inset-x-0 m-auto w-[327px]"
+        className="absolute inset-x-0 bottom-[100px] m-auto"
       />
       <button
-        className="w-full transition text-xs underline  hover:brand-2 px-0 text-[#999999] font-normal absolute bottom-[60px] inset-x-0 m-auto"
+        className="hover:brand-2 absolute inset-x-0 bottom-[60px]  m-auto w-full px-0 text-xs font-normal text-[#999999] underline transition"
         onClick={handleSubmit}
       >
         다음에 할래요

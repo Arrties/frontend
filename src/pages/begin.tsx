@@ -14,12 +14,12 @@ interface defaultProps {
   [key: string]: any;
 }
 
-const ImageWrapper = tw.div<defaultProps>`h-[340px] pt-[100px] `;
+const ImageWrapper = tw.div<defaultProps>`h-[360px] pt-[100px] `;
 const Title = tw.p`
-text-20 font-bold mt-16
+text-18 font-bold mt-16 text-center
 `;
-const Content = tw.p<defaultProps>`text-10 text-[#767676] mt-2 leading-4`;
-const Line = tw.p``;
+const Content = tw.p<defaultProps>`text-[14px] font-bold text-[#767676] mt-2 leading-4 `;
+const Line = tw.p`leading-5 pl-5`;
 
 export default function Begin() {
   const swiperRef = useRef<any>(null);
@@ -30,7 +30,7 @@ export default function Begin() {
         <Swiper
           navigation={true}
           modules={[Navigation]}
-          className="mySwiper"
+          className="mySwiper h-[800px]"
           ref={swiperRef}
         >
           <SwiperSlide>
@@ -58,7 +58,7 @@ export default function Begin() {
                 <Line>버려지고 방치되는게 아깝지 않으신가요?</Line>
               </Content>
             </div>
-            <div className="mt-6 flex justify-center space-x-3">
+            <div className="mt-8 flex justify-center space-x-3">
               <div className="aspect-square w-2 rounded-full bg-brand"></div>
               <div className="aspect-square w-2 rounded-full bg-[#D9D9D9]"></div>
               <div className="aspect-square w-2 rounded-full bg-[#D9D9D9]"></div>
@@ -85,7 +85,7 @@ export default function Begin() {
                 <Line>다양한 작품을 확인할 수 있습니다. </Line>
               </Content>
             </div>
-            <div className="mt-6 flex justify-center space-x-3">
+            <div className="mt-8 flex justify-center space-x-3">
               <div className="aspect-square w-2 rounded-full bg-[#D9D9D9]"></div>
               <div className="aspect-square w-2 rounded-full bg-brand"></div>
               <div className="aspect-square w-2 rounded-full bg-[#D9D9D9]"></div>
@@ -107,14 +107,14 @@ export default function Begin() {
                 <Line>현대미술의 장점! 채팅으로 함께 소통해요.</Line>
               </Content>
             </div>
-            <div className="mt-6 flex justify-center space-x-3">
+            <div className="mt-8 flex justify-center space-x-3">
               <div className="aspect-square w-2 rounded-full bg-[#D9D9D9]"></div>
               <div className="aspect-square w-2 rounded-full bg-[#D9D9D9]"></div>
               <div className="aspect-square w-2 rounded-full bg-brand"></div>
             </div>
             <Button
               onClick={() => router.push('/auth/login')}
-              className="mt-7"
+              className="absolute inset-x-0 bottom-[100px] m-auto"
               text="시작하기"
             />
           </SwiperSlide>
