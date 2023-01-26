@@ -7,7 +7,6 @@ import useGetDetail from '@hooks/queries/useGetDetail';
 import useGetProfile from '@hooks/queries/useGetProfile';
 
 export function getServerSideProps({ params }) {
-  console.log(params);
   return {
     props: {
       params,
@@ -18,8 +17,6 @@ export function getServerSideProps({ params }) {
 export default function Detail({ params }) {
   const router = useRouter();
   const artWorkId = params?.id;
-  console.log(artWorkId);
-  // const artWorkId = router?.query?.id || '0';
   const handleChat = () => {
     // 채팅방 만들기 API
   };
@@ -27,7 +24,6 @@ export default function Detail({ params }) {
     // 응찰 페이지로 이동
   };
 
-  const { data: userInfo } = useGetProfile();
   const { data: detailData } = useGetDetail(Number(artWorkId));
   const { artWork, artist } = detailData || {};
 
