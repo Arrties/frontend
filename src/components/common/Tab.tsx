@@ -1,6 +1,6 @@
-import Image from 'next/image'
-import tw from 'tailwind-styled-components'
-import { useRouter } from 'next/router'
+import Image from 'next/image';
+import tw from 'tailwind-styled-components';
+import { useRouter } from 'next/router';
 
 const TABLIST = [
   {
@@ -35,10 +35,10 @@ interface DefaultProps {
 }
 
 const TabBox = tw.footer<DefaultProps>`
- fixed bottom-0 bg-white w-full max-w-[375px] flex justify-center z-50 py-4 inset-x-0 m-auto
+ absolute bottom-0 bg-white max-w-[420px] flex justify-center z-50 py-2 inset-x-0 m-auto px-3
 `;
 
-const TabList = tw.div<DefaultProps>`flex w-[327px]`;
+const TabList = tw.div<DefaultProps>`flex w-full`;
 
 interface TabItemProps {
   id: number;

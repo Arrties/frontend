@@ -6,7 +6,6 @@ import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import { persistStore } from 'redux-persist';
 import { QueryClient, QueryClientProvider } from 'react-query';
-import { ReactQueryDevtools } from 'react-query/devtools';
 
 import type { AppProps } from 'next/app';
 const queryClient = new QueryClient();
@@ -20,7 +19,7 @@ export default function App({ Component, pageProps }: AppProps) {
   // }, [router]);
 
   return (
-    <div className="relative mx-auto h-screen w-full max-w-[375px] overflow-y-auto border border-gray-500 font-Pretendard">
+    <div className="flex h-screen w-screen justify-center bg-slate-50">
       <Head>
         <link rel="shortcut icon" href="/static/favicon.ico" />
       </Head>
