@@ -20,7 +20,7 @@ export default function App({ Component, pageProps }: AppProps) {
   // }, [router]);
 
   return (
-    <div className="bg-grey-2 flex h-screen w-screen justify-center">
+    <div className="flex h-screen w-screen justify-center bg-slate-50">
       <Head>
         <link rel="shortcut icon" href="/static/favicon.ico" />
       </Head>
