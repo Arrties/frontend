@@ -43,7 +43,7 @@ export default function Chat() {
       <Layout>
         <section className="text-16 font-bold">채팅</section>
 
-        {chatRoomList.length ? (
+        {chatRoomList?.length ? (
           <div className="absolute inset-x-0 mt-5 w-full ">
             {chatRoomList.map((chatRoom: ChatRoomListForm) => (
               <Chatroom chatRoom={chatRoom} key={chatRoom.id} />
