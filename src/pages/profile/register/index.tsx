@@ -1,3 +1,4 @@
+import profileApi from '@apis/profile/profileApi';
 import Layout from '@components/common/Layout';
 import Navigate from '@components/common/Navigate';
 import Image from 'next/image';
@@ -5,22 +6,13 @@ import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
 import { getToken, setToken } from '@utils/localStorage/token';
-import profileApi from '@apis/profile/profileApi';
+import { formatBytes } from '@utils/formatBytes';
 
 interface FileForm {
   file: any;
   fileName: string;
   fileSize: string;
 }
-
-const formatBytes = (bytes: number, decimals = 1) => {
-  if (!bytes) return '0';
-  const k = 1024;
-  const dm = decimals < 0 ? 0 : decimals;
-  const sizes = ['Bytes', 'KB', 'MB'];
-  const i = Math.floor(Math.log(bytes) / Math.log(k));
-  return `${parseFloat((bytes / Math.pow(k, i)).toFixed(dm))} ${sizes[i]}`;
-};
 
 export default function Register() {
   const router = useRouter();
