@@ -1,7 +1,8 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface UserState extends User, Artist {
-  isApprovePromotion: boolean;
+  isApproveSMSPromotion: boolean;
+  isApproveEmailPromotion: boolean;
   isArtist: boolean;
   keywords: string[]; //user
 }
@@ -21,7 +22,8 @@ const initialState: UserState = {
   instagram: '',
   behance: '',
 
-  isApprovePromotion: false,
+  isApproveSMSPromotion: false,
+  isApproveEmailPromotion: false,
   isArtist: false,
 };
 
@@ -49,12 +51,19 @@ const userSlice = createSlice({
       instagram: action.payload.instagram,
       behance: action.payload.behance,
     }),
-    setIsApprovePromotion: (
+    setIsApproveSMSPromotion: (
       state: UserState,
       action: PayloadAction<boolean>,
     ) => ({
       ...state,
-      isApprovePromotion: action.payload,
+      isApproveSMSPromotion: action.payload,
+    }),
+    setIsApproveEmailPromotion: (
+      state: UserState,
+      action: PayloadAction<boolean>,
+    ) => ({
+      ...state,
+      isApproveEmailPromotion: action.payload,
     }),
     setIsArtist: (state: UserState, action: PayloadAction<boolean>) => ({
       ...state,
@@ -66,7 +75,8 @@ const userSlice = createSlice({
 export const {
   setUserInfo,
   setKeywords,
-  setIsApprovePromotion,
+  setIsApproveSMSPromotion,
+  setIsApproveEmailPromotion,
   setArtistInfo,
   setIsArtist,
 } = userSlice.actions;
