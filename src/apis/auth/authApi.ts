@@ -1,5 +1,5 @@
-import instance from '@apis/_axios/instance'
-import { deleteToken, getToken, Token } from '@utils/localStorage/token'
+import instance from '@apis/_axios/instance';
+import { Token } from '@utils/localStorage/token';
 
 export class AuthApi {
   async getMemberProfile(): Promise<Member> {
@@ -31,37 +31,6 @@ export class AuthApi {
     return await instance.patch(`/members/password`, {
       password,
     });
-  }
-
-  async patchUserInfo(formData: any) {
-    return await instance.patch(
-      `${process.env.NEXT_PUBLIC_API_BASE_URL}/members`,
-      formData,
-      {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      },
-    );
-  }
-  async patchArtistInfo(formData: any) {
-    const response = await instance.patch(
-      `${process.env.NEXT_PUBLIC_API_BASE_URL}/artists`,
-      formData,
-      {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      },
-    );
-    return response;
-  }
-  async patchKeyword(body: string[]) {
-    const response = await instance.patch(
-      `${process.env.NEXT_PUBLIC_API_BASE_URL}/members/keywords`,
-      body,
-    );
-    return response;
   }
 
   async deleteUser() {
@@ -98,16 +67,6 @@ export class AuthApi {
     const response = await instance(
       `/members/check-nickname?nickname=${nickname}`,
     );
-    return response;
-  }
-
-  async patchRole() {
-    const response = await instance.patch('/members/roles');
-    return response;
-  }
-
-  async patchInquiry(askId: number, formData: any) {
-    const response = await instance.patch(`/members/ask/${askId}`, formData);
     return response;
   }
 }

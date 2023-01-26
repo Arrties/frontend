@@ -1,42 +1,30 @@
-import 'swiper/css'
-import 'swiper/css/pagination'
+import 'swiper/css';
+import 'swiper/css/pagination';
 
-import AuctionNavigate from '@components/auction/AuctionNavigate'
-import Layout from '@components/common/Layout'
-import Tab from '@components/common/Tab'
-import AuctionItem from '@components/home/AuctionItem'
-import Calendar from '@components/home/Calendar'
-import ExhibitionItem from '@components/home/ExhibitionItem'
-import ScheduleItem from '@components/home/ScheduleItem'
-import useGetKeywordArtWork from '@hooks/queries/useGetKeywordArtWork'
-import Image from 'next/image'
-import React from 'react'
-import { useRouter } from 'next/router'
-import { Autoplay, Navigation, Scrollbar } from 'swiper'
-import { Swiper, SwiperSlide } from 'swiper/react'
-import { isUser } from '@utils/isUser'
-import { Pagination } from 'swiper'
+import AuctionNavigate from '@components/auction/AuctionNavigate';
+import Layout from '@components/common/Layout';
+import Tab from '@components/common/Tab';
+import AuctionItem from '@components/home/AuctionItem';
+import Calendar from '@components/home/Calendar';
+import ExhibitionItem from '@components/home/ExhibitionItem';
+import ScheduleItem from '@components/home/ScheduleItem';
+import useGetKeywordArtWork from '@hooks/queries/useGetKeywordArtWork';
+import Image from 'next/image';
+import React from 'react';
+import { useRouter } from 'next/router';
+import { Autoplay, Navigation, Scrollbar } from 'swiper';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { isUser } from '@utils/isUser';
+import { Pagination } from 'swiper';
+import useGetProfile from '@hooks/queries/useGetProfile';
 
-const DUMP_KEYWORD_LISTS = ['사진', '소묘', '파스텔', '추상화'];
-const DUMP_ART_LISTS = [
-  {
-    src: '/svg/example/exhibition.svg',
-    school: '홍익대학교',
-    name: '작품이름',
-  },
-  { src: '/svg/example/detail.svg', school: '서울대학교', name: '작품이름' },
-  {
-    src: '/svg/example/exhibition.svg',
-    school: '연세대학교',
-    name: '작품이름',
-  },
-  { src: '/svg/example/detail.svg', school: '고려대학교', name: '작품이름' },
-  {
-    src: '/svg/example/exhibition.svg',
-    school: '건국대학교',
-    name: '작품이름',
-  },
-];
+interface KeywordArtwork {
+  id: string;
+  image: string;
+  title: string;
+  education: string;
+}
+
 const DUMP_AUCTION_LISTS = [
   { time: 1, start: '12:00', end: '14:00' },
   { time: 2, start: '12:00', end: '19:00' },
@@ -87,7 +75,7 @@ const DUMP_PREV_AUCTION_LISTS: AuctionListForm[] = [
     id: 5,
   },
 ];
-const makeThreeEach = (auctionList) => {
+const makeThreeEach = (auctionList: AuctionListForm[]) => {
   const afterArr: AuctionListForm[][] = [];
   let arr: AuctionListForm[] = [];
   auctionList.forEach((it: any, idx: number) => {
@@ -107,14 +95,16 @@ const DUMP_AFTER_AUCTION_LIST = makeThreeEach(DUMP_PREV_AUCTION_LISTS);
 export default function Home() {
   const router = useRouter();
 
-  const { keywordArtWork } = useGetKeywordArtWork();
-
+  const { data: keywordArtwork } = useGetKeywordArtWork();
+  const { data: userInfo } = useGetProfile();
   return (
     <>
       <Layout>
         <AuctionNavigate />
         <section className="">
-          <div className="text-14 text-[#767676]">영서님 취향의</div>
+          <div className="text-14 text-[#767676]">
+            {userInfo?.nickname}님 취향의
+          </div>
           <div className="flex justify-between">
             <span className="text-20 font-bold">이번 주 전시작품</span>
             <div className="flex items-center justify-between">
@@ -136,7 +126,7 @@ export default function Home() {
           </div>
         </section>
         <section className="my-4">
-          {DUMP_KEYWORD_LISTS.map((keyword) => (
+          {userInfo?.keywords?.map((keyword) => (
             <span
               className="mr-2 mb-1 rounded-[19px] border-[1px] border-[#DBDBDB] px-2 py-1 text-12 text-[#767676] last:mr-0 "
               key={keyword}
@@ -154,12 +144,12 @@ export default function Home() {
             slidesPerView={2}
             autoplay={{ delay: 5000, disableOnInteraction: false }}
           >
-            {DUMP_ART_LISTS.map((art, idx) => (
+            {keywordArtwork?.map((art: KeywordArtwork, idx: number) => (
               <SwiperSlide key={idx}>
                 <ExhibitionItem
-                  src={art.src}
-                  school={art.school}
-                  name={art.name}
+                  src={art.image}
+                  education={art.education}
+                  title={art.title}
                 />
               </SwiperSlide>
             ))}
@@ -225,19 +215,19 @@ export default function Home() {
             )}
           </Swiper>
         </section>
+        {!isUser && (
+          <Image
+            src="/svg/icons/icon_registration.svg"
+            alt="register"
+            width={80}
+            height={0}
+            onClick={() => {
+              router.push('/home/post');
+            }}
+            className="sticky bottom-[10px] z-50  m-auto mr-0 h-[72px] w-[72px] cursor-pointer"
+          />
+        )}
       </Layout>
-      {!isUser && (
-        <Image
-          src="/svg/icons/icon_registration.svg"
-          alt="register"
-          width={80}
-          height={0}
-          onClick={() => {
-            router.push('/home/post');
-          }}
-          className="sticky bottom-24 right-6 z-50 m-auto mr-0 h-[72px] w-[72px] cursor-pointer"
-        />
-      )}
       <Tab />
     </>
   );
