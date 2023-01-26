@@ -6,14 +6,12 @@ interface ExhibitionItemForm {
   education: string;
   title: string;
   id: string;
-  onClick: (e) => void;
 }
 
 export default function ExhibitionItem({
   src,
   education,
   title,
-  onClick,
   id,
 }: ExhibitionItemForm) {
   const router = useRouter();
