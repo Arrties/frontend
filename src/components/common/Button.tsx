@@ -10,7 +10,7 @@ export interface ButtonProps {
 
 const FilledButton = tw.button<ButtonProps>`
 ${({ disabled }) => disabled && 'opacity-50 cursor-not-allowed'}
-w-full transition h-[52px] text-sm rounded-[4px] hover:opacity-90 border border-transparent hover:brand-2 bg-brand px-0 text-white leading-3 font-normal shadow-xl shadow-gray
+w-full transition h-[52px] text-sm rounded-[4px] hover:opacity-90 border border-transparent hover:brand-2 bg-brand px-0 text-white leading-3 font-normal 
 `;
 
 const OutlinedButton = tw.button<ButtonProps>`
