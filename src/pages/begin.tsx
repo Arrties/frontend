@@ -19,7 +19,7 @@ const Title = tw.p`
 text-20 font-bold mt-16
 `;
 const Content = tw.p<defaultProps>`text-10 text-[#767676] mt-2 leading-4`;
-const Line = tw.span``;
+const Line = tw.p``;
 
 export default function Begin() {
   const swiperRef = useRef<any>(null);
@@ -104,7 +104,7 @@ export default function Begin() {
               <Title>채팅으로 작가와 컬렉터가 소통해요</Title>
               <Content>
                 <Line>아티스트와 컬렉터가 대화할 수 있는 </Line>
-                <Line>현대미술의 장점! 채팅으로 컬렉터분들과 소통해요.</Line>
+                <Line>현대미술의 장점! 채팅으로 함께 소통해요.</Line>
               </Content>
             </div>
             <div className="mt-6 flex justify-center space-x-3">
