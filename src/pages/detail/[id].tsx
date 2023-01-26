@@ -2,14 +2,20 @@ import Layout from '@components/common/Layout';
 import Image from 'next/image';
 import React from 'react';
 import Button from 'stories/Button';
+import { useRouter } from 'next/router';
+import useGetDetail from '@hooks/queries/useGetDetail';
 
 export default function Detail() {
+  const router = useRouter();
+  const { id } = router.query;
   const handleChat = () => {
     // 채팅방 만들기 API
   };
   const handlePurchase = () => {
     // 응찰 페이지로 이동
   };
+  const { data } = useGetDetail(Number(id));
+  console.log(data);
   return (
     <>
       <Layout>
@@ -19,20 +25,20 @@ export default function Detail() {
             src="/svg/example/detail.svg"
             width="0"
             height="0"
-            className="absolute top-0 inset-x-0 w-full"
+            className="absolute inset-x-0 top-0 w-full"
           />
         </section>
-        <section className="absolute top-[13rem] bg-white inset-x-0 rounded-[1.6rem] h-full p-5">
+        <section className="absolute inset-x-0 top-[13rem] h-full rounded-[1.6rem] bg-white p-5">
           <article>
             <div className="relative">
               <div className="text-20 font-bold">콰야 녹아내리는 고드름</div>
               <div className="mt-1">홍익대학교 예술학과</div>
             </div>
             <p className="absolute right-5 top-5">
-              <span className="text-brand bg-[#F8F8FA] text-12 py-0.5 px-1 font-bold">
+              <span className="bg-[#F8F8FA] py-0.5 px-1 text-12 font-bold text-brand">
                 마감까지
               </span>
-              <span className="text-12 text-[#FFFFFF] bg-brand py-0.5 px-1 font-bold">
+              <span className="bg-brand py-0.5 px-1 text-12 font-bold text-[#FFFFFF]">
                 D-3
               </span>
             </p>
@@ -67,9 +73,9 @@ export default function Detail() {
               <span className="text-[#191919]">41x31.8cm | 6호</span>
             </p>
           </article>
-          <article className="py-8 px-2 border-y    ">
-            <div className="font-bold text-18">작가 프로필</div>
-            <div className="ml-3 my-2 w-[4rem] h-[4rem] border border-[#999999] rounded-full flex justify-center items-center">
+          <article className="border-y py-8 px-2    ">
+            <div className="text-18 font-bold">작가 프로필</div>
+            <div className="my-2 ml-3 flex h-[4rem] w-[4rem] items-center justify-center rounded-full border border-[#999999]">
               <Image
                 src="/svg/icons/profile/icon_avatar.svg"
                 width="35"
@@ -77,11 +83,11 @@ export default function Detail() {
                 alt="avatar"
               />
             </div>
-            <div className="w-[5rem] text-center ml-1">아라</div>
+            <div className="ml-1 w-[5rem] text-center">아라</div>
           </article>
-          <article className="py-5 border-b">
+          <article className="border-b py-5">
             <div className="text-18 font-bold">작품 설명</div>
-            <div className="text-brand text-12 py-2">
+            <div className="py-2 text-12 text-brand">
               세부 사항 등 궁금한 점은 채팅으로 작가와 소통 할 수 있어요.
             </div>
             <div className="py-5">
@@ -105,7 +111,7 @@ export default function Detail() {
           <div className="h-[5rem]"></div>
         </section>
       </Layout>
-      <article className="flex gap-5 absolute top-[46rem] inset-x-0 w-[20rem] m-auto">
+      <article className="absolute inset-x-0 top-[46rem] m-auto flex w-[20rem] gap-5">
         <Button text="채팅하기" kind="outlined" onClick={handleChat} />
         <Button text="응찰하기" onClick={handlePurchase} />
       </article>
