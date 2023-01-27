@@ -4,7 +4,8 @@ import React, { useEffect, useState } from 'react';
 import Button from 'stories/Button';
 import { useRouter } from 'next/router';
 import useGetDetail from '@hooks/queries/useGetDetail';
-import useGetProfile from '@hooks/queries/useGetProfile';
+import Navigate from '@components/common/Navigate';
+import artworkApi from '@apis/artwork/artworkApi';
 
 export function getServerSideProps({ params }) {
   return {
@@ -23,6 +24,14 @@ export default function Detail({ params }) {
   const handlePurchase = () => {
     // 응찰 페이지로 이동
   };
+  const handlePreferButton = async () => {
+    if (true) {
+      // 찜을 아직 안 눌렀다면
+      await artworkApi.postPrefer(artWorkId);
+    } else {
+      await artworkApi.postDeletePrefer(artWorkId);
+    }
+  };
 
   const { data: detailData } = useGetDetail(Number(artWorkId));
   const { artWork, artist } = detailData || {};
@@ -30,6 +39,18 @@ export default function Detail({ params }) {
   return (
     <>
       <Layout>
+        <Navigate
+          className="fixed inset-x-0 top-[25px] z-10 m-auto h-10 max-w-[350px]"
+          right_message={
+            <Image
+              alt="heart"
+              src="/svg/icons/icon_heart.svg"
+              width="18"
+              height="0"
+            />
+          }
+          handleRightButton={handlePreferButton}
+        />
         <section>
           <Image
             alt="detail"
@@ -60,7 +81,7 @@ export default function Detail({ params }) {
               <span className="inline-block w-[6rem] text-[#767676]">
                 작가명
               </span>
-              <span className="text-[#191919]">{artist?.artistName} | Ara</span>
+              <span className="text-[#191919]">{artist?.artistName}</span>
             </p>
             <p className="h-7">
               <span className="inline-block w-[6rem] text-[#767676]">
@@ -70,13 +91,11 @@ export default function Detail({ params }) {
             </p>
             <p className="h-7">
               <span className="inline-block w-[6rem] text-[#767676]">장르</span>
-              <span className="text-[#191919]">
-                {artWork?.genre} | Painting
-              </span>
+              <span className="text-[#191919]">{artWork?.genre}</span>
             </p>
             <p className="h-7">
               <span className="inline-block w-[6rem] text-[#767676]">재료</span>
-              <span className="text-[#191919]">재료 | Oill On Canvas</span>
+              <span className="text-[#191919]">재료</span>
             </p>
             <p className="h-7">
               <span className="inline-block w-[6rem] text-[#767676]">액자</span>
@@ -135,7 +154,7 @@ export default function Detail({ params }) {
           {/* <div className="h-[5rem]"></div> */}
         </section>
       </Layout>
-      <article className="absolute inset-x-0 top-[46rem] m-auto flex w-[20rem] gap-5">
+      <article className="fixed inset-x-0 bottom-[40px] m-auto flex max-w-[360px] gap-5">
         <Button text="채팅하기" kind="outlined" onClick={handleChat} />
         <Button text="응찰하기" onClick={handlePurchase} />
       </article>

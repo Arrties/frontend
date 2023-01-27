@@ -11,6 +11,7 @@ interface NavigateProps {
   isLeftButton?: boolean;
   handleLeftButton?: () => void;
   handleRightButton?: () => void;
+  [key: string]: any;
 }
 
 interface DefaultProps {
@@ -53,9 +54,10 @@ export default function Navigate({
     Router.back();
   },
   handleRightButton,
+  ...rest
 }: NavigateProps) {
   return (
-    <NavigateBox>
+    <NavigateBox {...rest}>
       {isLeftButton && (
         <LeftButton onClick={handleLeftButton}>
           {left_message ? (
