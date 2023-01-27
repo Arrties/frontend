@@ -9,18 +9,23 @@ import Tab from '@components/common/Tab';
 import useGetChatRoom from '@hooks/queries/chat/useGetChatRoom';
 
 interface ChatRoomListForm {
-  id: string;
-  profileImage: string;
-  name: string;
-  time: string;
-  message: string;
-  notifyCnt: number;
+  artWorkImage: string;
+  chatRoomId: number;
+  lastMessage: string;
+  otherMember: {
+    id: number;
+    name: string;
+    image: string;
+  };
+  unreadCount: number;
 }
 
 export default function Chat() {
   const router = useRouter();
   const client: any = useRef({}) as React.MutableRefObject<StompJs.Client>;
-  const { data: chatRoomList } = useGetChatRoom();
+  const { data } = useGetChatRoom();
+  const chatRoomList = data?.chatRooms || [];
+  console.log(chatRoomList);
 
   const connect = () => {
     client.current = createClient('/ws-connection');
@@ -46,7 +51,7 @@ export default function Chat() {
         {chatRoomList?.length ? (
           <div className="absolute inset-x-0 mt-5 w-full ">
             {chatRoomList.map((chatRoom: ChatRoomListForm) => (
-              <Chatroom chatRoom={chatRoom} key={chatRoom.id} />
+              <Chatroom chatRoom={chatRoom} key={chatRoom.chatRoomId} />
             ))}
           </div>
         ) : (
