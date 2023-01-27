@@ -1,32 +1,57 @@
 import profileApi from '@apis/profile/profileApi';
+import Button from '@components/common/Button';
 import Layout from '@components/common/Layout';
+import Loader from '@components/common/Loader';
+import Modal from '@components/common/Modal';
+import Navigate from '@components/common/Navigate';
 import SelectKeyword from '@components/profile/Selectkeyword';
+import useKeywordMutation from '@hooks/mutations/useKeywordMutation';
 import useGetProfile from '@hooks/queries/useGetProfile';
+import { useRouter } from 'next/router';
 import { useState, useEffect } from 'react';
 
 export default function Keyword() {
   const [keywordList, setKeywordList] = useState<string[]>([]);
   const { data } = useGetProfile();
-
+  const { mutate, isLoading, data: keywordData } = useKeywordMutation();
+  const [isModal, setIsModal] = useState<boolean>(false);
+  const router = useRouter();
   useEffect(() => {
     setKeywordList(data?.keywords || []);
   }, [data]);
 
-  const handleSubmit = async (e: any) => {
-    let response: any;
-    if (e.target.id === 'skip') {
-      response = await profileApi.patchKeyword(data?.keywords || []);
-    } else {
-      response = await profileApi.patchKeyword(keywordList);
-    }
-    console.log(response);
+  const handleButtonClick = () => {
+    const keywordsObject = {
+      keywords: keywordList,
+    };
+    mutate(keywordsObject);
+    setIsModal(true);
   };
+
+  if (isLoading) return <Loader />;
+
   return (
     <Layout>
+      <Navigate isRightButton={false} />
       <SelectKeyword
-        handleSubmit={handleSubmit}
+        className="mt-[10px]"
         setKeywordList={setKeywordList}
         keywordList={keywordList}
+      />
+      <Button
+        text="완료"
+        onClick={handleButtonClick}
+        disabled={keywordList?.length === 0}
+      />
+      <Modal
+        message="취향 분석이 완료 되었습니다."
+        isModal={isModal}
+        onCloseModal={() => {
+          setIsModal(false);
+        }}
+        onAccept={() => {
+          router.push('/profile');
+        }}
       />
     </Layout>
   );
