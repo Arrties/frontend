@@ -1,11 +1,5 @@
-import Modal from '@components/common/Modal';
-import Navigate from '@components/common/Navigate';
 import tw from 'tailwind-styled-components';
-import { useState } from 'react';
-import { useRouter } from 'next/router';
 import { KEYWORDLIST } from '@utils/keywordList';
-
-import Button from '../common/Button';
 
 interface SelectKeywordProps {
   keywordList: string[];
@@ -36,7 +30,6 @@ export default function SelectKeyword({
 
   return (
     <SelectKeywordTag {...rest}>
-      <div className="text-16 font-semibold">관심있는 키워드를 골라주세요.</div>
       <div className="flex flex-wrap py-4 text-[#767676]">
         {KEYWORDLIST.map((keyword) => (
           <div
