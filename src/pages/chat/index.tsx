@@ -2,12 +2,12 @@ import * as StompJs from '@stomp/stompjs';
 import Chatroom from '@components/chat/ChatRoom';
 import Layout from '@components/common/Layout';
 import Image from 'next/image';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useRouter } from 'next/router';
 import { createClient, publish, subscribe } from '@apis/chat/socketConnect';
 import Tab from '@components/common/Tab';
 import useGetChatRoomList from '@hooks/queries/chat/useGetChatRoomList';
-import useGetChatRoom from '@hooks/queries/chat/useGetChatRoom';
+import useGetProfile from '@hooks/queries/useGetProfile';
 
 interface ChatRoomListForm {
   artWorkImage: string;
@@ -28,22 +28,21 @@ export default function Chat() {
   const router = useRouter();
   const client: any = useRef({}) as React.MutableRefObject<StompJs.Client>;
   const { data: chatRooms } = useGetChatRoomList();
+  const { data: userInfo } = useGetProfile();
   const chatRoomList = chatRooms?.chatRooms || [];
-  // const { data: chatRoom, refetch: refetchChatRoom } = useGetChatRoom(1);
-  // const { data: chatRoomList } = useGetChatRoomList();
-  const connect = () => {
-    client.current = createClient('/ws-connection');
-    client.current.onConnect = onConnected;
-    client.current.activate();
+  const connect = async () => {
+    client.current = await createClient('/ws-connection');
+    client.current.onConnect = await onConnected;
+    await client.current.activate();
   };
+
   const sendChat = () => {
-    if (!client.current.connected) return;
-    publish(client.current, 1, '박규성', 'abcde');
-    // refetchChatRoom();
+    // if (!client.current.connected) return;
+    publish(client.current, 2, userInfo?.id, 'abcde');
   };
 
   const onConnected = () => {
-    subscribe(client.current, 1, subscribeCallback);
+    subscribe(client.current, 2, subscribeCallback);
   };
 
   const subscribeCallback = (response) => {
@@ -54,9 +53,9 @@ export default function Chat() {
 
   useEffect(() => {
     connect();
-    // () => {
-    //   disconnect();
-    // };
+    () => {
+      disconnect();
+    };
   }, []);
 
   const disconnect = () => {
