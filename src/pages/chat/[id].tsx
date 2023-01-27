@@ -6,16 +6,10 @@ import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
 import useGetChatRoom from '@hooks/queries/chat/useGetChatRoom';
-
-interface ChatRoomProps {
-  params: any;
-}
-
 interface ChatRoomForm {
-  id: string;
-  time: string;
-  text: string;
-  sender: 'me' | 'you';
+  senderId: string;
+  sendDate: string;
+  message: string;
 }
 
 interface MessageForm {
@@ -23,31 +17,20 @@ interface MessageForm {
   image: FileList;
 }
 
-const DUMP_CHATLIST: ChatRoomForm[] = [
-  {
-    id: '1',
-    time: '오전 10:30',
-    text: '온주 작가님 안녕하세요',
-    sender: 'me',
-  },
-  {
-    id: '2',
-    time: '오전 10:30',
-    text: '작품 관련 문의사항이 있어 연락드렸습니다.',
-    sender: 'me',
-  },
-  { id: '3', time: '오전 10:33', text: '네 안녕하세요!', sender: 'you' },
-  { id: '4', time: '오전 10:33', text: '반갑습니다', sender: 'you' },
-  { id: '5', time: '오전 10:35', text: '반가워요', sender: 'me' },
-];
+export function getServerSideProps({ params }) {
+  return {
+    props: {
+      params,
+    },
+  };
+}
 
-export default function ChatRoom({ params }: ChatRoomProps) {
+export default function ChatRoom({ params }) {
   const router = useRouter();
   const { register, handleSubmit, watch } = useForm<MessageForm>();
-  const { id } = router.query;
   const [isModal, setIsModal] = useState(false);
-  const [chatList, setChatList] = useState<ChatRoomForm[]>(DUMP_CHATLIST);
-  const { data: chatRoom } = useGetChatRoom(Number(id));
+  const { data: chatRoom } = useGetChatRoom(Number(params?.id));
+  const { artist, chatRoomId, member, messages } = chatRoom || { messages: [] };
 
   const handleOption = () => {
     console.log('option');
@@ -96,7 +79,7 @@ export default function ChatRoom({ params }: ChatRoomProps) {
             onClick={() => router.back()}
             className="cursor-pointer"
           />
-          <div className="px-5 text-16 ">온주</div>
+          <div className="px-5 text-16 ">{artist?.name}</div>
           <div className="flex items-center text-12">응답시간 : 1시간 이내</div>
           <Image
             src="/svg/icons/icon_option.svg"
@@ -113,12 +96,12 @@ export default function ChatRoom({ params }: ChatRoomProps) {
           2022년 12월 23일
         </article>
         <article className="mt-4">
-          {chatList.map((chatItem: ChatRoomForm) => (
+          {messages.map((chatItem: ChatRoomForm) => (
             <ChattingMessage
-              key={chatItem.id}
-              time={chatItem.time}
-              text={chatItem.text}
-              sender={chatItem.sender}
+              key={chatItem.senderId}
+              time={chatItem.sendDate}
+              text={chatItem.message}
+              sender={chatItem.senderId}
             />
           ))}
         </article>

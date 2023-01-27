@@ -3,7 +3,8 @@ import chatApi from '@apis/chat/chatApi';
 
 const useGetChatRoom = (id: number) => {
   return useQuery<any, Error>('useGetChatRoom', () => chatApi.getChatRoom(id), {
-    retry: 0,
+    retry: false,
+    refetchOnWindowFocus: false,
   });
 };
 
