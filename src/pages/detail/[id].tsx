@@ -151,7 +151,7 @@ export default function Detail({ params }) {
             priority
           />
 
-          {/* <div className="h-[5rem]"></div> */}
+          <div className="h-[5rem]"></div>
         </section>
       </Layout>
       <article className="fixed inset-x-0 bottom-[40px] m-auto flex max-w-[360px] gap-5">
