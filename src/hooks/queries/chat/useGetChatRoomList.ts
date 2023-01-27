@@ -5,7 +5,7 @@ const useGetChatRoomList = () => {
   return useQuery<any, Error>(
     'useGetChatRoomList',
     () => chatApi.getChatRoomList(),
-    { retry: 0 },
+    { retry: 0, refetchOnWindowFocus: false },
   );
 };
 

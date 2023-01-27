@@ -5,7 +5,10 @@ import { useRouter } from 'next/router';
 interface ChatRoomListForm {
   artWorkImage: string;
   chatRoomId: number;
-  lastMessage: string;
+  lastMessage: {
+    message: string;
+    sendDate: string;
+  };
   otherMember: {
     id: number;
     name: string;
@@ -21,7 +24,7 @@ interface ChatRoomProps {
 
 export default function Chatroom({ chatRoom }: ChatRoomProps) {
   const handleChattingRoom = () => {
-    router.push(`/chat/${chatRoom.chatRoomId}`);
+    router.push(`/chat/${chatRoom?.chatRoomId}`);
   };
   const router = useRouter();
   return (
@@ -45,11 +48,11 @@ export default function Chatroom({ chatRoom }: ChatRoomProps) {
             {chatRoom?.otherMember?.name}
           </p>
           <p className="flex items-center justify-center text-10 text-[#767676]">
-            {chatRoom?.otherMember?.name}
+            {chatRoom?.lastMessage?.sendDate}
           </p>
         </div>
         <p className="mt-1 flex items-center justify-center px-2 text-12 text-[#191919]">
-          {chatRoom?.lastMessage}
+          {chatRoom?.lastMessage?.message}
         </p>
       </article>
       {!!chatRoom.unreadCount && (
@@ -57,6 +60,7 @@ export default function Chatroom({ chatRoom }: ChatRoomProps) {
           {chatRoom.unreadCount}
         </article>
       )}
+      {/* <Image alt="" src="/svg/icons/icon_.svg" width="100" height="0" /> */}
     </section>
   );
 }

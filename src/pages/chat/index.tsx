@@ -12,7 +12,10 @@ import useGetChatRoom from '@hooks/queries/chat/useGetChatRoom';
 interface ChatRoomListForm {
   artWorkImage: string;
   chatRoomId: number;
-  lastMessage: string;
+  lastMessage: {
+    message: string;
+    sendDate: string;
+  };
   otherMember: {
     id: number;
     name: string;
@@ -24,11 +27,9 @@ interface ChatRoomListForm {
 export default function Chat() {
   const router = useRouter();
   const client: any = useRef({}) as React.MutableRefObject<StompJs.Client>;
-  // const { data } = useGetChatRoom();
-  // const chatRoomList = data?.chatRooms || [];
-  // console.log(chatRoomList);
-  const { data: chatRoom, refetch: refetchChatRoom } = useGetChatRoom(1);
-
+  const { data: chatRooms } = useGetChatRoomList();
+  const chatRoomList = chatRooms?.chatRooms || [];
+  // const { data: chatRoom, refetch: refetchChatRoom } = useGetChatRoom(1);
   // const { data: chatRoomList } = useGetChatRoomList();
   const connect = () => {
     client.current = createClient('/ws-connection');
@@ -72,15 +73,7 @@ export default function Chat() {
         {chatRoomList?.length ? (
           <div className="absolute inset-x-0 mt-5 w-full ">
             {chatRoomList.map((chatRoom: ChatRoomListForm) => (
-              // <Chatroom chatRoom={chatRoom} key={chatRoom.chatRoomId} />
-              <Chatroom
-                chatRoom={chatRoom}
-                // key={chatRoom.id}
-                // id={chatRoom.id}
-                onClick={(e) => {
-                  router.push(`/chat/${e.target.id}`);
-                }}
-              />
+              <Chatroom chatRoom={chatRoom} key={chatRoom.chatRoomId} />
             ))}
           </div>
         ) : (
