@@ -24,8 +24,11 @@ export default function Keyword() {
     const keywordsObject = {
       keywords: keywordList,
     };
-    mutate(keywordsObject);
-    setIsModal(true);
+    mutate(keywordsObject, {
+      onSuccess: () => {
+        setIsModal(true);
+      },
+    });
   };
 
   if (isLoading) return <Loader />;
