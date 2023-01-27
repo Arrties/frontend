@@ -5,7 +5,7 @@ import ErrorMessage from '@components/common/ErrorMessage';
 import Input from '@components/common/Input';
 import Layout from '@components/common/Layout';
 import SocialLoginButton from '@components/login/SocialLoginButton';
-import useLoginMutation from '@hooks/mutation/useLoginMutation';
+import useLoginMutation from '@hooks/mutations/useLoginMutation';
 import Image from 'next/image';
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react';

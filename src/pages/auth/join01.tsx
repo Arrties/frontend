@@ -202,7 +202,7 @@ export default function Join01() {
               : true
           }
           text="확인"
-          className="absolute inset-x-0 bottom-[100px] m-auto"
+          className="absolute inset-x-0 bottom-[100px] m-auto w-[calc(100%-48px)]"
         />
       </form>
     </Layout>
