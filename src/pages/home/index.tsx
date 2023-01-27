@@ -216,7 +216,7 @@ export default function Home() {
             )}
           </Swiper>
         </section>
-        <FloatButton />
+        {!isUser && <FloatButton />}
       </Layout>
       <Tab />
     </>
