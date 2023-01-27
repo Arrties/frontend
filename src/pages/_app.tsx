@@ -17,9 +17,8 @@ export default function App({ Component, pageProps }: AppProps) {
   //   const token = getToken();
   //   if (!token.accessToken) router.replace('/auth/login');
   // }, [router]);
-
   return (
-    <div className="flex h-screen w-screen justify-center bg-slate-50">
+    <div className="flex h-screen w-screen justify-center bg-slate-50 font-Pretendard">
       <Head>
         <link rel="shortcut icon" href="/static/favicon.ico" />
       </Head>
