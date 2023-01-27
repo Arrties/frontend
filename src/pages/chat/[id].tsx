@@ -2,10 +2,12 @@ import ChattingMessage from '@components/chat/ChatMessage';
 import Layout from '@components/common/Layout';
 import Modal from '@components/common/Modal';
 import Image from 'next/image';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
 import useGetChatRoom from '@hooks/queries/chat/useGetChatRoom';
+import * as StompJs from '@stomp/stompjs';
+import { createClient, publish, subscribe } from '@apis/chat/socketConnect';
 interface ChatRoomForm {
   senderId: string;
   sendDate: string;
@@ -26,14 +28,14 @@ export function getServerSideProps({ params }) {
 }
 
 export default function ChatRoom({ params }) {
+  const id = params?.id;
   const router = useRouter();
   const { register, handleSubmit, watch } = useForm<MessageForm>();
   const [isModal, setIsModal] = useState(false);
-  const { data: chatRoom } = useGetChatRoom(Number(params?.id));
+  const { data: chatRoom } = useGetChatRoom(Number(id));
   const { artist, chatRoomId, member, messages } = chatRoom || { messages: [] };
 
   const handleOption = () => {
-    console.log('option');
     setIsModal(true);
   };
   const onCloseModal = () => {
@@ -44,12 +46,6 @@ export default function ChatRoom({ params }) {
     // 채팅방 나가기 API
   };
 
-  const onSubmit = (form: MessageForm) => {
-    console.log(form);
-    console.log(chatRoom);
-    // publish(form.message);
-  };
-
   const image = watch('image');
   useEffect(() => {
     if (image && image.length > 0) {
@@ -57,6 +53,39 @@ export default function ChatRoom({ params }) {
       // 사진 API전송
     }
   }, [image]);
+
+  const client: any = useRef({}) as React.MutableRefObject<StompJs.Client>;
+  const connect = async () => {
+    client.current = await createClient('/ws-connection');
+    client.current.onConnect = await onConnected;
+    await client.current.activate();
+  };
+
+  const onConnected = () => {
+    subscribe(client.current, id, subscribeCallback);
+  };
+
+  const subscribeCallback = (response) => {
+    console.log(response);
+    const responseBody = JSON.parse(response.body);
+    console.log(responseBody);
+  };
+
+  useEffect(() => {
+    connect();
+    () => {
+      disconnect();
+    };
+  }, []);
+
+  const onSubmit = (form: MessageForm) => {
+    if (!client.current.connected) return;
+    publish(client.current, 2, member?.id, form?.message);
+  };
+
+  const disconnect = () => {
+    client.current.deactivate();
+  };
 
   return (
     <Layout>
