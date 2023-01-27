@@ -54,6 +54,11 @@ instance.interceptors.response.use(
       }
 
       if (data?.code === 'TOKEN_EXPIRED') {
+        setToken({
+          accessToken: '',
+          refreshToken: getToken().refreshToken,
+          roles: getToken().roles,
+        });
         const { accessToken } = await refreshToken();
         setToken({
           accessToken,
