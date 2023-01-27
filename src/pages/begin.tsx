@@ -18,7 +18,7 @@ const ImageWrapper = tw.div<defaultProps>`h-[360px] pt-[100px] `;
 const Title = tw.p`
 text-18 font-bold mt-16 text-center
 `;
-const Content = tw.p<defaultProps>`text-[14px] font-bold text-[#767676] mt-2 leading-4 `;
+const Content = tw.div<defaultProps>`text-[14px] font-bold text-[#767676] mt-2 leading-4 `;
 const Line = tw.p`leading-5 pl-5`;
 
 export default function Begin() {
@@ -47,6 +47,7 @@ export default function Begin() {
                 src="/svg/begin/begin_01.svg"
                 width="375"
                 height="0"
+                priority
               />
             </ImageWrapper>
             <div className="pl-6">

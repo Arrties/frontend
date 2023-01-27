@@ -126,7 +126,7 @@ export default function Home() {
             </div>
           </div>
         </section>
-        <section className="my-4">
+        <section className="my-4 ">
           {userInfo?.keywords?.map((keyword) => (
             <span
               className="mr-2 mb-1 rounded-[19px] border-[1px] border-[#DBDBDB] px-2 py-1 text-12 text-[#767676] last:mr-0 "
@@ -136,7 +136,7 @@ export default function Home() {
             </span>
           ))}
         </section>
-        <section className="mb-12">
+        <section className="mb-12 ">
           <Swiper
             modules={[Autoplay, Navigation, Scrollbar]}
             navigation
@@ -151,6 +151,7 @@ export default function Home() {
                   src={art.image}
                   education={art.education}
                   title={art.title}
+                  id={art.id}
                 />
               </SwiperSlide>
             ))}

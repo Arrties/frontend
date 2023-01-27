@@ -3,20 +3,28 @@ import instance from '@apis/_axios/instance';
 
 export class ArtworkApi {
   async postArtwork(body: FormData): Promise<ArtworkDTOType> {
-    try {
-      const { data } = await instance.post(
-        `${process.env.NEXT_PUBLIC_API_BASE_URL}/art-works`,
-        body,
-        {
-          headers: {
-            'Content-Type': 'multipart/form-data',
-          },
-        },
-      );
-      return data;
-    } catch (err: any) {
-      return err;
-    }
+    const { data } = await instance.post('/art-works', body, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
+    return data;
+  }
+  async getDetail(artWorkId: number) {
+    const { data } = await instance.get(`art-works/${artWorkId}`);
+    return data;
+  }
+  async postPrefer(artWorkId: number) {
+    const response = await instance.post(
+      `/members/preferred-artworks/${artWorkId}`,
+    );
+    return response;
+  }
+  async postDeletePrefer(artWorkId: number) {
+    const response = await instance.delete(
+      `/members/preferred-artworks/${artWorkId}`,
+    );
+    return response;
   }
 }
 
