@@ -1,6 +1,6 @@
 import tw from 'tailwind-styled-components';
 
-export interface ButtonProps {
+export interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
   kind?: 'filled' | 'outlined';
   text: string;
   disabled?: boolean;
