@@ -47,7 +47,7 @@ const publish = (client, roomId, senderId, chat) => {
     destination: '/app/send',
     body: {
       chatRoomId: roomId,
-      sender: senderId,
+      senderId: senderId,
       message: chat,
     },
   });
