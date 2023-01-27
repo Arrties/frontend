@@ -6,6 +6,7 @@ import { useRouter } from 'next/router';
 import useGetDetail from '@hooks/queries/useGetDetail';
 import Navigate from '@components/common/Navigate';
 import artworkApi from '@apis/artwork/artworkApi';
+import chatApi from '@apis/chat/chatApi';
 
 export function getServerSideProps({ params }) {
   return {
@@ -18,7 +19,11 @@ export function getServerSideProps({ params }) {
 export default function Detail({ params }) {
   const router = useRouter();
   const artWorkId = params?.id;
+  const { data: detailData } = useGetDetail(Number(artWorkId));
+  const { artWork, artist } = detailData || {};
+
   const handleChat = () => {
+    chatApi.postChat({ artistId: artist?.id, artWorkId: artWork?.id });
     // 채팅방 만들기 API
   };
   const handlePurchase = () => {
@@ -32,9 +37,6 @@ export default function Detail({ params }) {
       await artworkApi.postDeletePrefer(artWorkId);
     }
   };
-
-  const { data: detailData } = useGetDetail(Number(artWorkId));
-  const { artWork, artist } = detailData || {};
 
   return (
     <>

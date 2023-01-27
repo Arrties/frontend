@@ -12,7 +12,7 @@ export class ChatApi {
     return data;
   }
 
-  async postChat(body: ChatDTOType): Promise<ChatDTOType> {
+  async postChat(body: ChatDTOType): Promise<any> {
     const { data } = await instance.post('/chat-rooms', body);
     return data;
   }
