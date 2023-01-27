@@ -12,9 +12,13 @@ export class ChatApi {
     return data;
   }
 
-  async postChat(body: ChatDTOType): Promise<any> {
+  async postChatRoom(body: ChatDTOType): Promise<any> {
     const { data } = await instance.post('/chat-rooms', body);
     return data;
+  }
+  async deleteChatRoom(id: number): Promise<any> {
+    const response = await instance.delete(`/chat-rooms/${id}`);
+    return response;
   }
 }
 

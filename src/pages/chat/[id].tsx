@@ -8,6 +8,7 @@ import { useForm } from 'react-hook-form';
 import useGetChatRoom from '@hooks/queries/chat/useGetChatRoom';
 import * as StompJs from '@stomp/stompjs';
 import { createClient, publish, subscribe } from '@apis/chat/socketConnect';
+import chatApi from '@apis/chat/chatApi';
 interface ChatRoomForm {
   senderId: string;
   sendDate: string;
@@ -41,8 +42,12 @@ export default function ChatRoom({ params }) {
   const onCloseModal = () => {
     setIsModal(false);
   };
-  const onAccept = () => {
+  const onAccept = async () => {
     console.log('채팅방 나가기');
+    const response = await chatApi.deleteChatRoom(id);
+    if (response?.status === 200) {
+      router.push('/chat');
+    }
     // 채팅방 나가기 API
   };
 

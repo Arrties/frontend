@@ -23,7 +23,7 @@ export default function Detail({ params }) {
   const { artWork, artist } = detailData || {};
 
   const handleChat = () => {
-    chatApi.postChat({ artistId: artist?.id, artWorkId: artWork?.id });
+    chatApi.postChatRoom({ artistId: artist?.id, artWorkId: artWork?.id });
     // 채팅방 만들기 API
   };
   const handlePurchase = () => {
