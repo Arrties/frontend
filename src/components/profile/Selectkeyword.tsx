@@ -30,7 +30,7 @@ export default function SelectKeyword({
 
   return (
     <SelectKeywordTag {...rest}>
-      <div className="flex flex-wrap py-4 text-[#767676]">
+      <div className="flex flex-wrap py-5 text-[#767676]">
         {KEYWORDLIST.map((keyword) => (
           <div
             key={keyword.id}
