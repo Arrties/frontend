@@ -1,7 +1,8 @@
 import instance from '@apis/_axios/instance';
+import { CustomizeArtwork } from './homeApi.type';
 
 export class HomeApi {
-  async getKeywordArtWork(): Promise<any> {
+  async getCustomizedArtWork(): Promise<CustomizeArtwork> {
     const { data } = await instance(
       '/members/customized-artworks?page=1&limit=5',
     );

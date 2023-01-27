@@ -38,12 +38,9 @@ export class ProfileApi {
     const response = await instance.patch(`/members/ask/${askId}`, formData);
     return response;
   }
-  async patchKeyword(body: string[]) {
-    const response = await instance.patch(
-      `${process.env.NEXT_PUBLIC_API_BASE_URL}/members/keywords`,
-      body,
-    );
-    return response;
+  async patchKeyword(body: any) {
+    const { data } = await instance.patch('/members/keywords', body);
+    return data;
   }
 }
 

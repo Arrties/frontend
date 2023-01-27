@@ -7,8 +7,10 @@ import Tab from '@components/common/Tab';
 import AuctionItem from '@components/home/AuctionItem';
 import Calendar from '@components/home/Calendar';
 import ExhibitionItem from '@components/home/ExhibitionItem';
+import FloatButton from '@components/home/FloatButton';
 import ScheduleItem from '@components/home/ScheduleItem';
-import useGetKeywordArtWork from '@hooks/queries/useGetKeywordArtWork';
+import useGetCustomizedArtWork from '@hooks/queries/useGetCustomizedArtWork';
+import useGetProfile from '@hooks/queries/useGetProfile';
 import Image from 'next/image';
 import React from 'react';
 import { useRouter } from 'next/router';
@@ -16,7 +18,6 @@ import { Autoplay, Navigation, Scrollbar } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { isUser } from '@utils/isUser';
 import { Pagination } from 'swiper';
-import useGetProfile from '@hooks/queries/useGetProfile';
 
 interface KeywordArtwork {
   id: string;
@@ -95,7 +96,7 @@ const DUMP_AFTER_AUCTION_LIST = makeThreeEach(DUMP_PREV_AUCTION_LISTS);
 export default function Home() {
   const router = useRouter();
 
-  const { data: keywordArtwork } = useGetKeywordArtWork();
+  const { data: customizedArtwork } = useGetCustomizedArtWork();
   const { data: userInfo } = useGetProfile();
   return (
     <>
@@ -144,16 +145,18 @@ export default function Home() {
             slidesPerView={2}
             autoplay={{ delay: 5000, disableOnInteraction: false }}
           >
-            {keywordArtwork?.map((art: KeywordArtwork, idx: number) => (
-              <SwiperSlide key={idx}>
-                <ExhibitionItem
-                  src={art.image}
-                  education={art.education}
-                  title={art.title}
-                  id={art.id}
-                />
-              </SwiperSlide>
-            ))}
+            {customizedArtwork?.artworks?.map(
+              (art: KeywordArtwork, idx: number) => (
+                <SwiperSlide key={idx}>
+                  <ExhibitionItem
+                    src={art.image}
+                    education={art.education}
+                    title={art.title}
+                    id={art.id}
+                  />
+                </SwiperSlide>
+              ),
+            )}
           </Swiper>
         </section>
         <section className="mb-3">
@@ -216,18 +219,7 @@ export default function Home() {
             )}
           </Swiper>
         </section>
-        {!isUser && (
-          <Image
-            src="/svg/icons/icon_registration.svg"
-            alt="register"
-            width={80}
-            height={0}
-            onClick={() => {
-              router.push('/home/post');
-            }}
-            className="sticky bottom-[70px] right-[10px] z-50  m-auto mr-0 h-[72px] w-[72px] cursor-pointer"
-          />
-        )}
+        {!isUser && <FloatButton />}
       </Layout>
       <Tab />
     </>

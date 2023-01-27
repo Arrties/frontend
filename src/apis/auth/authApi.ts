@@ -6,6 +6,12 @@ export class AuthApi {
     const { data } = await instance.get(`/members/me`);
     return data;
   }
+
+  async postMember(body: Member): Promise<Member> {
+    const { data } = await instance.post('/members/join', body);
+    return data;
+  }
+
   async postLogin(body: LoginForm): Promise<Token> {
     const { data } = await instance.post('/members/login', body);
     return data;
