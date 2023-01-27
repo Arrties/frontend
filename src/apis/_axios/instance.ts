@@ -7,9 +7,12 @@ const instance = axios.create({
 
 const refreshToken = async () => {
   const refreshToken = getToken().refreshToken;
-  const response = await axios.post('/members/token', {
-    refreshToken,
-  });
+  const response = await axios.post(
+    `${process.env.NEXT_PUBLIC_API_BASE_URL}/members/token`,
+    {
+      refreshToken,
+    },
+  );
   return response.data;
 };
 

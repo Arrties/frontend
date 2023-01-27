@@ -1,18 +1,27 @@
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 
 interface ExhibitionItemForm {
   src: string;
   education: string;
   title: string;
+  id: string;
 }
 
 export default function ExhibitionItem({
   src,
   education,
   title,
+  id,
 }: ExhibitionItemForm) {
+  const router = useRouter();
   return (
-    <div className="relative h-[197px] w-[158px] rounded">
+    <div
+      className="relative h-[197px] w-[158px] rounded"
+      onClick={() => {
+        router.push(`/detail/${id}`);
+      }}
+    >
       <Image
         src={src}
         alt="notification"
