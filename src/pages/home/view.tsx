@@ -9,26 +9,31 @@ const DUMP_ART_LISTS = [
     image: '/svg/example/exhibition.svg',
     education: '홍익대학교',
     title: '작품이름',
+    id: '1',
   },
   {
     image: '/svg/example/detail.svg',
     education: '서울대학교',
     title: '작품이름',
+    id: '2',
   },
   {
     image: '/svg/example/exhibition.svg',
     education: '연세대학교',
     title: '작품이름',
+    id: '3',
   },
   {
     image: '/svg/example/detail.svg',
     education: '고려대학교',
     title: '작품이름',
+    id: '4',
   },
   {
     image: '/svg/example/exhibition.svg',
     education: '건국대학교',
     title: '작품이름',
+    id: '5',
   },
 ];
 
@@ -50,6 +55,7 @@ export default function View() {
             education={art.education}
             title={art.title}
             key={idx}
+            id={art.id}
           />
         ))}
       </div>
