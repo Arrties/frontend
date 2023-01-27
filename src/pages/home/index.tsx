@@ -17,6 +17,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { isUser } from '@utils/isUser';
 import { Pagination } from 'swiper';
 import useGetProfile from '@hooks/queries/useGetProfile';
+import FloatButton from '@components/home/FloatButton';
 
 interface KeywordArtwork {
   id: string;
@@ -215,18 +216,7 @@ export default function Home() {
             )}
           </Swiper>
         </section>
-        {!isUser && (
-          <Image
-            src="/svg/icons/icon_registration.svg"
-            alt="register"
-            width={80}
-            height={0}
-            onClick={() => {
-              router.push('/home/post');
-            }}
-            className="sticky bottom-[10px] z-50  m-auto mr-0 h-[72px] w-[72px] cursor-pointer"
-          />
-        )}
+        <FloatButton />
       </Layout>
       <Tab />
     </>
