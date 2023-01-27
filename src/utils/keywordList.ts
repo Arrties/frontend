@@ -35,5 +35,4 @@ export const KEYWORDLIST: KeywordForm[] = [
   { id: '29', name: '단순한' },
   { id: '30', name: '선명한' },
   { id: '31', name: '투명한' },
-  { id: '32', name: '단순한' },
 ];
