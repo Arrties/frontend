@@ -1,4 +1,4 @@
-export type InquiryForm = {
+export interface InquiryForm {
   date: string;
   time: string;
   title: string;
@@ -6,7 +6,15 @@ export type InquiryForm = {
   status: string;
   answer: string;
   id: number;
-};
-export type RoleForm = {
+}
+export interface RoleForm {
   roles: string;
-};
+}
+export interface KeywordForm {
+  keywords: string[];
+}
+
+export interface Keyword {
+  id: number;
+  keyword: string;
+}
