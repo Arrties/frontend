@@ -308,7 +308,7 @@ export default function Join02() {
 
         <Button
           text="확인"
-          className="absolute inset-x-0 bottom-[34px] m-auto w-[calc(100%-48px)]"
+          className="absolute inset-x-0 bottom-[34px] m-auto"
         />
       </form>
     </Layout>

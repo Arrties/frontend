@@ -72,7 +72,7 @@ function Join03() {
       </button>
       <Button
         text="분석 시작"
-        className="absolute inset-x-0 bottom-[34px] m-auto w-[calc(100%-48px)]"
+        className="absolute inset-x-0 bottom-[34px] m-auto"
         onClick={handleNextButton}
       />
     </Layout>

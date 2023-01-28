@@ -54,7 +54,7 @@ export default function Join04() {
         다음에 할래요
       </button>
       <Button
-        className="absolute inset-x-0 bottom-[34px] m-auto "
+        className="absolute inset-x-0 bottom-[34px] m-auto"
         text="분석 시작"
         onClick={() => {
           setIsModal(true);
