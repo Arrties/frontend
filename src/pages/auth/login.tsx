@@ -94,8 +94,14 @@ function Login() {
   return (
     <Layout>
       <div className="mx-auto w-full">
-        <div className="flex h-48 items-center justify-center text-center text-2xl font-light">
-          LOGO
+        <div className="flex h-56 items-center justify-center">
+          <Image
+            alt=""
+            src="/svg/icons/icon_logo_main.svg"
+            width="60"
+            height="0"
+            className="flex items-center justify-center text-center text-2xl font-light"
+          />
         </div>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="flex flex-col ">
@@ -157,7 +163,7 @@ function Login() {
               비밀번호 찾기
             </Link>
           </p>
-          <p className="mt-24 flex w-full items-center justify-center text-12">
+          <p className="mt-36 flex w-full items-center justify-center text-12 ">
             <span className="text-[#999999]">아직 회원이 아니신가요?</span>
             <Link className="ml-[2px]" href="/auth/join01">
               회원가입
