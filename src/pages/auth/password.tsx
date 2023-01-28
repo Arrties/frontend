@@ -40,29 +40,22 @@ function Password() {
   };
 
   const router = useRouter();
-  const handleLeftButton = () => {
-    router.push('/auth/login');
-  };
-  const handleRightButton = () => {
-    router.push('/auth/login');
-  };
-  const onCloseModal = () => {
-    setIsModal(false);
-  };
-
   return (
     <Layout>
       {isModal && (
         <Modal
           isModal={isModal}
-          onCloseModal={onCloseModal}
+          onCloseModal={() => {
+            setIsModal(false);
+          }}
           message="임시 비밀번호를 전송했습니다."
         />
       )}
       <Navigate
         message="비밀번호 찾기"
-        handleLeftButton={handleLeftButton}
-        handleRightButton={handleRightButton}
+        handleRightButton={() => {
+          router.push('/auth/login');
+        }}
       />
       <section className="py-5">
         <p className="text-16 font-semibold">
@@ -91,10 +84,11 @@ function Password() {
           이메일 주소를 입력해주시면 임시 비밀번호를 보내드립니다.
         </section>
 
-        <div className="h-[400px]" />
-        <section>
-          <Button text="확인" type="submit" />
-        </section>
+        <Button
+          text="확인"
+          type="submit"
+          className="absolute inset-x-0 bottom-[34px] m-auto w-[calc(100%-48px)]"
+        />
       </form>
     </Layout>
   );

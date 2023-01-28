@@ -7,7 +7,7 @@ interface KeywordBoxProps {
   [key: string]: any;
 }
 
-const KeywordBoxTag = tw.div<defaultProps>``;
+const KeywordBoxTag = tw.span<defaultProps>``;
 
 export default function KeywordBox({
   text,
@@ -22,7 +22,7 @@ export default function KeywordBox({
         focused
           ? 'border-brand text-[#767676]'
           : 'border-[#CECECE] text-[#767676]'
-      }  mr-2 mt-2 flex cursor-pointer items-center justify-center rounded-[19px] border px-3 py-1 text-[14px] text-[#767676]`}
+      }  mr-2 mt-2 cursor-pointer rounded-[19px] border px-3 py-1 text-[14px] text-[#767676]`}
       {...rest}
     >
       {text}
