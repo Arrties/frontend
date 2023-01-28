@@ -46,21 +46,21 @@ export default function Join04() {
         setKeywordList={setKeywordList}
         keywordList={keywordList}
       />
+      <button
+        className="hover:brand-2 absolute inset-x-0 bottom-[100px]  m-auto w-full px-0 text-xs font-normal text-[#999999] underline transition"
+        onClick={handleSubmit}
+        id="skip"
+      >
+        다음에 할래요
+      </button>
       <Button
-        className="absolute inset-x-0 bottom-[100px] m-auto "
+        className="absolute inset-x-0 bottom-[34px] m-auto "
         text="분석 시작"
         onClick={() => {
           setIsModal(true);
         }}
         disabled={keywordList?.length === 0}
       />
-      <button
-        className="hover:brand-2 absolute inset-x-0 bottom-[60px]  m-auto w-full px-0 text-xs font-normal text-[#999999] underline transition"
-        onClick={handleSubmit}
-        id="skip"
-      >
-        다음에 할래요
-      </button>
       <Modal
         message="취향 분석이 완료 되었습니다."
         isModal={isModal}
