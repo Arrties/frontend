@@ -186,11 +186,11 @@ export default function Join02() {
             type="text"
             label="ID"
             placeholder="영문+숫자 조합 5자리 이상 입력해주세요."
-            $error={errors.userId ? true : false}
+            $error={!!errors.userId}
             register={register('userId', {
               required: true,
               pattern: {
-                value: /^[a-z]+[a-z0-9]{5,19}$/g,
+                value: /^[a-z0-9]{5,19}$/g,
                 message: '아이디 형식에 맞게 입력해주세요.',
               },
             })}
@@ -208,7 +208,7 @@ export default function Join02() {
             type="text"
             label="닉네임"
             placeholder="닉네임을 입력해주세요."
-            $error={errors.nickname ? true : false}
+            $error={!!errors.nickname}
             register={register('nickname', {
               required: true,
               pattern: {
@@ -232,7 +232,7 @@ export default function Join02() {
             type="password"
             label="비밀번호"
             placeholder="영문+숫자 조합 8자리 이상 입력해주세요."
-            $error={errors.password ? true : false}
+            $error={!!errors.password}
             register={register('password', {
               required: true,
               pattern: {
@@ -245,7 +245,7 @@ export default function Join02() {
           <Input
             type="password"
             placeholder="비밀번호 재입력"
-            $error={errors.confirmPassword ? true : false}
+            $error={!!errors.confirmPassword}
             register={register('confirmPassword', {
               required: true,
               validate: (value: string) => {
@@ -266,7 +266,7 @@ export default function Join02() {
             type="text"
             label="휴대폰 번호"
             placeholder="-를 제외하고 입력해주세요."
-            $error={errors.telephone ? true : false}
+            $error={!!errors.telephone}
             register={register('telephone', {
               required: true,
               pattern: {
@@ -284,7 +284,7 @@ export default function Join02() {
             type="email"
             label="이메일"
             placeholder="ATTIES@naver.com"
-            $error={errors.email ? true : false}
+            $error={!!errors.email}
             register={register('email', {
               required: true,
               pattern: {
