@@ -42,6 +42,18 @@ export class ProfileApi {
     const { data } = await instance.patch('/members/keywords', body);
     return data;
   }
+  async getWish() {
+    const { data } = await instance.get('/members/preferred-artworks');
+    return data;
+  }
+  async getNotice() {
+    const { data } = await instance.get('/notifications');
+    return data;
+  }
+  async deleteNotice(id: number) {
+    const { data } = await instance.delete(`/notifications/${id}`);
+    return data;
+  }
 }
 
 const profileApi = new ProfileApi();
