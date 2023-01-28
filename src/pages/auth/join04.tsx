@@ -14,7 +14,7 @@ export default function Join04() {
   const [isModal, setIsModal] = useState<boolean>(false);
   const userState = useAppSelector((state) => state.user);
   const { mutate, isLoading } = useJoinMutation();
-  const handleSubmit = () => {
+  const handleSubmit = (e: any) => {
     let memberInfo: Member = {
       userId: userState.userId,
       nickname: userState.nickname,
@@ -23,9 +23,12 @@ export default function Join04() {
       email: userState.email,
       keywords: keywordList,
     };
+    if (e.target.id === 'skip') {
+      memberInfo = { ...memberInfo, keywords: [] };
+    }
     mutate(memberInfo, {
       onSuccess: () => {
-        setIsModal(true);
+        router.push('/auth/login');
       },
     });
   };
@@ -44,26 +47,27 @@ export default function Join04() {
         keywordList={keywordList}
       />
       <Button
-        className="absolute inset-x-0 bottom-[100px] m-auto"
-        text="완료"
-        onClick={handleSubmit}
+        className="absolute inset-x-0 bottom-[100px] m-auto "
+        text="분석 시작"
+        onClick={() => {
+          setIsModal(true);
+        }}
         disabled={keywordList?.length === 0}
       />
       <button
         className="hover:brand-2 absolute inset-x-0 bottom-[60px]  m-auto w-full px-0 text-xs font-normal text-[#999999] underline transition"
         onClick={handleSubmit}
+        id="skip"
       >
         다음에 할래요
       </button>
       <Modal
-        message="회원가입이 완료 되었습니다."
+        message="취향 분석이 완료 되었습니다."
         isModal={isModal}
         onCloseModal={() => {
           setIsModal(false);
         }}
-        onAccept={() => {
-          router.push('/auth/login');
-        }}
+        onAccept={handleSubmit}
       />
     </Layout>
   );
