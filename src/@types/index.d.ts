@@ -47,3 +47,7 @@ interface Error {
   error: string;
   status: number;
 }
+
+interface defaultProps {
+  [key: string]: any;
+}
