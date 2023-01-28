@@ -22,10 +22,6 @@ const CheckBoxList = tw.li<DefaultProps>`
 pb-[18px] flex justify-between
 `;
 
-const TermButton = tw.div<DefaultProps>`
-flex justify-center items-center cursor-pointer
-`;
-
 export default function Join01() {
   const router = useRouter();
 
@@ -114,14 +110,13 @@ export default function Join01() {
                 isChecked={checkedTerm.includes('term1')}
                 handler={(e) => onChecked(e.target.checked, e.target.id)}
               />
-              <TermButton onClick={() => router.push('/')}>
-                <Image
-                  src="/svg/icons/icon_arrow.svg"
-                  alt="arrowBtn"
-                  width={7}
-                  height={0}
-                ></Image>
-              </TermButton>
+              <Image
+                src="/svg/icons/icon_arrow.svg"
+                alt="arrowBtn"
+                width={7}
+                height={0}
+                className="cursor-pointer"
+              />
             </CheckBoxList>
             <CheckBoxList>
               <CheckBox
@@ -130,14 +125,13 @@ export default function Join01() {
                 isChecked={checkedTerm.includes('term2')}
                 handler={(e) => onChecked(e.target.checked, e.target.id)}
               />
-              <TermButton>
-                <Image
-                  src="/svg/icons/icon_arrow.svg"
-                  alt="arrowBtn"
-                  width={7}
-                  height={0}
-                ></Image>
-              </TermButton>
+              <Image
+                src="/svg/icons/icon_arrow.svg"
+                alt="arrowBtn"
+                width={7}
+                height={0}
+                className="cursor-pointer"
+              />
             </CheckBoxList>
             <CheckBoxList className="pb-0">
               <CheckBox
@@ -148,8 +142,14 @@ export default function Join01() {
                 }
                 handler={(e) => onCheckedPromotion(e.target.checked)}
               />
-              <TermButton
-                className={`${isOpen && 'rotate-90 transform transition'}`}
+              <Image
+                src="/svg/icons/icon_arrow.svg"
+                alt="arrowBtn"
+                width={7}
+                height={0}
+                className={`${
+                  isOpen && 'rotate-90 transform cursor-pointer transition'
+                }`}
                 onClick={() => {
                   if (!isOpen) {
                     setIsOpen(true);
@@ -157,14 +157,7 @@ export default function Join01() {
                     setIsOpen(false);
                   }
                 }}
-              >
-                <Image
-                  src="/svg/icons/icon_arrow.svg"
-                  alt="arrowBtn"
-                  width={7}
-                  height={0}
-                ></Image>
-              </TermButton>
+              />
             </CheckBoxList>
             {isOpen && (
               <div>
@@ -197,9 +190,7 @@ export default function Join01() {
         </div>
         <Button
           disabled={
-            checkedTerm.includes('term1') && checkedTerm.includes('term2')
-              ? false
-              : true
+            !(checkedTerm.includes('term1') && checkedTerm.includes('term2'))
           }
           text="확인"
           className="absolute inset-x-0 bottom-[34px] m-auto w-[calc(100%-48px)]"
