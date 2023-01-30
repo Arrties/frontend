@@ -14,7 +14,7 @@ interface ChatRoom {
   };
   lastMessage: {
     message: string;
-    sendDate: string;
+    sendTime: string;
   };
 }
 

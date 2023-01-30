@@ -14,26 +14,24 @@ export default function Chatroom({ chatRoom }: ChatRoomProps) {
   const router = useRouter();
   return (
     <section
-      className="relative flex h-[64px] cursor-pointer items-center border-b p-5 first:border-t"
+      className="relative flex h-[64px] cursor-pointer items-center border-b  p-5 first:border-t"
       onClick={handleChattingRoom}
     >
-      <article>
-        <Image
-          src={chatRoom?.otherMember?.image || '/svg/icons/icon_avatar.svg'}
-          alt="profile"
-          width="40"
-          height="0"
-          className="mx-1"
-        />
-      </article>
+      <Image
+        src={chatRoom?.otherMember?.image || '/svg/icons/icon_avatar.svg'}
+        alt="profile"
+        width="40"
+        height="0"
+        className="mx-1"
+      />
 
-      <article className="flex flex-col">
+      <article className="flex flex-col items-start">
         <div className="flex">
           <p className="flex items-center justify-center px-2 text-14 font-bold text-[#191919]">
             {chatRoom?.otherMember?.name}
           </p>
           <p className="flex items-center justify-center text-10 text-[#767676]">
-            {chatRoom?.lastMessage?.sendDate}
+            {chatRoom?.lastMessage?.sendTime}
           </p>
         </div>
         <p className="mt-1 flex items-center justify-center px-2 text-12 text-[#191919]">
@@ -42,10 +40,16 @@ export default function Chatroom({ chatRoom }: ChatRoomProps) {
       </article>
       {!!chatRoom.unreadCount && (
         <article className="absolute right-5 flex h-[20px] w-[20px] items-center justify-center rounded-full bg-[#FC6554] text-12 text-[#FFF]">
-          {chatRoom.unreadCount}
+          {chatRoom?.unreadCount}
         </article>
       )}
-      {/* <Image alt="" src="/svg/icons/icon_.svg" width="100" height="0" /> */}
+      <Image
+        alt=""
+        src={chatRoom?.artWorkImage || '/svg/icons/icon_.svg'}
+        width="30"
+        height="0"
+        className="absolute inset-y-0 right-7 my-auto "
+      />
     </section>
   );
 }

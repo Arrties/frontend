@@ -1,4 +1,3 @@
-import { ChatRoomListDTOType } from './../../../apis/chat/chatApi.type';
 import { useQuery } from 'react-query';
 import chatApi from '@apis/chat/chatApi';
 

@@ -18,7 +18,6 @@ const createClient = (endpoint) => {
 };
 
 const subscribe = async (client, roomId, subscribeCallback) => {
-  console.log('subscribe');
   await client.subscribe(`/queue/chat-rooms/${roomId}`, subscribeCallback);
 };
 

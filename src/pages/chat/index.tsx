@@ -14,10 +14,10 @@ export default function Chat() {
   const { data: chatRoomlist, refetch: refetchChatRoomList } =
     useGetChatRoomList();
   const chatRoomList = chatRoomlist?.chatRooms || [];
-  const connect = () => {
-    client.current = createClient('/ws-connection');
-    client.current.onConnect = onConnected;
-    client.current.activate();
+  const connect = async () => {
+    client.current = await createClient('/ws-connection');
+    client.current.onConnect = await onConnected;
+    await client.current.activate();
   };
 
   const onConnected = () => {
@@ -28,8 +28,6 @@ export default function Chat() {
   };
 
   const subscribeCallback = (response) => {
-    const responseBody = JSON.parse(response.body);
-    console.log(responseBody);
     refetchChatRoomList();
   };
 
@@ -41,6 +39,7 @@ export default function Chat() {
   }, [chatRoomlist]);
 
   const disconnect = () => {
+    console.log(1);
     client.current.deactivate();
   };
 
