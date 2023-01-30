@@ -1,5 +1,9 @@
 import instance from '@apis/_axios/instance';
-import { ChatDTOType, ChatRoomListDTOType } from './chatApi.type';
+import {
+  ChatDTOType,
+  ChatRoomListDTOType,
+  ChatRoomDTOType,
+} from './chatApi.type';
 
 export class ChatApi {
   async getChatRoomList(): Promise<ChatRoomListDTOType[]> {
@@ -7,7 +11,7 @@ export class ChatApi {
     return data;
   }
 
-  async getChatRoom(id: number): Promise<ChatDTOType> {
+  async getChatRoom(id: number): Promise<ChatRoomDTOType> {
     const { data } = await instance.get(`/chat-rooms/${id}`);
     return data;
   }
