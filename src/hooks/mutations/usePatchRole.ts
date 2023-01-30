@@ -4,7 +4,7 @@ import profileApi from '@apis/profile/profileApi';
 import { Role } from '@apis/profile/profileApi.type';
 import { useMutation } from 'react-query';
 
-const useRoleMutation = () => {
+const usePatchRole = () => {
   const router = useRouter();
   return useMutation<Role, Error>(
     'useRoleMuation',
@@ -21,4 +21,4 @@ const useRoleMutation = () => {
     },
   );
 };
-export default useRoleMutation;
+export default usePatchRole;

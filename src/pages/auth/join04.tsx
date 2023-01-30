@@ -1,10 +1,9 @@
-import ErrorMessage from '@components/common/ErrorMessage';
 import Layout from '@components/common/Layout';
 import Loader from '@components/common/Loader';
 import Modal from '@components/common/Modal';
 import SelectKeyword from '@components/profile/Selectkeyword';
 import { useAppSelector } from '@features/hooks';
-import useJoinMutation from '@hooks/mutations/useJoinMuation';
+import usePostJoin from '@hooks/mutations/usePostJoin';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import Button from 'stories/Button';
@@ -13,7 +12,7 @@ export default function Join04() {
   const [keywordList, setKeywordList] = useState<string[]>([]);
   const [isModal, setIsModal] = useState<boolean>(false);
   const userState = useAppSelector((state) => state.user);
-  const { mutate, isLoading } = useJoinMutation();
+  const { mutate, isLoading } = usePostJoin();
   const handleSubmit = (e: any) => {
     let memberInfo: Member = {
       userId: userState.userId,

@@ -5,7 +5,7 @@ import Loader from '@components/common/Loader';
 import Modal from '@components/common/Modal';
 import Navigate from '@components/common/Navigate';
 import SelectKeyword from '@components/profile/Selectkeyword';
-import useKeywordMutation from '@hooks/mutations/useKeywordMutation';
+import usePatchKeyword from '@hooks/mutations/usePatchKeyword';
 import useGetProfile from '@hooks/queries/useGetProfile';
 import { useRouter } from 'next/router';
 import { useState, useEffect } from 'react';
@@ -13,7 +13,7 @@ import { useState, useEffect } from 'react';
 export default function Keyword() {
   const [keywordList, setKeywordList] = useState<string[]>([]);
   const { data } = useGetProfile();
-  const { mutate, isLoading, data: keywordData } = useKeywordMutation();
+  const { mutate, isLoading, data: keywordData } = usePatchKeyword();
   const [isModal, setIsModal] = useState<boolean>(false);
   const router = useRouter();
   useEffect(() => {
