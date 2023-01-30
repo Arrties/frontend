@@ -10,7 +10,7 @@ interface defaultProps {
 }
 
 // customize artwork
-interface Artwork {
+interface KeywordArtwork {
   id: string;
   image: string;
   title: string;
@@ -19,5 +19,5 @@ interface Artwork {
 
 interface CustomizeArtwork {
   nextPage: boolean;
-  artworks: Artwork[];
+  artworks: KeywordArtwork[];
 }

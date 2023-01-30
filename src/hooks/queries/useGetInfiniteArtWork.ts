@@ -1,13 +1,6 @@
 import homeApi from '@apis/home/homeApi';
 import { useInfiniteQuery } from 'react-query';
 
-interface KeywordArtwork {
-  id: string;
-  image: string;
-  title: string;
-  education: string;
-}
-
 interface InfiniteQueryProps {
   artworks: KeywordArtwork[];
   current_page: number;
