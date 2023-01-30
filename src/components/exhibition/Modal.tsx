@@ -1,5 +1,5 @@
-import Image from 'next/image'
-import tw from 'tailwind-styled-components'
+import Image from 'next/image';
+import tw from 'tailwind-styled-components';
 
 interface ModalProps {
   title: string;
@@ -19,7 +19,7 @@ interface DefaultProps {
 }
 
 const ModalInner = tw.div<DefaultProps>`
-absolute w-[327px] h-[280px] m-auto rounded-[8px] backdrop-blur-[25.5px] p-5 transition ${(
+absolute w-[327px] h-[280px] m-auto rounded-[8px] backdrop-blur-[25.5px] p-5 transition  ${(
   p,
 ) =>
   p.$open
@@ -27,7 +27,7 @@ absolute w-[327px] h-[280px] m-auto rounded-[8px] backdrop-blur-[25.5px] p-5 tra
     : 'bg-gradient-to-b from-[#FFFFFF]/[.16] to-[#FFFFFF]/[.46] translate-y-[120px] text-[#191919]/40'}
 `;
 const ModalHeader = tw.div<DefaultProps>`
-text-[#424242] text-20 flex justify-between font-bold`;
+text-[#424242] text-20 flex justify-between font-bold `;
 
 const MajorDiv = tw.div<DefaultProps>`
 text-[#191919] text-14 pt-1`;
@@ -52,9 +52,7 @@ export default function Modal({
 }: ModalProps) {
   return (
     <ModalInner {...rest}>
-      {isOpen ? (
-        <></>
-      ) : (
+      {!isOpen && (
         <Image
           alt="swipe"
           src="/svg/icons/icon_swipe_arrow.svg"

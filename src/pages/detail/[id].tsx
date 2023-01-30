@@ -171,7 +171,7 @@ export default function Detail({ params }) {
           <div className="h-[5rem]"></div>
         </section>
       </Layout>
-      <article className="fixed inset-x-0 bottom-[40px] m-auto flex max-w-[360px] gap-5">
+      <article className="absolute inset-x-0 bottom-[34px] m-auto flex w-[calc(100%-48px)] gap-5">
         <Button text="채팅하기" kind="outlined" onClick={handleChat} />
         <Button text="응찰하기" onClick={handlePurchase} />
       </article>

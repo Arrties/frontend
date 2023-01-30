@@ -1,13 +1,13 @@
-import 'swiper/css'
+import 'swiper/css';
 
-import Navigate from '@components/common/Navigate'
-import Modal from '@components/exhibition/Modal'
-import Image from 'next/image'
-import React from 'react'
-import tw from 'tailwind-styled-components'
-import { useRef, useState } from 'react'
-import { Swiper, SwiperSlide, useSwiper } from 'swiper/react'
-import { useRouter } from 'next/router'
+import Navigate from '@components/common/Navigate';
+import Modal from '@components/exhibition/Modal';
+import Image from 'next/image';
+import React from 'react';
+import tw from 'tailwind-styled-components';
+import { useRef, useState } from 'react';
+import { Swiper, SwiperSlide, useSwiper } from 'swiper/react';
+import { useRouter } from 'next/router';
 
 const DUMP_ART_LISTS = [
   {
@@ -141,7 +141,7 @@ export default function Exhibition() {
           />
         </>
       )}
-      <Navigate message="전시회" isRightButton={false} />
+      <Navigate isRightButton={false} />
       <Swiper className="h-full" ref={swiperRef} spaceBetween={50}>
         {!isExpansion && !isOpen && (
           <div className="absolute top-[180px] z-50 flex w-[99%] justify-between">

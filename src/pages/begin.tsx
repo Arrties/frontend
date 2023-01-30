@@ -115,7 +115,7 @@ export default function Begin() {
             </div>
             <Button
               onClick={() => router.push('/auth/login')}
-              className="absolute inset-x-0 bottom-[100px] m-auto"
+              className="absolute inset-x-0 bottom-[34px] m-auto"
               text="시작하기"
             />
           </SwiperSlide>

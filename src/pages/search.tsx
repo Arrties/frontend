@@ -13,7 +13,7 @@ interface DefaultProps {
 }
 
 const SearchBox = tw.header<DefaultProps>`
-flex justify-between items-center font-semibold relative h-[64px]
+flex justify-between items-center font-semibold relative h-[64px] mt-7
 `;
 
 const RecentKeywordBox = tw.li<DefaultProps>`
