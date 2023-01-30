@@ -8,21 +8,7 @@ import { createClient, publish, subscribe } from '@apis/chat/socketConnect';
 import Tab from '@components/common/Tab';
 import useGetChatRoomList from '@hooks/queries/chat/useGetChatRoomList';
 import useGetProfile from '@hooks/queries/useGetProfile';
-
-interface ChatRoomListForm {
-  artWorkImage: string;
-  chatRoomId: number;
-  lastMessage: {
-    message: string;
-    sendDate: string;
-  };
-  otherMember: {
-    id: number;
-    name: string;
-    image: string;
-  };
-  unreadCount: number;
-}
+import { ChatRoomListDTOType } from '@apis/chat/chatApi.type';
 
 export default function Chat() {
   const router = useRouter();
@@ -71,7 +57,7 @@ export default function Chat() {
         </section>
         {chatRoomList?.length ? (
           <div className="absolute inset-x-0 mt-5 w-full ">
-            {chatRoomList.map((chatRoom: ChatRoomListForm) => (
+            {chatRoomList.map((chatRoom: ChatRoomListDTOType) => (
               <Chatroom chatRoom={chatRoom} key={chatRoom.chatRoomId} />
             ))}
           </div>

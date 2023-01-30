@@ -1,8 +1,9 @@
+import { ChatRoomListDTOType } from './../../../apis/chat/chatApi.type';
 import { useQuery } from 'react-query';
 import chatApi from '@apis/chat/chatApi';
 
 const useGetChatRoomList = () => {
-  return useQuery<any, Error>(
+  return useQuery<ChatRoomListDTOType, Error>(
     'useGetChatRoomList',
     () => chatApi.getChatRoomList(),
     { retry: 0, refetchOnWindowFocus: false },

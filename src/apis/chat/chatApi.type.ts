@@ -11,7 +11,7 @@ export type ChatParamPatchType = {
   data: Partial<ChatDTOType>;
 };
 
-export type ChatRoomDTOType = {
+export type ChatRoomListDTOType = {
   chatRoomId: number;
   artWorkImage: string;
   unreadCount: number;
@@ -23,5 +23,18 @@ export type ChatRoomDTOType = {
   lastMessage: {
     message: string;
     sendDate: string;
+  };
+};
+export type ChatRoomDTOType = {
+  chatRoomId: number;
+  artist: {
+    id: number;
+    name: string;
+    responseTime: string;
+  };
+  member: {
+    id: number;
+    name: string;
+    responseTime: string;
   };
 };
