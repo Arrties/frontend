@@ -53,8 +53,9 @@ function Join03() {
       <section className="flex flex-wrap gap-1">
         {Array(9)
           .fill(0)
-          .map((it, idx) => (
+          .map((_, idx) => (
             <Image
+              key={idx}
               alt="example"
               src={`/svg/example/example_artwork_${idx + 1}.svg`}
               width="0"

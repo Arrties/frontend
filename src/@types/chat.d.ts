@@ -1,17 +1,9 @@
-export type ChatDTOType = {
+interface Chat {
   artistId: number;
   artWorkId: number;
-};
-export type ChatParamPutType = {
-  id: string;
-  data: ChatDTOType;
-};
-export type ChatParamPatchType = {
-  id: string;
-  data: Partial<ChatDTOType>;
-};
+}
 
-export type ChatRoomType = {
+interface ChatRoom {
   chatRoomId: number;
   artWorkImage: string;
   unreadCount: number;
@@ -24,12 +16,13 @@ export type ChatRoomType = {
     message: string;
     sendDate: string;
   };
-};
+}
 
-export type ChatRoomListDTOType = {
-  chatRooms: [ChatRoomType];
-};
-export type ChatRoomDTOType = {
+interface ChatRoomList {
+  chatRooms: [ChatRoom];
+}
+
+interface ChatRoomById {
   chatRoomId: number;
   artist: {
     id: number;
@@ -53,4 +46,4 @@ export type ChatRoomDTOType = {
       sendDate: string;
     },
   ];
-};
+}

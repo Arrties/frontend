@@ -3,7 +3,7 @@ import { Token } from '@utils/localStorage/token';
 import { useMutation } from 'react-query';
 
 const useLoginMutation = () => {
-  return useMutation<Token, Error, LoginForm>('useLoginMuation', (data) =>
+  return useMutation<Token, Error, Login>('useLoginMuation', (data) =>
     authApi.postLogin(data),
   );
 };
