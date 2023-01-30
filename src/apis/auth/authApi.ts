@@ -44,36 +44,16 @@ export class AuthApi {
     return response;
   }
 
-  async getDuplicateCheck(params) {
-    const type = params.queryKey[0];
-    const data = params.queryKey[1];
-    let uri = '';
-    if (type === 'email') {
-      uri = '/members/check-email?email=';
-    } else if (type === 'id') {
-      uri = '/members/check-id?userId=';
-    } else if (type === 'nickname') {
-      uri = '/members/check-nickname?nickname=';
-    }
-    const response = await instance(`${uri}${data}`);
-    return response;
+  async getCheckId(userId: string) {
+    await instance(`/members/check-id?userId=${userId}`);
   }
 
   async getCheckEmail(email: string) {
-    const response = await instance(`/members/check-email?email=${email}`);
-    return response;
-  }
-
-  async getCheckId(userId: string) {
-    const response = await instance(`/members/check-id?userId=${userId}`);
-    return response;
+    await instance(`/members/check-email?email=${email}`);
   }
 
   async getCheckNickname(nickname: string | undefined) {
-    const response = await instance(
-      `/members/check-nickname?nickname=${nickname}`,
-    );
-    return response;
+    await instance(`/members/check-nickname?nickname=${nickname}`);
   }
 }
 
