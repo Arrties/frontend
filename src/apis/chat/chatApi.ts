@@ -6,7 +6,7 @@ import {
 } from './chatApi.type';
 
 export class ChatApi {
-  async getChatRoomList(): Promise<ChatRoomListDTOType[]> {
+  async getChatRoomList(): Promise<ChatRoomListDTOType> {
     const { data } = await instance.get('/chat-rooms');
     return data;
   }

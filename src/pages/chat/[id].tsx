@@ -9,6 +9,7 @@ import useGetChatRoom from '@hooks/queries/chat/useGetChatRoom';
 import * as StompJs from '@stomp/stompjs';
 import { createClient, publish, subscribe } from '@apis/chat/socketConnect';
 import chatApi from '@apis/chat/chatApi';
+import { ChatRoomDTOType } from '@apis/chat/chatApi.type';
 interface ChatRoomForm {
   senderId: string;
   sendDate: string;
@@ -34,7 +35,7 @@ export default function ChatRoom({ params }) {
   const { register, handleSubmit, watch } = useForm<MessageForm>();
   const [isModal, setIsModal] = useState(false);
   const { data: chatRoom } = useGetChatRoom(Number(id));
-  const { artist, chatRoomId, member, messages } = chatRoom || { messages: [] };
+  const { artist, chatRoomId, member, messages } = chatRoom || {};
 
   const handleOption = () => {
     setIsModal(true);
@@ -130,14 +131,15 @@ export default function ChatRoom({ params }) {
           2022년 12월 23일
         </article>
         <article className="mt-4">
-          {messages.map((chatItem: ChatRoomForm) => (
-            <ChattingMessage
-              key={chatItem.senderId}
-              time={chatItem.sendDate}
-              text={chatItem.message}
-              sender={chatItem.senderId}
-            />
-          ))}
+          {messages &&
+            messages.map((chatItem) => (
+              <ChattingMessage
+                key={chatItem.senderId}
+                sendDate={chatItem.sendDate}
+                message={chatItem.message}
+                senderId={chatItem.senderId}
+              />
+            ))}
         </article>
       </section>
       <form

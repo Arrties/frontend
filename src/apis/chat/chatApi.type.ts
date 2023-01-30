@@ -1,3 +1,5 @@
+import { NumericKeys } from 'react-hook-form/dist/types/path/common';
+
 export type ChatDTOType = {
   artistId: number;
   artWorkId: number;
@@ -11,7 +13,7 @@ export type ChatParamPatchType = {
   data: Partial<ChatDTOType>;
 };
 
-export type ChatRoomListDTOType = {
+export type ChatRoomType = {
   chatRoomId: number;
   artWorkImage: string;
   unreadCount: number;
@@ -25,6 +27,10 @@ export type ChatRoomListDTOType = {
     sendDate: string;
   };
 };
+
+export type ChatRoomListDTOType = {
+  chatRooms: [ChatRoomType];
+};
 export type ChatRoomDTOType = {
   chatRoomId: number;
   artist: {
@@ -37,4 +43,16 @@ export type ChatRoomDTOType = {
     name: string;
     responseTime: string;
   };
+  messages: [
+    {
+      senderId: number;
+      message: string;
+      sendDate: string;
+    },
+    {
+      senderId: number;
+      message: string;
+      sendDate: string;
+    },
+  ];
 };

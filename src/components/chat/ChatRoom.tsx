@@ -1,24 +1,10 @@
 import Image from 'next/image';
 import React from 'react';
 import { useRouter } from 'next/router';
-
-interface ChatRoomListForm {
-  artWorkImage: string;
-  chatRoomId: number;
-  lastMessage: {
-    message: string;
-    sendDate: string;
-  };
-  otherMember: {
-    id: number;
-    name: string;
-    image: string;
-  };
-  unreadCount: number;
-}
+import { ChatRoomType } from '@apis/chat/chatApi.type';
 
 interface ChatRoomProps {
-  chatRoom: ChatRoomListForm;
+  chatRoom: ChatRoomType;
   [key: string]: any;
 }
 
