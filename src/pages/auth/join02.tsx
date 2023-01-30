@@ -10,11 +10,7 @@ import { useAppDispatch } from '@features/hooks';
 import { setUserInfo } from '@features/user/userSlice';
 import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
-import {
-  useGetCheckEmail,
-  useGetCheckId,
-  useGetCheckNickname,
-} from '@hooks/queries/useGetDuplicateCheck';
+import { useGetDuplicateCheck } from '@hooks/queries/useGetDuplicateCheck';
 
 interface JoinForm {
   userId: string;
@@ -29,6 +25,12 @@ interface checkForm {
   id: boolean;
   nickname: boolean;
   email: boolean;
+}
+
+interface EnabledOptions {
+  userId: string;
+  nickname: string;
+  email: string;
 }
 
 export default function Join02() {
@@ -56,7 +58,7 @@ export default function Join02() {
 
   const dispatch = useAppDispatch();
 
-  const onSubmit = async (form: JoinForm) => {
+  const onSubmit = (form: JoinForm) => {
     const { userId, nickname, password, telephone, email } = form;
     if (!isValidate.id) {
       setError('userId', {
@@ -89,125 +91,13 @@ export default function Join02() {
     router.push('/auth/join03');
   };
 
-  // const handleValidateCheck = async (e: { target: { id: string } }) => {
-  //   let data: { status: number };
-  //   switch (e.target.id) {
-  //     case 'id':
-  //       if (!id || id === '') {
-  //         setError('userId', {
-  //           type: 'userId is null',
-  //           message: '아이디를 입력해주세요.',
-  //         });
-  //         return;
-  //       }
-  //       data = await authApi.getCheckId(id);
-  //       if (data?.status === 409) {
-  //         setError('userId', {
-  //           type: 'id duplicate',
-  //           message: '이미 사용중인 아이디 입니다.',
-  //         });
-  //         setIsValidate({ ...isValidate, id: false });
-  //         return;
-  //       } else {
-  //         setIsValidate({ ...isValidate, id: true });
-  //         clearErrors('userId');
-  //       }
-  //       break;
-  //     case 'nickname':
-  //       if (!nickname || nickname === '') {
-  //         setError('nickname', {
-  //           type: 'nickname is null',
-  //           message: '닉네임을 입력해주세요.',
-  //         });
-  //         return;
-  //       }
-  //       data = await authApi.getCheckNickname(nickname);
-  //       if (data?.status === 409) {
-  //         setError('nickname', {
-  //           type: 'nickname duplicate',
-  //           message: '이미 사용중인 닉네임 입니다.',
-  //         });
-  //         setIsValidate({ ...isValidate, nickname: false });
-  //         return;
-  //       } else {
-  //         setIsValidate({ ...isValidate, nickname: true });
-  //         clearErrors('userId');
-  //       }
-  //       break;
-  //     case 'email':
-  //       if (!email || email === '') {
-  //         setError('email', {
-  //           type: 'Email is null',
-  //           message: '이메일을 입력해주세요.',
-  //         });
-  //         return;
-  //       }
-  //       data = await authApi.getCheckEmail(email);
-  //       if (data?.status === 409) {
-  //         setError('email', {
-  //           type: 'email duplicate',
-  //           message: '이미 사용중인 이메일 입니다.',
-  //         });
-  //         setIsValidate({ ...isValidate, email: false });
-  //         return;
-  //       } else {
-  //         setIsValidate({ ...isValidate, email: true });
-  //         clearErrors('email');
-  //       }
-  //       break;
-  //   }
-  //   return;
-  // };
+  const [enabled, setEnabled] = useState<EnabledOptions>({
+    userId: '',
+    nickname: '',
+    email: '',
+  });
 
-  const [enableUserId, setEnableUserId] = useState('');
-  const [enableNickname, setEnableNickname] = useState('');
-  const [enableEmail, setEnableEmail] = useState('');
-
-  const { isSuccess: checkIdSuccess, error: checkIdError } =
-    useGetCheckId(enableUserId);
-  const { isSuccess: checkNicknameSuccess, error: checkNicknameError } =
-    useGetCheckNickname(enableNickname);
-  const { isSuccess: checkEmailSuccess, error: checkEmailError } =
-    useGetCheckEmail(enableEmail);
-
-  useEffect(() => {
-    if (checkIdError && checkIdError.code === 'EXIST_USER_ID') {
-      setError('userId', {
-        type: 'id duplicate',
-        message: checkIdError.detail,
-      });
-    }
-    if (
-      checkNicknameError &&
-      checkNicknameError.code === 'EXIST_USER_NICKNAME'
-    ) {
-      setError('nickname', {
-        type: 'nickname duplicate',
-        message: checkNicknameError.detail,
-      });
-    }
-    if (checkEmailError && checkEmailError.code === 'EXIST_USER_EMAIL') {
-      setError('email', {
-        type: 'email duplicate',
-        message: checkEmailError.detail,
-      });
-    }
-  }, [checkIdError, checkNicknameError, checkEmailError]);
-
-  useEffect(() => {
-    if (checkIdSuccess) {
-      setIsValidate({ ...isValidate, id: true });
-      clearErrors('userId');
-    }
-    if (checkNicknameSuccess) {
-      setIsValidate({ ...isValidate, nickname: true });
-      clearErrors('nickname');
-    }
-    if (checkEmailSuccess) {
-      setIsValidate({ ...isValidate, email: true });
-      clearErrors('email');
-    }
-  }, [checkIdSuccess, checkNicknameSuccess, checkEmailSuccess]);
+  const results = useGetDuplicateCheck(enabled);
 
   const id = watch('userId');
   const email = watch('email');
@@ -215,18 +105,58 @@ export default function Join02() {
 
   useEffect(() => {
     setIsValidate({ ...isValidate, id: false });
-    setEnableUserId('');
+    setEnabled((prev) => ({ ...prev, userId: '' }));
   }, [id]);
   useEffect(() => {
     setIsValidate({ ...isValidate, nickname: false });
-    setEnableNickname('');
+    setEnabled((prev) => ({ ...prev, nickname: '' }));
   }, [nickname]);
   useEffect(() => {
     setIsValidate({ ...isValidate, email: false });
-    setEnableEmail('');
+    setEnabled((prev) => ({ ...prev, email: '' }));
   }, [email]);
+  const [idResult, nicknameResult, emailResult] = results;
 
-  console.log(isValidate, checkIdSuccess);
+  useEffect(() => {
+    if (idResult.isSuccess) {
+      setIsValidate((prev) => ({ ...prev, id: true }));
+      clearErrors('userId');
+    }
+
+    if (nicknameResult.isSuccess) {
+      setIsValidate((prev) => ({ ...prev, nickname: true }));
+      clearErrors('nickname');
+    }
+    if (emailResult.isSuccess) {
+      setIsValidate((prev) => ({ ...prev, email: true }));
+      clearErrors('email');
+    }
+    if (idResult.error && idResult.error.code === 'EXIST_USER_ID') {
+      setIsValidate((prev) => ({ ...prev, id: false }));
+      setError('userId', {
+        type: 'id doublecheck',
+        message: '이미 존재하는 아이디 입니다.',
+      });
+    }
+    if (
+      nicknameResult.error &&
+      nicknameResult.error.code === 'EXIST_USER_NICKNAME'
+    ) {
+      setIsValidate((prev) => ({ ...prev, nickname: false }));
+      setError('nickname', {
+        type: 'nickname doublecheck',
+        message: '이미 존재하는 닉네임 입니다.',
+      });
+    }
+    if (emailResult.error && emailResult.error.code === 'EXIST_USER_EMAIL') {
+      setIsValidate((prev) => ({ ...prev, email: false }));
+      setError('email', {
+        type: 'email doublecheck',
+        message: '이미 존재하는 이메일 입니다.',
+      });
+    }
+  }, [idResult.isFetching, nicknameResult.isFetching, emailResult.isFetching]);
+
   return (
     <Layout>
       <Navigate
@@ -256,7 +186,7 @@ export default function Join02() {
           />
           <DoubleCheckButton
             $valid={!isValidate.id}
-            onClick={() => setEnableUserId(id)}
+            onClick={() => setEnabled((prev) => ({ ...prev, userId: id }))}
             id="id"
             text={isValidate.id ? '사용가능' : '중복확인'}
           />
@@ -278,7 +208,7 @@ export default function Join02() {
           />
           <DoubleCheckButton
             $valid={!isValidate.nickname}
-            onClick={() => setEnableNickname(nickname)}
+            onClick={() => setEnabled((prev) => ({ ...prev, nickname }))}
             id="nickname"
             text={isValidate.nickname ? '사용가능' : '중복확인'}
           />
@@ -357,7 +287,7 @@ export default function Join02() {
           )}
           <DoubleCheckButton
             $valid={!isValidate.email}
-            onClick={() => setEnableEmail(email)}
+            onClick={() => setEnabled((prev) => ({ ...prev, email }))}
             id="email"
             text={isValidate.email ? '사용가능' : '중복확인'}
           />
