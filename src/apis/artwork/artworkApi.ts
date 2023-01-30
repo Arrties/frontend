@@ -1,8 +1,7 @@
-import { ArtworkDTOType } from './artworkApi.type';
 import instance from '@apis/_axios/instance';
 
 export class ArtworkApi {
-  async postArtwork(body: FormData): Promise<ArtworkDTOType> {
+  async postArtwork(body: FormData): Promise<any> {
     const { data } = await instance.post('/art-works', body, {
       headers: {
         'Content-Type': 'multipart/form-data',

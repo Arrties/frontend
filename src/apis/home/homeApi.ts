@@ -1,7 +1,5 @@
 import instance from '@apis/_axios/instance';
 
-import { CustomizeArtwork } from './homeApi.type';
-
 export class HomeApi {
   async getCustomizedArtWork(
     page: number,
