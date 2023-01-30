@@ -15,6 +15,14 @@ export interface Keyword {
   id: number;
   keyword: string;
 }
+
+export interface NoticeForm {
+  id: number;
+  title: string;
+  message: string;
+  createdDate: string;
+  link: string;
+}
 export interface Role {
   roles: string;
 }
