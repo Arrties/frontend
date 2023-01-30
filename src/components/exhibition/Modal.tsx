@@ -23,7 +23,7 @@ absolute w-full bottom-0 h-auto m-auto rounded-[8px] backdrop-blur-[25.5px] p-5 
   p,
 ) =>
   p.$open
-    ? 'bg-gradient-to-r from-[#FFFFFF]/[.16] to-[#FFFFFF]/[.46] translate-y-[calc(-30vh)]'
+    ? 'bg-gradient-to-r from-[#FFFFFF]/[.16] to-[#FFFFFF]/[.46] translate-y-[-320px]'
     : 'bg-gradient-to-b from-[#FFFFFF]/[.16] to-[#FFFFFF]/[.46] translate-y-[120px]'}
 `;
 const ModalHeader = tw.div<DefaultProps>`
