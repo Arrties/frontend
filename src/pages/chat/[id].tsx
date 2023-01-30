@@ -10,6 +10,8 @@ import * as StompJs from '@stomp/stompjs';
 import { createClient, publish, subscribe } from '@apis/chat/socketConnect';
 import chatApi from '@apis/chat/chatApi';
 import { ChatRoomDTOType } from '@apis/chat/chatApi.type';
+import useGetProfile from '@hooks/queries/useGetProfile';
+import { isUser } from '@utils/isUser';
 interface ChatRoomForm {
   senderId: string;
   sendDate: string;
@@ -32,10 +34,13 @@ export function getServerSideProps({ params }) {
 export default function ChatRoom({ params }) {
   const id = params?.id;
   const router = useRouter();
-  const { register, handleSubmit, watch } = useForm<MessageForm>();
+  const { register, handleSubmit, watch, reset } = useForm<MessageForm>();
   const [isModal, setIsModal] = useState(false);
-  const { data: chatRoom } = useGetChatRoom(Number(id));
+  const { data: chatRoom, refetch: refetchChatRoom } = useGetChatRoom(
+    Number(id),
+  );
   const { artist, chatRoomId, member, messages } = chatRoom || {};
+  const { data: userInfo } = useGetProfile();
 
   const handleOption = () => {
     setIsModal(true);
@@ -71,9 +76,10 @@ export default function ChatRoom({ params }) {
     subscribe(client.current, id, subscribeCallback);
   };
 
-  const subscribeCallback = (response) => {
-    const responseBody = JSON.parse(response.body);
-    // 리렌더링
+  const subscribeCallback = (res) => {
+    console.log(res.body);
+    refetchChatRoom();
+    reset({ message: '' });
   };
 
   useEffect(() => {
@@ -82,7 +88,6 @@ export default function ChatRoom({ params }) {
       disconnect();
     };
   }, []);
-
   const onSubmit = (form: MessageForm) => {
     if (!client.current.connected) return;
     publish(client.current, id, member?.id, form?.message);
@@ -113,7 +118,9 @@ export default function ChatRoom({ params }) {
             onClick={() => router.back()}
             className="cursor-pointer"
           />
-          <div className="px-5 text-16 ">{artist?.name}</div>
+          <div className="px-5 text-16 ">
+            {isUser ? artist?.name : member?.name}
+          </div>
           <div className="flex items-center text-12">응답시간 : 1시간 이내</div>
           <Image
             src="/svg/icons/icon_option.svg"
@@ -131,18 +138,18 @@ export default function ChatRoom({ params }) {
         </article>
         <article className="mt-4">
           {messages &&
-            messages.map((chatItem, idx) => (
+            messages.map((message, idx: number) => (
               <ChattingMessage
                 key={idx}
-                sendDate={chatItem.sendDate}
-                message={chatItem.message}
-                senderId={chatItem.senderId}
+                sender={message?.senderId === userInfo?.id ? 'me' : 'you'}
+                sendTime={message.sendTime}
+                message={message.message}
               />
             ))}
         </article>
       </section>
       <form
-        className="absolute bottom-[30px] flex h-[50px] w-[327px] items-center rounded-[24.5px] bg-[#F8F8FA] px-[10px]"
+        className="fixed bottom-[30px] flex h-[50px] w-[327px] items-center rounded-[24.5px] bg-[#F8F8FA] px-[10px]"
         onSubmit={handleSubmit(onSubmit)}
       >
         <input

@@ -4,17 +4,15 @@ import Layout from '@components/common/Layout';
 import Image from 'next/image';
 import React, { useEffect, useRef } from 'react';
 import { useRouter } from 'next/router';
-import { createClient, publish, subscribe } from '@apis/chat/socketConnect';
+import { createClient, subscribe } from '@apis/chat/socketConnect';
 import Tab from '@components/common/Tab';
 import useGetChatRoomList from '@hooks/queries/chat/useGetChatRoomList';
-import useGetProfile from '@hooks/queries/useGetProfile';
 import { ChatRoomType } from '@apis/chat/chatApi.type';
 
 export default function Chat() {
   const router = useRouter();
   const client: any = useRef({}) as React.MutableRefObject<StompJs.Client>;
   const { data: chatRooms } = useGetChatRoomList();
-  const { data: userInfo } = useGetProfile();
   const chatRoomList = chatRooms?.chatRooms || [];
   const connect = async () => {
     client.current = await createClient('/ws-connection');
