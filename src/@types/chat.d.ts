@@ -22,6 +22,12 @@ interface ChatRoomList {
   chatRooms: [ChatRoom];
 }
 
+interface Message {
+  sendTime: string;
+  senderId: number;
+  message: string;
+}
+
 interface ChatRoomById {
   chatRoomId: number;
   artist: {
@@ -34,16 +40,5 @@ interface ChatRoomById {
     name: string;
     responseTime: string;
   };
-  messages: [
-    {
-      senderId: number;
-      message: string;
-      sendDate: string;
-    },
-    {
-      senderId: number;
-      message: string;
-      sendDate: string;
-    },
-  ];
+  messages: [Message];
 }

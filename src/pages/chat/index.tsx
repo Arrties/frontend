@@ -7,7 +7,6 @@ import { useRouter } from 'next/router';
 import { createClient, subscribe } from '@apis/chat/socketConnect';
 import Tab from '@components/common/Tab';
 import useGetChatRoomList from '@hooks/queries/chat/useGetChatRoomList';
-import { ChatRoomType } from '@apis/chat/chatApi.type';
 
 export default function Chat() {
   const router = useRouter();
@@ -49,7 +48,7 @@ export default function Chat() {
         </section>
         {chatRoomList?.length ? (
           <div className="absolute inset-x-0 mt-5 w-full ">
-            {chatRoomList.map((chatRoom: ChatRoomType) => (
+            {chatRoomList.map((chatRoom: ChatRoom) => (
               <Chatroom chatRoom={chatRoom} key={chatRoom.chatRoomId} />
             ))}
           </div>

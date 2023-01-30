@@ -7,9 +7,6 @@ const createClient = (endpoint) => {
   const client = new StompJs.Client({
     brokerURL: `wss://atties.shop${endpoint}`,
     connectHeaders: { Authorization: access },
-    debug: (str) => {
-      console.log(str);
-    },
   });
   client.webSocketFactory = () => {
     const socketIn = new SockJS(

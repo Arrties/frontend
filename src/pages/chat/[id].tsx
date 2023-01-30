@@ -9,16 +9,9 @@ import useGetChatRoom from '@hooks/queries/chat/useGetChatRoom';
 import * as StompJs from '@stomp/stompjs';
 import { createClient, publish, subscribe } from '@apis/chat/socketConnect';
 import chatApi from '@apis/chat/chatApi';
-import { ChatRoomDTOType } from '@apis/chat/chatApi.type';
 import useGetProfile from '@hooks/queries/useGetProfile';
 import { isUser } from '@utils/isUser';
-interface ChatRoomForm {
-  senderId: string;
-  sendDate: string;
-  message: string;
-}
-
-interface MessageForm {
+interface ContentForm {
   message: string;
   image: FileList;
 }
@@ -34,13 +27,11 @@ export function getServerSideProps({ params }) {
 export default function ChatRoom({ params }) {
   const id = params?.id;
   const router = useRouter();
-  const { register, handleSubmit, watch, reset } = useForm<MessageForm>();
-  const [isModal, setIsModal] = useState(false);
-  const { data: chatRoom, refetch: refetchChatRoom } = useGetChatRoom(
-    Number(id),
-  );
-  const { artist, chatRoomId, member, messages } = chatRoom || {};
+  const { register, handleSubmit, watch, reset } = useForm<ContentForm>();
+  const { data: chatRoom, refetch: refetchChatRoom } = useGetChatRoom(+id);
+  const { artist, member, messages } = chatRoom || {};
   const { data: userInfo } = useGetProfile();
+  const [isModal, setIsModal] = useState(false);
 
   const handleOption = () => {
     setIsModal(true);
@@ -76,8 +67,8 @@ export default function ChatRoom({ params }) {
     subscribe(client.current, id, subscribeCallback);
   };
 
-  const subscribeCallback = (res) => {
-    console.log(res.body);
+  const subscribeCallback = (response) => {
+    console.log(JSON.parse(response.body));
     refetchChatRoom();
     reset({ message: '' });
   };
@@ -88,9 +79,9 @@ export default function ChatRoom({ params }) {
       disconnect();
     };
   }, []);
-  const onSubmit = (form: MessageForm) => {
+  const onSubmit = (form: Message) => {
     if (!client.current.connected) return;
-    publish(client.current, id, member?.id, form?.message);
+    publish(client.current, id, userInfo?.id, form?.message);
   };
 
   const disconnect = () => {
@@ -138,7 +129,7 @@ export default function ChatRoom({ params }) {
         </article>
         <article className="mt-4">
           {messages &&
-            messages.map((message, idx: number) => (
+            messages.map((message: Message, idx: number) => (
               <ChattingMessage
                 key={idx}
                 sender={message?.senderId === userInfo?.id ? 'me' : 'you'}

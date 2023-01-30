@@ -1,10 +1,9 @@
 import Image from 'next/image';
 import React from 'react';
 import { useRouter } from 'next/router';
-import { ChatRoomType } from '@apis/chat/chatApi.type';
 
 interface ChatRoomProps {
-  chatRoom: ChatRoomType;
+  chatRoom: ChatRoom;
   [key: string]: any;
 }
 
