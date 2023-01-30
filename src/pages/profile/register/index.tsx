@@ -1,13 +1,12 @@
-import profileApi from '@apis/profile/profileApi';
 import Layout from '@components/common/Layout';
 import Navigate from '@components/common/Navigate';
 import Image from 'next/image';
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
-import { getToken, setToken } from '@utils/localStorage/token';
 import { formatBytes } from '@utils/formatBytes';
 import useRoleMutation from '@hooks/mutations/useRoleMutation';
+import Loader from '@components/common/Loader';
 
 interface FileForm {
   file: any;
@@ -47,6 +46,9 @@ export default function Register() {
   const handleDelete = () => {
     setFileState([]);
   };
+
+  if (isLoading) return <Loader />;
+
   return (
     <Layout>
       <Navigate

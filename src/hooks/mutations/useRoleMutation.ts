@@ -16,7 +16,7 @@ const useRoleMutation = () => {
           ...token,
           roles: data.roles,
         });
-        router.push('/profile/edit');
+        router.push('/profile/register/complete');
       },
     },
   );
