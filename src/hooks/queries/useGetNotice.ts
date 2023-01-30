@@ -3,7 +3,7 @@ import { NoticeForm } from '@apis/profile/profileApi.type';
 import { useQuery } from 'react-query';
 
 const useGetNotice = () => {
-  return useQuery<NoticeForm[] | undefined, Error>(
+  return useQuery<NoticeForm[], Error>(
     'useGetNotice',
     () => profileApi.getNotice(),
     {
