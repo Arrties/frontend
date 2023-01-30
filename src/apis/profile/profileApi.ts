@@ -1,5 +1,5 @@
 import instance from '@apis/_axios/instance';
-import { InquiryForm, RoleForm } from './profileApi.type';
+import { InquiryForm, Role } from './profileApi.type';
 
 export class ProfileApi {
   async patchUserInfo(formData: any) {
@@ -30,7 +30,7 @@ export class ProfileApi {
     const { data } = await instance.get('/members/ask');
     return data;
   }
-  async patchRole(): Promise<any> {
+  async patchRole(): Promise<Role> {
     const { data } = await instance.patch('/members/roles');
     return data;
   }

@@ -7,9 +7,6 @@ export interface InquiryForm {
   answer: string;
   id: number;
 }
-export interface RoleForm {
-  roles: string;
-}
 export interface KeywordForm {
   keywords: string[];
 }
@@ -17,4 +14,7 @@ export interface KeywordForm {
 export interface Keyword {
   id: number;
   keyword: string;
+}
+export interface Role {
+  roles: string;
 }
