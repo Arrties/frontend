@@ -13,10 +13,17 @@ import { useRouter } from 'next/router';
 import { isUser } from '@utils/isUser';
 import { makeBlob } from '@utils/makeBlob';
 import profileApi from '@apis/profile/profileApi';
-
+import { useGetDuplicateCheck } from '@hooks/queries/useGetDuplicateCheck';
+interface checkForm {
+  nickname: boolean;
+  email: boolean;
+}
 export default function Edit() {
-  const [isNicknameValidate, setIsNicknameValidate] = useState<boolean>(true);
-  const [isEmailValidate, setIsEmailValidate] = useState<boolean>(true);
+  const [isValidate, setIsValidate] = useState<checkForm>({
+    nickname: false,
+    email: false,
+  });
+
   const { isLoading, data } = useGetProfile();
   const [userInfo, setUserInfo] = useState<Member | null>(null);
 
@@ -35,21 +42,63 @@ export default function Edit() {
   } = useForm<Member>();
   const nickname = watch('nickname');
   const email = watch('email');
+
+  const [enabled, setEnabled] = useState<DuplicateCheck>({
+    userId: '',
+    nickname: '',
+    email: '',
+  });
+  const results = useGetDuplicateCheck(enabled);
+  useEffect(() => {
+    setIsValidate((prev) => ({ ...prev, nickname: false }));
+    setEnabled((prev) => ({ ...prev, nickname: '' }));
+    clearErrors('nickname');
+  }, [nickname]);
+
+  useEffect(() => {
+    setIsValidate((prev) => ({ ...prev, email: false }));
+    setEnabled((prev) => ({ ...prev, email: '' }));
+    clearErrors('email');
+  }, [email]);
+
+  console.log(results);
+
+  const nicknameResult = results[1];
+  const emailResult = results[2];
+  useEffect(() => {
+    if (nicknameResult.isSuccess) {
+      setIsValidate((prev) => ({ ...prev, nickname: true }));
+      clearErrors('nickname');
+    }
+    if (emailResult.isSuccess) {
+      setIsValidate((prev) => ({ ...prev, email: true }));
+      clearErrors('email');
+    }
+    if (
+      nicknameResult.error &&
+      nicknameResult.error.code === 'EXIST_USER_NICKNAME'
+    ) {
+      setIsValidate((prev) => ({ ...prev, nickname: false }));
+      setError('nickname', {
+        type: 'nickname doublecheck',
+        message: '이미 존재하는 닉네임 입니다.',
+      });
+    }
+    if (emailResult.error && emailResult.error.code === 'EXIST_USER_EMAIL') {
+      setIsValidate((prev) => ({ ...prev, email: false }));
+      setError('email', {
+        type: 'email doublecheck',
+        message: '이미 존재하는 이메일 입니다.',
+      });
+    }
+  }, [nicknameResult.isFetching, emailResult.isFetching]);
+
   const router = useRouter();
   const profile = watch('image');
 
   const handleLeftButton = () => {
     router.push('/profile');
   };
-
-  useEffect(() => {
-    setIsEmailValidate(false);
-    clearErrors('email');
-  }, [email]);
-  useEffect(() => {
-    setIsNicknameValidate(false);
-    clearErrors('nickname');
-  }, [nickname]);
 
   useEffect(() => {
     if (!profile) return;
@@ -61,36 +110,6 @@ export default function Edit() {
         } as User),
     );
   }, [profile]);
-
-  const handleDoubleCheckNickName = async () => {
-    if (!nickname || !userInfo) return;
-    const data = await authApi.getCheckNickname(nickname);
-    if (data.status === 409 && nickname !== userInfo?.nickname) {
-      setError('nickname', {
-        type: 'nickname duplicate',
-        message: '중복되는 닉네임 입니다.',
-      });
-      return;
-    } else {
-      setIsNicknameValidate(true);
-      clearErrors('nickname');
-    }
-  };
-
-  const handleDoubleCheckEmail = async () => {
-    if (!email || !userInfo) return;
-    const response = await authApi.getCheckEmail(email);
-    if (response.status === 409 && email !== userInfo?.email) {
-      setError('email', {
-        type: 'email duplicate',
-        message: '이미 가입된 이메일 입니다.',
-      });
-      return;
-    } else {
-      setIsEmailValidate(true);
-      clearErrors('email');
-    }
-  };
 
   const onSubmit = async (form: Member) => {
     const {
@@ -104,14 +123,14 @@ export default function Edit() {
     } = form;
     if (!nickname || !email) return;
     if (!userInfo) return;
-    if (!isNicknameValidate && userInfo.nickname !== form.nickname) {
+    if (!isValidate.nickname && userInfo.nickname !== form.nickname) {
       setError('nickname', {
         type: 'need nickname duplicate',
         message: '닉네임 중복체크를 해주세요',
       });
       return;
     }
-    if (!isEmailValidate && userInfo?.email !== form.email) {
+    if (!isValidate.email && userInfo?.email !== form.email) {
       setError('email', {
         type: 'need email duplicate',
         message: '이메일 중복체크를 해주세요',
@@ -248,9 +267,12 @@ export default function Edit() {
           })}
         />
         <DoubleCheckButton
-          $valid={!isNicknameValidate}
-          onClick={handleDoubleCheckNickName}
-          text={isNicknameValidate ? '사용가능' : '중복확인'}
+          $valid={!isValidate.nickname}
+          onClick={() => {
+            if (nickname !== data?.nickname)
+              setEnabled((prev) => ({ ...prev, nickname }));
+          }}
+          text={isValidate.nickname ? '사용가능' : '중복확인'}
         />
         {errors.nickname && <ErrorMessage message={errors.nickname.message} />}
       </section>
@@ -271,9 +293,12 @@ export default function Edit() {
           })}
         />
         <DoubleCheckButton
-          $valid={!isEmailValidate}
-          onClick={handleDoubleCheckEmail}
-          text={isEmailValidate ? '사용가능' : '중복확인'}
+          $valid={!isValidate.email}
+          onClick={() => {
+            if (email !== data?.email)
+              setEnabled((prev) => ({ ...prev, email }));
+          }}
+          text={isValidate.email ? '사용가능' : '중복확인'}
         />
         {errors.email ? <ErrorMessage message={errors.email.message} /> : ''}
       </section>
