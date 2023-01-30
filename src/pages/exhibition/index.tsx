@@ -7,7 +7,7 @@ import Image from 'next/image';
 import React from 'react';
 import tw from 'tailwind-styled-components';
 import { useRef, useState } from 'react';
-import { Swiper, SwiperSlide, useSwiper } from 'swiper/react';
+import { Swiper, SwiperSlide } from 'swiper/react';
 import { useRouter } from 'next/router';
 
 const DUMP_ART_LISTS = [
@@ -37,10 +37,6 @@ const DUMP_ART_LISTS = [
 interface DefaultProps {
   [key: string]: any;
 }
-
-const ExhibitionLayout = tw.div<DefaultProps>`
-relative h-full w-full max-w-[420px] overflow-x-hidden px-[24px]
-`;
 
 const SwiperButtonDiv = tw.div<DefaultProps>`
 bg-[rgba(153,153,153,0.24)] rounded-[10px] w-8 h-8 flex justify-center cursor-pointer
