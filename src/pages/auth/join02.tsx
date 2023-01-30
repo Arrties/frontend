@@ -27,12 +27,6 @@ interface checkForm {
   email: boolean;
 }
 
-interface EnabledOptions {
-  userId: string;
-  nickname: string;
-  email: string;
-}
-
 export default function Join02() {
   const [isValidate, setIsValidate] = useState<checkForm>({
     id: false,
@@ -91,7 +85,11 @@ export default function Join02() {
     router.push('/auth/join03');
   };
 
-  const [enabled, setEnabled] = useState<EnabledOptions>({
+  const id = watch('userId');
+  const email = watch('email');
+  const nickname = watch('nickname');
+
+  const [enabled, setEnabled] = useState<DuplicateCheck>({
     userId: '',
     nickname: '',
     email: '',
@@ -99,20 +97,16 @@ export default function Join02() {
 
   const results = useGetDuplicateCheck(enabled);
 
-  const id = watch('userId');
-  const email = watch('email');
-  const nickname = watch('nickname');
-
   useEffect(() => {
-    setIsValidate({ ...isValidate, id: false });
+    setIsValidate((prev) => ({ ...prev, id: false }));
     setEnabled((prev) => ({ ...prev, userId: '' }));
   }, [id]);
   useEffect(() => {
-    setIsValidate({ ...isValidate, nickname: false });
+    setIsValidate((prev) => ({ ...prev, nickname: false }));
     setEnabled((prev) => ({ ...prev, nickname: '' }));
   }, [nickname]);
   useEffect(() => {
-    setIsValidate({ ...isValidate, email: false });
+    setIsValidate((prev) => ({ ...prev, email: false }));
     setEnabled((prev) => ({ ...prev, email: '' }));
   }, [email]);
   const [idResult, nicknameResult, emailResult] = results;
