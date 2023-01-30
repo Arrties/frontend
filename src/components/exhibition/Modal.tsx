@@ -19,12 +19,12 @@ interface DefaultProps {
 }
 
 const ModalInner = tw.div<DefaultProps>`
-absolute w-[327px] h-[280px] m-auto rounded-[8px] backdrop-blur-[25.5px] p-5 transition  ${(
+absolute w-full bottom-0 h-auto m-auto rounded-[8px] backdrop-blur-[25.5px] p-5 transition  ${(
   p,
 ) =>
   p.$open
-    ? 'bg-gradient-to-r from-[#FFFFFF]/[.16] to-[#FFFFFF]/[.46] translate-y-[-250px]'
-    : 'bg-gradient-to-b from-[#FFFFFF]/[.16] to-[#FFFFFF]/[.46] translate-y-[120px] text-[#191919]/40'}
+    ? 'bg-gradient-to-r from-[#FFFFFF]/[.16] to-[#FFFFFF]/[.46] translate-y-[calc(-30vh)]'
+    : 'bg-gradient-to-b from-[#FFFFFF]/[.16] to-[#FFFFFF]/[.46] translate-y-[120px]'}
 `;
 const ModalHeader = tw.div<DefaultProps>`
 text-[#424242] text-20 flex justify-between font-bold `;
@@ -51,34 +51,38 @@ export default function Modal({
   ...rest
 }: ModalProps) {
   return (
-    <ModalInner {...rest}>
+    <>
       {!isOpen && (
-        <Image
-          alt="swipe"
-          src="/svg/icons/icon_swipe_arrow.svg"
-          width={20}
-          height={20}
-          className="absolute top-[-30px] right-[150px] cursor-pointer"
-          onClick={handleSwipeArrow}
-        />
+        <div className="absolute bottom-[170px] flex h-auto w-[22px] justify-center">
+          <Image
+            alt="swipe"
+            src="/svg/icons/icon_swipe_arrow.svg"
+            width={20}
+            height={20}
+            className="cursor-pointer"
+            onClick={handleSwipeArrow}
+          />
+        </div>
       )}
-      <ModalHeader>
-        <span>{title}</span>
-        <Image
-          src="/svg/icons/icon_grayClose.svg"
-          alt="close"
-          width={20}
-          height={20}
-          onClick={onCloseModal}
-          className="cursor-pointer"
-        />
-      </ModalHeader>
-      <MajorDiv>{major}</MajorDiv>
-      <DescriptionDiv>{description}</DescriptionDiv>
-      <div className="flex w-full justify-evenly pt-4">
-        <ModalButton onClick={handleLeftButton}>작품 더보기</ModalButton>
-        <ModalButton onClick={handleRighButton}>작가 프로필</ModalButton>
-      </div>
-    </ModalInner>
+      <ModalInner {...rest}>
+        <ModalHeader>
+          <span>{title}</span>
+          <Image
+            src="/svg/icons/icon_grayClose.svg"
+            alt="close"
+            width={20}
+            height={20}
+            onClick={onCloseModal}
+            className="cursor-pointer"
+          />
+        </ModalHeader>
+        <MajorDiv>{major}</MajorDiv>
+        <DescriptionDiv>{description}</DescriptionDiv>
+        <div className="flex w-full justify-evenly pt-4">
+          <ModalButton onClick={handleLeftButton}>작품 더보기</ModalButton>
+          <ModalButton onClick={handleRighButton}>작가 프로필</ModalButton>
+        </div>
+      </ModalInner>
+    </>
   );
 }
