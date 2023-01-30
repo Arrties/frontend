@@ -1,5 +1,6 @@
 import 'swiper/css';
 
+import Layout from '@components/common/Layout';
 import Navigate from '@components/common/Navigate';
 import Modal from '@components/exhibition/Modal';
 import Image from 'next/image';
@@ -38,7 +39,7 @@ interface DefaultProps {
 }
 
 const ExhibitionLayout = tw.div<DefaultProps>`
-font-Pretendard w-full px-6 pt-[45px] border h-[812px] relative overflow-y-hidden overflow-x-hidden
+relative h-full w-full max-w-[420px] overflow-x-hidden px-[24px]
 `;
 
 const SwiperButtonDiv = tw.div<DefaultProps>`
@@ -89,62 +90,36 @@ export default function Exhibition() {
   };
 
   return (
-    <ExhibitionLayout>
+    <Layout>
       {isExpansion ? (
-        <>
-          <Image
-            alt="exhibition_bg"
-            src="/svg/icons/bg_exhibition.jpg"
-            quality={100}
-            width={400}
-            height={0}
-            sizes="100vh"
-            style={{
-              objectFit: 'contain',
-            }}
-            className="absolute top-[240px] right-[-3px] scale-[1.8]"
-          />
-          <Image
-            alt="canvas"
-            src="/svg/icons/bg_canvas.svg"
-            quality={100}
-            width={400}
-            height={0}
-            sizes="100vh"
-            style={{
-              objectFit: 'contain',
-            }}
-            className="absolute top-[240px] right-[-3px] scale-[1.8]"
-          />
-        </>
+        <Image
+          alt="exhibition_bg"
+          src="/svg/icons/bg_exhibition.jpg"
+          quality={100}
+          width={400}
+          height={0}
+          sizes="100vh"
+          style={{
+            objectFit: 'contain',
+          }}
+          className="absolute top-[240px] right-[-3px] scale-[2.0]"
+        />
       ) : (
-        <>
-          <Image
-            alt="exhibition_bg"
-            src="/svg/icons/bg_exhibition.jpg"
-            quality={100}
-            fill
-            sizes="100vh"
-            style={{
-              objectFit: 'cover',
-            }}
-          />
-          <Image
-            alt="canvas"
-            src="/svg/icons/bg_canvas.svg"
-            quality={100}
-            fill
-            sizes="100vh"
-            style={{
-              objectFit: 'cover',
-            }}
-          />
-        </>
+        <Image
+          alt="exhibition_bg"
+          src="/svg/icons/bg_exhibition.jpg"
+          quality={100}
+          fill
+          sizes="100vh"
+          style={{
+            objectFit: 'cover',
+          }}
+        />
       )}
-      <Navigate isRightButton={false} />
-      <Swiper className="h-full" ref={swiperRef} spaceBetween={50}>
+      <Navigate isRightButton={false} className="absolute top-0 z-50 w-full" />
+      <Swiper className="absolute h-full" ref={swiperRef} spaceBetween={180}>
         {!isExpansion && !isOpen && (
-          <div className="absolute top-[180px] z-50 flex w-[99%] justify-between">
+          <div className="absolute top-[330px] z-10 flex w-full justify-between">
             <SwiperButtonDiv
               onClick={() => swiperRef.current.swiper.slidePrev()}
             >
@@ -170,8 +145,20 @@ export default function Exhibition() {
         {DUMP_ART_LISTS.map((art, idx) => (
           <SwiperSlide key={idx}>
             {isExpansion ? (
-              <div>
-                <div className="relative mt-[80px]">
+              <div className="flex h-full w-full justify-center">
+                <Image
+                  alt="canvas"
+                  src="/svg/icons/bg_canvas.svg"
+                  quality={100}
+                  width={400}
+                  height={0}
+                  sizes="100vh"
+                  style={{
+                    objectFit: 'contain',
+                  }}
+                  className="absolute top-[240px] scale-[2.0]"
+                />
+                <div className="absolute top-[160px] mr-1 w-[95%]">
                   <Image
                     src="/svg/example/exhibition.svg"
                     alt="image"
@@ -180,7 +167,7 @@ export default function Exhibition() {
                     quality={100}
                   />
                 </div>
-                <div className="absolute top-[95px] right-[15px]">
+                <div className="absolute top-[170px] right-[20px]">
                   <Image
                     src="/svg/icons/icon_maximize.svg"
                     alt="image"
@@ -192,8 +179,20 @@ export default function Exhibition() {
                 </div>
               </div>
             ) : (
-              <div>
-                <div className="relative m-auto mr-[44px] mt-[35px] flex h-[348px] w-[240px] justify-center">
+              <div className="flex h-full w-full justify-center">
+                <Image
+                  alt="canvas"
+                  src="/svg/icons/bg_canvas.svg"
+                  quality={100}
+                  width={400}
+                  height={0}
+                  sizes="100vh"
+                  style={{
+                    objectFit: 'contain',
+                  }}
+                  className="absolute top-[140px] scale-[1.6]"
+                />
+                <div className="absolute top-[130px] mr-1 w-[77%]">
                   <Image
                     src="/svg/example/exhibition.svg"
                     alt="image"
@@ -202,7 +201,7 @@ export default function Exhibition() {
                     quality={100}
                   />
                 </div>
-                <div className="absolute top-[45px] right-[55px]">
+                <div className="absolute top-[140px] right-[55px]">
                   <Image
                     src="/svg/icons/icon_maximize.svg"
                     alt="image"
@@ -215,7 +214,7 @@ export default function Exhibition() {
               </div>
             )}
             {modal && (
-              <div>
+              <div className="flex justify-center">
                 <Modal
                   isOpen={isOpen}
                   $open={isOpen}
@@ -232,6 +231,6 @@ export default function Exhibition() {
           </SwiperSlide>
         ))}
       </Swiper>
-    </ExhibitionLayout>
+    </Layout>
   );
 }
