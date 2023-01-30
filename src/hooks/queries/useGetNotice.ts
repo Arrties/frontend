@@ -1,10 +1,15 @@
 import profileApi from '@apis/profile/profileApi';
+import { NoticeForm } from '@apis/profile/profileApi.type';
 import { useQuery } from 'react-query';
 
 const useGetNotice = () => {
-  return useQuery<any, Error>('useGetNotice', () => profileApi.getNotice(), {
-    retry: false,
-  });
+  return useQuery<NoticeForm[] | undefined, Error>(
+    'useGetNotice',
+    () => profileApi.getNotice(),
+    {
+      retry: false,
+    },
+  );
 };
 
 export default useGetNotice;

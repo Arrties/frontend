@@ -1,24 +1,17 @@
+import { NoticeForm } from '@apis/profile/profileApi.type';
 import Layout from '@components/common/Layout';
 import Navigate from '@components/common/Navigate';
 import NoticeItem from '@components/notice/NoticeItem';
 import useGetNotice from '@hooks/queries/useGetNotice';
 import Image from 'next/image';
 
-interface NoticeForm {
-  id: number;
-  title: string;
-  message: string;
-  createdDate: string;
-  link: string;
-}
-
 export default function Notice() {
-  const { data: noticeList, refetch: refetchNotice } = useGetNotice();
+  const { data: noticeList = [], refetch: refetchNotice } = useGetNotice();
   return (
     <Layout>
       <Navigate isRightButton={false} message="알림" />
       <h1 className="mt-6 mb-2 font-bold">활동알림</h1>
-      {noticeList?.length > 0 ? (
+      {noticeList.length > 0 ? (
         <ul>
           {noticeList.map((notice: NoticeForm) => (
             <NoticeItem
