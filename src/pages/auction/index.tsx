@@ -1,10 +1,10 @@
-import ArtWorkItem from '@components/auction/ArtWorkItem'
-import AuctionNavigate from '@components/auction/AuctionNavigate'
-import Layout from '@components/common/Layout'
-import Tab from '@components/common/Tab'
-import Image from 'next/image'
-import React from 'react'
-import tw from 'tailwind-styled-components'
+import ArtWorkItem from '@components/auction/ArtWorkItem';
+import AuctionNavigate from '@components/auction/AuctionNavigate';
+import Layout from '@components/common/Layout';
+import Tab from '@components/common/Tab';
+import Image from 'next/image';
+import React from 'react';
+import tw from 'tailwind-styled-components';
 
 const ArtworkList = tw.div<DefaultProps>``;
 
@@ -17,17 +17,18 @@ export default function Auction() {
     <>
       <Layout>
         <AuctionNavigate />
-        <section className="relative flex justify-between mb-3">
-          <article className=" left-0 text-12 ">작품 17,029</article>
-          <article className=" right-0 text-12 flex cursor-pointer ">
-            인기순
+        <section className="relative mb-7 flex justify-between">
+          <span className="text-[20px] font-bold">제 1회 아띠즈 경매</span>
+          <div className=" flex items-center rounded border border-brand px-2">
             <Image
               alt=""
-              src="/svg/icons/icon_arrow_sort.svg"
-              width="18"
+              src="/svg/icons/icon_clock_brand.svg"
+              width="14"
               height="0"
+              className="mr-1"
             />
-          </article>
+            <span className="text-[14px] font-bold">08:20:03</span>
+          </div>
         </section>
         <ArtworkList>
           <ArtWorkItem />

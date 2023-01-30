@@ -6,6 +6,7 @@ import { useRouter } from 'next/router';
 import useGetDetail from '@hooks/queries/useGetDetail';
 import Navigate from '@components/common/Navigate';
 import artworkApi from '@apis/artwork/artworkApi';
+import chatApi from '@apis/chat/chatApi';
 
 export function getServerSideProps({ params }) {
   return {
@@ -18,23 +19,30 @@ export function getServerSideProps({ params }) {
 export default function Detail({ params }) {
   const router = useRouter();
   const artWorkId = params?.id;
-  const handleChat = () => {
-    // 채팅방 만들기 API
+  const { data: detailData, refetch: refetchDetail } = useGetDetail(
+    Number(artWorkId),
+  );
+  const { artWork, artist } = detailData || {};
+
+  const handleChat = async () => {
+    const chatData = await chatApi.postChatRoom({
+      artistId: artist?.id,
+      artWorkId: artWork?.id,
+    });
+    router.push(`/chat/${chatData?.chatRoomId}`);
   };
   const handlePurchase = () => {
-    // 응찰 페이지로 이동
+    router.push(`/auction/${artWork?.id}`);
   };
   const handlePreferButton = async () => {
-    if (true) {
-      // 찜을 아직 안 눌렀다면
-      await artworkApi.postPrefer(artWorkId);
-    } else {
+    if (detailData?.preferred) {
       await artworkApi.postDeletePrefer(artWorkId);
+      refetchDetail();
+    } else {
+      await artworkApi.postPrefer(artWorkId);
+      refetchDetail();
     }
   };
-
-  const { data: detailData } = useGetDetail(Number(artWorkId));
-  const { artWork, artist } = detailData || {};
 
   return (
     <>
@@ -42,12 +50,21 @@ export default function Detail({ params }) {
         <Navigate
           className="fixed inset-x-0 top-[25px] z-10 m-auto h-10 max-w-[350px]"
           right_message={
-            <Image
-              alt="heart"
-              src="/svg/icons/icon_heart.svg"
-              width="18"
-              height="0"
-            />
+            detailData?.preferred ? (
+              <Image
+                alt="heart"
+                src="/svg/icons/icon_heart_filled.svg"
+                width="18"
+                height="0"
+              />
+            ) : (
+              <Image
+                alt="heart"
+                src="/svg/icons/icon_heart.svg"
+                width="18"
+                height="0"
+              />
+            )
           }
           handleRightButton={handlePreferButton}
         />
@@ -136,7 +153,7 @@ export default function Detail({ params }) {
               <p className="text-14">{artWork?.description}</p>
               <div>
                 {artWork?.keywords?.map((keyword: string, idx: number) => (
-                  <div key={idx}>{keyword}</div>
+                  <></>
                 ))}
               </div>
             </div>
@@ -154,7 +171,7 @@ export default function Detail({ params }) {
           <div className="h-[5rem]"></div>
         </section>
       </Layout>
-      <article className="fixed inset-x-0 bottom-[40px] m-auto flex max-w-[360px] gap-5">
+      <article className="absolute inset-x-0 bottom-[34px] m-auto flex w-[calc(100%-48px)] gap-5">
         <Button text="채팅하기" kind="outlined" onClick={handleChat} />
         <Button text="응찰하기" onClick={handlePurchase} />
       </article>

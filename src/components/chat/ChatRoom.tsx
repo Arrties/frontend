@@ -1,34 +1,26 @@
-import Image from 'next/image'
-import React from 'react'
-import { useRouter } from 'next/router'
-
-interface ChatRoomForm {
-  id: string;
-  profileImage: string;
-  name: string;
-  time: string;
-  message: string;
-  notifyCnt: number;
-}
+import Image from 'next/image';
+import React from 'react';
+import { useRouter } from 'next/router';
+import { ChatRoomType } from '@apis/chat/chatApi.type';
 
 interface ChatRoomProps {
-  chatRoom: ChatRoomForm;
+  chatRoom: ChatRoomType;
   [key: string]: any;
 }
 
 export default function Chatroom({ chatRoom }: ChatRoomProps) {
   const handleChattingRoom = () => {
-    router.push(`/chat/${chatRoom.id}`);
+    router.push(`/chat/${chatRoom?.chatRoomId}`);
   };
   const router = useRouter();
   return (
     <section
-      className="h-[64px] flex items-center relative border-b cursor-pointer p-5 first:border-t"
+      className="relative flex h-[64px] cursor-pointer items-center border-b p-5 first:border-t"
       onClick={handleChattingRoom}
     >
       <article>
         <Image
-          src={chatRoom.profileImage}
+          src={chatRoom?.otherMember?.image || '/svg/icons/icon_avatar.svg'}
           alt="profile"
           width="40"
           height="0"
@@ -38,22 +30,23 @@ export default function Chatroom({ chatRoom }: ChatRoomProps) {
 
       <article className="flex flex-col">
         <div className="flex">
-          <p className="text-[#191919] text-14 flex items-center justify-center font-bold px-2">
-            {chatRoom.name}
+          <p className="flex items-center justify-center px-2 text-14 font-bold text-[#191919]">
+            {chatRoom?.otherMember?.name}
           </p>
-          <p className="text-[#767676] text-10 flex items-center justify-center">
-            {chatRoom.time}
+          <p className="flex items-center justify-center text-10 text-[#767676]">
+            {chatRoom?.lastMessage?.sendDate}
           </p>
         </div>
-        <p className="text-[#191919] text-12 flex items-center justify-center px-2 mt-1">
-          {chatRoom.message}
+        <p className="mt-1 flex items-center justify-center px-2 text-12 text-[#191919]">
+          {chatRoom?.lastMessage?.message}
         </p>
       </article>
-      {!!chatRoom.notifyCnt && (
-        <article className="absolute right-5 bg-[#FC6554] w-[20px] h-[20px] flex justify-center items-center text-[#FFF] text-12 rounded-full">
-          {chatRoom.notifyCnt}
+      {!!chatRoom.unreadCount && (
+        <article className="absolute right-5 flex h-[20px] w-[20px] items-center justify-center rounded-full bg-[#FC6554] text-12 text-[#FFF]">
+          {chatRoom.unreadCount}
         </article>
       )}
+      {/* <Image alt="" src="/svg/icons/icon_.svg" width="100" height="0" /> */}
     </section>
   );
 }

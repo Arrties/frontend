@@ -18,6 +18,7 @@ import { Autoplay, Navigation, Scrollbar } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { isUser } from '@utils/isUser';
 import { Pagination } from 'swiper';
+import KeywordBox from '@components/common/KeywordBox';
 
 interface KeywordArtwork {
   id: string;
@@ -96,7 +97,7 @@ const DUMP_AFTER_AUCTION_LIST = makeThreeEach(DUMP_PREV_AUCTION_LISTS);
 export default function Home() {
   const router = useRouter();
 
-  const { data: customizedArtwork } = useGetCustomizedArtWork();
+  const { data: customizedArtwork } = useGetCustomizedArtWork(1, 5);
   const { data: userInfo } = useGetProfile();
   return (
     <>
@@ -126,14 +127,9 @@ export default function Home() {
             </div>
           </div>
         </section>
-        <section className="my-4 ">
-          {userInfo?.keywords?.map((keyword) => (
-            <span
-              className="mr-2 mb-1 rounded-[19px] border-[1px] border-[#DBDBDB] px-2 py-1 text-12 text-[#767676] last:mr-0 "
-              key={keyword}
-            >
-              {keyword}
-            </span>
+        <section className="my-4 mt-2">
+          {userInfo?.keywords?.map((keyword: string) => (
+            <KeywordBox text={keyword} />
           ))}
         </section>
         <section className="mb-12 ">
@@ -142,7 +138,7 @@ export default function Home() {
             navigation
             scrollbar={{ draggable: true }}
             spaceBetween={2}
-            slidesPerView={2}
+            slidesPerView={2.1}
             autoplay={{ delay: 5000, disableOnInteraction: false }}
           >
             {customizedArtwork?.artworks?.map(
@@ -219,7 +215,7 @@ export default function Home() {
             )}
           </Swiper>
         </section>
-        {!isUser && <FloatButton />}
+        {isUser ? <div className="h-16" /> : <FloatButton />}
       </Layout>
       <Tab />
     </>

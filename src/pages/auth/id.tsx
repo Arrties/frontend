@@ -40,29 +40,22 @@ function Id() {
   };
 
   const router = useRouter();
-  const handleLeftButton = () => {
-    router.push('/auth/login');
-  };
-  const handleRightButton = () => {
-    router.push('/auth/login');
-  };
-  const onCloseModal = () => {
-    setIsModal(false);
-  };
-
   return (
     <Layout>
       {isModal && (
         <Modal
           isModal={isModal}
-          onCloseModal={onCloseModal}
+          onCloseModal={() => {
+            setIsModal(false);
+          }}
           message="입력하신 주소로 확인 메일을 보내드렸습니다."
         />
       )}
       <Navigate
         message="아이디 찾기"
-        handleLeftButton={handleLeftButton}
-        handleRightButton={handleRightButton}
+        handleRightButton={() => {
+          router.push('/auth/login');
+        }}
       />
       <section className="py-5">
         <p className="text-16 font-semibold">
@@ -71,7 +64,7 @@ function Id() {
         </p>
       </section>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <section className="py-2 space-y-2">
+        <section className="space-y-2 py-2">
           <Input
             type="email"
             placeholder="이메일을 입력해주세요. (@포함)"
@@ -86,10 +79,12 @@ function Id() {
           />
           {errors.email && <ErrorMessage message={errors.email.message} />}
         </section>
-        <div className="h-[400px]" />
-        <section>
-          <Button text="확인" type="submit" />
-        </section>
+
+        <Button
+          text="확인"
+          type="submit"
+          className="absolute inset-x-0 bottom-[34px] m-auto w-[calc(100%-48px)]"
+        />
       </form>
     </Layout>
   );

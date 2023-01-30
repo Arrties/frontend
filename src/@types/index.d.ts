@@ -9,6 +9,7 @@ interface User {
   nickname?: string;
   telephone?: string;
   image?: any;
+  id?: string;
 }
 interface Artist {
   education?: string;
@@ -46,4 +47,8 @@ interface Error {
   detail: string;
   error: string;
   status: number;
+}
+
+interface defaultProps {
+  [key: string]: any;
 }

@@ -7,9 +7,6 @@ export interface InquiryForm {
   answer: string;
   id: number;
 }
-export interface RoleForm {
-  roles: string;
-}
 export interface KeywordForm {
   keywords: string[];
 }
@@ -25,4 +22,7 @@ export interface NoticeForm {
   message: string;
   createdDate: string;
   link: string;
+}
+export interface Role {
+  roles: string;
 }

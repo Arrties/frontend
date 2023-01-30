@@ -1,31 +1,31 @@
 interface ChatProps {
-  time: number | string;
-  text: string;
-  sender: string;
+  sendDate: string;
+  message: string;
+  senderId: number;
   [key: string]: any;
 }
 
 export default function ChatMessage({
-  time,
-  text,
-  sender,
+  sendDate,
+  message,
+  senderId,
   ...rest
 }: ChatProps) {
   return (
     <div {...rest}>
-      {sender === 'me' ? (
-        <div className=" flex justify-end items-center mt-1">
-          <p className="text-10 text-[#767676] px-2">{time}</p>
-          <p className="px-6 py-2 bg-[#FC6554] text-[#FFFFFF] text-14 rounded-l-xl rounded-br-2xl max-w-[230px]">
-            {text}
+      {senderId === 1 ? (
+        <div className=" mt-1 flex items-center justify-end">
+          <p className="px-2 text-10 text-[#767676]">{sendDate}</p>
+          <p className="max-w-[230px] rounded-l-xl rounded-br-2xl bg-[#FC6554] px-6 py-2 text-14 text-[#FFFFFF]">
+            {message}
           </p>
         </div>
       ) : (
-        <div className="0  flex justify-start items-center mt-1">
-          <p className="px-6 py-2 bg-[#EDEDED] text-[#767676] text-14 rounded-r-xl rounded-bl-2xl max-w-[230px]">
-            {text}
+        <div className="0  mt-1 flex items-center justify-start">
+          <p className="max-w-[230px] rounded-r-xl rounded-bl-2xl bg-[#EDEDED] px-6 py-2 text-14 text-[#767676]">
+            {message}
           </p>
-          <span className="text-10 text-[#767676] px-2">{time}</span>
+          <span className="px-2 text-10 text-[#767676]">{sendDate}</span>
         </div>
       )}
     </div>
