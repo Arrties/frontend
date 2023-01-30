@@ -1,9 +1,9 @@
 import authApi from '@apis/auth/authApi';
 import { useMutation } from 'react-query';
 
-const useJoinMutation = () => {
+const usePostJoin = () => {
   return useMutation<Member, Error, Member>('useJoinMuation', (data) =>
-    authApi.postMember(data),
+    authApi.postJoin(data),
   );
 };
-export default useJoinMutation;
+export default usePostJoin;
