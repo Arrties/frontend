@@ -96,7 +96,7 @@ const DUMP_AFTER_AUCTION_LIST = makeThreeEach(DUMP_PREV_AUCTION_LISTS);
 export default function Home() {
   const router = useRouter();
 
-  const { data: customizedArtwork } = useGetCustomizedArtWork();
+  const { data: customizedArtwork } = useGetCustomizedArtWork(1, 5);
   const { data: userInfo } = useGetProfile();
   return (
     <>
@@ -142,7 +142,7 @@ export default function Home() {
             navigation
             scrollbar={{ draggable: true }}
             spaceBetween={2}
-            slidesPerView={2}
+            slidesPerView={2.1}
             autoplay={{ delay: 5000, disableOnInteraction: false }}
           >
             {customizedArtwork?.artworks?.map(
