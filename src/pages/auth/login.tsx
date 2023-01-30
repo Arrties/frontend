@@ -1,4 +1,3 @@
-import authApi from '@apis/auth/authApi';
 import Button from '@components/common/Button';
 import CheckBox from '@components/common/Checkbox';
 import ErrorMessage from '@components/common/ErrorMessage';
@@ -24,7 +23,7 @@ function Login() {
     handleSubmit,
     formState: { errors },
     setError,
-  } = useForm<LoginForm>({
+  } = useForm<Login>({
     defaultValues: {
       userId: getLocalStorage('savedId') || '',
     },
@@ -55,7 +54,7 @@ function Login() {
     }
   };
   const router = useRouter();
-  const onSubmit = async ({ userId, password }: LoginForm) => {
+  const onSubmit = async ({ userId, password }: Login) => {
     if (checkedTerm.includes('idSave')) {
       setLocalStorage('savedId', userId);
     }

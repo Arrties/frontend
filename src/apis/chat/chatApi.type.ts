@@ -1,5 +1,3 @@
-import { NumericKeys } from 'react-hook-form/dist/types/path/common';
-
 export type ChatDTOType = {
   artistId: number;
   artWorkId: number;

@@ -12,7 +12,7 @@ export class AuthApi {
     return data;
   }
 
-  async postLogin(body: LoginForm): Promise<Token> {
+  async postLogin(body: Login): Promise<Token> {
     const { data } = await instance.post('/members/login', body);
     return data;
   }
