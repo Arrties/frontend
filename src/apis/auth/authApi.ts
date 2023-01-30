@@ -7,7 +7,7 @@ export class AuthApi {
     return data;
   }
 
-  async postMember(body: Member): Promise<Member> {
+  async postJoin(body: Member): Promise<Member> {
     const { data } = await instance.post('/members/join', body);
     return data;
   }
