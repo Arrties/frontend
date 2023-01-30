@@ -22,7 +22,7 @@ const createClient = (endpoint) => {
 };
 
 const subscribe = (client, roomId, subscribeCallback) => {
-  client.subscribe(`/queue/chat-rooms/${roomId}}`, subscribeCallback);
+  client.subscribe(`/queue/chat-rooms/${roomId}`, subscribeCallback);
 };
 
 const publish = (client, roomId, senderId, chat) => {
