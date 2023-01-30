@@ -1,4 +1,3 @@
-import authApi from '@apis/auth/authApi';
 import DoubleCheckButton from '@components/common/DoubleCheckButton';
 import ErrorMessage from '@components/common/ErrorMessage';
 import Input from '@components/common/Input';
@@ -60,8 +59,6 @@ export default function Edit() {
     setEnabled((prev) => ({ ...prev, email: '' }));
     clearErrors('email');
   }, [email]);
-
-  console.log(results);
 
   const nicknameResult = results[1];
   const emailResult = results[2];
