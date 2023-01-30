@@ -72,9 +72,8 @@ export default function ChatRoom({ params }) {
   };
 
   const subscribeCallback = (response) => {
-    console.log(response);
     const responseBody = JSON.parse(response.body);
-    console.log(responseBody);
+    // 리렌더링
   };
 
   useEffect(() => {
@@ -86,7 +85,7 @@ export default function ChatRoom({ params }) {
 
   const onSubmit = (form: MessageForm) => {
     if (!client.current.connected) return;
-    publish(client.current, 2, member?.id, form?.message);
+    publish(client.current, id, member?.id, form?.message);
   };
 
   const disconnect = () => {
@@ -132,9 +131,9 @@ export default function ChatRoom({ params }) {
         </article>
         <article className="mt-4">
           {messages &&
-            messages.map((chatItem) => (
+            messages.map((chatItem, idx) => (
               <ChattingMessage
-                key={chatItem.senderId}
+                key={idx}
                 sendDate={chatItem.sendDate}
                 message={chatItem.message}
                 senderId={chatItem.senderId}

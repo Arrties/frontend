@@ -28,11 +28,11 @@ const subscribe = (client, roomId, subscribeCallback) => {
 const publish = (client, roomId, senderId, chat) => {
   client.publish({
     destination: '/app/send',
-    body: {
+    body: JSON.stringify({
       chatRoomId: roomId,
       senderId: senderId,
       message: chat,
-    },
+    }),
   });
 };
 

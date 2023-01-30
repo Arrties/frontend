@@ -22,11 +22,6 @@ export default function Chat() {
     await client.current.activate();
   };
 
-  const sendChat = () => {
-    // if (!client.current.connected) return;
-    publish(client.current, 2, userInfo?.id, 'abcde');
-  };
-
   const onConnected = () => {
     subscribe(client.current, 2, subscribeCallback);
   };
@@ -50,7 +45,6 @@ export default function Chat() {
 
   return (
     <>
-      <button onClick={sendChat}>눌러</button>
       <Layout>
         <section className="flex h-20 items-center text-16 font-bold">
           채팅
