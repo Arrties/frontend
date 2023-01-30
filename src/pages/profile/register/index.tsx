@@ -7,6 +7,7 @@ import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
 import { getToken, setToken } from '@utils/localStorage/token';
 import { formatBytes } from '@utils/formatBytes';
+import useRoleMutation from '@hooks/mutations/useRoleMutation';
 
 interface FileForm {
   file: any;
@@ -21,17 +22,15 @@ export default function Register() {
   const handleLeftButton = () => {
     router.back();
   };
+  const { mutate, isLoading } = useRoleMutation();
 
   const handleRightButton = async () => {
     if (!fileState) return;
-    const response = await profileApi.patchRole();
-    if (response.status === 200) {
-      const token = getToken();
-      token.roles = 'ROLE_ARTIST';
-      if (token) setToken(token);
-      router.push('/profile/register/complete');
-    }
+    const formData = new FormData();
+    formData.append('file', fileState[0].file);
+    mutate();
   };
+
   const file = watch('file');
   useEffect(() => {
     if (file?.length > 0) {
