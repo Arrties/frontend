@@ -14,12 +14,12 @@ const createClient = (endpoint) => {
     );
     return socketIn;
   };
-
   return client;
 };
 
-const subscribe = (client, roomId, subscribeCallback) => {
-  client.subscribe(`/queue/chat-rooms/${roomId}`, subscribeCallback);
+const subscribe = async (client, roomId, subscribeCallback) => {
+  console.log('subscribe');
+  await client.subscribe(`/queue/chat-rooms/${roomId}`, subscribeCallback);
 };
 
 const publish = (client, roomId, senderId, chat) => {

@@ -11,22 +11,26 @@ import useGetChatRoomList from '@hooks/queries/chat/useGetChatRoomList';
 export default function Chat() {
   const router = useRouter();
   const client: any = useRef({}) as React.MutableRefObject<StompJs.Client>;
-  const { data: chatRooms } = useGetChatRoomList();
-  const chatRoomList = chatRooms?.chatRooms || [];
-  const connect = async () => {
-    client.current = await createClient('/ws-connection');
-    client.current.onConnect = await onConnected;
-    await client.current.activate();
+  const { data: chatRoomlist, refetch: refetchChatRoomList } =
+    useGetChatRoomList();
+  const chatRoomList = chatRoomlist?.chatRooms || [];
+  const connect = () => {
+    client.current = createClient('/ws-connection');
+    client.current.onConnect = onConnected;
+    client.current.activate();
   };
 
   const onConnected = () => {
-    subscribe(client.current, 2, subscribeCallback);
+    chatRoomList.forEach((chatRoom) => {
+      console.log(chatRoom?.chatRoomId, 2);
+      subscribe(client.current, chatRoom?.chatRoomId, subscribeCallback);
+    });
   };
 
   const subscribeCallback = (response) => {
-    console.log(response);
     const responseBody = JSON.parse(response.body);
     console.log(responseBody);
+    refetchChatRoomList();
   };
 
   useEffect(() => {
@@ -34,7 +38,7 @@ export default function Chat() {
     () => {
       disconnect();
     };
-  }, []);
+  }, [chatRoomlist]);
 
   const disconnect = () => {
     client.current.deactivate();
