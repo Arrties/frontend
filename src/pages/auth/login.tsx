@@ -4,7 +4,7 @@ import ErrorMessage from '@components/common/ErrorMessage';
 import Input from '@components/common/Input';
 import Layout from '@components/common/Layout';
 import SocialLoginButton from '@components/login/SocialLoginButton';
-import useLoginMutation from '@hooks/mutations/useLoginMutation';
+import usePostLogin from '@hooks/mutations/usePostLogin';
 import Image from 'next/image';
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
@@ -29,7 +29,7 @@ function Login() {
     },
   });
   const [checkedTerm, setCheckedTerm] = useState<string[]>([]);
-  const { mutate, data, error } = useLoginMutation();
+  const { mutate, data, error } = usePostLogin();
 
   useEffect(() => {
     deleteToken();
