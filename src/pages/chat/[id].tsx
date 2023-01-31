@@ -30,6 +30,7 @@ export default function ChatRoom({ params }) {
       // 채팅방 나가기 API전송
     });
   }, []);
+  const scrollRef = useRef({});
 
   const id = params?.id;
   const router = useRouter();
@@ -39,7 +40,6 @@ export default function ChatRoom({ params }) {
   const { data: userInfo } = useGetProfile();
   const userId = userInfo?.id || 0;
 
-  console.log(messages);
   const [isModal, setIsModal] = useState(false);
 
   const handleOption = () => {
@@ -77,6 +77,7 @@ export default function ChatRoom({ params }) {
   };
 
   const subscribeCallback = (response) => {
+
     refetchChatRoom();
     reset({ message: '' });
   };
@@ -84,6 +85,7 @@ export default function ChatRoom({ params }) {
   useEffect(() => {
     connect();
     () => {
+      console.log(2);
       disconnect();
     };
   }, []);
@@ -92,7 +94,14 @@ export default function ChatRoom({ params }) {
     publish(client.current, id, userInfo?.id, form?.message);
   };
 
+  useEffect(() => {
+    console.log(1)
+		scrollRef.current.scrollIntoView({ behavior: 'smooth', block: 'end', inline: 'nearest' });
+
+	}, [messages]);
+
   const disconnect = () => {
+    console.log(1);
     client.current.deactivate();
   };
 
@@ -131,7 +140,7 @@ export default function ChatRoom({ params }) {
           />
         </article>
       </header>
-      <section className="absolute inset-x-0 top-[120px] w-full rounded-xl bg-white p-5">
+      <section className="overflow absolute inset-x-0 top-[120px] w-full  rounded-xl bg-white p-5" ref={scrollRef}>>
         <article className="flex h-[40px] items-center justify-center text-center text-14 font-bold text-[#767676]">
           2022년 12월 23일
         </article>
