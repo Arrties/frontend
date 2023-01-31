@@ -25,6 +25,17 @@ export function getServerSideProps({ params }) {
 }
 
 export default function ChatRoom({ params }) {
+  useEffect(() => {
+    window.addEventListener('beforeunload', (event) => {
+      // 표준에 따라 기본 동작 방지
+      event.preventDefault();
+      // Chrome에서는 returnValue 설정이 필요함
+      event.returnValue = '';
+
+      // API전송
+    });
+  }, []);
+
   const id = params?.id;
   const router = useRouter();
   const { register, handleSubmit, watch, reset } = useForm<ContentForm>();
