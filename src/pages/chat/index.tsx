@@ -22,7 +22,6 @@ export default function Chat() {
 
   const onConnected = () => {
     chatRoomList.forEach((chatRoom) => {
-      console.log(chatRoom?.chatRoomId, 2);
       subscribe(client.current, chatRoom?.chatRoomId, subscribeCallback);
     });
   };

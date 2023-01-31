@@ -77,35 +77,30 @@ export default function ChatRoom({ params }) {
   };
 
   const subscribeCallback = (response) => {
+    console.log(response);
     refetchChatRoom();
     reset({ message: '' });
   };
 
   useEffect(() => {
     connect();
-    () => {
-      console.log(2);
-      disconnect();
-    };
   }, []);
+  const disconnect = () => {
+    client.current.deactivate();
+  };
+
   const onSubmit = (form: { message: string; image: FileList }) => {
     if (!client.current.connected) return;
     publish(client.current, id, userInfo?.id, form?.message);
   };
 
   useEffect(() => {
-    console.log(1);
     scrollRef.current.scrollIntoView({
       behavior: 'smooth',
       block: 'end',
       inline: 'nearest',
     });
   }, [messages]);
-
-  const disconnect = () => {
-    console.log(1);
-    client.current.deactivate();
-  };
 
   return (
     <Layout>
@@ -118,7 +113,7 @@ export default function ChatRoom({ params }) {
         denyMessage="나가기"
         onAccept={onAccept}
       />
-      <header className="fixed inset-x-0 top-0 z-10 mx-auto h-[145px] max-w-[420px] bg-[#FC6554]">
+      <header className="fixed inset-x-0 top-0 mx-auto h-[145px] max-w-[420px] bg-[#FC6554]">
         <article className="relative mt-[70px] flex w-full px-5 text-white">
           <Image
             src="/svg/icons/icon_back_white.svg"
