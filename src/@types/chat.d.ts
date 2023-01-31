@@ -40,5 +40,5 @@ interface ChatRoomById {
     name: string;
     responseTime: string;
   };
-  messages: [Message];
+  messages: Message[];
 }
