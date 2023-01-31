@@ -19,6 +19,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { isUser } from '@utils/isUser';
 import { Pagination } from 'swiper';
 import KeywordBox from '@components/common/KeywordBox';
+import useGetIsNotice from '@hooks/queries/useGetIsNotice';
 
 interface KeywordArtwork {
   id: string;
@@ -128,7 +129,7 @@ export default function Home() {
           </div>
         </section>
         <section className="my-4 mt-2">
-          {userInfo?.keywords?.map((keyword: string,idx:number) => (
+          {userInfo?.keywords?.map((keyword: string, idx: number) => (
             <KeywordBox text={keyword} key={idx} />
           ))}
         </section>
