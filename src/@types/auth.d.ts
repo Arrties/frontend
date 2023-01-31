@@ -9,7 +9,7 @@ interface User {
   nickname?: string;
   telephone?: string;
   image?: any;
-  id?: string;
+  id?: number;
 }
 
 interface Artist {

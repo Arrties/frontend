@@ -37,6 +37,9 @@ export default function ChatRoom({ params }) {
   const { data: chatRoom, refetch: refetchChatRoom } = useGetChatRoom(+id);
   const { artist, member, messages } = chatRoom || {};
   const { data: userInfo } = useGetProfile();
+  const userId = userInfo?.id || 0;
+
+  console.log(messages);
   const [isModal, setIsModal] = useState(false);
 
   const handleOption = () => {
@@ -74,7 +77,6 @@ export default function ChatRoom({ params }) {
   };
 
   const subscribeCallback = (response) => {
-    console.log(JSON.parse(response.body));
     refetchChatRoom();
     reset({ message: '' });
   };
@@ -85,7 +87,7 @@ export default function ChatRoom({ params }) {
       disconnect();
     };
   }, []);
-  const onSubmit = (form: Message) => {
+  const onSubmit = (form: { message: string; image: FileList }) => {
     if (!client.current.connected) return;
     publish(client.current, id, userInfo?.id, form?.message);
   };
@@ -138,8 +140,8 @@ export default function ChatRoom({ params }) {
             messages.map((message: Message, idx: number) => (
               <ChattingMessage
                 key={idx}
-                sender={message?.senderId === userInfo?.id ? 'me' : 'you'}
-                sendTime={message.sendTime}
+                sender={+userId === message?.senderId ? 'me' : 'you'}
+                sendDate={message.sendDate}
                 message={message.message}
               />
             ))}

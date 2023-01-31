@@ -31,7 +31,7 @@ export default function Chatroom({ chatRoom }: ChatRoomProps) {
             {chatRoom?.otherMember?.name}
           </p>
           <p className="flex items-center justify-center text-10 text-[#767676]">
-            {chatRoom?.lastMessage?.sendTime}
+            {chatRoom?.lastMessage?.sendDate}
           </p>
         </div>
         <p className="mt-1 flex items-center justify-center px-2 text-12 text-[#191919]">

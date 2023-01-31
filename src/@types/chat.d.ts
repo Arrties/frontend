@@ -14,7 +14,7 @@ interface ChatRoom {
   };
   lastMessage: {
     message: string;
-    sendTime: string;
+    sendDate: string;
   };
 }
 
@@ -23,7 +23,7 @@ interface ChatRoomList {
 }
 
 interface Message {
-  sendTime: string;
+  sendDate: string;
   senderId: number;
   message: string;
 }
