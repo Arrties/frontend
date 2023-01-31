@@ -1,4 +1,5 @@
 interface Auction {
+  id: number;
   turn: number;
   startDate: string;
   endDate: string;
