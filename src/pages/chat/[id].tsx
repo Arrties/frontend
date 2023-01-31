@@ -30,7 +30,7 @@ export default function ChatRoom({ params }) {
       // 채팅방 나가기 API전송
     });
   }, []);
-  const scrollRef = useRef({});
+  const scrollRef = useRef();
 
   const id = params?.id;
   const router = useRouter();
@@ -77,7 +77,6 @@ export default function ChatRoom({ params }) {
   };
 
   const subscribeCallback = (response) => {
-
     refetchChatRoom();
     reset({ message: '' });
   };
@@ -95,10 +94,13 @@ export default function ChatRoom({ params }) {
   };
 
   useEffect(() => {
-    console.log(1)
-		scrollRef.current.scrollIntoView({ behavior: 'smooth', block: 'end', inline: 'nearest' });
-
-	}, [messages]);
+    console.log(1);
+    scrollRef.current.scrollIntoView({
+      behavior: 'smooth',
+      block: 'end',
+      inline: 'nearest',
+    });
+  }, [messages]);
 
   const disconnect = () => {
     console.log(1);
@@ -116,7 +118,7 @@ export default function ChatRoom({ params }) {
         denyMessage="나가기"
         onAccept={onAccept}
       />
-      <header className="absolute inset-x-0 top-0 h-[145px] w-full bg-[#FC6554]">
+      <header className="fixed inset-x-0 top-0 z-10 mx-auto h-[145px] max-w-[420px] bg-[#FC6554]">
         <article className="relative mt-[70px] flex w-full px-5 text-white">
           <Image
             src="/svg/icons/icon_back_white.svg"
@@ -140,7 +142,10 @@ export default function ChatRoom({ params }) {
           />
         </article>
       </header>
-      <section className="overflow absolute inset-x-0 top-[120px] w-full  rounded-xl bg-white p-5" ref={scrollRef}>>
+      <section
+        className="overflow absolute inset-x-0 top-[120px] w-full  rounded-xl bg-white p-5"
+        ref={scrollRef}
+      >
         <article className="flex h-[40px] items-center justify-center text-center text-14 font-bold text-[#767676]">
           2022년 12월 23일
         </article>
