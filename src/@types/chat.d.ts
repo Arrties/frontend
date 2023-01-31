@@ -19,7 +19,13 @@ interface ChatRoom {
 }
 
 interface ChatRoomList {
-  chatRooms: [ChatRoom];
+  chatRooms: ChatRoom[];
+}
+
+interface Message {
+  sendDate: string;
+  senderId: number;
+  message: string;
 }
 
 interface ChatRoomById {
@@ -34,16 +40,5 @@ interface ChatRoomById {
     name: string;
     responseTime: string;
   };
-  messages: [
-    {
-      senderId: number;
-      message: string;
-      sendDate: string;
-    },
-    {
-      senderId: number;
-      message: string;
-      sendDate: string;
-    },
-  ];
+  messages: Message[];
 }

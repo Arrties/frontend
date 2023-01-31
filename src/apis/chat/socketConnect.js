@@ -7,9 +7,6 @@ const createClient = (endpoint) => {
   const client = new StompJs.Client({
     brokerURL: `wss://atties.shop${endpoint}`,
     connectHeaders: { Authorization: access },
-    debug: (str) => {
-      console.log(str);
-    },
   });
   client.webSocketFactory = () => {
     const socketIn = new SockJS(
@@ -17,22 +14,21 @@ const createClient = (endpoint) => {
     );
     return socketIn;
   };
-
   return client;
 };
 
-const subscribe = (client, roomId, subscribeCallback) => {
-  client.subscribe(`/queue/chat-rooms/${roomId}`, subscribeCallback);
+const subscribe = async (client, roomId, subscribeCallback) => {
+  await client.subscribe(`/queue/chat-rooms/${roomId}`, subscribeCallback);
 };
 
 const publish = (client, roomId, senderId, chat) => {
   client.publish({
     destination: '/app/send',
-    body: {
+    body: JSON.stringify({
       chatRoomId: roomId,
       senderId: senderId,
       message: chat,
-    },
+    }),
   });
 };
 

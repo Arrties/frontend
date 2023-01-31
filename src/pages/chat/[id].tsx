@@ -9,14 +9,9 @@ import useGetChatRoom from '@hooks/queries/chat/useGetChatRoom';
 import * as StompJs from '@stomp/stompjs';
 import { createClient, publish, subscribe } from '@apis/chat/socketConnect';
 import chatApi from '@apis/chat/chatApi';
-import { ChatRoomDTOType } from '@apis/chat/chatApi.type';
-interface ChatRoomForm {
-  senderId: string;
-  sendDate: string;
-  message: string;
-}
-
-interface MessageForm {
+import useGetProfile from '@hooks/queries/useGetProfile';
+import { isUser } from '@utils/isUser';
+interface ContentForm {
   message: string;
   image: FileList;
 }
@@ -30,12 +25,22 @@ export function getServerSideProps({ params }) {
 }
 
 export default function ChatRoom({ params }) {
+  useEffect(() => {
+    window.addEventListener('beforeunload', (event) => {
+      // 채팅방 나가기 API전송
+    });
+  }, []);
+
   const id = params?.id;
   const router = useRouter();
-  const { register, handleSubmit, watch } = useForm<MessageForm>();
+  const { register, handleSubmit, watch, reset } = useForm<ContentForm>();
+  const { data: chatRoom, refetch: refetchChatRoom } = useGetChatRoom(+id);
+  const { artist, member, messages } = chatRoom || {};
+  const { data: userInfo } = useGetProfile();
+  const userId = userInfo?.id || 0;
+
+  console.log(messages);
   const [isModal, setIsModal] = useState(false);
-  const { data: chatRoom } = useGetChatRoom(Number(id));
-  const { artist, chatRoomId, member, messages } = chatRoom || {};
 
   const handleOption = () => {
     setIsModal(true);
@@ -72,9 +77,8 @@ export default function ChatRoom({ params }) {
   };
 
   const subscribeCallback = (response) => {
-    console.log(response);
-    const responseBody = JSON.parse(response.body);
-    console.log(responseBody);
+    refetchChatRoom();
+    reset({ message: '' });
   };
 
   useEffect(() => {
@@ -83,10 +87,9 @@ export default function ChatRoom({ params }) {
       disconnect();
     };
   }, []);
-
-  const onSubmit = (form: MessageForm) => {
+  const onSubmit = (form: { message: string; image: FileList }) => {
     if (!client.current.connected) return;
-    publish(client.current, 2, member?.id, form?.message);
+    publish(client.current, id, userInfo?.id, form?.message);
   };
 
   const disconnect = () => {
@@ -114,7 +117,9 @@ export default function ChatRoom({ params }) {
             onClick={() => router.back()}
             className="cursor-pointer"
           />
-          <div className="px-5 text-16 ">{artist?.name}</div>
+          <div className="px-5 text-16 ">
+            {isUser ? artist?.name : member?.name}
+          </div>
           <div className="flex items-center text-12">응답시간 : 1시간 이내</div>
           <Image
             src="/svg/icons/icon_option.svg"
@@ -132,18 +137,18 @@ export default function ChatRoom({ params }) {
         </article>
         <article className="mt-4">
           {messages &&
-            messages.map((chatItem) => (
+            messages.map((message: Message, idx: number) => (
               <ChattingMessage
-                key={chatItem.senderId}
-                sendDate={chatItem.sendDate}
-                message={chatItem.message}
-                senderId={chatItem.senderId}
+                key={idx}
+                sender={+userId === message?.senderId ? 'me' : 'you'}
+                sendDate={message.sendDate}
+                message={message.message}
               />
             ))}
         </article>
       </section>
       <form
-        className="absolute bottom-[30px] flex h-[50px] w-[327px] items-center rounded-[24.5px] bg-[#F8F8FA] px-[10px]"
+        className="fixed bottom-[30px] flex h-[50px] w-[327px] items-center rounded-[24.5px] bg-[#F8F8FA] px-[10px]"
         onSubmit={handleSubmit(onSubmit)}
       >
         <input
