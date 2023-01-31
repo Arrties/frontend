@@ -43,9 +43,7 @@ export default function Join02() {
   } = useForm<JoinForm>({ mode: 'onTouched' });
 
   const router = useRouter();
-  const handleLeftButton = () => {
-    router.back();
-  };
+
   const handleRightButton = () => {
     router.push('/auth/login');
   };
@@ -60,13 +58,15 @@ export default function Join02() {
         message: '아이디 중복확인을 해주세요.',
       });
       return;
-    } else if (!isValidate.nickname) {
+    }
+    if (!isValidate.nickname) {
       setError('nickname', {
         type: 'password doublecheck',
         message: '닉네임 중복확인을 해주세요.',
       });
       return;
-    } else if (!isValidate.email) {
+    }
+    if (!isValidate.email) {
       setError('email', {
         type: 'email doublecheck',
         message: '이메일 중복확인을 해주세요.',
@@ -116,7 +116,6 @@ export default function Join02() {
       setIsValidate((prev) => ({ ...prev, id: true }));
       clearErrors('userId');
     }
-
     if (nicknameResult.isSuccess) {
       setIsValidate((prev) => ({ ...prev, nickname: true }));
       clearErrors('nickname');
@@ -153,11 +152,7 @@ export default function Join02() {
 
   return (
     <Layout>
-      <Navigate
-        message="회원가입"
-        handleLeftButton={handleLeftButton}
-        handleRightButton={handleRightButton}
-      />
+      <Navigate message="회원가입" handleRightButton={handleRightButton} />
       <section className="mt-8">
         <p className="mb-[12px]">
           <span className="text-brand">회원정보</span>를 입력해주세요

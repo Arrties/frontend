@@ -52,7 +52,7 @@ export class AuthApi {
     await instance(`/members/check-email?email=${email}`);
   }
 
-  async getCheckNickname(nickname: string | undefined) {
+  async getCheckNickname(nickname: string) {
     await instance(`/members/check-nickname?nickname=${nickname}`);
   }
 }
