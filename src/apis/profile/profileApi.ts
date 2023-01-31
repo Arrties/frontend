@@ -3,11 +3,12 @@ import { InquiryForm, Role } from './profileApi.type';
 
 export class ProfileApi {
   async patchUserInfo(formData: any) {
-    return await instance.patch('/members', formData, {
+    const response = await instance.patch('/members', formData, {
       headers: {
         'Content-Type': 'multipart/form-data',
       },
     });
+    return response;
   }
   async patchArtistInfo(formData: any) {
     const response = await instance.patch('/artists', formData, {
