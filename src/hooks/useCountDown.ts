@@ -3,7 +3,7 @@ import { useState } from 'react';
 
 import useInterval from './useInterval';
 
-const convertDate = (countDown) => {
+const convertDate = (countDown): string[] => {
   const diff = moment.duration(countDown);
   const hours = String(diff.days() * 24 + diff.hours()).padStart(2, '0');
   const minutes = String(diff.minutes()).padStart(2, '0');
@@ -11,7 +11,7 @@ const convertDate = (countDown) => {
   return [hours, minutes, seconds];
 };
 
-export const useCountDown = (targetDate) => {
+export const useCountDown = (targetDate: string): string[] => {
   const currentDate = moment().unix() * 1000;
   const endDate = moment(targetDate, 'YYYY-MM-DD-HH-mm-ss').unix() * 1000;
   const [countdown, setCountdown] = useState<any>(endDate - currentDate);
