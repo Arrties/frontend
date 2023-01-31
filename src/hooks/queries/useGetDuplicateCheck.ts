@@ -1,5 +1,5 @@
 import authApi from '@apis/auth/authApi';
-import { useQueries, useQuery, UseQueryOptions } from 'react-query';
+import { useQueries, UseQueryOptions } from 'react-query';
 
 const useGetDuplicateCheck = ({ userId, email, nickname }: DuplicateCheck) => {
   return useQueries(
