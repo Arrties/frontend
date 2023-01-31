@@ -37,9 +37,17 @@ export default function Auction() {
           {date && <Timer {...date} />}
         </section>
         <ArtworkList>
-          <ArtWorkItem />
-          <ArtWorkItem />
-          <ArtWorkItem />
+          {data?.artWorkList.map((artwork) => (
+            <ArtWorkItem
+              id={artwork.id}
+              key={artwork.id}
+              mainImage={artwork.mainImage}
+              title={artwork.title}
+              topPrice={artwork.topPrice}
+              productionYear={artwork.productionYear}
+              artWorkSize={artwork.artWorkSize}
+            />
+          ))}
         </ArtworkList>
       </Layout>
       <Tab />
