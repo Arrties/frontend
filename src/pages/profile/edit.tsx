@@ -38,7 +38,7 @@ export default function Edit() {
     watch,
     setError,
     clearErrors,
-  } = useForm<Member>();
+  } = useForm<Member>({ mode: 'onTouched' });
   const nickname = watch('nickname');
   const email = watch('email');
 
@@ -51,13 +51,11 @@ export default function Edit() {
   useEffect(() => {
     setIsValidate((prev) => ({ ...prev, nickname: false }));
     setEnabled((prev) => ({ ...prev, nickname: '' }));
-    clearErrors('nickname');
   }, [nickname]);
 
   useEffect(() => {
     setIsValidate((prev) => ({ ...prev, email: false }));
     setEnabled((prev) => ({ ...prev, email: '' }));
-    clearErrors('email');
   }, [email]);
 
   const nicknameResult = results[1];
@@ -132,6 +130,7 @@ export default function Edit() {
         type: 'need email duplicate',
         message: '이메일 중복체크를 해주세요',
       });
+      return;
     }
     const formData = new FormData();
 
@@ -159,6 +158,7 @@ export default function Edit() {
       if (behance) formData.append('behance', behance);
     }
     let response;
+
     if (isUser) {
       response = await profileApi.patchUserInfo(formData);
     } else {
