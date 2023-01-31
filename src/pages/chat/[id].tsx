@@ -155,6 +155,7 @@ export default function ChatRoom({ params }) {
               />
             ))}
         </article>
+        <div className="h-20" />
       </section>
       <form
         className="fixed bottom-[30px] flex h-[50px] w-[327px] items-center rounded-[24.5px] bg-[#F8F8FA] px-[10px]"
