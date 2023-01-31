@@ -19,7 +19,7 @@ interface ChatRoom {
 }
 
 interface ChatRoomList {
-  chatRooms: [ChatRoom];
+  chatRooms: ChatRoom[];
 }
 
 interface Message {
