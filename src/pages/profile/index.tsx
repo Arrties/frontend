@@ -114,6 +114,7 @@ export default function Profile() {
         <Navigate
           left_message={false}
           message="프로필"
+          isLeftButton={false}
           right_message={
             <Image
               src="/svg/icons/icon_notification.svg"

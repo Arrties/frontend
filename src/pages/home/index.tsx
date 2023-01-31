@@ -104,7 +104,7 @@ export default function Home() {
     <>
       <Layout>
         <AuctionNavigate />
-        <section className="">
+        <section>
           <div className="text-14 text-[#767676]">
             {userInfo?.nickname}님 취향의
           </div>
