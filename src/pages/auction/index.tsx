@@ -10,7 +10,9 @@ import moment from 'moment';
 import React, { useEffect, useState } from 'react';
 import tw from 'tailwind-styled-components';
 
-const ArtworkList = tw.div<defaultProps>``;
+const ArtworkList = tw.div<defaultProps>`
+  mb-32
+`;
 
 export default function Auction() {
   const { data, isLoading, error } = useGetNowAuctionArtworkList();
