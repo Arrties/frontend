@@ -179,13 +179,6 @@ export default function ChatRoom({ params }) {
             </button>
           ) : (
             <>
-              <Image
-                src="/svg/icons/icon_glasses.svg"
-                alt="glasses"
-                width="25"
-                height="0"
-                className="absolute right-[70px] cursor-pointer"
-              />
               <label
                 className="flex items-center justify-center"
                 htmlFor="profileImage"
