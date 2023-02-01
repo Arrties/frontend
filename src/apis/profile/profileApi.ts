@@ -19,6 +19,20 @@ export class ProfileApi {
     return response;
   }
 
+  async getPick() {
+    const { data } = await instance.get('/members/preferred-artists');
+    return data;
+  }
+  async getPickDetail(artistId: number) {
+    const { data } = await instance.get(`/artists/${artistId}`);
+    return data;
+  }
+  async postPick(artistId: number) {
+    await instance.post(`/members/preferred-artists/${artistId}`);
+  }
+  async deletePick(artistId: number) {
+    await instance.delete(`/members/preferred-artists/${artistId}`);
+  }
   async getInquiry(): Promise<InquiryForm> {
     const { data } = await instance.get('/members/ask');
     return data;

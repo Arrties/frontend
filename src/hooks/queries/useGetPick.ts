@@ -1,28 +1,18 @@
-import instance from '@apis/_axios/instance';
 import { useQuery } from 'react-query';
-import { useState } from 'react';
+import profileApi from '@apis/profile/profileApi';
 
 const useGetPick = () => {
-  const [pickList, setPickList] = useState<Member[]>();
-
-  const query = useQuery(
+  return useQuery(
     'useGetPick',
     async () => {
-      const response = await instance(`/members/preferred-artists`);
+      const response = await profileApi.getPick();
       return response;
     },
     {
       retry: 0,
       refetchOnWindowFocus: false,
-      onSuccess: (response: any) => {
-        setPickList(response?.data);
-      },
-      onError: (error: any) => {
-        console.log(error);
-      },
     },
   );
-  return { ...query, pickList };
 };
 
 export default useGetPick;

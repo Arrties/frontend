@@ -16,7 +16,7 @@ w-full flex-col divide-y-[1px] divide-[#EDEDED]
 
 export default function Pick() {
   const router = useRouter();
-  const { pickList } = useGetPick();
+  const { data: pickList } = useGetPick();
 
   return (
     <Layout>
@@ -29,12 +29,13 @@ export default function Pick() {
       />
       <PickContainer>
         {pickList?.length ? (
-          pickList.map((pick: Member) => (
+          pickList.map((pick) => (
             <PickArtist
-              key={pick.userId}
-              id={pick.userId}
-              nickname={pick.nickname}
-              education={pick.education}
+              key={pick?.id}
+              id={pick?.id}
+              nickname={pick?.nickname}
+              education={pick?.education}
+              image={pick?.image}
             />
           ))
         ) : (

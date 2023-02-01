@@ -140,7 +140,7 @@ export default function Detail({ params }) {
                 height="0"
                 alt="avatar"
                 onClick={() => {
-                  router.push(`/profile/pick/${artist?.id}`);
+                  router.push(`/profile/${artist?.id}`);
                 }}
               />
             </div>
