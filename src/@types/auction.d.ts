@@ -20,6 +20,7 @@ interface NowAuctionArtwork {
   artWorkSize: ArtworkSize;
   productionYear: number;
   topPrice: number;
+  material: string;
 }
 
 interface LastAutionArtwork extends NowAuctionArtwork {

@@ -17,6 +17,7 @@ export default function ArtWorkItem({
   artWorkSize,
   productionYear,
   topPrice,
+  material,
   ...rest
 }: ArtWorkItemProps) {
   return (
@@ -35,7 +36,7 @@ export default function ArtWorkItem({
           {title.length > 20 ? `${title.slice(0, 20)}...` : title}
         </article>
         <article className="my-1 flex gap-2 text-14 text-[#767676]">
-          <span>Oil On Canvas</span>|
+          <span>{material}</span>|
           <span>
             {`${artWorkSize.width}x${artWorkSize.length}x${
               artWorkSize.height
