@@ -31,5 +31,5 @@ export const useCountDown = (targetDate: string): string[] => {
     isEnd ? null : 1000,
   );
 
-  return convertDate(countdown);
+  return countdown ? convertDate(countdown) : ['00', '00', '00'];
 };
