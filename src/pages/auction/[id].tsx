@@ -11,13 +11,13 @@ const LayoutBox = styled.div`
 
 export default function Detail() {
   const target = useRef<HTMLDivElement | null>(null);
-  const [isIntersecting, setIsIntersecting] = useState(false);
+  const [isCardOver, setIsCardOver] = useState(false);
   const onIntersect = (entries: IntersectionObserverEntry[]) => {
     entries.forEach((entry) => {
       if (entry.boundingClientRect.y < 64) {
-        setIsIntersecting(true);
+        setIsCardOver(true);
       } else {
-        setIsIntersecting(false);
+        setIsCardOver(false);
       }
     });
   };
@@ -35,9 +35,9 @@ export default function Detail() {
   }, [target]);
 
   return (
-    <LayoutBox className="relative h-full w-full max-w-[420px] overflow-y-scroll scroll-smooth border border-red-500 bg-white">
+    <LayoutBox className="relative h-full w-full max-w-[420px] overflow-y-scroll scroll-smooth  bg-white">
       <div className="fixed inset-x-0 top-0 mx-auto flex h-16 w-full max-w-[420px] items-center justify-between px-6">
-        {isIntersecting ? (
+        {isCardOver ? (
           <>
             <Image
               onClick={() => router.back()}
