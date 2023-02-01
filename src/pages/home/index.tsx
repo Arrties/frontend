@@ -128,8 +128,8 @@ export default function Home() {
           </div>
         </section>
         <section className="my-4 mt-2">
-          {userInfo?.keywords?.map((keyword: string) => (
-            <KeywordBox text={keyword} />
+          {userInfo?.keywords?.map((keyword: string,idx:number) => (
+            <KeywordBox text={keyword} key={idx} />
           ))}
         </section>
         <section className="mb-12 ">

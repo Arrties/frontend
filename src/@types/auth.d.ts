@@ -5,11 +5,11 @@ interface Member extends User, Artist {
 interface User {
   userId: string;
   password: string;
-  email?: string;
-  nickname?: string;
+  email: string;
+  nickname: string;
   telephone?: string;
   image?: any;
-  id?: string;
+  id?: number;
 }
 
 interface Artist {
@@ -23,4 +23,10 @@ interface Artist {
 interface Login {
   userId: string;
   password: string;
+}
+
+interface DuplicateCheck {
+  userId: string;
+  email: string;
+  nickname: string;
 }
