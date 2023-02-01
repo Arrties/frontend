@@ -30,7 +30,7 @@ export default function ChatRoom({ params }) {
       // 채팅방 나가기 API전송
     });
   }, []);
-  const client: any = useRef({}) as React.MutableRefObject<StompJs.Client>;
+  const client = useRef({}) as React.MutableRefObject<StompJs.Client>;
   const scrollRef: any = useRef();
 
   const id = params?.id;
@@ -50,7 +50,6 @@ export default function ChatRoom({ params }) {
     setIsModal(false);
   };
   const onAccept = async () => {
-    console.log('채팅방 나가기');
     const response = await chatApi.deleteChatRoom(id);
     if (response?.status === 200) {
       router.push('/chat');
