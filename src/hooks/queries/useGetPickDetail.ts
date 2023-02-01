@@ -4,9 +4,8 @@ import profileApi from '@apis/profile/profileApi';
 const useGetPickDetail = (artistId: number) => {
   return useQuery(
     'useGetPickDetail',
-    () => {
-      profileApi.getPickDetail(artistId);
-    },
+    () => profileApi.getPickDetail(artistId),
+
     {
       retry: 0,
       refetchOnWindowFocus: false,
