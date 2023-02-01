@@ -9,7 +9,7 @@ interface NoticeIconProps {
   [key: string]: any;
 }
 
-const NoticeIconTag = tw.div`
+const NoticeIconTag = tw.div<defaultProps>`
 flex w-[60px] justify-between
 `;
 
