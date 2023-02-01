@@ -1,5 +1,6 @@
 import Image from 'next/image';
-import { useEffect, useRef } from 'react';
+import { useRouter } from 'next/router';
+import { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 
 const LayoutBox = styled.div`
@@ -10,13 +11,17 @@ const LayoutBox = styled.div`
 
 export default function Detail() {
   const target = useRef<HTMLDivElement | null>(null);
+  const [isIntersecting, setIsIntersecting] = useState(false);
   const onIntersect = (entries: IntersectionObserverEntry[]) => {
     entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        console.log('intersecting!!!');
+      if (entry.boundingClientRect.y < 64) {
+        setIsIntersecting(true);
+      } else {
+        setIsIntersecting(false);
       }
     });
   };
+  const router = useRouter();
 
   useEffect(() => {
     let observer;
@@ -32,23 +37,43 @@ export default function Detail() {
   return (
     <LayoutBox className="relative h-full w-full max-w-[420px] overflow-y-scroll scroll-smooth border border-red-500 bg-white">
       <div className="fixed inset-x-0 top-0 mx-auto flex h-16 w-full max-w-[420px] items-center justify-between px-6">
-        <Image
-          alt="clock"
-          src="/svg/icons/auction/icon_arrow_white.svg"
-          width="24"
-          height="24"
-        />
-        <Image
-          alt="clock"
-          src="/svg/icons/auction/icon_heart_white.svg"
-          width="24"
-          height="24"
-        />
+        {isIntersecting ? (
+          <>
+            <Image
+              onClick={() => router.back()}
+              alt="clock"
+              src="/svg/icons/auction/icon_arrow_black.svg"
+              width="24"
+              height="24"
+            />
+            <Image
+              alt="clock"
+              src="/svg/icons/auction/icon_heart_black.svg"
+              width="24"
+              height="24"
+            />
+          </>
+        ) : (
+          <>
+            <Image
+              alt="clock"
+              src="/svg/icons/auction/icon_arrow_white.svg"
+              width="24"
+              height="24"
+            />
+            <Image
+              alt="clock"
+              src="/svg/icons/auction/icon_heart_white.svg"
+              width="24"
+              height="24"
+            />
+          </>
+        )}
       </div>
       <div className="h-[306px] w-full bg-slate-500"></div>
       <div
         ref={target}
-        className="-mt-4 h-[2000px] w-full rounded-t-2xl bg-blue-500"
+        className="-mt-4 h-[2000px] w-full rounded-t-2xl bg-white"
       ></div>
     </LayoutBox>
   );
