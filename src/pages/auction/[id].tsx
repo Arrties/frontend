@@ -237,8 +237,7 @@ export default function Detail({ params }) {
               priority
             />
           </article>
-
-          <div className="h-[5rem]"></div>
+          <div className="h-[7rem]" />
         </section>
       </Layout>
       <article className="absolute inset-x-0 bottom-0 max-w-[420px]">
