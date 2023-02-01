@@ -23,6 +23,9 @@ export interface NoticeForm {
   createdDate: string;
   link: string;
 }
+export interface IsNoticeForm {
+  newNotification: boolean;
+}
 export interface Role {
   roles: string;
 }

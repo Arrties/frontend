@@ -1,5 +1,5 @@
 import instance from '@apis/_axios/instance';
-import { InquiryForm, NoticeForm, Role } from './profileApi.type';
+import { InquiryForm, IsNoticeForm, NoticeForm, Role } from './profileApi.type';
 
 export class ProfileApi {
   async patchUserInfo(formData: any) {
@@ -19,6 +19,20 @@ export class ProfileApi {
     return response;
   }
 
+  async getPick() {
+    const { data } = await instance.get('/members/preferred-artists');
+    return data;
+  }
+  async getPickDetail(artistId: number) {
+    const { data } = await instance.get(`/artists/${artistId}`);
+    return data;
+  }
+  async postPick(artistId: number) {
+    await instance.post(`/members/preferred-artists/${artistId}`);
+  }
+  async deletePick(artistId: number) {
+    await instance.delete(`/members/preferred-artists/${artistId}`);
+  }
   async getInquiry(): Promise<InquiryForm> {
     const { data } = await instance.get('/members/ask');
     return data;
@@ -41,6 +55,10 @@ export class ProfileApi {
   }
   async getNotice(): Promise<NoticeForm[]> {
     const { data } = await instance.get('/notifications');
+    return data;
+  }
+  async getIsNotice(): Promise<IsNoticeForm> {
+    const { data } = await instance.get('/notifications/new');
     return data;
   }
   async deleteNotice(id: number) {

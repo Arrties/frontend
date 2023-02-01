@@ -22,12 +22,11 @@ export default function Chat() {
 
   const onConnected = () => {
     chatRoomList.forEach((chatRoom) => {
-      console.log(chatRoom?.chatRoomId, 2);
       subscribe(client.current, chatRoom?.chatRoomId, subscribeCallback);
     });
   };
 
-  const subscribeCallback = (response) => {
+  const subscribeCallback = () => {
     refetchChatRoomList();
   };
 
@@ -39,7 +38,6 @@ export default function Chat() {
   }, [chatRoomlist]);
 
   const disconnect = () => {
-    console.log(1);
     client.current.deactivate();
   };
 
