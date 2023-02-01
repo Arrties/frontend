@@ -1,11 +1,25 @@
 import Image from 'next/image';
 import React from 'react';
 import { useRouter } from 'next/router';
+import styled from 'styled-components';
 
 interface ChatRoomProps {
   chatRoom: ChatRoom;
   [key: string]: any;
 }
+
+const MessageBox = styled.p`
+  overflow: hidden;
+  max-width: 260px;
+  padding-left: 10px;
+  padding-right: 5px;
+  color: #191919;
+  font-size: 12px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+`;
 
 export default function Chatroom({ chatRoom }: ChatRoomProps) {
   const handleChattingRoom = () => {
@@ -22,21 +36,18 @@ export default function Chatroom({ chatRoom }: ChatRoomProps) {
         alt="profile"
         width="40"
         height="0"
-        className="mx-1"
+        className="mr-2"
       />
-
-      <article className="flex flex-col items-start">
-        <div className="flex">
-          <p className="flex items-center justify-center px-2 text-14 font-bold text-[#191919]">
+      <article className="flex flex-col">
+        <div className="align-center flex  ">
+          <p className="px-2 text-14 font-bold ">
             {chatRoom?.otherMember?.name}
           </p>
-          <p className="flex items-center justify-center text-10 text-[#767676]">
+          <p className="text-10 text-[#767676]">
             {chatRoom?.lastMessage?.sendDate}
           </p>
         </div>
-        <p className="mt-1 flex items-center justify-center px-2 text-12 text-[#191919]">
-          {chatRoom?.lastMessage?.message}
-        </p>
+        <MessageBox>{chatRoom?.lastMessage?.message}</MessageBox>
       </article>
       {!!chatRoom.unreadCount && (
         <article className="absolute right-5 flex h-[20px] w-[20px] items-center justify-center rounded-full bg-[#FC6554] text-12 text-[#FFF]">
@@ -48,7 +59,7 @@ export default function Chatroom({ chatRoom }: ChatRoomProps) {
         src={chatRoom?.artWorkImage || '/svg/icons/icon_.svg'}
         width="30"
         height="0"
-        className="absolute inset-y-0 right-7 my-auto "
+        className="absolute inset-y-0 right-5 my-auto h-10 w-10 rounded"
       />
     </section>
   );

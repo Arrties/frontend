@@ -26,7 +26,7 @@ export default function Chat() {
     });
   };
 
-  const subscribeCallback = (response) => {
+  const subscribeCallback = () => {
     refetchChatRoomList();
   };
 
@@ -38,7 +38,6 @@ export default function Chat() {
   }, [chatRoomlist]);
 
   const disconnect = () => {
-    console.log(1);
     client.current.deactivate();
   };
 
