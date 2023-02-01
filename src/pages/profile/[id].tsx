@@ -38,9 +38,7 @@ export default function PickDetail({ params }) {
 
   const { data: pickDetail, refetch: refetchPickDetail } =
     useGetPickDetail(artistId);
-  console.log(pickDetail);
   const { member, artworks, pick } = pickDetail || {};
-  console.log(member, artworks, pick);
 
   const handlePick = async () => {
     if (pick) {
