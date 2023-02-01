@@ -7,6 +7,7 @@ import useGetDetail from '@hooks/queries/useGetDetail';
 import Navigate from '@components/common/Navigate';
 import artworkApi from '@apis/artwork/artworkApi';
 import chatApi from '@apis/chat/chatApi';
+import KeywordBox from '@components/common/KeywordBox';
 
 export function getServerSideProps({ params }) {
   return {
@@ -152,11 +153,11 @@ export default function Detail({ params }) {
             <div className="py-2 text-12 text-brand">
               세부 사항 등 궁금한 점은 채팅으로 작가와 소통 할 수 있어요.
             </div>
-            <div className="py-5">
+            <div>
               <p className="text-14">{artWork?.description}</p>
-              <div>
+              <div className="mt-4">
                 {artWork?.keywords?.map((keyword: string, idx: number) => (
-                  <></>
+                  <KeywordBox text={keyword} key={idx} />
                 ))}
               </div>
             </div>
@@ -165,7 +166,7 @@ export default function Detail({ params }) {
           <Image
             alt="guarantee"
             src={artWork?.guaranteeImage || '/svg/example/guarantee.svg'}
-            width="0"
+            width="1000"
             height="0"
             className="w-full py-5"
             priority
