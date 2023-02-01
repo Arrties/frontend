@@ -72,7 +72,7 @@ export default function Detail({ params }) {
           <Image
             alt="detail"
             src={artWork?.images[0] || '/svg/example/detail.svg'}
-            width="0"
+            width="1000"
             height="0"
             className="absolute inset-x-0 top-0 w-full"
             priority
@@ -138,6 +138,9 @@ export default function Detail({ params }) {
                 width="35"
                 height="0"
                 alt="avatar"
+                onClick={() => {
+                  router.push(`/profile/pick/${artist?.id}`);
+                }}
               />
             </div>
             <div className="ml-1 w-[5rem] text-center">
