@@ -1,15 +1,12 @@
+import Modal from '@components/auth/Modal';
 import Button from '@components/common/Button';
 import CheckBox from '@components/common/Checkbox';
 import Layout from '@components/common/Layout';
 import Navigate from '@components/common/Navigate';
-import arrowBtn from '@public/svg/icons/icon_arrow.svg';
 import Image from 'next/image';
 import tw from 'tailwind-styled-components';
 import { useAppDispatch } from '@features/hooks';
-import {
-  setIsApproveEmailPromotion,
-  setIsApproveSMSPromotion,
-} from '@features/user/userSlice';
+import { setIsApproveEmailPromotion, setIsApproveSMSPromotion } from '@features/user/userSlice';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
@@ -34,7 +31,8 @@ export default function Join01() {
 
   const [checkedTerm, setCheckedTerm] = useState<string[]>([]);
   const [isOpen, setIsOpen] = useState<boolean>(false);
-
+  const [isModal, setIsModal] = useState<boolean>(false);
+  const [termNumber, setTermNumber] = useState<number>(1);
   const onCheckedAll = (checked: boolean): void => {
     if (checked) {
       setCheckedTerm(() => ['term1', 'term2', 'term4', 'term5']);
@@ -116,6 +114,10 @@ export default function Join01() {
                 width={7}
                 height={0}
                 className="cursor-pointer"
+                onClick={() => {
+                  setTermNumber(1);
+                  setIsModal(true);
+                }}
               />
             </CheckBoxList>
             <CheckBoxList>
@@ -131,6 +133,10 @@ export default function Join01() {
                 width={7}
                 height={0}
                 className="cursor-pointer"
+                onClick={() => {
+                  setTermNumber(2);
+                  setIsModal(true);
+                }}
               />
             </CheckBoxList>
             <CheckBoxList className="pb-0">
@@ -196,6 +202,11 @@ export default function Join01() {
           className="absolute inset-x-0 bottom-[34px] m-auto"
         />
       </form>
+      <Modal
+        term={termNumber}
+        isModal={isModal}
+        onCloseModal={() => setIsModal(false)}
+      />
     </Layout>
   );
 }
