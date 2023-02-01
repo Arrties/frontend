@@ -157,56 +157,58 @@ export default function ChatRoom({ params }) {
         </article>
         <div className="h-20" />
       </section>
-      <form
-        className="fixed inset-x-0 bottom-[30px] mx-auto flex h-[50px] max-w-[360px] items-center rounded-[24.5px] bg-[#F8F8FA] px-[10px]"
-        onSubmit={handleSubmit(onSubmit)}
-      >
-        <input
-          type="text"
-          className="h-[23px] w-[200px] border-none bg-[#F8F8FA] text-14 font-semibold placeholder:text-[#999999] "
-          placeholder="메세지를 입력해주세요."
-          {...register('message', { required: true })}
-        />
-        {watch('message') ? (
-          <button className="absolute right-[15px] cursor-pointer">
-            <Image
-              alt=""
-              src="/svg/icons/icon_send.svg"
-              width="22"
-              height="0"
-            />
-          </button>
-        ) : (
-          <>
-            <Image
-              src="/svg/icons/icon_glasses.svg"
-              alt="glasses"
-              width="25"
-              height="0"
-              className="absolute right-14 cursor-pointer"
-            />
-            <label
-              className="flex items-center justify-center"
-              htmlFor="profileImage"
-            >
+      <div className="fixed inset-x-0 bottom-0 mx-auto flex h-[70px] w-full max-w-[420px] justify-center bg-white">
+        <form
+          className="flex h-[50px] w-[360px] items-center rounded-[24.5px] bg-[#F8F8FA] px-[10px]"
+          onSubmit={handleSubmit(onSubmit)}
+        >
+          <input
+            type="text"
+            className="h-[23px] w-[200px] border-none bg-[#F8F8FA] text-14 font-semibold placeholder:text-[#999999] "
+            placeholder="메세지를 입력해주세요."
+            {...register('message', { required: true })}
+          />
+          {watch('message') ? (
+            <button className="absolute right-[40px] cursor-pointer">
               <Image
-                src="/svg/icons/icon_picture.svg"
-                alt="picture"
+                alt=""
+                src="/svg/icons/icon_send.svg"
+                width="22"
+                height="0"
+              />
+            </button>
+          ) : (
+            <>
+              <Image
+                src="/svg/icons/icon_glasses.svg"
+                alt="glasses"
                 width="25"
                 height="0"
-                className="absolute right-6 cursor-pointer"
+                className="absolute right-[70px] cursor-pointer"
               />
-            </label>
-            <input
-              type="file"
-              id="profileImage"
-              accept="image/*"
-              className="hidden"
-              {...register('image')}
-            />
-          </>
-        )}
-      </form>
+              <label
+                className="flex items-center justify-center"
+                htmlFor="profileImage"
+              >
+                <Image
+                  src="/svg/icons/icon_picture.svg"
+                  alt="picture"
+                  width="25"
+                  height="0"
+                  className="absolute right-[40px] cursor-pointer"
+                />
+              </label>
+              <input
+                type="file"
+                id="profileImage"
+                accept="image/*"
+                className="hidden"
+                {...register('image')}
+              />
+            </>
+          )}
+        </form>
+      </div>
     </Layout>
   );
 }
