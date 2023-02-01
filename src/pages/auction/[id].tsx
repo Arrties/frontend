@@ -36,7 +36,7 @@ export default function Detail() {
 
   return (
     <LayoutBox className="relative h-full w-full max-w-[420px] overflow-y-scroll scroll-smooth  bg-white">
-      <div className="fixed inset-x-0 top-0 mx-auto flex h-16 w-full max-w-[420px] items-center justify-between px-6">
+      <div className="fixed inset-x-0 top-0 z-50 mx-auto flex h-16 w-full max-w-[420px] items-center justify-between px-6">
         {isCardOver ? (
           <>
             <Image
@@ -70,10 +70,17 @@ export default function Detail() {
           </>
         )}
       </div>
-      <div className="h-[306px] w-full bg-slate-500"></div>
+      <div className="relative h-[306px] w-full">
+        <Image
+          fill
+          className="z-0 object-cover "
+          src="/svg/example/exhibition.svg"
+          alt="image"
+        />
+      </div>
       <div
         ref={target}
-        className="-mt-4 h-[2000px] w-full rounded-t-2xl bg-white"
+        className="relative z-10 -mt-4 h-[2000px] w-full rounded-t-2xl bg-white"
       ></div>
     </LayoutBox>
   );
