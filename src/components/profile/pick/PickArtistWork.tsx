@@ -1,3 +1,4 @@
+import Image from 'next/image';
 interface PickArtistWorkProps {
   title: string;
   saleStatus: string;
@@ -13,7 +14,14 @@ export default function PickArtistWork({
 }: PickArtistWorkProps) {
   return (
     <div className="flex cursor-pointer items-center" {...rest}>
-      <div className="aspect-square w-[82px] bg-[#D9D9D9]"></div>
+      <Image
+        alt="artwork"
+        src={image || '/svg/icons/icon_.svg'}
+        width="100"
+        height="0"
+        className="aspect-square w-[82px] rounded"
+      />
+
       <div className="ml-5">
         <p className="mb-[6px] text-14 font-medium">{title} </p>
         <div
@@ -26,5 +34,3 @@ export default function PickArtistWork({
     </div>
   );
 }
-
-import tw from 'tailwind-styled-components';

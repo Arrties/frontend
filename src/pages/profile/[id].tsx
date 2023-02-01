@@ -41,13 +41,13 @@ export default function PickDetail({ params }) {
   const { member, artworks, pick } = pickDetail || {};
   console.log(member, artworks, pick);
 
-  const handlePick = () => {
+  const handlePick = async () => {
     if (pick) {
-      profileApi.deletePick(artistId);
+      await profileApi.deletePick(artistId);
     } else {
-      profileApi.postPick(artistId);
+      await profileApi.postPick(artistId);
     }
-    refetchPickDetail();
+    await refetchPickDetail();
   };
 
   return (
@@ -90,13 +90,11 @@ export default function PickDetail({ params }) {
           <Tab.Panel className="space-y-8">
             <div className="space-y-3 text-14">
               <p className="font-semibold">소개</p>
-              <p className="text-12 font-bold leading-5">
-                {member?.description}
-              </p>
+              <p className="text-14 leading-5">{member?.description}</p>
             </div>
             <div className="space-y-3 text-14">
               <p className="font-semibold">이력</p>
-              <p className="text-12 font-bold leading-5">{member?.history}</p>
+              <p className="text-14 leading-5">{member?.history}</p>
             </div>
             <div className="text-14">
               <p className="font-semibold">SNS</p>
@@ -108,7 +106,7 @@ export default function PickDetail({ params }) {
                     height={20}
                     alt="instagram"
                   />
-                  <p className="ml-[6px] text-12 font-bold leading-5">
+                  <p className="ml-[6px] text-14 leading-5">
                     {member?.instagram}
                   </p>
                 </div>
@@ -119,7 +117,7 @@ export default function PickDetail({ params }) {
                     height={20}
                     alt="behance"
                   />
-                  <p className="ml-[6px] text-12 font-bold leading-5">
+                  <p className="ml-[6px] text-14 leading-5">
                     {member?.behance}
                   </p>
                 </div>
