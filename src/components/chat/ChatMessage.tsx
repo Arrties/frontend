@@ -21,7 +21,7 @@ export default function ChatMessage({
           </p>
         </div>
       ) : (
-        <div className="0  mt-1 flex items-center justify-start">
+        <div className="mt-1 flex items-center justify-start">
           <p className="max-w-[230px] rounded-r-xl rounded-bl-2xl bg-[#EDEDED] px-6 py-2 text-14 text-[#767676]">
             {message}
           </p>

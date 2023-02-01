@@ -158,7 +158,7 @@ export default function ChatRoom({ params }) {
         <div className="h-20" />
       </section>
       <form
-        className="fixed bottom-[30px] flex h-[50px] w-[327px] items-center rounded-[24.5px] bg-[#F8F8FA] px-[10px]"
+        className="fixed inset-x-0 bottom-[30px] mx-auto flex h-[50px] max-w-[360px] items-center rounded-[24.5px] bg-[#F8F8FA] px-[10px]"
         onSubmit={handleSubmit(onSubmit)}
       >
         <input
@@ -168,13 +168,14 @@ export default function ChatRoom({ params }) {
           {...register('message', { required: true })}
         />
         {watch('message') ? (
-          <Image
-            alt=""
-            src="/svg/icons/icon_send.svg"
-            width="22"
-            height="0"
-            className="absolute right-[15px] cursor-pointer"
-          />
+          <button className="absolute right-[15px] cursor-pointer">
+            <Image
+              alt=""
+              src="/svg/icons/icon_send.svg"
+              width="22"
+              height="0"
+            />
+          </button>
         ) : (
           <>
             <Image
