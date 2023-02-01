@@ -120,7 +120,7 @@ export default function ChatRoom({ params }) {
             alt="back"
             width="11"
             height="0"
-            onClick={() => router.back()}
+            onClick={() => router.push('/chat')}
             className="cursor-pointer"
           />
           <div className="px-5 text-16 ">
@@ -164,7 +164,7 @@ export default function ChatRoom({ params }) {
         >
           <input
             type="text"
-            className="h-[23px] w-[200px] border-none bg-[#F8F8FA] text-14 font-semibold placeholder:text-[#999999] "
+            className="h-[23px] w-[280px] border-none bg-[#F8F8FA] text-14 font-semibold placeholder:text-[#999999] "
             placeholder="메세지를 입력해주세요."
             {...register('message', { required: true })}
           />
