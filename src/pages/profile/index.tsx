@@ -197,7 +197,7 @@ export default function Profile() {
           <div className="relative my-4">
             <span className="text-14 font-bold text-[#191919]">
               취향 목록
-              {data?.keywords?.length && (
+              {data?.keywords && (
                 <Image
                   src="/svg/icons/icon_pencil_black.svg"
                   alt="edit_keywords"
