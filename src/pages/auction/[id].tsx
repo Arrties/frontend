@@ -1,10 +1,9 @@
 import Layout from '@components/common/Layout';
 import Image from 'next/image';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Button from 'stories/Button';
 import { useRouter } from 'next/router';
 import useGetDetail from '@hooks/queries/useGetDetail';
-import Navigate from '@components/common/Navigate';
 import artworkApi from '@apis/artwork/artworkApi';
 import chatApi from '@apis/chat/chatApi';
 
@@ -44,30 +43,71 @@ export default function Detail({ params }) {
     }
   };
 
+  const target = useRef<HTMLDivElement | null>(null);
+  const [isCardOver, setIsCardOver] = useState(false);
+  const onIntersect = (entries: IntersectionObserverEntry[]) => {
+    entries.forEach((entry) => {
+      if (entry.boundingClientRect.y < 64) {
+        setIsCardOver(true);
+      } else {
+        setIsCardOver(false);
+      }
+    });
+  };
+
+  useEffect(() => {
+    let observer;
+    if (target) {
+      observer = new IntersectionObserver(onIntersect, {
+        rootMargin: `0px 0px -${window.innerHeight - 64}px 0px`,
+      });
+      observer.observe(target.current);
+    }
+    return () => observer && observer.disconnect();
+  }, [target]);
+
   return (
     <>
       <Layout>
-        <Navigate
-          className="fixed inset-x-0 top-0 z-10 m-auto h-10 max-w-[384px]"
-          right_message={
-            detailData?.preferred ? (
+        <div
+          className={`fixed inset-x-0 top-0 z-50 mx-auto flex h-16 w-full max-w-[420px] items-center justify-between px-6 ${
+            isCardOver && 'bg-white'
+          }`}
+        >
+          {isCardOver ? (
+            <>
               <Image
-                alt="heart"
-                src="/svg/icons/icon_heart_filled.svg"
-                width="18"
-                height="0"
+                onClick={() => router.back()}
+                alt="clock"
+                src="/svg/icons/auction/icon_arrow_black.svg"
+                width="24"
+                height="24"
               />
-            ) : (
               <Image
-                alt="heart"
-                src="/svg/icons/icon_heart.svg"
-                width="18"
-                height="0"
+                alt="clock"
+                src="/svg/icons/auction/icon_heart_black.svg"
+                width="24"
+                height="24"
               />
-            )
-          }
-          handleRightButton={handlePreferButton}
-        />
+            </>
+          ) : (
+            <>
+              <Image
+                alt="clock"
+                src="/svg/icons/auction/icon_arrow_white.svg"
+                width="24"
+                height="24"
+              />
+              <Image
+                alt="clock"
+                src="/svg/icons/auction/icon_heart_white.svg"
+                width="24"
+                height="24"
+              />
+            </>
+          )}
+        </div>
+
         <section className="absolute inset-x-0 top-0 h-60">
           <Image
             alt="detail"
@@ -77,20 +117,25 @@ export default function Detail({ params }) {
             quality={100}
           />
         </section>
-        <section className="absolute inset-x-0 top-[13rem] h-full rounded-2xl bg-white px-6 py-8">
+        <section
+          ref={target}
+          className="absolute inset-x-0 top-[13rem] h-full rounded-2xl bg-white px-6 py-8"
+        >
           <article>
             <div>
-              <div className="text-18 font-semibold">{artWork?.title}</div>
+              <div className="flex items-center justify-between">
+                <span className="text-18 font-semibold">{artWork?.title}</span>
+                <span className="text-14">
+                  <span className="rounded-l-md bg-[#F8F8FA] px-2 py-1 text-brand">
+                    마감까지
+                  </span>
+                  <span className="rounded-r-md bg-brand px-2 py-1 text-[#FFFFFF]">
+                    D-3
+                  </span>
+                </span>
+              </div>
               <div className="mt-3 text-14">{artist?.artistEducation}</div>
             </div>
-            <p className="absolute right-6 top-8 text-14">
-              <span className="rounded-l-md bg-[#F8F8FA] px-2 py-1 text-brand">
-                마감까지
-              </span>
-              <span className="rounded-r-md bg-brand px-2 py-1 text-[#FFFFFF]">
-                D-3
-              </span>
-            </p>
           </article>
           <article className="space-y-3 py-8 text-14 leading-[14px]">
             <p>
@@ -127,32 +172,35 @@ export default function Detail({ params }) {
               </span>
             </p>
           </article>
-          <article className="border-y py-8">
-            <div className="text-18 font-bold">작가 프로필</div>
-            <div className="my-2 ml-3 flex h-[4rem] w-[4rem] items-center justify-center rounded-full border border-[#999999]">
-              <Image
-                src={
-                  artist?.artistImage || '/svg/icons/profile/icon_avatar.svg'
-                }
-                width="35"
-                height="0"
-                alt="avatar"
-              />
+          <div className="mt-8 border-y border-y-[#EDEDED] py-8">
+            <div className="flex w-[74px] flex-col items-center justify-center">
+              <p className="w-full text-center font-medium">작가프로필</p>
+              <div className="my-2 flex aspect-square w-[4rem] items-center justify-center rounded-full border border-[#999999]">
+                <Image
+                  src={
+                    artist?.artistImage || '/svg/icons/profile/icon_avatar.svg'
+                  }
+                  width="35"
+                  height="0"
+                  alt="profile"
+                />
+              </div>
+              <div className="w-fulltext-center ">{artist?.artistName}</div>
             </div>
-            <div className="ml-1 w-[5rem] text-center">
-              {artist?.artistName}
-            </div>
-          </article>
-          <article className="border-b py-8">
-            <div className="text-18 font-medium">작품 설명</div>
-            <div className="py-2 text-12 text-brand">
+          </div>
+
+          <article className="border-b py-8 font-medium">
+            <div className="text-16">작품 설명</div>
+            <div className="mt-2 text-10 text-brand">
               세부 사항 등 궁금한 점은 채팅으로 작가와 소통 할 수 있어요.
             </div>
-            <div className="py-5">
+            <div className="mt-4">
               <p className="text-14">{artWork?.description}</p>
-              <div>
+              <div className="mt-4">
                 {artWork?.keywords?.map((keyword: string, idx: number) => (
-                  <></>
+                  <span className="mr-2 mt-2 rounded-[19px] border border-[#CECECE] px-3 py-1 text-[14px] text-[#767676] ">
+                    {keyword}
+                  </span>
                 ))}
               </div>
             </div>
