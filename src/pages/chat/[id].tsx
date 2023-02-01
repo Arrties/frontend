@@ -30,7 +30,8 @@ export default function ChatRoom({ params }) {
       // 채팅방 나가기 API전송
     });
   }, []);
-  const scrollRef = useRef();
+  const client: any = useRef({}) as React.MutableRefObject<StompJs.Client>;
+  const scrollRef: any = useRef();
 
   const id = params?.id;
   const router = useRouter();
@@ -65,7 +66,6 @@ export default function ChatRoom({ params }) {
     }
   }, [image]);
 
-  const client: any = useRef({}) as React.MutableRefObject<StompJs.Client>;
   const connect = async () => {
     client.current = await createClient('/ws-connection');
     client.current.onConnect = await onConnected;
