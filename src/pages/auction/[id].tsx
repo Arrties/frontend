@@ -83,12 +83,23 @@ export default function Detail({ params }) {
                 width="24"
                 height="24"
               />
-              <Image
-                alt="clock"
-                src="/svg/icons/auction/icon_heart_black.svg"
-                width="24"
-                height="24"
-              />
+              {detailData?.preferred ? (
+                <Image
+                  onClick={handlePreferButton}
+                  alt="clock"
+                  src="/svg/icons/icon_heart_filled.svg"
+                  width="24"
+                  height="24"
+                />
+              ) : (
+                <Image
+                  onClick={handlePreferButton}
+                  alt="clock"
+                  src="/svg/icons/auction/icon_heart_black.svg"
+                  width="24"
+                  height="24"
+                />
+              )}
             </>
           ) : (
             <>
@@ -98,12 +109,23 @@ export default function Detail({ params }) {
                 width="24"
                 height="24"
               />
-              <Image
-                alt="clock"
-                src="/svg/icons/auction/icon_heart_white.svg"
-                width="24"
-                height="24"
-              />
+              {detailData?.preferred ? (
+                <Image
+                  onClick={handlePreferButton}
+                  alt="clock"
+                  src="/svg/icons/icon_heart_filled.svg"
+                  width="24"
+                  height="24"
+                />
+              ) : (
+                <Image
+                  onClick={handlePreferButton}
+                  alt="clock"
+                  src="/svg/icons/auction/icon_heart_white.svg"
+                  width="24"
+                  height="24"
+                />
+              )}
             </>
           )}
         </div>
@@ -219,9 +241,12 @@ export default function Detail({ params }) {
           <div className="h-[5rem]"></div>
         </section>
       </Layout>
-      <article className="absolute inset-x-0 bottom-[34px] m-auto flex w-[calc(100%-48px)] max-w-[384px] gap-5">
-        <Button text="채팅하기" kind="outlined" onClick={handleChat} />
-        <Button text="응찰하기" onClick={handlePurchase} />
+      <article className="absolute inset-x-0 bottom-0 max-w-[420px]">
+        <div className="h-[18px] bg-gradient-to-t from-white to-gray-100"></div>
+        <div className="m-auto flex w-full  gap-5 bg-white  px-6 pb-9 shadow-lg">
+          <Button text="채팅하기" kind="outlined" onClick={handleChat} />
+          <Button text="응찰하기" onClick={handlePurchase} />
+        </div>
       </article>
     </>
   );
