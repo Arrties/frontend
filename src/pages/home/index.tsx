@@ -1,7 +1,6 @@
 import 'swiper/css';
 import 'swiper/css/pagination';
 
-import AuctionNavigate from '@components/auction/AuctionNavigate';
 import Layout from '@components/common/Layout';
 import Tab from '@components/common/Tab';
 import AuctionItem from '@components/home/AuctionItem';
@@ -19,6 +18,8 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { isUser } from '@utils/isUser';
 import { Pagination } from 'swiper';
 import KeywordBox from '@components/common/KeywordBox';
+import Navigate from '@components/common/Navigate';
+import NoticeIcon from '@components/common/NoticeIcon';
 
 interface KeywordArtwork {
   id: string;
@@ -102,8 +103,22 @@ export default function Home() {
   return (
     <>
       <Layout>
-        <AuctionNavigate />
-        <section className="">
+        <Navigate
+          left_message={
+            <Image
+              alt="logo"
+              src="/svg/icons/icon_logo.svg"
+              width="90"
+              height="0"
+            />
+          }
+          handleLeftButton={() => {
+            router.push('/home');
+          }}
+          right_message={<NoticeIcon />}
+        />
+
+        <section>
           <div className="text-14 text-[#767676]">
             {userInfo?.nickname}님 취향의
           </div>
@@ -128,7 +143,7 @@ export default function Home() {
           </div>
         </section>
         <section className="my-4 mt-2">
-          {userInfo?.keywords?.map((keyword: string,idx:number) => (
+          {userInfo?.keywords?.map((keyword: string, idx: number) => (
             <KeywordBox text={keyword} key={idx} />
           ))}
         </section>

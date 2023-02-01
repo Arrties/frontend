@@ -2,11 +2,15 @@ import * as SockJS from 'sockjs-client';
 import * as StompJs from '@stomp/stompjs';
 import { getToken } from '@utils/localStorage/token';
 
+const access = getToken().accessToken;
+
 const createClient = (endpoint) => {
-  const access = getToken().accessToken;
   const client = new StompJs.Client({
     brokerURL: `wss://atties.shop${endpoint}`,
     connectHeaders: { Authorization: access },
+    // debug: (res) => {
+    //   console.log(res);
+    // },
   });
   client.webSocketFactory = () => {
     const socketIn = new SockJS(
@@ -17,8 +21,11 @@ const createClient = (endpoint) => {
   return client;
 };
 
-const subscribe = async (client, roomId, subscribeCallback) => {
-  await client.subscribe(`/queue/chat-rooms/${roomId}`, subscribeCallback);
+const subscribe = (client, roomId, subscribeCallback) => {
+  client.subscribe(`/queue/chat-rooms/${roomId}`, subscribeCallback, {
+    Authorization: access,
+    action: 'enter',
+  });
 };
 
 const publish = (client, roomId, senderId, chat) => {

@@ -1,10 +1,10 @@
-import Layout from '@components/common/Layout'
-import Navigate from '@components/common/Navigate'
-import PickArtist from '@components/profile/pick/PickArtist'
-import useGetPick from '@hooks/queries/useGetPick'
-import Button from 'stories/Button'
-import tw from 'tailwind-styled-components'
-import { useRouter } from 'next/router'
+import Layout from '@components/common/Layout';
+import Navigate from '@components/common/Navigate';
+import PickArtist from '@components/profile/pick/PickArtist';
+import useGetPick from '@hooks/queries/useGetPick';
+import Button from 'stories/Button';
+import tw from 'tailwind-styled-components';
+import { useRouter } from 'next/router';
 
 interface defaultProps {
   [key: string]: any;
@@ -16,7 +16,7 @@ w-full flex-col divide-y-[1px] divide-[#EDEDED]
 
 export default function Pick() {
   const router = useRouter();
-  const { pickList } = useGetPick();
+  const { data: pickList } = useGetPick();
 
   return (
     <Layout>
@@ -29,22 +29,24 @@ export default function Pick() {
       />
       <PickContainer>
         {pickList?.length ? (
-          pickList.map((pick: Member) => (
+          pickList.map((pick) => (
             <PickArtist
-              key={pick.userId}
-              id={pick.userId}
-              nickname={pick.nickname}
-              education={pick.education}
+              key={pick?.id}
+              id={pick?.id}
+              nickname={pick?.nickname}
+              education={pick?.education}
+              image={pick?.image}
             />
           ))
         ) : (
           <div>
-            <div className="w-full h-[98px] flex justify-center items-center text-14">
+            <div className="flex h-[98px] w-full items-center justify-center text-14">
               픽한 작가가 없습니다.
             </div>
             <Button
               text="작가 픽 하러 가기"
               onClick={() => router.push('/home')}
+              className="mt-10 w-full"
             />
           </div>
         )}

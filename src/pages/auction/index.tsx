@@ -1,6 +1,7 @@
 import ArtWorkItem from '@components/auction/ArtWorkItem';
-import AuctionNavigate from '@components/auction/AuctionNavigate';
 import Layout from '@components/common/Layout';
+import Navigate from '@components/common/Navigate';
+import NoticeIcon from '@components/common/NoticeIcon';
 import Loader from '@components/common/Loader';
 import Tab from '@components/common/Tab';
 import useGetNowAuctionArtworkList from '@hooks/queries/auction/useGetNowAuctionArtworkList';
@@ -8,12 +9,14 @@ import { useCountDown } from '@hooks/useCountDown';
 import Image from 'next/image';
 import React, { useEffect, useState } from 'react';
 import tw from 'tailwind-styled-components';
+import { useRouter } from 'next/router';
 
 const ArtworkList = tw.div<defaultProps>`
   mb-32
 `;
 
 export default function Auction() {
+  const router = useRouter();
   const { data, isLoading, error } = useGetNowAuctionArtworkList();
   const [date, setDate] = useState('');
 
@@ -30,7 +33,20 @@ export default function Auction() {
   return (
     <>
       <Layout>
-        <AuctionNavigate />
+        <Navigate
+          left_message={
+            <Image
+              alt="logo"
+              src="/svg/icons/icon_logo.svg"
+              width="90"
+              height="0"
+            />
+          }
+          handleLeftButton={() => {
+            router.push('/home');
+          }}
+          right_message={<NoticeIcon />}
+        />
         <section className="relative mb-7 flex justify-between">
           <span className="text-[20px] font-bold">{`제 ${data?.turn}회 아띠즈 경매`}</span>
           {date && (

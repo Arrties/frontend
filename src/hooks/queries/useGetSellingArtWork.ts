@@ -3,25 +3,13 @@ import { useQuery } from 'react-query';
 import { useState } from 'react';
 
 export default function useGetSellingArtWork() {
-  const [sellingArtWork, setSellingArtWork] = useState<Member[]>();
-
-  const query = useQuery(
+  return useQuery(
     'useSellingArtWork',
-    async () => {
-      const response = await instance('/art-works/me');
-      console.log(response);
-      return response;
-    },
+    () => instance('/art-works/me'),
+
     {
       retry: 0,
       refetchOnWindowFocus: false,
-      onSuccess: (response: any) => {
-        setSellingArtWork(response?.data);
-      },
-      onError: (error: any) => {
-        console.log(error);
-      },
     },
   );
-  return { ...query, sellingArtWork };
 }

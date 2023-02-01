@@ -30,6 +30,8 @@ export default function ChatRoom({ params }) {
       // 채팅방 나가기 API전송
     });
   }, []);
+  const client = useRef({}) as React.MutableRefObject<StompJs.Client>;
+  const scrollRef: any = useRef();
 
   const id = params?.id;
   const router = useRouter();
@@ -39,7 +41,6 @@ export default function ChatRoom({ params }) {
   const { data: userInfo } = useGetProfile();
   const userId = userInfo?.id || 0;
 
-  console.log(messages);
   const [isModal, setIsModal] = useState(false);
 
   const handleOption = () => {
@@ -49,7 +50,6 @@ export default function ChatRoom({ params }) {
     setIsModal(false);
   };
   const onAccept = async () => {
-    console.log('채팅방 나가기');
     const response = await chatApi.deleteChatRoom(id);
     if (response?.status === 200) {
       router.push('/chat');
@@ -65,7 +65,6 @@ export default function ChatRoom({ params }) {
     }
   }, [image]);
 
-  const client: any = useRef({}) as React.MutableRefObject<StompJs.Client>;
   const connect = async () => {
     client.current = await createClient('/ws-connection');
     client.current.onConnect = await onConnected;
@@ -77,24 +76,30 @@ export default function ChatRoom({ params }) {
   };
 
   const subscribeCallback = (response) => {
+    console.log(response);
     refetchChatRoom();
     reset({ message: '' });
   };
 
   useEffect(() => {
     connect();
-    () => {
-      disconnect();
-    };
   }, []);
+  const disconnect = () => {
+    client.current.deactivate();
+  };
+
   const onSubmit = (form: { message: string; image: FileList }) => {
     if (!client.current.connected) return;
     publish(client.current, id, userInfo?.id, form?.message);
   };
 
-  const disconnect = () => {
-    client.current.deactivate();
-  };
+  useEffect(() => {
+    scrollRef.current.scrollIntoView({
+      behavior: 'smooth',
+      block: 'end',
+      inline: 'nearest',
+    });
+  }, [messages]);
 
   return (
     <Layout>
@@ -107,14 +112,14 @@ export default function ChatRoom({ params }) {
         denyMessage="나가기"
         onAccept={onAccept}
       />
-      <header className="absolute inset-x-0 top-0 h-[145px] w-full bg-[#FC6554]">
+      <header className="fixed inset-x-0 top-0 mx-auto h-[145px] max-w-[420px] bg-[#FC6554]">
         <article className="relative mt-[70px] flex w-full px-5 text-white">
           <Image
             src="/svg/icons/icon_back_white.svg"
             alt="back"
             width="11"
             height="0"
-            onClick={() => router.back()}
+            onClick={() => router.push('/chat')}
             className="cursor-pointer"
           />
           <div className="px-5 text-16 ">
@@ -131,7 +136,10 @@ export default function ChatRoom({ params }) {
           />
         </article>
       </header>
-      <section className="absolute inset-x-0 top-[120px] w-full rounded-xl bg-white p-5">
+      <section
+        className="overflow absolute inset-x-0 top-[120px] w-full  rounded-xl bg-white p-5"
+        ref={scrollRef}
+      >
         <article className="flex h-[40px] items-center justify-center text-center text-14 font-bold text-[#767676]">
           2022년 12월 23일
         </article>
@@ -146,56 +154,53 @@ export default function ChatRoom({ params }) {
               />
             ))}
         </article>
+        <div className="h-20" />
       </section>
-      <form
-        className="fixed bottom-[30px] flex h-[50px] w-[327px] items-center rounded-[24.5px] bg-[#F8F8FA] px-[10px]"
-        onSubmit={handleSubmit(onSubmit)}
-      >
-        <input
-          type="text"
-          className="h-[23px] w-[200px] border-none bg-[#F8F8FA] text-14 font-semibold placeholder:text-[#999999] "
-          placeholder="메세지를 입력해주세요."
-          {...register('message', { required: true })}
-        />
-        {watch('message') ? (
-          <Image
-            alt=""
-            src="/svg/icons/icon_send.svg"
-            width="22"
-            height="0"
-            className="absolute right-[15px] cursor-pointer"
+      <div className="fixed inset-x-0 bottom-0 mx-auto flex h-[70px] w-full max-w-[420px] justify-center bg-white">
+        <form
+          className="flex h-[50px] w-[360px] items-center rounded-[24.5px] bg-[#F8F8FA] px-[10px]"
+          onSubmit={handleSubmit(onSubmit)}
+        >
+          <input
+            type="text"
+            className="h-[23px] w-[280px] border-none bg-[#F8F8FA] text-14 font-semibold placeholder:text-[#999999] "
+            placeholder="메세지를 입력해주세요."
+            {...register('message', { required: true })}
           />
-        ) : (
-          <>
-            <Image
-              src="/svg/icons/icon_glasses.svg"
-              alt="glasses"
-              width="25"
-              height="0"
-              className="absolute right-14 cursor-pointer"
-            />
-            <label
-              className="flex items-center justify-center"
-              htmlFor="profileImage"
-            >
+          {watch('message') ? (
+            <button className="absolute right-[40px] cursor-pointer">
               <Image
-                src="/svg/icons/icon_picture.svg"
-                alt="picture"
-                width="25"
+                alt=""
+                src="/svg/icons/icon_send.svg"
+                width="22"
                 height="0"
-                className="absolute right-6 cursor-pointer"
               />
-            </label>
-            <input
-              type="file"
-              id="profileImage"
-              accept="image/*"
-              className="hidden"
-              {...register('image')}
-            />
-          </>
-        )}
-      </form>
+            </button>
+          ) : (
+            <>
+              <label
+                className="flex items-center justify-center"
+                htmlFor="profileImage"
+              >
+                <Image
+                  src="/svg/icons/icon_picture.svg"
+                  alt="picture"
+                  width="25"
+                  height="0"
+                  className="absolute right-[40px] cursor-pointer"
+                />
+              </label>
+              <input
+                type="file"
+                id="profileImage"
+                accept="image/*"
+                className="hidden"
+                {...register('image')}
+              />
+            </>
+          )}
+        </form>
+      </div>
     </Layout>
   );
 }

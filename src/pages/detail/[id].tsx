@@ -7,6 +7,7 @@ import useGetDetail from '@hooks/queries/useGetDetail';
 import Navigate from '@components/common/Navigate';
 import artworkApi from '@apis/artwork/artworkApi';
 import chatApi from '@apis/chat/chatApi';
+import KeywordBox from '@components/common/KeywordBox';
 
 export function getServerSideProps({ params }) {
   return {
@@ -72,7 +73,7 @@ export default function Detail({ params }) {
           <Image
             alt="detail"
             src={artWork?.images[0] || '/svg/example/detail.svg'}
-            width="0"
+            width="1000"
             height="0"
             className="absolute inset-x-0 top-0 w-full"
             priority
@@ -138,6 +139,9 @@ export default function Detail({ params }) {
                 width="35"
                 height="0"
                 alt="avatar"
+                onClick={() => {
+                  router.push(`/profile/${artist?.id}`);
+                }}
               />
             </div>
             <div className="ml-1 w-[5rem] text-center">
@@ -149,11 +153,11 @@ export default function Detail({ params }) {
             <div className="py-2 text-12 text-brand">
               세부 사항 등 궁금한 점은 채팅으로 작가와 소통 할 수 있어요.
             </div>
-            <div className="py-5">
+            <div>
               <p className="text-14">{artWork?.description}</p>
-              <div>
+              <div className="mt-4">
                 {artWork?.keywords?.map((keyword: string, idx: number) => (
-                  <></>
+                  <KeywordBox text={keyword} key={idx} />
                 ))}
               </div>
             </div>
@@ -162,7 +166,7 @@ export default function Detail({ params }) {
           <Image
             alt="guarantee"
             src={artWork?.guaranteeImage || '/svg/example/guarantee.svg'}
-            width="0"
+            width="1000"
             height="0"
             className="w-full py-5"
             priority
@@ -171,7 +175,7 @@ export default function Detail({ params }) {
           <div className="h-[5rem]"></div>
         </section>
       </Layout>
-      <article className="absolute inset-x-0 bottom-[34px] m-auto flex w-[calc(100%-48px)] gap-5">
+      <article className="absolute inset-x-0 bottom-[34px] m-auto flex max-w-[360px] gap-5">
         <Button text="채팅하기" kind="outlined" onClick={handleChat} />
         <Button text="응찰하기" onClick={handlePurchase} />
       </article>

@@ -1,16 +1,16 @@
-import avatar from '@public/svg/icons/profile/icon_avatar.svg'
-import Image from 'next/image'
-import tw from 'tailwind-styled-components'
-import { useRouter } from 'next/router'
+import Image from 'next/image';
+import tw from 'tailwind-styled-components';
+import { useRouter } from 'next/router';
 
 interface DefaultProps {
   [key: string]: any;
 }
 
 interface PickArtistForm {
-  id: string;
-  nickname?: string;
-  education?: string;
+  id: number;
+  nickname: string;
+  education: string;
+  image: string;
 }
 
 const PickArtistContainer = tw.div<DefaultProps>`
@@ -25,13 +25,19 @@ export default function PickArtist({
   id,
   nickname,
   education,
+  image,
 }: PickArtistForm) {
   const router = useRouter();
 
   return (
-    <PickArtistContainer onClick={() => router.push(`/profile/pick/${id}`)}>
+    <PickArtistContainer onClick={() => router.push(`/profile/${id}`)}>
       <PickArtistProfile>
-        <Image src={avatar} alt="avatar" width={28} height={28} />
+        <Image
+          src={image || '/svg/icons/profile/icon_avatar.svg'}
+          alt="avatar"
+          width={28}
+          height={28}
+        />
       </PickArtistProfile>
       <span>{nickname}</span>
       <span className="pl-1">{education}</span>

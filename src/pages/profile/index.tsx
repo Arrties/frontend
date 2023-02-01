@@ -10,6 +10,7 @@ import Image from 'next/image';
 import tw from 'tailwind-styled-components';
 import { isUser } from '@utils/isUser';
 import { useRouter } from 'next/router';
+import NoticeIcon from '@components/common/NoticeIcon';
 
 interface defaultProps {
   [key: string]: any;
@@ -112,17 +113,17 @@ export default function Profile() {
     <>
       <Layout>
         <Navigate
-          left_message={false}
           message="프로필"
+          isLeftButton={false}
+          handleLeftButton={() => {
+            router.push('/home');
+          }}
           right_message={
-            <Image
-              src="/svg/icons/icon_notification.svg"
-              alt="notification"
-              width="20"
-              height="0"
+            <NoticeIcon
+              isSearch={false}
+              handleRightButton={handleRightButton}
             />
           }
-          handleRightButton={handleRightButton}
         />
         <section>
           <WelcomeBox>
@@ -196,7 +197,7 @@ export default function Profile() {
           <div className="relative my-4">
             <span className="text-14 font-bold text-[#191919]">
               취향 목록
-              {data?.keywords?.length && (
+              {data?.keywords && (
                 <Image
                   src="/svg/icons/icon_pencil_black.svg"
                   alt="edit_keywords"
