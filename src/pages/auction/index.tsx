@@ -17,7 +17,7 @@ export default function Auction() {
   const { data, isLoading, error } = useGetNowAuctionArtworkList();
   const [date, setDate] = useState('');
 
-  const [hours, minutes, seconds] = useCountDown(date);
+  const [hours, minutes, seconds] = useCountDown?.(date);
   const remaind = +hours + +minutes + +seconds;
 
   useEffect(() => {
