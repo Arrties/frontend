@@ -38,16 +38,13 @@ export class ProfileApi {
     return data;
   }
   async patchRole(): Promise<Role> {
-    const { data } = await instance.patch('/members/roles');
-    return data;
+    await instance.patch('/members/roles');
   }
   async patchInquiry(askId: number, formData: any) {
-    const response = await instance.patch(`/members/ask/${askId}`, formData);
-    return response;
+    await instance.patch(`/members/ask/${askId}`, formData);
   }
   async patchKeyword(body: any) {
-    const { data } = await instance.patch('/members/keywords', body);
-    return data;
+    await instance.patch('/members/keywords', body);
   }
   async getWish(): Promise<WishArtwork> {
     const { data } = await instance.get('/members/preferred-artworks');
@@ -62,8 +59,7 @@ export class ProfileApi {
     return data;
   }
   async deleteNotice(id: number) {
-    const { data } = await instance.delete(`/notifications/${id}`);
-    return data;
+    await instance.delete(`/notifications/${id}`);
   }
 }
 
