@@ -28,7 +28,7 @@ export default function Detail({ params }) {
       artistId: artist?.id,
       artWorkId: artWork?.id,
     });
-    router.push(`/chat/${chatData?.chatRoomId}`);
+    await router.push(`/chat/${chatData?.chatRoomId}`);
   };
   const handlePurchase = () => {
     router.push(`/auction/${artWork?.id}`);

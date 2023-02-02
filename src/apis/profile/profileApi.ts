@@ -37,9 +37,6 @@ export class ProfileApi {
     const { data } = await instance.get('/members/ask');
     return data;
   }
-  async patchRole(): Promise<Role> {
-    await instance.patch('/members/roles');
-  }
   async patchInquiry(askId: number, formData: any) {
     await instance.patch(`/members/ask/${askId}`, formData);
   }
