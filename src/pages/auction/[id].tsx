@@ -7,6 +7,7 @@ import useGetDetail from '@hooks/queries/useGetDetail';
 import artworkApi from '@apis/artwork/artworkApi';
 import chatApi from '@apis/chat/chatApi';
 import usePostPrefer from '@hooks/mutations/usePostPrefer';
+import useDeletePrefer from '@hooks/mutations/useDeletePrefer';
 
 export function getServerSideProps({ params }) {
   return {
@@ -19,9 +20,10 @@ export function getServerSideProps({ params }) {
 export default function Detail({ params }) {
   const router = useRouter();
   const artWorkId = params?.id;
-  const { data: detailData, refetch: refetchDetail } = useGetDetail(+artWorkId);
+  const { data: detailData } = useGetDetail(+artWorkId);
   const { artWork, artist } = detailData || {};
-  const { mutate } = usePostPrefer(artWork?.id!);
+  const { mutate: postPrefer } = usePostPrefer(artWork?.id!);
+  const { mutate: deletePrefer } = useDeletePrefer(artWork?.id!);
 
   const handleChat = async () => {
     const chatData = await chatApi.postChatRoom({
@@ -35,12 +37,9 @@ export default function Detail({ params }) {
   };
   const handlePreferButton = async () => {
     if (detailData?.preferred) {
-      await artworkApi.postDeletePrefer(artWorkId);
-      refetchDetail();
+      deletePrefer();
     } else {
-      // await artworkApi.postPrefer(artWorkId);
-      // refetchDetail();
-      mutate();
+      postPrefer();
     }
   };
 
