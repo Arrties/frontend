@@ -1,5 +1,6 @@
 import { priceToString } from '@utils/priceToString';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 import tw from 'tailwind-styled-components';
 
 interface ArtWorkItemProps extends NowAuctionArtwork {
@@ -20,8 +21,14 @@ export default function ArtWorkItem({
   material,
   ...rest
 }: ArtWorkItemProps) {
+  const router = useRouter();
   return (
-    <ArtWorkItemTag {...rest}>
+    <ArtWorkItemTag
+      {...rest}
+      onClick={() => {
+        router.push(`/auction/${rest.id}`);
+      }}
+    >
       <section className="relative h-[200px] overflow-hidden">
         <Image
           alt="image"
