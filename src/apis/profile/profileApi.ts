@@ -41,7 +41,8 @@ export class ProfileApi {
     await instance.patch(`/members/ask/${askId}`, formData);
   }
   async patchKeyword(body: any) {
-    await instance.patch('/members/keywords', body);
+    const { data } = await instance.patch('/members/keywords', body);
+    return data;
   }
   async getWish(): Promise<WishArtwork> {
     const { data } = await instance.get('/members/preferred-artworks');
