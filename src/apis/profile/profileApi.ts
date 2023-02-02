@@ -19,11 +19,11 @@ export class ProfileApi {
     return response;
   }
 
-  async getPick() {
+  async getPick(): Promise<pickList> {
     const { data } = await instance.get('/members/preferred-artists');
     return data;
   }
-  async getPickDetail(artistId: number) {
+  async getPickDetail(artistId: number): Promise<artistDetail> {
     const { data } = await instance.get(`/artists/${artistId}`);
     return data;
   }
@@ -49,7 +49,7 @@ export class ProfileApi {
     const { data } = await instance.patch('/members/keywords', body);
     return data;
   }
-  async getWish() {
+  async getWish(): Promise<WishArtwork> {
     const { data } = await instance.get('/members/preferred-artworks');
     return data;
   }

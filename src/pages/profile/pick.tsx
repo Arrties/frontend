@@ -29,7 +29,7 @@ export default function Pick() {
       />
       <PickContainer>
         {pickList?.length ? (
-          pickList.map((pick) => (
+          pickList.map((pick: pickList) => (
             <PickArtist
               key={pick?.id}
               id={pick?.id}
