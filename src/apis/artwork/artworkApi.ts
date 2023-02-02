@@ -14,16 +14,10 @@ export class ArtworkApi {
     return data;
   }
   async postPrefer(artWorkId: number) {
-    const response = await instance.post(
-      `/members/preferred-artworks/${artWorkId}`,
-    );
-    return response;
+    await instance.post(`/members/preferred-artworks/${artWorkId}`);
   }
   async postDeletePrefer(artWorkId: number) {
-    const response = await instance.delete(
-      `/members/preferred-artworks/${artWorkId}`,
-    );
-    return response;
+    await instance.delete(`/members/preferred-artworks/${artWorkId}`);
   }
 }
 
