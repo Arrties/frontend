@@ -35,9 +35,9 @@ export default function Admin() {
 
   return (
     <Layout>
-      <form className="flex items-center" onSubmit={handleSubmit(onSubmitRole)}>
+      <form onSubmit={handleSubmit(onSubmitRole)}>
         <Input type="text" register={register('memberId')} />
-        <Button text="작가 프로필 전환" className="w-4/12" />
+        <Button text="작가 프로필 전환" className="w-full" />
       </form>
       <form onSubmit={handleSubmit(onSubmitAuction)}>
         <div>
@@ -52,7 +52,7 @@ export default function Admin() {
           종료 날짜
           <Input type="text" register={register('endDate')} />
         </div>
-        <Button text="경매 생성" className="w-4/12" />
+        <Button text="경매 생성" className="w-full" />
       </form>
     </Layout>
   );
