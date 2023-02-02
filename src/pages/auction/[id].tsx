@@ -6,6 +6,7 @@ import { useRouter } from 'next/router';
 import useGetDetail from '@hooks/queries/useGetDetail';
 import artworkApi from '@apis/artwork/artworkApi';
 import chatApi from '@apis/chat/chatApi';
+import usePostPrefer from '@hooks/mutations/usePostPrefer';
 
 export function getServerSideProps({ params }) {
   return {
@@ -18,15 +19,14 @@ export function getServerSideProps({ params }) {
 export default function Detail({ params }) {
   const router = useRouter();
   const artWorkId = params?.id;
-  const { data: detailData, refetch: refetchDetail } = useGetDetail(
-    Number(artWorkId),
-  );
+  const { data: detailData, refetch: refetchDetail } = useGetDetail(+artWorkId);
   const { artWork, artist } = detailData || {};
+  const { mutate } = usePostPrefer(artWork?.id!);
 
   const handleChat = async () => {
     const chatData = await chatApi.postChatRoom({
-      artistId: artist?.id,
-      artWorkId: artWork?.id,
+      artistId: artist?.id!,
+      artWorkId: artWork?.id!,
     });
     router.push(`/chat/${chatData?.chatRoomId}`);
   };
@@ -38,8 +38,9 @@ export default function Detail({ params }) {
       await artworkApi.postDeletePrefer(artWorkId);
       refetchDetail();
     } else {
-      await artworkApi.postPrefer(artWorkId);
-      refetchDetail();
+      // await artworkApi.postPrefer(artWorkId);
+      // refetchDetail();
+      mutate();
     }
   };
 
