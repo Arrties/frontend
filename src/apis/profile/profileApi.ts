@@ -19,7 +19,7 @@ export class ProfileApi {
     return response;
   }
 
-  async getPick(): Promise<pickList> {
+  async getPick(): Promise<pickList[]> {
     const { data } = await instance.get('/members/preferred-artists');
     return data;
   }
