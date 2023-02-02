@@ -16,3 +16,12 @@ interface Artwork {
   width: number;
   height: number;
 }
+
+interface WishArtwork {
+  hot: boolean;
+  id: number;
+  image: string;
+  price: number;
+  status: string;
+  title: string;
+}

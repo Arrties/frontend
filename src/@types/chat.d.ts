@@ -42,3 +42,7 @@ interface ChatRoomById {
   };
   messages: Message[];
 }
+
+interface chatData {
+  chatRoomId: number;
+}

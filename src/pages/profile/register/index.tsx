@@ -5,7 +5,6 @@ import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
 import { formatBytes } from '@utils/formatBytes';
-import usePatchRole from '@hooks/mutations/usePatchRole';
 import Loader from '@components/common/Loader';
 
 interface FileForm {
@@ -21,13 +20,11 @@ export default function Register() {
   const handleLeftButton = () => {
     router.back();
   };
-  const { mutate, isLoading } = usePatchRole();
 
   const handleRightButton = async () => {
     if (!fileState) return;
     const formData = new FormData();
     formData.append('file', fileState[0].file);
-    mutate();
   };
 
   const file = watch('file');
@@ -47,7 +44,7 @@ export default function Register() {
     setFileState([]);
   };
 
-  if (isLoading) return <Loader />;
+  // if (isLoading) return <Loader />;
 
   return (
     <Layout>
