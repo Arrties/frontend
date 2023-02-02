@@ -1,7 +1,6 @@
 import artworkApi from '@apis/artwork/artworkApi';
-import { useMutation, useQueryClient } from 'react-query';
-
-const queryClient = useQueryClient();
+import { queryClient } from 'pages/_app';
+import { useMutation } from 'react-query';
 
 const usePostPrefer = (artWorkId: number) => {
   return useMutation<any, Error>(
@@ -10,20 +9,12 @@ const usePostPrefer = (artWorkId: number) => {
     {
       retry: false,
       onMutate: async () => {
-        await queryClient.cancelQueries({ queryKey: ['useGetPostPrefer'] });
+        await queryClient.cancelQueries({ queryKey: ['usePostPrefer'] });
         const previousValue = queryClient.getQueryData(['useGetDetail']);
         queryClient.setQueryData(['useGetDetail'], (old: any) => {
           return {
             ...old,
-            artWorkList: old.artWorkList.map((artwork: any) => {
-              if (artwork.id === artWorkId) {
-                return {
-                  ...artwork,
-                  isPrefer: true,
-                };
-              }
-              return artwork;
-            }),
+            preferred: true,
           };
         });
         return { previousValue };
