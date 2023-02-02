@@ -47,43 +47,60 @@ export default function Auction() {
           }}
           right_message={<NoticeIcon />}
         />
-        <section className="relative mb-7 flex justify-between">
-          <span className="text-[20px] font-bold">{`제 ${data?.turn}회 아띠즈 경매`}</span>
-          {date && (
-            <div className="flex w-[100px] items-center justify-center rounded border border-brand px-2">
-              <Image
-                alt="clock"
-                src="/svg/icons/icon_clock_brand.svg"
-                width="14"
-                height="14"
-                className="mr-1"
-              />
-              {remaind < 0 ? (
-                <span className="w-[66px] text-[14px] font-medium tracking-widest">
-                  00:00:00
-                </span>
-              ) : (
-                <span className="w-[66px] text-[14px] font-medium tracking-widest">
-                  {hours}:{minutes}:{seconds}
-                </span>
-              )}
-            </div>
-          )}
-        </section>
-        <ArtworkList>
-          {data?.artWorkList.map((artwork) => (
-            <ArtWorkItem
-              id={artwork.id}
-              key={artwork.id}
-              mainImage={artwork.mainImage}
-              title={artwork.title}
-              topPrice={artwork.topPrice}
-              productionYear={artwork.productionYear}
-              artWorkSize={artwork.artWorkSize}
-              material={artwork.material}
+        <div className="top-100px absolute inset-x-0 mx-auto  max-w-[420px] border-b border-brand" />
+        {error && error.code === 'NOT_FOUND_AUCTION_PROCESSING' ? (
+          <div className="mt-[100%] flex flex-col items-center justify-center">
+            <Image
+              alt="auction"
+              src="/svg/icons/auction/icon_auction_gray.svg"
+              width="54"
+              height="54"
             />
-          ))}
-        </ArtworkList>
+            <p className="mt-3 text-16 font-medium text-[#999999]">
+              아직 진행중인 경매가 없어요
+            </p>
+          </div>
+        ) : (
+          <>
+            <section className="relative mb-7 flex justify-between">
+              <span className="text-[20px] font-bold">{`제 ${data?.turn}회 아띠즈 경매`}</span>
+              {date && (
+                <div className="flex w-[100px] items-center justify-center rounded border border-brand px-2">
+                  <Image
+                    alt="clock"
+                    src="/svg/icons/icon_clock_brand.svg"
+                    width="14"
+                    height="14"
+                    className="mr-1"
+                  />
+                  {remaind < 0 ? (
+                    <span className="w-[66px] text-[14px] font-medium tracking-widest">
+                      00:00:00
+                    </span>
+                  ) : (
+                    <span className="w-[66px] text-[14px] font-medium tracking-widest">
+                      {hours}:{minutes}:{seconds}
+                    </span>
+                  )}
+                </div>
+              )}
+            </section>
+            <ArtworkList>
+              {data?.artWorkList.map((artwork) => (
+                <ArtWorkItem
+                  id={artwork.id}
+                  key={artwork.id}
+                  mainImage={artwork.mainImage}
+                  title={artwork.title}
+                  topPrice={artwork.topPrice}
+                  productionYear={artwork.productionYear}
+                  artWorkSize={artwork.artWorkSize}
+                  material={artwork.material}
+                />
+              ))}
+            </ArtworkList>
+          </>
+        )}
       </Layout>
       <Tab />
     </>
