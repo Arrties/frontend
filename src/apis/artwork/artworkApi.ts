@@ -9,7 +9,7 @@ export class ArtworkApi {
     });
     return data;
   }
-  async getDetail(artWorkId: number) {
+  async getDetail(artWorkId: number): Promise<ArtworkDetail> {
     const { data } = await instance.get(`art-works/${artWorkId}`);
     return data;
   }
