@@ -62,10 +62,14 @@ export default function Auction() {
           </div>
         ) : (
           <>
-            <section className="relative mb-7 flex justify-between">
+            <section className="relative mb-7 mt-4 flex justify-between">
               <span className="text-[20px] font-bold">{`제 ${data?.turn}회 아띠즈 경매`}</span>
               {date && (
-                <div className="flex w-[100px] items-center justify-center rounded border border-brand px-2">
+                <div
+                  className={`flex ${
+                    +hours >= 24 ? 'w-fit' : 'w-[100px]'
+                  } items-center justify-center rounded border border-brand px-2`}
+                >
                   <Image
                     alt="clock"
                     src="/svg/icons/icon_clock_brand.svg"
@@ -78,8 +82,14 @@ export default function Auction() {
                       00:00:00
                     </span>
                   ) : (
-                    <span className="w-[66px] text-[14px] font-medium tracking-widest">
-                      {hours}:{minutes}:{seconds}
+                    <span
+                      className={`${
+                        +hours >= 24 ? 'w-fit' : 'w-[66px]'
+                      } text-[14px] font-medium tracking-widest`}
+                    >
+                      {+hours >= 24
+                        ? 'D-' + Math.floor(+hours / 24)
+                        : hours + ':' + minutes + ':' + seconds}{' '}
                     </span>
                   )}
                 </div>
