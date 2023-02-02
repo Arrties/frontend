@@ -4,7 +4,6 @@ import React, { useEffect, useRef, useState } from 'react';
 import Button from 'stories/Button';
 import { useRouter } from 'next/router';
 import useGetDetail from '@hooks/queries/useGetDetail';
-import artworkApi from '@apis/artwork/artworkApi';
 import chatApi from '@apis/chat/chatApi';
 import usePostPrefer from '@hooks/mutations/usePostPrefer';
 import useDeletePrefer from '@hooks/mutations/useDeletePrefer';
