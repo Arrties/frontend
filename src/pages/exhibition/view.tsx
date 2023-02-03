@@ -17,12 +17,6 @@ interface DefaultProps {
   [key: string]: any;
 }
 
-const LayoutBox = styled.div`
-  &::-webkit-scrollbar {
-    display: none;
-  }
-`;
-
 const SwiperButtonDiv = tw.div<DefaultProps>`
 bg-[rgba(153,153,153,0.24)] rounded-[10px] w-8 h-8 flex justify-center cursor-pointer
 `;
@@ -40,16 +34,6 @@ export default function ExhibitionArts() {
   const id = parseInt(router.query.id as string, 10)!;
 
   const { data: artLists } = useGetExhibitionItemList(id, genre);
-
-  const handleLeftButton = () => {
-    // 작품 더보기 페이지로 이동
-    router.push('/');
-  };
-
-  const handleRightButton = () => {
-    // 해당 작품 작가 프로필로 이동
-    router.push('/');
-  };
 
   const onCloseModal = () => {
     setIsOpen(false);
@@ -83,7 +67,7 @@ export default function ExhibitionArts() {
     );
 
   return (
-    <LayoutBox className="relative h-full w-full max-w-[420px] overflow-y-scroll bg-white px-[24px]">
+    <Layout>
       {isExpansion ? (
         <Image
           alt="exhibition_bg"
@@ -226,14 +210,12 @@ export default function ExhibitionArts() {
                   education={art.education}
                   description={art.description}
                   onCloseModal={onCloseModal}
-                  handleLeftButton={handleLeftButton}
-                  handleRighButton={handleRightButton}
                 />
               </div>
             )}
           </SwiperSlide>
         ))}
       </Swiper>
-    </LayoutBox>
+    </Layout>
   );
 }
