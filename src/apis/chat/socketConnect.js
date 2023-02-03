@@ -8,9 +8,9 @@ const createClient = (endpoint) => {
   const client = new StompJs.Client({
     brokerURL: `wss://atties.shop${endpoint}`,
     connectHeaders: { Authorization: access },
-    // debug: (res) => {
-    //   console.log(res);
-    // },
+    debug: (res) => {
+      console.log(res);
+    },
   });
   client.webSocketFactory = () => {
     const socketIn = new SockJS(
@@ -21,11 +21,17 @@ const createClient = (endpoint) => {
   return client;
 };
 
-const subscribe = (client, roomId, subscribeCallback) => {
-  client.subscribe(`/queue/chat-rooms/${roomId}`, subscribeCallback, {
-    Authorization: access,
-    action: 'enter',
-  });
+const subscribe = (client, roomId, subscribeCallback, isRoom = false) => {
+  if (isRoom) {
+    client.subscribe(`/queue/chat-rooms/${roomId}`, subscribeCallback, {
+      Authorization: access,
+      action: 'enter',
+    });
+  } else {
+    client.subscribe(`/queue/chat-rooms/${roomId}`, subscribeCallback, {
+      Authorization: access,
+    });
+  }
 };
 
 const publish = (client, roomId, senderId, chat) => {

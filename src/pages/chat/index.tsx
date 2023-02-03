@@ -2,7 +2,7 @@ import * as StompJs from '@stomp/stompjs';
 import Chatroom from '@components/chat/ChatRoom';
 import Layout from '@components/common/Layout';
 import Image from 'next/image';
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/router';
 import { createClient, subscribe } from '@apis/chat/socketConnect';
 import Tab from '@components/common/Tab';
@@ -11,9 +11,8 @@ import useGetChatRoomList from '@hooks/queries/chat/useGetChatRoomList';
 export default function Chat() {
   const router = useRouter();
   const client: any = useRef({}) as React.MutableRefObject<StompJs.Client>;
-  const { data: chatRoomlist, refetch: refetchChatRoomList } =
-    useGetChatRoomList();
-  const chatRoomList = chatRoomlist?.chatRooms || [];
+  const { data: chatRoom, refetch: refetchChatRoomList } = useGetChatRoomList();
+  const chatRoomList = chatRoom?.chatRooms || [];
   const connect = async () => {
     client.current = await createClient('/ws-connection');
     client.current.onConnect = await onConnected;
@@ -21,25 +20,19 @@ export default function Chat() {
   };
 
   const onConnected = () => {
-    chatRoomList.forEach((chatRoom) => {
-      subscribe(client.current, chatRoom?.chatRoomId, subscribeCallback);
-    });
+    if (chatRoomList?.length > 0) {
+      chatRoomList.forEach((chatRoom) => {
+        subscribe(client.current, chatRoom?.chatRoomId, subscribeCallback);
+      });
+    }
   };
-
   const subscribeCallback = () => {
     refetchChatRoomList();
   };
 
   useEffect(() => {
     connect();
-    () => {
-      disconnect();
-    };
-  }, [chatRoomlist]);
-
-  const disconnect = () => {
-    client.current.deactivate();
-  };
+  }, [chatRoomList.length]);
 
   return (
     <>

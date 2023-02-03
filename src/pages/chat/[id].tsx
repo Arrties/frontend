@@ -11,8 +11,7 @@ import { createClient, publish, subscribe } from '@apis/chat/socketConnect';
 import chatApi from '@apis/chat/chatApi';
 import useGetProfile from '@hooks/queries/useGetProfile';
 import { isUser } from '@utils/isUser';
-import { makeBlob } from '@utils/makeBlob';
-import { makeBase64 } from '@utils/makeBase64';
+
 interface ContentForm {
   message: string;
   image: FileList;
@@ -56,14 +55,12 @@ export default function ChatRoom({ params }) {
     if (response?.status === 200) {
       router.push('/chat');
     }
-    // 채팅방 나가기 API
   };
 
   const image = watch('image');
 
   const sendImage = (e) => {
     const reader = new FileReader();
-
     reader.readAsDataURL(e.target.files[0]);
     reader.onload = () => {
       const base64data = reader.result;
@@ -82,18 +79,13 @@ export default function ChatRoom({ params }) {
   };
 
   const subscribeCallback = (response) => {
-    console.log(response);
-    refetchChatRoom();
     reset({ message: '' });
+    refetchChatRoom();
   };
 
   useEffect(() => {
     connect();
   }, []);
-
-  const disconnect = () => {
-    client.current.deactivate();
-  };
 
   const onSubmit = (form: { message: string; image: FileList }) => {
     if (!client.current.connected) return;
@@ -110,9 +102,6 @@ export default function ChatRoom({ params }) {
 
   return (
     <Layout>
-      <button onClick={sendImage} className="fixed bottom-0 z-20">
-        dddddddddddddddddddddddddddddddddddd
-      </button>
       <Modal
         isMain
         message="채팅방을 나가면 채팅 목록 및 대화내용이 삭제 됩니다.
