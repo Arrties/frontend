@@ -210,6 +210,9 @@ export default function Detail({ params }) {
                   width="35"
                   height="0"
                   alt="profile"
+                  onClick={() => {
+                    router.push(`/profile/${artist?.id}`);
+                  }}
                 />
               </div>
               <div className="w-fulltext-center ">{artist?.artistName}</div>

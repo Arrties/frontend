@@ -57,8 +57,8 @@ ActivityLists = isUser
       {
         id: '3',
         text: '구매작품',
-        icon: '/svg/icons/icon_buying.svg',
-        path: '/profile/buying',
+        icon: '/svg/icons/icon_bid.svg',
+        path: '/profile/bid',
       },
       {
         id: '4',

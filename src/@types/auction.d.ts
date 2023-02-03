@@ -39,3 +39,13 @@ interface LastAuctionArtworkList {
   nextPage: boolean;
   artWorks: LastAutionArtwork[];
 }
+
+interface AuctionList {
+  artWorkCount: number;
+  endDate: string;
+  id: number;
+  image: string;
+  startDate: string;
+  status: string;
+  turn: number;
+}

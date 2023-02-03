@@ -10,6 +10,10 @@ export class HomeApi {
     );
     return data;
   }
+  async getAuctionList() {
+    const { data } = await instance('/auction');
+    return data;
+  }
 }
 
 const homeApi = new HomeApi();

@@ -136,8 +136,6 @@ export default function Edit() {
 
     formData.append('nickname', nickname);
     formData.append('email', email);
-    formData.append('address', '');
-    formData.append('keywords', ''); // 아직 서버측에서 keywords 제외 안함
 
     if (profile && profile?.length) {
       //유저가 프로필을 변환하였다면
@@ -157,8 +155,8 @@ export default function Edit() {
       if (instagram) formData.append('instagram', instagram);
       if (behance) formData.append('behance', behance);
     }
-    let response;
 
+    let response;
     if (isUser) {
       response = await profileApi.patchUserInfo(formData);
     } else {

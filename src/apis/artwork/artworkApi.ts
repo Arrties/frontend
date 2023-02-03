@@ -31,6 +31,9 @@ export class ArtworkApi {
 
   async getExhibitionItem(artworkId: number) {
     const { data } = await instance.get(`/exhibit/art-works/${artworkId}`);
+  }
+  async getBid() {
+    const { data } = await instance.get('/art-works/bidding/me');
     return data;
   }
 }

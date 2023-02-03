@@ -20,6 +20,7 @@ import { Pagination } from 'swiper';
 import KeywordBox from '@components/common/KeywordBox';
 import Navigate from '@components/common/Navigate';
 import NoticeIcon from '@components/common/NoticeIcon';
+import useGetAuction from '@hooks/queries/useGetAuction';
 
 interface KeywordArtwork {
   id: string;
@@ -33,54 +34,9 @@ const DUMP_AUCTION_LISTS = [
   { time: 2, start: '12:00', end: '19:00' },
 ];
 
-interface AuctionListForm {
-  src: string;
-  date: string;
-  artRegister: number;
-  auctionRegister: number;
-  id: number;
-}
-
-const DUMP_PREV_AUCTION_LISTS: AuctionListForm[] = [
-  {
-    src: '/svg/example/exhibition.svg',
-    date: '2022.12.21',
-    artRegister: 20,
-    auctionRegister: 18,
-    id: 1,
-  },
-  {
-    src: '/svg/example/exhibition.svg',
-    date: '2022.12.21',
-    artRegister: 20,
-    auctionRegister: 18,
-    id: 2,
-  },
-  {
-    src: '/svg/example/exhibition.svg',
-    date: '2022.12.21',
-    artRegister: 20,
-    auctionRegister: 18,
-    id: 3,
-  },
-  {
-    src: '/svg/example/exhibition.svg',
-    date: '2022.12.21',
-    artRegister: 20,
-    auctionRegister: 18,
-    id: 4,
-  },
-  {
-    src: '/svg/example/exhibition.svg',
-    date: '2022.12.21',
-    artRegister: 20,
-    auctionRegister: 18,
-    id: 5,
-  },
-];
-const makeThreeEach = (auctionList: AuctionListForm[]) => {
-  const afterArr: AuctionListForm[][] = [];
-  let arr: AuctionListForm[] = [];
+const makeThreeEach = (auctionList: AuctionList[]) => {
+  const afterArr: AuctionList[][] = [];
+  let arr: AuctionList[] = [];
   auctionList.forEach((it: any, idx: number) => {
     arr.push(it);
     if (arr.length === 3) {
@@ -93,13 +49,15 @@ const makeThreeEach = (auctionList: AuctionListForm[]) => {
   });
   return afterArr;
 };
-const DUMP_AFTER_AUCTION_LIST = makeThreeEach(DUMP_PREV_AUCTION_LISTS);
 
 export default function Home() {
   const router = useRouter();
 
   const { data: customizedArtwork } = useGetCustomizedArtWork(1, 5);
   const { data: userInfo } = useGetProfile();
+  const { data: auctionList } = useGetAuction();
+  console.log(auctionList);
+
   return (
     <>
       <Layout>
@@ -207,27 +165,19 @@ export default function Home() {
             pagination={true}
             className="h-[360px]"
           >
-            {DUMP_AFTER_AUCTION_LIST.map(
-              (auctionList: AuctionListForm[], index: number) => (
-                <SwiperSlide key={'' + index}>
-                  {auctionList.map(
-                    (auctionItem: AuctionListForm, idx: number) => (
+            {!!auctionList &&
+              makeThreeEach(auctionList)?.map(
+                (auctionItem: AuctionList[], index: number) => (
+                  <SwiperSlide key={'' + index}>
+                    {auctionItem.map((auctionItem: AuctionList) => (
                       <AuctionItem
-                        key={'' + idx}
-                        src={auctionItem.src}
-                        date={auctionItem.date}
-                        artRegister={auctionItem.artRegister}
-                        auctionRegister={auctionItem.auctionRegister}
-                        id={auctionItem.id}
-                        onClick={() => {
-                          router.push('/home/history');
-                        }}
+                        key={auctionItem.id}
+                        auctionItem={auctionItem}
                       />
-                    ),
-                  )}
-                </SwiperSlide>
-              ),
-            )}
+                    ))}
+                  </SwiperSlide>
+                ),
+              )}
           </Swiper>
         </section>
         {isUser ? <div className="h-16" /> : <FloatButton />}
