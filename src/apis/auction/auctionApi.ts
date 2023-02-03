@@ -28,7 +28,7 @@ export class AuctionApi {
   }
 
   async getBiddingHistory(artWorkId: number): Promise<BiddingHistory> {
-    const { data } = await instance.get(`/art-works/${artWorkId}/binding`);
+    const { data } = await instance.get(`/art-works/${artWorkId}/bidding`);
     return data;
   }
 }
