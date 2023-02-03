@@ -70,6 +70,9 @@ function Login() {
         roles: data.roles,
       };
       if (token) setToken(token);
+      if (data.roles === 'ROLE_ADMIN') {
+        router.push('/admin');
+      }
       router.push('/home');
     }
   }, [data]);

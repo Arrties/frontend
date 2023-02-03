@@ -48,3 +48,12 @@ interface ArtworkDetail {
   preferred: boolean;
   turn: number;
 }
+
+interface WishArtwork {
+  hot: boolean;
+  id: number;
+  image: string;
+  price: number;
+  status: string;
+  title: string;
+}
