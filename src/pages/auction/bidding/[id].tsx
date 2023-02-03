@@ -9,14 +9,26 @@ import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
 import AskPriceModal from '@components/auction/AskPriceModal';
+import useGetBiddingHistory from '@hooks/queries/auction/useGetBiddingHistory';
 
 interface inputForm {
   singlePrice: number;
   autoPrice: number;
 }
 
-export default function Bidding() {
+export function getServerSideProps({ params }) {
+  return {
+    props: {
+      params,
+    },
+  };
+}
+
+export default function Bidding({ params }) {
   const router = useRouter();
+  const artWorkId = params?.id;
+  const { data } = useGetBiddingHistory(+artWorkId);
+
   const {
     register,
     handleSubmit,
@@ -35,6 +47,7 @@ export default function Bidding() {
   const handleOlderTable = () => {
     console.log('호가표');
   };
+
   return (
     <Layout>
       <Navigate
