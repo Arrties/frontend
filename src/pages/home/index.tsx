@@ -100,7 +100,7 @@ export default function Home() {
             </div>
           </div>
         </section>
-        <section className="my-4 mt-2">
+        <section className="my-4 mt-2 flex flex-wrap">
           {userInfo?.keywords?.map((keyword: string, idx: number) => (
             <KeywordBox text={keyword} key={idx} />
           ))}
