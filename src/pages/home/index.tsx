@@ -21,6 +21,7 @@ import KeywordBox from '@components/common/KeywordBox';
 import Navigate from '@components/common/Navigate';
 import NoticeIcon from '@components/common/NoticeIcon';
 import useGetAuction from '@hooks/queries/useGetAuction';
+import moment from 'moment';
 
 interface KeywordArtwork {
   id: string;
@@ -56,7 +57,13 @@ export default function Home() {
   const { data: customizedArtwork } = useGetCustomizedArtWork(1, 5);
   const { data: userInfo } = useGetProfile();
   const { data: auctionList } = useGetAuction();
-  console.log(auctionList);
+  const a = new Intl.DateTimeFormat('ko', { dateStyle: 'long' }).format(
+    new Date(moment('2019-12-10', 'YYYY-MM-DD').format('LLLL')),
+  );
+  if (!!auctionList) {
+    console.log(new Date(moment('2019-12-10', 'YYYY-MM-DD').format('LLLL')));
+    console.log(a);
+  }
 
   return (
     <>
@@ -137,18 +144,15 @@ export default function Home() {
               아띠즈 경매 캘린더
             </span>
           </div>
-          <Calendar />
+          <Calendar auctionList={auctionList} />
         </section>
         <section className="mb-12">
-          {DUMP_AUCTION_LISTS.map((auction, idx) => (
-            <div key={idx}>
-              <ScheduleItem
-                time={auction.time}
-                start={auction.start}
-                end={auction.end}
-              />
-            </div>
-          ))}
+          {!!auctionList &&
+            auctionList.map((auctionItem) => (
+              <div key={auctionItem?.id}>
+                <ScheduleItem auctionItem={auctionItem} />
+              </div>
+            ))}
         </section>
         <section>
           <div className="mb-5 flex flex-col">
