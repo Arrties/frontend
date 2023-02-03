@@ -10,6 +10,8 @@ import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
 import AskPriceModal from '@components/auction/AskPriceModal';
 import useGetBiddingHistory from '@hooks/queries/auction/useGetBiddingHistory';
+import { priceToString } from '@utils/priceToString';
+import { useCountDown } from '@hooks/useCountDown';
 
 interface inputForm {
   singlePrice: number;
@@ -28,6 +30,11 @@ export default function Bidding({ params }) {
   const router = useRouter();
   const artWorkId = params?.id;
   const { data } = useGetBiddingHistory(+artWorkId);
+  const { artWork, auction, biddingList, totalBiddingCount } = data || {};
+  const [days, hours, minutes, seconds] = useCountDown?.(
+    auction?.endDate || '',
+  );
+  const remaind = +days + +hours + +minutes + +seconds;
 
   const {
     register,
@@ -41,20 +48,13 @@ export default function Bidding({ params }) {
     console.log(form);
   };
 
-  const handleRightButton = () => {
-    router.push('/auction');
-  };
-  const handleOlderTable = () => {
-    console.log('호가표');
-  };
-
   return (
     <Layout>
       <Navigate
         isLeftButton={false}
         className="text-18 font-medium"
         message="응찰내역"
-        handleRightButton={handleRightButton}
+        handleRightButton={() => router.push('/auction')}
       />
       <div className="top-100px absolute inset-x-0 mx-auto  max-w-[420px] border-b border-brand" />
       <section>
@@ -71,22 +71,25 @@ export default function Bidding({ params }) {
             </div>
             <div className="ml-3 h-fit flex-col">
               <p className="text-15 font-semibold leading-5">
-                콰야 녹아내리는 고드름
+                {artWork?.title}
               </p>
               <p className="mt-1 text-[12.44px] text-font-500">
-                아라 <span className="ml-[6px]">회화 | Painting</span>
+                {artWork?.artistName}
+                <span className="ml-[6px]">{artWork?.genre}</span>
               </p>
               <div className="mt-3 text-[13px] font-medium text-font-500">
                 <p className="leading-5">
                   현재가
                   <span className="ml-2 text-brand">
-                    KRW 2,800,000 (응찰 4)
+                    KRW {artWork?.topPrice && priceToString(artWork?.topPrice)}{' '}
+                    (응찰 {totalBiddingCount})
                   </span>
                 </p>
                 <p className="leading-5">
                   시작가
                   <span className="ml-2 font-semibold text-[#191919]">
-                    KRW 1,000,000
+                    KRW
+                    {artWork?.beginPrice && priceToString(artWork?.beginPrice)}
                   </span>
                 </p>
               </div>
@@ -94,7 +97,7 @@ export default function Bidding({ params }) {
           </div>
         </article>
         <article className="mt-5 flex h-[70px] items-center rounded-xl border border-[#D9D9D9]">
-          <div className="flex flex-grow flex-col items-center border-r border-[#D9D9D9]">
+          <div className="flex w-2/5 flex-col items-center border-r border-[#D9D9D9]">
             <p className="flex">
               <Image
                 alt=""
@@ -104,9 +107,23 @@ export default function Bidding({ params }) {
               />
               <span className="ml-1 text-14">남은시간</span>
             </p>
-            <p className="text-16 font-semibold">1일 2:43:56</p>
+            <p className="w-full text-center text-16 font-semibold">
+              {remaind > 0 ? (
+                days ? (
+                  <p>
+                    {days}일 {hours}:{minutes}:{seconds}
+                  </p>
+                ) : (
+                  <p>
+                    {hours}:{minutes}:{seconds}
+                  </p>
+                )
+              ) : (
+                '경매종료'
+              )}
+            </p>
           </div>
-          <div className="flex flex-grow flex-col items-center">
+          <div className="flex w-3/5 flex-col items-center">
             <p className="flex">
               <Image
                 alt=""
@@ -116,7 +133,11 @@ export default function Bidding({ params }) {
               />
               <span className="ml-1 text-14">시작시간</span>
             </p>
-            <p className="text-16 font-semibold">2023-02-08 09:00</p>
+            <p className="text-16 font-semibold">
+              {auction?.startDate.split('-').slice(0, 3).join('-') +
+                ' ' +
+                auction?.startDate.split('-').slice(3, 5).join(':')}
+            </p>
           </div>
         </article>
       </section>

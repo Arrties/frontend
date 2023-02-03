@@ -7,6 +7,7 @@ import useGetDetail from '@hooks/queries/useGetDetail';
 import chatApi from '@apis/chat/chatApi';
 import usePostPrefer from '@hooks/mutations/usePostPrefer';
 import useDeletePrefer from '@hooks/mutations/useDeletePrefer';
+import { useCountDown } from '@hooks/useCountDown';
 
 export function getServerSideProps({ params }) {
   return {
@@ -23,6 +24,10 @@ export default function Detail({ params }) {
   const { artWork, artist } = detailData || {};
   const { mutate: postPrefer } = usePostPrefer(artWork?.id!);
   const { mutate: deletePrefer } = useDeletePrefer(artWork?.id!);
+  const [days, hours, minutes, seconds] = useCountDown?.(
+    detailData?.endDate || '',
+  );
+  const remaind = +days + +hours + +minutes + +seconds;
 
   const handleChat = async () => {
     const chatData = await chatApi.postChatRoom({
@@ -155,7 +160,21 @@ export default function Detail({ params }) {
                     마감까지
                   </span>
                   <span className="rounded-r-md bg-brand px-2 py-1 text-[#FFFFFF]">
-                    D-3
+                    {remaind < 0 ? (
+                      <span className="w-[66px] text-[14px] font-medium tracking-widest">
+                        00:00:00
+                      </span>
+                    ) : (
+                      <span
+                        className={`${
+                          +days >= 1 ? 'w-fit' : 'w-[66px]'
+                        } text-[14px] font-medium tracking-widest`}
+                      >
+                        {+days >= 1
+                          ? 'D-' + days
+                          : hours + ':' + minutes + ':' + seconds}
+                      </span>
+                    )}
                   </span>
                 </span>
               </div>

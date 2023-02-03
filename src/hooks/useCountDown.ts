@@ -5,10 +5,11 @@ import useInterval from './useInterval';
 
 const convertDate = (countDown): string[] => {
   const diff = moment.duration(countDown);
-  const hours = String(diff.days() * 24 + diff.hours()).padStart(2, '0');
+  const days = String(diff.days());
+  const hours = String(diff.hours()).padStart(2, '0');
   const minutes = String(diff.minutes()).padStart(2, '0');
   const seconds = String(diff.seconds()).padStart(2, '0');
-  return [hours, minutes, seconds];
+  return [days, hours, minutes, seconds];
 };
 
 export const useCountDown = (targetDate: string): string[] => {
