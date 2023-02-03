@@ -19,7 +19,7 @@ const usePostPrefer = (artWorkId: number) => {
         });
         return { previousValue };
       },
-      onError: (err, variables, context: any) => {
+      onError: (context: any) => {
         queryClient.setQueryData(['useGetDetail'], context.previousValue);
       },
       onSettled: () => {

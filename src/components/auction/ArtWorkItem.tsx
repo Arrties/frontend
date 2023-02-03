@@ -13,6 +13,7 @@ const ArtWorkItemTag = tw.div<defaultProps>`
 w-full h-[264px] bg-[#FFFFFF] rounded-xl relative shadow-lg shadow-slate-100 mb-5
 `;
 export default function ArtWorkItem({
+  id,
   mainImage,
   title,
   artWorkSize,
@@ -26,7 +27,7 @@ export default function ArtWorkItem({
     <ArtWorkItemTag
       {...rest}
       onClick={() => {
-        router.push(`/auction/${rest.id}`);
+        router.push(`/auction/${id}`);
       }}
     >
       <section className="relative h-[200px] overflow-hidden">
