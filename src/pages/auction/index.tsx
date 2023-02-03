@@ -68,14 +68,14 @@ export default function Auction() {
                 <div
                   className={`flex ${
                     +hours >= 24 ? 'w-fit' : 'w-[100px]'
-                  } items-center justify-center rounded border border-brand px-2`}
+                  } items-center justify-center rounded bg-brand px-2 text-white`}
                 >
                   <Image
                     alt="clock"
-                    src="/svg/icons/icon_clock_brand.svg"
+                    src="/svg/icons/icon_clock_white.svg"
                     width="14"
                     height="14"
-                    className="mr-1"
+                    className="mr-1.5"
                   />
                   {remaind < 0 ? (
                     <span className="w-[66px] text-[14px] font-medium tracking-widest">
