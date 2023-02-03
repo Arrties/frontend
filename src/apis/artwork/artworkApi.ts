@@ -30,7 +30,7 @@ export class ArtworkApi {
     return data;
   }
 
-  async getExhibitionItems(auctionId: number) {
+  async getExhibitionItemList(auctionId: number) {
     const { data } = await instance.get(`/exhibit/${auctionId}`);
     return data;
   }

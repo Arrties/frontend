@@ -8,10 +8,10 @@ import Image from 'next/image';
 import React from 'react';
 import styled from 'styled-components';
 import tw from 'tailwind-styled-components';
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { useRouter } from 'next/router';
-import { useGetExhibitionItems } from '@hooks/queries/useGetExhibition';
+import { useGetExhibitionItemList } from '@hooks/queries/useGetExhibition';
 
 interface DefaultProps {
   [key: string]: any;
@@ -39,7 +39,7 @@ export default function ExhibitionArts() {
   const router = useRouter();
   const id = parseInt(router.query.id as string, 10)!;
 
-  const { data: artLists } = useGetExhibitionItems(id, genre);
+  const { data: artLists } = useGetExhibitionItemList(id, genre);
 
   const handleLeftButton = () => {
     // 작품 더보기 페이지로 이동

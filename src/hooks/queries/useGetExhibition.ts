@@ -12,10 +12,13 @@ export const useGetExhibition = () => {
   );
 };
 
-export const useGetExhibitionItems = (auctionId: number, genres: string[]) => {
+export const useGetExhibitionItemList = (
+  auctionId: number,
+  genres: string[],
+) => {
   return useQuery<ExhibitArtWork[], Error>(
     'useGetExhibitionItems',
-    () => artworkApi.getExhibitionItems(auctionId),
+    () => artworkApi.getExhibitionItemList(auctionId),
     {
       enabled: !!auctionId,
       select: (arts) => {
