@@ -47,7 +47,7 @@ interface TabItemProps {
   [key: string]: any;
 }
 
-export default function Tab() {
+export default function Tab({ handler = () => {} }) {
   const router = useRouter();
   const handleTabItem = (name) => {
     router.push(`/${name}`);
@@ -59,7 +59,10 @@ export default function Tab() {
           <div
             className="m-auto cursor-pointer"
             key={tabItem.id}
-            onClick={() => handleTabItem(tabItem.name)}
+            onClick={() => {
+              handler();
+              handleTabItem(tabItem.name);
+            }}
           >
             <div className="flex-col items-center justify-center">
               <Image

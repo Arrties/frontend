@@ -57,7 +57,12 @@ export default function Chat() {
           </section>
         )}
       </Layout>
-      <Tab />
+      <Tab
+        handler={() => {
+          console.log(1);
+          client.current.forceDisconnect();
+        }}
+      />
     </>
   );
 }
