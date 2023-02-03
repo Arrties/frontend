@@ -26,11 +26,6 @@ export function getServerSideProps({ params }) {
 }
 
 export default function ChatRoom({ params }) {
-  useEffect(() => {
-    window.addEventListener('beforeunload', (event) => {
-      // 채팅방 나가기 API전송
-    });
-  }, []);
   const client = useRef({}) as React.MutableRefObject<StompJs.Client>;
   const scrollRef: any = useRef();
 
@@ -57,8 +52,6 @@ export default function ChatRoom({ params }) {
     }
   };
 
-  const image = watch('image');
-
   const sendImage = (e) => {
     const reader = new FileReader();
     reader.readAsDataURL(e.target.files[0]);
@@ -75,10 +68,10 @@ export default function ChatRoom({ params }) {
   };
 
   const onConnected = () => {
-    subscribe(client.current, id, subscribeCallback);
+    subscribe(client.current, id, subscribeCallback, true);
   };
 
-  const subscribeCallback = (response) => {
+  const subscribeCallback = () => {
     reset({ message: '' });
     refetchChatRoom();
   };
@@ -118,7 +111,10 @@ export default function ChatRoom({ params }) {
             alt="back"
             width="11"
             height="0"
-            onClick={() => router.push('/chat')}
+            onClick={() => {
+              client.current.forceDisconnect();
+              router.push('/chat');
+            }}
             className="cursor-pointer"
           />
           <div className="px-5 text-16 ">
