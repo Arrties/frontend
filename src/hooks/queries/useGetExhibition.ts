@@ -2,7 +2,7 @@ import artworkApi from '@apis/artwork/artworkApi';
 import { useQuery } from 'react-query';
 
 export const useGetExhibition = () => {
-  return useQuery<ExhibitListProps[], Error>(
+  return useQuery<ExhibitionListProps[], Error>(
     'useGetExhibition',
     () => artworkApi.getExhibitionList(),
     {
@@ -16,7 +16,7 @@ export const useGetExhibitionItemList = (
   auctionId: number,
   genres: string[],
 ) => {
-  return useQuery<ExhibitArtWork[], Error>(
+  return useQuery<ExhibitionArtWork[], Error>(
     'useGetExhibitionItems',
     () => artworkApi.getExhibitionItemList(auctionId),
     {
@@ -34,7 +34,7 @@ export const useGetExhibitionItemList = (
 };
 
 export const useGetExhibitionItem = (auctionId: number) => {
-  return useQuery<ExhibitArtWork, Error>(
+  return useQuery<ExhibitionArtWork, Error>(
     'useGetExhibitionItem',
     () => artworkApi.getExhibitionItem(auctionId),
     {
