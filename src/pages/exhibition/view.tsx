@@ -6,44 +6,28 @@ import GenreModal from '@components/exhibition/GenreModal';
 import Modal from '@components/exhibition/Modal';
 import Image from 'next/image';
 import React from 'react';
+import styled from 'styled-components';
 import tw from 'tailwind-styled-components';
 import { useRef, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { useRouter } from 'next/router';
-
-const DUMP_ART_LISTS = [
-  {
-    img: 'asdasd',
-    title: '콰야 녹아내리는 고드름',
-    major: '홍익대학교 예술학과',
-    description:
-      '대자연을 자신만의 시각적 언어로 표현한다. 작가는 언어보다 시각적 언어로 표현한다. 언어보다 시각적으로 사물을 관찰하고 이해한 바를 캔버스로 옮긴다. 먼저 속에 떠오르는 형태, 색 그리고 공간의 질서를 만들어간다.',
-  },
-  {
-    img: '111111',
-    title: 'asodnvioansodn',
-    major: '건국대학교 미술학과',
-    description:
-      '대자연을 자신만의 시각적 언어로 표현한다. 작가는 언어보다 시각적 언어로 표현한다. 언어보다 시각적으로 사물을 관찰하고 이해한 바를 캔버스로 옮긴다. 먼저 속에 떠오르는 형태, 색 그리고 공간의 질서를 만들어간다.',
-  },
-  {
-    img: '222222222',
-    title: '콰야 녹아내리는 고드름',
-    major: '단국대학교 조형과',
-    description:
-      '대자연을 자신만의 시각적 언어로 표현한다. 작가는 언어보다 시각적 언어로 표현한다. 언어보다 시각적으로 사물을 관찰하고 이해한 바를 캔버스로 옮긴다. 먼저 속에 떠오르는 형태, 색 그리고 공간의 질서를 만들어간다.',
-  },
-];
+import { useGetExhibitionItems } from '@hooks/queries/useGetExhibition';
 
 interface DefaultProps {
   [key: string]: any;
 }
 
+const LayoutBox = styled.div`
+  &::-webkit-scrollbar {
+    display: none;
+  }
+`;
+
 const SwiperButtonDiv = tw.div<DefaultProps>`
 bg-[rgba(153,153,153,0.24)] rounded-[10px] w-8 h-8 flex justify-center cursor-pointer
 `;
 
-export default function Exhibition() {
+export default function ExhibitionArts() {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [modal, setModal] = useState<boolean>(true);
   const [isGenreModal, setIsGenreModal] = useState<boolean>(false);
@@ -53,8 +37,9 @@ export default function Exhibition() {
   const swiperRef = useRef<any>(null);
 
   const router = useRouter();
-  console.log(router.query);
-  console.log(genre);
+  const id = parseInt(router.query.id as string, 10)!;
+
+  const { data: artLists } = useGetExhibitionItems(id);
 
   const handleLeftButton = () => {
     // 작품 더보기 페이지로 이동
@@ -98,7 +83,7 @@ export default function Exhibition() {
     );
 
   return (
-    <Layout>
+    <LayoutBox className="relative h-full w-full max-w-[420px] overflow-y-scroll bg-white px-[24px]">
       {isExpansion ? (
         <Image
           alt="exhibition_bg"
@@ -107,10 +92,7 @@ export default function Exhibition() {
           width={400}
           height={0}
           sizes="100vh"
-          style={{
-            objectFit: 'contain',
-          }}
-          className="absolute top-[240px] right-[-3px] scale-[2.0]"
+          className="absolute top-[240px] right-[-3px] scale-[2.0] object-contain"
         />
       ) : (
         <Image
@@ -119,9 +101,7 @@ export default function Exhibition() {
           quality={100}
           fill
           sizes="100vh"
-          style={{
-            objectFit: 'cover',
-          }}
+          className="object-cover"
         />
       )}
       <Navigate
@@ -161,7 +141,7 @@ export default function Exhibition() {
             </SwiperButtonDiv>
           </div>
         )}
-        {DUMP_ART_LISTS.map((art, idx) => (
+        {artLists?.map((art, idx) => (
           <SwiperSlide key={idx}>
             {isExpansion ? (
               <div className="flex h-full w-full justify-center">
@@ -172,29 +152,26 @@ export default function Exhibition() {
                   width={400}
                   height={0}
                   sizes="100vh"
-                  style={{
-                    objectFit: 'contain',
-                  }}
-                  className="absolute top-[240px] scale-[2.0]"
+                  className="absolute top-[240px] scale-[2.0] object-contain"
                 />
                 <div className="absolute top-[160px] mr-1 w-[95%]">
                   <Image
-                    src="/svg/example/exhibition.svg"
+                    src={art.image}
                     alt="image"
                     width={1000}
                     height={0}
                     quality={100}
                   />
-                </div>
-                <div className="absolute top-[170px] right-[20px]">
-                  <Image
-                    src="/svg/icons/icon_maximize.svg"
-                    alt="image"
-                    width={25}
-                    height={0}
-                    className="cursor-pointer"
-                    onClick={handleExpansion}
-                  />
+                  <div className="absolute top-[10px] right-[10px]">
+                    <Image
+                      src="/svg/icons/icon_maximize.svg"
+                      alt="image"
+                      width={25}
+                      height={0}
+                      className="cursor-pointer"
+                      onClick={handleExpansion}
+                    />
+                  </div>
                 </div>
               </div>
             ) : (
@@ -206,50 +183,57 @@ export default function Exhibition() {
                   width={400}
                   height={0}
                   sizes="100vh"
-                  style={{
-                    objectFit: 'contain',
-                  }}
-                  className="absolute top-[140px] scale-[1.6]"
+                  className="absolute top-[140px] scale-[1.6] object-contain"
                 />
-                <div className="absolute top-[130px] mr-1 w-[77%]">
+                <div className="absolute top-[135px] mr-1 w-[77%]">
                   <Image
-                    src="/svg/example/exhibition.svg"
+                    src={art.image}
                     alt="image"
                     width={1000}
                     height={0}
                     quality={100}
                   />
-                </div>
-                <div className="absolute top-[140px] right-[55px]">
-                  <Image
-                    src="/svg/icons/icon_maximize.svg"
-                    alt="image"
-                    width={25}
-                    height={0}
-                    className="cursor-pointer"
-                    onClick={handleExpansion}
-                  />
+                  <div className="absolute top-[10px] right-[10px]">
+                    <Image
+                      src="/svg/icons/icon_maximize.svg"
+                      alt="image"
+                      width={25}
+                      height={0}
+                      className="cursor-pointer"
+                      onClick={handleExpansion}
+                    />
+                  </div>
                 </div>
               </div>
             )}
             {modal && (
-              <div className="flex justify-center">
+              <div className="absolute bottom-[-80px] flex w-full flex-col justify-center">
+                {!isOpen && (
+                  <div className="m-auto mb-3 w-[22px]">
+                    <Image
+                      alt="swipe"
+                      src="/svg/icons/icon_swipe_arrow.svg"
+                      width={20}
+                      height={20}
+                      className="cursor-pointer"
+                      onClick={handleSwipeArrow}
+                    />
+                  </div>
+                )}
                 <Modal
-                  isOpen={isOpen}
                   $open={isOpen}
                   title={art.title}
-                  major={art.major}
+                  education={art.education}
                   description={art.description}
                   onCloseModal={onCloseModal}
                   handleLeftButton={handleLeftButton}
                   handleRighButton={handleRightButton}
-                  handleSwipeArrow={handleSwipeArrow}
                 />
               </div>
             )}
           </SwiperSlide>
         ))}
       </Swiper>
-    </Layout>
+    </LayoutBox>
   );
 }
