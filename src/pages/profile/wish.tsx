@@ -14,48 +14,7 @@ const WishContainer = tw.div<defaultProps>`
 w-full grid grid-cols-2 gap-x-[15px] gap-y-[23px]
 `;
 
-interface WishForm {
-  id: string;
-  image: string;
-  name: string;
-  description: string;
-  price: number;
-  status1: string;
-  status2: string;
-}
-
-const DUMP_WISHLIST: WishForm[] = [
-  {
-    id: '1',
-    image: '',
-    name: '퓨처리즘',
-    description: '자연과 공생하는 미래',
-    price: 250000,
-    status1: '입찰중',
-    status2: 'HOT',
-  },
-  {
-    id: '2',
-    image: '',
-    name: '퓨처리즘',
-    description: '자연과 공생하는 미래',
-    price: 250000,
-    status1: 'NEW',
-    status2: '입찰완료',
-  },
-  {
-    id: '3',
-    image: '',
-    name: '퓨처리즘',
-    description: '자연과 공생하는 미래',
-    price: 250000,
-    status1: 'HOT',
-    status2: '입찰완료',
-  },
-];
-
 export default function Wish() {
-  // const [wishList, setWishList] = useState(DUMP_WISHLIST);
   const router = useRouter();
   const handleBack = () => {
     router.push('/profile');
@@ -70,7 +29,7 @@ export default function Wish() {
         handleLeftButton={handleBack}
       />
       <WishContainer>
-        {wishList?.map((wish: WishForm) => (
+        {wishList?.map((wish: WishArtwork) => (
           <WishCard key={wish.id} wish={wish || {}} />
         ))}
       </WishContainer>

@@ -1,5 +1,6 @@
 import { priceToString } from '@utils/priceToString';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 import tw from 'tailwind-styled-components';
 
 interface ArtWorkItemProps extends NowAuctionArtwork {
@@ -9,9 +10,10 @@ interface defaultProps {
   [key: string]: any;
 }
 const ArtWorkItemTag = tw.div<defaultProps>`
-w-full h-[264px] bg-[#FFFFFF] rounded-xl relative shadow-lg shadow-slate-100 mb-5
+w-full h-[264px] bg-[#FFFFFF] rounded-xl relative shadow-lg shadow-slate-100 mb-5 cursor-pointer
 `;
 export default function ArtWorkItem({
+  id,
   mainImage,
   title,
   artWorkSize,
@@ -20,8 +22,14 @@ export default function ArtWorkItem({
   material,
   ...rest
 }: ArtWorkItemProps) {
+  const router = useRouter();
   return (
-    <ArtWorkItemTag {...rest}>
+    <ArtWorkItemTag
+      {...rest}
+      onClick={() => {
+        router.push(`/auction/${id}`);
+      }}
+    >
       <section className="relative h-[200px] overflow-hidden">
         <Image
           alt="image"

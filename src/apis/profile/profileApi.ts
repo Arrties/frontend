@@ -19,11 +19,11 @@ export class ProfileApi {
     return response;
   }
 
-  async getPick() {
+  async getPick(): Promise<pickList[]> {
     const { data } = await instance.get('/members/preferred-artists');
     return data;
   }
-  async getPickDetail(artistId: number) {
+  async getPickDetail(artistId: number): Promise<artistDetail> {
     const { data } = await instance.get(`/artists/${artistId}`);
     return data;
   }
@@ -37,19 +37,14 @@ export class ProfileApi {
     const { data } = await instance.get('/members/ask');
     return data;
   }
-  async patchRole(): Promise<Role> {
-    const { data } = await instance.patch('/members/roles');
-    return data;
-  }
   async patchInquiry(askId: number, formData: any) {
-    const response = await instance.patch(`/members/ask/${askId}`, formData);
-    return response;
+    await instance.patch(`/members/ask/${askId}`, formData);
   }
   async patchKeyword(body: any) {
     const { data } = await instance.patch('/members/keywords', body);
     return data;
   }
-  async getWish() {
+  async getWish(): Promise<WishArtwork> {
     const { data } = await instance.get('/members/preferred-artworks');
     return data;
   }
@@ -62,8 +57,7 @@ export class ProfileApi {
     return data;
   }
   async deleteNotice(id: number) {
-    const { data } = await instance.delete(`/notifications/${id}`);
-    return data;
+    await instance.delete(`/notifications/${id}`);
   }
 }
 
