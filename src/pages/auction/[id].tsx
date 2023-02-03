@@ -81,6 +81,7 @@ export default function Detail({ params }) {
                 src="/svg/icons/auction/icon_arrow_black.svg"
                 width="24"
                 height="24"
+                className="cursor-pointer"
               />
               {detailData?.preferred ? (
                 <Image
@@ -89,6 +90,7 @@ export default function Detail({ params }) {
                   src="/svg/icons/icon_heart_filled.svg"
                   width="24"
                   height="24"
+                  className="cursor-pointer"
                 />
               ) : (
                 <Image
@@ -97,6 +99,7 @@ export default function Detail({ params }) {
                   src="/svg/icons/auction/icon_heart_black.svg"
                   width="24"
                   height="24"
+                  className="cursor-pointer"
                 />
               )}
             </>
@@ -107,6 +110,7 @@ export default function Detail({ params }) {
                 src="/svg/icons/auction/icon_arrow_white.svg"
                 width="24"
                 height="24"
+                className="cursor-pointer"
               />
               {detailData?.preferred ? (
                 <Image
@@ -115,6 +119,7 @@ export default function Detail({ params }) {
                   src="/svg/icons/icon_heart_filled.svg"
                   width="24"
                   height="24"
+                  className="cursor-pointer"
                 />
               ) : (
                 <Image
@@ -123,6 +128,7 @@ export default function Detail({ params }) {
                   src="/svg/icons/auction/icon_heart_white.svg"
                   width="24"
                   height="24"
+                  className="cursor-pointer"
                 />
               )}
             </>

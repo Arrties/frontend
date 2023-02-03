@@ -10,7 +10,7 @@ interface defaultProps {
   [key: string]: any;
 }
 const ArtWorkItemTag = tw.div<defaultProps>`
-w-full h-[264px] bg-[#FFFFFF] rounded-xl relative shadow-lg shadow-slate-100 mb-5
+w-full h-[264px] bg-[#FFFFFF] rounded-xl relative shadow-lg shadow-slate-100 mb-5 cursor-pointer
 `;
 export default function ArtWorkItem({
   id,
