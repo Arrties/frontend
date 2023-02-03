@@ -26,6 +26,11 @@ export class AuctionApi {
     );
     return data;
   }
+
+  async getBiddingHistory(artWorkId: number): Promise<BiddingHistory> {
+    const { data } = await instance.get(`/art-works/${artWorkId}/binding`);
+    return data;
+  }
 }
 
 const auctionApi = new AuctionApi();
