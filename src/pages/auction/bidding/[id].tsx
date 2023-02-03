@@ -12,6 +12,7 @@ import AskPriceModal from '@components/auction/AskPriceModal';
 import useGetBiddingHistory from '@hooks/queries/auction/useGetBiddingHistory';
 import { priceToString } from '@utils/priceToString';
 import { useCountDown } from '@hooks/useCountDown';
+import Loader from '@components/common/Loader';
 
 interface inputForm {
   singlePrice: number;
@@ -29,7 +30,7 @@ export function getServerSideProps({ params }) {
 export default function Bidding({ params }) {
   const router = useRouter();
   const artWorkId = params?.id;
-  const { data } = useGetBiddingHistory(+artWorkId);
+  const { data, isLoading } = useGetBiddingHistory(+artWorkId);
   const { artWork, auction, biddingList, totalBiddingCount } = data || {};
   const [days, hours, minutes, seconds] = useCountDown?.(
     auction?.endDate || '',
@@ -47,6 +48,8 @@ export default function Bidding({ params }) {
   const onSubmit = (form: inputForm) => {
     console.log(form);
   };
+
+  if (isLoading) return <Loader />;
 
   return (
     <Layout>
@@ -81,7 +84,7 @@ export default function Bidding({ params }) {
                 <p className="leading-5">
                   현재가
                   <span className="ml-2 text-brand">
-                    KRW {artWork?.topPrice && priceToString(artWork?.topPrice)}{' '}
+                    KRW {artWork?.topPrice && priceToString(artWork?.topPrice)}
                     (응찰 {totalBiddingCount})
                   </span>
                 </p>
@@ -161,30 +164,26 @@ export default function Bidding({ params }) {
               <td>시간</td>
             </tr>
             <div className="absolute -left-6 top-10 z-10 h-10 w-[calc(100%+48px)] bg-brand opacity-25" />
-            <tr className="h-10">
-              <td className="text-left">라미</td>
-              <td className="font-bold text-brand">2,800,000</td>
-              <td>2022-12-16</td>
-              <td>11:38:02</td>
-            </tr>
-            <tr className="h-10">
-              <td className="text-left">노니</td>
-              <td className="font-bold">2,700,000</td>
-              <td>2022-12-16</td>
-              <td>11:38:02</td>
-            </tr>
-            <tr className="h-10">
-              <td className="text-left">고니</td>
-              <td className="font-bold">2,700,000</td>
-              <td>2022-12-16</td>
-              <td>11:38:02</td>
-            </tr>
-            <tr className="h-10">
-              <td className="text-left">피터</td>
-              <td className="font-bold">2,700,000</td>
-              <td>2022-12-16</td>
-              <td>11:38:02</td>
-            </tr>
+            {biddingList && biddingList.length > 0 && (
+              <tr className="h-10">
+                <td className="text-left">{biddingList[0].memberName}</td>
+                <td className="font-bold text-brand">
+                  {priceToString(biddingList[0].price)}
+                </td>
+                <td>{biddingList[0].date.split('-').slice(0, 3).join('-')}</td>
+                <td>{biddingList[0].date.split('-').slice(3, 6).join(':')}</td>
+              </tr>
+            )}
+            {biddingList &&
+              biddingList.length >= 1 &&
+              biddingList.slice(1).map((bidding) => (
+                <tr className="h-10">
+                  <td className="text-left">{bidding.memberName}</td>
+                  <td className="font-bold">{priceToString(bidding.price)}</td>
+                  <td>{bidding.date.split('-').slice(0, 3).join('-')}</td>
+                  <td>{bidding.date.split('-').slice(3, 6).join(':')}</td>
+                </tr>
+              ))}
           </tbody>
         </table>
       </section>

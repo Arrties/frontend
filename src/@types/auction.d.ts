@@ -42,7 +42,7 @@ interface LastAuctionArtworkList {
 
 interface Bidding {
   id: number;
-  MemberName: string;
+  memberName: string;
   price: number;
   date: string;
 }
