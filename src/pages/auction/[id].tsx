@@ -31,10 +31,8 @@ export default function Detail({ params }) {
     });
     await router.push(`/chat/${chatData?.chatRoomId}`);
   };
-  const handlePurchase = () => {
-    router.push(`/auction/${artWork?.id}`);
-  };
-  const handlePreferButton = async () => {
+
+  const handlePreferButton = () => {
     if (detailData?.preferred) {
       deletePrefer();
     } else {
@@ -249,7 +247,10 @@ export default function Detail({ params }) {
         <div className="h-[18px] bg-gradient-to-t from-white to-gray-100"></div>
         <div className="m-auto flex w-full  gap-5 bg-white  px-6 pb-9 shadow-lg">
           <Button text="채팅하기" kind="outlined" onClick={handleChat} />
-          <Button text="응찰하기" onClick={handlePurchase} />
+          <Button
+            text="응찰하기"
+            onClick={() => router.push(`/auction/bidding/${artWorkId}`)}
+          />
         </div>
       </article>
     </>
