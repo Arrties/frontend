@@ -56,11 +56,11 @@ interface BiddingHistory {
     beginPrice: number;
     topPrice: number;
   };
-  acution: {
+  auction: {
     id: number;
     startDate: string;
     endDate: string;
   };
-  bindingList: Bidding[];
-  totalBindingCount: number;
+  biddingList: Bidding[];
+  totalBiddingCount: number;
 }
