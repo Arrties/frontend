@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import tw from 'tailwind-styled-components';
+import { useRouter } from 'next/router';
 
 interface ModalProps {
   title: string;
@@ -7,8 +8,6 @@ interface ModalProps {
   description: string;
   $open?: boolean;
   onCloseModal: () => void;
-  handleLeftButton: () => void;
-  handleRighButton: () => void;
   [key: string]: any;
 }
 
@@ -42,10 +41,19 @@ export default function Modal({
   education,
   description,
   onCloseModal,
-  handleLeftButton,
-  handleRighButton,
   ...rest
 }: ModalProps) {
+  const router = useRouter();
+
+  const handleLeftButton = () => {
+    // 작품 더보기 페이지로 이동
+    router.push(``);
+  };
+
+  const handleRightButton = () => {
+    // 해당 작품 작가 프로필로 이동
+    router.push('/');
+  };
   return (
     <>
       <ModalInner {...rest}>
@@ -64,7 +72,7 @@ export default function Modal({
         <DescriptionDiv>{description}</DescriptionDiv>
         <div className="flex w-full justify-evenly pt-4">
           <ModalButton onClick={handleLeftButton}>작품 더보기</ModalButton>
-          <ModalButton onClick={handleRighButton}>작가 프로필</ModalButton>
+          <ModalButton onClick={handleRightButton}>작가 프로필</ModalButton>
         </div>
       </ModalInner>
     </>
