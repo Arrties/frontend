@@ -1,4 +1,4 @@
-interface ExhibitionListProps {
+interface ExhibitionList {
   id: number;
   turn: number;
   startDate: string;
