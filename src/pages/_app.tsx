@@ -32,3 +32,5 @@ export default function App({ Component, pageProps }: AppProps) {
     </div>
   );
 }
+
+export { queryClient };

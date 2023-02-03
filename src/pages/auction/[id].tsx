@@ -4,8 +4,9 @@ import React, { useEffect, useRef, useState } from 'react';
 import Button from 'stories/Button';
 import { useRouter } from 'next/router';
 import useGetDetail from '@hooks/queries/useGetDetail';
-import artworkApi from '@apis/artwork/artworkApi';
 import chatApi from '@apis/chat/chatApi';
+import usePostPrefer from '@hooks/mutations/usePostPrefer';
+import useDeletePrefer from '@hooks/mutations/useDeletePrefer';
 
 export function getServerSideProps({ params }) {
   return {
@@ -18,15 +19,15 @@ export function getServerSideProps({ params }) {
 export default function Detail({ params }) {
   const router = useRouter();
   const artWorkId = params?.id;
-  const { data: detailData, refetch: refetchDetail } = useGetDetail(
-    Number(artWorkId),
-  );
+  const { data: detailData } = useGetDetail(+artWorkId);
   const { artWork, artist } = detailData || {};
+  const { mutate: postPrefer } = usePostPrefer(artWork?.id!);
+  const { mutate: deletePrefer } = useDeletePrefer(artWork?.id!);
 
   const handleChat = async () => {
     const chatData = await chatApi.postChatRoom({
-      artistId: artist?.id,
-      artWorkId: artWork?.id,
+      artistId: artist?.id!,
+      artWorkId: artWork?.id!,
     });
     await router.push(`/chat/${chatData?.chatRoomId}`);
   };
@@ -35,11 +36,9 @@ export default function Detail({ params }) {
   };
   const handlePreferButton = async () => {
     if (detailData?.preferred) {
-      await artworkApi.postDeletePrefer(artWorkId);
-      refetchDetail();
+      deletePrefer();
     } else {
-      await artworkApi.postPrefer(artWorkId);
-      refetchDetail();
+      postPrefer();
     }
   };
 
@@ -82,6 +81,7 @@ export default function Detail({ params }) {
                 src="/svg/icons/auction/icon_arrow_black.svg"
                 width="24"
                 height="24"
+                className="cursor-pointer"
               />
               {detailData?.preferred ? (
                 <Image
@@ -90,6 +90,7 @@ export default function Detail({ params }) {
                   src="/svg/icons/icon_heart_filled.svg"
                   width="24"
                   height="24"
+                  className="cursor-pointer"
                 />
               ) : (
                 <Image
@@ -98,6 +99,7 @@ export default function Detail({ params }) {
                   src="/svg/icons/auction/icon_heart_black.svg"
                   width="24"
                   height="24"
+                  className="cursor-pointer"
                 />
               )}
             </>
@@ -108,6 +110,7 @@ export default function Detail({ params }) {
                 src="/svg/icons/auction/icon_arrow_white.svg"
                 width="24"
                 height="24"
+                className="cursor-pointer"
               />
               {detailData?.preferred ? (
                 <Image
@@ -116,6 +119,7 @@ export default function Detail({ params }) {
                   src="/svg/icons/icon_heart_filled.svg"
                   width="24"
                   height="24"
+                  className="cursor-pointer"
                 />
               ) : (
                 <Image
@@ -124,6 +128,7 @@ export default function Detail({ params }) {
                   src="/svg/icons/auction/icon_heart_white.svg"
                   width="24"
                   height="24"
+                  className="cursor-pointer"
                 />
               )}
             </>
