@@ -14,7 +14,7 @@ const DUMP_AUCTION_DATE_LISTS = [
   '20230227',
   '20230228',
 ];
-export default function Calendar() {
+export default function Calendar({ auctionList }) {
   const [date, setDate] = useState<moment.Moment>(() => moment());
   const today = date;
   const firstWeek = today.clone().startOf('month').week();
@@ -22,6 +22,8 @@ export default function Calendar() {
     today.clone().endOf('month').week() === 1
       ? 53
       : today.clone().endOf('month').week();
+
+  console.log(auctionList);
 
   const calendarArr = () => {
     const calendar: ReactElement[] = [];
@@ -43,7 +45,7 @@ export default function Calendar() {
                   </td>
                 );
               } else if (
-                moment().format('YYYYMMDD') === current.format('YYYYMMDD')
+                moment().format('YYYYMMDD') === current.format('YYYYMMDD') // 오늘 날짜
               ) {
                 return (
                   <td
@@ -55,7 +57,7 @@ export default function Calendar() {
                 );
               } else if (
                 DUMP_AUCTION_DATE_LISTS.find(
-                  (x) => x === current.format('YYYYMMDD'),
+                  (x) => x === current.format('YYYYMMDD'), // 경매 날짜
                 )
               ) {
                 return (

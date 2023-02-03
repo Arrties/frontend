@@ -10,7 +10,7 @@ export class HomeApi {
     );
     return data;
   }
-  async getAuctionList() {
+  async getAuctionList(): Promise<AuctionList[]> {
     const { data } = await instance('/auction');
     return data;
   }

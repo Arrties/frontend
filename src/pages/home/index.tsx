@@ -21,7 +21,6 @@ import KeywordBox from '@components/common/KeywordBox';
 import Navigate from '@components/common/Navigate';
 import NoticeIcon from '@components/common/NoticeIcon';
 import useGetAuction from '@hooks/queries/useGetAuction';
-import moment from 'moment';
 
 interface KeywordArtwork {
   id: string;
@@ -53,17 +52,9 @@ const makeThreeEach = (auctionList: AuctionList[]) => {
 
 export default function Home() {
   const router = useRouter();
-
   const { data: customizedArtwork } = useGetCustomizedArtWork(1, 5);
   const { data: userInfo } = useGetProfile();
-  const { data: auctionList } = useGetAuction();
-  const a = new Intl.DateTimeFormat('ko', { dateStyle: 'long' }).format(
-    new Date(moment('2019-12-10', 'YYYY-MM-DD').format('LLLL')),
-  );
-  if (!!auctionList) {
-    console.log(new Date(moment('2019-12-10', 'YYYY-MM-DD').format('LLLL')));
-    console.log(a);
-  }
+  const { auctionList } = useGetAuction();
 
   return (
     <>
@@ -148,7 +139,7 @@ export default function Home() {
         </section>
         <section className="mb-12">
           {!!auctionList &&
-            auctionList.map((auctionItem) => (
+            auctionList.map((auctionItem: AuctionList) => (
               <div key={auctionItem?.id}>
                 <ScheduleItem auctionItem={auctionItem} />
               </div>

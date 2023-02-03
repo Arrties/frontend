@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import React from 'react';
 import { useRouter } from 'next/router';
+import moment from 'moment';
 
 interface AuctionItemForm {
   auctionItem: AuctionList;
@@ -8,10 +9,9 @@ interface AuctionItemForm {
 }
 
 export default function AuctionItem({ auctionItem, ...rest }: AuctionItemForm) {
-  console.log(auctionItem);
-
   const router = useRouter();
-
+  const koDtf = new Intl.DateTimeFormat('ko', { dateStyle: 'long' });
+  const endDate = koDtf.format(auctionItem?.endDate);
   return (
     <div
       className="mb-5 flex last:mb-0"
@@ -33,7 +33,7 @@ export default function AuctionItem({ auctionItem, ...rest }: AuctionItemForm) {
         />
       </div>
       <div className="flex flex-col justify-center">
-        <span className="text-11 text-[#767676]">{auctionItem?.endDate}</span>
+        <span className="text-11 text-[#767676]">{endDate}</span>
         <span className="text-16 font-semibold text-[#191919]">
           제 {auctionItem?.turn}회 아띠즈 경매
         </span>
