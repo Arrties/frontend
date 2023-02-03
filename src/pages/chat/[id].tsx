@@ -11,6 +11,8 @@ import { createClient, publish, subscribe } from '@apis/chat/socketConnect';
 import chatApi from '@apis/chat/chatApi';
 import useGetProfile from '@hooks/queries/useGetProfile';
 import { isUser } from '@utils/isUser';
+import { makeBlob } from '@utils/makeBlob';
+import { makeBase64 } from '@utils/makeBase64';
 interface ContentForm {
   message: string;
   image: FileList;
@@ -58,12 +60,16 @@ export default function ChatRoom({ params }) {
   };
 
   const image = watch('image');
-  useEffect(() => {
-    if (image && image.length > 0) {
-      console.log(image[0]);
-      // 사진 API전송
-    }
-  }, [image]);
+
+  const sendImage = (e) => {
+    const reader = new FileReader();
+
+    reader.readAsDataURL(e.target.files[0]);
+    reader.onload = () => {
+      const base64data = reader.result;
+      publish(client.current, id, userInfo?.id, base64data);
+    };
+  };
 
   const connect = async () => {
     client.current = await createClient('/ws-connection');
@@ -84,6 +90,7 @@ export default function ChatRoom({ params }) {
   useEffect(() => {
     connect();
   }, []);
+
   const disconnect = () => {
     client.current.deactivate();
   };
@@ -103,6 +110,9 @@ export default function ChatRoom({ params }) {
 
   return (
     <Layout>
+      <button onClick={sendImage} className="fixed bottom-0 z-20">
+        dddddddddddddddddddddddddddddddddddd
+      </button>
       <Modal
         isMain
         message="채팅방을 나가면 채팅 목록 및 대화내용이 삭제 됩니다.
@@ -196,6 +206,7 @@ export default function ChatRoom({ params }) {
                 accept="image/*"
                 className="hidden"
                 {...register('image')}
+                onChange={sendImage}
               />
             </>
           )}
