@@ -25,6 +25,20 @@ export class ArtworkApi {
     );
     return response;
   }
+  async getExhibitionList() {
+    const { data } = await instance.get('/exhibit');
+    return data;
+  }
+
+  async getExhibitionItems(auctionId: number) {
+    const { data } = await instance.get(`/exhibit/${auctionId}`);
+    return data;
+  }
+
+  async getExhibitionItem(artworkId: number) {
+    const { data } = await instance.get(`/exhibit/art-works/${artworkId}`);
+    return data;
+  }
 }
 
 const artworkApi = new ArtworkApi();
