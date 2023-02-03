@@ -5,9 +5,10 @@ import Input from '@components/common/Input';
 import Layout from '@components/common/Layout';
 import Navigate from '@components/common/Navigate';
 import Image from 'next/image';
-import React from 'react';
+import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
+import AskPriceModal from '@components/auction/AskPriceModal';
 
 interface inputForm {
   singlePrice: number;
@@ -21,6 +22,8 @@ export default function Bidding() {
     handleSubmit,
     formState: { errors },
   } = useForm<inputForm>();
+
+  const [isModal, setIsModal] = useState<boolean>(false);
 
   const onSubmit = (form: inputForm) => {
     console.log(form);
@@ -105,13 +108,12 @@ export default function Bidding() {
         </article>
       </section>
       <DivisionBar className="absolute inset-x-0 mx-auto mt-6" />
-
       <section>
         <article className="mt-14 flex justify-between ">
           <span className="text-16 font-medium">경매순위</span>
           <span
             className="font-meduim cursor-pointer rounded border border-[#DBDBDB] px-1 py-0.5 text-14 text-[#767676]"
-            onClick={handleOlderTable}
+            onClick={() => setIsModal(true)}
           >
             호가표
           </span>
@@ -153,7 +155,6 @@ export default function Bidding() {
         </table>
       </section>
       <DivisionBar className="absolute inset-x-0 mx-auto mt-6" />
-
       <form className="my-[55px]" onSubmit={handleSubmit(onSubmit)}>
         <article>
           <p className="font-meduim text-16">응찰하기</p>
@@ -203,6 +204,11 @@ export default function Bidding() {
         </article>
         <Button text="확인" className="mt-7 w-full" />
       </form>
+      <AskPriceModal
+        isModal={isModal}
+        message="gg"
+        onCloseModal={() => setIsModal(false)}
+      />
     </Layout>
   );
 }
