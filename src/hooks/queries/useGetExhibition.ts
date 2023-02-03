@@ -12,14 +12,20 @@ export const useGetExhibition = () => {
   );
 };
 
-export const useGetExhibitionItems = (auctionId: number) => {
+export const useGetExhibitionItems = (auctionId: number, genres: string[]) => {
   return useQuery<ExhibitArtWork[], Error>(
     'useGetExhibitionItems',
     () => artworkApi.getExhibitionItems(auctionId),
     {
-      retry: false,
-      refetchOnWindowFocus: false,
       enabled: !!auctionId,
+      select: (arts) => {
+        if (genres?.length === 0) {
+          return arts;
+        } else {
+          const selected = arts.filter((art) => genres.includes(art.genre));
+          return selected;
+        }
+      },
     },
   );
 };
