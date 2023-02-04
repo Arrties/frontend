@@ -20,8 +20,8 @@ export default function Calendar({ auctionList }) {
       auctionList.forEach((it) => {
         let { startDate, endDate } = it;
         for (
-          let date = moment(startDate);
-          moment(endDate).diff(date, 'days') > 0;
+          let date = startDate;
+          endDate.diff(date, 'days') > 0;
           date = date.add(1, 'days')
         ) {
           auctionDateArr.push(date.format('YYYYMMDD'));

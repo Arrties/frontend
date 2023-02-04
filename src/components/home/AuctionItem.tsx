@@ -10,7 +10,7 @@ interface AuctionItemForm {
 
 export default function AuctionItem({ auctionItem, ...rest }: AuctionItemForm) {
   const router = useRouter();
-  const endDate = moment(auctionItem?.endDate).format('YYYY.MM.DD');
+  const endDate = auctionItem?.endDate.format('YYYY.MM.DD');
   return (
     <div
       className="mb-5 flex last:mb-0"

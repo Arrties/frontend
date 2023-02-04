@@ -10,8 +10,8 @@ const useGetAuction = () => {
       return data.map((it: AuctionList) => {
         return {
           ...it,
-          startDate: moment(it.startDate, 'YYYY-MM-DD-hh-mm-ss').format('LLLL'),
-          endDate: moment(it.endDate, 'YYYY-MM-DD-hh-mm-ss').format('LLLL'),
+          startDate: moment(it.startDate, 'YYYY-MM-DD-hh-mm-ss'),
+          endDate: moment(it.endDate, 'YYYY-MM-DD-hh-mm-ss'),
         };
       });
     },

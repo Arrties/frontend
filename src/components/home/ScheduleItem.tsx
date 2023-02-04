@@ -18,8 +18,8 @@ w-[26px] h-[26px] flex justify-center m-auto mx-0 rounded-full border-[1px] bord
 `;
 
 export default function ScheduleItem({ auctionItem }: ScheduleItemForm) {
-  const startDate: string = moment(auctionItem?.startDate).format('YYYY.MM.DD');
-  const endDate: string = moment(auctionItem?.endDate).format('YYYY.MM.DD');
+  const startDate: string = auctionItem?.startDate.format('YYYY.MM.DD');
+  const endDate: string = auctionItem?.endDate.format('YYYY.MM.DD');
 
   return (
     <div className="mt-5 flex justify-between ">
