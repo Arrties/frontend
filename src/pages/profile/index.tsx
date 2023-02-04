@@ -56,15 +56,15 @@ ActivityLists = isUser
       ...ActivityLists,
       {
         id: '3',
-        text: '구매작품',
-        icon: '/svg/icons/icon_bid.svg',
-        path: '/profile/bid',
+        text: '나의 경매',
+        icon: '/svg/icons/icon_selling.svg',
+        path: '/profile/selling',
       },
       {
         id: '4',
-        text: '판매활동',
-        icon: '/svg/icons/icon_selling.svg',
-        path: '/profile/selling',
+        text: '구매작품',
+        icon: '/svg/icons/icon_bid.svg',
+        path: '/profile/bid',
       },
     ];
 
