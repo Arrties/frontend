@@ -29,10 +29,11 @@ export class ArtworkApi {
     return data;
   }
 
-  async getExhibitionItem(artworkId: number) {
+  async getExhibitionItem(artworkId: number): Promise<ExhibitArtWork> {
     const { data } = await instance.get(`/exhibit/art-works/${artworkId}`);
+    return data;
   }
-  async getBid() {
+  async getBid(): Promise<BidArtwork> {
     const { data } = await instance.get('/art-works/bidding/me');
     return data;
   }
