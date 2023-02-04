@@ -10,7 +10,7 @@ interface AuctionItemForm {
 
 export default function AuctionItem({ auctionItem, ...rest }: AuctionItemForm) {
   const router = useRouter();
-  const koDtf = new Intl.DateTimeFormat('ko', { dateStyle: 'long' });
+  const koDtf = new Intl.DateTimeFormat('ko', { dateStyle: 'medium' });
   const endDate = koDtf.format(auctionItem?.endDate);
   return (
     <div
@@ -25,9 +25,6 @@ export default function AuctionItem({ auctionItem, ...rest }: AuctionItemForm) {
           src={auctionItem?.image || '/svg/icons/icon_logo_main.svg'}
           alt="notification"
           fill
-          // style={{
-          //   objectFit: 'cover',
-          // }}
           className="rounded"
           quality={100}
         />

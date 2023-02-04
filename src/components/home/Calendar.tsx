@@ -4,7 +4,7 @@ import { ReactElement, useEffect, useState } from 'react';
 
 const days = ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'];
 
-export default function Calendar({ auctionList = [] }) {
+export default function Calendar({ auctionList }) {
   const [date, setDate] = useState<moment.Moment>(() => moment());
   const [auctionDateList, setAuctionDateList] = useState<string[]>([]);
   const today = date;
