@@ -1,21 +1,12 @@
 import moment from 'moment';
 import Image from 'next/image';
-import { ReactElement, useState } from 'react';
+import { ReactElement, useEffect, useState } from 'react';
 
 const days = ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'];
-const DUMP_AUCTION_DATE_LISTS = [
-  '20230213',
-  '20230214',
-  '20230215',
-  '20230216',
-  '20230217',
-  '20230218',
-  '20230219',
-  '20230227',
-  '20230228',
-];
+
 export default function Calendar({ auctionList }) {
   const [date, setDate] = useState<moment.Moment>(() => moment());
+  const [auctionDateList, setAuctionDateList] = useState([]);
   const today = date;
   const firstWeek = today.clone().startOf('month').week();
   const lastWeek =
@@ -23,7 +14,25 @@ export default function Calendar({ auctionList }) {
       ? 53
       : today.clone().endOf('month').week();
 
-  console.log(auctionList);
+  useEffect(() => {
+    if (!!auctionList) {
+      const newArr = [];
+      auctionList.forEach((it) => {
+        // console.log(it);
+        let { startDate, endDate } = it;
+        startDate = moment(startDate);
+        endDate = moment(endDate);
+        for (
+          let date = startDate;
+          endDate.diff(date, 'days') > 0;
+          date = date.add(1, 'days')
+        ) {
+          newArr.push(date.format('YYYYMMDD'));
+        }
+      });
+      setAuctionDateList(newArr);
+    }
+  }, [auctionList]);
 
   const calendarArr = () => {
     const calendar: ReactElement[] = [];
@@ -39,45 +48,23 @@ export default function Calendar({ auctionList }) {
                 .startOf('week')
                 .add(data + index + 1, 'day');
               if (current.format('MM') !== today.format('MM')) {
-                return (
-                  <td className="" key={index}>
-                    <span></span>
-                  </td>
-                );
-              } else if (
-                moment().format('YYYYMMDD') === current.format('YYYYMMDD') // 오늘 날짜
-              ) {
-                return (
-                  <td
-                    className="p-2 text-14 font-bold text-[#FC6554]"
-                    key={index}
-                  >
-                    <span>{current.format('D')}</span>
-                  </td>
-                );
-              } else if (
-                DUMP_AUCTION_DATE_LISTS.find(
-                  (x) => x === current.format('YYYYMMDD'), // 경매 날짜
-                )
-              ) {
-                return (
-                  <td
-                    className="bg-[#FFC961] p-2 text-14 font-bold text-[#FFFFFF]"
-                    key={index}
-                  >
-                    <span>{current.format('D')}</span>
-                  </td>
-                );
-              } else {
-                return (
-                  <td
-                    className="p-2 text-14 font-bold text-[#767676]"
-                    key={index}
-                  >
-                    <span>{current.format('D')}</span>
-                  </td>
-                );
+                return <td key={index}></td>;
               }
+              const isToday = moment().isSame(current, 'days');
+              const isAuctionDay = auctionDateList.includes(
+                current.format('YYYYMMDD'),
+              );
+              return (
+                <td
+                  className={`
+              p-2 text-14 font-bold text-${
+                isToday ? '[#FC6554]' : '[#767676]'
+              } bg-${isAuctionDay && '[#FFC961]'}
+              `}
+                >
+                  {current.format('D')}
+                </td>
+              );
             })}
         </tr>,
       );

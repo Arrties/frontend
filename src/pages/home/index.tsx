@@ -29,11 +29,6 @@ interface KeywordArtwork {
   education: string;
 }
 
-const DUMP_AUCTION_LISTS = [
-  { time: 1, start: '12:00', end: '14:00' },
-  { time: 2, start: '12:00', end: '19:00' },
-];
-
 const makeThreeEach = (auctionList: AuctionList[]) => {
   const afterArr: AuctionList[][] = [];
   let arr: AuctionList[] = [];
