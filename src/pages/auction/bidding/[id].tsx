@@ -32,9 +32,9 @@ export function getServerSideProps({ params }) {
 export default function Bidding({ params }) {
   const router = useRouter();
   const artWorkId = params?.id;
-  const { data, isLoading, refetch } = useGetBiddingHistory(+artWorkId);
+  const { data, isLoading } = useGetBiddingHistory(+artWorkId);
   const { artWork, auction, biddingList, totalBiddingCount } = data || {};
-  const { mutate } = usePutBiddng(artWorkId);
+  const { mutate, isLoading: isBiddingLoading } = usePutBiddng(artWorkId);
   const [days, hours, minutes, seconds] = useCountDown?.(
     auction?.endDate || '',
   );
@@ -73,10 +73,9 @@ export default function Bidding({ params }) {
     const singlePrice = form.singlePrice.replace(/,/g, '');
     // const autoPrice = form.autoPrice.replace(/,/g, '');
     mutate({ price: +singlePrice });
-    refetch();
   };
 
-  if (isLoading) return <Loader />;
+  if (isLoading || isBiddingLoading) return <Loader />;
 
   return (
     <Layout>
