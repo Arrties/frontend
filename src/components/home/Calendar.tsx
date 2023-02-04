@@ -16,18 +16,19 @@ export default function Calendar({ auctionList }) {
 
   useEffect(() => {
     if (!!auctionList) {
-      const auctionDateArr: string[] = [];
-      auctionList.forEach((it) => {
+      const newArr: string[] = [];
+      auctionList.forEach((it: AuctionList) => {
         let { startDate, endDate } = it;
         for (
           let date = startDate;
           endDate.diff(date, 'days') > 0;
           date = date.add(1, 'days')
         ) {
-          auctionDateArr.push(date.format('YYYYMMDD'));
+          newArr.push(date.format('YYYYMMDD'));
         }
       });
-      setAuctionDateList(auctionDateArr);
+      console.log(newArr);
+      setAuctionDateList(newArr);
     }
   }, [auctionList?.length]);
 
