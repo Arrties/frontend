@@ -13,10 +13,12 @@ import useGetBiddingHistory from '@hooks/queries/auction/useGetBiddingHistory';
 import { priceToString } from '@utils/priceToString';
 import { useCountDown } from '@hooks/useCountDown';
 import Loader from '@components/common/Loader';
+import { leatAskPrice } from '@utils/leastAskPrice';
+import InputWithWon from '@components/auction/InputWithWon';
 
 interface inputForm {
-  singlePrice: number;
-  autoPrice: number;
+  singlePrice: string;
+  autoPrice: string;
 }
 
 export function getServerSideProps({ params }) {
@@ -36,14 +38,35 @@ export default function Bidding({ params }) {
     auction?.endDate || '',
   );
   const remaind = +days + +hours + +minutes + +seconds;
+  const [isBlurred, setIsBlurred] = useState(false);
 
   const {
     register,
+    setValue,
     handleSubmit,
+    trigger,
     formState: { errors },
-  } = useForm<inputForm>();
+  } = useForm<inputForm>({
+    mode: 'onChange',
+  });
 
   const [isModal, setIsModal] = useState<boolean>(false);
+
+  const handleSinglePriceChange = (
+    event: React.ChangeEvent<HTMLInputElement>,
+  ) => {
+    const value = event.target.value.replace(/,/g, '');
+    setValue('singlePrice', value.replace(/\B(?=(\d{3})+(?!\d))/g, ','));
+    if (isBlurred) trigger();
+  };
+
+  const handleAutoPriceChange = (
+    event: React.ChangeEvent<HTMLInputElement>,
+  ) => {
+    const value = event.target.value.replace(/,/g, '');
+    setValue('autoPrice', value.replace(/\B(?=(\d{3})+(?!\d))/g, ','));
+    if (isBlurred) trigger();
+  };
 
   const onSubmit = (form: inputForm) => {
     console.log(form);
@@ -196,46 +219,65 @@ export default function Bidding({ params }) {
           </p>
         </article>
         <article className="mt-6 flex items-center gap-3">
-          <div className="w-9/12  ">
-            <Input
-              type="text"
+          <div className="w-9/12">
+            <input
               placeholder="금액을 입력해주세요."
-              register={{
-                ...register('singlePrice', {
-                  required: false,
-                }),
-              }}
-              className="placeholder:text-normal h-[42px] placeholder:text-14"
+              className="placeholder:text-normal h-[42px] w-full  appearance-none rounded-[4px] border-[#D8D8D8] text-[13px] placeholder-[#999999] placeholder:text-14"
+              type="text"
+              {...register('singlePrice', {
+                required: false,
+                validate: (value) => {
+                  if (value) {
+                    if (
+                      +value.replace(/,/g, '') <
+                      leatAskPrice(artWork?.topPrice!)
+                    )
+                      return '호가 단위를 확인해주세요.';
+                  }
+                },
+              })}
+              onChange={handleSinglePriceChange}
+              onBlur={() => setIsBlurred(true)}
             />
-            {errors.singlePrice && (
-              <ErrorMessage message={errors.singlePrice.message} />
-            )}
           </div>
           <div className="box-border flex h-[42px] w-3/12 items-center justify-center rounded-[4px] border border-[#D8D8D8] text-14 font-medium ">
             1회 응찰
           </div>
         </article>
-        <article className="flex items-center gap-3">
+        {errors.singlePrice && (
+          <ErrorMessage message={errors.singlePrice.message} />
+        )}
+        <article className="mt-[14px] flex items-center gap-3">
           <div className="w-9/12  ">
-            <Input
-              type="text"
+            <input
               placeholder="금액을 입력해주세요."
-              register={{
-                ...register('autoPrice', {
-                  required: false,
-                }),
-              }}
-              className="placeholder:text-normal h-[42px] placeholder:text-14"
+              className="placeholder:text-normal h-[42px] w-full  appearance-none rounded-[4px] border-[#D8D8D8] text-[13px] placeholder-[#999999] placeholder:text-14"
+              type="text"
+              {...register('autoPrice', {
+                required: false,
+                validate: (value) => {
+                  if (value) {
+                    if (
+                      +value.replace(/,/g, '') <
+                      leatAskPrice(artWork?.topPrice!)
+                    )
+                      return '호가 단위를 확인해주세요.';
+                  }
+                },
+              })}
+              onChange={handleSinglePriceChange}
+              onBlur={() => setIsBlurred(true)}
             />
-            {errors.autoPrice && (
-              <ErrorMessage message={errors.autoPrice.message} />
-            )}
           </div>
           <div className="box-border flex h-[42px] w-3/12 items-center justify-center rounded-[4px] border border-[#D8D8D8] text-14 font-medium">
             자동 응찰
           </div>
         </article>
-        <Button text="확인" className="mt-7 w-full" />
+        {errors.autoPrice && (
+          <ErrorMessage message={errors.autoPrice.message} />
+        )}
+
+        <Button text="응찰" className="mt-8 w-full" />
       </form>
       <AskPriceModal
         isModal={isModal}
