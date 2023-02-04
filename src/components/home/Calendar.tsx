@@ -15,18 +15,20 @@ export default function Calendar({ auctionList }) {
       : today.clone().endOf('month').week();
 
   useEffect(() => {
-    const auctionDateArr: string[] = [];
-    auctionList.forEach((it) => {
-      let { startDate, endDate } = it;
-      for (
-        let date = moment(startDate);
-        moment(endDate).diff(date, 'days') > 0;
-        date = date.add(1, 'days')
-      ) {
-        auctionDateArr.push(date.format('YYYYMMDD'));
-      }
-    });
-    setAuctionDateList(auctionDateArr);
+    if (!!auctionList) {
+      const auctionDateArr: string[] = [];
+      auctionList.forEach((it) => {
+        let { startDate, endDate } = it;
+        for (
+          let date = moment(startDate);
+          moment(endDate).diff(date, 'days') > 0;
+          date = date.add(1, 'days')
+        ) {
+          auctionDateArr.push(date.format('YYYYMMDD'));
+        }
+      });
+      setAuctionDateList(auctionDateArr);
+    }
   }, [auctionList?.length]);
 
   const calendarArr = () => {

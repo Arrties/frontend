@@ -228,7 +228,10 @@ export default function Detail({ params }) {
               <p className="text-14">{artWork?.description}</p>
               <div className="mt-4">
                 {artWork?.keywords?.map((keyword: string, idx: number) => (
-                  <span className="mr-2 mt-2 rounded-[19px] border border-[#CECECE] px-3 py-1 text-[14px] text-[#767676] ">
+                  <span
+                    key={idx}
+                    className="mr-2 mt-2 rounded-[19px] border border-[#CECECE] px-3 py-1 text-[14px] text-[#767676] "
+                  >
                     {keyword}
                   </span>
                 ))}
