@@ -116,7 +116,7 @@ export default function Bidding({ params }) {
                 <p className="leading-5">
                   시작가
                   <span className="ml-2 font-semibold text-[#191919]">
-                    KRW
+                    KRW{' '}
                     {artWork?.beginPrice && priceToString(artWork?.beginPrice)}
                   </span>
                 </p>
@@ -182,22 +182,34 @@ export default function Bidding({ params }) {
         </article>
         <table className="mt-4 w-full">
           <tbody className="relative w-full text-center text-14">
-            <tr className="h-10">
-              <td className="text-left">이름</td>
-              <td>금액</td>
-              <td>날짜</td>
-              <td>시간</td>
-            </tr>
-            <div className="absolute -left-6 top-10 z-10 h-10 w-[calc(100%+48px)] bg-brand opacity-25" />
-            {biddingList && biddingList.length > 0 && (
+            {biddingList && biddingList.length > 0 ? (
               <tr className="h-10">
-                <td className="text-left">{biddingList[0].memberName}</td>
-                <td className="font-bold text-brand">
-                  {priceToString(biddingList[0].price)}
-                </td>
-                <td>{biddingList[0].date.split('-').slice(0, 3).join('-')}</td>
-                <td>{biddingList[0].date.split('-').slice(3, 6).join(':')}</td>
+                <td className="text-left">이름</td>
+                <td>금액</td>
+                <td>날짜</td>
+                <td>시간</td>
               </tr>
+            ) : (
+              <div className="my-10">
+                현재 입찰한 사람이 존재 하지 않습니다.
+              </div>
+            )}
+            {biddingList && biddingList.length > 0 && (
+              <>
+                <div className="absolute -left-6 top-10 z-10 h-10 w-[calc(100%+48px)] bg-brand opacity-25" />
+                <tr className="h-10">
+                  <td className="text-left">{biddingList[0].memberName}</td>
+                  <td className="font-bold text-brand">
+                    {priceToString(biddingList[0].price)}
+                  </td>
+                  <td>
+                    {biddingList[0].date.split('-').slice(0, 3).join('-')}
+                  </td>
+                  <td>
+                    {biddingList[0].date.split('-').slice(3, 6).join(':')}
+                  </td>
+                </tr>
+              </>
             )}
             {biddingList &&
               biddingList.length >= 1 &&
