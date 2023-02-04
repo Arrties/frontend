@@ -60,7 +60,7 @@ export default function Home() {
               alt="logo"
               src="/svg/icons/icon_logo.svg"
               width="90"
-              height="0"
+              height="90"
             />
           }
           handleLeftButton={() => {
@@ -88,7 +88,7 @@ export default function Home() {
                 src="/svg/icons/icon_arrow.svg"
                 alt="arrow"
                 width={6}
-                height={0}
+                height={6}
               />
             </div>
           </div>

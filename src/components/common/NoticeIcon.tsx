@@ -27,7 +27,7 @@ export default function NoticeIcon({
           alt="search"
           src="/svg/icons/icon_search.svg"
           width="22"
-          height="0"
+          height="22"
           onClick={() => {
             router.push('/search');
           }}
@@ -41,8 +41,8 @@ export default function NoticeIcon({
       <Image
         alt="notification"
         src="/svg/icons/icon_notification.svg"
-        width="22"
-        height="0"
+        width={22}
+        height={22}
         onClick={() => {
           router.push('/notice');
         }}

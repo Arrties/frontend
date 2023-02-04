@@ -4,9 +4,9 @@ import { ReactElement, useEffect, useState } from 'react';
 
 const days = ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'];
 
-export default function Calendar({ auctionList }) {
+export default function Calendar({ auctionList = [] }) {
   const [date, setDate] = useState<moment.Moment>(() => moment());
-  const [auctionDateList, setAuctionDateList] = useState([]);
+  const [auctionDateList, setAuctionDateList] = useState<string[]>([]);
   const today = date;
   const firstWeek = today.clone().startOf('month').week();
   const lastWeek =
@@ -15,24 +15,19 @@ export default function Calendar({ auctionList }) {
       : today.clone().endOf('month').week();
 
   useEffect(() => {
-    if (!!auctionList) {
-      const newArr = [];
-      auctionList.forEach((it) => {
-        // console.log(it);
-        let { startDate, endDate } = it;
-        startDate = moment(startDate);
-        endDate = moment(endDate);
-        for (
-          let date = startDate;
-          endDate.diff(date, 'days') > 0;
-          date = date.add(1, 'days')
-        ) {
-          newArr.push(date.format('YYYYMMDD'));
-        }
-      });
-      setAuctionDateList(newArr);
-    }
-  }, [auctionList]);
+    const auctionDateArr: string[] = [];
+    auctionList.forEach((it) => {
+      let { startDate, endDate } = it;
+      for (
+        let date = moment(startDate);
+        moment(endDate).diff(date, 'days') > 0;
+        date = date.add(1, 'days')
+      ) {
+        auctionDateArr.push(date.format('YYYYMMDD'));
+      }
+    });
+    setAuctionDateList(auctionDateArr);
+  }, [auctionList?.length]);
 
   const calendarArr = () => {
     const calendar: ReactElement[] = [];
@@ -56,6 +51,7 @@ export default function Calendar({ auctionList }) {
               );
               return (
                 <td
+                  key={index}
                   className={`
               p-2 text-14 font-bold text-${
                 isToday ? '[#FC6554]' : '[#767676]'
@@ -80,7 +76,7 @@ export default function Calendar({ auctionList }) {
             src="/svg/icons/icon_back.svg"
             alt="back"
             width={7}
-            height={0}
+            height={7}
           />
         </button>
         <span className="text-15 font-bold text-[#333333]">
@@ -91,7 +87,7 @@ export default function Calendar({ auctionList }) {
             src="/svg/icons/icon_next.svg"
             alt="arrow"
             width={8}
-            height={0}
+            height={8}
           />
         </button>
       </div>

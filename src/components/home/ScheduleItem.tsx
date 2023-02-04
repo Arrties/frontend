@@ -30,6 +30,8 @@ export default function ScheduleItem({ auctionItem }: ScheduleItemForm) {
             alt="calendar"
             width={20}
             height={20}
+            // fill
+            // className="w-auto"
           />
         </ScheduleIconBox>
         <div className="flex flex-col justify-center">
@@ -46,7 +48,7 @@ export default function ScheduleItem({ auctionItem }: ScheduleItemForm) {
           src="/svg/icons/icon_notification_white.svg"
           alt="notification"
           width={18}
-          height={0}
+          height={18}
         />
       </NotificationBox>
     </div>

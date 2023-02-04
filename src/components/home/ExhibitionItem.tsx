@@ -26,9 +26,11 @@ export default function ExhibitionItem({
         src={src}
         alt="notification"
         fill
+        sizes="1000"
         style={{
           objectFit: 'cover',
         }}
+        priority
         className="rounded"
         quality={100}
       />
@@ -43,7 +45,7 @@ export default function ExhibitionItem({
         src="/svg/icons/icon_heart_filled.svg"
         alt="heart"
         width={30}
-        height={0}
+        height={30}
         className="absolute right-3 top-3"
       />
     </div>

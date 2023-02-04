@@ -87,7 +87,7 @@ export default function Detail({ params }) {
                 <Image
                   onClick={handlePreferButton}
                   alt="clock"
-                  src="/svg/icons/icon_heart_filled.svg"
+                  src="/svg/icons/_filled.svg"
                   width="24"
                   height="24"
                   className="cursor-pointer"

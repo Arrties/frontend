@@ -22,12 +22,12 @@ export default function AuctionItem({ auctionItem, ...rest }: AuctionItemForm) {
     >
       <div className="relative mr-2 h-[90px] w-[82px] rounded">
         <Image
-          src={auctionItem?.image || ''}
+          src={auctionItem?.image || '/svg/icons/icon_logo_main.svg'}
           alt="notification"
           fill
-          style={{
-            objectFit: 'cover',
-          }}
+          // style={{
+          //   objectFit: 'cover',
+          // }}
           className="rounded"
           quality={100}
         />

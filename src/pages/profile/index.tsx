@@ -17,7 +17,7 @@ interface defaultProps {
 }
 
 const WelcomeBox = tw.div<defaultProps>`
-bg-brand rounded-lg h-[90px] flex justify-between items-center px-4
+bg-brand rounded-lg h-[90px] flex  items-center px-4
 `;
 
 interface ActivityList {
@@ -94,18 +94,6 @@ const SettingLists: SettingList[] = [
 
 export default function Profile() {
   const router = useRouter();
-  const handleRightButton = () => {
-    router.push('/notice');
-  };
-  const handleKeywords = () => {
-    router.push('/profile/keyword');
-  };
-  const handleEdit = () => {
-    router.push('/profile/edit');
-  };
-  const handleRegister = () => {
-    router.push('/profile/register');
-  };
   const { isLoading, data } = useGetProfile();
 
   if (isLoading) return <Loader />;
@@ -118,56 +106,64 @@ export default function Profile() {
           handleLeftButton={() => {
             router.push('/home');
           }}
-          right_message={
-            <NoticeIcon
-              isSearch={false}
-              handleRightButton={handleRightButton}
-            />
-          }
+          right_message={<NoticeIcon isSearch={false} />}
+          handleRightButton={() => {
+            router.push('/notice');
+          }}
         />
         <section>
           <WelcomeBox>
             <div className="flex h-[54px] w-[54px] items-center overflow-hidden rounded-full bg-[#EDEDED]">
               {data?.image ? (
-                <Image src={data?.image} width="54" height="54" alt="profile" />
+                <Image
+                  src={data?.image}
+                  width="54"
+                  height="54"
+                  alt="profile"
+                  priority
+                />
               ) : (
                 <Image
                   src="/svg/icons/icon_user_gray.svg"
                   alt="user"
-                  width="12"
-                  height="0"
-                  className="m-auto h-[27px] w-[27px] rounded-full bg-[#EDEDED]"
+                  width={12}
+                  height={12}
+                  className="m-auto h-[27px] rounded-full bg-[#EDEDED]"
                 />
               )}
             </div>
-            <div className="mr-3 flex flex-col text-[#FFFFFF]">
+            <div className="ml-3 flex flex-col  text-[#FFFFFF]">
               <span className="font-medium">
                 {data?.nickname ? data?.nickname : '회원'}님,
               </span>
               <span className="text-xs">아띠즈에 오신 걸 환영합니다.</span>
             </div>
-            <div className="mr-3">
+            <div className="absolute right-10">
               <Image
                 src="/svg/icons/icon_pencil.svg"
                 alt="setting"
-                className="cursor-pointer"
-                onClick={handleEdit}
-                width="23"
-                height="0"
+                className=" cursor-pointer"
+                onClick={() => {
+                  router.push('/profile/edit');
+                }}
+                width={23}
+                height={23}
               />
             </div>
           </WelcomeBox>
           {isUser && (
             <div
-              onClick={handleRegister}
+              onClick={() => {
+                router.push('/profile/register');
+              }}
               className="mt-4 flex cursor-pointer justify-between rounded border-[1px] border-brand p-4"
             >
               <div className="flex">
                 <Image
                   src="/svg/icons/icon_user.svg"
                   alt="avatar"
-                  width="23"
-                  height="0"
+                  width={23}
+                  height={23}
                 />
                 <span className="ml-3 text-14 leading-6">
                   작가 프로필 전환하기
@@ -176,8 +172,8 @@ export default function Profile() {
               <Image
                 src="/svg/icons/icon_arrow_black.svg"
                 alt="arrow"
-                width="25"
-                height="0"
+                width={25}
+                height={25}
               />
             </div>
           )}
@@ -201,8 +197,8 @@ export default function Profile() {
                 <Image
                   src="/svg/icons/icon_pencil_black.svg"
                   alt="edit_keywords"
-                  width="18"
-                  height="0"
+                  width={18}
+                  height={18}
                   className="absolute left-[4rem] top-1 cursor-pointer"
                   onClick={() => {
                     router.push('/profile/keyword');
@@ -225,15 +221,17 @@ export default function Profile() {
           ) : (
             <div className="mt-6 mb-12 flex justify-center text-center">
               <button
-                onClick={handleKeywords}
+                onClick={() => {
+                  router.push('/profile/keyword');
+                }}
                 className="flex h-[36px] w-[100px] items-center justify-center rounded-[19px] border-[1px] border-brand text-xs text-brand"
               >
                 <div>
                   <Image
                     src="/svg/icons/icon_plus_pink.svg"
                     alt="plus"
-                    width="10"
-                    height="0"
+                    width={10}
+                    height={10}
                   />
                 </div>
                 <div>취향분석</div>
