@@ -14,7 +14,6 @@ import { priceToString } from '@utils/priceToString';
 import { useCountDown } from '@hooks/useCountDown';
 import Loader from '@components/common/Loader';
 import { leatAskPrice } from '@utils/leastAskPrice';
-import InputWithWon from '@components/auction/InputWithWon';
 
 interface inputForm {
   singlePrice: string;
@@ -247,7 +246,11 @@ export default function Bidding({ params }) {
         {errors.singlePrice && (
           <ErrorMessage message={errors.singlePrice.message} />
         )}
-        <article className="mt-[14px] flex items-center gap-3">
+        <article
+          className={`${
+            errors.singlePrice ? 'mt-1' : 'mt-3'
+          } flex items-center gap-3`}
+        >
           <div className="w-9/12  ">
             <input
               placeholder="금액을 입력해주세요."
