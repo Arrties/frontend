@@ -1,6 +1,6 @@
-import moment from 'moment';
 import Image from 'next/image';
 import tw from 'tailwind-styled-components';
+import { useRouter } from 'next/router';
 
 interface ScheduleItemForm {
   auctionItem: AuctionList;
@@ -21,6 +21,8 @@ export default function ScheduleItem({ auctionItem }: ScheduleItemForm) {
   const startDate: string = auctionItem?.startDate.format('YYYY.MM.DD');
   const endDate: string = auctionItem?.endDate.format('YYYY.MM.DD');
 
+  const router = useRouter();
+
   return (
     <div className="mt-5 flex justify-between ">
       <div className="flex">
@@ -30,11 +32,14 @@ export default function ScheduleItem({ auctionItem }: ScheduleItemForm) {
             alt="calendar"
             width={20}
             height={20}
-            // fill
-            // className="w-auto"
           />
         </ScheduleIconBox>
-        <div className="flex flex-col justify-center">
+        <div
+          className="flex flex-col justify-center"
+          onClick={() => {
+            router.push(`/exhibition/view?id=${auctionItem?.turn}`);
+          }}
+        >
           <span className="text-14 font-bold">
             제 {auctionItem?.turn}회 아띠즈 경매
           </span>

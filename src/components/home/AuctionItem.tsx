@@ -12,13 +12,7 @@ export default function AuctionItem({ auctionItem, ...rest }: AuctionItemForm) {
   const router = useRouter();
   const endDate = auctionItem?.endDate.format('YYYY.MM.DD');
   return (
-    <div
-      className="mb-5 flex last:mb-0"
-      {...rest}
-      onClick={() => {
-        router.push(`/auction/${auctionItem?.id}`);
-      }}
-    >
+    <div className="mb-5 flex last:mb-0" {...rest}>
       <div className="relative mr-2 h-[90px] w-[82px] rounded">
         <Image
           src={auctionItem?.image || '/svg/icons/icon_logo_main.svg'}
@@ -28,7 +22,12 @@ export default function AuctionItem({ auctionItem, ...rest }: AuctionItemForm) {
           quality={100}
         />
       </div>
-      <div className="flex flex-col justify-center">
+      <div
+        className="flex flex-col justify-center"
+        onClick={() => {
+          router.push(`/exhibition/view?id=${auctionItem?.turn}`);
+        }}
+      >
         <span className="text-11 text-[#767676]">{endDate}</span>
         <span className="text-16 font-semibold text-[#191919]">
           제 {auctionItem?.turn}회 아띠즈 경매
