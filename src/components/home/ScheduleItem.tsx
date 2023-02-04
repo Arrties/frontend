@@ -18,9 +18,9 @@ w-[26px] h-[26px] flex justify-center m-auto mx-0 rounded-full border-[1px] bord
 `;
 
 export default function ScheduleItem({ auctionItem }: ScheduleItemForm) {
-  const koDtf = new Intl.DateTimeFormat('ko', { dateStyle: 'short' });
-  const startDate: string = koDtf.format(auctionItem?.startDate);
-  const endDate: string = koDtf.format(auctionItem?.endDate);
+  const startDate: string = moment(auctionItem?.startDate).format('YYYY.MM.DD');
+  const endDate: string = moment(auctionItem?.endDate).format('YYYY.MM.DD');
+
   return (
     <div className="mt-5 flex justify-between ">
       <div className="flex">

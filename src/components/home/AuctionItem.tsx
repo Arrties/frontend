@@ -10,8 +10,7 @@ interface AuctionItemForm {
 
 export default function AuctionItem({ auctionItem, ...rest }: AuctionItemForm) {
   const router = useRouter();
-  const koDtf = new Intl.DateTimeFormat('ko', { dateStyle: 'medium' });
-  const endDate = koDtf.format(auctionItem?.endDate);
+  const endDate = moment(auctionItem?.endDate).format('YYYY.MM.DD');
   return (
     <div
       className="mb-5 flex last:mb-0"

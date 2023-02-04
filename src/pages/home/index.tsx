@@ -30,26 +30,26 @@ interface KeywordArtwork {
 }
 
 const makeThreeEach = (auctionList: AuctionList[]) => {
-  const afterArr: AuctionList[][] = [];
+  const newArr: AuctionList[][] = [];
   let arr: AuctionList[] = [];
   auctionList.forEach((it: any, idx: number) => {
     arr.push(it);
     if (arr.length === 3) {
-      afterArr.push(arr);
+      newArr.push(arr);
       arr = [];
     }
     if (idx === auctionList.length - 1) {
-      afterArr.push(arr);
+      newArr.push(arr);
     }
   });
-  return afterArr;
+  return newArr;
 };
 
 export default function Home() {
   const router = useRouter();
   const { data: customizedArtwork } = useGetCustomizedArtWork(1, 5);
   const { data: userInfo } = useGetProfile();
-  const { auctionList } = useGetAuction();
+  const { data: auctionList } = useGetAuction();
 
   return (
     <>

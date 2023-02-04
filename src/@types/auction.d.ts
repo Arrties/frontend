@@ -42,10 +42,10 @@ interface LastAuctionArtworkList {
 
 interface AuctionList {
   artWorkCount: number;
-  endDate: Date;
+  endDate: moment.Moment;
   id: number;
   image: string;
-  startDate: Date;
+  startDate: moment.Moment;
   status: string;
   turn: number;
 }

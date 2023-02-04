@@ -70,7 +70,7 @@ interface BidArtworkForm {
 
 interface SuccessfulBidArtworkForm {
   id: number;
-  minaImage: string;
+  mainImage: string;
   turn: number;
   title: string;
   artistName: string;

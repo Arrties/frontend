@@ -55,9 +55,9 @@ export default function Calendar({ auctionList }) {
                 <td
                   key={index}
                   className={`
-              p-2 text-14 font-bold text-${
-                isToday ? '[#FC6554]' : '[#767676]'
-              } bg-${isAuctionDay && '[#FFC961]'}
+              p-2 text-14 font-bold text-${isToday && '[#FC6554]'} text-${
+                    isAuctionDay ? '[#FFFFFF]' : '[#767676]'
+                  }  bg-${isAuctionDay && '[#FFC961]'}
               `}
                 >
                   {current.format('D')}

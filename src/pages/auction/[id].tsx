@@ -18,7 +18,9 @@ export function getServerSideProps({ params }) {
 
 export default function Detail({ params }) {
   const router = useRouter();
-  const artWorkId = params?.id;
+
+  const artWorkId = parseInt(router.query.id as string, 10)!;
+
   const { data: detailData } = useGetDetail(+artWorkId);
   const { artWork, artist } = detailData || {};
   const { mutate: postPrefer } = usePostPrefer(artWork?.id!);

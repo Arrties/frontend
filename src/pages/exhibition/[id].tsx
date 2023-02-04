@@ -19,17 +19,6 @@ export default function ExhibitionArt() {
   const id = parseInt(router.query.id as string, 10)!;
 
   const { data: art } = useGetExhibitionItem(id);
-  console.log(art);
-
-  const handleLeftButton = () => {
-    // 작품 더보기 페이지로 이동
-    router.push('/');
-  };
-
-  const handleRightButton = () => {
-    // 해당 작품 작가 프로필로 이동
-    router.push('/');
-  };
 
   const onCloseModal = () => {
     setIsOpen(false);
@@ -148,7 +137,7 @@ export default function ExhibitionArt() {
         ) : (
           ''
         )}
-        {art && modal && (
+        {!!art && modal && (
           <div className="absolute bottom-[-80px] z-50 flex w-full flex-col justify-center">
             {!isOpen && (
               <div className="m-auto mb-3 w-[22px]">
@@ -168,8 +157,7 @@ export default function ExhibitionArt() {
               education={art.education}
               description={art.description}
               onCloseModal={onCloseModal}
-              handleLeftButton={handleLeftButton}
-              handleRighButton={handleRightButton}
+              id={id}
             />
           </div>
         )}
