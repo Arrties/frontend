@@ -31,6 +31,10 @@ export class AuctionApi {
     const { data } = await instance.get(`/art-works/${artWorkId}/bidding`);
     return data;
   }
+
+  async putBidding(artWorkId: number, price: number): Promise<any> {
+    await instance.put(`/art-works/${artWorkId}/bidding`, { price });
+  }
 }
 
 const auctionApi = new AuctionApi();

@@ -14,6 +14,7 @@ import { priceToString } from '@utils/priceToString';
 import { useCountDown } from '@hooks/useCountDown';
 import Loader from '@components/common/Loader';
 import { leatAskPrice } from '@utils/leastAskPrice';
+import usePutBiddng from '@hooks/mutations/usePutBidding';
 
 interface inputForm {
   singlePrice: string;
@@ -31,8 +32,9 @@ export function getServerSideProps({ params }) {
 export default function Bidding({ params }) {
   const router = useRouter();
   const artWorkId = params?.id;
-  const { data, isLoading } = useGetBiddingHistory(+artWorkId);
+  const { data, isLoading, refetch } = useGetBiddingHistory(+artWorkId);
   const { artWork, auction, biddingList, totalBiddingCount } = data || {};
+  const { mutate } = usePutBiddng(artWorkId);
   const [days, hours, minutes, seconds] = useCountDown?.(
     auction?.endDate || '',
   );
@@ -68,7 +70,10 @@ export default function Bidding({ params }) {
   };
 
   const onSubmit = (form: inputForm) => {
-    console.log(form);
+    const singlePrice = form.singlePrice.replace(/,/g, '');
+    // const autoPrice = form.autoPrice.replace(/,/g, '');
+    mutate({ price: +singlePrice });
+    refetch();
   };
 
   if (isLoading) return <Loader />;
@@ -268,7 +273,7 @@ export default function Bidding({ params }) {
                   }
                 },
               })}
-              onChange={handleSinglePriceChange}
+              onChange={handleAutoPriceChange}
               onBlur={() => setIsBlurred(true)}
             />
           </div>

@@ -47,6 +47,10 @@ interface Bidding {
   date: string;
 }
 
+interface BiddingRequest {
+  price: number;
+}
+
 interface BiddingHistory {
   artWork: {
     id: number;
