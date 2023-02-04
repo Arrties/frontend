@@ -21,20 +21,9 @@ const PickDetailProfile = tw.div<defaultProps>`
 w-[60px] mr-[10px] aspect-square flex  justify-center items-center rounded-full border-[1px] border-[#999999]
 `;
 
-export function getServerSideProps({ params }) {
-  return {
-    props: {
-      params,
-    },
-  };
-}
-
-export default function PickDetail({ params }) {
-  const artistId = +params?.id;
+export default function PickDetail() {
   const router = useRouter();
-  const handleArtistWork = () => {
-    router.push('/detail'); // 추후에 수정 필요
-  };
+  const artistId = parseInt(router.query.id as string, 10)!;
 
   const { data: pickDetail, refetch: refetchPickDetail } =
     useGetPickDetail(artistId);

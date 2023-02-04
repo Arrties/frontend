@@ -21,6 +21,7 @@ import KeywordBox from '@components/common/KeywordBox';
 import Navigate from '@components/common/Navigate';
 import NoticeIcon from '@components/common/NoticeIcon';
 import useGetAuction from '@hooks/queries/useGetAuction';
+import Loader from '@components/common/Loader';
 
 interface KeywordArtwork {
   id: string;
@@ -47,10 +48,11 @@ const makeThreeEach = (auctionList: AuctionList[]) => {
 
 export default function Home() {
   const router = useRouter();
-  const { data: customizedArtwork } = useGetCustomizedArtWork(1, 5);
-  const { data: userInfo } = useGetProfile();
-  const { data: auctionList } = useGetAuction();
-
+  const { isLoading: loading1, data: customizedArtwork } =
+    useGetCustomizedArtWork(1, 5);
+  const { isLoading: loading2, data: userInfo } = useGetProfile();
+  const { isLoading: loading3, data: auctionList } = useGetAuction();
+  if (loading1 || loading2 || loading3) return <Loader />;
   return (
     <>
       <Layout>

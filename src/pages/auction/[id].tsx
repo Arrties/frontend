@@ -8,18 +8,11 @@ import chatApi from '@apis/chat/chatApi';
 import usePostPrefer from '@hooks/mutations/usePostPrefer';
 import useDeletePrefer from '@hooks/mutations/useDeletePrefer';
 
-export function getServerSideProps({ params }) {
-  return {
-    props: {
-      params,
-    },
-  };
-}
-
-export default function Detail({ params }) {
+export default function Detail() {
   const router = useRouter();
 
   const artWorkId = parseInt(router.query.id as string, 10)!;
+  console.log(artWorkId);
 
   const { data: detailData } = useGetDetail(+artWorkId);
   const { artWork, artist } = detailData || {};
