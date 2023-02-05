@@ -25,7 +25,10 @@ export default function AuctionItem({ auctionItem, ...rest }: AuctionItemForm) {
       <div
         className="flex flex-col justify-center"
         onClick={() => {
-          router.push(`/exhibition/view?id=${auctionItem?.turn}`);
+          router.push({
+            pathname: '/exhibition/view',
+            query: { id: auctionItem?.turn },
+          });
         }}
       >
         <span className="text-11 text-[#767676]">{endDate}</span>

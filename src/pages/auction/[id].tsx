@@ -12,7 +12,6 @@ export default function Detail() {
   const router = useRouter();
 
   const artWorkId = parseInt(router.query.id as string, 10)!;
-  console.log(artWorkId);
 
   const { data: detailData } = useGetDetail(+artWorkId);
   const { artWork, artist } = detailData || {};
@@ -72,7 +71,7 @@ export default function Detail() {
             <>
               <Image
                 onClick={() => router.back()}
-                alt="clock"
+                alt="back"
                 src="/svg/icons/auction/icon_arrow_black.svg"
                 width="24"
                 height="24"
@@ -81,8 +80,8 @@ export default function Detail() {
               {detailData?.preferred ? (
                 <Image
                   onClick={handlePreferButton}
-                  alt="clock"
-                  src="/svg/icons/_filled.svg"
+                  alt="prefer"
+                  src="/svg/icons/icon_heart_filled.svg"
                   width="24"
                   height="24"
                   className="cursor-pointer"
@@ -90,7 +89,7 @@ export default function Detail() {
               ) : (
                 <Image
                   onClick={handlePreferButton}
-                  alt="clock"
+                  alt="prefer"
                   src="/svg/icons/auction/icon_heart_black.svg"
                   width="24"
                   height="24"
@@ -101,16 +100,17 @@ export default function Detail() {
           ) : (
             <>
               <Image
-                alt="clock"
+                alt="back"
                 src="/svg/icons/auction/icon_arrow_white.svg"
                 width="24"
                 height="24"
                 className="cursor-pointer"
+                onClick={() => router.back()}
               />
               {detailData?.preferred ? (
                 <Image
                   onClick={handlePreferButton}
-                  alt="clock"
+                  alt="prefer"
                   src="/svg/icons/icon_heart_filled.svg"
                   width="24"
                   height="24"
@@ -119,7 +119,7 @@ export default function Detail() {
               ) : (
                 <Image
                   onClick={handlePreferButton}
-                  alt="clock"
+                  alt="prefer"
                   src="/svg/icons/auction/icon_heart_white.svg"
                   width="24"
                   height="24"

@@ -27,7 +27,6 @@ export default function Calendar({ auctionList }) {
           newArr.push(date.format('YYYYMMDD'));
         }
       });
-      console.log(newArr);
       setAuctionDateList(newArr);
     }
   }, [auctionList?.length]);

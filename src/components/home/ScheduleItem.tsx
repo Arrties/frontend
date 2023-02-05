@@ -37,7 +37,10 @@ export default function ScheduleItem({ auctionItem }: ScheduleItemForm) {
         <div
           className="flex flex-col justify-center"
           onClick={() => {
-            router.push(`/exhibition/view?id=${auctionItem?.turn}`);
+            router.push({
+              pathname: '/exhibition/view',
+              query: { id: auctionItem?.turn },
+            });
           }}
         >
           <span className="text-14 font-bold">
