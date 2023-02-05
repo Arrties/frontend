@@ -25,6 +25,10 @@ export default function AuctionItem({ auctionItem, ...rest }: AuctionItemForm) {
       <div
         className="flex flex-col justify-center"
         onClick={() => {
+          if (auctionItem?.artWorkCount === 0) {
+            alert('등록된 작품이 없습니다.');
+            return;
+          }
           router.push({
             pathname: '/exhibition/view',
             query: { id: auctionItem?.turn },
