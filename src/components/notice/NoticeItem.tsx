@@ -30,7 +30,8 @@ const icon = {
 
 export default function NoticeItem({ notice, refetchNotice }: NoticeItemProps) {
   const router = useRouter();
-  const handleRemove = async () => {
+  const handleRemove = async (e) => {
+    e.stopPropagation();
     await profileApi.deleteNotice(notice?.id);
     refetchNotice();
   };

@@ -14,6 +14,10 @@ export class HomeApi {
     const { data } = await instance('/auction');
     return data;
   }
+  async getPastAuctionList(): Promise<AuctionList[]> {
+    const { data } = await instance('/auction/period-over');
+    return data;
+  }
 }
 
 const homeApi = new HomeApi();

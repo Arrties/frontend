@@ -20,8 +20,9 @@ import { Pagination } from 'swiper';
 import KeywordBox from '@components/common/KeywordBox';
 import Navigate from '@components/common/Navigate';
 import NoticeIcon from '@components/common/NoticeIcon';
-import useGetAuction from '@hooks/queries/useGetAuction';
+import useGetAuction from '@hooks/queries/auction/useGetAuction';
 import Loader from '@components/common/Loader';
+import useGetPastAuction from '@hooks/queries/auction/useGetPastAuction';
 
 interface KeywordArtwork {
   id: string;
@@ -52,7 +53,8 @@ export default function Home() {
     useGetCustomizedArtWork(1, 5);
   const { isLoading: loading2, data: userInfo } = useGetProfile();
   const { isLoading: loading3, data: auctionList } = useGetAuction();
-  if (loading1 || loading2 || loading3) return <Loader />;
+  const { isLoading: loading4, data: pastAuctionList } = useGetPastAuction();
+  if (loading1 || loading2 || loading3 || loading4) return <Loader />;
   return (
     <>
       <Layout>
@@ -157,8 +159,8 @@ export default function Home() {
             pagination={true}
             className="h-[360px]"
           >
-            {!!auctionList &&
-              makeThreeEach(auctionList)?.map(
+            {!!pastAuctionList &&
+              makeThreeEach(pastAuctionList)?.map(
                 (auctionItem: AuctionList[], index: number) => (
                   <SwiperSlide key={'' + index}>
                     {auctionItem.map((auctionItem: AuctionList) => (
