@@ -39,7 +39,6 @@ export default function PickDetail() {
       postPrefer();
     }
   };
-  console.log(pick);
 
   return (
     <Layout>
