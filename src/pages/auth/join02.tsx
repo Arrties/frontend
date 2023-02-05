@@ -1,4 +1,3 @@
-import authApi from '@apis/auth/authApi';
 import Button from '@components/common/Button';
 import DoubleCheckButton from '@components/common/DoubleCheckButton';
 import ErrorMessage from '@components/common/ErrorMessage';
