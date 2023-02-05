@@ -8,19 +8,12 @@ import chatApi from '@apis/chat/chatApi';
 import usePostPrefer from '@hooks/mutations/usePostPrefer';
 import useDeletePrefer from '@hooks/mutations/useDeletePrefer';
 import { useCountDown } from '@hooks/useCountDown';
+import Loader from '@components/common/Loader';
 
-export function getServerSideProps({ params }) {
-  return {
-    props: {
-      params,
-    },
-  };
-}
-
-export default function Detail({ params }) {
+export default function Detail() {
   const router = useRouter();
-  const artWorkId = params?.id;
-  const { data: detailData } = useGetDetail(+artWorkId);
+  const artWorkId = router.query.id;
+  const { data: detailData, isLoading } = useGetDetail(+artWorkId!);
   const { artWork, artist } = detailData || {};
   const { mutate: postPrefer } = usePostPrefer(artWork?.id!);
   const { mutate: deletePrefer } = useDeletePrefer(artWork?.id!);
@@ -67,6 +60,8 @@ export default function Detail({ params }) {
     }
     return () => observer && observer.disconnect();
   }, [target]);
+
+  if (isLoading) return <Loader />;
 
   return (
     <>

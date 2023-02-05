@@ -14,26 +14,17 @@ import { useCountDown } from '@hooks/useCountDown';
 import Loader from '@components/common/Loader';
 import { leatAskPrice } from '@utils/leastAskPrice';
 import usePutBiddng from '@hooks/mutations/usePutBidding';
-
 interface inputForm {
   singlePrice: string;
   autoPrice: string;
 }
 
-export function getServerSideProps({ params }) {
-  return {
-    props: {
-      params,
-    },
-  };
-}
-
-export default function Bidding({ params }) {
+export default function Bidding() {
   const router = useRouter();
-  const artWorkId = params?.id;
-  const { data, isLoading } = useGetBiddingHistory(+artWorkId);
+  const artWorkId = router.query.id;
+  const { data, isLoading } = useGetBiddingHistory(+artWorkId!);
   const { artWork, auction, biddingList, totalBiddingCount } = data || {};
-  const { mutate, isLoading: isBiddingLoading } = usePutBiddng(artWorkId);
+  const { mutate, isLoading: isBiddingLoading } = usePutBiddng(+artWorkId!);
   const [days, hours, minutes, seconds] = useCountDown?.(
     auction?.endDate || '',
   );
