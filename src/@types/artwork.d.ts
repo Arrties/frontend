@@ -49,15 +49,6 @@ interface ArtworkDetail {
   turn: number;
 }
 
-interface WishArtwork {
-  hot: boolean;
-  id: number;
-  image: string;
-  price: number;
-  status: string;
-  title: string;
-}
-
 interface BidArtworkForm {
   artistName: string;
   finalBiddingPrice: number;
@@ -80,4 +71,15 @@ interface SuccessfulBidArtworkForm {
 interface BidArtwork {
   biddingList: BidArtworkForm[];
   successfulBiddingList: SuccessfulBidArtworkForm[];
+}
+
+interface WishArtwork {
+  artist: string;
+  hot: boolean;
+  id: number;
+  image: string;
+  pick: boolean;
+  price: number;
+  saleStatus: string;
+  title: string;
 }
