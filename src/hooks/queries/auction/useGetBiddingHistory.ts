@@ -5,7 +5,7 @@ const useGetBiddingHistory = (artworkId: number) => {
   return useQuery<BiddingHistory, Error>(
     'useGetBiddingHistory',
     () => auctionApi.getBiddingHistory(artworkId),
-    { retry: false, refetchOnWindowFocus: false },
+    { retry: false, refetchOnWindowFocus: false, enabled: !!artworkId },
   );
 };
 
