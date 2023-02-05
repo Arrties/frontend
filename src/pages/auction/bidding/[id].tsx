@@ -47,7 +47,7 @@ export default function Bidding() {
     event: React.ChangeEvent<HTMLInputElement>,
   ) => {
     const value = event.target.value.replace(/,/g, '');
-    setValue('singlePrice', value.replace(/\B(?=(\d{3})+(?!\d))/g, ','));
+    setValue('singlePrice', Number(value).toLocaleString('kr-KR') + '');
     if (isBlurred) trigger();
   };
 
