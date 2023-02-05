@@ -1,4 +1,5 @@
 import profileApi from '@apis/profile/profileApi';
+import moment from 'moment';
 import Image from 'next/image';
 import React from 'react';
 
@@ -23,6 +24,7 @@ const icon = {
   '경매 등록 알림': 'post_auction',
   '전시회 등록 알림': 'post_exhibition',
   '작품 유찰 알림': 'bid_fail',
+  '입찰 경쟁 알림': 'inquiry',
 };
 
 export default function NoticeItem({ notice, refetchNotice }: NoticeItemProps) {
@@ -30,6 +32,11 @@ export default function NoticeItem({ notice, refetchNotice }: NoticeItemProps) {
     await profileApi.deleteNotice(notice?.id);
     refetchNotice();
   };
+  let date = moment(notice.createdDate)
+    .fromNow()
+    .replace('days', '일')
+    .replace('hours', '시간')
+    .replace('ago', '전');
   return (
     <li className="text-medium relative flex border-b-[1px] py-3 last:border-none">
       <Image
@@ -41,8 +48,10 @@ export default function NoticeItem({ notice, refetchNotice }: NoticeItemProps) {
       />
       <section className="flex flex-col leading-5">
         <p className="text-[12px] font-bold">{notice?.title}</p>
-        <p className="flex justify-between text-[14px]">{notice.message}</p>
-        <p className="text-[10px] text-[#999999]">{notice.createdDate}</p>
+        <p className="flex w-[240px] justify-between text-[14px]">
+          {notice.message}
+        </p>
+        <p className="text-[10px] text-[#999999]">{date}</p>
       </section>
       <Image
         src="/svg/icons/icon_grayClose.svg"
