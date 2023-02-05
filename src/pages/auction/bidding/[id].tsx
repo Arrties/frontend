@@ -38,7 +38,7 @@ export default function Bidding() {
     trigger,
     formState: { errors },
   } = useForm<inputForm>({
-    mode: 'onChange',
+    mode: 'onTouched',
   });
 
   const [isModal, setIsModal] = useState<boolean>(false);
