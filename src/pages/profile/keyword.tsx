@@ -43,6 +43,7 @@ export default function Keyword() {
       />
       <Button
         text="완료"
+        className="absolute inset-x-0 bottom-[34px] m-auto"
         onClick={handleButtonClick}
         disabled={keywordList?.length === 0}
       />
