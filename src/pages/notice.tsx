@@ -1,4 +1,3 @@
-import { NoticeForm } from '@apis/profile/profileApi.type';
 import Layout from '@components/common/Layout';
 import Navigate from '@components/common/Navigate';
 import NoticeItem from '@components/notice/NoticeItem';
@@ -13,7 +12,7 @@ export default function Notice() {
       <h1 className="mt-6 mb-2 font-bold">활동 알림</h1>
       {noticeList.length > 0 ? (
         <ul>
-          {noticeList.map((notice: NoticeForm) => (
+          {noticeList.map((notice: Notice) => (
             <NoticeItem
               notice={notice}
               key={notice?.id}

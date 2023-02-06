@@ -48,7 +48,7 @@ export class ProfileApi {
     const { data } = await instance.get('/members/preferred-artworks');
     return data;
   }
-  async getNotice(): Promise<NoticeForm[]> {
+  async getNotice(): Promise<Notice[]> {
     const { data } = await instance.get('/notifications');
     return data;
   }

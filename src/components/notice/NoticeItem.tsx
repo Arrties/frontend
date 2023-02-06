@@ -5,13 +5,7 @@ import React from 'react';
 import { useRouter } from 'next/router';
 
 interface NoticeItemProps {
-  notice: {
-    id: number;
-    title: string;
-    message: string;
-    createdDate: string;
-    link: string;
-  };
+  notice: Notice;
   refetchNotice: () => void;
 }
 
@@ -22,7 +16,7 @@ export default function NoticeItem({ notice, refetchNotice }: NoticeItemProps) {
     await profileApi.deleteNotice(notice?.id);
     refetchNotice();
   };
-  let date = moment(notice.createdDate)
+  let date = moment(notice.modifiedDate)
     .fromNow()
     .replace('days', '일')
     .replace('hours', '시간')
