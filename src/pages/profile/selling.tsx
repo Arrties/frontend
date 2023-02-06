@@ -4,7 +4,7 @@ import Navigate from '@components/common/Navigate';
 import React, { useState } from 'react';
 import { Tab } from '@headlessui/react';
 import useGetMyArtWork from '@hooks/queries/artwork/useGetMyArtWork';
-import SellingArtItem from '@components/profile/selling/SellingArtItem';
+import SellingItem from '@components/profile/selling/SellingItem';
 
 export default function Selling() {
   const [isModal, setIsModal] = useState<boolean>(false);
@@ -47,10 +47,9 @@ export default function Selling() {
             {data
               ?.filter((item) => item.auctionStatus === 'registered')
               .map((item) => (
-                <SellingArtItem
+                <SellingItem
                   key={item.id}
-                  biddingItem={item}
-                  auctionStatus="registered"
+                  sellingItem={item}
                   handleOption={handleOption}
                 />
               ))}
@@ -61,17 +60,30 @@ export default function Selling() {
             {data
               ?.filter((item) => item.auctionStatus === 'processing')
               .map((item) => (
-                <SellingArtItem
+                <SellingItem
                   key={item.id}
-                  biddingItem={item}
-                  auctionStatus="processing"
+                  sellingItem={item}
                   handleOption={handleOption}
                 />
               ))}
           </Tab.Panel>
         </Tab.Panels>
         <Tab.Panels>
-          <Tab.Panel>{/* <ArtItem handleOption={handleOption} /> */}</Tab.Panel>
+          <Tab.Panel>
+            {data
+              ?.filter(
+                (item) =>
+                  item.auctionStatus === 'sales_success' ||
+                  item.auctionStatus === 'sales_failed',
+              )
+              .map((item) => (
+                <SellingItem
+                  key={item.id}
+                  sellingItem={item}
+                  handleOption={handleOption}
+                />
+              ))}
+          </Tab.Panel>
         </Tab.Panels>
       </Tab.Group>
     </Layout>

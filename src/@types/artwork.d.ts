@@ -87,7 +87,7 @@ interface MyArtwork {
   id: number;
   title: string;
   artistName: string;
-  auctionStatus: string;
+  auctionStatus: 'registered' | 'processing' | 'sales_success' | 'sales_failed';
   biddingStatus: string | null;
   turn: number;
   image: string;
