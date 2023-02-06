@@ -31,7 +31,7 @@ export default function BidArtItem({
           alt="example"
           src={biddingItem?.mainImage || '/svg/example/example_picture_col.svg'}
           fill
-          className="object-fill"
+          className="object-cover"
         />
       </article>
       <article className="ml-3 pt-1">
