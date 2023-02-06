@@ -26,6 +26,7 @@ const icon = {
   '전시회 등록 알림': ['post_exhibition', '/exhibition'],
   '작품 유찰 알림': ['bid_fail', '/auction'],
   '입찰 경쟁 알림': ['inquiry', '/auction'],
+  '입찰 알림': ['inquiry', '/auction'],
 };
 
 export default function NoticeItem({ notice, refetchNotice }: NoticeItemProps) {
@@ -48,8 +49,10 @@ export default function NoticeItem({ notice, refetchNotice }: NoticeItemProps) {
       }}
     >
       <Image
-        alt=""
-        src={`/svg/icons/notice/icon_notice_${icon[notice?.title][0]}.svg`}
+        alt="notice_icon"
+        src={`/svg/icons/notice/icon_notice_${
+          icon[notice?.title] && icon[notice?.title][0]
+        }.svg`}
         width="40"
         height="0"
         className="ml-2 mr-4"
