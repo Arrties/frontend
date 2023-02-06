@@ -1,5 +1,5 @@
 import instance from '@apis/_axios/instance';
-import { InquiryForm, IsNoticeForm, NoticeForm, Role } from './profileApi.type';
+import { InquiryForm, IsNoticeForm } from './profileApi.type';
 
 export class ProfileApi {
   async patchUserInfo(formData: any) {
