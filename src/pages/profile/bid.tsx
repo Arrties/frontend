@@ -1,7 +1,7 @@
 import Layout from '@components/common/Layout';
 import Navigate from '@components/common/Navigate';
-import SuccessBidArtItem from '@components/profile/SuccessBidArtItem';
-import BidArtItem from '@components/profile/BidArtItem';
+import SuccessBidArtItem from '@components/profile/bid/SuccessBidArtItem';
+import BidArtItem from '@components/profile/bid/BidArtItem';
 import { Tab } from '@headlessui/react';
 import useGetBid from '@hooks/queries/artwork/useGetBid';
 import React from 'react';
