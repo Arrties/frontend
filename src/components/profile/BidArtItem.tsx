@@ -32,23 +32,27 @@ export default function BidArtItem({
         <Image
           alt="example"
           src={biddingItem?.mainImage || '/svg/example/example_picture_col.svg'}
-          width="70"
-          height="0"
+          width="82"
+          height="99"
         />
       </article>
-      <article className="ml-3">
-        <p className="text-12  text-[#767676]">
+      <article className="ml-3 py-2">
+        <p className="text-12 font-semibold text-[#767676]">
           제 {biddingItem?.turn}회 아띠즈 경매
         </p>
-        <p className="text-16 ">
-          {biddingItem?.title} | {biddingItem?.artistName}
+        <p>
+          <span className="text-14">{biddingItem?.title}</span>
+          <span className="text-12"> | {biddingItem?.artistName}</span>
         </p>
-        <p className="ml-1 text-14 ">
-          나의 입찰가 {biddingItem?.myBiddingPrice}원
-        </p>
-        <p className="ml-1 text-14 font-bold ">
-          최종 입찰가 {biddingItem?.finalBiddingPrice}원
-        </p>
+        <div className="mt-2">
+          <p className="text-12 font-semibold text-[#767676]">
+            나의 입찰가 {biddingItem?.myBiddingPrice}원
+          </p>
+          <p className="font-semibold">
+            <span className="text-12">최종 입찰가</span>
+            <span className="text-14"> {biddingItem?.finalBiddingPrice}원</span>
+          </p>
+        </div>
       </article>
     </ArtItemTag>
   );
