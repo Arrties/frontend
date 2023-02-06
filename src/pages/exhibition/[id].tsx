@@ -157,7 +157,8 @@ export default function ExhibitionArt() {
               education={art.education}
               description={art.description}
               onCloseModal={onCloseModal}
-              id={id}
+              id={art.id}
+              artistId={art.artistId}
             />
           </div>
         )}

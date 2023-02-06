@@ -12,7 +12,7 @@ const convertDate = (countDown): string[] => {
   return [days, hours, minutes, seconds];
 };
 
-export const useCountDown = (targetDate: string): string[] => {
+export const useCountDown = (targetDate: string) => {
   const currentDate = moment().unix() * 1000;
   const endDate = moment(targetDate, 'YYYY-MM-DD-HH-mm-ss').unix() * 1000;
   const [countdown, setCountdown] = useState<any>(endDate - currentDate);
@@ -32,5 +32,5 @@ export const useCountDown = (targetDate: string): string[] => {
     isEnd ? null : 1000,
   );
 
-  return countdown ? convertDate(countdown) : ['00', '00', '00'];
+  return convertDate(countdown);
 };

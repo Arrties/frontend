@@ -2,20 +2,16 @@ import Layout from '@components/common/Layout';
 import Navigate from '@components/common/Navigate';
 import ExhibitionItem from '@components/home/ExhibitionItem';
 import useGetProfile from '@hooks/queries/useGetProfile';
-import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import React, {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
 import { useGetInfiniteArtWork } from '@hooks/queries/useGetInfiniteArtWork';
-import { useRouter } from 'next/router';
-
-interface ARTLISTS {
-  id?: number;
-  title: string;
-  education: string;
-  image: string;
-}
 
 export default function View() {
-  const router = useRouter();
-
   const target = useRef<HTMLDivElement | null>(null);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
 

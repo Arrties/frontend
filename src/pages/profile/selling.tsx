@@ -1,7 +1,7 @@
 import Layout from '@components/common/Layout';
 import Modal from '@components/common/Modal';
 import Navigate from '@components/common/Navigate';
-import ArtItem from '@components/profile/ArtItem';
+import ArtItem from '@components/profile/SuccessBidArtItem';
 import React, { useState } from 'react';
 import { Tab } from '@headlessui/react';
 import useGetSellingArtWork from '@hooks/queries/useGetSellingArtWork';
@@ -45,13 +45,13 @@ export default function Selling() {
         </Tab.List>
         <Tab.Panels>
           <Tab.Panel>
-            <ArtItem handleOption={handleOption} />
-            <ArtItem handleOption={handleOption} />
+            {/* <ArtItem handleOption={handleOption} />
+            <ArtItem handleOption={handleOption} /> */}
           </Tab.Panel>
         </Tab.Panels>
         <Tab.Panels>
           <Tab.Panel>
-            <ArtItem
+            {/* <ArtItem
               lastChild={
                 <span className="text-14 font-bold text-[#FC6554]">
                   입찰 현황 : 450,000원
@@ -66,25 +66,11 @@ export default function Selling() {
                 </span>
               }
               handleOption={handleOption}
-            />
+            /> */}
           </Tab.Panel>
         </Tab.Panels>
         <Tab.Panels>
-          <Tab.Panel>
-            <ArtItem
-              lastChild={
-                <p>
-                  <span className="rounded bg-[#767676] px-1 py-0.5 text-10 text-[#FFF]">
-                    배송완료
-                  </span>
-                  <span className="ml-1 text-14 font-bold text-brand">
-                    입찰없음
-                  </span>
-                </p>
-              }
-              handleOption={handleOption}
-            />
-          </Tab.Panel>
+          <Tab.Panel>{/* <ArtItem handleOption={handleOption} /> */}</Tab.Panel>
         </Tab.Panels>
       </Tab.Group>
     </Layout>

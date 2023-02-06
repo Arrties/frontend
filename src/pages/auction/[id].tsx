@@ -53,7 +53,7 @@ export default function Detail() {
 
   useEffect(() => {
     let observer;
-    if (target) {
+    if (target && target.current) {
       observer = new IntersectionObserver(onIntersect, {
         rootMargin: `0px 0px -${window.innerHeight - 64}px 0px`,
       });
@@ -152,28 +152,31 @@ export default function Detail() {
             <div>
               <div className="flex items-center justify-between">
                 <span className="text-18 font-semibold">{artWork?.title}</span>
-                <span className="text-14">
-                  <span className="rounded-l-md bg-[#F8F8FA] px-2 py-1 text-brand">
-                    마감까지
+                {!Number.isNaN(+days) && (
+                  <span className="text-14">
+                    <span className="rounded-l-md bg-[#F8F8FA] px-2 py-1 text-brand">
+                      마감까지
+                    </span>
+
+                    <span className="rounded-r-md bg-brand px-2 py-1 text-[#FFFFFF]">
+                      {remaind < 0 ? (
+                        <span className="w-[66px] text-[14px] font-medium tracking-widest">
+                          00:00:00
+                        </span>
+                      ) : (
+                        <span
+                          className={`${
+                            +days >= 1 ? 'w-fit' : 'w-[66px]'
+                          } text-[14px] font-medium tracking-widest`}
+                        >
+                          {+days >= 1
+                            ? 'D-' + days
+                            : hours + ':' + minutes + ':' + seconds}
+                        </span>
+                      )}
+                    </span>
                   </span>
-                  <span className="rounded-r-md bg-brand px-2 py-1 text-[#FFFFFF]">
-                    {remaind < 0 ? (
-                      <span className="w-[66px] text-[14px] font-medium tracking-widest">
-                        00:00:00
-                      </span>
-                    ) : (
-                      <span
-                        className={`${
-                          +days >= 1 ? 'w-fit' : 'w-[66px]'
-                        } text-[14px] font-medium tracking-widest`}
-                      >
-                        {+days >= 1
-                          ? 'D-' + days
-                          : hours + ':' + minutes + ':' + seconds}
-                      </span>
-                    )}
-                  </span>
-                </span>
+                )}
               </div>
               <div className="mt-3 text-14">{artist?.artistEducation}</div>
             </div>

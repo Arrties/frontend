@@ -21,6 +21,7 @@ export default function Auction() {
   const [date, setDate] = useState('');
 
   const [days, hours, minutes, seconds] = useCountDown?.(date);
+
   const remaind = +hours + +minutes + +seconds;
 
   useEffect(() => {
@@ -64,7 +65,7 @@ export default function Auction() {
           <>
             <section className="relative mb-7 mt-4 flex justify-between">
               <span className="text-[20px] font-bold">{`제 ${data?.turn}회 아띠즈 경매`}</span>
-              {date && (
+              {date && !Number.isNaN(+days) && (
                 <div
                   className={`flex ${
                     +days >= 1 ? 'w-fit' : 'w-[100px]'

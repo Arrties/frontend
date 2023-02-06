@@ -234,7 +234,7 @@ export default function Profile() {
           )}
         </section>
         <DivisionBar className="my-5" />
-        <section>
+        <section className="mb-52">
           {SettingLists.map((setting: SettingList) => (
             <SettingItem
               key={setting.id}
