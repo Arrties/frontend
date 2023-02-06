@@ -108,7 +108,7 @@ export default function Home() {
             navigation
             scrollbar={{ draggable: true }}
             spaceBetween={2}
-            slidesPerView={2}
+            slidesPerView={2.1}
             autoplay={{ delay: 5000, disableOnInteraction: false }}
           >
             {customizedArtwork?.artworks?.map(
