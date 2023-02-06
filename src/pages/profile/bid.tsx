@@ -1,6 +1,6 @@
 import Layout from '@components/common/Layout';
 import Navigate from '@components/common/Navigate';
-import ArtItem from '@components/profile/ArtItem';
+import SuccessBidArtItem from '@components/profile/SuccessBidArtItem';
 import BidArtItem from '@components/profile/BidArtItem';
 import { Tab } from '@headlessui/react';
 import useGetBid from '@hooks/queries/artwork/useGetBid';
@@ -29,7 +29,10 @@ export default function bid() {
           <Tab.Panel className="space-y-6">
             {bidList?.successfulBiddingList.map(
               (biddingItem: SuccessfulBidArtworkForm) => (
-                <ArtItem key={biddingItem?.id} biddingItem={biddingItem} />
+                <SuccessBidArtItem
+                  key={biddingItem?.id}
+                  biddingItem={biddingItem}
+                />
               ),
             )}
           </Tab.Panel>
