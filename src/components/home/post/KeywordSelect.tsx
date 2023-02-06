@@ -35,18 +35,6 @@ export default function KeywordSelect({
             focused={keywordList?.includes(keyword.name)}
             onClick={() => onKeywordClick(keyword.name)}
           />
-          // <div
-          //   key={keyword.id}
-          //   id={keyword.id}
-          //   className={`${
-          //     keywordList?.includes(keyword.name)
-          //       ? 'border-brand text-[#767676]'
-          //       : 'border-[#CECECE] text-[#767676]'
-          //   } w rounded-full flex justify-center items-center px-3 py-1 border mr-2 mb-2.5 cursor-pointer text-14 text-[#767676]`}
-          //   onClick={() => onKeywordClick(keyword.name)}
-          // >
-          //   {keyword.name}
-          // </div>
         ))}
       </div>
     </SelectKeywordTag>
