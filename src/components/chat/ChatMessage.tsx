@@ -1,5 +1,5 @@
 import moment from 'moment';
-import 'moment/locale/ko'; // 이줄 추가
+import 'moment/locale/ko';
 interface ChatProps {
   sender: 'me' | 'you';
   sendDate: string;

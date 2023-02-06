@@ -25,7 +25,7 @@ const subscribe = (client, roomId, subscribeCallback, isRoom = false) => {
   if (isRoom) {
     client.subscribe(`/queue/chat-rooms/${roomId}`, subscribeCallback, {
       Authorization: access,
-      // action: 'enter',
+      action: 'enter',
     });
   } else {
     client.subscribe(`/queue/chat-rooms/${roomId}`, subscribeCallback, {
@@ -45,4 +45,15 @@ const publish = (client, roomId, senderId, chat) => {
   });
 };
 
-export { createClient, subscribe, publish };
+const publishImage = (client, roomId, senderId, chat) => {
+  client.publish({
+    destination: '/app/send',
+    body: JSON.stringify({
+      chatRoomId: roomId,
+      senderId: senderId,
+      encodedImage: chat,
+    }),
+  });
+};
+
+export { createClient, subscribe, publish, publishImage };

@@ -7,7 +7,12 @@ import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
 import useGetChatRoom from '@hooks/queries/chat/useGetChatRoom';
 import * as StompJs from '@stomp/stompjs';
-import { createClient, publish, subscribe } from '@apis/chat/socketConnect';
+import {
+  createClient,
+  publish,
+  publishImage,
+  subscribe,
+} from '@apis/chat/socketConnect';
 import chatApi from '@apis/chat/chatApi';
 import useGetProfile from '@hooks/queries/useGetProfile';
 import { isUser } from '@utils/isUser';
@@ -44,7 +49,7 @@ export default function ChatRoom() {
     reader.readAsDataURL(e.target.files[0]);
     reader.onload = () => {
       const base64data = reader.result;
-      publish(client.current, id, userInfo?.id, base64data);
+      publishImage(client.current, id, userInfo?.id, base64data);
     };
   };
 
