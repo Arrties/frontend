@@ -7,22 +7,20 @@ import useGetDetail from '@hooks/queries/useGetDetail';
 import chatApi from '@apis/chat/chatApi';
 import usePostPrefer from '@hooks/mutations/usePostPrefer';
 import useDeletePrefer from '@hooks/mutations/useDeletePrefer';
+import { useCountDown } from '@hooks/useCountDown';
+import Loader from '@components/common/Loader';
 
-export function getServerSideProps({ params }) {
-  return {
-    props: {
-      params,
-    },
-  };
-}
-
-export default function Detail({ params }) {
+export default function Detail() {
   const router = useRouter();
-  const artWorkId = params?.id;
-  const { data: detailData } = useGetDetail(+artWorkId);
+  const artWorkId = router.query.id;
+  const { data: detailData, isLoading } = useGetDetail(+artWorkId!);
   const { artWork, artist } = detailData || {};
   const { mutate: postPrefer } = usePostPrefer(artWork?.id!);
   const { mutate: deletePrefer } = useDeletePrefer(artWork?.id!);
+  const [days, hours, minutes, seconds] = useCountDown?.(
+    detailData?.endDate || '',
+  );
+  const remaind = +days + +hours + +minutes + +seconds;
 
   const handleChat = async () => {
     const chatData = await chatApi.postChatRoom({
@@ -31,10 +29,8 @@ export default function Detail({ params }) {
     });
     await router.push(`/chat/${chatData?.chatRoomId}`);
   };
-  const handlePurchase = () => {
-    router.push(`/auction/${artWork?.id}`);
-  };
-  const handlePreferButton = async () => {
+
+  const handlePreferButton = () => {
     if (detailData?.preferred) {
       deletePrefer();
     } else {
@@ -64,6 +60,8 @@ export default function Detail({ params }) {
     }
     return () => observer && observer.disconnect();
   }, [target]);
+
+  if (isLoading) return <Loader />;
 
   return (
     <>
@@ -157,7 +155,21 @@ export default function Detail({ params }) {
                     마감까지
                   </span>
                   <span className="rounded-r-md bg-brand px-2 py-1 text-[#FFFFFF]">
-                    D-3
+                    {remaind < 0 ? (
+                      <span className="w-[66px] text-[14px] font-medium tracking-widest">
+                        00:00:00
+                      </span>
+                    ) : (
+                      <span
+                        className={`${
+                          +days >= 1 ? 'w-fit' : 'w-[66px]'
+                        } text-[14px] font-medium tracking-widest`}
+                      >
+                        {+days >= 1
+                          ? 'D-' + days
+                          : hours + ':' + minutes + ':' + seconds}
+                      </span>
+                    )}
                   </span>
                 </span>
               </div>
@@ -249,7 +261,10 @@ export default function Detail({ params }) {
         <div className="h-[18px] bg-gradient-to-t from-white to-gray-100"></div>
         <div className="m-auto flex w-full  gap-5 bg-white  px-6 pb-9 shadow-lg">
           <Button text="채팅하기" kind="outlined" onClick={handleChat} />
-          <Button text="응찰하기" onClick={handlePurchase} />
+          <Button
+            text="응찰하기"
+            onClick={() => router.push(`/auction/bidding/${artWorkId}`)}
+          />
         </div>
       </article>
     </>

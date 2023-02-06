@@ -39,3 +39,32 @@ interface LastAuctionArtworkList {
   nextPage: boolean;
   artWorks: LastAutionArtwork[];
 }
+
+interface Bidding {
+  id: number;
+  memberName: string;
+  price: number;
+  date: string;
+}
+
+interface BiddingRequest {
+  price: number;
+}
+
+interface BiddingHistory {
+  artWork: {
+    id: number;
+    title: string;
+    artistName: string;
+    genre: string;
+    beginPrice: number;
+    topPrice: number;
+  };
+  auction: {
+    id: number;
+    startDate: string;
+    endDate: string;
+  };
+  biddingList: Bidding[];
+  totalBiddingCount: number;
+}
