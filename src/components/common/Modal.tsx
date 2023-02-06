@@ -1,4 +1,4 @@
-import tw from 'tailwind-styled-components'
+import tw from 'tailwind-styled-components';
 
 interface ModalProps {
   message: string;
@@ -23,7 +23,7 @@ const ModalInner = tw.div<DefaultProps>`
   z-20 w-[327px] h-[156px] absolute inset-0 m-auto
 `;
 const ModalMessage = tw.div`
-h-[104px] bg-white text-[#191919] text-14 rounded-t-[4px] flex items-center justify-center font-bold 
+h-[104px] bg-white text-[#191919] text-14 rounded-t-[4px] flex items-center justify-center font-bold px-5
 `;
 const ModalAccept = tw.div`
 bg-[#FC6554] h-[52px] rounded-b-[4px] text-white flex items-center justify-center cursor-pointer
@@ -58,7 +58,7 @@ export default function Modal({
   return isModal ? (
     isMain ? (
       <ModalTag {...rest}>
-        <MainModalBackground onClick={onCloseModal}></MainModalBackground>
+        <MainModalBackground onClick={onCloseModal} />
         <MainModalInner>
           <MainModalMessage>{message}</MainModalMessage>
           <div className="flex w-full justify-evenly ">
@@ -69,7 +69,7 @@ export default function Modal({
       </ModalTag>
     ) : (
       <ModalTag {...rest}>
-        <ModalBackground onClick={onCloseModal}></ModalBackground>
+        <ModalBackground onClick={onCloseModal} />
         <ModalInner>
           <ModalMessage>{message}</ModalMessage>
           <ModalAccept onClick={onAccept || onCloseModal}>확인</ModalAccept>

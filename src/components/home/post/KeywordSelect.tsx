@@ -1,5 +1,6 @@
 import tw from 'tailwind-styled-components';
 import { KEYWORDLIST } from '@utils/keywordList';
+import KeywordBox from '@components/common/KeywordBox';
 
 interface SelectKeywordProps {
   keywordList: string[];
@@ -28,18 +29,24 @@ export default function KeywordSelect({
     <SelectKeywordTag {...rest}>
       <div className="flex flex-wrap py-4 text-[#767676]">
         {KEYWORDLIST.map((keyword) => (
-          <div
+          <KeywordBox
+            text={keyword.name}
             key={keyword.id}
-            id={keyword.id}
-            className={`${
-              keywordList?.includes(keyword.name)
-                ? 'border-brand text-[#767676]'
-                : 'border-[#CECECE] text-[#767676]'
-            } w rounded-full flex justify-center items-center px-3 py-1 border mr-2 mb-2.5 cursor-pointer text-14 text-[#767676]`}
+            focused={keywordList?.includes(keyword.name)}
             onClick={() => onKeywordClick(keyword.name)}
-          >
-            {keyword.name}
-          </div>
+          />
+          // <div
+          //   key={keyword.id}
+          //   id={keyword.id}
+          //   className={`${
+          //     keywordList?.includes(keyword.name)
+          //       ? 'border-brand text-[#767676]'
+          //       : 'border-[#CECECE] text-[#767676]'
+          //   } w rounded-full flex justify-center items-center px-3 py-1 border mr-2 mb-2.5 cursor-pointer text-14 text-[#767676]`}
+          //   onClick={() => onKeywordClick(keyword.name)}
+          // >
+          //   {keyword.name}
+          // </div>
         ))}
       </div>
     </SelectKeywordTag>
