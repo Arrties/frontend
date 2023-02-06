@@ -84,16 +84,27 @@ export default function Post() {
     formState: { errors },
   } = useForm<Artwork>();
 
-  const file = watch('image');
-  useEffect(() => {
-    if (fileLists?.length <= 5 && fileLists?.length + file?.length <= 5) {
+  // const file = watch('image');
+  // useEffect(() => {
+  //   if (fileLists?.length <= 5 && fileLists?.length + file?.length <= 5) {
+  //     const newFileList: any = [];
+  //     for (const i of file) {
+  //       newFileList.push(i);
+  //     }
+  //     setFileLists((prev) => prev.concat(newFileList));
+  //   }
+  // }, [file]);
+  const handleImage = (e) => {
+    console.log(e.target.files);
+    const files = e.target.files;
+    if (fileLists?.length <= 5 && fileLists?.length + files?.length <= 5) {
       const newFileList: any = [];
-      for (const i of file) {
+      for (const i of files) {
         newFileList.push(i);
       }
       setFileLists((prev) => prev.concat(newFileList));
     }
-  }, [file]);
+  };
 
   useEffect(() => {
     if (keywordList.length > 0) {
@@ -233,6 +244,7 @@ export default function Post() {
             id="fileImage"
             className="hidden"
             {...register('image')}
+            onChange={handleImage}
           />
         </div>
         <div>
