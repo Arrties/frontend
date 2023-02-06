@@ -50,7 +50,7 @@ export default function Home() {
   const { isLoading: loading2, data: userInfo } = useGetProfile();
   const { isLoading: loading3, data: auctionList } = useGetAuction();
   const { isLoading: loading4, data: pastAuctionList } = useGetPastAuction();
-  if (loading1 || loading2 || loading3 || loading4) return <Loader />;
+  // if (loading1 || loading2 || loading3 || loading4) return <Loader />;
   return (
     <>
       <Layout>
