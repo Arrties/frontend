@@ -88,7 +88,7 @@ interface MyArtwork {
   title: string;
   artistName: string;
   auctionStatus: string;
-  biddingStatus: string;
+  biddingStatus: string | null;
   turn: number;
   image: string;
 }

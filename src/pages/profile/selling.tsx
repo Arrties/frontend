@@ -58,22 +58,16 @@ export default function Selling() {
         </Tab.Panels>
         <Tab.Panels>
           <Tab.Panel>
-            {/* <ArtItem
-              lastChild={
-                <span className="text-14 font-bold text-[#FC6554]">
-                  입찰 현황 : 450,000원
-                </span>
-              }
-              handleOption={handleOption}
-            />
-            <ArtItem
-              lastChild={
-                <span className="text-14 font-bold text-[#FC6554]">
-                  입찰 현황 : 입찰없음
-                </span>
-              }
-              handleOption={handleOption}
-            /> */}
+            {data
+              ?.filter((item) => item.auctionStatus === 'processing')
+              .map((item) => (
+                <SellingArtItem
+                  key={item.id}
+                  biddingItem={item}
+                  auctionStatus="processing"
+                  handleOption={handleOption}
+                />
+              ))}
           </Tab.Panel>
         </Tab.Panels>
         <Tab.Panels>

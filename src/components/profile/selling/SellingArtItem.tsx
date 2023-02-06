@@ -68,9 +68,13 @@ export default function SellingArtItem({
             <span className="text-12"> | {biddingItem?.artistName}</span>
           </p>
           <div className="mt-[1.5px]">
-            <p className="text-16 font-semibold text-brand">
-              {biddingItem?.biddingStatus}원
-            </p>
+            {biddingItem.biddingStatus === null ? (
+              <p className="text-16 font-semibold text-brand">입찰 없음</p>
+            ) : (
+              <p className="text-16 font-semibold text-brand">
+                입찰 현황 {biddingItem.biddingStatus}원
+              </p>
+            )}
           </div>
         </article>
       </SellingArtItemTag>
