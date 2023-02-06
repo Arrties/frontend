@@ -1,6 +1,4 @@
-import useDeletePick from '@hooks/mutations/useDeletePick';
 import useDeletePrefer from '@hooks/mutations/useDeletePrefer';
-import usePostPick from '@hooks/mutations/usePostPick';
 import usePostPrefer from '@hooks/mutations/usePostPrefer';
 import Image from 'next/image';
 import { useRouter } from 'next/router';

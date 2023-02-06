@@ -46,7 +46,7 @@ export default function Home() {
     isLoading: loading1,
     data: customizedArtwork,
     refetch: refetchCustomizedArtwork,
-  } = useGetCustomizedArtWork(1, 5);
+  } = useGetCustomizedArtWork(1, 5) || {};
   const { isLoading: loading2, data: userInfo } = useGetProfile();
   const { isLoading: loading3, data: auctionList } = useGetAuction();
   const { isLoading: loading4, data: pastAuctionList } = useGetPastAuction();
