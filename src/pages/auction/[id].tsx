@@ -53,7 +53,7 @@ export default function Detail() {
 
   useEffect(() => {
     let observer;
-    if (target) {
+    if (target && target.current) {
       observer = new IntersectionObserver(onIntersect, {
         rootMargin: `0px 0px -${window.innerHeight - 64}px 0px`,
       });
