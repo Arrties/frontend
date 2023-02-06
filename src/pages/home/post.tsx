@@ -60,7 +60,7 @@ export default function Post() {
   const [signature, setSignature] = useState<string>('');
   const [keywordList, setKeywordList] = useState<string[]>([]);
   const [genre, setGenre] = useState<string>('');
-  const [fileLists, setFileLists] = useState<File[]>([]);
+  const [fileList, setFileList] = useState<File[]>([]);
 
   const router = useRouter();
 
@@ -69,11 +69,11 @@ export default function Post() {
   }
 
   const handleRemoveFile = (targetName: string): void => {
-    const newFileLists = fileLists.filter((file) => {
+    const newFileList = fileList.filter((file) => {
       return file.name !== targetName;
     });
-    setFileLists(newFileLists);
-    setValue('image', newFileLists as any);
+    setFileList(newFileList);
+    setValue('image', newFileList as any);
   };
 
   const {
@@ -84,25 +84,15 @@ export default function Post() {
     formState: { errors },
   } = useForm<Artwork>();
 
-  // const file = watch('image');
-  // useEffect(() => {
-  //   if (fileLists?.length <= 5 && fileLists?.length + file?.length <= 5) {
-  //     const newFileList: any = [];
-  //     for (const i of file) {
-  //       newFileList.push(i);
-  //     }
-  //     setFileLists((prev) => prev.concat(newFileList));
-  //   }
-  // }, [file]);
   const handleImage = (e) => {
     console.log(e.target.files);
     const files = e.target.files;
-    if (fileLists?.length <= 5 && fileLists?.length + files?.length <= 5) {
+    if (fileList?.length <= 5 && fileList?.length + files?.length <= 5) {
       const newFileList: any = [];
       for (const i of files) {
         newFileList.push(i);
       }
-      setFileLists((prev) => prev.concat(newFileList));
+      setFileList((prev) => prev.concat(newFileList));
     }
   };
 
@@ -148,10 +138,10 @@ export default function Post() {
     formData.append('statusDescription', statusDescription);
     formData.append('keywords', keywordList + '');
 
-    if (file.length == 1) {
-      formData.append('image', file[0]);
+    if (fileList.length == 1) {
+      formData.append('image', fileList[0]);
     } else {
-      for (const i of file) {
+      for (const i of fileList) {
         formData.append('image', i);
       }
     }
@@ -223,13 +213,13 @@ export default function Post() {
                 height={17}
               />
               <div className="text-12 text-[#999999]">
-                {fileLists.length > 0 ? `${fileLists.length}/5` : '0/5'}
+                {fileList.length > 0 ? `${fileList.length}/5` : '0/5'}
               </div>
             </div>
           </label>
-          {fileLists.length > 0 && (
+          {fileList.length > 0 && (
             <div className="flex flex-wrap">
-              {fileLists.map((file, idx) => (
+              {fileList.map((file, idx) => (
                 <FileItem
                   handler={handleRemoveFile}
                   key={'' + idx}
