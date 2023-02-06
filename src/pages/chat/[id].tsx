@@ -32,12 +32,6 @@ export default function ChatRoom() {
 
   const [isModal, setIsModal] = useState(false);
 
-  const handleOption = () => {
-    setIsModal(true);
-  };
-  const onCloseModal = () => {
-    setIsModal(false);
-  };
   const onAccept = async () => {
     const response = await chatApi.deleteChatRoom(id);
     if (response?.status === 200) {
@@ -93,7 +87,9 @@ export default function ChatRoom() {
         message="채팅방을 나가면 채팅 목록 및 대화내용이 삭제 됩니다.
 채팅방에서 나가시겠어요?"
         isModal={isModal}
-        onCloseModal={onCloseModal}
+        onCloseModal={() => {
+          setIsModal(false);
+        }}
         denyMessage="나가기"
         onAccept={onAccept}
       />
@@ -120,7 +116,9 @@ export default function ChatRoom() {
             width="3"
             height="0"
             className="absolute right-5 cursor-pointer"
-            onClick={handleOption}
+            onClick={() => {
+              setIsModal(true);
+            }}
           />
         </article>
       </header>

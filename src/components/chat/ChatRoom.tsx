@@ -47,7 +47,7 @@ export default function Chatroom({ chatRoom }: ChatRoomProps) {
             {chatRoom?.lastMessage?.sendDate}
           </p>
         </div>
-        <MessageBox>{chatRoom?.lastMessage?.message}</MessageBox>
+        <MessageBox>{chatRoom?.lastMessage?.content}</MessageBox>
       </article>
       {!!chatRoom.unreadCount && (
         <article className="absolute right-16 flex h-[20px] w-[20px] items-center justify-center rounded-full bg-[#FC6554] text-12 text-[#FFF]">

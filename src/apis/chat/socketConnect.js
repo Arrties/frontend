@@ -25,7 +25,7 @@ const subscribe = (client, roomId, subscribeCallback, isRoom = false) => {
   if (isRoom) {
     client.subscribe(`/queue/chat-rooms/${roomId}`, subscribeCallback, {
       Authorization: access,
-      action: 'enter',
+      // action: 'enter',
     });
   } else {
     client.subscribe(`/queue/chat-rooms/${roomId}`, subscribeCallback, {
