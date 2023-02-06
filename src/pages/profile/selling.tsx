@@ -1,10 +1,10 @@
 import Layout from '@components/common/Layout';
 import Modal from '@components/common/Modal';
 import Navigate from '@components/common/Navigate';
-import ArtItem from '@components/profile/SuccessBidArtItem';
 import React, { useState } from 'react';
 import { Tab } from '@headlessui/react';
-import useGetSellingArtWork from '@hooks/queries/useGetSellingArtWork';
+import useGetMyArtWork from '@hooks/queries/artwork/useGetMyArtWork';
+import SellingArtItem from '@components/profile/selling/SellingArtItem';
 
 export default function Selling() {
   const [isModal, setIsModal] = useState<boolean>(false);
@@ -17,8 +17,7 @@ export default function Selling() {
   const handleAccept = () => {
     console.log('수정/삭제');
   };
-  const { data: sellingArtWork } = useGetSellingArtWork();
-  console.log(sellingArtWork);
+  const { data } = useGetMyArtWork();
   return (
     <Layout>
       <Modal
@@ -33,20 +32,28 @@ export default function Selling() {
       <Navigate isRightButton={false} message="판매활동" />
       <Tab.Group>
         <Tab.List className="w-full  text-14 ">
-          <Tab className="w-1/3 border-[#191919] ui-selected:border-b-2 ui-not-selected:border-b ui-not-selected:border-[#EDEDED] ui-not-selected:text-[#DBDBDB]">
+          <Tab className="h-[52px] w-1/3 border-[#191919] text-16 font-medium ui-selected:border-b-[2px] ui-selected:text-[#191919] ui-not-selected:border-b ui-not-selected:border-[#EDEDED] ui-not-selected:text-[#999999] ">
             등록된 작품
           </Tab>
-          <Tab className="w-1/3 border-[#191919] ui-selected:border-b-2 ui-not-selected:border-b ui-not-selected:border-[#EDEDED] ui-not-selected:text-[#DBDBDB]">
+          <Tab className="h-[52px] w-1/3 border-[#191919] text-16 font-medium ui-selected:border-b-[2px] ui-selected:text-[#191919] ui-not-selected:border-b ui-not-selected:border-[#EDEDED] ui-not-selected:text-[#999999] ">
             경매 중
           </Tab>
-          <Tab className="w-1/3 border-[#191919] ui-selected:border-b-2 ui-not-selected:border-b ui-not-selected:border-[#EDEDED] ui-not-selected:text-[#DBDBDB]">
+          <Tab className="h-[52px] w-1/3 border-[#191919] text-16 font-medium ui-selected:border-b-[2px] ui-selected:text-[#191919] ui-not-selected:border-b ui-not-selected:border-[#EDEDED] ui-not-selected:text-[#999999] ">
             경매 완료
           </Tab>
         </Tab.List>
         <Tab.Panels>
           <Tab.Panel>
-            {/* <ArtItem handleOption={handleOption} />
-            <ArtItem handleOption={handleOption} /> */}
+            {data
+              ?.filter((item) => item.auctionStatus === 'registered')
+              .map((item) => (
+                <SellingArtItem
+                  key={item.id}
+                  biddingItem={item}
+                  auctionStatus="registered"
+                  handleOption={handleOption}
+                />
+              ))}
           </Tab.Panel>
         </Tab.Panels>
         <Tab.Panels>
