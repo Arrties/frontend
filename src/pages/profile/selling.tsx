@@ -1,7 +1,7 @@
 import Layout from '@components/common/Layout';
 import Modal from '@components/common/Modal';
 import Navigate from '@components/common/Navigate';
-import ArtItem from '@components/profile/ArtItem';
+import ArtItem from '@components/profile/SuccessBidArtItem';
 import React, { useState } from 'react';
 import { Tab } from '@headlessui/react';
 import useGetSellingArtWork from '@hooks/queries/useGetSellingArtWork';
