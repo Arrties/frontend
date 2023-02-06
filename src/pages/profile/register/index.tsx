@@ -6,6 +6,7 @@ import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
 import { formatBytes } from '@utils/formatBytes';
 import Loader from '@components/common/Loader';
+import profileApi from '@apis/profile/profileApi';
 
 interface FileForm {
   file: any;
@@ -17,14 +18,13 @@ export default function Register() {
   const router = useRouter();
   const { register, watch } = useForm<FileForm>();
   const [fileState, setFileState] = useState<FileForm[]>([]);
-  const handleLeftButton = () => {
-    router.back();
-  };
 
   const handleRightButton = async () => {
     if (!fileState) return;
     const formData = new FormData();
-    formData.append('file', fileState[0].file);
+    formData.append('certificationImage', fileState[0].file);
+    await profileApi.patchProfile(formData);
+    router.push('/profile/complete');
   };
 
   const file = watch('file');
@@ -50,7 +50,6 @@ export default function Register() {
     <Layout>
       <Navigate
         right_message="다음"
-        handleLeftButton={handleLeftButton}
         handleRightButton={handleRightButton}
         message="작가 등록"
       />

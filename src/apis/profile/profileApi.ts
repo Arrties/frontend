@@ -59,6 +59,9 @@ export class ProfileApi {
   async deleteNotice(id: number) {
     await instance.delete(`/notifications/${id}`);
   }
+  async patchProfile(body: FormData) {
+    await instance.patch('/members/certification', body);
+  }
 }
 
 const profileApi = new ProfileApi();
