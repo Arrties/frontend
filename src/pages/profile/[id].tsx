@@ -88,8 +88,8 @@ export default function PickDetail() {
             </div>
             <div className="text-14">
               <p className="font-semibold">SNS</p>
-              <div className="mt-3 flex">
-                <div className="flex w-1/2 items-center">
+              <div className="mt-3 flex flex-col">
+                <div className="mb-2 flex w-1/2 items-center">
                   <Image
                     src="/svg/icons/icon_instagram_black.svg"
                     width={20}
@@ -97,7 +97,7 @@ export default function PickDetail() {
                     alt="instagram"
                   />
                   <p className="ml-[6px] text-14 leading-5">
-                    {member?.instagram}
+                    <a href={member?.instagram}>{member?.instagram}</a>
                   </p>
                 </div>
                 <div className="flex w-1/2 items-center">
@@ -108,7 +108,7 @@ export default function PickDetail() {
                     alt="behance"
                   />
                   <p className="ml-[6px] text-14 leading-5">
-                    {member?.behance}
+                    <a href={member?.behance}>{member?.behance}</a>
                   </p>
                 </div>
               </div>
