@@ -58,14 +58,13 @@ interface BidArtworkForm {
   title: string;
   turn: number;
 }
-
 interface SuccessfulBidArtworkForm {
   id: number;
   mainImage: string;
   turn: number;
   title: string;
   artistName: string;
-  finaleBiddingPrice: number;
+  finalBiddingPrice: number;
 }
 
 interface BidArtwork {
