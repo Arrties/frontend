@@ -37,6 +37,7 @@ w-[133px] h-[47px] bg-[#FFFFFF] rounded-[4px] text-[#191919] text-14 flex items-
 `;
 
 export default function Modal({
+  id,
   title,
   education,
   description,
@@ -47,7 +48,7 @@ export default function Modal({
 
   const handleLeftButton = () => {
     // 작품 더보기 페이지로 이동
-    router.push(``);
+    router.push(`/auction/${id}`);
   };
 
   const handleRightButton = () => {

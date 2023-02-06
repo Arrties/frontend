@@ -66,6 +66,10 @@ export default function ExhibitionArts() {
       />
     );
 
+  if (!artLists?.length) {
+    alert('등록된 작품이 없습니다.');
+    router.replace('/home');
+  }
   return (
     <Layout>
       {isExpansion ? (

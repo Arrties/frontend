@@ -46,8 +46,8 @@ function Join03() {
         작품을 추천 받아보세요
       </div>
       <section className="my-5 mt-9">
-        {KeywordList.map((keyword) => (
-          <KeywordBox text={keyword} focused />
+        {KeywordList.map((keyword: string, idx: number) => (
+          <KeywordBox text={keyword} focused key={idx} />
         ))}
       </section>
       <section className="flex flex-wrap gap-1">

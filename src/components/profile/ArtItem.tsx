@@ -1,6 +1,6 @@
-import Image from 'next/image'
-import React from 'react'
-import tw from 'tailwind-styled-components'
+import Image from 'next/image';
+import React from 'react';
+import tw from 'tailwind-styled-components';
 
 interface ArtItemProps {
   [key: string]: any;
@@ -13,13 +13,14 @@ flex mt-5 border-b last:border-none border-[#EDEDED] pb-5 relative
 `;
 
 export default function ArtItem({
+  biddingItem,
   lastChild,
   handleOption,
   ...rest
 }: ArtItemProps) {
   return (
     <ArtItemTag {...rest}>
-      <article className="rounded overflow-hidden">
+      <article className="overflow-hidden rounded">
         <Image
           alt="example"
           src="/svg/example/example_picture_col.svg"
@@ -28,8 +29,8 @@ export default function ArtItem({
         />
       </article>
       <article className="ml-3">
-        <p className="text-12 text-[#767676] font-bold">제 1회 아띠즈 경매</p>
-        <p className="font-bold text-16">콰야 녹아내리는 고드름</p>
+        <p className="text-12 font-bold text-[#767676]">제 1회 아띠즈 경매</p>
+        <p className="text-16 font-bold">콰야 녹아내리는 고드름</p>
         <p className="text-14"> 아라</p>
         {lastChild}
       </article>

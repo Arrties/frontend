@@ -8,6 +8,8 @@ import tw from 'tailwind-styled-components';
 import { useRouter } from 'next/router';
 import { Tab } from '@headlessui/react';
 import profileApi from '@apis/profile/profileApi';
+import usePostPick from '@hooks/mutations/usePostPick';
+import useDeletePick from '@hooks/mutations/useDeletePick';
 
 interface defaultProps {
   [key: string]: any;
@@ -21,32 +23,21 @@ const PickDetailProfile = tw.div<defaultProps>`
 w-[60px] mr-[10px] aspect-square flex  justify-center items-center rounded-full border-[1px] border-[#999999]
 `;
 
-export function getServerSideProps({ params }) {
-  return {
-    props: {
-      params,
-    },
-  };
-}
-
-export default function PickDetail({ params }) {
-  const artistId = +params?.id;
+export default function PickDetail() {
   const router = useRouter();
-  const handleArtistWork = () => {
-    router.push('/detail'); // 추후에 수정 필요
-  };
+  const artistId = parseInt(router.query.id as string, 10)!;
 
-  const { data: pickDetail, refetch: refetchPickDetail } =
-    useGetPickDetail(artistId);
+  const { data: pickDetail } = useGetPickDetail(artistId);
   const { member, artworks, pick } = pickDetail || {};
+  const { mutate: postPrefer } = usePostPick(artistId);
+  const { mutate: deletePrefer } = useDeletePick(artistId);
 
   const handlePick = async () => {
     if (pick) {
-      await profileApi.deletePick(artistId);
+      deletePrefer();
     } else {
-      await profileApi.postPick(artistId);
+      postPrefer();
     }
-    await refetchPickDetail();
   };
 
   return (
@@ -130,7 +121,7 @@ export default function PickDetail({ params }) {
                 title={artwork?.title}
                 saleStatus={artwork?.saleStatus}
                 onClick={() => {
-                  router.push(`/detail/${artwork?.id}`);
+                  router.push(`/auction/${artwork?.id}`);
                 }}
                 image={artwork?.image}
               />

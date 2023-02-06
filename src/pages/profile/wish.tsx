@@ -16,21 +16,13 @@ w-full grid grid-cols-2 gap-x-[15px] gap-y-[23px]
 
 export default function Wish() {
   const router = useRouter();
-  const handleBack = () => {
-    router.push('/profile');
-  };
-  const { data: wishList } = useGetWish() || [];
-  console.log(wishList);
+  const { data: wishList, refetch: refetchWish } = useGetWish() || [];
   return (
     <Layout>
-      <Navigate
-        message="찜 목록"
-        isRightButton={false}
-        handleLeftButton={handleBack}
-      />
+      <Navigate message="찜 목록" isRightButton={false} />
       <WishContainer>
         {wishList?.map((wish: WishArtwork) => (
-          <WishCard key={wish.id} wish={wish || {}} />
+          <WishCard key={wish.id} wish={wish} />
         ))}
       </WishContainer>
     </Layout>

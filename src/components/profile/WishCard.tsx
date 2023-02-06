@@ -1,25 +1,34 @@
 import Image from 'next/image';
 import tw from 'tailwind-styled-components';
+import { useRouter } from 'next/router';
+import useDeletePrefer from '@hooks/mutations/useDeletePrefer';
 
 interface DefaultProps {
   [key: string]: any;
 }
 
 const WishCardContainer = tw.div<DefaultProps>`
-rounded-lg hover:ring-1 hover:ring-blue-500 cursor-pointer
+rounded-lg hover:ring-1 hover:ring-blue-500 cursor-pointer relative
 `;
 
-interface StatusForm {
-  id: number;
-  image: string;
-  price: number;
-  title: string;
-}
-
 export default function WishCard({ wish }) {
-  console.log(wish);
+  const router = useRouter();
+  const { mutate: deletePrefer } = useDeletePrefer(wish?.id);
+  const handlePrefer = (e) => {
+    e.stopPropagation();
+    deletePrefer();
+  };
+  const statusArr: string[] = [wish.saleStatus];
+  if (!wish.hot) {
+    statusArr.push('HOT');
+  }
+
   return (
-    <WishCardContainer>
+    <WishCardContainer
+      onClick={() => {
+        router.push(`/auction/${wish.id}`);
+      }}
+    >
       <div className="relative h-28  bg-gray-300">
         <Image
           className="absolute top-3 right-3 rounded-t-lg"
@@ -30,34 +39,42 @@ export default function WishCard({ wish }) {
       </div>
       <div className="h-30 rounded-b-lg border-x-[1px] border-b-[1px] border-[#ededed] p-3">
         <div className="flex w-[84px] text-[10px] text-white">
-          {/* {wish &&
-            wish.map((statusItem) => (
-              <div
-                className={`h-[17px] w-1/2 bg-[${
-                  statusItem.status === '입찰중'
-                    ? '#4B9E77'
-                    : statusItem.status === 'HOT'
-                    ? '#F5535D'
-                    : statusItem.status === '입찰완료'
-                    ? '#191919'
-                    : statusItem.status === 'NEW'
-                    ? '#7B61FF'
-                    : ''
-                }]  flex items-center justify-center text-10`}
-                key={statusItem.id}
-              >
-                {statusItem.status}
-              </div>
-            ))} */}
+          {statusArr.map((status, idx) => (
+            <div
+              className={`h-[17px] w-1/2 bg-[${
+                status === '입찰중'
+                  ? '#4B9E77'
+                  : status === 'HOT'
+                  ? '#F5535D'
+                  : status === '입찰완료'
+                  ? '#191919'
+                  : status === '경매전'
+                  ? '#7B61FF'
+                  : ''
+              }]  flex items-center justify-center text-10`}
+              key={idx}
+            >
+              {status}
+            </div>
+          ))}
         </div>
         <div className="pt-[6px]">
           <div className="text-14 leading-4">{wish.title}</div>
-          <div className="text-12 leading-6">{wish.description}</div>
+          <div className="text-12 leading-6">{wish.artist}</div>
           <div className="text-14 font-bold leading-6 ">
             {wish.price.toLocaleString()}원
           </div>
         </div>
       </div>
+
+      <Image
+        alt="prefer"
+        src="/svg/icons/icon_heart_filled.svg"
+        width={20}
+        height={20}
+        className="absolute right-3 top-3"
+        onClick={handlePrefer}
+      />
     </WishCardContainer>
   );
 }

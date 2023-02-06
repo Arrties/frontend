@@ -16,25 +16,13 @@ interface ContentForm {
   image: FileList;
 }
 
-export function getServerSideProps({ params }) {
-  return {
-    props: {
-      params,
-    },
-  };
-}
-
-export default function ChatRoom({ params }) {
-  useEffect(() => {
-    window.addEventListener('beforeunload', (event) => {
-      // 채팅방 나가기 API전송
-    });
-  }, []);
+export default function ChatRoom() {
+  const router = useRouter();
   const client = useRef({}) as React.MutableRefObject<StompJs.Client>;
   const scrollRef: any = useRef();
 
-  const id = params?.id;
-  const router = useRouter();
+  const id = parseInt(router.query.id as string, 10)!;
+
   const { register, handleSubmit, watch, reset } = useForm<ContentForm>();
   const { data: chatRoom, refetch: refetchChatRoom } = useGetChatRoom(+id);
   const { artist, member, messages } = chatRoom || {};

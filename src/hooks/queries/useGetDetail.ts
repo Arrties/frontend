@@ -5,7 +5,11 @@ const useGetDetail = (artWorkId: number) => {
   return useQuery<ArtworkDetail, Error>(
     'useGetDetail',
     () => artworkApi.getDetail(artWorkId),
-    { retry: false, refetchOnWindowFocus: false, enabled: !!artWorkId },
+    {
+      retry: false,
+      refetchOnWindowFocus: false,
+      enabled: !!artWorkId,
+    },
   );
 };
 

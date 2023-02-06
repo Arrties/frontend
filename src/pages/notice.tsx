@@ -10,7 +10,7 @@ export default function Notice() {
   return (
     <Layout>
       <Navigate isRightButton={false} message="알림" />
-      <h1 className="mt-6 mb-2 font-bold">활동알림</h1>
+      <h1 className="mt-6 mb-2 font-bold">활동 알림</h1>
       {noticeList.length > 0 ? (
         <ul>
           {noticeList.map((notice: NoticeForm) => (

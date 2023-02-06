@@ -40,6 +40,15 @@ interface LastAuctionArtworkList {
   artWorks: LastAutionArtwork[];
 }
 
+interface AuctionList {
+  artWorkCount: number;
+  endDate: moment.Moment;
+  id: number;
+  image: string;
+  startDate: moment.Moment;
+  status: string;
+  turn: number;
+}
 interface Bidding {
   id: number;
   memberName: string;
