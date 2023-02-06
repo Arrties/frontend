@@ -2,7 +2,6 @@ import DoubleCheckButton from '@components/common/DoubleCheckButton';
 import ErrorMessage from '@components/common/ErrorMessage';
 import Input from '@components/common/Input';
 import Layout from '@components/common/Layout';
-import Loader from '@components/common/Loader';
 import Navigate from '@components/common/Navigate';
 import useGetProfile from '@hooks/queries/useGetProfile';
 import Image from 'next/image';
@@ -23,7 +22,7 @@ export default function Edit() {
     email: false,
   });
 
-  const { isLoading, data } = useGetProfile();
+  const { data } = useGetProfile();
   const [userInfo, setUserInfo] = useState<Member | null>(null);
 
   useEffect(() => {
@@ -166,8 +165,6 @@ export default function Edit() {
       router.push('/home');
     }
   };
-
-  if (isLoading) return <Loader />;
 
   return (
     <Layout>

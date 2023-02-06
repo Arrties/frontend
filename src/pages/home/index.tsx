@@ -21,7 +21,6 @@ import KeywordBox from '@components/common/KeywordBox';
 import Navigate from '@components/common/Navigate';
 import NoticeIcon from '@components/common/NoticeIcon';
 import useGetAuction from '@hooks/queries/auction/useGetAuction';
-import Loader from '@components/common/Loader';
 import useGetPastAuction from '@hooks/queries/auction/useGetPastAuction';
 
 const makeThreeEach = (auctionList: AuctionList[]) => {
@@ -42,15 +41,11 @@ const makeThreeEach = (auctionList: AuctionList[]) => {
 
 export default function Home() {
   const router = useRouter();
-  const {
-    isLoading: loading1,
-    data: customizedArtwork,
-    refetch: refetchCustomizedArtwork,
-  } = useGetCustomizedArtWork(1, 5) || {};
-  const { isLoading: loading2, data: userInfo } = useGetProfile();
-  const { isLoading: loading3, data: auctionList } = useGetAuction();
-  const { isLoading: loading4, data: pastAuctionList } = useGetPastAuction();
-  // if (loading1 || loading2 || loading3 || loading4) return <Loader />;
+  const { data: customizedArtwork, refetch: refetchCustomizedArtwork } =
+    useGetCustomizedArtWork(1, 5) || {};
+  const { data: userInfo } = useGetProfile();
+  const { data: auctionList } = useGetAuction();
+  const { data: pastAuctionList } = useGetPastAuction();
   return (
     <>
       <Layout>

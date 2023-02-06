@@ -5,7 +5,6 @@ import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
 import { formatBytes } from '@utils/formatBytes';
-import Loader from '@components/common/Loader';
 import profileApi from '@apis/profile/profileApi';
 
 interface FileForm {
@@ -43,8 +42,6 @@ export default function Register() {
   const handleDelete = () => {
     setFileState([]);
   };
-
-  // if (isLoading) return <Loader />;
 
   return (
     <Layout>

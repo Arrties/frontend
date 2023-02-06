@@ -1,6 +1,5 @@
 import DivisionBar from '@components/common/DivisionBar';
 import Layout from '@components/common/Layout';
-import Loader from '@components/common/Loader';
 import Navigate from '@components/common/Navigate';
 import Tab from '@components/common/Tab';
 import Activity from '@components/profile/Activity';
@@ -95,9 +94,8 @@ const SettingLists: SettingList[] = [
 
 export default function Profile() {
   const router = useRouter();
-  const { isLoading, data } = useGetProfile();
+  const { data } = useGetProfile();
 
-  if (isLoading) return <Loader />;
   return (
     <>
       <Layout>

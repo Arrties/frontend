@@ -1,7 +1,5 @@
-import profileApi from '@apis/profile/profileApi';
 import Button from '@components/common/Button';
 import Layout from '@components/common/Layout';
-import Loader from '@components/common/Loader';
 import Modal from '@components/common/Modal';
 import Navigate from '@components/common/Navigate';
 import SelectKeyword from '@components/profile/Selectkeyword';
@@ -13,7 +11,7 @@ import { useState, useEffect } from 'react';
 export default function Keyword() {
   const [keywordList, setKeywordList] = useState<string[]>([]);
   const { data } = useGetProfile();
-  const { mutate, isLoading, data: keywordData } = usePatchKeyword();
+  const { mutate, data: keywordData } = usePatchKeyword();
   const [isModal, setIsModal] = useState<boolean>(false);
   const router = useRouter();
   useEffect(() => {
@@ -30,8 +28,6 @@ export default function Keyword() {
       },
     });
   };
-
-  if (isLoading) return <Loader />;
 
   return (
     <Layout>
