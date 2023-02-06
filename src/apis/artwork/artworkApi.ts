@@ -37,6 +37,11 @@ export class ArtworkApi {
     const { data } = await instance.get('/art-works/bidding/me');
     return data;
   }
+
+  async getMyArtworkList(): Promise<MyArtwork[]> {
+    const { data } = await instance.get('/art-works/me');
+    return data;
+  }
 }
 
 const artworkApi = new ArtworkApi();

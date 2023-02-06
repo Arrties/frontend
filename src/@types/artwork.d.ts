@@ -82,3 +82,13 @@ interface WishArtwork {
   saleStatus: string;
   title: string;
 }
+
+interface MyArtwork {
+  id: number;
+  title: string;
+  artistName: string;
+  auctionStatus: string;
+  biddingStatus: string;
+  turn: number;
+  image: string;
+}
