@@ -1,4 +1,4 @@
-ㅋinterface Auction {
+interface Auction {
   id: number;
   turn: number;
   startDate: string;
