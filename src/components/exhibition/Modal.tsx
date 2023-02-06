@@ -1,16 +1,13 @@
 import Image from 'next/image';
 import tw from 'tailwind-styled-components';
+import { useRouter } from 'next/router';
 
 interface ModalProps {
   title: string;
-  major: string;
+  education: string;
   description: string;
   $open?: boolean;
-  isOpen: boolean;
   onCloseModal: () => void;
-  handleLeftButton: () => void;
-  handleRighButton: () => void;
-  handleSwipeArrow: () => void;
   [key: string]: any;
 }
 
@@ -19,17 +16,17 @@ interface DefaultProps {
 }
 
 const ModalInner = tw.div<DefaultProps>`
-absolute w-full bottom-0 h-auto m-auto rounded-[8px] backdrop-blur-[25.5px] p-5 transition  ${(
+w-full h-auto m-auto rounded-[8px] backdrop-blur-[25.5px] p-5 transition  ${(
   p,
 ) =>
   p.$open
-    ? 'bg-gradient-to-r from-[#FFFFFF]/[.16] to-[#FFFFFF]/[.46] translate-y-[-320px]'
-    : 'bg-gradient-to-b from-[#FFFFFF]/[.16] to-[#FFFFFF]/[.46] translate-y-[120px]'}
+    ? 'bg-gradient-to-r from-[#FFFFFF]/[.16] to-[#FFFFFF]/[.46] translate-y-[-420px]'
+    : 'bg-gradient-to-b from-[#FFFFFF]/[.16] to-[#FFFFFF]/[.46]'}
 `;
 const ModalHeader = tw.div<DefaultProps>`
 text-[#424242] text-20 flex justify-between font-bold `;
 
-const MajorDiv = tw.div<DefaultProps>`
+const EducationDiv = tw.div<DefaultProps>`
 text-[#191919] text-14 pt-1`;
 
 const DescriptionDiv = tw.div<DefaultProps>`
@@ -40,30 +37,26 @@ w-[133px] h-[47px] bg-[#FFFFFF] rounded-[4px] text-[#191919] text-14 flex items-
 `;
 
 export default function Modal({
+  id,
   title,
-  major,
+  education,
   description,
-  isOpen,
   onCloseModal,
-  handleLeftButton,
-  handleRighButton,
-  handleSwipeArrow,
   ...rest
 }: ModalProps) {
+  const router = useRouter();
+
+  const handleLeftButton = () => {
+    // 작품 더보기 페이지로 이동
+    router.push(`/auction/${id}`);
+  };
+
+  const handleRightButton = () => {
+    // 해당 작품 작가 프로필로 이동
+    router.push('/');
+  };
   return (
     <>
-      {!isOpen && (
-        <div className="absolute bottom-[170px] flex h-auto w-[22px] justify-center">
-          <Image
-            alt="swipe"
-            src="/svg/icons/icon_swipe_arrow.svg"
-            width={20}
-            height={20}
-            className="cursor-pointer"
-            onClick={handleSwipeArrow}
-          />
-        </div>
-      )}
       <ModalInner {...rest}>
         <ModalHeader>
           <span>{title}</span>
@@ -76,11 +69,11 @@ export default function Modal({
             className="cursor-pointer"
           />
         </ModalHeader>
-        <MajorDiv>{major}</MajorDiv>
+        <EducationDiv>{education}</EducationDiv>
         <DescriptionDiv>{description}</DescriptionDiv>
         <div className="flex w-full justify-evenly pt-4">
           <ModalButton onClick={handleLeftButton}>작품 더보기</ModalButton>
-          <ModalButton onClick={handleRighButton}>작가 프로필</ModalButton>
+          <ModalButton onClick={handleRightButton}>작가 프로필</ModalButton>
         </div>
       </ModalInner>
     </>

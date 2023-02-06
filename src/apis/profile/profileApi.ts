@@ -44,7 +44,7 @@ export class ProfileApi {
     const { data } = await instance.patch('/members/keywords', body);
     return data;
   }
-  async getWish(): Promise<WishArtwork> {
+  async getWish(): Promise<WishArtwork[]> {
     const { data } = await instance.get('/members/preferred-artworks');
     return data;
   }

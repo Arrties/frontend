@@ -5,7 +5,7 @@ import { useMutation } from 'react-query';
 const useDeletePrefer = (artWorkId: number) => {
   return useMutation<any, Error>(
     'useDeletePrefer',
-    () => artworkApi.postDeletePrefer(artWorkId),
+    () => artworkApi.deletePrefer(artWorkId),
     {
       retry: false,
       onMutate: async () => {

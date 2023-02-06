@@ -7,22 +7,21 @@ import useGetDetail from '@hooks/queries/useGetDetail';
 import chatApi from '@apis/chat/chatApi';
 import usePostPrefer from '@hooks/mutations/usePostPrefer';
 import useDeletePrefer from '@hooks/mutations/useDeletePrefer';
+import { useCountDown } from '@hooks/useCountDown';
+import Loader from '@components/common/Loader';
 
-export function getServerSideProps({ params }) {
-  return {
-    props: {
-      params,
-    },
-  };
-}
-
-export default function Detail({ params }) {
+export default function Detail() {
   const router = useRouter();
-  const artWorkId = params?.id;
-  const { data: detailData } = useGetDetail(+artWorkId);
+
+  const artWorkId = router.query.id;
+  const { data: detailData, isLoading } = useGetDetail(+artWorkId!);
   const { artWork, artist } = detailData || {};
   const { mutate: postPrefer } = usePostPrefer(artWork?.id!);
   const { mutate: deletePrefer } = useDeletePrefer(artWork?.id!);
+  const [days, hours, minutes, seconds] = useCountDown?.(
+    detailData?.endDate || '',
+  );
+  const remaind = +days + +hours + +minutes + +seconds;
 
   const handleChat = async () => {
     const chatData = await chatApi.postChatRoom({
@@ -31,10 +30,8 @@ export default function Detail({ params }) {
     });
     await router.push(`/chat/${chatData?.chatRoomId}`);
   };
-  const handlePurchase = () => {
-    router.push(`/auction/${artWork?.id}`);
-  };
-  const handlePreferButton = async () => {
+
+  const handlePreferButton = () => {
     if (detailData?.preferred) {
       deletePrefer();
     } else {
@@ -65,6 +62,8 @@ export default function Detail({ params }) {
     return () => observer && observer.disconnect();
   }, [target]);
 
+  if (isLoading) return <Loader />;
+
   return (
     <>
       <Layout>
@@ -77,7 +76,7 @@ export default function Detail({ params }) {
             <>
               <Image
                 onClick={() => router.back()}
-                alt="clock"
+                alt="back"
                 src="/svg/icons/auction/icon_arrow_black.svg"
                 width="24"
                 height="24"
@@ -86,7 +85,7 @@ export default function Detail({ params }) {
               {detailData?.preferred ? (
                 <Image
                   onClick={handlePreferButton}
-                  alt="clock"
+                  alt="prefer"
                   src="/svg/icons/icon_heart_filled.svg"
                   width="24"
                   height="24"
@@ -95,7 +94,7 @@ export default function Detail({ params }) {
               ) : (
                 <Image
                   onClick={handlePreferButton}
-                  alt="clock"
+                  alt="prefer"
                   src="/svg/icons/auction/icon_heart_black.svg"
                   width="24"
                   height="24"
@@ -106,16 +105,17 @@ export default function Detail({ params }) {
           ) : (
             <>
               <Image
-                alt="clock"
+                alt="back"
                 src="/svg/icons/auction/icon_arrow_white.svg"
                 width="24"
                 height="24"
                 className="cursor-pointer"
+                onClick={() => router.back()}
               />
               {detailData?.preferred ? (
                 <Image
                   onClick={handlePreferButton}
-                  alt="clock"
+                  alt="prefer"
                   src="/svg/icons/icon_heart_filled.svg"
                   width="24"
                   height="24"
@@ -124,7 +124,7 @@ export default function Detail({ params }) {
               ) : (
                 <Image
                   onClick={handlePreferButton}
-                  alt="clock"
+                  alt="prefer"
                   src="/svg/icons/auction/icon_heart_white.svg"
                   width="24"
                   height="24"
@@ -157,7 +157,21 @@ export default function Detail({ params }) {
                     마감까지
                   </span>
                   <span className="rounded-r-md bg-brand px-2 py-1 text-[#FFFFFF]">
-                    D-3
+                    {remaind < 0 ? (
+                      <span className="w-[66px] text-[14px] font-medium tracking-widest">
+                        00:00:00
+                      </span>
+                    ) : (
+                      <span
+                        className={`${
+                          +days >= 1 ? 'w-fit' : 'w-[66px]'
+                        } text-[14px] font-medium tracking-widest`}
+                      >
+                        {+days >= 1
+                          ? 'D-' + days
+                          : hours + ':' + minutes + ':' + seconds}
+                      </span>
+                    )}
                   </span>
                 </span>
               </div>
@@ -210,6 +224,9 @@ export default function Detail({ params }) {
                   width="35"
                   height="0"
                   alt="profile"
+                  onClick={() => {
+                    router.push(`/profile/${artist?.id}`);
+                  }}
                 />
               </div>
               <div className="w-fulltext-center ">{artist?.artistName}</div>
@@ -225,7 +242,10 @@ export default function Detail({ params }) {
               <p className="text-14">{artWork?.description}</p>
               <div className="mt-4">
                 {artWork?.keywords?.map((keyword: string, idx: number) => (
-                  <span className="mr-2 mt-2 rounded-[19px] border border-[#CECECE] px-3 py-1 text-[14px] text-[#767676] ">
+                  <span
+                    key={idx}
+                    className="mr-2 mt-2 rounded-[19px] border border-[#CECECE] px-3 py-1 text-[14px] text-[#767676] "
+                  >
                     {keyword}
                   </span>
                 ))}
@@ -249,7 +269,10 @@ export default function Detail({ params }) {
         <div className="h-[18px] bg-gradient-to-t from-white to-gray-100"></div>
         <div className="m-auto flex w-full  gap-5 bg-white  px-6 pb-9 shadow-lg">
           <Button text="채팅하기" kind="outlined" onClick={handleChat} />
-          <Button text="응찰하기" onClick={handlePurchase} />
+          <Button
+            text="응찰하기"
+            onClick={() => router.push(`/auction/bidding/${artWorkId}`)}
+          />
         </div>
       </article>
     </>

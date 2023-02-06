@@ -1,4 +1,3 @@
-import authApi from '@apis/auth/authApi';
 import Button from '@components/common/Button';
 import DoubleCheckButton from '@components/common/DoubleCheckButton';
 import ErrorMessage from '@components/common/ErrorMessage';
@@ -28,6 +27,7 @@ interface checkForm {
 }
 
 export default function Join02() {
+  const router = useRouter();
   const [isValidate, setIsValidate] = useState<checkForm>({
     id: false,
     nickname: false,
@@ -40,9 +40,8 @@ export default function Join02() {
     watch,
     setError,
     clearErrors,
+    trigger,
   } = useForm<JoinForm>({ mode: 'onTouched' });
-
-  const router = useRouter();
 
   const handleRightButton = () => {
     router.push('/auth/login');
@@ -175,7 +174,12 @@ export default function Join02() {
           />
           <DoubleCheckButton
             $valid={!isValidate.id}
-            onClick={() => setEnabled((prev) => ({ ...prev, userId: id }))}
+            onClick={() => {
+              trigger('userId');
+              if (!errors.userId) {
+                setEnabled((prev) => ({ ...prev, userId: id }));
+              }
+            }}
             id="id"
             text={isValidate.id ? '사용가능' : '중복확인'}
           />
@@ -197,7 +201,12 @@ export default function Join02() {
           />
           <DoubleCheckButton
             $valid={!isValidate.nickname}
-            onClick={() => setEnabled((prev) => ({ ...prev, nickname }))}
+            onClick={() => {
+              trigger('nickname');
+              if (!errors.nickname) {
+                setEnabled((prev) => ({ ...prev, nickname: nickname }));
+              }
+            }}
             id="nickname"
             text={isValidate.nickname ? '사용가능' : '중복확인'}
           />
@@ -218,7 +227,6 @@ export default function Join02() {
                 message: '비밀번호를 형식에 맞게 입력해주세요.',
               },
             })}
-            className="mb-0"
           />
           <Input
             type="password"
@@ -276,7 +284,12 @@ export default function Join02() {
           )}
           <DoubleCheckButton
             $valid={!isValidate.email}
-            onClick={() => setEnabled((prev) => ({ ...prev, email }))}
+            onClick={() => {
+              trigger('email');
+              if (!errors.email) {
+                setEnabled((prev) => ({ ...prev, email: email }));
+              }
+            }}
             id="email"
             text={isValidate.email ? '사용가능' : '중복확인'}
           />

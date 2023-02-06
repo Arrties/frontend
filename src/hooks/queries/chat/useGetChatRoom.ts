@@ -8,6 +8,7 @@ const useGetChatRoom = (id: number) => {
     {
       retry: false,
       refetchOnWindowFocus: false,
+      enabled: !!id,
     },
   );
 };

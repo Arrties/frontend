@@ -1,6 +1,6 @@
-import Image from 'next/image'
-import tw from 'tailwind-styled-components'
-import { useRouter } from 'next/router'
+import Image from 'next/image';
+import tw from 'tailwind-styled-components';
+import { useRouter } from 'next/router';
 
 interface ActivityBoxProps {
   key: string;
@@ -25,9 +25,8 @@ export default function Activity({ text, path, icon }: ActivityBoxProps) {
         router.push(`${path}`);
       }}
     >
-      
       <Image src={icon} alt={`${icon}`} width={20} height={20} />
-      <span className="text-[#767676] pt-[12px] text-12">{text}</span>
+      <span className="pt-[12px] text-12 text-[#767676]">{text}</span>
     </ActivityBox>
   );
 }

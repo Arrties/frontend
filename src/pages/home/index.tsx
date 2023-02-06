@@ -20,6 +20,9 @@ import { Pagination } from 'swiper';
 import KeywordBox from '@components/common/KeywordBox';
 import Navigate from '@components/common/Navigate';
 import NoticeIcon from '@components/common/NoticeIcon';
+import useGetAuction from '@hooks/queries/auction/useGetAuction';
+import Loader from '@components/common/Loader';
+import useGetPastAuction from '@hooks/queries/auction/useGetPastAuction';
 
 interface KeywordArtwork {
   id: string;
@@ -28,78 +31,30 @@ interface KeywordArtwork {
   education: string;
 }
 
-const DUMP_AUCTION_LISTS = [
-  { time: 1, start: '12:00', end: '14:00' },
-  { time: 2, start: '12:00', end: '19:00' },
-];
-
-interface AuctionListForm {
-  src: string;
-  date: string;
-  artRegister: number;
-  auctionRegister: number;
-  id: number;
-}
-
-const DUMP_PREV_AUCTION_LISTS: AuctionListForm[] = [
-  {
-    src: '/svg/example/exhibition.svg',
-    date: '2022.12.21',
-    artRegister: 20,
-    auctionRegister: 18,
-    id: 1,
-  },
-  {
-    src: '/svg/example/exhibition.svg',
-    date: '2022.12.21',
-    artRegister: 20,
-    auctionRegister: 18,
-    id: 2,
-  },
-  {
-    src: '/svg/example/exhibition.svg',
-    date: '2022.12.21',
-    artRegister: 20,
-    auctionRegister: 18,
-    id: 3,
-  },
-  {
-    src: '/svg/example/exhibition.svg',
-    date: '2022.12.21',
-    artRegister: 20,
-    auctionRegister: 18,
-    id: 4,
-  },
-  {
-    src: '/svg/example/exhibition.svg',
-    date: '2022.12.21',
-    artRegister: 20,
-    auctionRegister: 18,
-    id: 5,
-  },
-];
-const makeThreeEach = (auctionList: AuctionListForm[]) => {
-  const afterArr: AuctionListForm[][] = [];
-  let arr: AuctionListForm[] = [];
+const makeThreeEach = (auctionList: AuctionList[]) => {
+  const newArr: AuctionList[][] = [];
+  let arr: AuctionList[] = [];
   auctionList.forEach((it: any, idx: number) => {
     arr.push(it);
     if (arr.length === 3) {
-      afterArr.push(arr);
+      newArr.push(arr);
       arr = [];
     }
     if (idx === auctionList.length - 1) {
-      afterArr.push(arr);
+      newArr.push(arr);
     }
   });
-  return afterArr;
+  return newArr;
 };
-const DUMP_AFTER_AUCTION_LIST = makeThreeEach(DUMP_PREV_AUCTION_LISTS);
 
 export default function Home() {
   const router = useRouter();
-
-  const { data: customizedArtwork } = useGetCustomizedArtWork(1, 5);
-  const { data: userInfo } = useGetProfile();
+  const { isLoading: loading1, data: customizedArtwork } =
+    useGetCustomizedArtWork(1, 5);
+  const { isLoading: loading2, data: userInfo } = useGetProfile();
+  const { isLoading: loading3, data: auctionList } = useGetAuction();
+  const { isLoading: loading4, data: pastAuctionList } = useGetPastAuction();
+  if (loading1 || loading2 || loading3 || loading4) return <Loader />;
   return (
     <>
       <Layout>
@@ -109,7 +64,7 @@ export default function Home() {
               alt="logo"
               src="/svg/icons/icon_logo.svg"
               width="90"
-              height="0"
+              height="90"
             />
           }
           handleLeftButton={() => {
@@ -137,12 +92,12 @@ export default function Home() {
                 src="/svg/icons/icon_arrow.svg"
                 alt="arrow"
                 width={6}
-                height={0}
+                height={6}
               />
             </div>
           </div>
         </section>
-        <section className="my-4 mt-2">
+        <section className="my-4 mt-2 flex flex-wrap">
           {userInfo?.keywords?.map((keyword: string, idx: number) => (
             <KeywordBox text={keyword} key={idx} />
           ))}
@@ -153,7 +108,7 @@ export default function Home() {
             navigation
             scrollbar={{ draggable: true }}
             spaceBetween={2}
-            slidesPerView={2.1}
+            slidesPerView={2}
             autoplay={{ delay: 5000, disableOnInteraction: false }}
           >
             {customizedArtwork?.artworks?.map(
@@ -179,18 +134,15 @@ export default function Home() {
               아띠즈 경매 캘린더
             </span>
           </div>
-          <Calendar />
+          <Calendar auctionList={auctionList} />
         </section>
         <section className="mb-12">
-          {DUMP_AUCTION_LISTS.map((auction, idx) => (
-            <div key={idx}>
-              <ScheduleItem
-                time={auction.time}
-                start={auction.start}
-                end={auction.end}
-              />
-            </div>
-          ))}
+          {!!auctionList &&
+            auctionList.map((auctionItem: AuctionList) => (
+              <div key={auctionItem?.id}>
+                <ScheduleItem auctionItem={auctionItem} />
+              </div>
+            ))}
         </section>
         <section>
           <div className="mb-5 flex flex-col">
@@ -207,27 +159,19 @@ export default function Home() {
             pagination={true}
             className="h-[360px]"
           >
-            {DUMP_AFTER_AUCTION_LIST.map(
-              (auctionList: AuctionListForm[], index: number) => (
-                <SwiperSlide key={'' + index}>
-                  {auctionList.map(
-                    (auctionItem: AuctionListForm, idx: number) => (
+            {!!pastAuctionList &&
+              makeThreeEach(pastAuctionList)?.map(
+                (auctionItem: AuctionList[], index: number) => (
+                  <SwiperSlide key={'' + index}>
+                    {auctionItem.map((auctionItem: AuctionList) => (
                       <AuctionItem
-                        key={'' + idx}
-                        src={auctionItem.src}
-                        date={auctionItem.date}
-                        artRegister={auctionItem.artRegister}
-                        auctionRegister={auctionItem.auctionRegister}
-                        id={auctionItem.id}
-                        onClick={() => {
-                          router.push('/home/history');
-                        }}
+                        key={auctionItem.id}
+                        auctionItem={auctionItem}
                       />
-                    ),
-                  )}
-                </SwiperSlide>
-              ),
-            )}
+                    ))}
+                  </SwiperSlide>
+                ),
+              )}
           </Swiper>
         </section>
         {isUser ? <div className="h-16" /> : <FloatButton />}
