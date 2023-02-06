@@ -1,4 +1,4 @@
-interface ExhibitListProps {
+interface ExhibitionList {
   id: number;
   turn: number;
   startDate: string;
@@ -8,7 +8,7 @@ interface ExhibitListProps {
   status: string;
 }
 
-interface ExhibitArtWork {
+interface ExhibitionArtWork {
   title: string;
   education: string;
   description: string;

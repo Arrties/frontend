@@ -1,4 +1,4 @@
-interface Auction {
+ㅋinterface Auction {
   id: number;
   turn: number;
   startDate: string;
@@ -48,4 +48,32 @@ interface AuctionList {
   startDate: moment.Moment;
   status: string;
   turn: number;
+}
+interface Bidding {
+  id: number;
+  memberName: string;
+  price: number;
+  date: string;
+}
+
+interface BiddingRequest {
+  price: number;
+}
+
+interface BiddingHistory {
+  artWork: {
+    id: number;
+    title: string;
+    artistName: string;
+    genre: string;
+    beginPrice: number;
+    topPrice: number;
+  };
+  auction: {
+    id: number;
+    startDate: string;
+    endDate: string;
+  };
+  biddingList: Bidding[];
+  totalBiddingCount: number;
 }

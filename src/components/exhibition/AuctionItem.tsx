@@ -3,7 +3,7 @@ import Image from 'next/image';
 import { useRouter } from 'next/router';
 
 interface AuctionListProps {
-  auctionList: ExhibitListProps;
+  auctionList: ExhibitionList;
 }
 
 export default function AuctionItem({ auctionList }: AuctionListProps) {

@@ -20,7 +20,7 @@ export default function Auction() {
   const { data, isLoading, error } = useGetNowAuctionArtworkList();
   const [date, setDate] = useState('');
 
-  const [hours, minutes, seconds] = useCountDown?.(date);
+  const [days, hours, minutes, seconds] = useCountDown?.(date);
   const remaind = +hours + +minutes + +seconds;
 
   useEffect(() => {
@@ -67,7 +67,7 @@ export default function Auction() {
               {date && (
                 <div
                   className={`flex ${
-                    +hours >= 24 ? 'w-fit' : 'w-[100px]'
+                    +days >= 1 ? 'w-fit' : 'w-[100px]'
                   } items-center justify-center rounded bg-brand px-2 text-white`}
                 >
                   <Image
@@ -84,12 +84,12 @@ export default function Auction() {
                   ) : (
                     <span
                       className={`${
-                        +hours >= 24 ? 'w-fit' : 'w-[66px]'
+                        +days >= 1 ? 'w-fit' : 'w-[66px]'
                       } text-[14px] font-medium tracking-widest`}
                     >
-                      {+hours >= 24
-                        ? 'D-' + Math.floor(+hours / 24)
-                        : hours + ':' + minutes + ':' + seconds}{' '}
+                      {+days >= 1
+                        ? 'D-' + days
+                        : hours + ':' + minutes + ':' + seconds}
                     </span>
                   )}
                 </div>
