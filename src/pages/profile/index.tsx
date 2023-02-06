@@ -11,6 +11,7 @@ import tw from 'tailwind-styled-components';
 import { isUser } from '@utils/isUser';
 import { useRouter } from 'next/router';
 import NoticeIcon from '@components/common/NoticeIcon';
+import KeywordBox from '@components/common/KeywordBox';
 
 interface defaultProps {
   [key: string]: any;
@@ -126,8 +127,8 @@ export default function Profile() {
                 <Image
                   src="/svg/icons/icon_user_gray.svg"
                   alt="user"
-                  width={12}
-                  height={12}
+                  width={100}
+                  height={100}
                   className="m-auto h-[27px] rounded-full bg-[#EDEDED]"
                 />
               )}
@@ -191,31 +192,24 @@ export default function Profile() {
         <DivisionBar className="my-5" />
         <section className="my-4">
           <div className="relative my-4">
-            <span className="text-14 font-bold text-[#191919]">
-              취향 목록
-              {data?.keywords && (
-                <Image
-                  src="/svg/icons/icon_pencil_black.svg"
-                  alt="edit_keywords"
-                  width={18}
-                  height={18}
-                  className="absolute left-[4rem] top-1 cursor-pointer"
-                  onClick={() => {
-                    router.push('/profile/keyword');
-                  }}
-                />
-              )}
-            </span>
+            <span className="text-14 font-bold text-[#191919]">취향 목록</span>
+            {data?.keywords && (
+              <Image
+                src="/svg/icons/icon_pencil_black.svg"
+                alt="edit_keywords"
+                width={18}
+                height={18}
+                className="absolute left-[4rem] top-1 cursor-pointer"
+                onClick={() => {
+                  router.push('/profile/keyword');
+                }}
+              />
+            )}
           </div>
-          {data?.keywords?.length ? (
+          {!!data?.keywords?.length ? (
             <div className="mb-8 flex flex-wrap">
-              {data?.keywords?.map((keyword: string) => (
-                <span
-                  className="mr-2 mb-1 rounded-[19px] border-[1px] border-[#DBDBDB] px-3 py-1 text-14 text-[#767676] last:mr-0 "
-                  key={keyword}
-                >
-                  {keyword}
-                </span>
+              {data?.keywords?.map((keyword: string, idx: number) => (
+                <KeywordBox text={keyword} key={idx} />
               ))}
             </div>
           ) : (

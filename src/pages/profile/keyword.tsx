@@ -45,6 +45,7 @@ export default function Keyword() {
         text="완료"
         onClick={handleButtonClick}
         disabled={keywordList?.length === 0}
+        className="absolute inset-x-0 bottom-[34px] m-auto"
       />
       <Modal
         message="취향 분석이 완료 되었습니다."
