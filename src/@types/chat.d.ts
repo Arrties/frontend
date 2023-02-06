@@ -25,7 +25,8 @@ interface ChatRoomList {
 interface Message {
   sendDate: string;
   senderId: number;
-  message: string;
+  content: string;
+  type: string;
 }
 
 interface ChatRoomById {

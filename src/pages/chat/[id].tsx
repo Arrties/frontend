@@ -138,7 +138,7 @@ export default function ChatRoom() {
                 key={idx}
                 sender={+userId === message?.senderId ? 'me' : 'you'}
                 sendDate={message.sendDate}
-                message={message.message}
+                content={message.content}
               />
             ))}
         </article>

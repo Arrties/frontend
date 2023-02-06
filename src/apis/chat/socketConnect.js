@@ -40,7 +40,7 @@ const publish = (client, roomId, senderId, chat) => {
     body: JSON.stringify({
       chatRoomId: roomId,
       senderId: senderId,
-      message: chat,
+      content: chat,
     }),
   });
 };
