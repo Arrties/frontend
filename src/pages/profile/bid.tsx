@@ -21,7 +21,7 @@ export default function bid() {
           </Tab>
         </Tab.List>
         <Tab.Panels>
-          <Tab.Panel className="space-y-8">
+          <Tab.Panel className="space-y-6">
             {bidList?.biddingList.map((biddingItem: BidArtworkForm) => (
               <BidArtItem key={biddingItem?.id} biddingItem={biddingItem} />
             ))}
