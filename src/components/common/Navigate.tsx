@@ -34,7 +34,7 @@ const LeftButton = tw.div<LeftButtonProps>`cursor-pointer z-10 absolute left-0
 `;
 
 const CenterMessage = tw.div`
-text-font-1 text-18 absolute left-0 right-0 m-auto text-center 
+font-medium text-18 absolute left-0 right-0 m-auto text-center 
 `;
 
 const RightButton = tw.div<RightButtonProps>`
