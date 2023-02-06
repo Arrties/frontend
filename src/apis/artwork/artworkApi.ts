@@ -14,10 +14,10 @@ export class ArtworkApi {
     return data;
   }
   async postPrefer(artWorkId: number) {
-    await instance.post(`/members/preferred-artists/${artWorkId}`);
+    await instance.post(`/members/preferred-artworks/${artWorkId}`);
   }
   async deletePrefer(artWorkId: number) {
-    await instance.delete(`/members/preferred-artists/${artWorkId}`);
+    await instance.delete(`/members/preferred-artworks/${artWorkId}`);
   }
   async getExhibitionList() {
     const { data } = await instance.get('/exhibit');

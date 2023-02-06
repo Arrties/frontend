@@ -1,20 +1,31 @@
+import useDeletePick from '@hooks/mutations/useDeletePick';
+import useDeletePrefer from '@hooks/mutations/useDeletePrefer';
+import usePostPick from '@hooks/mutations/usePostPick';
+import usePostPrefer from '@hooks/mutations/usePostPrefer';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 
-interface ExhibitionItemForm {
-  src: string;
-  education: string;
-  title: string;
-  id: string;
-}
-
 export default function ExhibitionItem({
-  src,
+  image,
   education,
   title,
   id,
-}: ExhibitionItemForm) {
+  pick,
+  refetchCustomizedArtwork,
+}: KeywordArtwork) {
   const router = useRouter();
+  const { mutate: deletePrefer } = useDeletePrefer(+id);
+  const { mutate: postPrefer } = usePostPrefer(+id);
+  const handlePrefer = async (e) => {
+    e.stopPropagation();
+    if (pick) {
+      await deletePrefer();
+      await refetchCustomizedArtwork();
+    } else {
+      await postPrefer();
+      await refetchCustomizedArtwork();
+    }
+  };
   return (
     <div
       className="relative h-[197px] w-[158px] rounded"
@@ -23,7 +34,7 @@ export default function ExhibitionItem({
       }}
     >
       <Image
-        src={src}
+        src={image}
         alt="notification"
         fill
         sizes="1000"
@@ -42,11 +53,12 @@ export default function ExhibitionItem({
         </div>
       </div>
       <Image
-        src="/svg/icons/icon_heart_filled.svg"
+        src={`/svg/icons/icon_heart${pick ? '_filled' : ''}.svg`}
         alt="heart"
-        width={30}
-        height={30}
-        className="absolute right-3 top-3"
+        width={20}
+        height={20}
+        className="absolute right-2 top-2.5"
+        onClick={handlePrefer}
       />
     </div>
   );

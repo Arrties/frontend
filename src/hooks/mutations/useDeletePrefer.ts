@@ -14,7 +14,7 @@ const useDeletePrefer = (artWorkId: number) => {
         queryClient.setQueryData(['useGetDetail'], (old: any) => {
           return {
             ...old,
-            preferred: false,
+            pick: false,
           };
         });
         return { previousValue };
