@@ -116,10 +116,7 @@ export default function ChatRoom() {
             alt="back"
             width="11"
             height="0"
-            onClick={() => {
-              client.current.forceDisconnect();
-              router.push('/chat');
-            }}
+            onClick={() => router.push('/chat')}
             className="cursor-pointer"
           />
           <div className="px-5 text-16 ">

@@ -47,7 +47,7 @@ interface TabItemProps {
   [key: string]: any;
 }
 
-export default function Tab({ handler = () => {} }) {
+export default function Tab() {
   const router = useRouter();
   const handleTabItem = (name) => {
     router.push(`/${name}`);
@@ -60,7 +60,6 @@ export default function Tab({ handler = () => {} }) {
             className="m-auto cursor-pointer"
             key={tabItem.id}
             onClick={() => {
-              handler();
               handleTabItem(tabItem.name);
             }}
           >
