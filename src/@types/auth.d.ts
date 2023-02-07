@@ -7,7 +7,6 @@ interface User {
   password: string;
   email: string;
   nickname: string;
-  telephone?: string;
   image?: any;
   id?: number;
 }
