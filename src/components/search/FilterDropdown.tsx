@@ -9,6 +9,10 @@ interface FilterDropdownProps {
 export default function FilterDropdown({ setStatus }: FilterDropdownProps) {
   const [selected, setSelected] = useState<string[]>([]);
 
+  const handleMenu = (status: string) => {
+    setStatus(() => [status]);
+    setSelected(() => [status]);
+  };
   return (
     <div>
       <Menu as="div" className="relative">
@@ -58,10 +62,7 @@ export default function FilterDropdown({ setStatus }: FilterDropdownProps) {
               <Menu.Item>
                 <button
                   className="flex w-full items-center justify-between border-b-[1px] py-3 px-2 text-sm"
-                  onClick={() => {
-                    setStatus(() => ['processing']);
-                    setSelected(() => ['processing']);
-                  }}
+                  onClick={() => handleMenu('processing')}
                 >
                   경매중
                   {selected.includes('processing') ? (
@@ -79,10 +80,7 @@ export default function FilterDropdown({ setStatus }: FilterDropdownProps) {
               <Menu.Item>
                 <button
                   className="flex w-full items-center justify-between py-3 px-2 text-sm"
-                  onClick={() => {
-                    setStatus(() => ['sales_success']);
-                    setSelected(() => ['sales_success']);
-                  }}
+                  onClick={() => handleMenu('sales_success')}
                 >
                   경매완료
                   {selected.includes('sales_success') ? (
