@@ -17,10 +17,10 @@ export const useGetExhibitionItemList = (
   genres: string[],
 ) => {
   return useQuery<ExhibitionArtWork[], Error>(
-    'useGetExhibitionItems',
+    ['useGetExhibitionItems', auctionId],
     () => artworkApi.getExhibitionItemList(auctionId),
     {
-      enabled: !!auctionId,
+      enabled: !isNaN(auctionId),
       select: (arts) => {
         if (genres?.length === 0) {
           return arts;
@@ -33,14 +33,14 @@ export const useGetExhibitionItemList = (
   );
 };
 
-export const useGetExhibitionItem = (auctionId: number) => {
+export const useGetExhibitionItem = (artWorkId: number) => {
   return useQuery<ExhibitionArtWork, Error>(
-    'useGetExhibitionItem',
-    () => artworkApi.getExhibitionItem(auctionId),
+    ['useGetExhibitionItem', artWorkId],
+    () => artworkApi.getExhibitionItem(artWorkId),
     {
       retry: false,
       refetchOnWindowFocus: false,
-      enabled: !!auctionId,
+      enabled: !isNaN(artWorkId),
     },
   );
 };
