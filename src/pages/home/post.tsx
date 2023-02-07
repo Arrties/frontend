@@ -61,6 +61,10 @@ export default function Post() {
   const [keywordList, setKeywordList] = useState<string[]>([]);
   const [genre, setGenre] = useState<string>('');
   const [fileList, setFileList] = useState<File[]>([]);
+  const [responseData, setResponseData] = useState<{
+    artworkId: number;
+    turn: number;
+  }>({ artworkId: 0, turn: 0 });
 
   const router = useRouter();
 
@@ -157,6 +161,7 @@ export default function Post() {
 
     const data = await artworkApi.postArtwork(formData);
     console.log('성공', data);
+    setResponseData({ turn: data.turn, artworkId: data.artWork.id });
     setIsModal(true);
   };
 
@@ -189,16 +194,16 @@ export default function Post() {
   return (
     <Layout>
       <Modal
-        message="등록이 완료되었습니다.
-마이페이지>판매활동>등록된 작품에서 작품내역을 확인해보세요."
+        message={`${responseData?.turn}회 경매에 등록 완료되었습니다.
+마이페이지>판매활동>등록된 작품에서 작품내역을 확인해보세요.`}
         isModal={isModal}
         onCloseModal={() => {
           setIsModal(false);
-          router.push('/home');
+          router.push(`/auction/${responseData.artworkId}`);
         }}
         onAccept={() => {
           setIsModal(false);
-          router.push('/home');
+          router.push(`/auction/${responseData.artworkId}`);
         }}
       />
       <form className="w-full space-y-3" onSubmit={handleSubmit(onSubmit)}>
