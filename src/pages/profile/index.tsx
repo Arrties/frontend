@@ -120,8 +120,6 @@ export default function Profile() {
                   priority
                   fill
                   className="object-cover"
-                  // width={100}
-                  // height={100}
                 />
               ) : (
                 <Image
