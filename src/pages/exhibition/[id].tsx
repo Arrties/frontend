@@ -16,7 +16,7 @@ export default function ExhibitionArt() {
   const [isExpansion, setExpansion] = useState<boolean>(false);
 
   const router = useRouter();
-  const id = parseInt(router.query.id as string, 10)!;
+  const id = Number(router.query.id);
 
   const { data: art } = useGetExhibitionItem(id);
 

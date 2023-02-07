@@ -12,8 +12,8 @@ import { useCountDown } from '@hooks/useCountDown';
 export default function Detail() {
   const router = useRouter();
 
-  const artWorkId = router.query.id;
-  const { data: detailData } = useGetDetail(+artWorkId!);
+  const artWorkId = Number(router.query.id);
+  const { data: detailData } = useGetDetail(artWorkId);
   const { artWork, artist } = detailData || {};
   const { mutate: postPrefer } = usePostPrefer(artWork?.id!);
   const { mutate: deletePrefer } = useDeletePrefer(artWork?.id!);

@@ -6,18 +6,13 @@ import GenreModal from '@components/exhibition/GenreModal';
 import Modal from '@components/exhibition/Modal';
 import Image from 'next/image';
 import React from 'react';
-import styled from 'styled-components';
 import tw from 'tailwind-styled-components';
 import { useRef, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { useRouter } from 'next/router';
 import { useGetExhibitionItemList } from '@hooks/queries/useGetExhibition';
 
-interface DefaultProps {
-  [key: string]: any;
-}
-
-const SwiperButtonDiv = tw.div<DefaultProps>`
+const SwiperButtonDiv = tw.div<defaultProps>`
 bg-[rgba(153,153,153,0.24)] rounded-[10px] w-8 h-8 flex justify-center cursor-pointer
 `;
 
@@ -31,7 +26,7 @@ export default function ExhibitionArts() {
   const swiperRef = useRef<any>(null);
 
   const router = useRouter();
-  const id = parseInt(router.query.id as string, 10)!;
+  const id = Number(router.query.id);
 
   const { data: artLists } = useGetExhibitionItemList(id, genre);
 
@@ -66,10 +61,6 @@ export default function ExhibitionArts() {
       />
     );
 
-  if (!artLists?.length) {
-    alert('등록된 작품이 없습니다.');
-    router.replace('/home');
-  }
   return (
     <Layout>
       {isExpansion ? (

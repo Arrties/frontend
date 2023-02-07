@@ -3,13 +3,13 @@ import profileApi from '@apis/profile/profileApi';
 
 const useGetPickDetail = (artistId: number) => {
   return useQuery<artistDetail, Error>(
-    'useGetPickDetail',
+    ['useGetPickDetail', artistId],
     () => profileApi.getPickDetail(artistId),
 
     {
       retry: 0,
       refetchOnWindowFocus: false,
-      enabled: !!artistId,
+      enabled: !isNaN(artistId),
     },
   );
 };
