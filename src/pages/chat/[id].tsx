@@ -38,10 +38,8 @@ export default function ChatRoom() {
   const [isModal, setIsModal] = useState(false);
 
   const onAccept = async () => {
-    const response = await chatApi.deleteChatRoom(id);
-    if (response?.status === 200) {
-      router.push('/chat');
-    }
+    await chatApi.deleteChatRoom(id);
+    router.push('/chat');
   };
 
   const sendImage = (e) => {
@@ -59,8 +57,6 @@ export default function ChatRoom() {
     client.current.onDisconnect = await onDisconnected;
     await client.current.activate();
   };
-
-  // connect > subscribe >
 
   const onConnected = () => {
     subscribe(client.current, id, subscribeCallback, true);
