@@ -1,13 +1,10 @@
 import Layout from '@components/common/Layout';
-import Loader from '@components/common/Loader';
 import Navigate from '@components/common/Navigate';
 import AuctionItem from '@components/exhibition/AuctionItem';
 import { useGetExhibition } from '@hooks/queries/useGetExhibition';
 
 export default function Exhibition() {
-  const { data, isLoading } = useGetExhibition();
-
-  if (isLoading) return <Loader />;
+  const { data } = useGetExhibition();
 
   return (
     <Layout>

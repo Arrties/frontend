@@ -16,12 +16,13 @@ export interface Keyword {
   keyword: string;
 }
 
-export interface NoticeForm {
+export interface Notice {
+  data: number;
+  details: string;
   id: number;
-  title: string;
   message: string;
-  createdDate: string;
-  link: string;
+  modifiedDate: string;
+  title: string;
 }
 export interface IsNoticeForm {
   newNotification: boolean;

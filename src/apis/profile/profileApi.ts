@@ -1,5 +1,5 @@
 import instance from '@apis/_axios/instance';
-import { InquiryForm, IsNoticeForm, NoticeForm, Role } from './profileApi.type';
+import { InquiryForm, IsNoticeForm } from './profileApi.type';
 
 export class ProfileApi {
   async patchUserInfo(formData: any) {
@@ -48,7 +48,7 @@ export class ProfileApi {
     const { data } = await instance.get('/members/preferred-artworks');
     return data;
   }
-  async getNotice(): Promise<NoticeForm[]> {
+  async getNotice(): Promise<Notice[]> {
     const { data } = await instance.get('/notifications');
     return data;
   }
@@ -58,6 +58,9 @@ export class ProfileApi {
   }
   async deleteNotice(id: number) {
     await instance.delete(`/notifications/${id}`);
+  }
+  async patchProfile(body: FormData) {
+    await instance.patch('/members/certification', body);
   }
 }
 

@@ -15,9 +15,12 @@ interface KeywordArtwork {
   image: string;
   title: string;
   education: string;
+  pick: boolean;
+  refetchCustomizedArtwork: () => void;
 }
 
 interface CustomizeArtwork {
   nextPage: boolean;
+
   artworks: KeywordArtwork[];
 }

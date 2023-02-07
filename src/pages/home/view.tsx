@@ -16,7 +16,12 @@ export default function View() {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
   const { data: userInfo } = useGetProfile();
-  const { data, hasNextPage, fetchNextPage } = useGetInfiniteArtWork();
+  const {
+    data,
+    hasNextPage,
+    fetchNextPage,
+    refetch: refetchCustomizedArtwork,
+  } = useGetInfiniteArtWork();
 
   const artworkLists = useMemo(
     () => data?.pages.flatMap((page) => page.artworks),
@@ -66,13 +71,15 @@ export default function View() {
         <p className="text-[20px] font-bold text-[#191919]">이번 주 전시작품</p>
       </div>
       <div className="mt-6 flex w-full flex-wrap justify-center gap-y-5 gap-x-5">
-        {artworkLists?.map((art, idx) => (
+        {artworkLists?.map((art, idx: number) => (
           <ExhibitionItem
             key={idx}
-            src={art.image}
+            image={art.image}
             education={art.education}
             title={art.title}
             id={art.id}
+            pick={art.pick}
+            refetchCustomizedArtwork={refetchCustomizedArtwork}
           />
         ))}
         <div ref={target} className="flex h-[100px] w-full justify-center">

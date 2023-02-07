@@ -7,7 +7,6 @@ import React from 'react';
 import tw from 'tailwind-styled-components';
 import { useRouter } from 'next/router';
 import { Tab } from '@headlessui/react';
-import profileApi from '@apis/profile/profileApi';
 import usePostPick from '@hooks/mutations/usePostPick';
 import useDeletePick from '@hooks/mutations/useDeletePick';
 

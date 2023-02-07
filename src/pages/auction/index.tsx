@@ -2,7 +2,6 @@ import ArtWorkItem from '@components/auction/ArtWorkItem';
 import Layout from '@components/common/Layout';
 import Navigate from '@components/common/Navigate';
 import NoticeIcon from '@components/common/NoticeIcon';
-import Loader from '@components/common/Loader';
 import Tab from '@components/common/Tab';
 import useGetNowAuctionArtworkList from '@hooks/queries/auction/useGetNowAuctionArtworkList';
 import { useCountDown } from '@hooks/useCountDown';
@@ -17,7 +16,7 @@ const ArtworkList = tw.div<defaultProps>`
 
 export default function Auction() {
   const router = useRouter();
-  const { data, isLoading, error } = useGetNowAuctionArtworkList();
+  const { data, error } = useGetNowAuctionArtworkList();
   const [date, setDate] = useState('');
 
   const [days, hours, minutes, seconds] = useCountDown?.(date);
@@ -28,8 +27,6 @@ export default function Auction() {
     if (!data) return;
     setDate(data.endDate);
   }, [data]);
-
-  if (isLoading) return <Loader />;
 
   return (
     <>
