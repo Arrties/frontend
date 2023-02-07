@@ -114,7 +114,15 @@ export default function Profile() {
           <WelcomeBox>
             <div className="relative flex h-[54px] w-[54px] items-center overflow-hidden rounded-full bg-[#EDEDED]">
               {data?.image ? (
-                <Image src={data?.image} fill alt="profile" priority />
+                <Image
+                  src={data?.image}
+                  alt="profile"
+                  priority
+                  fill
+                  className="object-cover"
+                  // width={100}
+                  // height={100}
+                />
               ) : (
                 <Image
                   src="/svg/icons/icon_user_gray.svg"
@@ -240,3 +248,4 @@ export default function Profile() {
     </>
   );
 }
+//
