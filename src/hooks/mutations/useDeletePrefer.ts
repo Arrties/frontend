@@ -45,6 +45,11 @@ const Querykey = {
       };
     },
   },
+  '/wish': {
+    getDataQuery: 'useGetWish',
+    convertFunc: (old, artWorkId: number) =>
+      old.filter((it) => it.id !== artWorkId),
+  },
 };
 
 const useDeletePrefer = (artWorkId: number, path: string) => {

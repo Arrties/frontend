@@ -2,8 +2,7 @@ import Layout from '@components/common/Layout';
 import Navigate from '@components/common/Navigate';
 import WishCard from '@components/profile/WishCard';
 import tw from 'tailwind-styled-components';
-import React, { useState } from 'react';
-import { useRouter } from 'next/router';
+import React from 'react';
 import useGetWish from '@hooks/queries/profile/useGetWish';
 
 interface defaultProps {
@@ -15,8 +14,7 @@ w-full grid grid-cols-2 gap-x-[15px] gap-y-[23px]
 `;
 
 export default function Wish() {
-  const router = useRouter();
-  const { data: wishList, refetch: refetchWish } = useGetWish() || [];
+  const { data: wishList } = useGetWish() || [];
   return (
     <Layout>
       <Navigate message="찜 목록" isRightButton={false} />
