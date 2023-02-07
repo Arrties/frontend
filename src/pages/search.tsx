@@ -91,7 +91,7 @@ export default function Search() {
   };
 
   const page = useMemo(() => {
-    return router.query.page !== undefined ? router.query.page : 'Intro';
+    return router.query.word !== undefined ? router.query.word : 'Intro';
   }, [router.query]);
 
   return (
