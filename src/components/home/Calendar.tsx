@@ -29,7 +29,7 @@ export default function Calendar({ auctionList }) {
       });
       setAuctionDateList(newArr);
     }
-  }, [auctionList?.length]);
+  }, [auctionList]);
 
   const calendarArr = () => {
     const calendar: ReactElement[] = [];
