@@ -50,6 +50,12 @@ const Querykey = {
     convertFunc: (old, artWorkId: number) =>
       old.filter((it) => it.id !== artWorkId),
   },
+  '/search': {
+    getDataQuery: 'useGetSearch',
+    convertFunc: (old, artWorkId: number) => {
+      console.log(old, artWorkId);
+    },
+  },
 };
 
 const useDeletePrefer = (artWorkId: number, path: string) => {
@@ -63,9 +69,9 @@ const useDeletePrefer = (artWorkId: number, path: string) => {
         const previousValue = queryClient.getQueryData([
           Querykey[path].getDataQuery,
         ]);
-        queryClient.setQueryData([Querykey[path].getDataQuery], (old: any) => {
-          return Querykey[path].convertFunc(old);
-        });
+        queryClient.setQueryData([Querykey[path].getDataQuery], (old: any) =>
+          Querykey[path].convertFunc(old),
+        );
         return { previousValue };
       },
       onError: (context: any) => {
