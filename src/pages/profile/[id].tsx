@@ -24,7 +24,7 @@ w-[60px] mr-[10px] aspect-square flex  justify-center items-center rounded-full 
 
 export default function PickDetail() {
   const router = useRouter();
-  const artistId = parseInt(router.query.id as string, 10)!;
+  const artistId = Number(router.query.id);
 
   const { data: pickDetail } = useGetPickDetail(artistId);
   const { member, artworks, pick } = pickDetail || {};
