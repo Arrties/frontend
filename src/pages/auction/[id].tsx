@@ -8,6 +8,7 @@ import chatApi from '@apis/chat/chatApi';
 import usePostPrefer from '@hooks/mutations/usePostPrefer';
 import useDeletePrefer from '@hooks/mutations/useDeletePrefer';
 import { useCountDown } from '@hooks/useCountDown';
+import useGetProfile from '@hooks/queries/useGetProfile';
 
 export default function Detail() {
   const router = useRouter();
@@ -15,6 +16,7 @@ export default function Detail() {
   const artWorkId = router.query.id;
   const { data: detailData } = useGetDetail(+artWorkId!);
   const { artWork, artist } = detailData || {};
+  const { data: userInfo } = useGetProfile();
   const { mutate: postPrefer } = usePostPrefer(artWork?.id!);
   const { mutate: deletePrefer } = useDeletePrefer(artWork?.id!);
   const [days, hours, minutes, seconds] = useCountDown?.(
@@ -79,7 +81,7 @@ export default function Detail() {
                 height="24"
                 className="cursor-pointer"
               />
-              {detailData?.preferred ? (
+              {userInfo?.id !== artist?.id && detailData?.preferred && (
                 <Image
                   onClick={handlePreferButton}
                   alt="prefer"
@@ -88,7 +90,8 @@ export default function Detail() {
                   height="24"
                   className="cursor-pointer"
                 />
-              ) : (
+              )}
+              {userInfo?.id !== artist?.id && !detailData?.preferred && (
                 <Image
                   onClick={handlePreferButton}
                   alt="prefer"
@@ -109,7 +112,7 @@ export default function Detail() {
                 className="cursor-pointer"
                 onClick={() => router.back()}
               />
-              {detailData?.preferred ? (
+              {userInfo?.id !== artist?.id && detailData?.preferred && (
                 <Image
                   onClick={handlePreferButton}
                   alt="prefer"
@@ -118,7 +121,9 @@ export default function Detail() {
                   height="24"
                   className="cursor-pointer"
                 />
-              ) : (
+              )}
+
+              {userInfo?.id !== artist?.id && !detailData?.preferred && (
                 <Image
                   onClick={handlePreferButton}
                   alt="prefer"
