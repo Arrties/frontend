@@ -23,6 +23,7 @@ export default function Detail() {
     detailData?.endDate || '',
   );
   const remaind = +days + +hours + +minutes + +seconds;
+  const isMine = userInfo?.id === artist?.id;
 
   const handleChat = async () => {
     const chatData = await chatApi.postChatRoom({
@@ -81,7 +82,7 @@ export default function Detail() {
                 height="24"
                 className="cursor-pointer"
               />
-              {userInfo?.id !== artist?.id && detailData?.preferred && (
+              {!isMine && detailData?.preferred && (
                 <Image
                   onClick={handlePreferButton}
                   alt="prefer"
@@ -91,7 +92,7 @@ export default function Detail() {
                   className="cursor-pointer"
                 />
               )}
-              {userInfo?.id !== artist?.id && !detailData?.preferred && (
+              {!isMine && !detailData?.preferred && (
                 <Image
                   onClick={handlePreferButton}
                   alt="prefer"
@@ -112,7 +113,7 @@ export default function Detail() {
                 className="cursor-pointer"
                 onClick={() => router.back()}
               />
-              {userInfo?.id !== artist?.id && detailData?.preferred && (
+              {!isMine && detailData?.preferred && (
                 <Image
                   onClick={handlePreferButton}
                   alt="prefer"
@@ -123,7 +124,7 @@ export default function Detail() {
                 />
               )}
 
-              {userInfo?.id !== artist?.id && !detailData?.preferred && (
+              {!isMine && !detailData?.preferred && (
                 <Image
                   onClick={handlePreferButton}
                   alt="prefer"
@@ -270,16 +271,19 @@ export default function Detail() {
           <div className="h-[7rem]" />
         </section>
       </Layout>
-      <article className="absolute inset-x-0 bottom-0 mx-auto max-w-[420px]">
-        <div className="h-[18px] bg-gradient-to-t from-white to-gray-100"></div>
-        <div className="m-auto flex w-full  gap-5 bg-white  px-6 pb-9 shadow-lg">
-          <Button text="채팅하기" kind="outlined" onClick={handleChat} />
-          <Button
-            text="응찰하기"
-            onClick={() => router.push(`/auction/bidding/${artWorkId}`)}
-          />
-        </div>
-      </article>
+
+      {!isMine && (
+        <article className="absolute inset-x-0 bottom-0 mx-auto max-w-[420px]">
+          <div className="h-[18px] bg-gradient-to-t from-white to-gray-100"></div>
+          <div className="m-auto flex w-full  gap-5 bg-white  px-6 pb-9 shadow-lg">
+            <Button text="채팅하기" kind="outlined" onClick={handleChat} />
+            <Button
+              text="응찰하기"
+              onClick={() => router.push(`/auction/bidding/${artWorkId}`)}
+            />
+          </div>
+        </article>
+      )}
     </>
   );
 }
