@@ -68,7 +68,7 @@ export default function Bidding() {
         isLeftButton={false}
         className="text-18 font-medium"
         message="응찰내역"
-        handleRightButton={() => router.push('/auction')}
+        handleRightButton={() => router.back()}
       />
       <div className="top-100px absolute inset-x-0 mx-auto  max-w-[420px] border-b border-brand" />
       <section>
