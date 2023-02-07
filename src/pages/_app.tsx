@@ -35,6 +35,7 @@ export default function App({ Component, pageProps }: AppProps) {
     <div className="flex h-screen w-screen justify-center bg-slate-50 font-Pretendard">
       <Head>
         <link rel="shortcut icon" href="/static/favicon.ico" />
+        <title>Atties</title>
       </Head>
       <Suspense fallback={<Loader />}>
         <Provider store={store}>
