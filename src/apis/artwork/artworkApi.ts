@@ -42,6 +42,24 @@ export class ArtworkApi {
     const { data } = await instance.get('/art-works/me');
     return data;
   }
+
+  async getRecentSearch(): Promise<RecentSearch[]> {
+    const { data } = await instance.get('/search');
+    return data;
+  }
+
+  async getSearchArtwork(word: string): Promise<SearchArtWork[]> {
+    const { data } = await instance.get(`/search/art-works/${word}`);
+    return data;
+  }
+
+  async deleteRecentWord(wordId: number) {
+    await instance.delete(`/search/${wordId}`);
+  }
+
+  async deleteRecentAllWords() {
+    await instance.delete(`/search`);
+  }
 }
 
 const artworkApi = new ArtworkApi();
