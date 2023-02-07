@@ -8,9 +8,10 @@ const createClient = (endpoint) => {
   const client = new StompJs.Client({
     brokerURL: `wss://atties.shop${endpoint}`,
     connectHeaders: { Authorization: access },
-    // debug: (res) => {
-    //   console.log(res);
-    // },
+    debug: (res) => {
+      console.log(res);
+    },
+    reconnectDelay: 0,
   });
   client.webSocketFactory = () => {
     const socketIn = new SockJS(
@@ -21,11 +22,17 @@ const createClient = (endpoint) => {
   return client;
 };
 
-const subscribe = (client, roomId, subscribeCallback) => {
-  client.subscribe(`/queue/chat-rooms/${roomId}`, subscribeCallback, {
-    Authorization: access,
-    action: 'enter',
-  });
+const subscribe = (client, roomId, subscribeCallback, isRoom = false) => {
+  if (isRoom) {
+    client.subscribe(`/queue/chat-rooms/${roomId}`, subscribeCallback, {
+      Authorization: access,
+      action: 'enter',
+    });
+  } else {
+    client.subscribe(`/queue/chat-rooms/${roomId}`, subscribeCallback, {
+      Authorization: access,
+    });
+  }
 };
 
 const publish = (client, roomId, senderId, chat) => {
@@ -34,9 +41,20 @@ const publish = (client, roomId, senderId, chat) => {
     body: JSON.stringify({
       chatRoomId: roomId,
       senderId: senderId,
-      message: chat,
+      content: chat,
     }),
   });
 };
 
-export { createClient, subscribe, publish };
+const publishImage = (client, roomId, senderId, chat) => {
+  client.publish({
+    destination: '/app/send',
+    body: JSON.stringify({
+      chatRoomId: roomId,
+      senderId: senderId,
+      encodedImage: chat,
+    }),
+  });
+};
+
+export { createClient, subscribe, publish, publishImage };

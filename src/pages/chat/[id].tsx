@@ -7,10 +7,16 @@ import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
 import useGetChatRoom from '@hooks/queries/chat/useGetChatRoom';
 import * as StompJs from '@stomp/stompjs';
-import { createClient, publish, subscribe } from '@apis/chat/socketConnect';
+import {
+  createClient,
+  publish,
+  publishImage,
+  subscribe,
+} from '@apis/chat/socketConnect';
 import chatApi from '@apis/chat/chatApi';
 import useGetProfile from '@hooks/queries/useGetProfile';
 import { isUser } from '@utils/isUser';
+
 interface ContentForm {
   message: string;
   image: FileList;
@@ -21,7 +27,7 @@ export default function ChatRoom() {
   const client = useRef({}) as React.MutableRefObject<StompJs.Client>;
   const scrollRef: any = useRef();
 
-  const id = parseInt(router.query.id as string, 10)!;
+  const id = Number(router.query.id);
 
   const { register, handleSubmit, watch, reset } = useForm<ContentForm>();
   const { data: chatRoom, refetch: refetchChatRoom } = useGetChatRoom(+id);
@@ -31,50 +37,51 @@ export default function ChatRoom() {
 
   const [isModal, setIsModal] = useState(false);
 
-  const handleOption = () => {
-    setIsModal(true);
-  };
-  const onCloseModal = () => {
-    setIsModal(false);
-  };
   const onAccept = async () => {
-    const response = await chatApi.deleteChatRoom(id);
-    if (response?.status === 200) {
-      router.push('/chat');
-    }
-    // 채팅방 나가기 API
+    await chatApi.deleteChatRoom(id);
+    router.push('/chat');
   };
 
-  const image = watch('image');
-  useEffect(() => {
-    if (image && image.length > 0) {
-      console.log(image[0]);
-      // 사진 API전송
-    }
-  }, [image]);
+  const sendImage = (e) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(e.target.files[0]);
+    reader.onload = () => {
+      const base64data = reader.result;
+      publishImage(client.current, id, userInfo?.id, base64data);
+    };
+  };
 
   const connect = async () => {
     client.current = await createClient('/ws-connection');
     client.current.onConnect = await onConnected;
+    client.current.onDisconnect = await onDisconnected;
     await client.current.activate();
   };
 
   const onConnected = () => {
-    subscribe(client.current, id, subscribeCallback);
+    subscribe(client.current, id, subscribeCallback, true);
+  };
+  const onDisconnected = () => {
+    console.log('disconnect');
   };
 
-  const subscribeCallback = (response) => {
-    console.log(response);
-    refetchChatRoom();
+  const subscribeCallback = () => {
     reset({ message: '' });
+    refetchChatRoom();
+  };
+
+  const disconnect = () => {
+    if (client != null && client.current.connected) {
+      client.current.deactivate();
+    }
   };
 
   useEffect(() => {
     connect();
+    return () => {
+      disconnect();
+    };
   }, []);
-  const disconnect = () => {
-    client.current.deactivate();
-  };
 
   const onSubmit = (form: { message: string; image: FileList }) => {
     if (!client.current.connected) return;
@@ -96,7 +103,9 @@ export default function ChatRoom() {
         message="채팅방을 나가면 채팅 목록 및 대화내용이 삭제 됩니다.
 채팅방에서 나가시겠어요?"
         isModal={isModal}
-        onCloseModal={onCloseModal}
+        onCloseModal={() => {
+          setIsModal(false);
+        }}
         denyMessage="나가기"
         onAccept={onAccept}
       />
@@ -120,7 +129,9 @@ export default function ChatRoom() {
             width="3"
             height="0"
             className="absolute right-5 cursor-pointer"
-            onClick={handleOption}
+            onClick={() => {
+              setIsModal(true);
+            }}
           />
         </article>
       </header>
@@ -138,7 +149,7 @@ export default function ChatRoom() {
                 key={idx}
                 sender={+userId === message?.senderId ? 'me' : 'you'}
                 sendDate={message.sendDate}
-                message={message.message}
+                content={message.content}
               />
             ))}
         </article>
@@ -184,6 +195,7 @@ export default function ChatRoom() {
                 accept="image/*"
                 className="hidden"
                 {...register('image')}
+                onChange={sendImage}
               />
             </>
           )}

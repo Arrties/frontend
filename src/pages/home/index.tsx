@@ -22,22 +22,7 @@ import Navigate from '@components/common/Navigate';
 import NoticeIcon from '@components/common/NoticeIcon';
 import useGetAuction from '@hooks/queries/auction/useGetAuction';
 import useGetPastAuction from '@hooks/queries/auction/useGetPastAuction';
-
-const makeThreeEach = (auctionList: AuctionList[]) => {
-  const newArr: AuctionList[][] = [];
-  let arr: AuctionList[] = [];
-  auctionList.forEach((it: any, idx: number) => {
-    arr.push(it);
-    if (arr.length === 3) {
-      newArr.push(arr);
-      arr = [];
-    }
-    if (idx === auctionList.length - 1) {
-      newArr.push(arr);
-    }
-  });
-  return newArr;
-};
+import { makeThreeEach } from '@utils/makeThreeEach';
 
 export default function Home() {
   const router = useRouter();

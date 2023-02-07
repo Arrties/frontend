@@ -1,12 +1,41 @@
 import Input from '@components/common/Input';
 import Layout from '@components/common/Layout';
+import SearchItem from '@components/search/SearchItem';
 import back from '@public/svg/icons/icon_back.svg';
-import close from '@public/svg/icons/icon_grayClose.svg';
 import Image from 'next/image';
 import tw from 'tailwind-styled-components';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import RecentSearchBox from '@components/search/RecentSearchBox';
+import {
+  useGetRecentSearch,
+  useGetSearch,
+} from '@hooks/queries/useGetSearchArtWork';
+import { useDeleteAllWord } from '@hooks/mutations/useDeleteWord';
+import FilterDropdown from '@components/search/FilterDropdown';
+
+interface Genre {
+  id: string;
+  name: string;
+}
+
+const GENRELIST: Genre[] = [
+  { id: '1', name: '동양화' },
+  { id: '2', name: '한국화' },
+  { id: '3', name: '서양화' },
+  { id: '4', name: '조각' },
+  { id: '5', name: '공예' },
+  { id: '6', name: '서예' },
+  { id: '7', name: '판화' },
+  { id: '8', name: '드로잉' },
+  { id: '9', name: '사진' },
+  { id: '10', name: '리빙' },
+  { id: '11', name: '패션' },
+  { id: '12', name: '일러스트' },
+  { id: '13', name: '제품' },
+  { id: '14', name: '기타' },
+];
 
 interface DefaultProps {
   [key: string]: any;
@@ -16,115 +45,44 @@ const SearchBox = tw.header<DefaultProps>`
 flex justify-between items-center font-semibold relative h-[64px] mt-7
 `;
 
-const RecentKeywordBox = tw.li<DefaultProps>`
-border-b-[1px] border-[#EDEDED] text-[#767676] flex px-2 justify-between basis-[48.6%] p-0 cursor-pointer odd:mr-2 pb-1 mt-2
-`;
-
-interface RecentKeywordForm {
-  id?: string;
-  word: string;
-}
-
-const DUMP_RECENT_KEYWORD = [
-  {
-    id: '1',
-    word: '유화',
-  },
-  {
-    id: '2',
-    word: '화유',
-  },
-  {
-    id: '3',
-    word: '졸업',
-  },
-  {
-    id: '4',
-    word: '작품',
-  },
-  {
-    id: '5',
-    word: '거래',
-  },
-];
-const DUMP_RECOMMEND_KEYWORD = [
-  {
-    id: '1',
-    word: '유화',
-  },
-  {
-    id: '2',
-    word: '심플한',
-  },
-  {
-    id: '3',
-    word: '세련된',
-  },
-  {
-    id: '4',
-    word: '모던한',
-  },
-  {
-    id: '5',
-    word: '서양화',
-  },
-  {
-    id: '6',
-    word: '변화의',
-  },
-  {
-    id: '7',
-    word: '비판적인',
-  },
-  {
-    id: '8',
-    word: '동양화',
-  },
-  {
-    id: '9',
-    word: '미디어아트',
-  },
-  {
-    id: '10',
-    word: '풍경화',
-  },
-  {
-    id: '11',
-    word: '화려한',
-  },
-];
-
 export default function Search() {
+  const [searchWord, setSearchWord] = useState<string>('');
+  const [status, setStatus] = useState<string[]>([]);
+  const [value, setValue] = useState<string>('');
   const router = useRouter();
-  const [recentKeywordList, setRecentKeywordList] =
-    useState<RecentKeywordForm[]>(DUMP_RECENT_KEYWORD);
 
-  const { register, handleSubmit } = useForm<RecentKeywordForm>();
+  const { handleSubmit } = useForm<RecentSearch>();
+  const { data: searchResults } = useGetSearch(searchWord, status);
+  const { data: RecentWords } = useGetRecentSearch();
+  const { mutate: deleteAllWords } = useDeleteAllWord();
 
   const handleBackBtn = () => {
     router.back();
   };
-  const onSubmit = (form: any) => {
-    console.log(form.word);
-    // 검색 API
+
+  const handleValue = (e) => {
+    setValue(() => e.target.value);
+    if (!e.target.value) {
+      setSearchWord('');
+    }
   };
-  const handleRecentKeyword = (e: any) => {
-    console.log(e.target.id, 'Search');
-    // 검색 API
+
+  const onSubmit = () => {
+    setSearchWord(value);
   };
-  const handleDelete = (e: any) => {
-    e.stopPropagation();
-    setRecentKeywordList(
-      recentKeywordList.filter(
-        (recentKeyword: RecentKeywordForm) => recentKeyword.id !== e.target.id,
-      ),
-    );
+
+  const handleRecentWord = ({ word }) => {
+    setSearchWord(word);
+    setValue(word);
   };
+
   const handleDeleteAll = () => {
-    setRecentKeywordList([]);
+    deleteAllWords();
   };
-  const handleRecommendKeyword = (e: any) => {
-    console.log(e.target.id);
+
+  const handleRecommendKeyword = (keyword: string) => {
+    setValue(keyword);
+    setSearchWord(keyword);
   };
 
   return (
@@ -138,67 +96,68 @@ export default function Search() {
             className="h-[42px] border-none bg-[#F1F1F5]"
             type="text"
             placeholder="검색어를 입력해주세요"
-            register={register('word')}
+            value={value}
+            onChange={handleValue}
           />
         </form>
       </SearchBox>
-      <section className="mt-[38px]">
-        <div className="flex justify-between">
-          <span className="text-base font-semibold">최근 검색어</span>
-          {!!recentKeywordList.length && (
-            <span
-              className="cursor-pointer text-xs leading-6 text-[#999999]"
-              onClick={handleDeleteAll}
-            >
-              모두 지우기
-            </span>
-          )}
-        </div>
-        <div className="mt-[15px]">
-          <ul className="m-auto flex flex-wrap">
-            {recentKeywordList.length ? (
-              recentKeywordList.map((recentKeyword: RecentKeywordForm) => (
-                <RecentKeywordBox
-                  key={recentKeyword.id}
-                  id={recentKeyword.word}
-                  onClick={handleRecentKeyword}
-                >
-                  <span>{recentKeyword.word}</span>
-                  <span className="ml-2 flex align-middle">
-                    <Image
-                      src={close}
-                      alt="close"
-                      width={20}
-                      height={20}
-                      id={recentKeyword.id}
-                      onClick={handleDelete}
-                    />
-                  </span>
-                </RecentKeywordBox>
-              ))
-            ) : (
-              <div>최근 검색어가 없습니다.</div>
-            )}
-          </ul>
-        </div>
-      </section>
-      <section>
-        <div className="mt-6 flex flex-col justify-between">
-          <div className="text-base font-semibold ">취향 분석 맞춤 키워드</div>
-          <div className="mt-2 flex flex-wrap">
-            {DUMP_RECOMMEND_KEYWORD.map((keyword) => (
-              <div
-                key={keyword.id}
-                id={keyword.word}
-                className="my-[6px] mr-3 cursor-pointer  rounded-[19px] border py-1 px-3 text-14 font-bold text-[#767676]"
-                onClick={handleRecommendKeyword}
-              >
-                {keyword.word}
-              </div>
+      {searchWord ? (
+        <div>
+          <FilterDropdown setStatus={setStatus} />
+          <div className="flex flex-wrap justify-between gap-y-2 px-5 py-5">
+            {searchResults?.map((artwork: SearchArtWork, idx) => (
+              <SearchItem artwork={artwork} key={+idx} />
             ))}
           </div>
         </div>
-      </section>
+      ) : (
+        <div>
+          <section>
+            <div className="mt-6 flex flex-col justify-between">
+              <div className="text-base font-semibold ">장르</div>
+              <div className="mt-2 flex flex-wrap">
+                {GENRELIST.map((genre) => (
+                  <div
+                    key={genre.id}
+                    className="my-[6px] mr-3 cursor-pointer  rounded-[19px] border py-1 px-3 text-14 font-bold text-[#767676]"
+                    onClick={() => handleRecommendKeyword(genre.name)}
+                  >
+                    {genre.name}
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
+        </div>
+      )}
+      {RecentWords?.length && !searchWord ? (
+        <div>
+          <section className="mt-[38px]">
+            <div className="flex justify-between">
+              <span className="text-base font-semibold">최근 검색어</span>
+              <span
+                className="cursor-pointer text-xs leading-6 text-[#999999]"
+                onClick={handleDeleteAll}
+              >
+                모두 지우기
+              </span>
+            </div>
+            <div className="mt-[15px]">
+              <ul className="m-auto flex flex-wrap">
+                {RecentWords?.map((word: RecentSearch, idx) => (
+                  <RecentSearchBox
+                    key={idx}
+                    data={word}
+                    handleRecentWord={() => handleRecentWord(word)}
+                  />
+                ))}
+              </ul>
+            </div>
+          </section>
+        </div>
+      ) : (
+        <div></div>
+      )}
     </Layout>
   );
 }

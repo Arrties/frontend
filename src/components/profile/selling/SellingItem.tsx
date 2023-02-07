@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 import tw from 'tailwind-styled-components';
 
 interface SellingItemProps {
@@ -14,12 +15,17 @@ flex mt-6 border-b last:border-none border-[#EDEDED] pb-6 relative
 export default function SellingItem({
   sellingItem,
   handleOption,
-
   ...rest
 }: SellingItemProps) {
+  const router = useRouter();
   if (sellingItem.auctionStatus === 'registered')
     return (
-      <SellingItemTag {...rest}>
+      <SellingItemTag
+        {...rest}
+        onClick={() => {
+          router.push(`/auction/${sellingItem.id}`);
+        }}
+      >
         <article className="relative h-[100px] w-[82px] overflow-hidden rounded">
           <Image
             alt="example"
