@@ -5,7 +5,7 @@ import back from '@public/svg/icons/icon_back.svg';
 import Image from 'next/image';
 import tw from 'tailwind-styled-components';
 import { useRouter } from 'next/router';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import RecentSearchBox from '@components/search/RecentSearchBox';
 import {
@@ -42,6 +42,11 @@ interface DefaultProps {
   [key: string]: any;
 }
 
+const components = [
+  { page: 'Intro', component: 'IntroComponent' },
+  { page: 'Result', component: 'StepOneComponent' },
+];
+
 const SearchBox = tw.header<DefaultProps>`
 flex justify-between items-center font-semibold relative h-[64px] mt-7
 `;
@@ -57,9 +62,7 @@ export default function Search() {
   const { data: RecentWords } = useGetRecentSearch();
   const { mutate: deleteAllWords } = useDeleteAllWord();
 
-  const handleBackBtn = () => {
-    router.back();
-  };
+  const [currentIndex, setCurrentIndex] = useState(0);
 
   const handleValue = (e) => {
     setValue(() => e.target.value);
@@ -69,6 +72,7 @@ export default function Search() {
   };
 
   const onSubmit = () => {
+    router.push(`search/?page=${value}`);
     setSearchWord(value);
   };
 
@@ -86,10 +90,21 @@ export default function Search() {
     setSearchWord(keyword);
   };
 
+  const page = useMemo(() => {
+    return router.query.page !== undefined ? router.query.page : 'Intro';
+  }, [router.query]);
+
   return (
     <Layout>
       <SearchBox>
-        <div className="grow-[1]" onClick={() => handleBackBtn()}>
+        <div
+          className="grow-[1]"
+          onClick={() => {
+            setValue('');
+            setCurrentIndex(0);
+            router.back();
+          }}
+        >
           <Image src={back} alt="back" />
         </div>
         <form className="grow-[5]" onSubmit={handleSubmit(onSubmit)}>
@@ -102,7 +117,7 @@ export default function Search() {
           />
         </form>
       </SearchBox>
-      {searchWord ? (
+      {page !== 'Intro' ? (
         <div>
           <FilterDropdown setStatus={setStatus} />
           <div className="flex flex-wrap justify-between gap-y-2  px-2 py-5">
@@ -129,7 +144,7 @@ export default function Search() {
           </section>
         </div>
       )}
-      {RecentWords?.length && !searchWord ? (
+      {RecentWords?.length && page === 'Intro' && (
         <div>
           <section className="mt-[38px]">
             <div className="flex justify-between">
@@ -154,8 +169,6 @@ export default function Search() {
             </div>
           </section>
         </div>
-      ) : (
-        <div></div>
       )}
     </Layout>
   );
