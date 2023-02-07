@@ -2,7 +2,6 @@ import ArtWorkItem from '@components/auction/ArtWorkItem';
 import Layout from '@components/common/Layout';
 import Navigate from '@components/common/Navigate';
 import NoticeIcon from '@components/common/NoticeIcon';
-import Loader from '@components/common/Loader';
 import Tab from '@components/common/Tab';
 import useGetNowAuctionArtworkList from '@hooks/queries/auction/useGetNowAuctionArtworkList';
 import { useCountDown } from '@hooks/useCountDown';
@@ -17,18 +16,17 @@ const ArtworkList = tw.div<defaultProps>`
 
 export default function Auction() {
   const router = useRouter();
-  const { data, isLoading, error } = useGetNowAuctionArtworkList();
+  const { data, error } = useGetNowAuctionArtworkList();
   const [date, setDate] = useState('');
 
   const [days, hours, minutes, seconds] = useCountDown?.(date);
+
   const remaind = +hours + +minutes + +seconds;
 
   useEffect(() => {
     if (!data) return;
     setDate(data.endDate);
   }, [data]);
-
-  if (isLoading) return <Loader />;
 
   return (
     <>
@@ -64,7 +62,7 @@ export default function Auction() {
           <>
             <section className="relative mb-7 mt-4 flex justify-between">
               <span className="text-[20px] font-bold">{`제 ${data?.turn}회 아띠즈 경매`}</span>
-              {date && (
+              {date && !Number.isNaN(+days) && (
                 <div
                   className={`flex ${
                     +days >= 1 ? 'w-fit' : 'w-[100px]'

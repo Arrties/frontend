@@ -9,9 +9,11 @@ interface ExhibitionList {
 }
 
 interface ExhibitionArtWork {
+  id: number;
   title: string;
   education: string;
   description: string;
   genre: string;
   image: string;
+  artistId: number;
 }

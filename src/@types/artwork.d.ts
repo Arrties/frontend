@@ -49,7 +49,7 @@ interface ArtworkDetail {
   turn: number;
 }
 
-interface BidArtworkForm {
+interface BidArtwork {
   artistName: string;
   finalBiddingPrice: number;
   id: number;
@@ -58,19 +58,18 @@ interface BidArtworkForm {
   title: string;
   turn: number;
 }
-
-interface SuccessfulBidArtworkForm {
+interface SuccessfulBidArtwork {
   id: number;
   mainImage: string;
   turn: number;
   title: string;
   artistName: string;
-  finaleBiddingPrice: number;
+  finalBiddingPrice: number;
 }
 
 interface BidArtwork {
-  biddingList: BidArtworkForm[];
-  successfulBiddingList: SuccessfulBidArtworkForm[];
+  biddingList: BidArtwork[];
+  successfulBiddingList: SuccessfulBidArtwork[];
 }
 
 interface WishArtwork {
@@ -82,4 +81,14 @@ interface WishArtwork {
   price: number;
   saleStatus: string;
   title: string;
+}
+
+interface MyArtwork {
+  id: number;
+  title: string;
+  artistName: string;
+  auctionStatus: 'registered' | 'processing' | 'sales_success' | 'sales_failed';
+  biddingStatus: string | null;
+  turn: number;
+  image: string;
 }

@@ -3,9 +3,11 @@ import tw from 'tailwind-styled-components';
 import { useRouter } from 'next/router';
 
 interface ModalProps {
+  id: number;
   title: string;
   education: string;
   description: string;
+  artistId: number;
   $open?: boolean;
   onCloseModal: () => void;
   [key: string]: any;
@@ -41,19 +43,18 @@ export default function Modal({
   title,
   education,
   description,
+  artistId,
   onCloseModal,
   ...rest
 }: ModalProps) {
   const router = useRouter();
 
   const handleLeftButton = () => {
-    // 작품 더보기 페이지로 이동
     router.push(`/auction/${id}`);
   };
 
   const handleRightButton = () => {
-    // 해당 작품 작가 프로필로 이동
-    router.push('/');
+    router.push(`/profile/${artistId}`);
   };
   return (
     <>

@@ -1,11 +1,11 @@
-import artworkApi from '@apis/artwork/artworkApi';
+import profileApi from '@apis/profile/profileApi';
 import { queryClient } from 'pages/_app';
 import { useMutation } from 'react-query';
 
 const usePostPick = (artWorkId: number) => {
   return useMutation<any, Error>(
     'usePostPick',
-    () => artworkApi.postPrefer(artWorkId),
+    () => profileApi.postPick(artWorkId),
     {
       retry: false,
       onMutate: async () => {

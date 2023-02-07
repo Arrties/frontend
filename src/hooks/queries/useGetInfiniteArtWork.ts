@@ -18,7 +18,7 @@ export const useGetInfiniteArtWork = () => {
     };
   };
 
-  const { data, fetchNextPage, hasNextPage } = useInfiniteQuery(
+  const { data, fetchNextPage, hasNextPage, refetch } = useInfiniteQuery(
     ['useInfiniteArtWork'],
     getArtWork,
     {
@@ -31,5 +31,5 @@ export const useGetInfiniteArtWork = () => {
     },
   );
 
-  return { data, fetchNextPage, hasNextPage };
+  return { data, fetchNextPage, hasNextPage, refetch };
 };

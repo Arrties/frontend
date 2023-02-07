@@ -1,5 +1,4 @@
 import Layout from '@components/common/Layout';
-import Loader from '@components/common/Loader';
 import Modal from '@components/common/Modal';
 import SelectKeyword from '@components/profile/Selectkeyword';
 import { useAppSelector } from '@features/hooks';
@@ -12,7 +11,7 @@ export default function Join04() {
   const [keywordList, setKeywordList] = useState<string[]>([]);
   const [isModal, setIsModal] = useState<boolean>(false);
   const userState = useAppSelector((state) => state.user);
-  const { mutate, isLoading } = usePostJoin();
+  const { mutate } = usePostJoin();
   const handleSubmit = (e: any) => {
     let memberInfo: Member = {
       userId: userState.userId,
@@ -33,8 +32,6 @@ export default function Join04() {
   };
 
   const router = useRouter();
-
-  if (isLoading) return <Loader />;
 
   return (
     <Layout>

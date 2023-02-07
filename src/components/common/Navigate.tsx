@@ -9,6 +9,7 @@ interface NavigateProps {
   right_message?: React.ReactNode;
   isRightButton?: boolean;
   isLeftButton?: boolean;
+  focused?: boolean;
   handleLeftButton?: () => void;
   handleRightButton?: () => void;
   [key: string]: any;
@@ -34,14 +35,14 @@ const LeftButton = tw.div<LeftButtonProps>`cursor-pointer z-10 absolute left-0
 `;
 
 const CenterMessage = tw.div`
-text-font-1 text-18 absolute left-0 right-0 m-auto text-center 
+font-medium text-18 absolute left-0 right-0 m-auto text-center 
 `;
 
 const RightButton = tw.div<RightButtonProps>`
 text-14 z-10 cursor-pointer absolute right-0
 `;
 const SideMessage = tw.button`
-  cursor-pointer z-10  text-14 text-[#191919]
+  cursor-pointer z-10  text-14
 `;
 
 export default function Navigate({
@@ -50,6 +51,7 @@ export default function Navigate({
   right_message,
   isRightButton = true,
   isLeftButton = true,
+  focused = true,
   handleLeftButton = () => {
     Router.back();
   },
@@ -77,7 +79,11 @@ export default function Navigate({
       {isRightButton && (
         <RightButton onClick={handleRightButton}>
           {right_message ? (
-            <SideMessage>{right_message}</SideMessage>
+            <SideMessage
+              className={`text-${focused ? '[#191919]' : '[#999999]'}`}
+            >
+              {right_message}
+            </SideMessage>
           ) : (
             <Image
               src="/svg/icons/icon_close.svg"

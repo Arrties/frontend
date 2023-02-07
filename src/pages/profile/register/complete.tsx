@@ -6,15 +6,14 @@ import Image from 'next/image';
 
 export default function Complete() {
   const router = useRouter();
-  const handleRightButton = () => {
-    router.push('/profile/edit');
-  };
   return (
     <Layout>
       <Navigate
         message="작가 등록"
         isLeftButton={false}
-        handleRightButton={handleRightButton}
+        handleRightButton={() => {
+          router.push('/home');
+        }}
       />
       <section className="relative flex h-[40rem] flex-col items-center justify-center text-center">
         <Image

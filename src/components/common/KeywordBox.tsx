@@ -22,7 +22,7 @@ export default function KeywordBox({
         focused
           ? 'border-brand text-[#767676]'
           : 'border-[#CECECE] text-[#767676]'
-      }  mt-1 mr-1 cursor-pointer rounded-[19px] border px-3 py-1 text-[14px] text-[#767676]`}
+      }  mt-1 mr-1 cursor-pointer rounded-[19px] border py-0.5 px-2 text-[14px] text-[#767676]`}
       {...rest}
     >
       {text}

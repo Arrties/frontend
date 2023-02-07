@@ -14,10 +14,10 @@ export class ArtworkApi {
     return data;
   }
   async postPrefer(artWorkId: number) {
-    await instance.post(`/members/preferred-artists/${artWorkId}`);
+    await instance.post(`/members/preferred-artworks/${artWorkId}`);
   }
   async deletePrefer(artWorkId: number) {
-    await instance.delete(`/members/preferred-artists/${artWorkId}`);
+    await instance.delete(`/members/preferred-artworks/${artWorkId}`);
   }
   async getExhibitionList() {
     const { data } = await instance.get('/exhibit');
@@ -35,6 +35,11 @@ export class ArtworkApi {
   }
   async getBid(): Promise<BidArtwork> {
     const { data } = await instance.get('/art-works/bidding/me');
+    return data;
+  }
+
+  async getMyArtworkList(): Promise<MyArtwork[]> {
+    const { data } = await instance.get('/art-works/me');
     return data;
   }
 }

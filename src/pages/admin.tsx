@@ -1,10 +1,12 @@
 import Layout from '@components/common/Layout';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
 import Input from '@components/common/Input';
 import Button from 'stories/Button';
 import adminApi from '@apis/admin/admin';
+import useGetCertificationList from '@hooks/queries/admin/useGetCertificationList';
+import Image from 'next/image';
 
 interface InputForm {
   memberId: number;
@@ -33,6 +35,13 @@ export default function Admin() {
     await adminApi.postAuction({ turn, startDate, endDate });
   };
 
+  const { data: certificationList } = useGetCertificationList();
+  console.log(certificationList);
+  const handleAccept = async (memberId: number) => {
+    await adminApi.patchRole(memberId);
+    alert('전환 성공');
+  };
+
   return (
     <Layout>
       <form onSubmit={handleSubmit(onSubmitRole)}>
@@ -54,6 +63,26 @@ export default function Admin() {
         </div>
         <Button text="경매 생성" className="w-full" />
       </form>
+      {!!certificationList &&
+        certificationList.map((certificationItem) => (
+          <div key={certificationItem?.id}>
+            <span>id:{certificationItem?.id}</span>
+
+            <Image
+              alt="image"
+              src={certificationItem?.certificationImage}
+              width="100"
+              height="0"
+            />
+            <Button
+              text="수락하기"
+              onClick={() => {
+                handleAccept(certificationItem?.id);
+              }}
+              className="w-full"
+            />
+          </div>
+        ))}
     </Layout>
   );
 }

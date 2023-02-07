@@ -11,7 +11,6 @@ import AskPriceModal from '@components/auction/AskPriceModal';
 import useGetBiddingHistory from '@hooks/queries/auction/useGetBiddingHistory';
 import { priceToString } from '@utils/priceToString';
 import { useCountDown } from '@hooks/useCountDown';
-import Loader from '@components/common/Loader';
 import { leatAskPrice } from '@utils/leastAskPrice';
 import usePutBiddng from '@hooks/mutations/usePutBidding';
 interface inputForm {
@@ -22,9 +21,9 @@ interface inputForm {
 export default function Bidding() {
   const router = useRouter();
   const artWorkId = router.query.id;
-  const { data, isLoading } = useGetBiddingHistory(+artWorkId!);
+  const { data } = useGetBiddingHistory(+artWorkId!);
   const { artWork, auction, biddingList, totalBiddingCount } = data || {};
-  const { mutate, isLoading: isBiddingLoading } = usePutBiddng(+artWorkId!);
+  const { mutate } = usePutBiddng(+artWorkId!);
   const [days, hours, minutes, seconds] = useCountDown?.(
     auction?.endDate || '',
   );
@@ -64,8 +63,6 @@ export default function Bidding() {
     // const autoPrice = form.autoPrice.replace(/,/g, '');
     mutate({ price: +singlePrice });
   };
-
-  if (isLoading || isBiddingLoading) return <Loader />;
 
   return (
     <Layout>
