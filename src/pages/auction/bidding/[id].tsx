@@ -4,7 +4,7 @@ import ErrorMessage from '@components/common/ErrorMessage';
 import Layout from '@components/common/Layout';
 import Navigate from '@components/common/Navigate';
 import Image from 'next/image';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
 import AskPriceModal from '@components/auction/AskPriceModal';
@@ -38,6 +38,16 @@ export default function Bidding() {
   } = useForm<inputForm>({
     mode: 'onTouched',
   });
+
+  useEffect(() => {
+    if (data) {
+      if (data.artWork.topPrice === null)
+        setValue('price', priceToString(data.artWork.beginPrice));
+      else {
+        setValue('price', priceToString(leatAskPrice(data.artWork.topPrice)));
+      }
+    }
+  }, [data]);
 
   const [isModal, setIsModal] = useState<boolean>(false);
 
@@ -218,7 +228,15 @@ export default function Bidding() {
                 required: false,
                 validate: (value) => {
                   if (value) {
-                    if (
+                    if (artWork?.topPrice === null) {
+                      if (
+                        +value.replace(/,/g, '') <
+                          leatAskPrice(artWork?.beginPrice!) &&
+                        +value.replace(/,/g, '') > artWork.beginPrice
+                      )
+                        return '호가 단위를 확인해주세요.';
+                      else return true;
+                    } else if (
                       +value.replace(/,/g, '') <
                       leatAskPrice(artWork?.topPrice!)
                     )
