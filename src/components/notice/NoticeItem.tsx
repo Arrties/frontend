@@ -23,7 +23,7 @@ export default function NoticeItem({ notice, refetchNotice }: NoticeItemProps) {
     .replace('ago', '전');
 
   const icon = {
-    '채팅 알림': ['chat', '/chat'],
+    채팅: ['chat', `/chat/${notice.id}`],
     '작품 등록 완료': ['post', `/auction/${notice.data}`],
     '작가 등록 완료': ['post', '/profile'],
     응찰: ['bid', '/auction'],
