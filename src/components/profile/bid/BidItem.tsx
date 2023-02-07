@@ -3,24 +3,24 @@ import Image from 'next/image';
 import React from 'react';
 import tw from 'tailwind-styled-components';
 
-interface ArtItemProps {
-  biddingItem: BidArtworkForm;
+interface BidItemProps {
+  biddingItem: BidArtwork;
   [key: string]: any;
   handleOption?: () => void;
 }
 
-const ArtItemTag = tw.section<ArtItemProps>`
+const BidItemTag = tw.section<BidItemProps>`
 flex mt-6 border-b last:border-none border-[#EDEDED] pb-6 relative
 `;
 
-export default function BidArtItem({
+export default function BidItem({
   biddingItem,
   handleOption,
   ...rest
-}: ArtItemProps) {
+}: BidItemProps) {
   const router = useRouter();
   return (
-    <ArtItemTag
+    <BidItemTag
       {...rest}
       onClick={() => {
         router.push(`/auction/${biddingItem?.id}`);
@@ -31,7 +31,7 @@ export default function BidArtItem({
           alt="example"
           src={biddingItem?.mainImage || '/svg/example/example_picture_col.svg'}
           fill
-          className="object-fill"
+          className="object-cover"
         />
       </article>
       <article className="ml-3 pt-1">
@@ -52,6 +52,6 @@ export default function BidArtItem({
           </p>
         </div>
       </article>
-    </ArtItemTag>
+    </BidItemTag>
   );
 }

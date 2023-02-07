@@ -2,23 +2,23 @@ import Image from 'next/image';
 import React from 'react';
 import tw from 'tailwind-styled-components';
 
-interface SuccessBidArtItemProps {
-  biddingItem: SuccessfulBidArtworkForm;
+interface SuccessBidItemProps {
+  biddingItem: SuccessfulBidArtwork;
   [key: string]: any;
   handleOption?: () => void;
 }
 
-const SuccessBidArtItemTag = tw.section<SuccessBidArtItemProps>`
+const SuccessBidItemTag = tw.section<SuccessBidItemProps>`
 flex mt-6 border-b last:border-none border-[#EDEDED] pb-6 relative
 `;
 
-export default function SuccessBidArtItem({
+export default function SuccessBidItem({
   biddingItem,
   handleOption,
   ...rest
-}: SuccessBidArtItemProps) {
+}: SuccessBidItemProps) {
   return (
-    <SuccessBidArtItemTag {...rest}>
+    <SuccessBidItemTag {...rest}>
       <article className="relative h-[100px] w-[82px] overflow-hidden rounded">
         <Image
           alt="example"
@@ -41,6 +41,6 @@ export default function SuccessBidArtItem({
           </p>
         </div>
       </article>
-    </SuccessBidArtItemTag>
+    </SuccessBidItemTag>
   );
 }
