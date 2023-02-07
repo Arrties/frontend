@@ -14,6 +14,7 @@ import {
 } from '@hooks/queries/useGetSearchArtWork';
 import { useDeleteAllWord } from '@hooks/mutations/useDeleteWord';
 import FilterDropdown from '@components/search/FilterDropdown';
+import KeywordBox from '@components/common/KeywordBox';
 
 interface Genre {
   id: string;
@@ -104,7 +105,7 @@ export default function Search() {
       {searchWord ? (
         <div>
           <FilterDropdown setStatus={setStatus} />
-          <div className="flex flex-wrap justify-between gap-y-2 px-5 py-5">
+          <div className="flex flex-wrap justify-between gap-y-2  px-2 py-5">
             {searchResults?.map((artwork: SearchArtWork, idx) => (
               <SearchItem artwork={artwork} key={+idx} />
             ))}
@@ -117,13 +118,11 @@ export default function Search() {
               <div className="text-base font-semibold ">장르</div>
               <div className="mt-2 flex flex-wrap">
                 {GENRELIST.map((genre) => (
-                  <div
+                  <KeywordBox
                     key={genre.id}
-                    className="my-[6px] mr-3 cursor-pointer  rounded-[19px] border py-1 px-3 text-14 font-bold text-[#767676]"
                     onClick={() => handleRecommendKeyword(genre.name)}
-                  >
-                    {genre.name}
-                  </div>
+                    text={genre.name}
+                  />
                 ))}
               </div>
             </div>
