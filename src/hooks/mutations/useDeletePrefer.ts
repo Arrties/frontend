@@ -11,7 +11,7 @@ const Querykey = {
   },
   '/home': {
     getDataQuery: 'useCustomizedArtWork',
-    convertFunc: (old, artWorkId) => {
+    convertFunc: (old, artWorkId: number) => {
       return {
         ...old,
         artworks: old.artworks.map((it) => {
@@ -26,7 +26,7 @@ const Querykey = {
   },
   '/home/view': {
     getDataQuery: 'useInfiniteArtWork',
-    convertFunc: (old, artWorkId) => {
+    convertFunc: (old, artWorkId: number) => {
       console.log(old);
       return {
         ...old,
@@ -47,7 +47,7 @@ const Querykey = {
   },
 };
 
-const useDeletePrefer = (artWorkId: number, path) => {
+const useDeletePrefer = (artWorkId: number, path: string) => {
   return useMutation<any, Error>(
     'useDeletePrefer',
     () => artworkApi.deletePrefer(artWorkId),
