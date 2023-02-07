@@ -12,7 +12,6 @@ const initialState: UserState = {
   password: '',
   email: '',
   nickname: '',
-  telephone: '',
 
   keywords: [], //user
 
@@ -37,7 +36,6 @@ const userSlice = createSlice({
       password: action.payload.password,
       email: action.payload.email,
       nickname: action.payload.nickname,
-      telephone: action.payload.telephone,
     }),
     setKeywords: (state: UserState, action: PayloadAction<string[]>) => ({
       ...state,
