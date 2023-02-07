@@ -78,6 +78,7 @@ export default function Search() {
 
   const handleRecentWord = ({ word }) => {
     setSearchWord(word);
+    router.push(`search/?word=${word}`);
     setValue(word);
   };
 
@@ -87,6 +88,7 @@ export default function Search() {
 
   const handleRecommendKeyword = (keyword: string) => {
     setValue(keyword);
+    router.push(`search/?word=${keyword}`);
     setSearchWord(keyword);
   };
 
