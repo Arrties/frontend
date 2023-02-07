@@ -11,6 +11,7 @@ const createClient = (endpoint) => {
     debug: (res) => {
       console.log(res);
     },
+    reconnectDelay: 0,
   });
   client.webSocketFactory = () => {
     const socketIn = new SockJS(

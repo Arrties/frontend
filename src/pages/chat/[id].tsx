@@ -56,11 +56,17 @@ export default function ChatRoom() {
   const connect = async () => {
     client.current = await createClient('/ws-connection');
     client.current.onConnect = await onConnected;
+    client.current.onDisconnect = await onDisconnected;
     await client.current.activate();
   };
 
+  // connect > subscribe >
+
   const onConnected = () => {
     subscribe(client.current, id, subscribeCallback, true);
+  };
+  const onDisconnected = () => {
+    console.log('disconnect');
   };
 
   const subscribeCallback = () => {
@@ -68,8 +74,17 @@ export default function ChatRoom() {
     refetchChatRoom();
   };
 
+  const disconnect = () => {
+    if (client != null && client.current.connected) {
+      client.current.deactivate();
+    }
+  };
+
   useEffect(() => {
     connect();
+    return () => {
+      disconnect();
+    };
   }, []);
 
   const onSubmit = (form: { message: string; image: FileList }) => {

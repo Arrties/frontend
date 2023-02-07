@@ -32,8 +32,16 @@ export default function Chat() {
 
   useEffect(() => {
     connect();
+    return () => {
+      disconnect();
+    };
   }, [chatRoomList.length]);
 
+  const disconnect = () => {
+    if (client != null && client.current.connected) {
+      client.current.deactivate();
+    }
+  };
   return (
     <>
       <Layout>
@@ -59,7 +67,6 @@ export default function Chat() {
       </Layout>
       <Tab
         handler={() => {
-          console.log(1);
           client.current.forceDisconnect();
         }}
       />
