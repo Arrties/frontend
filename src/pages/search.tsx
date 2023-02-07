@@ -42,11 +42,6 @@ interface DefaultProps {
   [key: string]: any;
 }
 
-const components = [
-  { page: 'Intro', component: 'IntroComponent' },
-  { page: 'Result', component: 'StepOneComponent' },
-];
-
 const SearchBox = tw.header<DefaultProps>`
 flex justify-between items-center font-semibold relative h-[64px] mt-7
 `;
@@ -61,8 +56,6 @@ export default function Search() {
   const { data: searchResults } = useGetSearch(searchWord, status);
   const { data: RecentWords } = useGetRecentSearch();
   const { mutate: deleteAllWords } = useDeleteAllWord();
-
-  const [currentIndex, setCurrentIndex] = useState(0);
 
   const handleValue = (e) => {
     setValue(() => e.target.value);
@@ -103,7 +96,6 @@ export default function Search() {
           className="grow-[1]"
           onClick={() => {
             setValue('');
-            setCurrentIndex(0);
             router.back();
           }}
         >
