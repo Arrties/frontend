@@ -10,8 +10,8 @@ export default function FilterDropdown({ setStatus }: FilterDropdownProps) {
   const [selected, setSelected] = useState<string[]>([]);
 
   const handleMenu = (status: string) => {
-    setStatus(() => [status]);
-    setSelected(() => [status]);
+    setStatus([status]);
+    setSelected([status]);
   };
   return (
     <div>
@@ -42,8 +42,8 @@ export default function FilterDropdown({ setStatus }: FilterDropdownProps) {
                 <button
                   className="flex w-full items-center justify-between border-b-[1px] py-3 px-2 text-sm"
                   onClick={() => {
-                    setStatus(() => []);
-                    setSelected(() => []);
+                    setStatus([]);
+                    setSelected([]);
                   }}
                 >
                   모두
