@@ -59,7 +59,9 @@ export default function Tab() {
           <div
             className="m-auto cursor-pointer"
             key={tabItem.id}
-            onClick={() => handleTabItem(tabItem.name)}
+            onClick={() => {
+              handleTabItem(tabItem.name);
+            }}
           >
             <div className="flex-col items-center justify-center">
               <Image

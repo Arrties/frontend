@@ -39,18 +39,18 @@ export default function Chatroom({ chatRoom }: ChatRoomProps) {
         className="mr-2"
       />
       <article className="flex flex-col">
-        <div className="align-center flex  ">
-          <p className="px-2 text-14 font-bold ">
+        <div className="flex items-center">
+          <p className="px-2 text-14 font-bold">
             {chatRoom?.otherMember?.name}
           </p>
           <p className="text-10 text-[#767676]">
             {chatRoom?.lastMessage?.sendDate}
           </p>
         </div>
-        <MessageBox>{chatRoom?.lastMessage?.message}</MessageBox>
+        <MessageBox>{chatRoom?.lastMessage?.content}</MessageBox>
       </article>
       {!!chatRoom.unreadCount && (
-        <article className="absolute right-5 flex h-[20px] w-[20px] items-center justify-center rounded-full bg-[#FC6554] text-12 text-[#FFF]">
+        <article className="absolute right-16 flex h-[20px] w-[20px] items-center justify-center rounded-full bg-[#FC6554] text-12 text-[#FFF]">
           {chatRoom?.unreadCount}
         </article>
       )}
