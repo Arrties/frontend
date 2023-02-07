@@ -72,7 +72,7 @@ export default function Search() {
   };
 
   const onSubmit = () => {
-    router.push(`search/?page=${value}`);
+    router.push(`search/?word=${value}`);
     setSearchWord(value);
   };
 
