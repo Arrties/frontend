@@ -23,12 +23,13 @@ export default function NoticeItem({ notice, refetchNotice }: NoticeItemProps) {
     .replace('ago', '전');
   let title: string = notice.title;
   if (
-    notice?.title === '작품 등록 완료' ||
-    '작가 등록 완료' ||
-    '작품 낙찰 성공'
+    ['작품 등록 완료', '작가 등록 완료', '작품 낙찰 성공'].includes(
+      notice?.title,
+    )
   ) {
     title += ' 🎉';
   }
+  console.log(notice?.title);
 
   const icon = {
     '작가 등록 완료 🎉': ['post', '/profile/edit'],
