@@ -21,15 +21,13 @@ export default function NoticeItem({ notice, refetchNotice }: NoticeItemProps) {
     .replace('days', '일')
     .replace('hours', '시간')
     .replace('ago', '전');
-  let title;
+  let title: string = notice.title;
   if (
     notice?.title === '작품 등록 완료' ||
     '작가 등록 완료' ||
     '작품 낙찰 성공'
   ) {
-    title = notice.title + ' 🎉';
-  } else {
-    title = notice.title;
+    title += ' 🎉';
   }
 
   const icon = {
