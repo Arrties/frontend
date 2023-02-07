@@ -3,12 +3,12 @@ import { useQuery } from 'react-query';
 
 const useGetDetail = (artWorkId: number) => {
   return useQuery<ArtworkDetail, Error>(
-    'useGetDetail',
+    ['useGetDetail', artWorkId],
     () => artworkApi.getDetail(artWorkId),
     {
       retry: false,
       refetchOnWindowFocus: false,
-      enabled: !!artWorkId,
+      enabled: !isNaN(artWorkId),
     },
   );
 };
