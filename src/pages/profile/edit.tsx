@@ -108,6 +108,7 @@ export default function Edit() {
 
     formData.append('nickname', nickname);
     formData.append('email', data?.email!);
+    formData.append('telephone', data?.telephone!);
 
     if (profile && profile?.length) {
       //유저가 프로필을 변환하였다면

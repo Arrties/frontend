@@ -77,6 +77,7 @@ export default function Join02() {
         userId,
         nickname,
         password,
+        telephone,
         email,
       }),
     );

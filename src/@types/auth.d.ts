@@ -8,6 +8,7 @@ interface User {
   email: string;
   nickname: string;
   image?: any;
+  telephone?: string;
   id?: number;
 }
 
