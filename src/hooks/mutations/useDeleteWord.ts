@@ -9,7 +9,6 @@ export const useDeleteWord = (wordId: number) => {
     {
       onMutate: async () => {
         await queryClient.cancelQueries({ queryKey: ['useDeleteWord'] });
-        console.log(wordId);
         const previousValue = queryClient.getQueryData(['useGetRecentSearch']);
         queryClient.setQueryData(['useGetRecentSearch'], (old: any) =>
           old.filter((t) => t.id !== wordId),
