@@ -58,13 +58,13 @@ export default function NoticeItem({ notice, refetchNotice }: NoticeItemProps) {
         src={`/svg/icons/notice/icon_notice_${
           icon[title] && icon[title][0]
         }.svg`}
-        width="40"
-        height="0"
-        className="ml-2 mr-4"
+        width={37}
+        height={37}
+        className="ml-1 mr-3"
       />
       <section className="flex flex-col leading-5">
         <p className="text-[12px] font-bold">{title}</p>
-        <p className="flex w-[240px] justify-between text-[14px]">
+        <p className="flex w-[260px] justify-between text-[14px]">
           {notice.message}
         </p>
         <p className="text-[10px] text-[#999999]">{modifiedDate}</p>
