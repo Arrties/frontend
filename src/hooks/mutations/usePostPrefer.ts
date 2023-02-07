@@ -1,10 +1,15 @@
 import artworkApi from '@apis/artwork/artworkApi';
-import profileApi from '@apis/profile/profileApi';
 import { queryClient } from 'pages/_app';
 import { useMutation } from 'react-query';
 
 const Querykey = {
-  home: {
+  '/auction': {
+    getDataQuery: 'useGetDetail',
+    convertFunc: (old) => {
+      return { ...old, pick: true };
+    },
+  },
+  '/home': {
     getDataQuery: 'useCustomizedArtWork',
     convertFunc: (old, artWorkId) => {
       return {
@@ -19,15 +24,30 @@ const Querykey = {
       };
     },
   },
-  auction: {
-    getDataQuery: 'useGetDetail',
-    convertFunc: (old) => {
-      return { ...old, pick: true };
+  '/home/view': {
+    getDataQuery: 'useInfiniteArtWork',
+    convertFunc: (old, artWorkId) => {
+      console.log(old);
+      return {
+        ...old,
+        pages: old.pages.map((page) => {
+          return {
+            ...page,
+            artworks: page.artworks.map((artwork) => {
+              if (artwork.id === artWorkId) {
+                return { ...artwork, pick: true };
+              } else {
+                return artwork;
+              }
+            }),
+          };
+        }),
+      };
     },
   },
 };
 
-const usePostPrefer = (artWorkId: number, path) => {
+const usePostPrefer = (artWorkId: number, path: string) => {
   return useMutation<any, Error>(
     'usePostPrefer',
     () => artworkApi.postPrefer(artWorkId),

@@ -11,8 +11,9 @@ export default function ExhibitionItem({
   pick,
 }: KeywordArtwork) {
   const router = useRouter();
-  const { mutate: deletePrefer } = useDeletePrefer(+id, 'home');
-  const { mutate: postPrefer } = usePostPrefer(+id, 'home');
+
+  const { mutate: deletePrefer } = useDeletePrefer(+id, router.asPath);
+  const { mutate: postPrefer } = usePostPrefer(+id, router.asPath);
   const handlePrefer = (e) => {
     e.stopPropagation();
     if (pick) {
