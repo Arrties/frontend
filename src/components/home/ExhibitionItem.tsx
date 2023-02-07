@@ -9,19 +9,16 @@ export default function ExhibitionItem({
   title,
   id,
   pick,
-  refetchCustomizedArtwork,
 }: KeywordArtwork) {
   const router = useRouter();
-  const { mutate: deletePrefer } = useDeletePrefer(+id);
-  const { mutate: postPrefer } = usePostPrefer(+id);
-  const handlePrefer = async (e) => {
+  const { mutate: deletePrefer } = useDeletePrefer(+id, 'home');
+  const { mutate: postPrefer } = usePostPrefer(+id, 'home');
+  const handlePrefer = (e) => {
     e.stopPropagation();
     if (pick) {
-      await deletePrefer();
-      await refetchCustomizedArtwork();
+      deletePrefer();
     } else {
-      await postPrefer();
-      await refetchCustomizedArtwork();
+      postPrefer();
     }
   };
   return (

@@ -111,7 +111,6 @@ export default function Home() {
                     title={art.title}
                     id={art.id}
                     pick={art.pick}
-                    refetchCustomizedArtwork={refetchCustomizedArtwork}
                   />
                 </SwiperSlide>
               ),

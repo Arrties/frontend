@@ -1,8 +1,33 @@
 import artworkApi from '@apis/artwork/artworkApi';
+import profileApi from '@apis/profile/profileApi';
 import { queryClient } from 'pages/_app';
 import { useMutation } from 'react-query';
 
-const usePostPrefer = (artWorkId: number) => {
+const Querykey = {
+  home: {
+    getDataQuery: 'useCustomizedArtWork',
+    convertFunc: (old, artWorkId) => {
+      return {
+        ...old,
+        artworks: old.artworks.map((it) => {
+          if (it.id === artWorkId) {
+            return { ...it, pick: true };
+          } else {
+            return it;
+          }
+        }),
+      };
+    },
+  },
+  auction: {
+    getDataQuery: 'useGetDetail',
+    convertFunc: (old) => {
+      return { ...old, pick: true };
+    },
+  },
+};
+
+const usePostPrefer = (artWorkId: number, path) => {
   return useMutation<any, Error>(
     'usePostPrefer',
     () => artworkApi.postPrefer(artWorkId),
@@ -10,21 +35,23 @@ const usePostPrefer = (artWorkId: number) => {
       retry: false,
       onMutate: async () => {
         await queryClient.cancelQueries({ queryKey: ['usePostPrefer'] });
-        const previousValue = queryClient.getQueryData(['useGetDetail']);
-        queryClient.setQueryData(['useGetDetail'], (old: any) => {
-          return {
-            ...old,
-            preferred: true,
-          };
+        const previousValue = queryClient.getQueryData([
+          Querykey[path].getDataQuery,
+        ]);
+        queryClient.setQueryData([Querykey[path].getDataQuery], (old: any) => {
+          return Querykey[path].convertFunc(old);
         });
         return { previousValue };
       },
       onError: (context: any) => {
-        queryClient.setQueryData(['useGetDetail'], context.previousValue);
+        queryClient.setQueryData(
+          [Querykey[path].getDataQuery],
+          context.previousValue,
+        );
       },
       onSettled: () => {
         queryClient.invalidateQueries({
-          queryKey: ['useGetDetail'],
+          queryKey: [Querykey[path].getDataQuery],
         });
       },
     },

@@ -17,8 +17,8 @@ export default function Detail() {
   const { data: detailData } = useGetDetail(artWorkId);
   const { artWork, artist } = detailData || {};
   const { data: userInfo } = useGetProfile();
-  const { mutate: postPrefer } = usePostPrefer(artWork?.id!);
-  const { mutate: deletePrefer } = useDeletePrefer(artWork?.id!);
+  const { mutate: postPrefer } = usePostPrefer(artWork?.id!, 'auction');
+  const { mutate: deletePrefer } = useDeletePrefer(artWork?.id!, 'auction');
   const [days, hours, minutes, seconds] = useCountDown?.(
     detailData?.endDate || '',
   );
