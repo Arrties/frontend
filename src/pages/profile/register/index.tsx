@@ -23,7 +23,7 @@ export default function Register() {
     const formData = new FormData();
     formData.append('certificationImage', fileState[0].file);
     await profileApi.patchProfile(formData);
-    router.push('/profile/complete');
+    router.push('/profile/register/complete');
   };
 
   const file = watch('file');
@@ -49,6 +49,7 @@ export default function Register() {
         right_message="다음"
         handleRightButton={handleRightButton}
         message="작가 등록"
+        focused={!!file}
       />
       <section className="absolute inset-x-0 flex items-start bg-[#F8F8FA] px-4 py-6">
         <Image
