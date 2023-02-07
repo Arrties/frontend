@@ -29,8 +29,8 @@ export class ArtworkApi {
     return data;
   }
 
-  async getExhibitionItem(artworkId: number): Promise<ExhibitionArtWork> {
-    const { data } = await instance.get(`/exhibit/art-works/${artworkId}`);
+  async getExhibitionItem(artWorkId: number): Promise<ExhibitionArtWork> {
+    const { data } = await instance.get(`/exhibit/art-works/${artWorkId}`);
     return data;
   }
   async getBid(): Promise<BidArtwork> {

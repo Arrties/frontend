@@ -20,8 +20,8 @@ interface inputForm {
 
 export default function Bidding() {
   const router = useRouter();
-  const artWorkId = router.query.id;
-  const { data } = useGetBiddingHistory(+artWorkId!);
+  const artWorkId = Number(router.query.id);
+  const { data } = useGetBiddingHistory(artWorkId);
   const { artWork, auction, biddingList, totalBiddingCount } = data || {};
   const { mutate } = usePutBiddng(+artWorkId!);
   const [days, hours, minutes, seconds] = useCountDown?.(
