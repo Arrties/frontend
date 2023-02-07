@@ -47,9 +47,9 @@ ActivityLists = isUser
       ...ActivityLists,
       {
         id: '3',
-        text: '작품 목록',
-        icon: '/svg/icons/icon_picture_black.svg',
-        path: '/auction',
+        text: '나의 경매',
+        icon: '/svg/icons/icon_bid.svg',
+        path: '/profile/bid',
       },
     ]
   : [
