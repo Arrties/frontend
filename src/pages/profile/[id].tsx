@@ -9,6 +9,7 @@ import { useRouter } from 'next/router';
 import { Tab } from '@headlessui/react';
 import usePostPick from '@hooks/mutations/usePostPick';
 import useDeletePick from '@hooks/mutations/useDeletePick';
+import useGetProfile from '@hooks/queries/useGetProfile';
 
 interface defaultProps {
   [key: string]: any;
@@ -28,8 +29,10 @@ export default function PickDetail() {
 
   const { data: pickDetail } = useGetPickDetail(artistId);
   const { member, artworks, pick } = pickDetail || {};
+  const { data: userInfo } = useGetProfile();
   const { mutate: postPrefer } = usePostPick(artistId);
   const { mutate: deletePrefer } = useDeletePick(artistId);
+  const isMine = userInfo?.id === artistId;
 
   const handlePick = async () => {
     if (pick) {
@@ -56,14 +59,16 @@ export default function PickDetail() {
           <span className="text-14">{member?.education}</span>
         </div>
 
-        <Image
-          alt="like"
-          src={`/svg/icons/icon_book_mark${pick ? '_focused' : ''}.svg`}
-          width="20"
-          height="0"
-          className="absolute right-5 cursor-pointer"
-          onClick={handlePick}
-        />
+        {!isMine && (
+          <Image
+            alt="like"
+            src={`/svg/icons/icon_book_mark${pick ? '_focused' : ''}.svg`}
+            width="20"
+            height="0"
+            className="absolute right-5 cursor-pointer"
+            onClick={handlePick}
+          />
+        )}
       </PickDetailContainer>
 
       <Tab.Group>
