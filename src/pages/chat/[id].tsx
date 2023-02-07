@@ -27,7 +27,7 @@ export default function ChatRoom() {
   const client = useRef({}) as React.MutableRefObject<StompJs.Client>;
   const scrollRef: any = useRef();
 
-  const id = parseInt(router.query.id as string, 10)!;
+  const id = Number(router.query.id);
 
   const { register, handleSubmit, watch, reset } = useForm<ContentForm>();
   const { data: chatRoom, refetch: refetchChatRoom } = useGetChatRoom(+id);
