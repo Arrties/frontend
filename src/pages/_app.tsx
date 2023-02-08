@@ -17,9 +17,7 @@ const queryClient = new QueryClient({
       suspense: true,
       useErrorBoundary: true,
     },
-    mutations: {
-      useErrorBoundary: true,
-    },
+    mutations: { retry: 0, useErrorBoundary: true },
   },
 });
 const persistor = persistStore(store);
