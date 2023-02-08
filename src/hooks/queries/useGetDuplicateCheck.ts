@@ -24,6 +24,7 @@ const useGetDuplicateCheck = ({ userId, email, nickname }: DuplicateCheck) => {
       ...query,
       retry: false,
       refetchOnWindowFocus: false,
+      suspense: false,
     })),
   );
 };

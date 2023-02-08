@@ -16,7 +16,6 @@ interface KeywordArtwork {
   title: string;
   education: string;
   pick: boolean;
-  refetchCustomizedArtwork: () => void;
 }
 
 interface CustomizeArtwork {

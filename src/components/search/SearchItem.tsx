@@ -9,8 +9,8 @@ interface ArtworkForm {
 
 export default function SearchItem({ artwork }: ArtworkForm) {
   const router = useRouter();
-  const { mutate: deletePrefer } = useDeletePrefer(artwork.id);
-  const { mutate: postPrefer } = usePostPrefer(artwork.id);
+  const { mutate: deletePrefer } = useDeletePrefer(artwork.id, router.asPath);
+  const { mutate: postPrefer } = usePostPrefer(artwork.id, router.asPath);
   const handlePrefer = (artworkPick) => {
     if (artworkPick) {
       deletePrefer();
