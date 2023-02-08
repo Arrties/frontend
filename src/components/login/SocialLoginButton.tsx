@@ -27,20 +27,20 @@ export default function SocialLoginButton({
 }: SocialLoginButtonProps) {
   return kind === 'kakao' ? (
     <Link
-      href={`https://kauth.kakao.com/oauth/authorize?client_id=${CONFIG.API_KEYS.KAKAO}&redirect_uri=http://localhost:3000/auth/kakao/callback&response_type=code`}
+      href={`https://kauth.kakao.com/oauth/authorize?client_id=${CONFIG.API_KEYS.KAKAO}&redirect_uri=${CONFIG.DOMAIN}/auth/kakao/callback&response_type=code`}
     >
       <KaKaoButton {...rest}>
         <Image src={kakao} width={20} height={20} alt="kakao" />
-        <span className="text-[#3B1E1E] ml-2">카카오톡으로 로그인</span>
+        <span className="ml-2 text-[#3B1E1E]">카카오톡으로 로그인</span>
       </KaKaoButton>
     </Link>
   ) : (
     <Link
-      href={`https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=${CONFIG.API_KEYS.NAVER}&state=${STATESTRING}&redirect_uri=http://localhost:3000/auth/naver/callback`}
+      href={`https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=${CONFIG.API_KEYS.NAVER}&state=${STATESTRING}&redirect_uri=${CONFIG.DOMAIN}/auth/naver/callback`}
     >
       <NaverButton {...rest}>
         <Image src={naver} width={20} height={20} alt="kakao" />
-        <span className="text-white ml-2">네이버로 로그인</span>
+        <span className="ml-2 text-white">네이버로 로그인</span>
       </NaverButton>
     </Link>
   );

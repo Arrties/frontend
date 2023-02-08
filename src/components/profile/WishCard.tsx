@@ -13,7 +13,7 @@ rounded-lg hover:ring-1 hover:ring-blue-500 cursor-pointer relative
 
 export default function WishCard({ wish }) {
   const router = useRouter();
-  const { mutate: deletePrefer } = useDeletePrefer(wish?.id);
+  const { mutate: deletePrefer } = useDeletePrefer(wish?.id, '/wish');
   const handlePrefer = (e) => {
     e.stopPropagation();
     deletePrefer();

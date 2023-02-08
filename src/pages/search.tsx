@@ -5,7 +5,7 @@ import back from '@public/svg/icons/icon_back.svg';
 import Image from 'next/image';
 import tw from 'tailwind-styled-components';
 import { useRouter } from 'next/router';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import RecentSearchBox from '@components/search/RecentSearchBox';
 import {
@@ -14,6 +14,7 @@ import {
 } from '@hooks/queries/useGetSearchArtWork';
 import { useDeleteAllWord } from '@hooks/mutations/useDeleteWord';
 import FilterDropdown from '@components/search/FilterDropdown';
+import KeywordBox from '@components/common/KeywordBox';
 
 interface Genre {
   id: string;
@@ -56,10 +57,6 @@ export default function Search() {
   const { data: RecentWords } = useGetRecentSearch();
   const { mutate: deleteAllWords } = useDeleteAllWord();
 
-  const handleBackBtn = () => {
-    router.back();
-  };
-
   const handleValue = (e) => {
     setValue(() => e.target.value);
     if (!e.target.value) {
@@ -68,11 +65,13 @@ export default function Search() {
   };
 
   const onSubmit = () => {
+    router.push(`search/?word=${value}`);
     setSearchWord(value);
   };
 
   const handleRecentWord = ({ word }) => {
     setSearchWord(word);
+    router.push(`search/?word=${word}`);
     setValue(word);
   };
 
@@ -82,13 +81,24 @@ export default function Search() {
 
   const handleRecommendKeyword = (keyword: string) => {
     setValue(keyword);
+    router.push(`search/?word=${keyword}`);
     setSearchWord(keyword);
   };
+
+  const page = useMemo(() => {
+    return router.query.word !== undefined ? router.query.word : 'Intro';
+  }, [router.query]);
 
   return (
     <Layout>
       <SearchBox>
-        <div className="grow-[1]" onClick={() => handleBackBtn()}>
+        <div
+          className="grow-[1]"
+          onClick={() => {
+            setValue('');
+            router.back();
+          }}
+        >
           <Image src={back} alt="back" />
         </div>
         <form className="grow-[5]" onSubmit={handleSubmit(onSubmit)}>
@@ -101,10 +111,10 @@ export default function Search() {
           />
         </form>
       </SearchBox>
-      {searchWord ? (
+      {page !== 'Intro' ? (
         <div>
           <FilterDropdown setStatus={setStatus} />
-          <div className="flex flex-wrap justify-between gap-y-2 px-5 py-5">
+          <div className="flex flex-wrap justify-between gap-y-2  px-2 py-5">
             {searchResults?.map((artwork: SearchArtWork, idx) => (
               <SearchItem artwork={artwork} key={+idx} />
             ))}
@@ -117,20 +127,18 @@ export default function Search() {
               <div className="text-base font-semibold ">장르</div>
               <div className="mt-2 flex flex-wrap">
                 {GENRELIST.map((genre) => (
-                  <div
+                  <KeywordBox
                     key={genre.id}
-                    className="my-[6px] mr-3 cursor-pointer  rounded-[19px] border py-1 px-3 text-14 font-bold text-[#767676]"
                     onClick={() => handleRecommendKeyword(genre.name)}
-                  >
-                    {genre.name}
-                  </div>
+                    text={genre.name}
+                  />
                 ))}
               </div>
             </div>
           </section>
         </div>
       )}
-      {RecentWords?.length && !searchWord ? (
+      {RecentWords?.length && page === 'Intro' && (
         <div>
           <section className="mt-[38px]">
             <div className="flex justify-between">
@@ -155,8 +163,6 @@ export default function Search() {
             </div>
           </section>
         </div>
-      ) : (
-        <div></div>
       )}
     </Layout>
   );

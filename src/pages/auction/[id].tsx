@@ -17,8 +17,8 @@ export default function Detail() {
   const { data: detailData } = useGetDetail(artWorkId);
   const { artWork, artist } = detailData || {};
   const { data: userInfo } = useGetProfile();
-  const { mutate: postPrefer } = usePostPrefer(artWork?.id!);
-  const { mutate: deletePrefer } = useDeletePrefer(artWork?.id!);
+  const { mutate: postPrefer } = usePostPrefer(artWork?.id!, '/auction');
+  const { mutate: deletePrefer } = useDeletePrefer(artWork?.id!, '/auction');
   const [days, hours, minutes, seconds] = useCountDown?.(
     detailData?.endDate || '',
   );
@@ -222,7 +222,7 @@ export default function Detail() {
           <div className="mt-8 border-y border-y-[#EDEDED] py-8">
             <div className="flex w-[74px] flex-col items-center justify-center">
               <p className="w-full text-center font-medium">작가프로필</p>
-              <div className="my-2 flex aspect-square w-[4rem] items-center justify-center rounded-full border border-[#999999]">
+              <div className="relative my-2 flex aspect-square w-[4rem] items-center justify-center rounded-full border border-[#999999]">
                 <Image
                   src={
                     artist?.artistImage || '/svg/icons/profile/icon_avatar.svg'
@@ -230,10 +230,11 @@ export default function Detail() {
                   width={35}
                   height={35}
                   alt="profile"
-                  className="cursor-pointer"
+                  className="cursor-pointer rounded-full"
                   onClick={() => {
                     router.push(`/profile/${artist?.id}`);
                   }}
+                  fill
                 />
               </div>
               <div className="w-fulltext-center ">{artist?.artistName}</div>

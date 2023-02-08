@@ -10,8 +10,9 @@ import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/router';
 import { isUser } from '@utils/isUser';
 import { makeBlob } from '@utils/makeBlob';
-import profileApi from '@apis/profile/profileApi';
 import { useGetDuplicateCheck } from '@hooks/queries/useGetDuplicateCheck';
+import { usePatchArtist, usePatchUser } from '@hooks/mutations/usePatchMember';
+import Loader from '@components/common/Loader';
 interface checkForm {
   nickname: boolean;
   email: boolean;
@@ -24,6 +25,9 @@ export default function Edit() {
 
   const { data } = useGetProfile();
   const [userInfo, setUserInfo] = useState<Member | null>(null);
+  const { mutate: mutateUser, isLoading: isPatchUserLoading } = usePatchUser();
+  const { mutate: mutateArtist, isLoading: isPatchArtistLoading } =
+    usePatchArtist();
 
   useEffect(() => {
     if (!data) return;
@@ -40,7 +44,6 @@ export default function Edit() {
     trigger,
   } = useForm<Member>({ mode: 'onTouched' });
   const nickname = watch('nickname');
-  const email = watch('email');
 
   const [enabled, setEnabled] = useState<DuplicateCheck>({
     userId: '',
@@ -53,21 +56,11 @@ export default function Edit() {
     setEnabled((prev) => ({ ...prev, nickname: '' }));
   }, [nickname]);
 
-  useEffect(() => {
-    setIsValidate((prev) => ({ ...prev, email: false }));
-    setEnabled((prev) => ({ ...prev, email: '' }));
-  }, [email]);
-
   const nicknameResult = results[1];
-  const emailResult = results[2];
   useEffect(() => {
     if (nicknameResult.isSuccess) {
       setIsValidate((prev) => ({ ...prev, nickname: true }));
       clearErrors('nickname');
-    }
-    if (emailResult.isSuccess) {
-      setIsValidate((prev) => ({ ...prev, email: true }));
-      clearErrors('email');
     }
     if (
       nicknameResult.error &&
@@ -79,14 +72,7 @@ export default function Edit() {
         message: '이미 존재하는 닉네임 입니다.',
       });
     }
-    if (emailResult.error && emailResult.error.code === 'EXIST_USER_EMAIL') {
-      setIsValidate((prev) => ({ ...prev, email: false }));
-      setError('email', {
-        type: 'email doublecheck',
-        message: '이미 존재하는 이메일 입니다.',
-      });
-    }
-  }, [nicknameResult.isFetching, emailResult.isFetching]);
+  }, [nicknameResult.isFetching]);
 
   const router = useRouter();
   const profile = watch('image');
@@ -107,16 +93,9 @@ export default function Edit() {
   }, [profile]);
 
   const onSubmit = async (form: Member) => {
-    const {
-      nickname,
-      email,
-      instagram,
-      behance,
-      education,
-      history,
-      description,
-    } = form;
-    if (!nickname || !email) return;
+    const { nickname, instagram, behance, education, history, description } =
+      form;
+    if (!nickname) return;
     if (!userInfo) return;
     if (!isValidate.nickname && userInfo.nickname !== form.nickname) {
       setError('nickname', {
@@ -125,17 +104,12 @@ export default function Edit() {
       });
       return;
     }
-    if (!isValidate.email && userInfo?.email !== form.email) {
-      setError('email', {
-        type: 'need email duplicate',
-        message: '이메일 중복체크를 해주세요',
-      });
-      return;
-    }
+
     const formData = new FormData();
 
     formData.append('nickname', nickname);
-    formData.append('email', email);
+    formData.append('email', data?.email!);
+    formData.append('telephone', data?.telephone!);
 
     if (profile && profile?.length) {
       //유저가 프로필을 변환하였다면
@@ -156,16 +130,14 @@ export default function Edit() {
       if (behance) formData.append('behance', behance);
     }
 
-    let response;
     if (isUser) {
-      response = await profileApi.patchUserInfo(formData);
+      mutateUser(formData);
     } else {
-      response = await profileApi.patchArtistInfo(formData);
-    }
-    if (response?.status === 200) {
-      router.push('/home');
+      mutateArtist(formData);
     }
   };
+
+  if (isPatchUserLoading || isPatchArtistLoading) return <Loader />;
 
   return (
     <Layout>
@@ -276,6 +248,7 @@ export default function Edit() {
         <Input
           type="text"
           label="이메일"
+          disabled
           defaultValue={userInfo?.email}
           placeholder="이메일을 입력해 주세요."
           $error={!!errors.email}
@@ -297,7 +270,14 @@ export default function Edit() {
           }}
           text={isValidate.email ? '사용가능' : '중복확인'}
         />
-        {errors.email ? <ErrorMessage message={errors.email.message} /> : ''}
+        {errors.email ? (
+          <ErrorMessage
+            message={errors.email.message}
+            className="text-[#999999]"
+          />
+        ) : (
+          ''
+        )}
       </section>
 
       {!isUser && (
@@ -308,9 +288,7 @@ export default function Edit() {
             defaultValue={userInfo?.education}
             placeholder="학교와 학위, 전공 등을 입력해 주세요."
             $error={!!errors.education}
-            register={register('education', {
-              required: true,
-            })}
+            register={register('education')}
           />
           {errors.education && (
             <ErrorMessage message={errors.education.message} />
@@ -321,9 +299,7 @@ export default function Edit() {
             defaultValue={userInfo?.history}
             placeholder="이력을 작성해 주세요."
             $error={!!errors.history}
-            register={register('history', {
-              required: true,
-            })}
+            register={register('history')}
           />
           {errors.history && <ErrorMessage message={errors.history.message} />}
           <Input
@@ -332,9 +308,7 @@ export default function Edit() {
             placeholder="소개를 작성해 주세요."
             defaultValue={userInfo?.description}
             $error={!!errors.description}
-            register={register('description', {
-              required: true,
-            })}
+            register={register('description')}
           />
           {errors.description && (
             <ErrorMessage message={errors.description.message} />
