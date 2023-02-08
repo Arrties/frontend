@@ -237,7 +237,7 @@ export default function Edit() {
           onClick={() => {
             trigger('nickname');
             if (!errors.nickname) {
-              setEnabled((prev) => ({ ...prev, nickname }));
+              setEnabled((prev) => ({ ...prev, nickname: watch('nickname') }));
             }
           }}
           text={isValidate.nickname ? '사용가능' : '중복확인'}
@@ -265,7 +265,7 @@ export default function Edit() {
           onClick={() => {
             trigger('email');
             if (!errors.email) {
-              setEnabled((prev) => ({ ...prev, email }));
+              setEnabled((prev) => ({ ...prev, email: watch('email') }));
             }
           }}
           text={isValidate.email ? '사용가능' : '중복확인'}
