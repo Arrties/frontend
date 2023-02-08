@@ -227,12 +227,14 @@ export default function Detail() {
                   src={
                     artist?.artistImage || '/svg/icons/profile/icon_avatar.svg'
                   }
+                  width={35}
+                  height={35}
                   alt="profile"
+                  className="cursor-pointer rounded-full"
                   onClick={() => {
                     router.push(`/profile/${artist?.id}`);
                   }}
                   fill
-                  className="rounded-full"
                 />
               </div>
               <div className="w-fulltext-center ">{artist?.artistName}</div>

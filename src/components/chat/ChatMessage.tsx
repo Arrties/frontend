@@ -29,7 +29,9 @@ export default function ChatMessage({
           <p className="max-w-[230px] rounded-r-xl rounded-bl-2xl bg-[#EDEDED] px-6 py-2 text-14 text-[#767676]">
             {content}
           </p>
-          <span className="px-2 text-10 text-[#767676]">{sendDate}</span>
+          <span className="px-2 text-10 text-[#767676]">
+            {moment(sendDate, 'YYYY-MM-DD-hh-mm-ss').format('LT')}
+          </span>
         </div>
       )}
     </div>
