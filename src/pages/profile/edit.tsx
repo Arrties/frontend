@@ -255,7 +255,7 @@ export default function Edit() {
         defaultValue={userInfo?.email}
         placeholder="이메일을 입력해 주세요."
         $error={!!errors.email}
-        className="disabled"
+        className="disabled text-[#999999]"
       />
 
       {!isUser && (

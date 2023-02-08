@@ -155,7 +155,7 @@ export default function ChatRoom() {
         </article>
         <div className="h-20" />
       </section>
-      <div className="fixed inset-x-0 bottom-0 mx-auto flex h-[70px] w-full max-w-[420px] justify-center bg-white">
+      <div className="fixed inset-x-0 bottom-0 mx-auto flex h-[70px] w-full max-w-[420px] justify-center bg-white px-[20px]">
         <form
           className="flex h-[50px] w-full items-center rounded-[24.5px] px-[10px]"
           onSubmit={handleSubmit(onSubmit)}
