@@ -29,7 +29,6 @@ export default function NoticeItem({ notice, refetchNotice }: NoticeItemProps) {
   ) {
     title += ' 🎉';
   }
-  console.log(notice?.title);
 
   const icon = {
     '작가 등록 완료 🎉': ['post', '/profile/edit'],
