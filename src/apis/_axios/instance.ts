@@ -52,7 +52,7 @@ instance.interceptors.response.use(
     if (isUnAuthError) {
       if (data?.code === 'TOKEN_INVALID') {
         alert('세션이 만료되었습니다. 다시 로그인해 주시기 바랍니다.');
-        window.location.href = `${process.env.NEXT_PUBLIC_CLIENT_BASE_URL}/auth/login`;
+        window.location.href = `${process.env.NEXT_PUBLIC_API_BASE_URL}/auth/login`;
         return;
       }
 
