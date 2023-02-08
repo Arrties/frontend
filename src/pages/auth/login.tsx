@@ -96,7 +96,7 @@ function Login() {
 
   return (
     <Layout>
-      <div className="mx-auto w-full">
+      <div className="mt-[33%] w-full">
         <div className="flex h-56 items-center justify-center">
           <Image
             alt=""
@@ -148,14 +148,14 @@ function Login() {
           <div className="mt-[34px]">
             <Button text="로그인" className="w-full" />
           </div>
-          <div className="mt-6 space-y-3">
+          {/* <div className="mt-6 space-y-3">
             <div>
               <SocialLoginButton kind="kakao" />
             </div>
             <div>
               <SocialLoginButton kind="naver" />
             </div>
-          </div>
+          </div> */}
           <p className="mt-3 w-full text-center text-12">
             계정을 잊으셨나요?&nbsp;
             <Link className="text-[#0099FF]" href="/auth/id">
@@ -166,7 +166,7 @@ function Login() {
               비밀번호 찾기
             </Link>
           </p>
-          <p className="mt-36 flex w-full items-center justify-center text-12 ">
+          <p className="mt-12 flex w-full items-center justify-center text-12 ">
             <span className="text-[#999999]">아직 회원이 아니신가요?</span>
             <Link className="ml-[2px]" href="/auth/join01">
               회원가입
