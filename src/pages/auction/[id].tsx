@@ -155,18 +155,14 @@ export default function Detail() {
             <div>
               <div className="flex items-center justify-between">
                 <span className="text-18 font-semibold">{artWork?.title}</span>
-                {!Number.isNaN(+days) && (
+                {!Number.isNaN(+days) && remaind > 0 && (
                   <span className="text-14">
                     <span className="rounded-l-md bg-[#F8F8FA] px-2 py-1 text-brand">
                       마감까지
                     </span>
 
                     <span className="rounded-r-md bg-brand px-2 py-1 text-[#FFFFFF]">
-                      {remaind < 0 ? (
-                        <span className="w-[66px] text-[14px] font-medium tracking-widest">
-                          00:00:00
-                        </span>
-                      ) : (
+                      {
                         <span
                           className={`${
                             +days >= 1 ? 'w-fit' : 'w-[66px]'
@@ -176,7 +172,7 @@ export default function Detail() {
                             ? 'D-' + days
                             : hours + ':' + minutes + ':' + seconds}
                         </span>
-                      )}
+                      }
                     </span>
                   </span>
                 )}
