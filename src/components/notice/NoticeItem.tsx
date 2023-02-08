@@ -26,6 +26,8 @@ export default function NoticeItem({ notice }: NoticeItemProps) {
     title += ' 🎉';
   }
 
+  console.log(notice);
+
   const icon = {
     '작가 등록 완료 🎉': ['post', '/profile/edit'],
     '작품 등록 완료 🎉': ['post', `/auction/${notice.data}`],
@@ -53,7 +55,7 @@ export default function NoticeItem({ notice }: NoticeItemProps) {
         className="mr-3"
       />
       <section
-        className="flex cursor-pointer flex-col leading-5"
+        className="flex cursor-pointer flex-col leading-5 max-[400px]:w-[230px] max-[355px]:w-[200px]"
         onClick={() => {
           router.push(icon[title][1]);
         }}
@@ -67,7 +69,7 @@ export default function NoticeItem({ notice }: NoticeItemProps) {
         alt="close"
         width={25}
         height={0}
-        className="cursor-pointer min-[400px]:ml-6"
+        className="cursor-pointer"
         onClick={() => deleteNotice()}
       />
     </li>
