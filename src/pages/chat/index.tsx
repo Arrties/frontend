@@ -49,7 +49,7 @@ export default function Chat() {
           채팅
         </section>
         {chatRoomList?.length ? (
-          <div className="absolute inset-x-0 mt-5 w-full ">
+          <div className="absolute inset-x-0 mt-5 w-full">
             {chatRoomList.map((chatRoom: ChatRoom) => (
               <Chatroom chatRoom={chatRoom} key={chatRoom.chatRoomId} />
             ))}

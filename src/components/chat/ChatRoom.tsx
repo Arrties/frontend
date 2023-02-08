@@ -2,6 +2,8 @@ import Image from 'next/image';
 import React from 'react';
 import { useRouter } from 'next/router';
 import styled from 'styled-components';
+import moment from 'moment';
+import 'moment/locale/ko';
 
 interface ChatRoomProps {
   chatRoom: ChatRoom;
@@ -45,7 +47,10 @@ export default function Chatroom({ chatRoom }: ChatRoomProps) {
             {chatRoom?.otherMember?.name}
           </p>
           <p className="text-10 text-[#767676]">
-            {chatRoom?.lastMessage?.sendDate}
+            {moment(
+              chatRoom?.lastMessage?.sendDate,
+              'YYYY-MM-DD-hh-mm-ss',
+            ).format('LT')}
           </p>
         </div>
         <MessageBox>{chatRoom?.lastMessage?.content}</MessageBox>
