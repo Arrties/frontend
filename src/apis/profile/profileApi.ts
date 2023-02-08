@@ -2,21 +2,19 @@ import instance from '@apis/_axios/instance';
 import { InquiryForm, IsNoticeForm } from './profileApi.type';
 
 export class ProfileApi {
-  async patchUserInfo(formData: any) {
-    const response = await instance.patch('/members', formData, {
+  async patchUser(formData: any) {
+    await instance.patch('/members', formData, {
       headers: {
         'Content-Type': 'multipart/form-data',
       },
     });
-    return response;
   }
-  async patchArtistInfo(formData: any) {
-    const response = await instance.patch('/artists', formData, {
+  async patchArtist(formData: any) {
+    await instance.patch('/artists', formData, {
       headers: {
         'Content-Type': 'multipart/form-data',
       },
     });
-    return response;
   }
 
   async getPick(): Promise<pickList[]> {
