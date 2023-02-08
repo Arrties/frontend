@@ -3,19 +3,16 @@ import moment from 'moment';
 import Image from 'next/image';
 import React from 'react';
 import { useRouter } from 'next/router';
+import useDeleteNotice from '@hooks/mutations/useDeleteNotice';
 
 interface NoticeItemProps {
   notice: Notice;
-  refetchNotice: () => void;
 }
 
-export default function NoticeItem({ notice, refetchNotice }: NoticeItemProps) {
+export default function NoticeItem({ notice }: NoticeItemProps) {
   const router = useRouter();
-  const handleRemove = async (e) => {
-    e.stopPropagation();
-    await profileApi.deleteNotice(notice?.id);
-    refetchNotice();
-  };
+  const { mutate: deleteNotice } = useDeleteNotice(notice.id);
+
   const modifiedDate = moment(notice.modifiedDate)
     .fromNow()
     .replace('days', '일')
@@ -29,7 +26,7 @@ export default function NoticeItem({ notice, refetchNotice }: NoticeItemProps) {
   ) {
     title += ' 🎉';
   }
-  console.log(notice?.title);
+  console.log(notice);
 
   const icon = {
     '작가 등록 완료 🎉': ['post', '/profile/edit'],
@@ -47,12 +44,7 @@ export default function NoticeItem({ notice, refetchNotice }: NoticeItemProps) {
   };
 
   return (
-    <li
-      className="text-medium relative flex border-b-[1px] py-3 last:border-none"
-      onClick={() => {
-        router.push(icon[title][1]);
-      }}
-    >
+    <li className="text-medium relative flex border-b-[1px] py-3 last:border-none">
       <Image
         alt="notice_icon"
         src={`/svg/icons/notice/icon_notice_${
@@ -62,7 +54,12 @@ export default function NoticeItem({ notice, refetchNotice }: NoticeItemProps) {
         height={37}
         className="ml-1 mr-3"
       />
-      <section className="flex flex-col leading-5">
+      <section
+        className="flex cursor-pointer flex-col leading-5"
+        onClick={() => {
+          router.push(icon[title][1]);
+        }}
+      >
         <p className="text-[12px] font-bold">{title}</p>
         <p className="flex w-[260px] justify-between text-[14px]">
           {notice.message}
@@ -75,7 +72,7 @@ export default function NoticeItem({ notice, refetchNotice }: NoticeItemProps) {
         width={25}
         height={0}
         className="absolute inset-y-0 right-[10px] bottom-0 top-0 m-auto cursor-pointer"
-        onClick={handleRemove}
+        onClick={() => deleteNotice()}
       />
     </li>
   );
