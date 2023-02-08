@@ -5,7 +5,7 @@ import useGetNotice from '@hooks/queries/useGetNotice';
 import Image from 'next/image';
 
 export default function Notice() {
-  const { data: noticeList = [], refetch: refetchNotice } = useGetNotice();
+  const { data: noticeList = [] } = useGetNotice();
   return (
     <Layout>
       <Navigate isRightButton={false} message="알림" />
@@ -13,11 +13,7 @@ export default function Notice() {
       {noticeList.length > 0 ? (
         <ul>
           {noticeList.map((notice: Notice) => (
-            <NoticeItem
-              notice={notice}
-              key={notice?.id}
-              refetchNotice={refetchNotice}
-            />
+            <NoticeItem notice={notice} key={notice?.id} />
           ))}
         </ul>
       ) : (
