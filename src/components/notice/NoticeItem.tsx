@@ -44,26 +44,28 @@ export default function NoticeItem({ notice }: NoticeItemProps) {
   };
 
   return (
-    <li className="text-medium relative flex border-b-[1px] py-3 last:border-none">
-      <Image
-        alt="notice_icon"
-        src={`/svg/icons/notice/icon_notice_${
-          icon[title] && icon[title][0]
-        }.svg`}
-        width={37}
-        height={37}
-        className="mr-3"
-      />
-      <section
-        className="flex cursor-pointer flex-col leading-5 max-[400px]:w-[230px] max-[355px]:w-[200px]"
-        onClick={() => {
-          router.push(icon[title][1]);
-        }}
-      >
-        <p className="text-[12px] font-bold">{title}</p>
-        <p className="flex justify-between text-[14px]">{notice.message}</p>
-        <p className="text-[10px] text-[#999999]">{modifiedDate}</p>
-      </section>
+    <li className="text-medium relative flex justify-between border-b-[1px] py-3 last:border-none">
+      <div className="flex">
+        <Image
+          alt="notice_icon"
+          src={`/svg/icons/notice/icon_notice_${
+            icon[title] && icon[title][0]
+          }.svg`}
+          width={37}
+          height={37}
+          className="mr-3"
+        />
+        <section
+          className="flex cursor-pointer flex-col leading-5 max-[400px]:w-[230px] max-[355px]:w-[200px]"
+          onClick={() => {
+            router.push(icon[title][1]);
+          }}
+        >
+          <p className="text-[12px] font-bold">{title}</p>
+          <p className="flex justify-between text-[14px]">{notice.message}</p>
+          <p className="text-[10px] text-[#999999]">{modifiedDate}</p>
+        </section>
+      </div>
       <Image
         src="/svg/icons/icon_grayClose.svg"
         alt="close"
