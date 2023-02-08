@@ -1,4 +1,3 @@
-import instance from '@apis/_axios/instance';
 import Button from '@components/common/Button';
 import Layout from '@components/common/Layout';
 import Navigate from '@components/common/Navigate';
@@ -11,6 +10,7 @@ import { Tab } from '@headlessui/react';
 import { useForm } from 'react-hook-form';
 import { useEffect, useState } from 'react';
 import { formatBytes } from '@utils/formatBytes';
+import usePostInquiry from '@hooks/mutations/usePostInquiry';
 
 interface InquiryForm {
   title: string;
@@ -29,10 +29,12 @@ interface InquiryForm {
 }
 
 export default function Inquiry() {
+  const [postData, setPostData] = useState<FormData>();
   const [fileLists, setFileLists] = useState<File[]>([]);
   const [fileSize, setFileSize] = useState<number>(0);
   const [selectedIndex, setSelectedIndex] = useState<number>(0);
-  const { data, refetch: inquiryRefetch } = useGetInquiry();
+  const { mutate: postInquiry } = usePostInquiry(postData);
+  const { data } = useGetInquiry();
 
   const router = useRouter();
   const handleLeftButton = () => {
@@ -49,13 +51,6 @@ export default function Inquiry() {
     });
     setFileLists(newFileLists);
     setFileSize((prev) => prev - targetSize);
-  };
-
-  const handleRemoveInquiry = async (targetId: number) => {
-    const response = await instance.delete(`/members/ask/${targetId}`);
-    inquiryRefetch();
-
-    return;
   };
 
   const clearForm = () => {
@@ -85,14 +80,25 @@ export default function Inquiry() {
     const formData = new FormData();
     formData.append('title', title);
     formData.append('content', content);
-    for (let i = 0; i < image.length; i++) {
-      formData.append('image', image[i]);
+    if (image.length) {
+      for (let i = 0; i < image.length; i++) {
+        formData.append('image', image[i]);
+        console.log(image[i]);
+      }
+    } else {
+      formData.append('image', new File([''], ''));
     }
-    const response = await instance.post('/members/ask', formData);
+    console.log(image);
+    setPostData(() => formData);
     clearForm();
-    inquiryRefetch();
     setSelectedIndex(1);
   };
+
+  useEffect(() => {
+    if (postData) {
+      postInquiry();
+    }
+  }, [postData]);
 
   return (
     <Layout>
@@ -103,10 +109,10 @@ export default function Inquiry() {
       />
       <Tab.Group selectedIndex={selectedIndex} onChange={setSelectedIndex}>
         <Tab.List>
-          <Tab className="mb-[28px] h-[32px] w-1/2 border-[#191919] text-16 font-bold ui-selected:border-b-[2px] ui-selected:text-[#191919] ui-not-selected:border-b-[1px] ui-not-selected:border-[#EDEDED] ui-not-selected:text-[#999999]">
+          <Tab className="h-[52px] w-1/2 border-[#191919] text-16 font-medium ui-selected:border-b-[2px] ui-selected:text-[#191919] ui-not-selected:border-b ui-not-selected:border-[#EDEDED] ui-not-selected:text-[#999999]">
             문의하기
           </Tab>
-          <Tab className="h-[32px] w-1/2 border-[#191919] text-16 font-bold ui-selected:border-b-[2px] ui-selected:text-[#191919] ui-not-selected:border-b-[1px] ui-not-selected:border-[#EDEDED] ui-not-selected:text-[#999999] ">
+          <Tab className="h-[52px] w-1/2 border-[#191919] text-16 font-medium ui-selected:border-b-[2px] ui-selected:text-[#191919] ui-not-selected:border-b ui-not-selected:border-[#EDEDED] ui-not-selected:text-[#999999]">
             문의내역확인
           </Tab>
         </Tab.List>
@@ -114,7 +120,7 @@ export default function Inquiry() {
           <Tab.Panel>
             <form autoComplete="off" onSubmit={handleSubmit(onSubmit)}>
               <section className="mb-5 flex flex-col">
-                <div className="mb-3 flex justify-between">
+                <div className="mb-3 mt-6 flex justify-between">
                   <label
                     htmlFor="title"
                     className="text-14 font-bold leading-8"
@@ -176,7 +182,7 @@ export default function Inquiry() {
                 <div>
                   <div className="flex">
                     <label htmlFor="fileImage">
-                      <div className="mr-0 flex h-[60px] w-[60px] flex-col items-center justify-center rounded border-[1px] border-[#DBDBDB]">
+                      <div className="mr-0 flex h-[60px] w-[60px] cursor-pointer flex-col items-center justify-center rounded border-[1px] border-[#DBDBDB]">
                         <Image
                           src="/svg/icons/icon_camera_black.svg"
                           alt="camera"
@@ -230,16 +236,16 @@ export default function Inquiry() {
                   {...register('image')}
                 />
               </section>
-              <section className="mt-[75px] flex w-full justify-between">
+              <section className="mt-[75px] mb-[45px] flex w-full justify-between">
                 <Button
                   kind="outlined"
                   text="취소"
-                  className="h-[48px] w-[150px]"
+                  className="h-[48px] w-[46%]"
                 />
                 <Button
                   type="submit"
                   text="문의접수"
-                  className="h-[48px] w-[150px]"
+                  className="h-[48px] w-[46%]"
                 />
               </section>
             </form>
@@ -248,11 +254,7 @@ export default function Inquiry() {
             {data?.length ? (
               <div>
                 {data?.map((inquiry, idx) => (
-                  <InquiryItem
-                    key={'' + idx}
-                    inquiry={inquiry}
-                    handler={handleRemoveInquiry}
-                  />
+                  <InquiryItem key={'' + idx} inquiry={inquiry} />
                 ))}
                 <div className="mt-[14px] text-center text-14 text-[#999999]">
                   최근 1년간 문의내역만 조회 가능합니다.
