@@ -155,18 +155,14 @@ export default function Detail() {
             <div>
               <div className="flex items-center justify-between">
                 <span className="text-18 font-semibold">{artWork?.title}</span>
-                {!Number.isNaN(+days) && (
+                {!Number.isNaN(+days) && remaind > 0 && (
                   <span className="text-14">
                     <span className="rounded-l-md bg-[#F8F8FA] px-2 py-1 text-brand">
                       마감까지
                     </span>
 
                     <span className="rounded-r-md bg-brand px-2 py-1 text-[#FFFFFF]">
-                      {remaind < 0 ? (
-                        <span className="w-[66px] text-[14px] font-medium tracking-widest">
-                          00:00:00
-                        </span>
-                      ) : (
+                      {
                         <span
                           className={`${
                             +days >= 1 ? 'w-fit' : 'w-[66px]'
@@ -176,7 +172,7 @@ export default function Detail() {
                             ? 'D-' + days
                             : hours + ':' + minutes + ':' + seconds}
                         </span>
-                      )}
+                      }
                     </span>
                   </span>
                 )}
@@ -227,12 +223,14 @@ export default function Detail() {
                   src={
                     artist?.artistImage || '/svg/icons/profile/icon_avatar.svg'
                   }
+                  width={35}
+                  height={35}
                   alt="profile"
+                  className="cursor-pointer rounded-full"
                   onClick={() => {
                     router.push(`/profile/${artist?.id}`);
                   }}
                   fill
-                  className="rounded-full"
                 />
               </div>
               <div className="w-fulltext-center ">{artist?.artistName}</div>
@@ -272,7 +270,7 @@ export default function Detail() {
         </section>
       </Layout>
 
-      {!isMine && (
+      {!isMine && remaind > 0 && (
         <article className="absolute inset-x-0 bottom-0 mx-auto max-w-[420px]">
           <div className="h-[18px] bg-gradient-to-t from-white to-gray-100"></div>
           <div className="m-auto flex w-full  gap-5 bg-white  px-6 pb-9 shadow-lg">

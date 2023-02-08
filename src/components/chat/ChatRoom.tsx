@@ -2,6 +2,8 @@ import Image from 'next/image';
 import React from 'react';
 import { useRouter } from 'next/router';
 import styled from 'styled-components';
+import moment from 'moment';
+import 'moment/locale/ko';
 
 interface ChatRoomProps {
   chatRoom: ChatRoom;
@@ -28,23 +30,27 @@ export default function Chatroom({ chatRoom }: ChatRoomProps) {
   const router = useRouter();
   return (
     <section
-      className="relative flex h-[64px] cursor-pointer items-center border-b  p-5 first:border-t"
+      className="relative flex h-[64px] cursor-pointer items-center border-b p-5 first:border-t"
       onClick={handleChattingRoom}
     >
-      <Image
-        src={chatRoom?.otherMember?.image || '/svg/icons/icon_avatar.svg'}
-        alt="profile"
-        width="40"
-        height="0"
-        className="mr-2"
-      />
+      <div className="relative h-[49px] w-[49px]">
+        <Image
+          src={chatRoom?.otherMember?.image || '/svg/icons/icon_avatar.svg'}
+          alt="profile"
+          fill
+          className="rounded-full object-cover"
+        />
+      </div>
       <article className="flex flex-col">
         <div className="flex items-center">
           <p className="px-2 text-14 font-bold">
             {chatRoom?.otherMember?.name}
           </p>
           <p className="text-10 text-[#767676]">
-            {chatRoom?.lastMessage?.sendDate}
+            {moment(
+              chatRoom?.lastMessage?.sendDate,
+              'YYYY-MM-DD-hh-mm-ss',
+            ).format('LT')}
           </p>
         </div>
         <MessageBox>{chatRoom?.lastMessage?.content}</MessageBox>

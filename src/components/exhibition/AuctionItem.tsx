@@ -27,11 +27,20 @@ export default function AuctionItem({ auctionList }: AuctionListProps) {
       }
     >
       <div className="relative mr-2 h-[99px] w-[82px] rounded">
-        {auctionList.image && (
+        {auctionList.image ? (
           <Image
             src={auctionList.image}
-            alt="notification"
+            alt="auction"
             fill
+            className="rounded object-cover"
+            quality={100}
+          />
+        ) : (
+          <Image
+            src="/svg/icons/icon_logo_main.svg"
+            alt="auction"
+            width={100}
+            height={100}
             className="rounded object-cover"
             quality={100}
           />
