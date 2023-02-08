@@ -37,6 +37,7 @@ export default function Edit() {
     watch,
     setError,
     clearErrors,
+    trigger,
   } = useForm<Member>({ mode: 'onTouched' });
   const nickname = watch('nickname');
   const email = watch('email');
@@ -253,16 +254,19 @@ export default function Edit() {
           register={register('nickname', {
             required: true,
             pattern: {
-              value: /^(?=.*[a-z0-9가-힣])[a-z0-9가-힣]{2,16}$/i,
-              message: '닉네임을 형식에 맞게 입력해주세요.',
+              value: /^[가-힣A-Za-z0-9]{1,5}$/g,
+              message:
+                '한글, 닉네임, 숫자를 포함하여 최대 5자 까지 입력 가능합니다.',
             },
           })}
         />
         <DoubleCheckButton
           $valid={!isValidate.nickname}
           onClick={() => {
-            if (nickname !== data?.nickname)
+            trigger('nickname');
+            if (!errors.nickname) {
               setEnabled((prev) => ({ ...prev, nickname }));
+            }
           }}
           text={isValidate.nickname ? '사용가능' : '중복확인'}
         />
@@ -278,8 +282,7 @@ export default function Edit() {
           register={register('email', {
             required: true,
             pattern: {
-              value:
-                /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i,
+              value: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g,
               message: '이메일을 형식에 맞게 입력해주세요.',
             },
           })}
@@ -287,8 +290,10 @@ export default function Edit() {
         <DoubleCheckButton
           $valid={!isValidate.email}
           onClick={() => {
-            if (email !== data?.email)
+            trigger('email');
+            if (!errors.email) {
               setEnabled((prev) => ({ ...prev, email }));
+            }
           }}
           text={isValidate.email ? '사용가능' : '중복확인'}
         />

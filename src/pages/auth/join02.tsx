@@ -195,7 +195,8 @@ export default function Join02() {
               required: true,
               pattern: {
                 value: /^[가-힣A-Za-z0-9]{1,5}$/g,
-                message: '최대 5자 까지 입력 가능합니다.',
+                message:
+                  '한글, 닉네임, 숫자를 포함하여 최대 5자 까지 입력 가능합니다.',
               },
             })}
           />
@@ -223,7 +224,7 @@ export default function Join02() {
             register={register('password', {
               required: true,
               pattern: {
-                value: /^[A-Za-z0-9]{8,15}$/,
+                value: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d\w\W]{8,}$/,
                 message: '비밀번호를 형식에 맞게 입력해주세요.',
               },
             })}
