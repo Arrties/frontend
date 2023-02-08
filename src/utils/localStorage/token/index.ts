@@ -1,5 +1,3 @@
-import { CONFIG } from '@config';
-
 import {
   getLocalStorage,
   removeLocalStorage,
@@ -12,7 +10,7 @@ export interface Token {
   roles: string | undefined;
 }
 
-const TOKEN_KEY = CONFIG.AUTH_TOKEN_KEY || '@token';
+const TOKEN_KEY = '@token';
 
 export const getToken = (): Token => {
   const token = getLocalStorage<Token>(TOKEN_KEY, {

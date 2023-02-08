@@ -9,7 +9,9 @@ import { QueryClient, QueryClientProvider } from 'react-query';
 
 import type { AppProps } from 'next/app';
 import Loader from '@components/common/Loader';
-import { Suspense } from 'react';
+import { Suspense, useEffect } from 'react';
+import { useRouter } from 'next/router';
+import { getToken } from '@utils/localStorage/token';
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
@@ -23,11 +25,13 @@ const queryClient = new QueryClient({
 const persistor = persistStore(store);
 
 export default function App({ Component, pageProps }: AppProps) {
-  // useEffect(() => {
-  //   if (router.pathname.includes('auth')) return;
-  //   const token = getToken();
-  //   if (!token.accessToken) router.replace('/auth/login');
-  // }, [router]);
+  const router = useRouter();
+  useEffect(() => {
+    if (router.pathname.includes('auth') || router.pathname === '/begin')
+      return;
+    const token = getToken();
+    if (!token.accessToken) router.replace('/begin');
+  }, [router]);
 
   return (
     <div className="flex h-screen w-screen justify-center bg-slate-50 font-Pretendard">
