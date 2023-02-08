@@ -3,11 +3,10 @@ import { Disclosure } from '@headlessui/react';
 import { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import Button from '@components/common/Button';
-import useGetInquiry from '@hooks/queries/useGetInquiry';
-import authApi from '@apis/auth/authApi';
 import FileItem from '@components/inquiry/FileItem';
 import { formatBytes } from '@utils/formatBytes';
-import profileApi from '@apis/profile/profileApi';
+import useDeleteInquiry from '@hooks/mutations/useDeleteInquiry';
+import usePatchInquiry from '@hooks/mutations/usePatchInquiry';
 
 interface InquiryForm {
   title: string;
@@ -17,28 +16,19 @@ interface InquiryForm {
 
 interface InquiryItemForm {
   key: string;
-  inquiry: {
-    id: number;
-    date: string;
-    time: string;
-    title: string;
-    content: string;
-    status: string;
-    answer: string;
-  };
-  handler: (e: number) => void;
+  inquiry: Inquiry;
 }
 
-export default function InquiryItem({ inquiry, handler }: InquiryItemForm) {
+export default function InquiryItem({ inquiry }: InquiryItemForm) {
+  const [modifiedData, setModifiedData] = useState<FormData>();
   const [fileLists, setFileLists] = useState<File[]>([]);
   const [isSelected, setIsSelected] = useState<boolean>(false);
   const [fileSize, setFileSize] = useState<number>(0);
-
+  const { mutate: deleteInquiry } = useDeleteInquiry(inquiry.id);
+  const { mutate: patchInquiry } = usePatchInquiry(inquiry.id, modifiedData);
   const { register, handleSubmit, watch } = useForm<InquiryForm>({
     mode: 'onTouched',
   });
-
-  const { refetch: inquiryRefetch } = useGetInquiry();
 
   const handleRemoveFile = (targetName: string, targetSize: number): void => {
     const newFileLists = fileLists.filter((file) => {
@@ -64,17 +54,27 @@ export default function InquiryItem({ inquiry, handler }: InquiryItemForm) {
     }
   }, [file]);
 
+  useEffect(() => {
+    if (modifiedData) {
+      patchInquiry();
+    }
+  }, [modifiedData]);
+
   const onSubmit = async (form: InquiryForm) => {
     const { content, image, title } = form;
     const formData = new FormData();
     formData.append('title', title);
     formData.append('content', content);
-    for (let i = 0; i < image?.length; i++) {
-      formData.append('image', image[i]);
+    if (image.length) {
+      for (let i = 0; i < image.length; i++) {
+        formData.append('image', image[i]);
+        console.log(image[i]);
+      }
+    } else {
+      formData.append('image', new File([''], ''));
     }
-    const response = await profileApi.patchInquiry(inquiry.id, formData);
+    setModifiedData(formData);
     setIsSelected(false);
-    inquiryRefetch();
   };
   return (
     <div className="border-b-[1px] pb-6">
@@ -101,10 +101,7 @@ export default function InquiryItem({ inquiry, handler }: InquiryItemForm) {
                 {isSelected ? '취소' : '수정'}
               </span>
               <span className="mx-2 text-[#DBDBDB]">|</span>
-              <span
-                onClick={() => handler(inquiry.id)}
-                className="cursor-pointer"
-              >
+              <span onClick={() => deleteInquiry()} className="cursor-pointer">
                 삭제
               </span>
             </div>
@@ -178,7 +175,7 @@ export default function InquiryItem({ inquiry, handler }: InquiryItemForm) {
               <div>
                 <div className="flex">
                   <label htmlFor="fileImage">
-                    <div className="mr-0 flex h-[60px] w-[60px] flex-col items-center justify-center rounded border-[1px] border-[#DBDBDB]">
+                    <div className="mr-0 flex h-[60px] w-[60px] cursor-pointer flex-col items-center justify-center rounded border-[1px] border-[#DBDBDB]">
                       <Image
                         src="/svg/icons/icon_camera_black.svg"
                         alt="camera"
@@ -231,7 +228,7 @@ export default function InquiryItem({ inquiry, handler }: InquiryItemForm) {
               />
             </section>
             <section className="mt-[75px] w-full">
-              <Button type="submit" text="수정" className="h-[48px]" />
+              <Button type="submit" text="수정" className="h-[48px] w-full" />
             </section>
           </form>
         ) : (
@@ -241,15 +238,15 @@ export default function InquiryItem({ inquiry, handler }: InquiryItemForm) {
               <Image
                 src="/svg/icons/icon_arrow_down.svg"
                 alt="arrow"
-                width={20}
-                height={20}
+                width={12}
+                height={12}
               />
             </Disclosure.Button>
           </div>
         )}
         <Disclosure.Panel className="pt-5 text-14 text-gray-500">
-          <div className="w-[320px] bg-[#F8F8FA] py-4 px-2">
-            <section className="mb-4 flex">
+          <div className="flex w-full items-center bg-[#F8F8FA] py-4 px-2">
+            <section className="flex">
               <div className="mr-2 flex h-6 w-6 items-center justify-center rounded-full bg-brand">
                 <Image
                   src="/svg/icons/icon_search_white.svg"
