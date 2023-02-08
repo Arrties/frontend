@@ -109,10 +109,10 @@ export default function Inquiry() {
       />
       <Tab.Group selectedIndex={selectedIndex} onChange={setSelectedIndex}>
         <Tab.List>
-          <Tab className="mb-[28px] h-[32px] w-1/2 border-[#191919] text-16 font-bold ui-selected:border-b-[2px] ui-selected:text-[#191919] ui-not-selected:border-b-[2px] ui-not-selected:border-[#EDEDED] ui-not-selected:text-[#999999]">
+          <Tab className="h-[52px] w-1/2 border-[#191919] text-16 font-medium ui-selected:border-b-[2px] ui-selected:text-[#191919] ui-not-selected:border-b ui-not-selected:border-[#EDEDED] ui-not-selected:text-[#999999]">
             문의하기
           </Tab>
-          <Tab className="h-[32px] w-1/2 border-[#191919] text-16 font-bold ui-selected:border-b-[2px] ui-selected:text-[#191919] ui-not-selected:border-b-[2px] ui-not-selected:border-[#EDEDED] ui-not-selected:text-[#999999] ">
+          <Tab className="h-[52px] w-1/2 border-[#191919] text-16 font-medium ui-selected:border-b-[2px] ui-selected:text-[#191919] ui-not-selected:border-b ui-not-selected:border-[#EDEDED] ui-not-selected:text-[#999999]">
             문의내역확인
           </Tab>
         </Tab.List>
@@ -120,7 +120,7 @@ export default function Inquiry() {
           <Tab.Panel>
             <form autoComplete="off" onSubmit={handleSubmit(onSubmit)}>
               <section className="mb-5 flex flex-col">
-                <div className="mb-3 flex justify-between">
+                <div className="mb-3 mt-6 flex justify-between">
                   <label
                     htmlFor="title"
                     className="text-14 font-bold leading-8"
