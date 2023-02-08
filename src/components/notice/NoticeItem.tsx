@@ -1,4 +1,3 @@
-import profileApi from '@apis/profile/profileApi';
 import moment from 'moment';
 import Image from 'next/image';
 import React from 'react';
@@ -51,7 +50,7 @@ export default function NoticeItem({ notice }: NoticeItemProps) {
         }.svg`}
         width={37}
         height={37}
-        className="ml-1 mr-3"
+        className="mr-3"
       />
       <section
         className="flex cursor-pointer flex-col leading-5"
@@ -60,9 +59,7 @@ export default function NoticeItem({ notice }: NoticeItemProps) {
         }}
       >
         <p className="text-[12px] font-bold">{title}</p>
-        <p className="flex w-[260px] justify-between text-[14px]">
-          {notice.message}
-        </p>
+        <p className="flex justify-between text-[14px]">{notice.message}</p>
         <p className="text-[10px] text-[#999999]">{modifiedDate}</p>
       </section>
       <Image
@@ -70,7 +67,7 @@ export default function NoticeItem({ notice }: NoticeItemProps) {
         alt="close"
         width={25}
         height={0}
-        className="absolute inset-y-0 right-[10px] bottom-0 top-0 m-auto cursor-pointer"
+        className="cursor-pointer min-[400px]:ml-6"
         onClick={() => deleteNotice()}
       />
     </li>
