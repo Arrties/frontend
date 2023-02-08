@@ -22,6 +22,7 @@ const useGetDuplicateCheck = ({ userId, email, nickname }: DuplicateCheck) => {
       },
     ].map<UseQueryOptions<any, Error>>((query) => ({
       ...query,
+      useErrorBoundary: false,
       suspense: false,
     })),
   );
