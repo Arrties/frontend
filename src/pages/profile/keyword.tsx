@@ -47,7 +47,7 @@ export default function Keyword() {
         message="취향 분석이 완료 되었습니다."
         isModal={isModal}
         onCloseModal={() => {
-          setIsModal(false);
+          router.push('/profile');
         }}
         onAccept={() => {
           router.push('/profile');

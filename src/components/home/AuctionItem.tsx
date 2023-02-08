@@ -10,7 +10,8 @@ interface AuctionItemForm {
 
 export default function AuctionItem({ auctionItem, ...rest }: AuctionItemForm) {
   const router = useRouter();
-  const endDate = auctionItem?.endDate.format('YYYY.MM.DD');
+  const startDate = auctionItem?.startDate.format('MM.DD');
+  const endDate = auctionItem?.endDate.format('MM.DD');
   return (
     <div className="mb-5 flex last:mb-0" {...rest}>
       <div className="relative mr-2 h-[90px] w-[82px] rounded">
@@ -35,7 +36,9 @@ export default function AuctionItem({ auctionItem, ...rest }: AuctionItemForm) {
           });
         }}
       >
-        <span className="text-11 text-[#767676]">{endDate}</span>
+        <span className="text-11 text-[#767676]">
+          {startDate}~{endDate}
+        </span>
         <span className="text-16 font-semibold text-[#191919]">
           제 {auctionItem?.turn}회 아띠즈 경매
         </span>

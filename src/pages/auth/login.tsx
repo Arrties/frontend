@@ -30,6 +30,7 @@ function Login() {
   });
   const [checkedTerm, setCheckedTerm] = useState<string[]>([]);
   const { mutate, data, error } = usePostLogin();
+  console.log(error);
 
   useEffect(() => {
     deleteToken();

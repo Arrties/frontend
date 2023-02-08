@@ -53,7 +53,7 @@ export default function ExhibitionItem({
         alt="heart"
         width={20}
         height={20}
-        className="absolute right-2 top-2.5"
+        className="absolute right-2 top-2.5 cursor-pointer"
         onClick={handlePrefer}
       />
     </div>

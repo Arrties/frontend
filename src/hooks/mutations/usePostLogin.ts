@@ -3,8 +3,12 @@ import { Token } from '@utils/localStorage/token';
 import { useMutation } from 'react-query';
 
 const usePostLogin = () => {
-  return useMutation<Token, Error, Login>('useLoginMuation', (data) =>
-    authApi.postLogin(data),
+  return useMutation<Token, Error, Login>(
+    'useLoginMuation',
+    (data) => authApi.postLogin(data),
+    {
+      useErrorBoundary: false,
+    },
   );
 };
 export default usePostLogin;
