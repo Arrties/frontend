@@ -157,12 +157,12 @@ export default function ChatRoom() {
       </section>
       <div className="fixed inset-x-0 bottom-0 mx-auto flex h-[70px] w-full max-w-[420px] justify-center bg-white">
         <form
-          className="flex h-[50px] w-[360px] items-center rounded-[24.5px] bg-[#F8F8FA] px-[10px]"
+          className="flex h-[50px] w-full items-center rounded-[24.5px] px-[10px]"
           onSubmit={handleSubmit(onSubmit)}
         >
           <input
             type="text"
-            className="h-[23px] w-[280px] border-none bg-[#F8F8FA] text-14 font-semibold placeholder:text-[#999999] "
+            className="h-full w-full appearance-none rounded-[24.5px] border-none bg-[#F8F8FA] px-[20px]  text-14  font-semibold placeholder:text-[#999999] "
             placeholder="메세지를 입력해주세요."
             {...register('message', { required: true })}
           />
@@ -193,7 +193,7 @@ export default function ChatRoom() {
                 type="file"
                 id="profileImage"
                 accept="image/*"
-                className="hidden"
+                className="hidden "
                 {...register('image')}
                 onChange={sendImage}
               />
