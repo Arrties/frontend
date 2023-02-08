@@ -48,29 +48,49 @@ export default function Home() {
           }}
           right_message={<NoticeIcon />}
         />
-
         <section>
           <div className="text-14 text-[#767676]">
             {userInfo?.nickname}님 취향의
           </div>
-          <div className="flex justify-between">
+          <div className="relative flex justify-between">
             <span className="text-20 font-bold">이번 주 전시작품</span>
-            <div className="flex items-center justify-between">
-              <span
-                className="cursor-pointer pr-1 text-12 text-[#999999]"
-                onClick={() => {
-                  router.push('home/view');
-                }}
-              >
-                전체보기
-              </span>
-              <Image
-                src="/svg/icons/icon_arrow.svg"
-                alt="arrow"
-                width={6}
-                height={6}
-              />
-            </div>
+            {customizedArtwork?.artworks.length ? (
+              <div className="flex items-center justify-between">
+                <span
+                  className="cursor-pointer pr-1 text-12 text-[#999999]"
+                  onClick={() => {
+                    router.push('/home/view');
+                  }}
+                >
+                  전체보기
+                </span>
+                <Image
+                  src="/svg/icons/icon_arrow.svg"
+                  alt="arrow"
+                  width={6}
+                  height={6}
+                />
+              </div>
+            ) : (
+              <div className="absolute right-0 -top-7 mt-6 mb-12 flex justify-center text-center">
+                <button
+                  onClick={() => {
+                    router.push('/profile/keyword');
+                  }}
+                  className="flex h-[36px] w-[100px] items-center justify-center rounded-[19px] border-[1px] border-brand text-xs text-brand"
+                >
+                  <div>
+                    <Image
+                      src="/svg/icons/icon_plus_pink.svg"
+                      alt="plus"
+                      width={10}
+                      height={10}
+                    />
+                  </div>
+                  <div>취향분석</div>
+                </button>
+              </div>
+            )}
           </div>
         </section>
         <section className="my-4 mt-2 flex flex-wrap">

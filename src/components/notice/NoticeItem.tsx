@@ -26,8 +26,6 @@ export default function NoticeItem({ notice }: NoticeItemProps) {
     title += ' 🎉';
   }
 
-  console.log(notice);
-
   const icon = {
     '작가 등록 완료 🎉': ['post', '/profile/edit'],
     '작품 등록 완료 🎉': ['post', `/auction/${notice.data}`],

@@ -92,9 +92,12 @@ export default function Edit() {
     );
   }, [profile]);
 
+  // console.log()
+
   const onSubmit = async (form: Member) => {
     const { nickname, instagram, behance, education, history, description } =
       form;
+    console.log(form);
     if (!nickname) return;
     if (!userInfo) return;
     if (!isValidate.nickname && userInfo.nickname !== form.nickname) {
@@ -244,41 +247,16 @@ export default function Edit() {
         />
         {errors.nickname && <ErrorMessage message={errors.nickname.message} />}
       </section>
-      <section className="relative">
-        <Input
-          type="text"
-          label="이메일"
-          disabled
-          defaultValue={userInfo?.email}
-          placeholder="이메일을 입력해 주세요."
-          $error={!!errors.email}
-          register={register('email', {
-            required: true,
-            pattern: {
-              value: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g,
-              message: '이메일을 형식에 맞게 입력해주세요.',
-            },
-          })}
-        />
-        <DoubleCheckButton
-          $valid={!isValidate.email}
-          onClick={() => {
-            trigger('email');
-            if (!errors.email) {
-              setEnabled((prev) => ({ ...prev, email: watch('email') }));
-            }
-          }}
-          text={isValidate.email ? '사용가능' : '중복확인'}
-        />
-        {errors.email ? (
-          <ErrorMessage
-            message={errors.email.message}
-            className="text-[#999999]"
-          />
-        ) : (
-          ''
-        )}
-      </section>
+
+      <Input
+        type="text"
+        label="이메일"
+        disabled
+        defaultValue={userInfo?.email}
+        placeholder="이메일을 입력해 주세요."
+        $error={!!errors.email}
+        className="disabled text-[#999999]"
+      />
 
       {!isUser && (
         <section>

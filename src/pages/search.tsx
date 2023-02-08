@@ -138,7 +138,7 @@ export default function Search() {
           </section>
         </div>
       )}
-      {RecentWords?.length && page === 'Intro' && (
+      {!!RecentWords && page === 'Intro' && (
         <div>
           <section className="mt-[38px]">
             <div className="flex justify-between">

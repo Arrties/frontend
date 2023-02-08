@@ -124,13 +124,13 @@ export default function Bidding() {
             <p className="w-full text-center text-16 font-semibold">
               {remaind > 0 ? (
                 days ? (
-                  <p>
+                  <span>
                     {days}일 {hours}:{minutes}:{seconds}
-                  </p>
+                  </span>
                 ) : (
-                  <p>
+                  <span>
                     {hours}:{minutes}:{seconds}
-                  </p>
+                  </span>
                 )
               ) : (
                 '경매종료'
@@ -176,13 +176,13 @@ export default function Bidding() {
                 <td>시간</td>
               </tr>
             ) : (
-              <div className="my-10">
-                현재 입찰한 사람이 존재 하지 않습니다.
-              </div>
+              <tr className="my-10">
+                <td>현재 입찰한 사람이 존재 하지 않습니다.</td>
+              </tr>
             )}
             {biddingList && biddingList.length > 0 && (
               <>
-                <div className="absolute -left-6 top-10 z-10 h-10 w-[calc(100%+48px)] bg-brand opacity-25" />
+                <tr className="absolute -left-6 top-10 z-10 h-10 w-[calc(100%+48px)] bg-brand opacity-25" />
                 <tr className="h-10">
                   <td className="text-left">{biddingList[0].memberName}</td>
                   <td className="font-bold text-brand">
@@ -199,8 +199,8 @@ export default function Bidding() {
             )}
             {biddingList &&
               biddingList.length >= 1 &&
-              biddingList.slice(1).map((bidding) => (
-                <tr className="h-10">
+              biddingList.slice(1).map((bidding, idx: number) => (
+                <tr className="h-10" key={idx}>
                   <td className="text-left">{bidding.memberName}</td>
                   <td className="font-bold">{priceToString(bidding.price)}</td>
                   <td>{bidding.date.split('-').slice(0, 3).join('-')}</td>
