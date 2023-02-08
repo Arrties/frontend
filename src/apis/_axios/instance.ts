@@ -1,18 +1,16 @@
+import { CONFIG } from '@config';
 import axios from 'axios';
 import { getToken, setToken } from '@utils/localStorage/token';
 
 const instance = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_API_BASE_URL,
+  baseURL: CONFIG.API_BASE_URL,
 });
 
 const refreshToken = async () => {
   const refreshToken = getToken().refreshToken;
-  const response = await axios.post(
-    `${process.env.NEXT_PUBLIC_API_BASE_URL}/members/token`,
-    {
-      refreshToken,
-    },
-  );
+  const response = await axios.post(`${CONFIG.API_BASE_URL}/members/token`, {
+    refreshToken,
+  });
   return response.data;
 };
 
@@ -51,8 +49,13 @@ instance.interceptors.response.use(
 
     if (isUnAuthError) {
       if (data?.code === 'TOKEN_INVALID') {
-        alert('세션이 만료되었습니다. 다시 로그인해 주시기 바랍니다.');
-        window.location.href = `${process.env.NEXT_PUBLIC_CLIENT_BASE_URL}/auth/login`;
+        if (CONFIG.ENV === 'development') {
+          alert('세션이 만료되었습니다. 다시 로그인해 주시기 바랍니다.');
+          window.location.href = `${CONFIG.LOCAL}/auth/login`;
+        } else if (CONFIG.ENV === 'production') {
+          alert('세션이 만료되었습니다. 다시 로그인해 주시기 바랍니다.');
+          window.location.href = `${CONFIG.DOMAIN}/auth/login`;
+        }
         return;
       }
 
