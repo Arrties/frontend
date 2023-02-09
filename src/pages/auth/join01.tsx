@@ -6,7 +6,10 @@ import Navigate from '@components/common/Navigate';
 import Image from 'next/image';
 import tw from 'tailwind-styled-components';
 import { useAppDispatch } from '@features/hooks';
-import { setIsApproveEmailPromotion, setIsApproveSMSPromotion } from '@features/user/userSlice';
+import {
+  setIsApproveEmailPromotion,
+  setIsApproveSMSPromotion,
+} from '@features/user/userSlice';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
@@ -154,8 +157,8 @@ export default function Join01() {
                 width={7}
                 height={0}
                 className={`${
-                  isOpen && 'rotate-90 transform cursor-pointer transition'
-                }`}
+                  isOpen && 'rotate-90 transform transition'
+                } cursor-pointer`}
                 onClick={() => {
                   if (!isOpen) {
                     setIsOpen(true);

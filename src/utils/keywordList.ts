@@ -25,7 +25,7 @@ export const KEYWORDLIST: KeywordForm[] = [
   { id: '19', name: '차가운' },
   { id: '20', name: '새로운' },
   { id: '21', name: '안정된' },
-  { id: '22', name: '고급수러운' },
+  { id: '22', name: '고급스러운' },
   { id: '23', name: '수수한' },
   { id: '24', name: '탁한' },
   { id: '25', name: '우울한' },

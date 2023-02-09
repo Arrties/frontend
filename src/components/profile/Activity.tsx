@@ -29,7 +29,9 @@ export default function Activity({ text, path, icon }: ActivityBoxProps) {
       }}
     >
       <Image src={icon} alt={`${icon}`} width={20} height={20} />
-      <span className="pt-[12px] text-12 text-[#767676]">{text}</span>
+      <span className="pt-[12px] text-12 text-[#767676] max-[400px]:pt-[6px]">
+        {text}
+      </span>
     </ActivityBox>
   );
 }

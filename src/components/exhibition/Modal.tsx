@@ -50,7 +50,10 @@ export default function Modal({
   const router = useRouter();
 
   const handleLeftButton = () => {
-    router.push(`/auction/view?id=${id}`);
+    router.push({
+      pathname: `/auction/view`,
+      query: { id },
+    });
   };
 
   const handleRightButton = () => {

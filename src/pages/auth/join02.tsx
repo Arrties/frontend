@@ -196,7 +196,7 @@ export default function Join02() {
               pattern: {
                 value: /^[가-힣A-Za-z0-9]{1,5}$/g,
                 message:
-                  '한글, 닉네임, 숫자를 포함하여 최대 5자 까지 입력 가능합니다.',
+                  '한글, 영어, 숫자를 포함하여 최대 5자 까지 입력 가능합니다.',
               },
             })}
           />
@@ -298,10 +298,7 @@ export default function Join02() {
 
         <div className="h-[30px]" />
 
-        <Button
-          text="확인"
-          className="absolute inset-x-0 bottom-[34px] m-auto"
-        />
+        <Button text="확인" className="mb-[76px] w-full" />
       </form>
     </Layout>
   );

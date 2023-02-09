@@ -171,7 +171,7 @@ function Login() {
               비밀번호 찾기
             </Link>
           </p>
-          <p className="mt-12 flex w-full items-center justify-center text-12 ">
+          <p className="mt-12 mb-9 flex w-full items-center justify-center text-12 ">
             <span className="text-[#999999]">아직 회원이 아니신가요?</span>
             <Link className="ml-[2px]" href="/auth/join01">
               회원가입
