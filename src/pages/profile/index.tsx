@@ -193,7 +193,7 @@ export default function Profile() {
             <span className="text-14 font-bold text-[#191919]">취향 목록</span>
             {data?.keywords && (
               <Image
-                src="/svg/icons/icon_pencil_black.svg"
+                src="/svg/icons/icon_pencil_gray_bright.svg"
                 alt="edit_keywords"
                 width={16}
                 height={16}
