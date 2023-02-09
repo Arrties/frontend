@@ -37,7 +37,7 @@ let ActivityLists: ActivityList[] = [
   {
     id: '2',
     text: '나의 픽 작가',
-    icon: '/svg/icons/icon_book.svg',
+    icon: '/svg/icons/icon_book_mark.svg',
     path: '/profile/pick',
   },
 ];
@@ -177,7 +177,7 @@ export default function Profile() {
             </div>
           )}
         </section>
-        <section className="flex justify-between gap-2">
+        <section className="flex justify-between gap-2 ">
           {ActivityLists.map((activity: ActivityList) => (
             <Activity
               key={activity.id}
@@ -189,15 +189,15 @@ export default function Profile() {
         </section>
         <DivisionBar className="my-5" />
         <section className="my-4">
-          <div className="relative my-4">
+          <div className="relative my-4 flex">
             <span className="text-14 font-bold text-[#191919]">취향 목록</span>
             {data?.keywords && (
               <Image
                 src="/svg/icons/icon_pencil_black.svg"
                 alt="edit_keywords"
-                width={18}
-                height={18}
-                className="absolute left-[4rem] top-1 cursor-pointer"
+                width={16}
+                height={16}
+                className="top-1 ml-1 cursor-pointer"
                 onClick={() => {
                   router.push('/profile/keyword');
                 }}
