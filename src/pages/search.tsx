@@ -65,13 +65,13 @@ export default function Search() {
   };
 
   const onSubmit = () => {
-    router.push(`search/?word=${value}`);
+    router.replace(`search/?word=${value}`);
     setSearchWord(value);
   };
 
   const handleRecentWord = ({ word }) => {
     setSearchWord(word);
-    router.push(`search/?word=${word}`);
+    router.replace(`search/?word=${word}`);
     setValue(word);
   };
 
@@ -81,7 +81,7 @@ export default function Search() {
 
   const handleRecommendKeyword = (keyword: string) => {
     setValue(keyword);
-    router.push(`search/?word=${keyword}`);
+    router.replace(`search/?word=${keyword}`);
     setSearchWord(keyword);
   };
 

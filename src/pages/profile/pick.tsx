@@ -45,7 +45,7 @@ export default function Pick() {
             </div>
             <Button
               text="작가 픽 하러 가기"
-              onClick={() => router.push('/home')}
+              onClick={() => router.push('/exhibition')}
               className="mt-10 w-full"
             />
           </div>

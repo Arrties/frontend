@@ -17,7 +17,7 @@ export default function Wish() {
   const { data: wishList } = useGetWish() || [];
   return (
     <Layout>
-      <Navigate message="찜 목록" isRightButton={false} />
+      <Navigate message="관심 목록" isRightButton={false} />
       <WishContainer>
         {wishList?.map((wish: WishArtwork) => (
           <WishCard key={wish.id} wish={wish} />

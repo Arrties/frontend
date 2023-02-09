@@ -9,7 +9,7 @@ interface SuccessBidItemProps {
 }
 
 const SuccessBidItemTag = tw.section<SuccessBidItemProps>`
-flex mt-6 border-b last:border-none border-[#EDEDED] pb-6 relative
+flex mt-6 border-b last:border-none border-[#EDEDED] pb-6 relative cursor-pointer
 `;
 
 export default function SuccessBidItem({
