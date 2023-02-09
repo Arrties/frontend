@@ -61,7 +61,9 @@ export default function Auction() {
         ) : (
           <>
             <section className="relative mb-7 mt-4 flex justify-between">
-              <span className="text-[20px] font-bold">{`제 ${data?.turn}회 아띠즈 경매`}</span>
+              {data && (
+                <span className="text-[20px] font-bold">{`제 ${data?.turn}회 아띠즈 경매`}</span>
+              )}
               {date && !Number.isNaN(+days) && (
                 <div
                   className={`flex ${
