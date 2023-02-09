@@ -199,11 +199,11 @@ export default function Post() {
         isModal={isModal}
         onCloseModal={() => {
           setIsModal(false);
-          router.push(`/auction/${responseData.artworkId}`);
+          router.replace(`/auction/${responseData.artworkId}`);
         }}
         onAccept={() => {
           setIsModal(false);
-          router.push(`/auction/${responseData.artworkId}`);
+          router.replace(`/auction/${responseData.artworkId}`);
         }}
       />
       <form className="w-full space-y-3" onSubmit={handleSubmit(onSubmit)}>
