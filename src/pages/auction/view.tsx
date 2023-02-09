@@ -229,7 +229,10 @@ export default function View() {
                   alt="profile"
                   className="cursor-pointer rounded-full"
                   onClick={() => {
-                    router.push(`/profile/${artist?.id}`);
+                    router.push({
+                      pathname: '/auction/view',
+                      query: { id: artist?.id },
+                    });
                   }}
                   fill
                 />

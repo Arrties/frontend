@@ -57,7 +57,10 @@ export default function Modal({
   };
 
   const handleRightButton = () => {
-    router.push(`/profile/${artistId}`);
+    router.push({
+      pathname: '/auction/view',
+      query: { id: artistId },
+    });
   };
   return (
     <>
