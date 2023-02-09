@@ -298,7 +298,12 @@ export default function View() {
             <Button text="채팅하기" kind="outlined" onClick={handleChat} />
             <Button
               text="응찰하기"
-              onClick={() => router.push(`/auction/bidding/${artWorkId}`)}
+              onClick={() =>
+                router.push({
+                  pathname: '/auction/bidding',
+                  query: { id: artWorkId },
+                })
+              }
             />
           </div>
         </article>

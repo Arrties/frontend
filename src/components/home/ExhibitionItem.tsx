@@ -26,7 +26,10 @@ export default function ExhibitionItem({
     <div
       className="relative h-[197px] w-[158px] rounded"
       onClick={() => {
-        router.push(`/exhibition/${id}`);
+        router.push({
+          pathname: '/exhibition/detail',
+          query: { id },
+        });
       }}
     >
       <Image
