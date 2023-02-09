@@ -187,8 +187,8 @@ export default function Profile() {
             />
           ))}
         </section>
-        <DivisionBar className="my-5" />
-        <section className="my-4">
+        <DivisionBar className="fixed inset-x-0 m-auto mt-5 max-w-[420px]" />
+        <section className="my-10">
           <div className="relative my-4 flex">
             <span className="text-14 font-bold text-[#191919]">취향 목록</span>
             {data?.keywords && (
@@ -231,8 +231,8 @@ export default function Profile() {
             </div>
           )}
         </section>
-        <DivisionBar className="my-5" />
-        <section className="mb-52">
+        <DivisionBar className="fixed inset-x-0 m-auto -mt-5 max-w-[420px]" />
+        <section className="">
           {SettingLists.map((setting: SettingList) => (
             <SettingItem
               key={setting.id}
