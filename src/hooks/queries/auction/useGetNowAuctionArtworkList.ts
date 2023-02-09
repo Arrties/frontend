@@ -5,7 +5,12 @@ const useGetNowAuctionArtworkList = () => {
   return useQuery<NowAuctionArtworkList, Error>(
     'useGetNowAuctionArtworkList',
     () => auctionApi.getNowAuctionArtworkList(),
-    { retry: false, refetchOnWindowFocus: false },
+    {
+      retry: false,
+      refetchOnWindowFocus: false,
+      suspense: false,
+      useErrorBoundary: false,
+    },
   );
 };
 

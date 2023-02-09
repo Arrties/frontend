@@ -10,7 +10,7 @@ import useDeletePrefer from '@hooks/mutations/useDeletePrefer';
 import { useCountDown } from '@hooks/useCountDown';
 import useGetProfile from '@hooks/queries/useGetProfile';
 
-export default function Detail() {
+export default function View() {
   const router = useRouter();
 
   const artWorkId = Number(router.query.id);
@@ -199,7 +199,7 @@ export default function Detail() {
             </p>
             <p>
               <span className="inline-block w-[6rem] text-[#767676]">재료</span>
-              <span className="text-[#191919]">재료</span>
+              <span className="text-[#191919]">{artWork?.material}</span>
             </p>
             <p>
               <span className="inline-block w-[6rem] text-[#767676]">액자</span>
@@ -242,7 +242,7 @@ export default function Detail() {
             </div>
             <div className="mt-4">
               <p className="text-14">{artWork?.description}</p>
-              <div className="mt-4">
+              <div className="mt-4 flex flex-wrap">
                 {artWork?.keywords?.map((keyword: string, idx: number) => (
                   <span
                     key={idx}
@@ -254,8 +254,29 @@ export default function Detail() {
               </div>
             </div>
           </article>
+          <article>
+            {artWork?.images.slice(1).map((image: string, idx: number) => (
+              <div key={idx} className="relative mt-8 aspect-square w-full">
+                <Image
+                  src={image}
+                  alt="artwork"
+                  fill
+                  className="object-contain"
+                  priority
+                />
+              </div>
+            ))}
+          </article>
 
-          <article className="relative h-[457px] w-full">
+          {/* <article className="relative h-[457px] w-full">
+            <div>
+              <Image
+                src="/svg/example/guarantee_empty.svg"
+                alt="guarantee"
+                width={327}
+                height={457}
+              />
+            </div>
             <Image
               alt="guarantee"
               src={artWork?.guaranteeImage || '/svg/example/guarantee.svg'}
@@ -263,7 +284,7 @@ export default function Detail() {
               className="object-contain"
               priority
             />
-          </article>
+          </article> */}
           <div className="h-[7rem]" />
         </section>
       </Layout>
