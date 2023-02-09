@@ -10,7 +10,7 @@ import useDeletePrefer from '@hooks/mutations/useDeletePrefer';
 import { useCountDown } from '@hooks/useCountDown';
 import useGetProfile from '@hooks/queries/useGetProfile';
 
-export default function Detail() {
+export default function View() {
   const router = useRouter();
 
   const artWorkId = Number(router.query.id);
