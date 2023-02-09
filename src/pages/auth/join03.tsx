@@ -66,14 +66,14 @@ function Join03() {
       </section>
 
       <button
-        className="hover:brand-2 absolute inset-x-0 bottom-[100px] m-auto w-full  text-xs font-normal text-[#999999] underline transition "
+        className="hover:brand-2 mt-[66px] mb-3 w-full text-xs font-normal text-[#999999] underline transition"
         onClick={handleSkipButton}
       >
         다음에 할래요
       </button>
       <Button
         text="분석 시작"
-        className="absolute inset-x-0 bottom-[34px] m-auto"
+        className="mb-[34px] w-full"
         onClick={handleNextButton}
       />
     </Layout>
