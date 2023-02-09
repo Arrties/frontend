@@ -30,7 +30,10 @@ export default function View() {
       artistId: artist?.id!,
       artWorkId: artWork?.id!,
     });
-    await router.push(`/chat/${chatData?.chatRoomId}`);
+    router.push({
+      pathname: '/chat/room',
+      query: { id: chatData?.chatRoomId },
+    });
   };
 
   const handlePreferButton = () => {
