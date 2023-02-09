@@ -36,6 +36,7 @@ export default function ChatRoom() {
   const userId = userInfo?.id || 0;
 
   const [isModal, setIsModal] = useState(false);
+  const [isPreparingModal, setIsPreparingModal] = useState(false);
 
   const onAccept = async () => {
     await chatApi.deleteChatRoom(id);
@@ -43,12 +44,13 @@ export default function ChatRoom() {
   };
 
   const sendImage = (e) => {
-    const reader = new FileReader();
-    reader.readAsDataURL(e.target.files[0]);
-    reader.onload = () => {
-      const base64data = reader.result;
-      publishImage(client.current, id, userInfo?.id, base64data);
-    };
+    // const reader = new FileReader();
+    // reader.readAsDataURL(e.target.files[0]);
+    // reader.onload = () => {
+    //   const base64data = reader.result;
+    //   publishImage(client.current, id, userInfo?.id, base64data);
+    // };
+    setIsPreparingModal(true);
   };
 
   const connect = async () => {
@@ -98,6 +100,17 @@ export default function ChatRoom() {
 
   return (
     <Layout>
+      <Modal
+        message="아직 준비 중인 서비스예요."
+        isModal={isPreparingModal}
+        onCloseModal={() => {
+          setIsPreparingModal(false);
+        }}
+        denyMessage="나가기"
+        onAccept={() => {
+          setIsPreparingModal(false);
+        }}
+      />
       <Modal
         isMain
         message="채팅방을 나가면 채팅 목록 및 대화내용이 삭제 됩니다.
@@ -190,12 +203,13 @@ export default function ChatRoom() {
                 />
               </label>
               <input
-                type="file"
+                // type="file"
                 id="profileImage"
                 accept="image/*"
                 className="hidden "
                 {...register('image')}
-                onChange={sendImage}
+                // onChange={sendImage}
+                onClick={sendImage}
               />
             </>
           )}
