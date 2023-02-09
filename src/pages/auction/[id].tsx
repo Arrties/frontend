@@ -254,8 +254,29 @@ export default function Detail() {
               </div>
             </div>
           </article>
+          <article>
+            {artWork?.images.slice(1).map((image: string, idx: number) => (
+              <div key={idx} className="relative mt-8 aspect-square w-full">
+                <Image
+                  src={image}
+                  alt="artwork"
+                  fill
+                  className="object-contain"
+                  priority
+                />
+              </div>
+            ))}
+          </article>
 
-          <article className="relative h-[457px] w-full">
+          {/* <article className="relative h-[457px] w-full">
+            <div>
+              <Image
+                src="/svg/example/guarantee_empty.svg"
+                alt="guarantee"
+                width={327}
+                height={457}
+              />
+            </div>
             <Image
               alt="guarantee"
               src={artWork?.guaranteeImage || '/svg/example/guarantee.svg'}
@@ -263,7 +284,7 @@ export default function Detail() {
               className="object-contain"
               priority
             />
-          </article>
+          </article> */}
           <div className="h-[7rem]" />
         </section>
       </Layout>
