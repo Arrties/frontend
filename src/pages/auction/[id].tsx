@@ -242,7 +242,7 @@ export default function Detail() {
             </div>
             <div className="mt-4">
               <p className="text-14">{artWork?.description}</p>
-              <div className="mt-4">
+              <div className="mt-4 flex flex-wrap">
                 {artWork?.keywords?.map((keyword: string, idx: number) => (
                   <span
                     key={idx}
