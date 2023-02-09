@@ -26,7 +26,7 @@ export default function WishCard({ wish }) {
   return (
     <WishCardContainer
       onClick={() => {
-        router.push(`/auction/${wish.id}`);
+        router.push(`/auction/view?id=${wish.id}`);
       }}
     >
       <div className="relative h-28  bg-gray-300">

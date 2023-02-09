@@ -288,10 +288,9 @@ export default function View() {
           <div className="h-[7rem]" />
         </section>
       </Layout>
-
       {!isMine && remaind > 0 && (
         <article className="absolute inset-x-0 bottom-0 mx-auto max-w-[420px]">
-          <div className="h-[18px] bg-gradient-to-t from-white to-gray-100"></div>
+          <div className="to-gray-10 h-[18px] bg-gradient-to-t from-white"></div>
           <div className="m-auto flex w-full  gap-5 bg-white  px-6 pb-9 shadow-lg">
             <Button text="채팅하기" kind="outlined" onClick={handleChat} />
             <Button

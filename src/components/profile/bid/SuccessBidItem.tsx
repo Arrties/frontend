@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import React from 'react';
 import tw from 'tailwind-styled-components';
+import { useRouter } from 'next/router';
 
 interface SuccessBidItemProps {
   biddingItem: SuccessfulBidArtwork;
@@ -9,7 +10,7 @@ interface SuccessBidItemProps {
 }
 
 const SuccessBidItemTag = tw.section<SuccessBidItemProps>`
-flex mt-6 border-b last:border-none border-[#EDEDED] pb-6 relative
+flex mt-6 border-b last:border-none border-[#EDEDED] pb-6 relative cursor-pointer
 `;
 
 export default function SuccessBidItem({
@@ -17,8 +18,18 @@ export default function SuccessBidItem({
   handleOption,
   ...rest
 }: SuccessBidItemProps) {
+  const router = useRouter();
+
   return (
-    <SuccessBidItemTag {...rest}>
+    <SuccessBidItemTag
+      {...rest}
+      onClick={() => {
+        router.push({
+          pathname: '/auction/view',
+          query: { id: biddingItem.id },
+        });
+      }}
+    >
       <article className="relative h-[100px] w-[82px] overflow-hidden rounded">
         <Image
           alt="example"

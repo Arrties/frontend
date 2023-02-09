@@ -10,7 +10,7 @@ interface BidItemProps {
 }
 
 const BidItemTag = tw.section<BidItemProps>`
-flex mt-6 border-b last:border-none border-[#EDEDED] pb-6 relative
+flex mt-6 border-b last:border-none border-[#EDEDED] pb-6 relative cursor-pointer
 `;
 
 export default function BidItem({
@@ -23,7 +23,10 @@ export default function BidItem({
     <BidItemTag
       {...rest}
       onClick={() => {
-        router.push(`/auction/${biddingItem?.id}`);
+        router.push({
+          pathname: '/auction/view',
+          query: { id: biddingItem.id },
+        });
       }}
     >
       <article className="relative h-[100px] w-[82px] overflow-hidden rounded">

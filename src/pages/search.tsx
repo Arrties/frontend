@@ -5,7 +5,7 @@ import back from '@public/svg/icons/icon_back.svg';
 import Image from 'next/image';
 import tw from 'tailwind-styled-components';
 import { useRouter } from 'next/router';
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import RecentSearchBox from '@components/search/RecentSearchBox';
 import {
@@ -65,13 +65,13 @@ export default function Search() {
   };
 
   const onSubmit = () => {
-    router.push(`search/?word=${value}`);
+    router.replace(`search/?word=${value}`);
     setSearchWord(value);
   };
 
   const handleRecentWord = ({ word }) => {
     setSearchWord(word);
-    router.push(`search/?word=${word}`);
+    router.replace(`search/?word=${word}`);
     setValue(word);
   };
 
@@ -81,13 +81,19 @@ export default function Search() {
 
   const handleRecommendKeyword = (keyword: string) => {
     setValue(keyword);
-    router.push(`search/?word=${keyword}`);
+    router.replace(`search/?word=${keyword}`);
     setSearchWord(keyword);
   };
 
   const page = useMemo(() => {
-    return router.query.word !== undefined ? router.query.word : 'Intro';
+    return router.query.word !== undefined ? router.query.word : '';
   }, [router.query]);
+
+  useEffect(() => {
+    console.log(page);
+    setValue(page + '');
+    setSearchWord(page + '');
+  }, [page]);
 
   return (
     <Layout>
@@ -111,7 +117,7 @@ export default function Search() {
           />
         </form>
       </SearchBox>
-      {page !== 'Intro' ? (
+      {!!page ? (
         <div>
           <FilterDropdown setStatus={setStatus} />
           <div className="flex flex-wrap justify-between gap-y-2  px-2 py-5">
@@ -138,7 +144,7 @@ export default function Search() {
           </section>
         </div>
       )}
-      {!!RecentWords && page === 'Intro' && (
+      {!!RecentWords && !page && (
         <div>
           <section className="mt-[38px]">
             <div className="flex justify-between">

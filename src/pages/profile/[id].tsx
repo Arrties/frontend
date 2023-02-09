@@ -125,7 +125,7 @@ export default function PickDetail() {
                 title={artwork?.title}
                 saleStatus={artwork?.saleStatus}
                 onClick={() => {
-                  router.push(`/auction/${artwork?.id}`);
+                  router.push(`/auction/view?id=${artwork?.id}`);
                 }}
                 image={artwork?.image}
               />

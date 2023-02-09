@@ -26,8 +26,7 @@ import { makeThreeEach } from '@utils/makeThreeEach';
 
 export default function Home() {
   const router = useRouter();
-  const { data: customizedArtwork, refetch: refetchCustomizedArtwork } =
-    useGetCustomizedArtWork(1, 5) || {};
+  const { data: customizedArtwork } = useGetCustomizedArtWork(1, 5) || {};
   const { data: userInfo } = useGetProfile();
   const { data: auctionList } = useGetAuction();
   const { data: pastAuctionList } = useGetPastAuction();
