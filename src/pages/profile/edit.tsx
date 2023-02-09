@@ -307,7 +307,7 @@ export default function Edit() {
                 {...register('instagram')}
                 id="instagram"
                 defaultValue={userInfo?.instagram}
-                className="h-[30px] w-[calc(100%-32px)] indent-1 text-12 placeholder:text-[#999]"
+                className="h-[30px] w-[140px] indent-1 text-12 placeholder:text-[#999]"
               />
             </div>
             <div className="flex items-center">
@@ -325,7 +325,7 @@ export default function Edit() {
                 {...register('behance')}
                 id="behance"
                 defaultValue={userInfo?.behance}
-                className="h-[30px] w-[calc(100%-32px)] indent-1 text-12 placeholder:text-[#999]"
+                className="h-[30px] w-[140px] indent-1 text-12 placeholder:text-[#999]"
               />
             </div>
           </article>
