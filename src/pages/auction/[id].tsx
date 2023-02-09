@@ -199,7 +199,7 @@ export default function Detail() {
             </p>
             <p>
               <span className="inline-block w-[6rem] text-[#767676]">재료</span>
-              <span className="text-[#191919]">재료</span>
+              <span className="text-[#191919]">{artWork?.material}</span>
             </p>
             <p>
               <span className="inline-block w-[6rem] text-[#767676]">액자</span>
