@@ -54,7 +54,7 @@ export default function NoticeItem({ notice }: NoticeItemProps) {
           className="mr-3"
         />
         <section
-          className="flex cursor-pointer flex-col leading-5 max-[400px]:w-[230px] max-[355px]:w-[200px]"
+          className="flex cursor-pointer flex-col leading-5"
           onClick={() => {
             router.push(icon[title][1]);
           }}
