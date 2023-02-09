@@ -16,6 +16,8 @@ import { useRouter } from 'next/router';
 import { getToken } from '@utils/localStorage/token';
 import { dataURLtoFile } from '@utils/dataURLtoFile';
 import KeywordBox from '@components/common/KeywordBox';
+import usePostArtwork from '@hooks/mutations/usePostArtwork';
+import Loader from '@components/common/Loader';
 
 const ARTWORK_STATUS = [
   { value: '매우 좋음' },
@@ -65,6 +67,7 @@ export default function Post() {
     artworkId: number;
     turn: number;
   }>({ artworkId: 0, turn: 0 });
+  const [isErrorModal, setIsErrorModal] = useState<boolean>(false);
 
   const router = useRouter();
 
@@ -111,6 +114,14 @@ export default function Post() {
       setValue('guaranteeImage', signature);
     }
   }, [keywordList, setValue, genre, signature]);
+
+  const {
+    mutate,
+    data,
+    isSuccess,
+    isLoading: isLoadingPost,
+    isError,
+  } = usePostArtwork();
 
   const onSubmit = async (form: Artwork) => {
     const {
@@ -159,10 +170,13 @@ export default function Post() {
       formData.append('guaranteeImage', file);
     }
 
-    const data = await artworkApi.postArtwork(formData);
-    console.log('성공', data);
-    setResponseData({ turn: data.turn, artworkId: data.artWork.id });
-    setIsModal(true);
+    mutate(formData);
+    if (isError) {
+      setIsErrorModal(true);
+    } else {
+      setResponseData({ turn: data.turn, artworkId: data.artWork.id });
+      setIsModal(true);
+    }
   };
 
   if (isGuaranteeModal)
@@ -191,6 +205,9 @@ export default function Post() {
       />
     );
 
+  if (isLoadingPost) {
+    return <Loader />;
+  }
   return (
     <Layout>
       <Modal
@@ -199,11 +216,21 @@ export default function Post() {
         isModal={isModal}
         onCloseModal={() => {
           setIsModal(false);
-          router.replace(`/auction/${responseData.artworkId}`);
+          // router.replace(`/auction/${responseData.artworkId}`);
         }}
         onAccept={() => {
           setIsModal(false);
-          router.replace(`/auction/${responseData.artworkId}`);
+          // router.replace(`/auction/${responseData.artworkId}`);
+        }}
+      />
+      <Modal
+        message={`현재 예정된 중인 경매가 없습니다. 죄송합니다.`}
+        isModal={isErrorModal}
+        onCloseModal={() => {
+          setIsErrorModal(false);
+        }}
+        onAccept={() => {
+          setIsErrorModal(false);
         }}
       />
       <form className="w-full space-y-3" onSubmit={handleSubmit(onSubmit)}>

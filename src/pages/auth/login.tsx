@@ -16,6 +16,7 @@ import {
 } from '@utils/localStorage/helper';
 import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
+import Loader from '@components/common/Loader';
 
 function Login() {
   const {
@@ -29,8 +30,7 @@ function Login() {
     },
   });
   const [checkedTerm, setCheckedTerm] = useState<string[]>([]);
-  const { mutate, data, error } = usePostLogin();
-  console.log(error);
+  const { mutate, data, error, isLoading: isLoadingLogin } = usePostLogin();
 
   useEffect(() => {
     deleteToken();
@@ -94,6 +94,10 @@ function Login() {
       }
     }
   }, [error]);
+
+  if (isLoadingLogin) {
+    return <Loader />;
+  }
 
   return (
     <Layout>
