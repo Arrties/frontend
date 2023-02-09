@@ -7,6 +7,7 @@ import Button from 'stories/Button';
 import adminApi from '@apis/admin/admin';
 import useGetCertificationList from '@hooks/queries/admin/useGetCertificationList';
 import Image from 'next/image';
+import { getToken } from '@utils/localStorage/token';
 
 interface InputForm {
   memberId: number;
@@ -25,6 +26,12 @@ export default function Admin() {
     },
   });
 
+  useEffect(() => {
+    if (getToken().roles !== 'ROLE_ADMIN') {
+      router.push('/home');
+    }
+  }, []);
+
   const onSubmitRole = async (form: InputForm) => {
     const { memberId } = form;
     await adminApi.patchRole(memberId);
@@ -36,7 +43,6 @@ export default function Admin() {
   };
 
   const { data: certificationList } = useGetCertificationList();
-  console.log(certificationList);
   const handleAccept = async (memberId: number) => {
     await adminApi.patchRole(memberId);
     alert('전환 성공');
