@@ -24,13 +24,14 @@ const Line = tw.p`leading-5 pl-5`;
 export default function Begin() {
   const swiperRef = useRef<any>(null);
   const router = useRouter();
+
   return (
     <Layout>
       <div>
         <Swiper
           navigation={true}
           modules={[Navigation]}
-          className="mySwiper h-[800px]"
+          className="mySwiper h-[810px]"
           ref={swiperRef}
         >
           <SwiperSlide>
@@ -115,7 +116,7 @@ export default function Begin() {
             </div>
             <Button
               onClick={() => router.push('/auth/login')}
-              className="absolute inset-x-0 bottom-[34px] m-auto"
+              className="fixed inset-x-0 bottom-[0px] m-auto w-full"
               text="시작하기"
             />
           </SwiperSlide>
