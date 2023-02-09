@@ -14,7 +14,7 @@ interface DefaultProps {
   [key: string]: any;
 }
 
-const ModalTag = tw.div<DefaultProps>``;
+const ModalTag = tw.div<DefaultProps>`fixed inset-x-0 inset-y-0 z-10`;
 
 const ModalBackground = tw.div`
   absolute inset-0 bg-[#767676] opacity-80 backdrop-blur-3xl z-10

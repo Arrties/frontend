@@ -73,8 +73,9 @@ function Login() {
       if (token) setToken(token);
       if (data.roles === 'ROLE_ADMIN') {
         router.push('/admin');
+      } else {
+        router.push('/home');
       }
-      router.push('/home');
     }
   }, [data]);
 

@@ -46,17 +46,17 @@ export default function AuctionItem({ auctionList }: AuctionListProps) {
           />
         )}
       </div>
-      <div className="flex flex-col justify-center">
+      <div className="relative flex flex-col justify-center">
         {auctionList.status === 'processing' ? (
-          <span className="h-[17px] w-[42px] bg-[#FC6554] text-center text-10 text-[#FFFFFF]">
+          <span className="absolute top-0 flex h-[17px] w-[42px] items-center justify-center bg-[#FC6554] text-center text-10 text-[#FFFFFF]">
             D-{remainedDay()}
           </span>
         ) : (
-          <span className="h-[17px] w-[42px] bg-[#191919] text-center text-10 text-[#FFFFFF]">
+          <span className="absolute top-0  flex h-[17px] w-[42px] items-center justify-center bg-[#191919] text-center text-10 text-[#FFFFFF]">
             종료
           </span>
         )}
-        <span className="text-16 font-semibold text-[#191919]">
+        <span className="mt-4 text-16 font-semibold text-[#191919]">
           제 {auctionList.turn}회 아띠즈 경매
         </span>
         <span className="text-14 text-[#767676]">

@@ -51,8 +51,8 @@ export default function ExhibitionItem({
       <Image
         src={`/svg/icons/icon_heart${pick ? '_filled' : ''}.svg`}
         alt="heart"
-        width={20}
-        height={20}
+        width={30}
+        height={30}
         className="absolute right-2 top-2.5 cursor-pointer"
         onClick={handlePrefer}
       />
