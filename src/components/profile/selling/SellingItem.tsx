@@ -23,7 +23,7 @@ export default function SellingItem({
       <SellingItemTag
         {...rest}
         onClick={() => {
-          router.push(`/auction/${sellingItem.id}`);
+          router.push(`/auction/view?id=${sellingItem?.id}`);
         }}
       >
         <article className="relative h-[100px] w-[82px] overflow-hidden rounded">
