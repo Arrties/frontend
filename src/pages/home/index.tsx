@@ -23,6 +23,13 @@ import NoticeIcon from '@components/common/NoticeIcon';
 import useGetAuction from '@hooks/queries/auction/useGetAuction';
 import useGetPastAuction from '@hooks/queries/auction/useGetPastAuction';
 import { makeThreeEach } from '@utils/makeThreeEach';
+import styled from 'styled-components';
+
+const PastAuction = styled.section`
+  .swiper-pagination-bullet-active {
+    background-color: #fc6554;
+  }
+`;
 
 export default function Home() {
   const router = useRouter();
@@ -149,7 +156,7 @@ export default function Home() {
               </div>
             ))}
         </section>
-        <section>
+        <PastAuction>
           <div className="mb-5 flex flex-col">
             <span className="text-14 text-[#767676]">아쉽지만 끝난</span>
             <span className="text-20 font-bold text-[#191919]">
@@ -178,7 +185,7 @@ export default function Home() {
                 ),
               )}
           </Swiper>
-        </section>
+        </PastAuction>
         {isUser ? <div className="h-16" /> : <FloatButton />}
       </Layout>
       <Tab />

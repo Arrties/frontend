@@ -30,7 +30,10 @@ export default function View() {
       artistId: artist?.id!,
       artWorkId: artWork?.id!,
     });
-    await router.push(`/chat/${chatData?.chatRoomId}`);
+    router.push({
+      pathname: '/chat/room',
+      query: { id: chatData?.chatRoomId },
+    });
   };
 
   const handlePreferButton = () => {
@@ -226,7 +229,10 @@ export default function View() {
                   alt="profile"
                   className="cursor-pointer rounded-full"
                   onClick={() => {
-                    router.push(`/profile/${artist?.id}`);
+                    router.push({
+                      pathname: '/profile/detail',
+                      query: { id: artist?.id },
+                    });
                   }}
                   fill
                 />
@@ -288,18 +294,29 @@ export default function View() {
           <div className="h-[7rem]" />
         </section>
       </Layout>
-      {!isMine && remaind > 0 && (
+      {
         <article className="absolute inset-x-0 bottom-0 mx-auto max-w-[420px]">
-          <div className="to-gray-10 h-[18px] bg-gradient-to-t from-white"></div>
+          <div className="to-gray-10 h-[18px] bg-gradient-to-t from-white" />
           <div className="m-auto flex w-full  gap-5 bg-white  px-6 pb-9 shadow-lg">
-            <Button text="채팅하기" kind="outlined" onClick={handleChat} />
+            <Button
+              text="채팅하기"
+              kind="outlined"
+              onClick={handleChat}
+              disabled={isMine}
+            />
             <Button
               text="응찰하기"
-              onClick={() => router.push(`/auction/bidding/${artWorkId}`)}
+              onClick={() =>
+                router.push({
+                  pathname: '/auction/bidding',
+                  query: { id: artWorkId },
+                })
+              }
+              disabled={remaind > 0}
             />
           </div>
         </article>
-      )}
+      }
     </>
   );
 }

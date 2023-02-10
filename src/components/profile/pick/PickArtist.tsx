@@ -30,7 +30,14 @@ export default function PickArtist({
   const router = useRouter();
 
   return (
-    <PickArtistContainer onClick={() => router.push(`/profile/${id}`)}>
+    <PickArtistContainer
+      onClick={() =>
+        router.push({
+          pathname: '/auction/view',
+          query: { id },
+        })
+      }
+    >
       <PickArtistProfile>
         <Image
           src={image || '/svg/icons/profile/icon_avatar.svg'}
