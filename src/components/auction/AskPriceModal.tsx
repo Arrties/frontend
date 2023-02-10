@@ -83,6 +83,14 @@ export default function AskPriceModal({
                   500,000원
                 </div>
               </div>
+              <div className="itmes-center flex h-[30px] w-full justify-center border-t border-[#EDEDED] text-10  font-medium text-[#999999]">
+                <div className="flex w-3/5 items-center justify-center border-r border-[#EDEDED]">
+                  1000만 이상
+                </div>
+                <div className="flex w-2/5 items-center justify-center">
+                  1,000,000원
+                </div>
+              </div>
             </div>
           </div>
         </ModalMessage>
