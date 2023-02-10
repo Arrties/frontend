@@ -4,7 +4,7 @@ import { ReactElement, useEffect, useState } from 'react';
 
 const days = ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'];
 
-export default function Calendar({ auctionList }) {
+export default function Calendar({ auctionList, pastAuctionList }) {
   const [date, setDate] = useState<moment.Moment>(() => moment());
   const [auctionDateList, setAuctionDateList] = useState<string[]>([]);
   const today = date;
@@ -21,7 +21,7 @@ export default function Calendar({ auctionList }) {
         let { startDate, endDate } = it;
         for (
           let date = startDate;
-          endDate.diff(date, 'days') > 0;
+          endDate.isAfter(date);
           date = date.add(1, 'days')
         ) {
           newArr.push(date.format('YYYYMMDD'));
@@ -30,6 +30,22 @@ export default function Calendar({ auctionList }) {
       setAuctionDateList(newArr);
     }
   }, [auctionList]);
+  useEffect(() => {
+    if (!!pastAuctionList) {
+      const newArr: string[] = [];
+      pastAuctionList.forEach((it: AuctionList) => {
+        let { startDate, endDate } = it;
+        for (
+          let date = startDate;
+          endDate.isAfter(date);
+          date = date.add(1, 'days')
+        ) {
+          newArr.push(date.format('YYYYMMDD'));
+        }
+      });
+      setAuctionDateList(newArr);
+    }
+  }, [pastAuctionList]);
 
   const calendarArr = () => {
     const calendar: ReactElement[] = [];
