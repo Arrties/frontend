@@ -32,7 +32,10 @@ export default function SearchItem({ artwork }: ArtworkForm) {
         className="rounded"
         quality={100}
         onClick={() => {
-          router.push(`/exhibition/${artwork.id}`);
+          router.push({
+            pathname: '/exhibition/detail',
+            query: { id: artwork.id },
+          });
         }}
       />
 
