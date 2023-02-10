@@ -162,14 +162,14 @@ export default function Home() {
           />
         </section>
         <section className="mb-12">
-          {!!auctionList &&
-            auctionList.map((auctionItem: AuctionList) => (
+          {!!pastAuctionList &&
+            pastAuctionList.map((auctionItem: AuctionList) => (
               <div key={auctionItem?.id}>
                 <ScheduleItem auctionItem={auctionItem} />
               </div>
             ))}
-          {!!pastAuctionList &&
-            pastAuctionList.map((auctionItem: AuctionList) => (
+          {!!auctionList &&
+            auctionList.map((auctionItem: AuctionList) => (
               <div key={auctionItem?.id}>
                 <ScheduleItem auctionItem={auctionItem} />
               </div>

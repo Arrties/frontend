@@ -8,13 +8,13 @@ interface ScheduleItemForm {
 }
 
 const ScheduleIconBox = tw.div<ScheduleItemForm>`
-${({ turn }) => (turn === 1 ? 'bg-[#FC6554]' : 'bg-[#FFC961]')}
+bg-[#D1D1D1]
 w-[52px] h-[52px] flex justify-center mr-3 rounded-l-[5px] drop-shadow-lg
 `;
 
 const NotificationBox = tw.div<ScheduleItemForm>`
-${({ turn }) => (turn === 1 ? 'bg-[#FC6554]' : 'bg-[#FFC961]')}
-w-[26px] h-[26px] flex justify-center m-auto mx-0 rounded-full border-[1px] border-[#F8F8FA] cursor-pointer drop-shadow-none
+
+w-[26px] h-[26px] flex justify-center m-auto mx-0 rounded-full border-[1px] border-[#D1D1D1] cursor-pointer drop-shadow-none
 `;
 
 export default function ScheduleItem({ auctionItem }: ScheduleItemForm) {
@@ -53,7 +53,7 @@ export default function ScheduleItem({ auctionItem }: ScheduleItemForm) {
       </div>
       <NotificationBox turn={auctionItem?.turn}>
         <Image
-          src="/svg/icons/icon_notification_white.svg"
+          src="/svg/icons/icon_notification_gray.svg"
           alt="notification"
           width={18}
           height={18}
