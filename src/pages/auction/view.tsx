@@ -43,6 +43,7 @@ export default function View() {
       postPrefer();
     }
   };
+  console.log(remaind, isMine);
 
   const target = useRef<HTMLDivElement | null>(null);
   const [isCardOver, setIsCardOver] = useState(false);
@@ -158,25 +159,38 @@ export default function View() {
             <div>
               <div className="flex items-center justify-between">
                 <span className="text-18 font-semibold">{artWork?.title}</span>
-                {!Number.isNaN(+days) && remaind > 0 && (
-                  <span className="text-14">
-                    <span className="rounded-l-md bg-[#F8F8FA] px-2 py-1 text-brand">
-                      마감까지
-                    </span>
+                {remaind > 0 ? (
+                  !Number.isNaN(+days) && (
+                    <span className="text-14">
+                      <span className="rounded-l-md bg-[#F8F8FA] px-2 py-1 text-brand">
+                        마감까지
+                      </span>
 
-                    <span className="rounded-r-md bg-brand px-2 py-1 text-[#FFFFFF]">
-                      {
-                        <span
-                          className={`${
-                            +days >= 1 ? 'w-fit' : 'w-[66px]'
-                          } text-[14px] font-medium tracking-widest`}
-                        >
-                          {+days >= 1
-                            ? 'D-' + days
-                            : hours + ':' + minutes + ':' + seconds}
-                        </span>
-                      }
+                      <span className="rounded-r-md bg-brand px-2 py-1 text-[#FFFFFF]">
+                        {
+                          <span
+                            className={`${
+                              +days >= 1 ? 'w-fit' : 'w-[66px]'
+                            } text-[14px] font-medium tracking-widest`}
+                          >
+                            {+days >= 1
+                              ? 'D-' + days
+                              : hours + ':' + minutes + ':' + seconds}
+                          </span>
+                        }
+                      </span>
                     </span>
+                  )
+                ) : (
+                  <span className="flex rounded-md border border-[#999999] px-2 py-0.5 text-14 text-[#999999]">
+                    <Image
+                      alt="clock"
+                      src="/svg/icons/icon_clock_gray.svg"
+                      width={16}
+                      height={16}
+                      className="mr-1"
+                    />
+                    00:00:00
                   </span>
                 )}
               </div>
@@ -312,7 +326,7 @@ export default function View() {
                   query: { id: artWorkId },
                 })
               }
-              disabled={remaind > 0}
+              disabled={remaind <= 0}
             />
           </div>
         </article>
