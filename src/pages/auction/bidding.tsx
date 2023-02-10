@@ -13,6 +13,7 @@ import { priceToString } from '@utils/priceToString';
 import { useCountDown } from '@hooks/useCountDown';
 import { leatAskPrice } from '@utils/leastAskPrice';
 import usePutBiddng from '@hooks/mutations/usePutBidding';
+import useGetProfile from '@hooks/queries/useGetProfile';
 interface inputForm {
   price: string;
 }
@@ -23,6 +24,7 @@ export default function Bidding() {
   const { data } = useGetBiddingHistory(artWorkId);
   const { artWork, auction, biddingList, totalBiddingCount } = data || {};
   const { mutate } = usePutBiddng(+artWorkId!);
+  const { data: userInfo } = useGetProfile();
   const [days, hours, minutes, seconds] = useCountDown?.(
     auction?.endDate || '',
   );
@@ -251,7 +253,7 @@ export default function Bidding() {
         </article>
         {errors.price && <ErrorMessage message={errors.price.message} />}
 
-        <Button text="응찰" className="mt-4 w-full" />
+        <Button text="응찰" className="mt-4 w-full" disabled={remaind < 0} />
       </form>
       <AskPriceModal
         isModal={isModal}
