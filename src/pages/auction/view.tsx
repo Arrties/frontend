@@ -9,6 +9,7 @@ import usePostPrefer from '@hooks/mutations/usePostPrefer';
 import useDeletePrefer from '@hooks/mutations/useDeletePrefer';
 import { useCountDown } from '@hooks/useCountDown';
 import useGetProfile from '@hooks/queries/useGetProfile';
+import KeywordBox from '@components/common/KeywordBox';
 
 export default function View() {
   const router = useRouter();
@@ -264,12 +265,13 @@ export default function View() {
               <p className="text-14">{artWork?.description}</p>
               <div className="mt-4 flex flex-wrap">
                 {artWork?.keywords?.map((keyword: string, idx: number) => (
-                  <span
-                    key={idx}
-                    className="mr-2 mt-2 rounded-[19px] border border-[#CECECE] px-3 py-1 text-[14px] text-[#767676] "
-                  >
-                    {keyword}
-                  </span>
+                  // <span
+                  //   key={idx}
+                  //   className="mr-2 mt-2 rounded-[19px] border border-[#CECECE] px-3 py-1 text-[14px] text-[#767676] "
+                  // >
+                  //   {keyword}
+                  // </span>
+                  <KeywordBox text={keyword} key={idx} />
                 ))}
               </div>
             </div>
