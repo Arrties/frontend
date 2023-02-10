@@ -13,7 +13,7 @@ import useGetProfile from '@hooks/queries/useGetProfile';
 import Image from 'next/image';
 import React from 'react';
 import { useRouter } from 'next/router';
-import { Autoplay, Navigation, Scrollbar } from 'swiper';
+import { Autoplay, FreeMode, Mousewheel, Navigation, Scrollbar } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { isUser } from '@utils/isUser';
 import { Pagination } from 'swiper';
@@ -28,6 +28,16 @@ import styled from 'styled-components';
 const PastAuction = styled.section`
   .swiper-pagination-bullet-active {
     background-color: #fc6554;
+  }
+`;
+const KeywordSection = styled.section`
+  margin-top: 4px;
+  margin-bottom: 8px;
+  display: flex;
+  overflow-x: auto;
+  white-space: nowrap;
+  &::-webkit-scrollbar {
+    display: none;
   }
 `;
 
@@ -87,12 +97,15 @@ export default function Home() {
                   fill
                   className="absolute"
                 />
-                <div className="direc z-10 flex flex-col  justify-center text-[#FFFFFF] p-5" onClick={()=>{
-                  router.push('/profile/keyword')
-                }}>
+                <div
+                  className="direc z-10 flex flex-col  justify-center p-5 text-[#FFFFFF]"
+                  onClick={() => {
+                    router.push('/profile/keyword');
+                  }}
+                >
                   <p className="text-16">
                     내 취향에 맞는
-                    <br /> 작품을 추천 받아 보세요 >
+                    <br /> 작품을 추천 받아 보세요 &gt;
                   </p>
                   <p className="text-14">
                     영서님 취향의 전시작품이 아직 없어요
@@ -102,11 +115,14 @@ export default function Home() {
             )}
           </div>
         </section>
-        <section className="my-4 mt-2 flex flex-wrap">
-          {customizedArtwork?.artworks.length && userInfo?.keywords?.map((keyword: string, idx: number) => (
-            <KeywordBox text={keyword} key={idx} />
-          ))}
-        </section>
+
+        <KeywordSection>
+          {customizedArtwork?.artworks.length &&
+            userInfo?.keywords?.map((keyword: string, idx: number) => (
+              <KeywordBox text={keyword} key={idx} />
+            ))}
+        </KeywordSection>
+
         <section className="mb-12 ">
           <Swiper
             modules={[Autoplay, Navigation, Scrollbar]}
