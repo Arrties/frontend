@@ -58,10 +58,10 @@ export default function Home() {
           <div className="text-14 text-[#767676]">
             {userInfo?.nickname}님 취향의
           </div>
+          <span className="text-20 font-bold">이번 주 전시작품</span>
           <div className="relative flex justify-between">
-            <span className="text-20 font-bold">이번 주 전시작품</span>
             {customizedArtwork?.artworks.length ? (
-              <div className="flex items-center justify-between">
+              <div className="absolute right-0 -top-5 flex items-center justify-between">
                 <span
                   className="cursor-pointer pr-1 text-12 text-[#999999]"
                   onClick={() => {
@@ -78,23 +78,14 @@ export default function Home() {
                 />
               </div>
             ) : (
-              <div className="absolute right-0 -top-7 mt-6 mb-12 flex justify-center text-center">
-                <button
-                  onClick={() => {
-                    router.push('/profile/keyword');
-                  }}
-                  className="flex h-[36px] w-[100px] items-center justify-center rounded-[19px] border-[1px] border-brand text-xs text-brand"
-                >
-                  <div>
-                    <Image
-                      src="/svg/icons/icon_plus_pink.svg"
-                      alt="plus"
-                      width={10}
-                      height={10}
-                    />
-                  </div>
-                  <div>취향분석</div>
-                </button>
+              <div>
+                <Image
+                  alt="keyword"
+                  src="/svg/icons/bg_home_keyword.svg"
+                  width={500}
+                  height={500}
+                  className="my-3"
+                />
               </div>
             )}
           </div>
