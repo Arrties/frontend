@@ -1,4 +1,6 @@
 import moment from 'moment';
+import 'moment/locale/ko';
+
 import Image from 'next/image';
 import React from 'react';
 import { useRouter } from 'next/router';
@@ -33,8 +35,8 @@ export default function NoticeItem({ notice }: NoticeItemProps) {
     '전시회 등록 알림': ['post_exhibition', '/exhibition'],
     '작품 유찰 알림': ['bid_fail', ''],
 
-    '입찰 알림': ['bid_fail', `/auction/bidding/${notice.data}`],
-    '입찰 경쟁 알림': ['inquiry', `/auction/bidding/${notice.data}`],
+    '입찰 알림': ['bid', `/auction/bidding/${notice.data}`],
+    '입찰 경쟁 알림': ['bid_fail', `/auction/bidding/${notice.data}`],
 
     '작품 낙찰 성공 🎉': ['bid_success', '/profile/bid'],
     '1대1 문의 알림': ['inquiry', '/inquiry'],

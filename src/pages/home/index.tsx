@@ -130,11 +130,20 @@ export default function Home() {
               아띠즈 경매 캘린더
             </span>
           </div>
-          <Calendar auctionList={auctionList} />
+          <Calendar
+            auctionList={auctionList}
+            pastAuctionList={pastAuctionList}
+          />
         </section>
         <section className="mb-12">
           {!!auctionList &&
             auctionList.map((auctionItem: AuctionList) => (
+              <div key={auctionItem?.id}>
+                <ScheduleItem auctionItem={auctionItem} />
+              </div>
+            ))}
+          {!!pastAuctionList &&
+            pastAuctionList.map((auctionItem: AuctionList) => (
               <div key={auctionItem?.id}>
                 <ScheduleItem auctionItem={auctionItem} />
               </div>
