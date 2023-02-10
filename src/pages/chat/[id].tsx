@@ -56,15 +56,11 @@ export default function ChatRoom() {
   const connect = async () => {
     client.current = await createClient('/ws-connection');
     client.current.onConnect = await onConnected;
-    client.current.onDisconnect = await onDisconnected;
     await client.current.activate();
   };
 
   const onConnected = () => {
     subscribe(client.current, id, subscribeCallback, true);
-  };
-  const onDisconnected = () => {
-    console.log('disconnect');
   };
 
   const subscribeCallback = () => {
