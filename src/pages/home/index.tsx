@@ -55,43 +55,55 @@ export default function Home() {
           right_message={<NoticeIcon />}
         />
         <section>
-          <div className="text-14 text-[#767676]">
-            {userInfo?.nickname}님 취향의
-          </div>
-          <span className="text-20 font-bold">이번 주 전시작품</span>
           <div className="relative flex justify-between">
             {customizedArtwork?.artworks.length ? (
-              <div className="absolute right-0 -top-5 flex items-center justify-between">
-                <span
-                  className="cursor-pointer pr-1 text-12 text-[#999999]"
-                  onClick={() => {
-                    router.push('/home/view');
-                  }}
-                >
-                  전체보기
-                </span>
-                <Image
-                  src="/svg/icons/icon_arrow.svg"
-                  alt="arrow"
-                  width={6}
-                  height={6}
-                />
+              <div>
+                <div className="text-14 text-[#767676]">
+                  {userInfo?.nickname}님 취향의
+                </div>
+                <span className="text-20 font-bold">이번 주 전시작품</span>
+                <div className="absolute right-0 top-0 flex items-center justify-between">
+                  <span
+                    className="cursor-pointer pr-1 text-12 text-[#999999]"
+                    onClick={() => {
+                      router.push('/home/view');
+                    }}
+                  >
+                    전체보기
+                  </span>
+                  <Image
+                    src="/svg/icons/icon_arrow.svg"
+                    alt="arrow"
+                    width={6}
+                    height={6}
+                  />
+                </div>
               </div>
             ) : (
-              <div>
+              <div className="relative flex h-[120px] w-[500px] items-center ">
                 <Image
                   alt="keyword"
-                  src="/svg/icons/bg_home_keyword.svg"
-                  width={500}
-                  height={500}
-                  className="my-3"
+                  src="/svg/icons/bg_home_banner.svg"
+                  fill
+                  className="absolute"
                 />
+                <div className="direc z-10 flex flex-col  justify-center text-[#FFFFFF] p-5" onClick={()=>{
+                  router.push('/profile/keyword')
+                }}>
+                  <p className="text-16">
+                    내 취향에 맞는
+                    <br /> 작품을 추천 받아 보세요 >
+                  </p>
+                  <p className="text-14">
+                    영서님 취향의 전시작품이 아직 없어요
+                  </p>
+                </div>
               </div>
             )}
           </div>
         </section>
         <section className="my-4 mt-2 flex flex-wrap">
-          {userInfo?.keywords?.map((keyword: string, idx: number) => (
+          {customizedArtwork?.artworks.length && userInfo?.keywords?.map((keyword: string, idx: number) => (
             <KeywordBox text={keyword} key={idx} />
           ))}
         </section>
