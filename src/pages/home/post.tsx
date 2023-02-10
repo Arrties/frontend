@@ -391,7 +391,7 @@ export default function Post() {
         </div>
         <Input
           type="text"
-          label="작품 판매가"
+          label="경매 시작가"
           placeholder="작품 최소 가격을 설정해주세요."
           register={register('price', { required: true })}
           unit="원"
