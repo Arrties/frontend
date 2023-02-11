@@ -47,6 +47,7 @@ export default function Home() {
   const { data: userInfo } = useGetProfile();
   const { data: auctionList } = useGetAuction();
   const { data: pastAuctionList } = useGetPastAuction();
+
   return (
     <>
       <Layout>
