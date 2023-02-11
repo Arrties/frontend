@@ -6,7 +6,7 @@ const days = ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'];
 
 export default function Calendar({ auctionList, pastAuctionList }) {
   const [date, setDate] = useState<moment.Moment>(() => moment());
-  const [auctionDateList, setAuctionDateList] = useState<string[]>([]);
+  const [auctionDateList, setAuctionDateList] = useState<moment.Moment[][]>([]);
   const today = date;
   const firstWeek = today.clone().startOf('month').week();
   const lastWeek =
@@ -16,16 +16,16 @@ export default function Calendar({ auctionList, pastAuctionList }) {
 
   useEffect(() => {
     if (!!pastAuctionList || !!auctionList) {
-      const allAuctionArr = [];
+      const allAuctionArr: moment.Moment[][] = [];
       [...auctionList, ...pastAuctionList].forEach((it: AuctionList) => {
-        const auctionArr = [];
+        const auctionArr: moment.Moment[] = [];
         let { startDate, endDate } = it;
         for (
           let date = startDate;
           endDate.isAfter(date);
           date = date.add(1, 'days')
         ) {
-          auctionArr.push(date);
+          auctionArr.push(date.subtract(1, 'days'));
         }
         allAuctionArr.push(auctionArr);
       });
@@ -64,15 +64,10 @@ export default function Calendar({ auctionList, pastAuctionList }) {
                   } else {
                     status = 'proceeding';
                   }
-                  console.log(status);
 
                   break;
                 }
               }
-
-              const isAuctionDay = auctionDateList.includes(
-                current.format('YYYYMMDD'),
-              );
               return (
                 <td
                   key={index}
