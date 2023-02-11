@@ -15,23 +15,7 @@ export default function Calendar({ auctionList, pastAuctionList }) {
       : today.clone().endOf('month').week();
 
   useEffect(() => {
-    if (!!auctionList) {
-      const newArr: string[] = [];
-      auctionList.forEach((it: AuctionList) => {
-        let { startDate, endDate } = it;
-        for (
-          let date = startDate;
-          endDate.isAfter(date);
-          date = date.add(1, 'days')
-        ) {
-          newArr.push(date.format('YYYYMMDD'));
-        }
-      });
-      setAuctionDateList(newArr);
-    }
-  }, [auctionList]);
-  useEffect(() => {
-    if (!!pastAuctionList) {
+    if (!!pastAuctionList || !!auctionList) {
       const newArr: string[] = [];
       pastAuctionList.forEach((it: AuctionList) => {
         let { startDate, endDate } = it;
@@ -43,9 +27,9 @@ export default function Calendar({ auctionList, pastAuctionList }) {
           newArr.push(date.format('YYYYMMDD'));
         }
       });
-      setAuctionDateList(newArr);
+      setAuctionDateList([...auctionDateList, ...newArr]);
     }
-  }, [pastAuctionList]);
+  }, [auctionList, pastAuctionList]);
 
   const calendarArr = () => {
     const calendar: ReactElement[] = [];
@@ -64,6 +48,7 @@ export default function Calendar({ auctionList, pastAuctionList }) {
                 return <td key={index}></td>;
               }
               const isToday = moment().isSame(current, 'days');
+              // const isAuctionDay = auctionDateList.includes(current);
               const isAuctionDay = auctionDateList.includes(
                 current.format('YYYYMMDD'),
               );
@@ -71,12 +56,12 @@ export default function Calendar({ auctionList, pastAuctionList }) {
                 <td
                   key={index}
                   className={`
-              p-2 text-14 font-bold text-${isToday && '[#FC6554]'} text-${
+                p-2 text-14 font-bold text-${isToday && '[#FC6554]'} text-${
                     isAuctionDay ? '[#FFFFFF]' : '[#767676]'
-                  }  bg-${isAuctionDay && '[#FFC961]'}
-              `}
+                  }  bg-${isAuctionDay && '[#FFC961]'} 
+                `}
                 >
-                  {current.format('D')}
+                  <span>{current.format('D')}</span>
                 </td>
               );
             })}
