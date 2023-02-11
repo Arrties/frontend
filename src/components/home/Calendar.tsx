@@ -16,18 +16,20 @@ export default function Calendar({ auctionList, pastAuctionList }) {
 
   useEffect(() => {
     if (!!pastAuctionList || !!auctionList) {
-      const newArr: string[] = [];
-      pastAuctionList.forEach((it: AuctionList) => {
+      const allAuctionArr = [];
+      [...auctionList, ...pastAuctionList].forEach((it: AuctionList) => {
+        const auctionArr = [];
         let { startDate, endDate } = it;
         for (
           let date = startDate;
           endDate.isAfter(date);
           date = date.add(1, 'days')
         ) {
-          newArr.push(date.format('YYYYMMDD'));
+          auctionArr.push(date);
         }
+        allAuctionArr.push(auctionArr);
       });
-      setAuctionDateList([...auctionDateList, ...newArr]);
+      setAuctionDateList(allAuctionArr);
     }
   }, [auctionList, pastAuctionList]);
 
@@ -48,7 +50,26 @@ export default function Calendar({ auctionList, pastAuctionList }) {
                 return <td key={index}></td>;
               }
               const isToday = moment().isSame(current, 'days');
-              // const isAuctionDay = auctionDateList.includes(current);
+
+              let status = 'notAuctionDate';
+              for (const it of auctionDateList) {
+                if (
+                  current.isSameOrAfter(it[0], 'days') &&
+                  current.isSameOrBefore(it[it.length - 1], 'days')
+                ) {
+                  if (moment().isAfter(it[it.length - 1], 'days')) {
+                    status = 'done';
+                  } else if (moment().isBefore(it[0], 'days')) {
+                    status = 'expected';
+                  } else {
+                    status = 'proceeding';
+                  }
+                  console.log(status);
+
+                  break;
+                }
+              }
+
               const isAuctionDay = auctionDateList.includes(
                 current.format('YYYYMMDD'),
               );
@@ -57,8 +78,16 @@ export default function Calendar({ auctionList, pastAuctionList }) {
                   key={index}
                   className={`
                 p-2 text-14 font-bold text-${isToday && '[#FC6554]'} text-${
-                    isAuctionDay ? '[#FFFFFF]' : '[#767676]'
-                  }  bg-${isAuctionDay && '[#FFC961]'} 
+                    status === 'notAuctionDate' ? '[#767676]' : '[#FFFFFF]'
+                  }  bg-${
+                    status === 'proceeding'
+                      ? 'brand'
+                      : status === 'done'
+                      ? '[#D1D1D1]'
+                      : status === 'expected'
+                      ? '[#FFC961]'
+                      : ''
+                  } 
                 `}
                 >
                   <span>{current.format('D')}</span>

@@ -15,7 +15,7 @@ ${({ status }) =>
     ? 'bg-[#D1D1D1]'
     : status === 'proceeding'
     ? 'bg-brand'
-    : '[bg-#FFC961]'} 
+    : 'bg-[#FFC961]'} 
 w-[52px] h-[52px] flex justify-center mr-3 rounded-l-[5px] drop-shadow-lg
 `;
 
@@ -25,7 +25,7 @@ const NotificationBox = tw.div<ScheduleItemForm>`
      ? 'bg-[#FFFFFF]'
      : status === 'proceeding'
      ? 'bg-brand'
-     : '[bg-#FFC961]'} 
+     : 'bg-[#FFC961]'} 
 w-[26px] h-[26px] flex justify-center m-auto mx-0 rounded-full border-[1px] ${({
   status,
 }) =>
