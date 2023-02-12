@@ -14,6 +14,7 @@ import { useCountDown } from '@hooks/useCountDown';
 import { leatAskPrice } from '@utils/leastAskPrice';
 import usePutBiddng from '@hooks/mutations/usePutBidding';
 import useGetProfile from '@hooks/queries/useGetProfile';
+import moment from 'moment';
 interface inputForm {
   price: string;
 }
@@ -257,7 +258,11 @@ export default function Bidding() {
         <Button
           text="응찰"
           className="mt-4 w-full"
-          disabled={remaind < 0 || isMine}
+          disabled={
+            remaind < 0 ||
+            isMine ||
+            moment().isBefore(moment(auction?.startDate, 'YYYY-MM-DD-hh-mm-ss'))
+          }
         />
       </form>
       <AskPriceModal
