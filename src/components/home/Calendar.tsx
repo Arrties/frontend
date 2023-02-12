@@ -6,7 +6,7 @@ const days = ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'];
 
 export default function Calendar({ auctionList, pastAuctionList }) {
   const [date, setDate] = useState<moment.Moment>(() => moment());
-  const [auctionDateList, setAuctionDateList] = useState<moment.Moment[][]>([]);
+  const [auctionDateList, setAuctionDateList] = useState();
   const today = date;
   const firstWeek = today.clone().startOf('month').week();
   const lastWeek =
@@ -15,21 +15,12 @@ export default function Calendar({ auctionList, pastAuctionList }) {
       : today.clone().endOf('month').week();
 
   useEffect(() => {
-    if (!!pastAuctionList || !!auctionList) {
-      const allAuctionArr: moment.Moment[][] = [];
-      [...auctionList, ...pastAuctionList].forEach((it: AuctionList) => {
-        const auctionArr: moment.Moment[] = [];
-        let { startDate, endDate } = it;
-        for (
-          let date = startDate;
-          endDate.isAfter(date);
-          date = date.add(1, 'days')
-        ) {
-          auctionArr.push(date.subtract(1, 'days'));
-        }
-        allAuctionArr.push(auctionArr);
-      });
-      setAuctionDateList(allAuctionArr);
+    if (!!auctionList || !!pastAuctionList) {
+      setAuctionDateList(
+        [...auctionList, ...pastAuctionList].map((it) => {
+          return { startDate: it.startDate, endDate: it.endDate };
+        }),
+      );
     }
   }, [auctionList, pastAuctionList]);
 
@@ -52,19 +43,19 @@ export default function Calendar({ auctionList, pastAuctionList }) {
               const isToday = moment().isSame(current, 'days');
 
               let status = 'notAuctionDate';
+              if (!auctionDateList) return;
               for (const it of auctionDateList) {
                 if (
-                  current.isSameOrAfter(it[0], 'days') &&
-                  current.isSameOrBefore(it[it.length - 1], 'days')
+                  current.isSameOrAfter(it.startDate, 'days') &&
+                  current.isSameOrBefore(it.endDate, 'days')
                 ) {
-                  if (moment().isAfter(it[it.length - 1], 'days')) {
+                  if (moment().isAfter(it.endDate, 'days')) {
                     status = 'done';
-                  } else if (moment().isBefore(it[0], 'days')) {
+                  } else if (moment().isBefore(it.startDate, 'days')) {
                     status = 'expected';
                   } else {
                     status = 'proceeding';
                   }
-
                   break;
                 }
               }
@@ -72,9 +63,12 @@ export default function Calendar({ auctionList, pastAuctionList }) {
                 <td
                   key={index}
                   className={`
-                p-2 text-14 font-bold text-${isToday && '[#FC6554]'} text-${
+                p-2 text-14 font-bold text-${
+                  isToday && status !== 'proceeding' && '[#FC6554]'
+                } text-${
                     status === 'notAuctionDate' ? '[#767676]' : '[#FFFFFF]'
-                  }  bg-${
+                  }                   
+                  bg-${
                     status === 'proceeding'
                       ? 'brand'
                       : status === 'done'
