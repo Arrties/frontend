@@ -13,7 +13,7 @@ import useGetProfile from '@hooks/queries/useGetProfile';
 import Image from 'next/image';
 import React from 'react';
 import { useRouter } from 'next/router';
-import { Autoplay, FreeMode, Mousewheel, Navigation, Scrollbar } from 'swiper';
+import { Autoplay, Navigation, Scrollbar } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { isUser } from '@utils/isUser';
 import { Pagination } from 'swiper';
