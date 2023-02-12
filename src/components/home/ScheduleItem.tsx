@@ -41,12 +41,12 @@ export default function ScheduleItem({ auctionItem }: ScheduleItemForm) {
   const endDate: string = auctionItem?.endDate.format('YYYY.MM.DD');
 
   useEffect(() => {
-    if (moment().isAfter(auctionItem?.endDate)) {
+    if (moment().isAfter(auctionItem?.endDate, 'days')) {
       setStatus('done');
-    } else if (moment().isAfter(auctionItem?.startDate)) {
-      setStatus('proceeding');
-    } else {
+    } else if (moment().isBefore(auctionItem?.startDate, 'days')) {
       setStatus('expected');
+    } else {
+      setStatus('proceeding');
     }
   });
 
@@ -64,6 +64,10 @@ export default function ScheduleItem({ auctionItem }: ScheduleItemForm) {
         <div
           className="flex flex-col justify-center"
           onClick={() => {
+            if (status === 'proceeding') {
+              window.alert('경매가 시작하면 입장하실 수 있습니다.');
+              return;
+            }
             router.push({
               pathname: '/exhibition/view',
               query: { id: auctionItem?.turn },
