@@ -1,4 +1,4 @@
-import moment from 'moment';
+import moment, { Moment } from 'moment';
 import Image from 'next/image';
 import { ReactElement, useEffect, useState } from 'react';
 
@@ -6,7 +6,8 @@ const days = ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'];
 
 export default function Calendar({ auctionList, pastAuctionList }) {
   const [date, setDate] = useState<moment.Moment>(() => moment());
-  const [auctionDateList, setAuctionDateList] = useState();
+  const [auctionDateList, setAuctionDateList] =
+    useState<{ startDate: moment.Moment; endDate: moment.Moment }[]>();
   const today = date;
   const firstWeek = today.clone().startOf('month').week();
   const lastWeek =
