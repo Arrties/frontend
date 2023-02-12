@@ -9,8 +9,8 @@ import { QueryClient, QueryClientProvider } from 'react-query';
 
 import type { AppProps } from 'next/app';
 import Loader from '@components/common/Loader';
-import { Suspense, useEffect } from 'react';
-import { useRouter } from 'next/router';
+import { Suspense, useEffect, useState } from 'react';
+import { Router, useRouter } from 'next/router';
 import { getToken } from '@utils/localStorage/token';
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -26,6 +26,7 @@ const persistor = persistStore(store);
 
 export default function App({ Component, pageProps }: AppProps) {
   const router = useRouter();
+  const [loading, setLoading] = useState<boolean>(false);
   useEffect(() => {
     if (router.pathname.includes('auth') || router.pathname === '/begin')
       return;
@@ -33,7 +34,28 @@ export default function App({ Component, pageProps }: AppProps) {
     if (!token.accessToken) router.replace('/begin');
   }, [router]);
 
-  return (
+  useEffect(() => {
+    const start = () => {
+      setLoading(true);
+    };
+    const end = () => {
+      setLoading(false);
+    };
+
+    Router.events.on('routeChangeStart', start);
+    Router.events.on('routeChangeComplete', end);
+    Router.events.on('routeChangeError', end);
+
+    return () => {
+      Router.events.off('routeChangeStart', start);
+      Router.events.off('routeChangeComplete', end);
+      Router.events.off('routeChangeError', end);
+    };
+  }, []);
+
+  return loading ? (
+    <Loader />
+  ) : (
     <div className="flex h-screen w-screen justify-center bg-slate-50 font-Pretendard">
       <Head>
         <link rel="shortcut icon" href="/static/favicon.ico" />
