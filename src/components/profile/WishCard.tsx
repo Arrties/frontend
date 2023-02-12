@@ -29,9 +29,9 @@ export default function WishCard({ wish }) {
         router.push(`/auction/view?id=${wish.id}`);
       }}
     >
-      <div className="relative h-28  bg-gray-300">
+      <div className="relative h-28  rounded-t-lg bg-gray-300">
         <Image
-          className="absolute top-3 right-3 rounded-t-lg"
+          className="rounded-t-lg object-cover"
           src={wish?.image || '/svg/icons/icon_favorite.svg'}
           alt="favorite"
           fill
