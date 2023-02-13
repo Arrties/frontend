@@ -55,7 +55,10 @@ export default function Selling() {
                   sellingItem={item}
                   handleOption={handleOption}
                   onClick={() => {
-                    router.push(`/auction/view?id=${item.id}`);
+                    router.push({
+                      pathname: '/auction/view',
+                      query: { id: item.id },
+                    });
                   }}
                 />
               ))}
@@ -71,7 +74,10 @@ export default function Selling() {
                   sellingItem={item}
                   handleOption={handleOption}
                   onClick={() => {
-                    router.push(`/auction/view?id=${item.id}`);
+                    router.push({
+                      pathname: '/auction/view',
+                      query: { id: item.id },
+                    });
                   }}
                 />
               ))}
@@ -91,7 +97,10 @@ export default function Selling() {
                   sellingItem={item}
                   handleOption={handleOption}
                   onClick={() => {
-                    router.push(`/auction/view?id=${item.id}`);
+                    router.push({
+                      pathname: '/auction/view',
+                      query: { id: item.id },
+                    });
                   }}
                 />
               ))}
