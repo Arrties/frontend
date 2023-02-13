@@ -1,12 +1,13 @@
-import moment from 'moment';
+import moment, { Moment } from 'moment';
 import Image from 'next/image';
 import { ReactElement, useEffect, useState } from 'react';
 
 const days = ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'];
 
-export default function Calendar({ auctionList }) {
+export default function Calendar({ auctionList, pastAuctionList }) {
   const [date, setDate] = useState<moment.Moment>(() => moment());
-  const [auctionDateList, setAuctionDateList] = useState<string[]>([]);
+  const [auctionDateList, setAuctionDateList] =
+    useState<{ startDate: moment.Moment; endDate: moment.Moment }[]>();
   const today = date;
   const firstWeek = today.clone().startOf('month').week();
   const lastWeek =
@@ -15,21 +16,14 @@ export default function Calendar({ auctionList }) {
       : today.clone().endOf('month').week();
 
   useEffect(() => {
-    if (!!auctionList) {
-      const newArr: string[] = [];
-      auctionList.forEach((it: AuctionList) => {
-        let { startDate, endDate } = it;
-        for (
-          let date = startDate;
-          endDate.diff(date, 'days') > 0;
-          date = date.add(1, 'days')
-        ) {
-          newArr.push(date.format('YYYYMMDD'));
-        }
-      });
-      setAuctionDateList(newArr);
+    if (!!auctionList || !!pastAuctionList) {
+      setAuctionDateList(
+        [...auctionList, ...pastAuctionList].map((it) => {
+          return { startDate: it.startDate, endDate: it.endDate };
+        }),
+      );
     }
-  }, [auctionList]);
+  }, [auctionList, pastAuctionList]);
 
   const calendarArr = () => {
     const calendar: ReactElement[] = [];
@@ -48,19 +42,45 @@ export default function Calendar({ auctionList }) {
                 return <td key={index}></td>;
               }
               const isToday = moment().isSame(current, 'days');
-              const isAuctionDay = auctionDateList.includes(
-                current.format('YYYYMMDD'),
-              );
+
+              let status = 'notAuctionDate';
+              if (!auctionDateList) return;
+              for (const it of auctionDateList) {
+                if (
+                  current.isSameOrAfter(it.startDate, 'days') &&
+                  current.isSameOrBefore(it.endDate, 'days')
+                ) {
+                  if (moment().isAfter(it.endDate, 'days')) {
+                    status = 'done';
+                  } else if (moment().isBefore(it.startDate, 'days')) {
+                    status = 'expected';
+                  } else {
+                    status = 'proceeding';
+                  }
+                  break;
+                }
+              }
               return (
                 <td
                   key={index}
                   className={`
-              p-2 text-14 font-bold text-${isToday && '[#FC6554]'} text-${
-                    isAuctionDay ? '[#FFFFFF]' : '[#767676]'
-                  }  bg-${isAuctionDay && '[#FFC961]'}
-              `}
+                p-2 text-14 font-bold text-${
+                  isToday && status !== 'proceeding' && '[#FC6554]'
+                } text-${
+                    status === 'notAuctionDate' ? '[#767676]' : '[#FFFFFF]'
+                  }                   
+                  bg-${
+                    status === 'proceeding'
+                      ? 'brand'
+                      : status === 'done'
+                      ? '[#D1D1D1]'
+                      : status === 'expected'
+                      ? '[#FFC961]'
+                      : ''
+                  } 
+                `}
                 >
-                  {current.format('D')}
+                  <span>{current.format('D')}</span>
                 </td>
               );
             })}

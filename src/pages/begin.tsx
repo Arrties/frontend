@@ -1,5 +1,5 @@
 import 'swiper/css';
-
+import 'swiper/css/pagination';
 import Button from '@components/common/Button';
 import Layout from '@components/common/Layout';
 import Navigate from '@components/common/Navigate';
@@ -7,8 +7,9 @@ import Image from 'next/image';
 import tw from 'tailwind-styled-components';
 import React, { useRef } from 'react';
 import { useRouter } from 'next/router';
-import { Navigation } from 'swiper';
+import { Navigation, Pagination } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
+import styled from 'styled-components';
 
 interface defaultProps {
   [key: string]: any;
@@ -21,26 +22,35 @@ text-18 font-bold mt-16 text-center
 const Content = tw.div<defaultProps>`text-[14px] font-bold text-[#767676] mt-2 leading-4 `;
 const Line = tw.p`leading-5 pl-5`;
 
+const SwiperWrapper = styled.section`
+  .swiper-wrapper {
+    height: 800px;
+  }
+  .swiper-pagination-bullet-active {
+    background-color: #fc6554;
+  }
+`;
+
 export default function Begin() {
   const swiperRef = useRef<any>(null);
   const router = useRouter();
-
   return (
     <Layout>
-      <div>
+      <SwiperWrapper>
         <Swiper
           navigation={true}
-          modules={[Navigation]}
-          className="mySwiper h-[810px]"
+          modules={[Pagination]}
+          className="mySwiper"
           ref={swiperRef}
+          pagination={true}
         >
           <SwiperSlide>
             <Navigate
               isLeftButton={false}
               right_message="건너뛰기"
-              handleRightButton={() =>
-                swiperRef.current.swiper.slideTo(2, 1000)
-              }
+              handleRightButton={() => {
+                swiperRef.current.swiper.slideTo(3);
+              }}
             />
             <ImageWrapper>
               <Image
@@ -60,17 +70,14 @@ export default function Begin() {
                 <Line>버려지고 방치되는게 아깝지 않으신가요?</Line>
               </Content>
             </div>
-            <div className="mt-8 flex justify-center space-x-3">
-              <div className="aspect-square w-2 rounded-full bg-brand"></div>
-              <div className="aspect-square w-2 rounded-full bg-[#D9D9D9]"></div>
-              <div className="aspect-square w-2 rounded-full bg-[#D9D9D9]"></div>
-            </div>
           </SwiperSlide>
           <SwiperSlide>
             <Navigate
               isLeftButton={false}
               right_message="건너뛰기"
-              handleRightButton={() => swiperRef.current.swiper.slideTo(2)}
+              handleRightButton={() => {
+                swiperRef.current.swiper.slideTo(3);
+              }}
             />
             <ImageWrapper>
               <Image
@@ -87,14 +94,16 @@ export default function Begin() {
                 <Line>다양한 작품을 확인할 수 있습니다. </Line>
               </Content>
             </div>
-            <div className="mt-8 flex justify-center space-x-3">
-              <div className="aspect-square w-2 rounded-full bg-[#D9D9D9]"></div>
-              <div className="aspect-square w-2 rounded-full bg-brand"></div>
-              <div className="aspect-square w-2 rounded-full bg-[#D9D9D9]"></div>
-            </div>
           </SwiperSlide>
           <SwiperSlide>
-            <ImageWrapper className="mt-14">
+            <Navigate
+              isLeftButton={false}
+              right_message="건너뛰기"
+              handleRightButton={() => {
+                swiperRef.current.swiper.slideTo(3);
+              }}
+            />
+            <ImageWrapper>
               <Image
                 alt="begin"
                 src="/svg/begin/begin_03.svg"
@@ -109,19 +118,32 @@ export default function Begin() {
                 <Line>현대미술의 장점! 채팅으로 함께 소통해요.</Line>
               </Content>
             </div>
-            <div className="mt-8 flex justify-center space-x-3">
-              <div className="aspect-square w-2 rounded-full bg-[#D9D9D9]"></div>
-              <div className="aspect-square w-2 rounded-full bg-[#D9D9D9]"></div>
-              <div className="aspect-square w-2 rounded-full bg-brand"></div>
+          </SwiperSlide>
+          <SwiperSlide>
+            <ImageWrapper className="mt-12">
+              <Image
+                alt="begin"
+                src="/svg/begin/begin_04.svg"
+                width="375"
+                height="0"
+              />
+            </ImageWrapper>
+            <div className="mt-24 pl-6">
+              <Title>수수료 없이 무료로 거래해요</Title>
+              <Content>
+                <Line>작가와 컬렉터가 대화할 수 있는</Line>
+                <Line>현대 미술의 장점! 채팅으로 함께 소통해요.</Line>
+              </Content>
             </div>
+
             <Button
               onClick={() => router.push('/auth/login')}
-              className="fixed inset-x-0 bottom-[0px] m-auto w-full"
+              className="fixed inset-x-0 bottom-[40px] m-auto w-full"
               text="시작하기"
             />
           </SwiperSlide>
         </Swiper>
-      </div>
+      </SwiperWrapper>
     </Layout>
   );
 }

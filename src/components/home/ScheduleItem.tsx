@@ -1,6 +1,8 @@
 import Image from 'next/image';
 import tw from 'tailwind-styled-components';
 import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
+import moment from 'moment';
 
 interface ScheduleItemForm {
   auctionItem: AuctionList;
@@ -8,25 +10,50 @@ interface ScheduleItemForm {
 }
 
 const ScheduleIconBox = tw.div<ScheduleItemForm>`
-${({ turn }) => (turn === 1 ? 'bg-[#FC6554]' : 'bg-[#FFC961]')}
+${({ status }) =>
+  status === 'done'
+    ? 'bg-[#D1D1D1]'
+    : status === 'proceeding'
+    ? 'bg-brand'
+    : 'bg-[#FFC961]'} 
 w-[52px] h-[52px] flex justify-center mr-3 rounded-l-[5px] drop-shadow-lg
 `;
 
 const NotificationBox = tw.div<ScheduleItemForm>`
-${({ turn }) => (turn === 1 ? 'bg-[#FC6554]' : 'bg-[#FFC961]')}
-w-[26px] h-[26px] flex justify-center m-auto mx-0 rounded-full border-[1px] border-[#F8F8FA] cursor-pointer drop-shadow-none
+ ${({ status }) =>
+   status === 'done'
+     ? 'bg-[#FFFFFF]'
+     : status === 'proceeding'
+     ? 'bg-brand'
+     : 'bg-[#FFC961]'} 
+w-[26px] h-[26px] flex justify-center m-auto mx-0 rounded-full border-[1px] ${({
+  status,
+}) =>
+  status === 'done'
+    ? 'border-[#D1D1D1]'
+    : 'border-[#F8F8Fa]'} cursor-pointer drop-shadow-none
 `;
 
 export default function ScheduleItem({ auctionItem }: ScheduleItemForm) {
+  const router = useRouter();
+  const [status, setStatus] = useState<String>('');
   const startDate: string = auctionItem?.startDate.format('YYYY.MM.DD');
   const endDate: string = auctionItem?.endDate.format('YYYY.MM.DD');
 
-  const router = useRouter();
+  useEffect(() => {
+    if (moment().isAfter(auctionItem?.endDate, 'days')) {
+      setStatus('done');
+    } else if (moment().isBefore(auctionItem?.startDate, 'days')) {
+      setStatus('expected');
+    } else {
+      setStatus('proceeding');
+    }
+  });
 
   return (
     <div className="mt-5 flex justify-between ">
       <div className="flex">
-        <ScheduleIconBox turn={auctionItem?.turn}>
+        <ScheduleIconBox status={status}>
           <Image
             src="/svg/icons/icon_calendar.svg"
             alt="calendar"
@@ -37,6 +64,10 @@ export default function ScheduleItem({ auctionItem }: ScheduleItemForm) {
         <div
           className="flex flex-col justify-center"
           onClick={() => {
+            if (status === 'proceeding') {
+              window.alert('경매가 시작하면 입장하실 수 있습니다.');
+              return;
+            }
             router.push({
               pathname: '/exhibition/view',
               query: { id: auctionItem?.turn },
@@ -51,9 +82,11 @@ export default function ScheduleItem({ auctionItem }: ScheduleItemForm) {
           </span>
         </div>
       </div>
-      <NotificationBox turn={auctionItem?.turn}>
+      <NotificationBox status={status}>
         <Image
-          src="/svg/icons/icon_notification_white.svg"
+          src={`/svg/icons/icon_notification_${
+            status === 'done' ? 'gray' : 'white'
+          }.svg`}
           alt="notification"
           width={18}
           height={18}

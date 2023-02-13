@@ -1,4 +1,6 @@
 import moment from 'moment';
+import 'moment/locale/ko';
+
 import Image from 'next/image';
 import React from 'react';
 import { useRouter } from 'next/router';
@@ -28,13 +30,13 @@ export default function NoticeItem({ notice }: NoticeItemProps) {
 
   const icon = {
     '작가 등록 완료 🎉': ['post', '/profile/edit'],
-    '작품 등록 완료 🎉': ['post', `/auction/${notice.data}`],
-    '경매 등록 알림': ['post_auction', `/auction/${notice.data}`],
+    '작품 등록 완료 🎉': ['post', `/auction?id=${notice.data}`],
+    '경매 등록 알림': ['post_auction', `/auction?id=${notice.data}`],
     '전시회 등록 알림': ['post_exhibition', '/exhibition'],
     '작품 유찰 알림': ['bid_fail', ''],
 
-    '입찰 알림': ['bid_fail', `/auction/bidding/${notice.data}`],
-    '입찰 경쟁 알림': ['inquiry', `/auction/bidding/${notice.data}`],
+    '입찰 알림': ['bid', `/auction/bidding?id=${notice.data}`],
+    '입찰 경쟁 알림': ['bid_fail', `/auction/bidding?id=${notice.data}`],
 
     '작품 낙찰 성공 🎉': ['bid_success', '/profile/bid'],
     '1대1 문의 알림': ['inquiry', '/inquiry'],
@@ -56,6 +58,7 @@ export default function NoticeItem({ notice }: NoticeItemProps) {
         <section
           className="flex cursor-pointer flex-col leading-5"
           onClick={() => {
+            deleteNotice();
             router.push(icon[title][1]);
           }}
         >

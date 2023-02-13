@@ -14,6 +14,7 @@ import { useCountDown } from '@hooks/useCountDown';
 import { leatAskPrice } from '@utils/leastAskPrice';
 import usePutBiddng from '@hooks/mutations/usePutBidding';
 import useGetProfile from '@hooks/queries/useGetProfile';
+import moment from 'moment';
 interface inputForm {
   price: string;
 }
@@ -29,7 +30,8 @@ export default function Bidding() {
     auction?.endDate || '',
   );
   const remaind = +days + +hours + +minutes + +seconds;
-  const [isBlurred, setIsBlurred] = useState(false);
+  const [isBlurred, setIsBlurred] = useState(true);
+  const isMine = artWork?.id === userInfo?.id;
 
   const {
     register,
@@ -253,7 +255,15 @@ export default function Bidding() {
         </article>
         {errors.price && <ErrorMessage message={errors.price.message} />}
 
-        <Button text="응찰" className="mt-4 w-full" disabled={remaind < 0} />
+        <Button
+          text="응찰"
+          className="mt-4 w-full"
+          disabled={
+            remaind < 0 ||
+            isMine ||
+            moment().isBefore(moment(auction?.startDate, 'YYYY-MM-DD-hh-mm-ss'))
+          }
+        />
       </form>
       <AskPriceModal
         isModal={isModal}

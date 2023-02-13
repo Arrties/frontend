@@ -215,12 +215,10 @@ export default function Post() {
 마이페이지>판매활동>등록된 작품에서 작품내역을 확인해보세요.`}
         isModal={isModal}
         onCloseModal={() => {
-          setIsModal(false);
-          // router.replace(`/auction/${responseData.artworkId}`);
+          router.replace(`/auction/view?id=${responseData.artworkId}`);
         }}
         onAccept={() => {
-          setIsModal(false);
-          // router.replace(`/auction/${responseData.artworkId}`);
+          router.replace(`/auction/view?id=${responseData.artworkId}`);
         }}
       />
       <Modal
@@ -391,7 +389,7 @@ export default function Post() {
         </div>
         <Input
           type="text"
-          label="작품 판매가"
+          label="경매 시작가"
           placeholder="작품 최소 가격을 설정해주세요."
           register={register('price', { required: true })}
           unit="원"

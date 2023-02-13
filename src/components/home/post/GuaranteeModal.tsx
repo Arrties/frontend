@@ -1,8 +1,8 @@
-import Layout from '@components/common/Layout'
-import Navigate from '@components/common/Navigate'
-import Image from 'next/image'
-import SignatureCanvas from 'react-signature-canvas'
-import React, { useRef } from 'react'
+import Layout from '@components/common/Layout';
+import Navigate from '@components/common/Navigate';
+import Image from 'next/image';
+import SignatureCanvas from 'react-signature-canvas';
+import React, { useRef } from 'react';
 
 interface GuaranteeModalProps {
   onCloseModal: () => void;
@@ -17,19 +17,20 @@ export default function GuaranteeModal({
   return (
     <Layout>
       <Navigate
-        isRightButton={false}
+        right_message="완료"
+        handleRightButton={onCloseModal}
         message="작품 보증서"
         handleLeftButton={onCloseModal}
       />
       <div className="w-full">
-        <div className="flex justify-between text-14 mt-6">
+        <div className="mt-6 flex justify-between text-14">
           <span className="font-medium">서명을 입력하세요</span>
           <button
             onClick={() => {
               canvasRef.current.clear();
               setSignature('');
             }}
-            className="text-[#767676] flex"
+            className="flex text-[#767676]"
           >
             <Image
               src="/svg/icons/icon_reset.svg"
@@ -56,7 +57,7 @@ export default function GuaranteeModal({
           />
         </div>
         <div className="mt-6">
-          <ul className="text-[#767676] ml-3 text-12 list-disc tracking-tight">
+          <ul className="ml-3 list-disc text-12 tracking-tight text-[#767676]">
             <li>서명 후 아래 이미지로 보증서에 적용됩니다.</li>
           </ul>
         </div>

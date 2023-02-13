@@ -63,6 +63,9 @@ export default function Search() {
       setSearchWord('');
     }
   };
+  const clearValue = () => {
+    setValue('');
+  };
 
   const onSubmit = () => {
     router.replace(`search/?word=${value}`);
@@ -115,6 +118,14 @@ export default function Search() {
             value={value}
             onChange={handleValue}
           />
+          <div
+            className="absolute inset-y-0 right-3 top-0 bottom-0 m-auto flex cursor-pointer items-center text-20 font-medium"
+            onClick={() => {
+              setValue('');
+            }}
+          >
+            x
+          </div>
         </form>
       </SearchBox>
       {!!page ? (

@@ -11,6 +11,7 @@ import { useRef, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { useRouter } from 'next/router';
 import { useGetExhibitionItemList } from '@hooks/queries/useGetExhibition';
+import { EffectCoverflow, Pagination } from 'swiper';
 
 const SwiperButtonDiv = tw.div<defaultProps>`
 bg-[rgba(153,153,153,0.24)] rounded-[10px] w-8 h-8 flex justify-center cursor-pointer
@@ -95,7 +96,12 @@ export default function ExhibitionArts() {
         handleRightButton={() => setIsGenreModal(true)}
         className="absolute inset-0 mx-[24px] w-[calc(100%-48px)]"
       />
-      <Swiper className="absolute h-full" ref={swiperRef} spaceBetween={180}>
+      <Swiper
+        className="mySwiper absolute h-full"
+        ref={swiperRef}
+        effect={'coverflow'}
+        modules={[EffectCoverflow]}
+      >
         {!isExpansion && !isOpen && (
           <div className="absolute top-[330px] z-10 flex w-full justify-between">
             <SwiperButtonDiv

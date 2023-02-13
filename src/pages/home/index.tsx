@@ -30,6 +30,16 @@ const PastAuction = styled.section`
     background-color: #fc6554;
   }
 `;
+const KeywordSection = styled.section`
+  margin-top: 4px;
+  margin-bottom: 8px;
+  display: flex;
+  overflow-x: auto;
+  white-space: nowrap;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+`;
 
 export default function Home() {
   const router = useRouter();
@@ -37,6 +47,7 @@ export default function Home() {
   const { data: userInfo } = useGetProfile();
   const { data: auctionList } = useGetAuction();
   const { data: pastAuctionList } = useGetPastAuction();
+
   return (
     <>
       <Layout>
@@ -55,55 +66,64 @@ export default function Home() {
           right_message={<NoticeIcon />}
         />
         <section>
-          <div className="text-14 text-[#767676]">
-            {userInfo?.nickname}님 취향의
-          </div>
           <div className="relative flex justify-between">
-            <span className="text-20 font-bold">이번 주 전시작품</span>
             {customizedArtwork?.artworks.length ? (
-              <div className="flex items-center justify-between">
-                <span
-                  className="cursor-pointer pr-1 text-12 text-[#999999]"
-                  onClick={() => {
-                    router.push('/home/view');
-                  }}
-                >
-                  전체보기
-                </span>
-                <Image
-                  src="/svg/icons/icon_arrow.svg"
-                  alt="arrow"
-                  width={6}
-                  height={6}
-                />
+              <div>
+                <div className="text-14 text-[#767676]">
+                  {userInfo?.nickname}님 취향의
+                </div>
+                <span className="text-20 font-bold">이번 주 전시작품</span>
+                <div className="absolute right-0 top-0 flex items-center justify-between">
+                  <span
+                    className="cursor-pointer pr-1 text-12 text-[#999999]"
+                    onClick={() => {
+                      router.push('/home/view');
+                    }}
+                  >
+                    전체보기
+                  </span>
+                  <Image
+                    src="/svg/icons/icon_arrow.svg"
+                    alt="arrow"
+                    width={6}
+                    height={6}
+                  />
+                </div>
               </div>
             ) : (
-              <div className="absolute right-0 -top-7 mt-6 mb-12 flex justify-center text-center">
-                <button
+              <div className="relative flex h-[120px] w-[500px] items-center ">
+                <Image
+                  alt="keyword"
+                  src="/svg/icons/bg_home_banner.svg"
+                  fill
+                  className="absolute"
+                />
+                <div
+                  className="direc z-10 flex flex-col  justify-center p-5 text-[#FFFFFF]"
                   onClick={() => {
                     router.push('/profile/keyword');
                   }}
-                  className="flex h-[36px] w-[100px] items-center justify-center rounded-[19px] border-[1px] border-brand text-xs text-brand"
                 >
-                  <div>
-                    <Image
-                      src="/svg/icons/icon_plus_pink.svg"
-                      alt="plus"
-                      width={10}
-                      height={10}
-                    />
-                  </div>
-                  <div>취향분석</div>
-                </button>
+                  <p className="text-16">
+                    내 취향에 맞는
+                    <br /> 작품을 추천 받아 보세요 &gt;
+                  </p>
+                  <p className="text-14">
+                    영서님 취향의 전시작품이 아직 없어요
+                  </p>
+                </div>
               </div>
             )}
           </div>
         </section>
-        <section className="my-4 mt-2 flex flex-wrap">
-          {userInfo?.keywords?.map((keyword: string, idx: number) => (
-            <KeywordBox text={keyword} key={idx} />
-          ))}
-        </section>
+
+        <KeywordSection>
+          {customizedArtwork?.artworks.length &&
+            userInfo?.keywords?.map((keyword: string, idx: number) => (
+              <KeywordBox text={keyword} key={idx} />
+            ))}
+        </KeywordSection>
+
         <section className="mb-12 ">
           <Swiper
             modules={[Autoplay, Navigation, Scrollbar]}
@@ -137,9 +157,18 @@ export default function Home() {
               아띠즈 경매 캘린더
             </span>
           </div>
-          <Calendar auctionList={auctionList} />
+          <Calendar
+            auctionList={auctionList}
+            pastAuctionList={pastAuctionList}
+          />
         </section>
         <section className="mb-12">
+          {!!pastAuctionList &&
+            pastAuctionList.map((auctionItem: AuctionList) => (
+              <div key={auctionItem?.id}>
+                <ScheduleItem auctionItem={auctionItem} />
+              </div>
+            ))}
           {!!auctionList &&
             auctionList.map((auctionItem: AuctionList) => (
               <div key={auctionItem?.id}>
