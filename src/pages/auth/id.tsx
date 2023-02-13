@@ -5,9 +5,11 @@ import Input from '@components/common/Input';
 import Layout from '@components/common/Layout';
 import Modal from '@components/common/Modal';
 import Navigate from '@components/common/Navigate';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/router';
+import usePostFindId from '@hooks/mutations/usePostFindId';
+import Loader from '@components/common/Loader';
 
 interface FindIdForm {
   email: string;
@@ -21,21 +23,13 @@ function Id() {
     formState: { errors },
   } = useForm<FindIdForm>();
   const [isModal, setIsModal] = useState(false);
+  const { mutate, isError, isLoading, isSuccess } = usePostFindId();
 
+  if (isLoading) return <Loader />;
   const onSubmit = async ({ email }: FindIdForm) => {
-    if (email) {
-      const response = await authApi.postFindId(email);
-      if (response.status === 200) {
-        setIsModal(true);
-      } else if (
-        response.status === 404 &&
-        response.data.code === 'NOT_FOUND_EMAIL'
-      ) {
-        setError('email', {
-          type: 'not found',
-          message: response.data.detail,
-        });
-      }
+    mutate(email);
+    if (isSuccess) {
+      setIsModal(true);
     }
   };
 
@@ -46,7 +40,7 @@ function Id() {
         <Modal
           isModal={isModal}
           onCloseModal={() => {
-            setIsModal(false);
+            router.push('/auth/login');
           }}
           message="입력하신 주소로 확인 메일을 보내드렸습니다."
         />
@@ -77,7 +71,7 @@ function Id() {
               },
             })}
           />
-          {errors.email && <ErrorMessage message={errors.email.message} />}
+          {isError && <ErrorMessage message="존재하지 않는 이메일입니다." />}
         </section>
 
         <Button
