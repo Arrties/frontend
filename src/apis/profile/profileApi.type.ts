@@ -26,6 +26,7 @@ export interface Notice {
 }
 export interface IsNoticeForm {
   newNotification: boolean;
+  isArtist: boolean;
 }
 export interface Role {
   roles: string;
