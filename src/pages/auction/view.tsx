@@ -44,7 +44,6 @@ export default function View() {
       postPrefer();
     }
   };
-  console.log(remaind, isMine);
 
   const target = useRef<HTMLDivElement | null>(null);
   const [isCardOver, setIsCardOver] = useState(false);
