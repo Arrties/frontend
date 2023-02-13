@@ -7,4 +7,5 @@ export const CONFIG = {
     KAKAO: process.env.NEXT_PUBLIC_KAKAO_LOGIN_API_KEY,
     NAVER: process.env.NEXT_PUBLIC_NAVER_LOGIN_API_KEY,
   },
+  GOOGLE_TAG: process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS,
 } as const;
