@@ -12,6 +12,7 @@ import Loader from '@components/common/Loader';
 import { Suspense, useEffect, useState } from 'react';
 import { Router, useRouter } from 'next/router';
 import { getToken } from '@utils/localStorage/token';
+import HeadMeta from '@components/HeadMeta';
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
@@ -57,10 +58,8 @@ export default function App({ Component, pageProps }: AppProps) {
     <Loader />
   ) : (
     <div className="flex h-screen w-screen justify-center bg-slate-50 font-Pretendard">
-      <Head>
-        <link rel="shortcut icon" href="/static/favicon.ico" />
-        <title>Atties</title>
-      </Head>
+      <HeadMeta />
+
       <Suspense fallback={<Loader />}>
         <Provider store={store}>
           <QueryClientProvider client={queryClient}>
