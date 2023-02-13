@@ -16,23 +16,17 @@ interface FindIdForm {
 }
 
 function Id() {
-  const {
-    register,
-    handleSubmit,
-    setError,
-    formState: { errors },
-  } = useForm<FindIdForm>();
+  const { register, handleSubmit } = useForm<FindIdForm>();
   const [isModal, setIsModal] = useState(false);
   const { mutate, isError, isLoading, isSuccess } = usePostFindId();
 
   if (isLoading) return <Loader />;
   const onSubmit = async ({ email }: FindIdForm) => {
     mutate(email);
-    if (isSuccess) {
-      setIsModal(true);
-    }
   };
-
+  if (isSuccess && !isModal) {
+    setIsModal(true);
+  }
   const router = useRouter();
   return (
     <Layout>
