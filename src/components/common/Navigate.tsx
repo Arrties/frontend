@@ -45,7 +45,7 @@ const SideMessage = tw.button`
   cursor-pointer z-10  text-14
 `;
 
-export default function Navigate({
+export default React.memo(function Navigate({
   left_message,
   message,
   right_message,
@@ -96,4 +96,4 @@ export default function Navigate({
       )}
     </NavigateBox>
   );
-}
+});

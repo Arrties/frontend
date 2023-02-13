@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import tw from 'tailwind-styled-components';
 import { useRouter } from 'next/router';
+import React from 'react';
 
 const TABLIST = [
   {
@@ -47,7 +48,7 @@ interface TabItemProps {
   [key: string]: any;
 }
 
-export default function Tab() {
+export default React.memo(function Tab() {
   const router = useRouter();
   const handleTabItem = (name) => {
     router.push(`/${name}`);
@@ -90,4 +91,4 @@ export default function Tab() {
       </TabList>
     </TabBox>
   );
-}
+});
