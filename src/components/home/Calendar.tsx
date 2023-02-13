@@ -1,10 +1,18 @@
-import moment, { Moment } from 'moment';
+import moment from 'moment';
 import Image from 'next/image';
-import { ReactElement, useEffect, useState } from 'react';
+import React, { ReactElement, useEffect, useState } from 'react';
 
 const days = ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'];
 
-export default function Calendar({ auctionList, pastAuctionList }) {
+interface CalendarProps {
+  auctionList: AuctionList[];
+  pastAuctionList: AuctionList[];
+}
+
+export default React.memo(function Calendar({
+  auctionList,
+  pastAuctionList,
+}: CalendarProps) {
   const [date, setDate] = useState<moment.Moment>(() => moment());
   const [auctionDateList, setAuctionDateList] =
     useState<{ startDate: moment.Moment; endDate: moment.Moment }[]>();
@@ -125,4 +133,4 @@ export default function Calendar({ auctionList, pastAuctionList }) {
       </table>
     </>
   );
-}
+});

@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import tw from 'tailwind-styled-components';
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import moment from 'moment';
 
 interface ScheduleItemForm {
@@ -34,7 +34,9 @@ w-[26px] h-[26px] flex justify-center m-auto mx-0 rounded-full border-[1px] ${({
     : 'border-[#F8F8Fa]'} cursor-pointer drop-shadow-none
 `;
 
-export default function ScheduleItem({ auctionItem }: ScheduleItemForm) {
+export default React.memo(function ScheduleItem({
+  auctionItem,
+}: ScheduleItemForm) {
   const router = useRouter();
   const [status, setStatus] = useState<String>('');
   const startDate: string = auctionItem?.startDate.format('YYYY.MM.DD');
@@ -94,4 +96,4 @@ export default function ScheduleItem({ auctionItem }: ScheduleItemForm) {
       </NotificationBox>
     </div>
   );
-}
+});

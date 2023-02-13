@@ -8,7 +8,10 @@ interface AuctionItemForm {
   [key: string]: any;
 }
 
-export default function AuctionItem({ auctionItem, ...rest }: AuctionItemForm) {
+export default React.memo(function AuctionItem({
+  auctionItem,
+  ...rest
+}: AuctionItemForm) {
   const router = useRouter();
   const startDate = auctionItem?.startDate.format('MM.DD');
   const endDate = auctionItem?.endDate.format('MM.DD');
@@ -51,4 +54,4 @@ export default function AuctionItem({ auctionItem, ...rest }: AuctionItemForm) {
       </div>
     </div>
   );
-}
+});
