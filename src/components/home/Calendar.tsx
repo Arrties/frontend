@@ -100,8 +100,11 @@ export default React.memo(function Calendar({
 
   return (
     <>
-      <div className="m-auto mt-3 flex h-[50px] items-center justify-evenly bg-[#F8F8FA]">
-        <button onClick={() => setDate(date.clone().subtract(1, 'month'))}>
+      <div className="m-auto mt-3 flex h-[50px] items-center justify-center bg-[#F8F8FA]">
+        <button
+          onClick={() => setDate(date.clone().subtract(1, 'month'))}
+          className="absolute left-16"
+        >
           <Image
             src="/svg/icons/icon_back.svg"
             alt="back"
@@ -112,7 +115,10 @@ export default React.memo(function Calendar({
         <span className="text-15 font-bold text-[#333333]">
           {date.format('MMMM YYYY')}
         </span>
-        <button onClick={() => setDate(date.clone().add(1, 'month'))}>
+        <button
+          onClick={() => setDate(date.clone().add(1, 'month'))}
+          className="absolute right-16"
+        >
           <Image
             src="/svg/icons/icon_next.svg"
             alt="arrow"
