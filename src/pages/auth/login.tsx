@@ -118,6 +118,7 @@ function Login() {
               id="id"
               placeholder="아이디를 입력해 주세요."
               register={register('userId', { required: true })}
+              autoComplete="on"
             />
             {errors.userId && <ErrorMessage message={errors.userId.message} />}
           </div>
@@ -129,6 +130,7 @@ function Login() {
               register={register('password', {
                 required: true,
               })}
+              autoComplete="on"
             />
             {errors.password && (
               <ErrorMessage message={errors.password.message} />
@@ -153,14 +155,14 @@ function Login() {
           <div className="mt-[34px]">
             <Button text="로그인" className="w-full" />
           </div>
-          {/* <div className="mt-6 space-y-3">
+          <div className="mt-6 space-y-3">
             <div>
               <SocialLoginButton kind="kakao" />
             </div>
             <div>
               <SocialLoginButton kind="naver" />
             </div>
-          </div> */}
+          </div>
           <p className="mt-3 w-full text-center text-12">
             계정을 잊으셨나요?&nbsp;
             <Link className="text-[#0099FF]" href="/auth/id">

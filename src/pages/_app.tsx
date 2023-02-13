@@ -12,6 +12,9 @@ import Loader from '@components/common/Loader';
 import { Suspense, useEffect, useState } from 'react';
 import { Router, useRouter } from 'next/router';
 import { getToken } from '@utils/localStorage/token';
+import Script from 'next/script';
+import { CONFIG } from '@config';
+import { pageview } from '@utils/gtag';
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
@@ -53,6 +56,18 @@ export default function App({ Component, pageProps }: AppProps) {
     };
   }, []);
 
+  useEffect(() => {
+    const handleRouteChange = (url) => {
+      pageview(url);
+    };
+    router.events.on('routeChangeComplete', handleRouteChange);
+    router.events.on('hashChangeComplete', handleRouteChange);
+    return () => {
+      router.events.off('routeChangeComplete', handleRouteChange);
+      router.events.off('hashChangeComplete', handleRouteChange);
+    };
+  }, [router.events]);
+
   return loading ? (
     <Loader />
   ) : (
@@ -61,6 +76,24 @@ export default function App({ Component, pageProps }: AppProps) {
         <link rel="shortcut icon" href="/static/favicon.ico" />
         <title>Atties</title>
       </Head>
+      <Script
+        strategy="afterInteractive"
+        src={`https://www.googletagmanager.com/gtag/js?id=${CONFIG.GOOGLE_TAG}`}
+      />
+      <Script
+        id="gtag-init"
+        strategy="afterInteractive"
+        dangerouslySetInnerHTML={{
+          __html: `
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', '${CONFIG.GOOGLE_TAG}', {
+              page_path: window.location.pathname,
+            });
+          `,
+        }}
+      />
       <Suspense fallback={<Loader />}>
         <Provider store={store}>
           <QueryClientProvider client={queryClient}>
