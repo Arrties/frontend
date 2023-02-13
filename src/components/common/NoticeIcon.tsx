@@ -13,7 +13,7 @@ const NoticeIconTag = tw.div<defaultProps>`
 flex w-[60px] justify-between
 `;
 
-export default function NoticeIcon({
+export default React.memo(function NoticeIcon({
   isSearch = true,
   ...rest
 }: NoticeIconProps) {
@@ -49,4 +49,4 @@ export default function NoticeIcon({
       />
     </NoticeIconTag>
   );
-}
+});

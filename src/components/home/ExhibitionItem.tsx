@@ -2,8 +2,9 @@ import useDeletePrefer from '@hooks/mutations/useDeletePrefer';
 import usePostPrefer from '@hooks/mutations/usePostPrefer';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
+import React from 'react';
 
-export default function ExhibitionItem({
+export default React.memo(function ExhibitionItem({
   image,
   education,
   title,
@@ -61,4 +62,4 @@ export default function ExhibitionItem({
       />
     </div>
   );
-}
+});

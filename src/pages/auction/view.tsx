@@ -44,7 +44,6 @@ export default function View() {
       postPrefer();
     }
   };
-  console.log(remaind, isMine);
 
   const target = useRef<HTMLDivElement | null>(null);
   const [isCardOver, setIsCardOver] = useState(false);
@@ -73,7 +72,7 @@ export default function View() {
     <>
       <Layout>
         <div
-          className={`fixed inset-x-0 top-0 z-50 mx-auto flex h-16 w-full max-w-[420px] items-center justify-between px-6 ${
+          className={`fixed inset-x-0 top-4 z-50 mx-auto flex h-16 w-full max-w-[420px] items-center justify-between px-5 ${
             isCardOver && 'bg-white'
           }`}
         >
@@ -265,12 +264,6 @@ export default function View() {
               <p className="text-14">{artWork?.description}</p>
               <div className="mt-4 flex flex-wrap">
                 {artWork?.keywords?.map((keyword: string, idx: number) => (
-                  // <span
-                  //   key={idx}
-                  //   className="mr-2 mt-2 rounded-[19px] border border-[#CECECE] px-3 py-1 text-[14px] text-[#767676] "
-                  // >
-                  //   {keyword}
-                  // </span>
                   <KeywordBox text={keyword} key={idx} />
                 ))}
               </div>
@@ -313,7 +306,7 @@ export default function View() {
       {
         <article className="absolute inset-x-0 bottom-0 mx-auto max-w-[420px]">
           <div className="to-gray-10 h-[18px] bg-gradient-to-t from-white" />
-          <div className="m-auto flex w-full  gap-5 bg-white  px-6 pb-9 shadow-lg">
+          <div className="m-auto flex w-full gap-5 bg-white  px-6 pb-3 shadow-lg">
             <Button
               text="채팅하기"
               kind="outlined"

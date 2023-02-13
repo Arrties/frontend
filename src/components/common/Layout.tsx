@@ -11,10 +11,10 @@ interface LayoutProps {
   children?: React.ReactNode;
 }
 
-export default function Layout({ children }: LayoutProps) {
+export default React.memo(function Layout({ children }: LayoutProps) {
   return (
     <LayoutBox className="relative h-full w-full max-w-[420px] overflow-y-scroll  bg-white px-[24px]">
       {children}
     </LayoutBox>
   );
-}
+});

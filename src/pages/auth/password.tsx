@@ -8,36 +8,28 @@ import Navigate from '@components/common/Navigate';
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/router';
+import usePostFindPassword from '@hooks/mutations/usePostFindPassword';
+import Loader from '@components/common/Loader';
 
 interface NewPasswordForm {
   email: string;
 }
 
 function Password() {
-  const {
-    register,
-    handleSubmit,
-    setError,
-    formState: { errors },
-  } = useForm<NewPasswordForm>();
+  const { register, handleSubmit } = useForm<NewPasswordForm>();
   const [isModal, setIsModal] = useState(false);
+  const { mutate, isError, isLoading, isSuccess } = usePostFindPassword();
 
+  if (isLoading) return <Loader />;
   const onSubmit = async ({ email }: NewPasswordForm) => {
-    if (email) {
-      const response = await authApi.postNewPassword(email);
-      if (response.status === 200) {
-        setIsModal(true);
-      } else if (
-        response.status === 404 &&
-        response.data.code === 'NOT_FOUND_EMAIL'
-      ) {
-        setError('email', {
-          type: 'not found',
-          message: response.data.detail,
-        });
-      }
+    mutate(email);
+    if (isSuccess) {
+      setIsModal(true);
     }
   };
+  if (isSuccess && !isModal) {
+    setIsModal(true);
+  }
 
   const router = useRouter();
   return (
@@ -46,7 +38,7 @@ function Password() {
         <Modal
           isModal={isModal}
           onCloseModal={() => {
-            setIsModal(false);
+            router.push('/auth/login');
           }}
           message="임시 비밀번호를 전송했습니다."
         />
@@ -78,7 +70,7 @@ function Password() {
               },
             })}
           />
-          {errors.email ? <ErrorMessage message={errors.email.message} /> : ''}
+          {isError && <ErrorMessage message="가입되지 않은 이메일입니다." />}
         </section>
         <section className="text-12 text-[#999999]">
           이메일 주소를 입력해주시면 임시 비밀번호를 보내드립니다.

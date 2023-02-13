@@ -1,10 +1,18 @@
-import moment, { Moment } from 'moment';
+import moment from 'moment';
 import Image from 'next/image';
-import { ReactElement, useEffect, useState } from 'react';
+import React, { ReactElement, useEffect, useState } from 'react';
 
 const days = ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'];
 
-export default function Calendar({ auctionList, pastAuctionList }) {
+interface CalendarProps {
+  auctionList: AuctionList[];
+  pastAuctionList: AuctionList[];
+}
+
+export default React.memo(function Calendar({
+  auctionList,
+  pastAuctionList,
+}: CalendarProps) {
   const [date, setDate] = useState<moment.Moment>(() => moment());
   const [auctionDateList, setAuctionDateList] =
     useState<{ startDate: moment.Moment; endDate: moment.Moment }[]>();
@@ -92,8 +100,11 @@ export default function Calendar({ auctionList, pastAuctionList }) {
 
   return (
     <>
-      <div className="m-auto mt-3 flex h-[50px] items-center justify-evenly bg-[#F8F8FA]">
-        <button onClick={() => setDate(date.clone().subtract(1, 'month'))}>
+      <div className="m-auto mt-3 flex h-[50px] items-center justify-center bg-[#F8F8FA]">
+        <button
+          onClick={() => setDate(date.clone().subtract(1, 'month'))}
+          className="absolute left-16"
+        >
           <Image
             src="/svg/icons/icon_back.svg"
             alt="back"
@@ -104,7 +115,10 @@ export default function Calendar({ auctionList, pastAuctionList }) {
         <span className="text-15 font-bold text-[#333333]">
           {date.format('MMMM YYYY')}
         </span>
-        <button onClick={() => setDate(date.clone().add(1, 'month'))}>
+        <button
+          onClick={() => setDate(date.clone().add(1, 'month'))}
+          className="absolute right-16"
+        >
           <Image
             src="/svg/icons/icon_next.svg"
             alt="arrow"
@@ -125,4 +139,4 @@ export default function Calendar({ auctionList, pastAuctionList }) {
       </table>
     </>
   );
-}
+});

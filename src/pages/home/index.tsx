@@ -45,8 +45,8 @@ export default function Home() {
   const router = useRouter();
   const { data: customizedArtwork } = useGetCustomizedArtWork(1, 5) || {};
   const { data: userInfo } = useGetProfile();
-  const { data: auctionList } = useGetAuction();
-  const { data: pastAuctionList } = useGetPastAuction();
+  const { data: auctionList } = useGetAuction() || {};
+  const { data: pastAuctionList } = useGetPastAuction() || {};
 
   return (
     <>
@@ -157,10 +157,12 @@ export default function Home() {
               아띠즈 경매 캘린더
             </span>
           </div>
-          <Calendar
-            auctionList={auctionList}
-            pastAuctionList={pastAuctionList}
-          />
+          {auctionList && pastAuctionList && (
+            <Calendar
+              auctionList={auctionList}
+              pastAuctionList={pastAuctionList}
+            />
+          )}
         </section>
         <section className="mb-12">
           {!!pastAuctionList &&
