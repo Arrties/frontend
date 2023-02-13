@@ -72,7 +72,7 @@ export default function View() {
     <>
       <Layout>
         <div
-          className={`fixed inset-x-0 top-0 z-50 mx-auto flex h-16 w-full max-w-[420px] items-center justify-between px-6 ${
+          className={`fixed inset-x-0 top-4 z-50 mx-auto flex h-16 w-full max-w-[420px] items-center justify-between px-5 ${
             isCardOver && 'bg-white'
           }`}
         >
@@ -264,12 +264,6 @@ export default function View() {
               <p className="text-14">{artWork?.description}</p>
               <div className="mt-4 flex flex-wrap">
                 {artWork?.keywords?.map((keyword: string, idx: number) => (
-                  // <span
-                  //   key={idx}
-                  //   className="mr-2 mt-2 rounded-[19px] border border-[#CECECE] px-3 py-1 text-[14px] text-[#767676] "
-                  // >
-                  //   {keyword}
-                  // </span>
                   <KeywordBox text={keyword} key={idx} />
                 ))}
               </div>
