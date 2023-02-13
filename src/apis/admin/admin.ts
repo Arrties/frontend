@@ -11,6 +11,13 @@ export class AdminApi {
     const { data } = await instance.get('/admin/members/certification');
     return data;
   }
+  async getAsk() {
+    const { data } = await instance.get('/admin/members/ask');
+    return data;
+  }
+  async postAnswer(id: number, body: { answer: string }) {
+    await instance.patch(`/admin/members/answer/${id}`, body);
+  }
 }
 
 const adminApi = new AdminApi();
