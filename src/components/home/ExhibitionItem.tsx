@@ -25,7 +25,7 @@ export default React.memo(function ExhibitionItem({
   };
   return (
     <div
-      className="relative h-[197px] w-[158px] rounded"
+      className="relative h-[197px] w-[158px] rounded max-[400px]:h-[175px] max-[400px]:w-[145px]"
       onClick={() => {
         router.push({
           pathname: '/exhibition/detail',
@@ -38,11 +38,8 @@ export default React.memo(function ExhibitionItem({
         alt="notification"
         fill
         sizes="1000"
-        style={{
-          objectFit: 'cover',
-        }}
         priority
-        className="rounded"
+        className="rounded object-cover"
         quality={100}
       />
 
