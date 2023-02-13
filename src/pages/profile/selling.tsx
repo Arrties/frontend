@@ -15,17 +15,18 @@ export default function Selling() {
     setIsModal(false);
   };
   const handleAccept = () => {
-    console.log('수정/삭제');
+    setIsModal(true);
   };
   const { data } = useGetMyArtWork();
   return (
     <Layout>
       <Modal
         isModal={isModal}
-        isMain
+        // isMain
         onCloseModal={handleCloseModal}
-        message="경매 중으로 넘어간 작품은 수정/삭제가 불가능 합니다."
-        denyMessage="수정"
+        // message="경매 중으로 넘어간 작품은 수정/삭제가 불가능 합니다."
+        message="아직 준비 중인 서비스입니다."
+        // denyMessage="수정"
         className="top-5"
         onAccept={handleAccept}
       />
