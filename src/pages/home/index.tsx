@@ -118,7 +118,7 @@ export default function Home() {
         </section>
 
         <KeywordSection>
-          {customizedArtwork?.artworks.length &&
+          {!!customizedArtwork?.artworks.length &&
             userInfo?.keywords?.map((keyword: string, idx: number) => (
               <KeywordBox text={keyword} key={idx} />
             ))}
