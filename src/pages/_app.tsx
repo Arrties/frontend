@@ -1,7 +1,6 @@
 import '../styles/globals.css';
 
 import store from '@features/store';
-import Head from 'next/head';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import { persistStore } from 'redux-persist';
@@ -15,6 +14,7 @@ import { getToken } from '@utils/localStorage/token';
 import Script from 'next/script';
 import { CONFIG } from '@config';
 import { pageview } from '@utils/gtag';
+import HeadMeta from '@components/HeadMeta';
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
@@ -72,10 +72,7 @@ export default function App({ Component, pageProps }: AppProps) {
     <Loader />
   ) : (
     <div className="flex h-screen w-screen justify-center bg-slate-50 font-Pretendard">
-      <Head>
-        <link rel="shortcut icon" href="/static/favicon.ico" />
-        <title>Atties</title>
-      </Head>
+      <HeadMeta />
       <Script
         strategy="afterInteractive"
         src={`https://www.googletagmanager.com/gtag/js?id=${CONFIG.GOOGLE_TAG}`}
