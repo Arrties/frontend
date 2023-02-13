@@ -153,14 +153,14 @@ function Login() {
           <div className="mt-[34px]">
             <Button text="로그인" className="w-full" />
           </div>
-          {/* <div className="mt-6 space-y-3">
+          <div className="mt-6 space-y-3">
             <div>
               <SocialLoginButton kind="kakao" />
             </div>
             <div>
               <SocialLoginButton kind="naver" />
             </div>
-          </div> */}
+          </div>
           <p className="mt-3 w-full text-center text-12">
             계정을 잊으셨나요?&nbsp;
             <Link className="text-[#0099FF]" href="/auth/id">
