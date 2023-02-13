@@ -5,8 +5,10 @@ import React, { useState } from 'react';
 import { Tab } from '@headlessui/react';
 import useGetMyArtWork from '@hooks/queries/artwork/useGetMyArtWork';
 import SellingItem from '@components/profile/selling/SellingItem';
+import { useRouter } from 'next/router';
 
 export default function Selling() {
+  const router = useRouter();
   const [isModal, setIsModal] = useState<boolean>(false);
   const handleOption = () => {
     setIsModal(true);
@@ -52,6 +54,9 @@ export default function Selling() {
                   key={item.id}
                   sellingItem={item}
                   handleOption={handleOption}
+                  onClick={() => {
+                    router.push(`/auction/view?id=${item.id}`);
+                  }}
                 />
               ))}
           </Tab.Panel>
@@ -65,6 +70,9 @@ export default function Selling() {
                   key={item.id}
                   sellingItem={item}
                   handleOption={handleOption}
+                  onClick={() => {
+                    router.push(`/auction/view?id=${item.id}`);
+                  }}
                 />
               ))}
           </Tab.Panel>
@@ -82,6 +90,9 @@ export default function Selling() {
                   key={item.id}
                   sellingItem={item}
                   handleOption={handleOption}
+                  onClick={() => {
+                    router.push(`/auction/view?id=${item.id}`);
+                  }}
                 />
               ))}
           </Tab.Panel>
