@@ -5,6 +5,7 @@ import BidItem from '@components/profile/bid/BidItem';
 import { Tab } from '@headlessui/react';
 import useGetBid from '@hooks/queries/artwork/useGetBid';
 import React from 'react';
+import None from '@components/common/None';
 
 export default function bid() {
   const { data: bidList } = useGetBid() || {};
@@ -22,18 +23,26 @@ export default function bid() {
         </Tab.List>
         <Tab.Panels>
           <Tab.Panel className="space-y-6">
-            {bidList?.biddingList.map((biddingItem: BidArtwork) => (
-              <BidItem key={biddingItem?.id} biddingItem={biddingItem} />
-            ))}
+            {bidList?.biddingList.length ? (
+              bidList?.biddingList.map((biddingItem: BidArtwork) => (
+                <BidItem key={biddingItem?.id} biddingItem={biddingItem} />
+              ))
+            ) : (
+              <None path="bid" message="입찰 내역이 없어요." />
+            )}
           </Tab.Panel>
           <Tab.Panel className="space-y-6">
-            {bidList?.successfulBiddingList.map(
-              (biddingItem: SuccessfulBidArtwork) => (
-                <SuccessBidItem
-                  key={biddingItem?.id}
-                  biddingItem={biddingItem}
-                />
-              ),
+            {bidList?.successfulBiddingList.length ? (
+              bidList?.successfulBiddingList.map(
+                (biddingItem: SuccessfulBidArtwork) => (
+                  <SuccessBidItem
+                    key={biddingItem?.id}
+                    biddingItem={biddingItem}
+                  />
+                ),
+              )
+            ) : (
+              <None path="bid" message="낙찰 내역이 없어요." />
             )}
           </Tab.Panel>
         </Tab.Panels>
