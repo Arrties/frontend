@@ -33,7 +33,7 @@ export default function PickArtist({
     <PickArtistContainer
       onClick={() =>
         router.push({
-          pathname: '/auction/view',
+          pathname: '/profile/detail',
           query: { id },
         })
       }
