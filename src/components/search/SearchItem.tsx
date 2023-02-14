@@ -19,7 +19,7 @@ export default function SearchItem({ artwork }: ArtworkForm) {
     }
   };
   return (
-    <div className="relative h-[197px] w-[158px] rounded">
+    <div className="relative h-[197px] w-[158px] rounded max-[400px]:h-[175px] max-[400px]:w-[145px]">
       <Image
         src={artwork.image}
         alt="notification"
