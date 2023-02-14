@@ -4,6 +4,7 @@ import WishCard from '@components/profile/WishCard';
 import tw from 'tailwind-styled-components';
 import React from 'react';
 import useGetWish from '@hooks/queries/profile/useGetWish';
+import None from '@components/common/None';
 
 interface defaultProps {
   [key: string]: any;
@@ -18,11 +19,16 @@ export default function Wish() {
   return (
     <Layout>
       <Navigate message="관심 목록" isRightButton={false} />
-      <WishContainer>
-        {wishList?.map((wish: WishArtwork) => (
-          <WishCard key={wish.id} wish={wish} />
-        ))}
-      </WishContainer>
+
+      {wishList?.length ? (
+        <WishContainer>
+          {wishList?.map((wish: WishArtwork) => (
+            <WishCard key={wish.id} wish={wish} />
+          ))}
+        </WishContainer>
+      ) : (
+        <None path="wish" message="관심 작품이 없어요." />
+      )}
     </Layout>
   );
 }
