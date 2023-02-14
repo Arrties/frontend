@@ -131,7 +131,7 @@ export default function Search() {
       {!!page ? (
         <div>
           <FilterDropdown setStatus={setStatus} />
-          <div className="flex flex-wrap justify-between gap-y-2  px-2 py-5">
+          <div className="mt-6 grid grid-cols-2 items-center justify-items-center gap-y-5">
             {searchResults?.map((artwork: SearchArtWork, idx) => (
               <SearchItem artwork={artwork} key={+idx} />
             ))}
