@@ -47,7 +47,6 @@ export default function Home() {
   const { data: userInfo } = useGetProfile();
   const { data: auctionList } = useGetAuction() || {};
   const { data: pastAuctionList } = useGetPastAuction() || {};
-
   return (
     <>
       <Layout>
@@ -124,12 +123,12 @@ export default function Home() {
             ))}
         </KeywordSection>
 
-        <section className="mb-12 ">
+        <section className="mb-12 flex justify-center">
           <Swiper
             modules={[Autoplay, Navigation, Scrollbar]}
             navigation
             scrollbar={{ draggable: true }}
-            spaceBetween={2}
+            spaceBetween={0}
             slidesPerView={2.1}
             autoplay={{ delay: 5000, disableOnInteraction: false }}
           >

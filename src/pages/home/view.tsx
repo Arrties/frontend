@@ -65,7 +65,7 @@ export default function View() {
         </p>
         <p className="text-[20px] font-bold text-[#191919]">이번 주 전시작품</p>
       </div>
-      <div className="mt-6 flex w-full flex-wrap justify-center gap-y-5 gap-x-5">
+      <div className="mt-6 grid w-full grid-cols-2 content-center items-center justify-items-center gap-y-5">
         {artworkLists?.map((art) => (
           <ExhibitionItem
             key={art.id}
@@ -76,19 +76,19 @@ export default function View() {
             pick={art.pick}
           />
         ))}
-        <div ref={target} className="flex h-[100px] w-full justify-center">
-          {isLoaded && (
-            <div className="mt-5 flex h-[30px] items-center justify-center">
-              <div className="grid gap-2">
-                <div className="flex items-center justify-center space-x-2">
-                  <div className="h-3 w-3 animate-bounce1 rounded-full bg-brand"></div>
-                  <div className="h-3 w-3 animate-bounce2 rounded-full bg-brand"></div>
-                  <div className="h-3 w-3 animate-bounce3 rounded-full bg-brand"></div>
-                </div>
+      </div>
+      <div ref={target} className="flex h-[100px] w-full justify-center">
+        {isLoaded && (
+          <div className="mt-5 flex h-[30px] items-center justify-center">
+            <div className="grid gap-2">
+              <div className="flex items-center justify-center space-x-2">
+                <div className="h-3 w-3 animate-bounce1 rounded-full bg-brand"></div>
+                <div className="h-3 w-3 animate-bounce2 rounded-full bg-brand"></div>
+                <div className="h-3 w-3 animate-bounce3 rounded-full bg-brand"></div>
               </div>
             </div>
-          )}
-        </div>
+          </div>
+        )}
       </div>
     </Layout>
   );

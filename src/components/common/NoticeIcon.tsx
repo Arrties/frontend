@@ -3,6 +3,7 @@ import Image from 'next/image';
 import React from 'react';
 import { useRouter } from 'next/router';
 import useGetIsNotice from '@hooks/queries/useGetIsNotice';
+import { getToken, setToken } from '@utils/localStorage/token';
 
 interface NoticeIconProps {
   isSearch?: boolean;
@@ -20,6 +21,14 @@ export default React.memo(function NoticeIcon({
   const router = useRouter();
   const { data } = useGetIsNotice();
   const isNotice = data?.newNotification;
+  const isArtist = data?.isArtist;
+  if (isArtist === true && getToken().roles !== 'ROLE_ARTIST') {
+    setToken({
+      accessToken: getToken().accessToken,
+      refreshToken: getToken().refreshToken,
+      roles: 'ROLE_ARTIST',
+    });
+  }
   return (
     <NoticeIconTag {...rest}>
       {isSearch ? (
