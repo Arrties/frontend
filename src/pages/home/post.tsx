@@ -1,4 +1,3 @@
-import artworkApi from '@apis/artwork/artworkApi';
 import ErrorMessage from '@components/common/ErrorMessage';
 import Input from '@components/common/Input';
 import Layout from '@components/common/Layout';
@@ -10,17 +9,17 @@ import GuaranteeModal from '@components/home/post/GuaranteeModal';
 import KeywordModal from '@components/home/post/KeywordModal.tsx';
 import FileItem from '@components/inquiry/FileItem';
 import Image from 'next/image';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/router';
 import { getToken } from '@utils/localStorage/token';
-import { dataURLtoFile } from '@utils/dataURLtoFile';
 import KeywordBox from '@components/common/KeywordBox';
 import usePostArtwork from '@hooks/mutations/usePostArtwork';
 import Loader from '@components/common/Loader';
 import { makeBlob } from '@utils/makeBlob';
 import useGetProfile from '@hooks/queries/useGetProfile';
 import { today } from '@utils/today';
+import { toBlob } from 'html-to-image';
 
 const ARTWORK_STATUS = [
   { value: '매우 좋음' },
@@ -119,6 +118,7 @@ export default function Post() {
   }, [keywordList, setValue, genre, signature]);
 
   const { mutate, data, isLoading: isLoadingPost, isError } = usePostArtwork();
+  const guaranteeRef = useRef<HTMLDivElement>(null);
 
   const onSubmit = async (form: Artwork) => {
     const {
@@ -136,6 +136,9 @@ export default function Post() {
       statusDescription,
     } = form;
     const formData = new FormData();
+
+    const guarantee = await toBlob(guaranteeRef.current as HTMLDivElement);
+
     formData.append('title', title);
     formData.append('productionYear', productionYear + '');
     formData.append('description', description);
@@ -162,9 +165,8 @@ export default function Post() {
       formData.append('genre', genre);
     }
 
-    if (signature) {
-      const file = dataURLtoFile(signature, 'guaranteeImage');
-      formData.append('guaranteeImage', file);
+    if (guarantee) {
+      formData.append('guaranteeImage', guarantee, 'image/png');
     }
 
     mutate(formData);
@@ -439,7 +441,10 @@ export default function Post() {
           )}
         </div>
         <div className="">
-          <div className="m-auto min-w-[327px] flex-col items-center justify-center py-9">
+          <div
+            ref={guaranteeRef}
+            className="m-auto min-w-[327px] flex-col items-center justify-center py-9"
+          >
             <div className="text-center text-16 font-semibold tracking-[0.3em]">
               작 품 보 증 서
             </div>
@@ -490,7 +495,7 @@ export default function Post() {
                 본 작품은 일체의 모작, 위작이 아님을 보증합니다.
               </li>
               <li className="inline-block text-black  before:mr-2  before:content-['\2022']">
-                본 보즈서는 작품 보증 이외 환불, 교환 등의 목적으로 사용이
+                본 보증서는 작품 보증 이외 환불, 교환 등의 목적으로 사용이
                 불가합니다.
               </li>
             </ul>
