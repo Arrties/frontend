@@ -21,15 +21,14 @@ export default React.memo(function NoticeIcon({
   const router = useRouter();
   const { data } = useGetIsNotice();
   const isNotice = data?.newNotification;
-  // const isArtist = data?.isArtist;
-  // if (isArtist === true) {
-  //   console.log('전환');
-  //   setToken({
-  //     accessToken: getToken().accessToken,
-  //     refreshToken: getToken().refreshToken,
-  //     roles: 'ROLE_ARTIST',
-  //   });
-  // }
+  const isArtist = data?.isArtist;
+  if (isArtist === true && getToken().roles !== 'ROLE_ARTIST') {
+    setToken({
+      accessToken: getToken().accessToken,
+      refreshToken: getToken().refreshToken,
+      roles: 'ROLE_ARTIST',
+    });
+  }
   return (
     <NoticeIconTag {...rest}>
       {isSearch ? (
