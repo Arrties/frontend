@@ -37,7 +37,14 @@ const KeywordSection = styled.section`
   overflow-x: auto;
   white-space: nowrap;
   &::-webkit-scrollbar {
-    display: none;
+    width: 5px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: #fc6554; /*스크롤바의 색상*/
+    background-clip: padding-box;
+    border: 5px solid transparent;
+    border-top-left-radius: 50px;
+    border-bottom-right-radius: 50px;
   }
 `;
 
@@ -128,7 +135,6 @@ export default function Home() {
             modules={[Autoplay, Navigation, Scrollbar]}
             navigation
             scrollbar={{ draggable: true }}
-            spaceBetween={0}
             slidesPerView={2.1}
             autoplay={{ delay: 5000, disableOnInteraction: false }}
           >

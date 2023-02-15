@@ -11,10 +11,9 @@ import Loader from '@components/common/Loader';
 import { Suspense, useEffect, useState } from 'react';
 import { Router, useRouter } from 'next/router';
 import { getToken } from '@utils/localStorage/token';
-import Script from 'next/script';
-import { CONFIG } from '@config';
 import { pageview } from '@utils/gtag';
-import HeadMeta from '@components/HeadMeta';
+import GoogleScript from '@components/GoogleScript';
+import MetaHead from '@components/MetaHead';
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
@@ -34,7 +33,7 @@ export default function App({ Component, pageProps }: AppProps) {
     if (router.pathname.includes('auth') || router.pathname === '/begin')
       return;
     const token = getToken();
-    if (!token.accessToken) router.replace('/begin');
+    if (!token.accessToken) router.replace('/auth/login');
   }, [router]);
 
   useEffect(() => {
@@ -72,25 +71,8 @@ export default function App({ Component, pageProps }: AppProps) {
     <Loader />
   ) : (
     <div className="flex h-screen w-screen justify-center bg-slate-50 font-Pretendard">
-      <HeadMeta />
-      <Script
-        strategy="afterInteractive"
-        src={`https://www.googletagmanager.com/gtag/js?id=${CONFIG.GOOGLE_TAG}`}
-      />
-      <Script
-        id="gtag-init"
-        strategy="afterInteractive"
-        dangerouslySetInnerHTML={{
-          __html: `
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', '${CONFIG.GOOGLE_TAG}', {
-              page_path: window.location.pathname,
-            });
-          `,
-        }}
-      />
+      <MetaHead />
+      <GoogleScript />
       <Suspense fallback={<Loader />}>
         <Provider store={store}>
           <QueryClientProvider client={queryClient}>

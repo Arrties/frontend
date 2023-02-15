@@ -3,7 +3,7 @@ import artworkApi from '@apis/artwork/artworkApi';
 
 import { useMutation } from 'react-query';
 
-const usePostArtwork = () => {
+const usePostArtwork = (setIsErrorModal) => {
   const router = useRouter();
   return useMutation(
     'usePostArtwork',
@@ -15,6 +15,9 @@ const usePostArtwork = () => {
           pathname: '/auction/view',
           query: { id: data.artWork.id },
         });
+      },
+      onError: () => {
+        setIsErrorModal(true);
       },
     },
   );

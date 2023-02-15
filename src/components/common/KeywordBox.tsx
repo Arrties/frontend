@@ -1,3 +1,4 @@
+import React from 'react';
 import tw from 'tailwind-styled-components';
 
 interface KeywordBoxProps {
@@ -11,7 +12,7 @@ const KeywordBoxTag = tw.span<defaultProps>`${(p) =>
     ? 'border-brand text-[#767676]'
     : 'border-[#CECECE] text-[#767676]'} mt-1 mr-1 cursor-pointer rounded-[19px] border py-0.5 px-2 text-[14px] text-[#767676] `;
 
-export default function KeywordBox({
+export default React.memo(function KeywordBox({
   text,
   id,
   focused = false,
@@ -22,4 +23,4 @@ export default function KeywordBox({
       {text}
     </KeywordBoxTag>
   );
-}
+});

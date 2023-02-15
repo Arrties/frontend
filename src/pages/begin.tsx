@@ -5,11 +5,13 @@ import Layout from '@components/common/Layout';
 import Navigate from '@components/common/Navigate';
 import Image from 'next/image';
 import tw from 'tailwind-styled-components';
-import React, { useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useRouter } from 'next/router';
 import { Navigation, Pagination } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import styled from 'styled-components';
+import { getToken, setToken } from '@utils/localStorage/token';
+import { getLocalStorage, setLocalStorage } from '@utils/localStorage/helper';
 
 interface defaultProps {
   [key: string]: any;
@@ -34,6 +36,11 @@ const SwiperWrapper = styled.section`
 export default function Begin() {
   const swiperRef = useRef<any>(null);
   const router = useRouter();
+  useEffect(() => {
+    if (getLocalStorage('isVisited')) {
+      router.replace('/auth/login');
+    }
+  }, []);
   return (
     <Layout>
       <SwiperWrapper>
@@ -137,7 +144,10 @@ export default function Begin() {
             </div>
 
             <Button
-              onClick={() => router.push('/auth/login')}
+              onClick={() => {
+                setLocalStorage('isVisited', true);
+                router.push('/auth/login');
+              }}
               className="fixed inset-x-0 bottom-[40px] m-auto w-full"
               text="시작하기"
             />

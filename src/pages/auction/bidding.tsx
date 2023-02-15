@@ -31,7 +31,7 @@ export default function Bidding() {
   );
   const remaind = +days + +hours + +minutes + +seconds;
   const [isBlurred, setIsBlurred] = useState(true);
-  const isMine = artWork?.id === userInfo?.id;
+  const isMine = artWork?.artist === userInfo?.id;
 
   const {
     register,
