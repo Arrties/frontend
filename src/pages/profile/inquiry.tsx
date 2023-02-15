@@ -172,7 +172,7 @@ export default function Inquiry() {
                   id="content"
                   maxLength={1000}
                   placeholder="정확한 상담을 위하여 자세한 문의사항을 작성 부탁드립니다."
-                  className="h-[150px] w-full resize-none overflow-hidden rounded-[4px] border-[#D8D8D8] text-[13px] placeholder-[#999999] placeholder:absolute placeholder:text-14 "
+                  className="h-[150px] w-full resize-none overflow-hidden rounded-[4px] border-[#D8D8D8] text-[13px] placeholder-[#999999] "
                   {...register('content', {
                     required: true,
                   })}
