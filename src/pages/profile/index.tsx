@@ -187,7 +187,7 @@ export default function Profile() {
             />
           ))}
         </section>
-        <DivisionBar className="fixed inset-x-0 m-auto mt-5 max-w-[420px]" />
+        <DivisionBar className="absolute inset-x-0 m-auto mt-5 max-w-[420px]" />
         <section className="my-10">
           <div className="relative my-4 flex">
             <span className="text-14 font-bold text-[#191919]">취향 목록</span>
