@@ -6,6 +6,7 @@ import { Tab } from '@headlessui/react';
 import useGetMyArtWork from '@hooks/queries/artwork/useGetMyArtWork';
 import SellingItem from '@components/profile/selling/SellingItem';
 import { useRouter } from 'next/router';
+import None from '@components/common/None';
 
 export default function Selling() {
   const router = useRouter();
@@ -19,7 +20,10 @@ export default function Selling() {
   const handleAccept = () => {
     setIsModal(true);
   };
-  const { data } = useGetMyArtWork();
+  const {
+    data: [registered, processing, sales_finished],
+  } = useGetMyArtWork();
+  console.log(registered, processing, sales_finished);
   return (
     <Layout>
       <Modal
@@ -34,22 +38,21 @@ export default function Selling() {
       />
       <Navigate isRightButton={false} message="판매활동" />
       <Tab.Group>
-        <Tab.List className="w-full  text-14 ">
-          <Tab className="h-[52px] w-1/3 border-[#191919] text-16 font-medium ui-selected:border-b-[2px] ui-selected:text-[#191919] ui-not-selected:border-b ui-not-selected:border-[#EDEDED] ui-not-selected:text-[#999999] ">
+        <Tab.List className="w-full text-14 ">
+          <Tab className="z-10 h-[52px] w-1/3 border-[#191919] text-16 font-medium ui-selected:border-b-[2px] ui-selected:text-[#191919] ui-not-selected:border-b ui-not-selected:border-[#EDEDED] ui-not-selected:text-[#999999] ">
             등록된 작품
           </Tab>
-          <Tab className="h-[52px] w-1/3 border-[#191919] text-16 font-medium ui-selected:border-b-[2px] ui-selected:text-[#191919] ui-not-selected:border-b ui-not-selected:border-[#EDEDED] ui-not-selected:text-[#999999] ">
+          <Tab className="z-10 h-[52px] w-1/3 border-[#191919] text-16 font-medium ui-selected:border-b-[2px] ui-selected:text-[#191919] ui-not-selected:border-b ui-not-selected:border-[#EDEDED] ui-not-selected:text-[#999999] ">
             경매 중
           </Tab>
-          <Tab className="h-[52px] w-1/3 border-[#191919] text-16 font-medium ui-selected:border-b-[2px] ui-selected:text-[#191919] ui-not-selected:border-b ui-not-selected:border-[#EDEDED] ui-not-selected:text-[#999999] ">
+          <Tab className="z-10 h-[52px] w-1/3 border-[#191919] text-16 font-medium ui-selected:border-b-[2px] ui-selected:text-[#191919] ui-not-selected:border-b ui-not-selected:border-[#EDEDED] ui-not-selected:text-[#999999] ">
             경매 완료
           </Tab>
         </Tab.List>
         <Tab.Panels>
           <Tab.Panel>
-            {data
-              ?.filter((item) => item.auctionStatus === 'registered')
-              .map((item) => (
+            {registered.length ? (
+              registered.map((item) => (
                 <SellingItem
                   key={item.id}
                   sellingItem={item}
@@ -61,14 +64,16 @@ export default function Selling() {
                     });
                   }}
                 />
-              ))}
+              ))
+            ) : (
+              <None path="selling" message="등록된 작품이 없어요." />
+            )}
           </Tab.Panel>
         </Tab.Panels>
         <Tab.Panels>
           <Tab.Panel>
-            {data
-              ?.filter((item) => item.auctionStatus === 'processing')
-              .map((item) => (
+            {processing.length ? (
+              processing.map((item) => (
                 <SellingItem
                   key={item.id}
                   sellingItem={item}
@@ -80,18 +85,16 @@ export default function Selling() {
                     });
                   }}
                 />
-              ))}
+              ))
+            ) : (
+              <None path="selling" message="경매중인 작품이 없어요." />
+            )}
           </Tab.Panel>
         </Tab.Panels>
         <Tab.Panels>
           <Tab.Panel>
-            {data
-              ?.filter(
-                (item) =>
-                  item.auctionStatus === 'sales_success' ||
-                  item.auctionStatus === 'sales_failed',
-              )
-              .map((item) => (
+            {sales_finished.length ? (
+              sales_finished.map((item) => (
                 <SellingItem
                   key={item.id}
                   sellingItem={item}
@@ -103,7 +106,10 @@ export default function Selling() {
                     });
                   }}
                 />
-              ))}
+              ))
+            ) : (
+              <None path="selling" message="경매에 참여한 내역이 없어요." />
+            )}
           </Tab.Panel>
         </Tab.Panels>
       </Tab.Group>

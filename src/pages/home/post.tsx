@@ -1,4 +1,3 @@
-import artworkApi from '@apis/artwork/artworkApi';
 import ErrorMessage from '@components/common/ErrorMessage';
 import Input from '@components/common/Input';
 import Layout from '@components/common/Layout';
@@ -10,14 +9,17 @@ import GuaranteeModal from '@components/home/post/GuaranteeModal';
 import KeywordModal from '@components/home/post/KeywordModal.tsx';
 import FileItem from '@components/inquiry/FileItem';
 import Image from 'next/image';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/router';
 import { getToken } from '@utils/localStorage/token';
-import { dataURLtoFile } from '@utils/dataURLtoFile';
 import KeywordBox from '@components/common/KeywordBox';
 import usePostArtwork from '@hooks/mutations/usePostArtwork';
 import Loader from '@components/common/Loader';
+import { makeBlob } from '@utils/makeBlob';
+import useGetProfile from '@hooks/queries/useGetProfile';
+import { today } from '@utils/today';
+import { toBlob } from 'html-to-image';
 
 const ARTWORK_STATUS = [
   { value: '매우 좋음' },
@@ -68,6 +70,7 @@ export default function Post() {
     turn: number;
   }>({ artworkId: 0, turn: 0 });
   const [isErrorModal, setIsErrorModal] = useState<boolean>(false);
+  const { data: user } = useGetProfile();
 
   const router = useRouter();
 
@@ -92,7 +95,6 @@ export default function Post() {
   } = useForm<Artwork>();
 
   const handleImage = (e) => {
-    console.log(e.target.files);
     const files = e.target.files;
     if (fileList?.length <= 5 && fileList?.length + files?.length <= 5) {
       const newFileList: any = [];
@@ -115,13 +117,8 @@ export default function Post() {
     }
   }, [keywordList, setValue, genre, signature]);
 
-  const {
-    mutate,
-    data,
-    isSuccess,
-    isLoading: isLoadingPost,
-    isError,
-  } = usePostArtwork();
+  const { mutate, isLoading: isLoadingPost } = usePostArtwork();
+  const guaranteeRef = useRef<HTMLDivElement>(null);
 
   const onSubmit = async (form: Artwork) => {
     const {
@@ -139,6 +136,9 @@ export default function Post() {
       statusDescription,
     } = form;
     const formData = new FormData();
+
+    const guarantee = await toBlob(guaranteeRef.current as HTMLDivElement);
+
     formData.append('title', title);
     formData.append('productionYear', productionYear + '');
     formData.append('description', description);
@@ -165,18 +165,17 @@ export default function Post() {
       formData.append('genre', genre);
     }
 
-    if (signature) {
-      const file = dataURLtoFile(signature, 'guaranteeImage');
-      formData.append('guaranteeImage', file);
+    if (guarantee) {
+      formData.append('guaranteeImage', guarantee, 'image/png');
     }
 
     mutate(formData);
-    if (isError) {
-      setIsErrorModal(true);
-    } else {
-      setResponseData({ turn: data.turn, artworkId: data.artWork.id });
-      setIsModal(true);
-    }
+    // if (isError) {
+    //   setIsErrorModal(true);
+    // } else {
+    //   setResponseData({ turn: data.turn, artworkId: data.artWork.id });
+    //   setIsModal(true);
+    // }
   };
 
   if (isGuaranteeModal)
@@ -441,6 +440,85 @@ export default function Post() {
             </div>
           )}
         </div>
+        {user &&
+          watch('title') &&
+          watch('productionYear') &&
+          watch('width') &&
+          watch('length') &&
+          watch('height') &&
+          watch('genre') &&
+          signature && (
+            <div
+              ref={guaranteeRef}
+              className="m-auto min-w-[327px] flex-col items-center justify-center py-9"
+            >
+              <div className="text-center text-16 font-semibold tracking-[0.3em]">
+                작 품 보 증 서
+              </div>
+              <p className="text-center text-[8px] font-light tracking-[-0.05em] text-[#A5A5A5]">
+                CERTIFICATE OF AUTHENTICITY
+              </p>
+              <div className="relative mx-auto mt-7 h-[74px] w-[116px]">
+                <Image
+                  src={makeBlob(fileList[0])}
+                  fill
+                  className="object-cover"
+                  alt="artwork"
+                />
+              </div>
+              <div className="mt-3 flex justify-center text-11 leading-5">
+                <div className="flex-col font-semibold">
+                  <p>작가</p>
+                  <p>제목</p>
+                  <p>제작년도</p>
+                  <p>작품크기</p>
+                  <p>제작기법</p>
+                </div>
+                <div className="ml-12 flex-col">
+                  <p>{user?.nickname}</p>
+                  <p>{watch('title')}</p>
+                  <p>{watch('productionYear')}</p>
+                  <p>{`${watch('width')}x${watch('length')}x${watch(
+                    'height',
+                  )}cm`}</p>
+                  <p>{watch('genre')}</p>
+                </div>
+              </div>
+              <div className="mt-4 flex-col">
+                <div className="flex items-center justify-center">
+                  <Image src={signature} width={50} height={50} alt="artwork" />
+                </div>
+                <div className="mt-2 flex-col items-center justify-center">
+                  <div className="mx-auto w-[70px] border-t border-t-black pb-[3px]" />
+                  <div className="text-center text-[8px]  text-[#A5A5A5]">
+                    Artist Signature
+                  </div>
+                </div>
+              </div>
+              <ul className="mt-3 w-full list-none text-center text-[8px]">
+                <li className="w-full  text-black  before:mr-2  before:content-['\2022']">
+                  본 작품은 위에 서명한 작가의 작품임을 보증합니다.
+                </li>
+                <li className="w-full text-black  before:mr-2  before:content-['\2022']">
+                  본 작품은 일체의 모작, 위작이 아님을 보증합니다.
+                </li>
+                <li className="w-full text-black  before:mr-2  before:content-['\2022']">
+                  본 보증서는 작품 보증 이외 환불, 교환 등의 목적으로 사용이
+                  불가합니다.
+                </li>
+              </ul>
+              <p className="my-3 text-center text-[8px]">{today()}</p>
+              <div className="flex items-center justify-center text-brand">
+                <Image
+                  src="/svg/post/logo_small.svg"
+                  width={60}
+                  height={10}
+                  alt="logo"
+                />
+              </div>
+            </div>
+          )}
+
         <div className="relative h-[336px]">
           <div className="absolute -left-6 -bottom-10 h-[376px] w-[375px]">
             <div className="mt-12 h-4 bg-[#F8F8FA]"></div>
@@ -448,7 +526,7 @@ export default function Post() {
               <p className="mt-8 font-medium">
                 다음의 경우 작품등록이 제외될 수 있습니다.
               </p>
-              <ul className="mt-3 ml-3 list-disc space-y-2 tracking-tight text-[#767676]">
+              <ul className="mt-3 ml-3 w-fit list-disc space-y-2 tracking-tight text-[#767676]">
                 <li>
                   작품의 선정성, 유해성이 통신판매업 시행령(2019) 기준에 맞지
                   아니 하다고 판단되는 경우

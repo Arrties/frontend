@@ -72,7 +72,7 @@ export default function View() {
     <>
       <Layout>
         <div
-          className={`fixed inset-x-0 top-4 z-50 mx-auto flex h-16 w-full max-w-[420px] items-center justify-between px-5 ${
+          className={`fixed inset-x-0 top-0 z-50 mx-auto flex h-16 w-full max-w-[420px] items-center justify-between px-5 ${
             isCardOver && 'bg-white'
           }`}
         >
@@ -283,23 +283,17 @@ export default function View() {
             ))}
           </article>
 
-          {/* <article className="relative h-[457px] w-full">
-            <div>
+          <article className="relative h-[457px] w-full">
+            {artWork?.guaranteeImage && (
               <Image
-                src="/svg/example/guarantee_empty.svg"
                 alt="guarantee"
-                width={327}
-                height={457}
+                src={artWork?.guaranteeImage}
+                fill
+                className="object-contain"
+                priority
               />
-            </div>
-            <Image
-              alt="guarantee"
-              src={artWork?.guaranteeImage || '/svg/example/guarantee.svg'}
-              fill
-              className="object-contain"
-              priority
-            />
-          </article> */}
+            )}
+          </article>
           <div className="h-[7rem]" />
         </section>
       </Layout>

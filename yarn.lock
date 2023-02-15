@@ -9394,6 +9394,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"html-to-image@npm:^1.11.11":
+  version: 1.11.11
+  resolution: "html-to-image@npm:1.11.11"
+  checksum: b453beca72a697bf06fae4945e5460d1d9b1751e8569a0d721dda9485df1dde093938cc9bd9172b8df5fc23133a53a4d619777b3d22f7211cd8a67e3197ab4e8
+  languageName: node
+  linkType: hard
+
 "html-void-elements@npm:^1.0.0":
   version: 1.0.5
   resolution: "html-void-elements@npm:1.0.5"
@@ -10507,6 +10514,7 @@ __metadata:
     eslint-config-next: 13.0.0
     eslint-config-prettier: ^8.5.0
     eslint-plugin-storybook: ^0.6.8
+    html-to-image: ^1.11.11
     moment: ^2.29.4
     msw: ^0.49.2
     next: 13.0.0
