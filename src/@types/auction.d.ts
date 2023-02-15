@@ -68,6 +68,7 @@ interface BiddingHistory {
     genre: string;
     beginPrice: number;
     topPrice: number;
+    artist: number;
   };
   auction: {
     id: number;
