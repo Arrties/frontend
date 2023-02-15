@@ -1,11 +1,21 @@
-import storage from 'redux-persist/lib/storage'
-import { combineReducers, configureStore } from '@reduxjs/toolkit'
-import { FLUSH, PAUSE, PERSIST, persistReducer, PURGE, REGISTER, REHYDRATE } from 'redux-persist'
+import storage from 'redux-persist/lib/storage';
+import { combineReducers, configureStore } from '@reduxjs/toolkit';
+import {
+  FLUSH,
+  PAUSE,
+  PERSIST,
+  persistReducer,
+  PURGE,
+  REGISTER,
+  REHYDRATE,
+} from 'redux-persist';
 
-import userSlice from './user/userSlice'
+import userSlice from './user/userSlice';
+import noticeSlice from './noticeSlice';
 
 const rootReducer = combineReducers({
   user: userSlice,
+  notice: noticeSlice,
 });
 
 const persistConfig = {
