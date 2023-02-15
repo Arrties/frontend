@@ -4,6 +4,7 @@ import Navigate from '@components/common/Navigate';
 import FileItem from '@components/inquiry/FileItem';
 import InquiryItem from '@components/inquiry/InquiryItem';
 import useGetInquiry from '@hooks/queries/useGetInquiry';
+import Loader from '@components/common/Loader';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { Tab } from '@headlessui/react';
@@ -33,7 +34,7 @@ export default function Inquiry() {
   const [fileLists, setFileLists] = useState<File[]>([]);
   const [fileSize, setFileSize] = useState<number>(0);
   const [selectedIndex, setSelectedIndex] = useState<number>(0);
-  const { mutate: postInquiry } = usePostInquiry(postData);
+  const { mutate: postInquiry, isLoading } = usePostInquiry(postData);
   const { data } = useGetInquiry();
 
   const router = useRouter();
@@ -90,15 +91,16 @@ export default function Inquiry() {
     }
     console.log(image);
     setPostData(() => formData);
-    clearForm();
-    setSelectedIndex(1);
   };
-
   useEffect(() => {
     if (postData) {
       postInquiry();
+      clearForm();
+      setSelectedIndex(1);
     }
   }, [postData]);
+
+  if (isLoading) return <Loader />;
 
   return (
     <Layout>
