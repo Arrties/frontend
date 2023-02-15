@@ -256,7 +256,7 @@ export default function Inquiry() {
                 {data?.map((inquiry, idx) => (
                   <InquiryItem key={'' + idx} inquiry={inquiry} />
                 ))}
-                <div className="mt-[14px] text-center text-14 text-[#999999]">
+                <div className="my-[14px] text-center text-14 text-[#999999]">
                   최근 1년간 문의내역만 조회 가능합니다.
                 </div>
               </div>

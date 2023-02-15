@@ -82,7 +82,7 @@ export default function InquiryItem({ inquiry }: InquiryItemForm) {
         <div className="mt-5 flex justify-between">
           <div className="flex justify-start">
             <span className="mr-2 w-[70px] rounded-[39px] border-[1px] border-[#DBDBDB] py-[1px] text-center text-12 font-semibold text-[#767676] ">
-              {inquiry.status === 'WAITING' && '대기중'}
+              {inquiry.status === 'WAITING' ? '대기중' : '답변완료'}
             </span>
             <span className="text-14 text-[#999999]">{inquiry.date}</span>
           </div>
@@ -245,7 +245,7 @@ export default function InquiryItem({ inquiry }: InquiryItemForm) {
           </div>
         )}
         <Disclosure.Panel className="pt-5 text-14 text-gray-500">
-          <div className="flex w-full items-center bg-[#F8F8FA] py-4 px-2">
+          <div className="flex w-full flex-col bg-[#F8F8FA] py-4 px-2">
             <section className="flex">
               <div className="mr-2 flex h-6 w-6 items-center justify-center rounded-full bg-brand">
                 <Image
@@ -258,7 +258,7 @@ export default function InquiryItem({ inquiry }: InquiryItemForm) {
               <div className="w-[270px]">{inquiry.content}</div>
             </section>
             {inquiry.answer && (
-              <section className="flex">
+              <section className="mt-3 flex">
                 <div className="mr-2 flex h-6 w-6 items-center justify-center rounded-full bg-brand">
                   <Image
                     src="/svg/icons/icon_logo_brand.svg"
