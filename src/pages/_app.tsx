@@ -33,7 +33,7 @@ export default function App({ Component, pageProps }: AppProps) {
     if (router.pathname.includes('auth') || router.pathname === '/begin')
       return;
     const token = getToken();
-    if (!token.accessToken) router.replace('/begin');
+    if (!token.accessToken) router.replace('/auth/login');
   }, [router]);
 
   useEffect(() => {
