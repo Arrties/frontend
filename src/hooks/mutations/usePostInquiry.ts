@@ -8,21 +8,6 @@ const usePostInquiry = (formData: any) => {
     () => profileApi.postInquiry(formData),
     {
       retry: false,
-      onMutate: async () => {
-        await queryClient.cancelQueries({ queryKey: ['usePostInquiry'] });
-        const previousValue = queryClient.getQueryData(['useGetInquiry']);
-        queryClient.setQueryData(['useGetInquiry'], (old: any) => {
-          console.log(old);
-          return {
-            ...old,
-            formData,
-          };
-        });
-        return { previousValue };
-      },
-      onError: (context: any) => {
-        queryClient.setQueryData(['useGetInquiry'], context.previousValue);
-      },
       onSettled: () => {
         queryClient.invalidateQueries({
           queryKey: ['useGetInquiry'],
