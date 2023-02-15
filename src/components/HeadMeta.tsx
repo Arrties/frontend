@@ -1,6 +1,6 @@
 import Head from 'next/head';
 
-const HeadMeta = () => {
+export default function HeadMeta() {
   return (
     <Head>
       <link rel="shortcut icon" href="/static/favicon.ico" />
@@ -17,6 +17,4 @@ const HeadMeta = () => {
       <meta property="og:article:author" content="졸업작품 거래 플랫폼" />
     </Head>
   );
-};
-
-export default HeadMeta;
+}

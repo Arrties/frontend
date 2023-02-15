@@ -15,6 +15,7 @@ import Script from 'next/script';
 import { CONFIG } from '@config';
 import { pageview } from '@utils/gtag';
 import HeadMeta from '@components/HeadMeta';
+import GoogleScript from '@components/GoogleScript';
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
@@ -73,24 +74,7 @@ export default function App({ Component, pageProps }: AppProps) {
   ) : (
     <div className="flex h-screen w-screen justify-center bg-slate-50 font-Pretendard">
       <HeadMeta />
-      <Script
-        strategy="afterInteractive"
-        src={`https://www.googletagmanager.com/gtag/js?id=${CONFIG.GOOGLE_TAG}`}
-      />
-      <Script
-        id="gtag-init"
-        strategy="afterInteractive"
-        dangerouslySetInnerHTML={{
-          __html: `
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', '${CONFIG.GOOGLE_TAG}', {
-              page_path: window.location.pathname,
-            });
-          `,
-        }}
-      />
+      <GoogleScript />
       <Suspense fallback={<Loader />}>
         <Provider store={store}>
           <QueryClientProvider client={queryClient}>
