@@ -128,7 +128,6 @@ export default function Home() {
             modules={[Autoplay, Navigation, Scrollbar]}
             navigation
             scrollbar={{ draggable: true }}
-            spaceBetween={0}
             slidesPerView={2.1}
             autoplay={{ delay: 5000, disableOnInteraction: false }}
           >
