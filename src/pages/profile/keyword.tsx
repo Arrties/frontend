@@ -32,11 +32,13 @@ export default function Keyword() {
   return (
     <Layout>
       <Navigate isRightButton={false} />
+      <div className="text-16 font-semibold">관심있는 키워드를 골라주세요.</div>
       <SelectKeyword
         className="mt-[10px]"
         setKeywordList={setKeywordList}
         keywordList={keywordList}
       />
+
       <Button
         text="완료"
         className="absolute inset-x-0 bottom-[34px] m-auto"
