@@ -241,14 +241,18 @@ export default function View() {
                     artist?.artistImage || '/svg/icons/profile/icon_avatar.svg'
                   }
                   alt="profile"
-                  className="cursor-pointer rounded-full"
+                  className={`cursor-pointer object-cover ${
+                    !!artist?.artistImage && 'rounded-full'
+                  }`}
                   onClick={() => {
                     router.push({
                       pathname: '/profile/detail',
                       query: { id: artist?.id },
                     });
                   }}
-                  fill
+                  fill={!!artist?.artistImage}
+                  width={!artist?.artistImage ? 40 : 0}
+                  height={!artist?.artistImage ? 40 : 0}
                 />
               </div>
               <div className="w-fulltext-center ">{artist?.artistName}</div>
