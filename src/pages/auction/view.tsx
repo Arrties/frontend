@@ -235,25 +235,35 @@ export default function View() {
           <div className="mt-8 border-y border-y-[#EDEDED] py-8">
             <div className="flex w-[74px] flex-col items-center justify-center">
               <p className="w-full text-center font-medium">작가프로필</p>
-              <div className="relative my-2 flex aspect-square w-[4rem] items-center justify-center rounded-full border border-[#999999]">
-                <Image
-                  src={
-                    artist?.artistImage || '/svg/icons/profile/icon_avatar.svg'
-                  }
-                  alt="profile"
-                  className={`cursor-pointer object-cover ${
-                    !!artist?.artistImage && 'rounded-full'
-                  }`}
-                  onClick={() => {
-                    router.push({
-                      pathname: '/profile/detail',
-                      query: { id: artist?.id },
-                    });
-                  }}
-                  fill={!!artist?.artistImage}
-                  width={!artist?.artistImage ? 40 : 0}
-                  height={!artist?.artistImage ? 40 : 0}
-                />
+              <div className="relative my-2 flex aspect-square w-[4rem] cursor-pointer items-center justify-center overflow-hidden rounded-full border  border-[#999999]">
+                {artist?.artistImage ? (
+                  <Image
+                    src={artist?.artistImage}
+                    alt="profile"
+                    priority
+                    fill
+                    className="object-cover"
+                    onClick={() => {
+                      router.push({
+                        pathname: '/profile/detail',
+                        query: { id: artist?.id },
+                      });
+                    }}
+                  />
+                ) : (
+                  <Image
+                    src="/svg/icons/profile/icon_avatar.svg"
+                    alt="user"
+                    width={40}
+                    height={40}
+                    onClick={() => {
+                      router.push({
+                        pathname: '/profile/detail',
+                        query: { id: artist?.id },
+                      });
+                    }}
+                  />
+                )}
               </div>
               <div className="w-fulltext-center ">{artist?.artistName}</div>
             </div>

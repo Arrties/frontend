@@ -123,7 +123,7 @@ export default function Profile() {
                 />
               ) : (
                 <Image
-                  src="/svg/icons/icon_user_gray.svg"
+                  src="/svg/icons/profile/icon_avatar.svg"
                   alt="user"
                   width={100}
                   height={100}

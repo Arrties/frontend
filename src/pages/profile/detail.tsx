@@ -20,7 +20,7 @@ w-full flex items-center mt-5 mb-8
 `;
 
 const PickDetailProfile = tw.div<defaultProps>`
-w-[60px] mr-[10px] aspect-square flex  justify-center items-center rounded-full border-[1px] border-[#999999]
+w-[60px] mr-[10px] aspect-square flex justify-center items-center rounded-full border-[1px] border-[#999999] overflow-hidden relative
 `;
 
 export default function PickDetail() {
@@ -47,12 +47,22 @@ export default function PickDetail() {
       <Navigate isRightButton={false} message="작가 프로필" />
       <PickDetailContainer>
         <PickDetailProfile>
-          <Image
-            src={member?.image || '/svg/icons/icon_user_gray.svg'}
-            alt="avatar"
-            width={34}
-            height={34}
-          />
+          {member?.image ? (
+            <Image
+              src={member?.image}
+              alt="profile"
+              priority
+              fill
+              className="object-cover"
+            />
+          ) : (
+            <Image
+              src="/svg/icons/profile/icon_avatar.svg"
+              alt="user"
+              width={40}
+              height={40}
+            />
+          )}
         </PickDetailProfile>
         <div className="flex h-10 flex-col">
           <span className="text-18 font-semibold">{member?.nickname}</span>
