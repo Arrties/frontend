@@ -117,7 +117,7 @@ export default function Post() {
     }
   }, [keywordList, setValue, genre, signature]);
 
-  const { mutate, isLoading: isLoadingPost } = usePostArtwork();
+  const { mutate, isLoading: isLoadingPost } = usePostArtwork(setIsErrorModal);
   const guaranteeRef = useRef<HTMLDivElement>(null);
 
   const onSubmit = async (form: Artwork) => {
@@ -170,12 +170,6 @@ export default function Post() {
     }
 
     mutate(formData);
-    // if (isError) {
-    //   setIsErrorModal(true);
-    // } else {
-    //   setResponseData({ turn: data.turn, artworkId: data.artWork.id });
-    //   setIsModal(true);
-    // }
   };
 
   if (isGuaranteeModal)
