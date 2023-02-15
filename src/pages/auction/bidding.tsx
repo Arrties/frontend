@@ -80,12 +80,14 @@ export default function Bidding() {
           <div className="textd-16 font-medium">작품정보</div>
           <div className="mt-3 flex items-center">
             <div className="relative h-[97px] w-[85px] overflow-hidden rounded-[4px]">
-              <Image
-                alt="image"
-                src="/svg/example/example_artwork_1.svg"
-                fill
-                className="object-cover"
-              />
+              {artWork?.image && (
+                <Image
+                  alt="image"
+                  src={artWork?.image}
+                  fill
+                  className="object-cover"
+                />
+              )}
             </div>
             <div className="ml-3 h-fit flex-col">
               <p className="text-15 font-semibold leading-5">
