@@ -5,6 +5,7 @@ import useGetPick from '@hooks/queries/useGetPick';
 import Button from 'stories/Button';
 import tw from 'tailwind-styled-components';
 import { useRouter } from 'next/router';
+import None from '@components/common/None';
 
 interface defaultProps {
   [key: string]: any;
@@ -39,16 +40,7 @@ export default function Pick() {
             />
           ))
         ) : (
-          <div>
-            <div className="flex h-[98px] w-full items-center justify-center text-14">
-              픽한 작가가 없습니다.
-            </div>
-            <Button
-              text="작가 픽 하러 가기"
-              onClick={() => router.push('/exhibition')}
-              className="mt-10 w-full"
-            />
-          </div>
+          <None path="pick" message="나의 픽 작가가 없어요." />
         )}
       </PickContainer>
     </Layout>

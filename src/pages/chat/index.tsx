@@ -7,6 +7,7 @@ import { useRouter } from 'next/router';
 import { createClient, subscribe } from '@apis/chat/socketConnect';
 import Tab from '@components/common/Tab';
 import useGetChatRoomList from '@hooks/queries/chat/useGetChatRoomList';
+import None from '@components/common/None';
 
 export default function Chat() {
   const router = useRouter();
@@ -55,14 +56,7 @@ export default function Chat() {
             ))}
           </div>
         ) : (
-          <section className="flex h-[650px] items-center justify-center">
-            <Image
-              src={'/svg/icons/icon_chat_main.svg'}
-              width="150"
-              height="0"
-              alt="chat"
-            />
-          </section>
+          <None path="chat" message="아직 채팅 목록이 없어요" />
         )}
       </Layout>
       <Tab />
