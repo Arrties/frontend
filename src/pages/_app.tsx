@@ -11,11 +11,9 @@ import Loader from '@components/common/Loader';
 import { Suspense, useEffect, useState } from 'react';
 import { Router, useRouter } from 'next/router';
 import { getToken } from '@utils/localStorage/token';
-import Script from 'next/script';
-import { CONFIG } from '@config';
 import { pageview } from '@utils/gtag';
-import HeadMeta from '@components/HeadMeta';
 import GoogleScript from '@components/GoogleScript';
+import MetaHead from '@components/MetaHead';
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
@@ -73,7 +71,7 @@ export default function App({ Component, pageProps }: AppProps) {
     <Loader />
   ) : (
     <div className="flex h-screen w-screen justify-center bg-slate-50 font-Pretendard">
-      <HeadMeta />
+      <MetaHead />
       <GoogleScript />
       <Suspense fallback={<Loader />}>
         <Provider store={store}>
