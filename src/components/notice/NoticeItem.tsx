@@ -39,7 +39,7 @@ export default function NoticeItem({ notice }: NoticeItemProps) {
     '입찰 경쟁 알림': ['bid_fail', `/auction/bidding?id=${notice.data}`],
 
     '작품 낙찰 성공 🎉': ['bid_success', '/profile/bid'],
-    '1대1 문의 알림': ['inquiry', '/inquiry'],
+    '1대1 문의 알림': ['inquiry', '/profile/inquiry'],
     채팅: ['chat', `/chat`],
   };
 
