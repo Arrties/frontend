@@ -15,7 +15,7 @@ export default function Page404Props() {
         <Button
           text="홈으로 바로가기"
           onClick={() => {
-            router.push('/auth/login');
+            router.push('/home');
           }}
         />
       </p>
