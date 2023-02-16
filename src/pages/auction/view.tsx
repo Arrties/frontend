@@ -72,7 +72,7 @@ export default function View() {
     <>
       <Layout>
         <div
-          className={`fixed inset-x-0 top-0 z-50 mx-auto flex h-16 w-full max-w-[420px] items-center justify-between px-5 ${
+          className={`fixed inset-x-0 top-4 z-50 mx-auto flex h-16 w-full max-w-[420px] items-center justify-between px-5 ${
             isCardOver && 'bg-white'
           }`}
         >
