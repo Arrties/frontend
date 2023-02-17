@@ -5,7 +5,8 @@ import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
 import { formatBytes } from '@utils/formatBytes';
-import profileApi from '@apis/profile/profileApi';
+import usePatchResgister from '@hooks/mutations/usePatchRegister';
+import Loader from '@components/common/Loader';
 
 interface FileForm {
   file: any;
@@ -17,12 +18,13 @@ export default function Register() {
   const router = useRouter();
   const { register, watch } = useForm<FileForm>();
   const [fileState, setFileState] = useState<FileForm[]>([]);
+  const { mutate, isLoading } = usePatchResgister();
 
   const handleRightButton = async () => {
     if (!fileState) return;
     const formData = new FormData();
     formData.append('certificationImage', fileState[0].file);
-    await profileApi.patchProfile(formData);
+    mutate(formData);
     router.push('/profile/register/complete');
   };
 
@@ -42,6 +44,8 @@ export default function Register() {
   const handleDelete = () => {
     setFileState([]);
   };
+
+  if (isLoading) return <Loader />;
 
   return (
     <Layout>
