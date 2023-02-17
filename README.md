@@ -78,7 +78,9 @@ useQuery, useMutation으로 mapping한 query, mutation hook들과 개별 hook들
 
 [📄 Git 컨밴션](https://www.notion.so/guesung/PR-59399896b4504c4ea5703b8c3ac2b874)
 
-## 기술스택 🛠
+## 프로젝트 기술스택 🛠
+
+![](https://i.imgur.com/KN4SEfW.png)
 
 - **Language :** [Typescript](https://www.typescriptlang.org/)
 - **Framework :** [Next.js](https://nextjs.org/)
