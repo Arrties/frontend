@@ -99,7 +99,7 @@ export default function Home() {
                 </div>
               </div>
             ) : (
-              <div className="relative flex h-[120px] w-[500px] items-center ">
+              <div className="relative mt-2 flex h-[120px] w-[500px] items-center ">
                 <Image
                   alt="keyword"
                   src="/svg/icons/bg_home_banner.svg"
