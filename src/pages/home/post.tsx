@@ -136,10 +136,31 @@ export default function Post() {
       statusDescription,
     } = form;
 
+    if (fileList.length === 0) {
+      setError('image', {
+        type: 'required',
+        message: '작품 사진을 최소 한 장 이상 선택해주세요.',
+      });
+      return;
+    }
     if (keywordList.length === 0) {
       setError('keywords', {
         type: 'required',
-        message: '키워드를 입력해주세요.',
+        message: '태그를 최소 한 개 이상 선택해주세요.',
+      });
+      return;
+    }
+    if (genre === '') {
+      setError('genre', {
+        type: 'required',
+        message: '장르를 선택해주세요.',
+      });
+      return;
+    }
+    if (signature === '') {
+      setError('guaranteeImage', {
+        type: 'required',
+        message: '작가 서명을 입력해주세요.',
       });
       return;
     }
@@ -243,14 +264,12 @@ export default function Post() {
             type="file"
             id="fileImage"
             className="hidden"
-            {...register('image', {
-              required: true,
-            })}
             onChange={handleImage}
           />
         </div>
         {errors.image && (
           <ErrorMessage
+            className="mt-2"
             message={'작품 이미지를 최소 한 장 이상 등록해주세요.'}
           />
         )}
@@ -261,7 +280,13 @@ export default function Post() {
             placeholder="작품명을 입력해주세요"
             register={register('title', { required: true })}
           />
-          <button onClick={() => setIsKeywordModal(true)} className="relative">
+          <button
+            onClick={() => {
+              clearErrors('keywords');
+              setIsKeywordModal(true);
+            }}
+            className="relative"
+          >
             <div className="flex h-[38px] w-[92px] items-center rounded-[4px] border border-[#D8D8D8] pl-3 text-[13px] text-[#999999]">
               태그추가
             </div>
@@ -288,8 +313,15 @@ export default function Post() {
           label="제작연도"
           min={2010}
           placeholder="숫자만 입력해주세요. ex)2022"
-          register={register('productionYear', { required: true })}
+          register={register('productionYear', {
+            required: true,
+            min: 2010,
+            max: 2023,
+          })}
         />
+        {errors.productionYear && (
+          <ErrorMessage message="제작년도를 확인해주세요." />
+        )}
         <div>
           <div className="flex justify-between">
             <label htmlFor="description" className="text-14 leading-8">
@@ -320,7 +352,12 @@ export default function Post() {
           placeholder="사용한 재료를 입력해주세요."
           register={register('material', { required: true })}
         />
-        <div onClick={() => setIsGenreModal(true)}>
+        <div
+          onClick={() => {
+            clearErrors('genre');
+            setIsGenreModal(true);
+          }}
+        >
           <label className="text-14 leading-8">장르</label>
           <div
             className={`flex h-[52px] w-full cursor-pointer items-center rounded-[4px] border border-[#D8D8D8] pl-3 text-[13px] ${
@@ -330,6 +367,7 @@ export default function Post() {
             {genre ? genre : '선택하기'}
           </div>
         </div>
+        {errors.genre && <ErrorMessage message={errors.genre.message} />}
         <Select
           name="frame"
           setValue={setValue}
@@ -399,7 +437,10 @@ export default function Post() {
         />
         <div
           className="w-full cursor-pointer"
-          onClick={() => setIsGuaranteeModal(true)}
+          onClick={() => {
+            clearErrors('guaranteeImage');
+            setIsGuaranteeModal(true);
+          }}
         >
           <label htmlFor="statusDetail" className="text-14 leading-8">
             작품 보증서
@@ -431,6 +472,9 @@ export default function Post() {
             </div>
           )}
         </div>
+        {errors.guaranteeImage && (
+          <ErrorMessage message={errors.guaranteeImage.message} />
+        )}
         {user &&
           watch('title') &&
           watch('productionYear') &&
