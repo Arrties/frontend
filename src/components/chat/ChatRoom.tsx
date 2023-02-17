@@ -31,6 +31,7 @@ export default function Chatroom({ chatRoom }: ChatRoomProps) {
     });
   };
   const router = useRouter();
+  console.log(chatRoom?.lastMessage?.sendDate);
   return (
     <section
       className="relative flex h-[64px] cursor-pointer items-center border-b p-5 first:border-t"
@@ -50,10 +51,11 @@ export default function Chatroom({ chatRoom }: ChatRoomProps) {
             {chatRoom?.otherMember?.name}
           </p>
           <p className="text-10 text-[#767676]">
-            {moment(
-              chatRoom?.lastMessage?.sendDate,
-              'YYYY-MM-DD-hh-mm-ss',
-            ).format('LT')}
+            {chatRoom?.lastMessage?.sendDate &&
+              moment(
+                chatRoom?.lastMessage?.sendDate,
+                'YYYY-MM-DD-hh-mm-ss',
+              ).format('LT')}
           </p>
         </div>
         <MessageBox>{chatRoom?.lastMessage?.content}</MessageBox>
