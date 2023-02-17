@@ -92,8 +92,6 @@ export default function Edit() {
     );
   }, [profile]);
 
-  // console.log()
-
   const onSubmit = async (form: Member) => {
     const { nickname, instagram, behance, education, history, description } =
       form;
@@ -135,8 +133,13 @@ export default function Edit() {
 
     if (isUser) {
       mutateUser(formData);
+      router.replace('/profile');
     } else {
       mutateArtist(formData);
+      router.replace({
+        pathname: '/profile/detail',
+        query: { id: userInfo?.id },
+      });
     }
   };
 

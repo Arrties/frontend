@@ -41,6 +41,7 @@ export default function PickDetail() {
       postPrefer();
     }
   };
+  console.log(member);
 
   return (
     <Layout>
@@ -92,57 +93,71 @@ export default function PickDetail() {
         </Tab.List>
         <Tab.Panels className="pt-8">
           <Tab.Panel className="space-y-8">
-            <div className="space-y-3 text-14">
-              <p className="font-semibold">소개</p>
-              <p className="text-14 leading-5">{member?.description}</p>
-            </div>
-            <div className="space-y-3 text-14">
-              <p className="font-semibold">이력</p>
-              <p className="text-14 leading-5">{member?.history}</p>
-            </div>
-            <div className="text-14">
-              <p className="font-semibold">SNS</p>
-              <div className="mt-3 flex flex-col">
-                <div className="mb-2 flex w-1/2 items-center">
-                  <Image
-                    src="/svg/icons/icon_instagram_black.svg"
-                    width={20}
-                    height={20}
-                    alt="instagram"
-                  />
-                  <p className="ml-[6px] text-14 leading-5">
-                    <a href={member?.instagram}>{member?.instagram}</a>
-                  </p>
-                </div>
-                <div className="flex w-1/2 items-center">
-                  <Image
-                    src="/svg/icons/icon_behance_black.svg"
-                    width={20}
-                    height={20}
-                    alt="behance"
-                  />
-                  <p className="ml-[6px] text-14 leading-5">
-                    <a href={member?.behance}>{member?.behance}</a>
-                  </p>
+            {!member?.description &&
+              !member?.history &&
+              !member?.instagram &&
+              !member?.behance && <div>기입된 정보가 없습니다.</div>}
+            {member?.description && (
+              <div className="space-y-3 text-14">
+                <p className="font-semibold">소개</p>
+                <p className="text-14 leading-5">{member?.description}</p>
+              </div>
+            )}
+            {member?.history && (
+              <div className="space-y-3 text-14">
+                <p className="font-semibold">이력</p>
+                <p className="text-14 leading-5">{member?.history}</p>
+              </div>
+            )}
+            {(member?.instagram || member?.behance) && (
+              <div className="text-14">
+                <p className="font-semibold">SNS</p>
+                <div className="mt-3 flex flex-col">
+                  <div className="mb-2 flex w-1/2 items-center">
+                    <Image
+                      src="/svg/icons/icon_instagram_black.svg"
+                      width={20}
+                      height={20}
+                      alt="instagram"
+                    />
+                    <p className="ml-[6px] text-14 leading-5">
+                      <a href={member?.instagram}>{member?.instagram}</a>
+                    </p>
+                  </div>
+                  <div className="flex w-1/2 items-center">
+                    <Image
+                      src="/svg/icons/icon_behance_black.svg"
+                      width={20}
+                      height={20}
+                      alt="behance"
+                    />
+                    <p className="ml-[6px] text-14 leading-5">
+                      <a href={member?.behance}>{member?.behance}</a>
+                    </p>
+                  </div>
                 </div>
               </div>
-            </div>
+            )}
           </Tab.Panel>
           <Tab.Panel className="space-y-6">
-            {artworks?.map((artwork, index: number) => (
-              <PickArtistWork
-                key={index}
-                title={artwork?.title}
-                saleStatus={artwork?.saleStatus}
-                onClick={() => {
-                  router.push({
-                    pathname: '/auction/view',
-                    query: { id: artwork.id },
-                  });
-                }}
-                image={artwork?.image}
-              />
-            ))}
+            {artworks && artworks.length > 0 ? (
+              artworks?.map((artwork, index: number) => (
+                <PickArtistWork
+                  key={index}
+                  title={artwork?.title}
+                  saleStatus={artwork?.saleStatus}
+                  onClick={() => {
+                    router.push({
+                      pathname: '/auction/view',
+                      query: { id: artwork.id },
+                    });
+                  }}
+                  image={artwork?.image}
+                />
+              ))
+            ) : (
+              <div>등록된 작품이 없습니다.</div>
+            )}
           </Tab.Panel>
         </Tab.Panels>
       </Tab.Group>

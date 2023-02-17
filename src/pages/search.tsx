@@ -68,13 +68,13 @@ export default function Search() {
   };
 
   const onSubmit = () => {
-    router.replace(`search/?word=${value}`);
+    router.push(`search/?word=${value}`);
     setSearchWord(value);
   };
 
   const handleRecentWord = ({ word }) => {
     setSearchWord(word);
-    router.replace(`search/?word=${word}`);
+    router.push(`search/?word=${word}`);
     setValue(word);
   };
 
@@ -84,7 +84,7 @@ export default function Search() {
 
   const handleRecommendKeyword = (keyword: string) => {
     setValue(keyword);
-    router.replace(`search/?word=${keyword}`);
+    router.push(`search/?word=${keyword}`);
     setSearchWord(keyword);
   };
 
@@ -155,7 +155,7 @@ export default function Search() {
           </section>
         </div>
       )}
-      {!!RecentWords && !page && (
+      {RecentWords && RecentWords.length > 0 && !page && (
         <div>
           <section className="mt-[38px]">
             <div className="flex justify-between">

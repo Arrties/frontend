@@ -11,7 +11,7 @@ const usePostArtwork = (setIsErrorModal) => {
     {
       useErrorBoundary: false,
       onSuccess: (data) => {
-        router.push({
+        router.replace({
           pathname: '/auction/view',
           query: { id: data.artWork.id },
         });

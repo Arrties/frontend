@@ -26,13 +26,13 @@ function Toast({ setToast, text }: ToastProps) {
   useEffect(() => {
     const timer = setTimeout(() => {
       setToast(false);
-    }, 1500);
+    }, 2000);
     return () => {
       clearTimeout(timer);
     };
   }, [setToast]);
   return (
-    <div className="animate-bounce4 fixed inset-x-0 top-8 m-auto flex h-[80px] w-[300px] flex-col items-start gap-2 rounded-2xl bg-[#F5F5F5] p-3 opacity-80">
+    <div className="fixed inset-x-0 top-8 m-auto flex h-[80px] w-[300px] animate-bounce4 flex-col items-start gap-2 rounded-2xl bg-[#F5F5F5] p-3 opacity-80">
       <div className="flex gap-2">
         <div className="flex h-[20px] w-[20px] items-center justify-center rounded bg-[#FC6554]">
           <Image
@@ -77,7 +77,15 @@ export default React.memo(function NoticeIcon({
 
   return (
     <NoticeIconTag {...rest}>
-      {toast && <Toast setToast={setToast} text="알림이 도착하였습니다.🔔" />}
+      {toast && (
+        <Toast
+          setToast={setToast}
+          text="알림이 도착하였습니다.🔔"
+          onClick={() => {
+            router.push('/notice');
+          }}
+        />
+      )}
       {isSearch ? (
         <Image
           alt="search"

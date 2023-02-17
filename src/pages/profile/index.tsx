@@ -127,7 +127,15 @@ export default function Profile() {
                   alt="user"
                   width={100}
                   height={100}
-                  className="m-auto h-[27px] rounded-full bg-[#EDEDED]"
+                  className="m-auto h-[27px] cursor-pointer rounded-full bg-[#EDEDED]"
+                  onClick={() => {
+                    router.push({
+                      pathname: '/profile/detail',
+                      query: {
+                        id: data?.id,
+                      },
+                    });
+                  }}
                 />
               )}
             </div>
@@ -231,8 +239,8 @@ export default function Profile() {
             </div>
           )}
         </section>
-        <DivisionBar className="fixed inset-x-0 m-auto -mt-5 max-w-[420px]" />
-        <section className="">
+        <DivisionBar className="absolute inset-x-0 m-auto -mt-5 max-w-[420px]" />
+        <section>
           {SettingLists.map((setting: SettingList) => (
             <SettingItem
               key={setting.id}
