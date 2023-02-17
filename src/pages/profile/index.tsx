@@ -127,7 +127,15 @@ export default function Profile() {
                   alt="user"
                   width={100}
                   height={100}
-                  className="m-auto h-[27px] rounded-full bg-[#EDEDED]"
+                  className="m-auto h-[27px] cursor-pointer rounded-full bg-[#EDEDED]"
+                  onClick={() => {
+                    router.push({
+                      pathname: '/profile/detail',
+                      query: {
+                        id: data?.id,
+                      },
+                    });
+                  }}
                 />
               )}
             </div>

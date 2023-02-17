@@ -138,6 +138,10 @@ export default function Edit() {
     } else {
       mutateArtist(formData);
     }
+    router.replace({
+      pathname: '/profile/detail',
+      query: { id: userInfo?.id },
+    });
   };
 
   if (isPatchUserLoading || isPatchArtistLoading) return <Loader />;
