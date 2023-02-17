@@ -7,6 +7,7 @@ import AuctionItem from '@components/home/AuctionItem';
 import Calendar from '@components/home/Calendar';
 import ExhibitionItem from '@components/home/ExhibitionItem';
 import FloatButton from '@components/home/FloatButton';
+import DivisionBar from '@components/common/DivisionBar';
 import ScheduleItem from '@components/home/ScheduleItem';
 import useGetCustomizedArtWork from '@hooks/queries/useGetCustomizedArtWork';
 import useGetProfile from '@hooks/queries/useGetProfile';
@@ -71,7 +72,8 @@ export default function Home() {
           }}
           right_message={<NoticeIcon />}
         />
-        <section>
+        <DivisionBar className="absolute inset-x-0 m-auto -mt-1 h-[1px] max-w-[420px] bg-[#FC6554]" />
+        <section className="mt-3">
           <div className="relative flex justify-between">
             {customizedArtwork?.artworks.length ? (
               <div>
@@ -97,7 +99,7 @@ export default function Home() {
                 </div>
               </div>
             ) : (
-              <div className="relative flex h-[120px] w-[500px] items-center ">
+              <div className="relative mt-2 flex h-[120px] w-[500px] items-center ">
                 <Image
                   alt="keyword"
                   src="/svg/icons/bg_home_banner.svg"

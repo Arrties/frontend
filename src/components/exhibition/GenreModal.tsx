@@ -54,7 +54,7 @@ export default function GenreModal({
         right_message="완료"
         handleRightButton={onCloseModal}
       />
-      <h1 className="mb-3 text-16 font-semibold">장르</h1>
+      <h1 className="mb-3 text-14 font-medium text-[#999999]">장르</h1>
       <div className="grid grid-cols-2 gap-3">
         {GENRELIST.map((genreList) => (
           <div
