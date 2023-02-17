@@ -17,7 +17,6 @@ import usePostArtwork from '@hooks/mutations/usePostArtwork';
 import Loader from '@components/common/Loader';
 import { makeBlob } from '@utils/makeBlob';
 import useGetProfile from '@hooks/queries/useGetProfile';
-import { today } from '@utils/today';
 import { dataURLtoFile } from '@utils/dataURLtoFile';
 import Guarantee from '@components/auction/Guarantee';
 
