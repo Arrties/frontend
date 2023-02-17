@@ -1,7 +1,6 @@
 import ErrorMessage from '@components/common/ErrorMessage';
 import Input from '@components/common/Input';
 import Layout from '@components/common/Layout';
-import Modal from '@components/common/Modal';
 import Navigate from '@components/common/Navigate';
 import Select from '@components/common/Select';
 import GenreModal from '@components/home/post/GenreModal';
@@ -19,7 +18,7 @@ import Loader from '@components/common/Loader';
 import { makeBlob } from '@utils/makeBlob';
 import useGetProfile from '@hooks/queries/useGetProfile';
 import { today } from '@utils/today';
-import { toBlob } from 'html-to-image';
+import { dataURLtoFile } from '@utils/dataURLtoFile';
 
 const ARTWORK_STATUS = [
   { value: '매우 좋음' },
@@ -60,16 +59,11 @@ export default function Post() {
   const [isGuaranteeModal, setIsGuaranteeModal] = useState<boolean>(false);
   const [isKeywordModal, setIsKeywordModal] = useState<boolean>(false);
   const [isGenreModal, setIsGenreModal] = useState<boolean>(false);
-  const [isModal, setIsModal] = useState<boolean>(false);
   const [signature, setSignature] = useState<string>('');
   const [keywordList, setKeywordList] = useState<string[]>([]);
   const [genre, setGenre] = useState<string>('');
   const [fileList, setFileList] = useState<File[]>([]);
-  const [responseData, setResponseData] = useState<{
-    artworkId: number;
-    turn: number;
-  }>({ artworkId: 0, turn: 0 });
-  const [isErrorModal, setIsErrorModal] = useState<boolean>(false);
+
   const { data: user } = useGetProfile();
 
   const router = useRouter();
@@ -91,10 +85,16 @@ export default function Post() {
     setValue,
     watch,
     handleSubmit,
+    setError,
+    clearErrors,
     formState: { errors },
-  } = useForm<Artwork>();
+  } = useForm<Artwork>({
+    mode: 'onTouched',
+  });
+  console.log(errors);
 
   const handleImage = (e) => {
+    clearErrors('image');
     const files = e.target.files;
     if (fileList?.length <= 5 && fileList?.length + files?.length <= 5) {
       const newFileList: any = [];
@@ -117,10 +117,10 @@ export default function Post() {
     }
   }, [keywordList, setValue, genre, signature]);
 
-  const { mutate, isLoading: isLoadingPost } = usePostArtwork(setIsErrorModal);
+  const { mutate, isLoading: isLoadingPost } = usePostArtwork();
   const guaranteeRef = useRef<HTMLDivElement>(null);
 
-  const onSubmit = async (form: Artwork) => {
+  const onSubmit = (form: Artwork) => {
     const {
       title,
       productionYear,
@@ -135,9 +135,16 @@ export default function Post() {
       status,
       statusDescription,
     } = form;
-    const formData = new FormData();
 
-    const guarantee = await toBlob(guaranteeRef.current as HTMLDivElement);
+    if (keywordList.length === 0) {
+      setError('keywords', {
+        type: 'required',
+        message: '키워드를 입력해주세요.',
+      });
+      return;
+    }
+
+    const formData = new FormData();
 
     formData.append('title', title);
     formData.append('productionYear', productionYear + '');
@@ -165,8 +172,9 @@ export default function Post() {
       formData.append('genre', genre);
     }
 
-    if (guarantee) {
-      formData.append('guaranteeImage', guarantee, 'image/png');
+    if (signature) {
+      const file = dataURLtoFile(signature, 'guaranteeImage');
+      formData.append('guaranteeImage', file);
     }
 
     mutate(formData);
@@ -203,27 +211,6 @@ export default function Post() {
   }
   return (
     <Layout>
-      <Modal
-        message={`${responseData?.turn}회 경매에 등록 완료되었습니다.
-마이페이지>판매활동>등록된 작품에서 작품내역을 확인해보세요.`}
-        isModal={isModal}
-        onCloseModal={() => {
-          router.replace(`/auction/view?id=${responseData.artworkId}`);
-        }}
-        onAccept={() => {
-          router.replace(`/auction/view?id=${responseData.artworkId}`);
-        }}
-      />
-      <Modal
-        message={`현재 예정된 중인 경매가 없습니다. 죄송합니다.`}
-        isModal={isErrorModal}
-        onCloseModal={() => {
-          setIsErrorModal(false);
-        }}
-        onAccept={() => {
-          setIsErrorModal(false);
-        }}
-      />
       <form className="w-full space-y-3" onSubmit={handleSubmit(onSubmit)}>
         <Navigate right_message="완료" />
         <div className="flex">
@@ -256,10 +243,17 @@ export default function Post() {
             type="file"
             id="fileImage"
             className="hidden"
-            {...register('image')}
+            {...register('image', {
+              required: true,
+            })}
             onChange={handleImage}
           />
         </div>
+        {errors.image && (
+          <ErrorMessage
+            message={'작품 이미지를 최소 한 장 이상 등록해주세요.'}
+          />
+        )}
         <div>
           <Input
             type="text"
@@ -285,6 +279,9 @@ export default function Post() {
               <KeywordBox text={name} key={name} focused />
             ))}
           </div>
+          {errors.keywords && (
+            <ErrorMessage message={errors.keywords.message} />
+          )}
         </div>
         <Input
           type="number"
