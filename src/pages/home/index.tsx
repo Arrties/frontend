@@ -54,6 +54,7 @@ export default function Home() {
   const { data: userInfo } = useGetProfile();
   const { data: auctionList } = useGetAuction() || {};
   const { data: pastAuctionList } = useGetPastAuction() || {};
+
   return (
     <>
       <Layout>
@@ -215,7 +216,13 @@ export default function Home() {
               )}
           </Swiper>
         </PastAuction>
-        {isUser ? <div className="h-16" /> : <FloatButton />}
+        {isUser ||
+        !auctionList?.filter((auction) => auction.status === 'scheduled')
+          .length ? (
+          <div className="h-16" />
+        ) : (
+          <FloatButton />
+        )}
       </Layout>
       <Tab />
     </>
