@@ -301,7 +301,7 @@ export default function View() {
 
           <article className="relative h-[457px] w-full">
             {artWork?.images && artWork.guaranteeImage && (
-              <div className="m-auto hidden min-w-[327px] flex-col items-center justify-center py-9">
+              <div className="m-auto  min-w-[327px] flex-col items-center justify-center py-9">
                 <div className="text-center text-16 font-semibold tracking-[0.3em]">
                   작 품 보 증 서
                 </div>
