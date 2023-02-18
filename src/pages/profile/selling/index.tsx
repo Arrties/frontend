@@ -8,7 +8,6 @@ import SellingItem from '@components/profile/selling/SellingItem';
 import { useRouter } from 'next/router';
 import None from '@components/common/None';
 import SellingModal from '@components/profile/selling/SellingModal';
-import artworkApi from '@apis/artwork/artworkApi';
 
 export default function Selling() {
   const router = useRouter();
@@ -16,6 +15,7 @@ export default function Selling() {
   const [thisId, setThisId] = useState<number>(0);
 
   const handleOption = (e) => {
+    console.log(1);
     e.stopPropagation();
     setThisId(e.target.id);
     setIsModal(true);
@@ -27,6 +27,7 @@ export default function Selling() {
   const {
     data: [registered, processing, sales_finished],
   } = useGetMyArtWork();
+
   return (
     <Layout>
       {isModal && (
@@ -59,12 +60,6 @@ export default function Selling() {
                   key={item.id}
                   sellingItem={item}
                   handleOption={handleOption}
-                  onClick={() => {
-                    router.push({
-                      pathname: '/auction/view',
-                      query: { id: item.id },
-                    });
-                  }}
                 />
               ))
             ) : (
@@ -80,12 +75,6 @@ export default function Selling() {
                   key={item.id}
                   sellingItem={item}
                   handleOption={handleOption}
-                  onClick={() => {
-                    router.push({
-                      pathname: '/auction/view',
-                      query: { id: item.id },
-                    });
-                  }}
                 />
               ))
             ) : (
@@ -101,12 +90,6 @@ export default function Selling() {
                   key={item.id}
                   sellingItem={item}
                   handleOption={handleOption}
-                  onClick={() => {
-                    router.push({
-                      pathname: '/auction/view',
-                      query: { id: item.id },
-                    });
-                  }}
                 />
               ))
             ) : (

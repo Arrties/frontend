@@ -20,6 +20,7 @@ import useGetProfile from '@hooks/queries/useGetProfile';
 import { dataURLtoFile } from '@utils/dataURLtoFile';
 import Guarantee from '@components/auction/Guarantee';
 import useGetEditForm from '@hooks/queries/artwork/useGetEditForm';
+import usePatchArtwork from '@hooks/mutations/usePatchArtwork';
 
 const ARTWORK_STATUS = [
   { value: '매우 좋음' },
@@ -58,6 +59,9 @@ const CANVAS_SIZE = [
 
 export default function Edit() {
   const router = useRouter();
+  const scrollRef: any = useRef();
+  const scrollToElement = () =>
+    scrollRef?.current?.scrollIntoView({ behavior: 'smooth' });
 
   const artWorkId = Number(router.query.id);
   const { data: editForm } = useGetEditForm(artWorkId);
@@ -66,11 +70,10 @@ export default function Edit() {
   const [isGuaranteeModal, setIsGuaranteeModal] = useState<boolean>(false);
   const [isKeywordModal, setIsKeywordModal] = useState<boolean>(false);
   const [isGenreModal, setIsGenreModal] = useState<boolean>(false);
-  const [signature, setSignature] = useState<string>(editForm?.guaranteeImage);
+  const [signature, setSignature] = useState<string>('');
   const [keywordList, setKeywordList] = useState<string[]>(editForm?.keywords);
   const [genre, setGenre] = useState<string>(editForm?.genre);
   const [fileList, setFileList] = useState([
-    { url: editForm?.mainImage },
     ...editForm?.images.map((image: string, idx: number) => {
       return {
         url: image,
@@ -103,6 +106,7 @@ export default function Edit() {
     setError,
     clearErrors,
     formState: { errors },
+    trigger,
   } = useForm<Artwork>({
     mode: 'onTouched',
     defaultValues: {
@@ -145,7 +149,7 @@ export default function Edit() {
     }
   }, [keywordList, setValue, genre, signature]);
 
-  const { mutate, isLoading: isLoadingPost } = usePostArtwork();
+  const { mutate, isLoading: isLoadingPost } = usePatchArtwork(artWorkId);
   const guaranteeRef = useRef<HTMLDivElement>(null);
 
   const onSubmit = (form: Artwork) => {
@@ -171,6 +175,7 @@ export default function Edit() {
       });
       return;
     }
+
     if (keywordList.length === 0) {
       setError('keywords', {
         type: 'required',
@@ -185,6 +190,7 @@ export default function Edit() {
       });
       return;
     }
+
     if (signature === '') {
       setError('guaranteeImage', {
         type: 'required',
@@ -216,13 +222,20 @@ export default function Edit() {
         formData.append('image', i);
       }
     }
-
+    if (!fileList.some((file) => !file.hasOwnProperty('url'))) {
+      formData.append('image', new File([''], ''));
+    }
+    if (!fileList.some((file) => file.hasOwnProperty('url'))) {
+      formData.append('prevImage', '');
+    }
     if (genre) {
       formData.append('genre', genre);
     }
-
     if (signature) {
-      const file = dataURLtoFile(signature, 'guaranteeImage');
+      let file;
+
+      file = dataURLtoFile(signature, 'guaranteeImage');
+
       formData.append('guaranteeImage', file);
     }
 
@@ -436,12 +449,11 @@ export default function Edit() {
               type="number"
               placeholder="10"
               unit="호"
-              register={register('size', {
-                validate: (value) =>
-                  CANVAS_SIZE.includes(value) || '호수를 확인해주세요.',
-              })}
+              register={register('size')}
             />
-            {errors.size && <ErrorMessage message={errors.size.message} />}
+            {!CANVAS_SIZE.includes(watch('size')) && (
+              <ErrorMessage message={'호수를 확인해주세요.'} />
+            )}
           </article>
         </div>
         <Input
@@ -501,6 +513,7 @@ export default function Edit() {
             </div>
           )}
         </div>
+        <input {...register('guaranteeImage')} className="h-0 w-0" />
         {errors.guaranteeImage && (
           <ErrorMessage message={errors.guaranteeImage.message} />
         )}
