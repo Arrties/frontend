@@ -10,6 +10,7 @@ import useDeletePrefer from '@hooks/mutations/useDeletePrefer';
 import { useCountDown } from '@hooks/useCountDown';
 import useGetProfile from '@hooks/queries/useGetProfile';
 import KeywordBox from '@components/common/KeywordBox';
+import Guarantee from '@components/auction/Guarantee';
 
 export default function View() {
   const router = useRouter();
@@ -72,7 +73,7 @@ export default function View() {
     <>
       <Layout>
         <div
-          className={`fixed inset-x-0 top-4 z-50 mx-auto flex h-16 w-full max-w-[420px] items-center justify-between px-5 ${
+          className={`fixed inset-x-0 top-0 z-50 mx-auto flex h-16 w-full max-w-[420px] items-center justify-between px-5 ${
             isCardOver && 'bg-white'
           }`}
         >
@@ -296,18 +297,19 @@ export default function View() {
               </div>
             ))}
           </article>
-
-          <article className="relative h-[457px] w-full">
-            {artWork?.guaranteeImage && (
-              <Image
-                alt="guarantee"
-                src={artWork?.guaranteeImage}
-                fill
-                className="object-contain"
-                priority
-              />
-            )}
-          </article>
+          {artWork && artist && (
+            <Guarantee
+              mainImage={artWork?.images[0]}
+              guaranteeImage={artWork?.guaranteeImage}
+              title={artWork?.title}
+              nickname={artist?.artistName}
+              productionYear={artWork?.productionYear}
+              genre={artWork?.genre}
+              width={artWork?.artWorkSize?.width}
+              length={artWork?.artWorkSize?.length}
+              height={artWork?.artWorkSize?.height}
+            />
+          )}
           <div className="h-[7rem]" />
         </section>
       </Layout>
