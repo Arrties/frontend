@@ -173,20 +173,21 @@ export default function Home() {
           )}
         </section>
         <section className="mb-12">
+          {!!auctionList &&
+            auctionList.reverse().map((auctionItem: AuctionList) => (
+              <div key={auctionItem?.id}>
+                <ScheduleItem auctionItem={auctionItem} />
+              </div>
+            ))}
           {!!pastAuctionList &&
             pastAuctionList
-              .slice(pastAuctionList.length - 5)
+              .slice(pastAuctionList.length - 3)
+              .reverse()
               .map((auctionItem: AuctionList) => (
                 <div key={auctionItem?.id}>
                   <ScheduleItem auctionItem={auctionItem} />
                 </div>
               ))}
-          {!!auctionList &&
-            auctionList.map((auctionItem: AuctionList) => (
-              <div key={auctionItem?.id}>
-                <ScheduleItem auctionItem={auctionItem} />
-              </div>
-            ))}
         </section>
         <PastAuction>
           <div className="mb-5 flex flex-col">
@@ -204,7 +205,7 @@ export default function Home() {
             className="h-[360px]"
           >
             {!!pastAuctionList &&
-              makeThreeEach(pastAuctionList)?.map(
+              makeThreeEach(pastAuctionList.reverse())?.map(
                 (auctionItem: AuctionList[], index: number) => (
                   <SwiperSlide key={'' + index}>
                     {auctionItem.map((auctionItem: AuctionList) => (
