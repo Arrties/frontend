@@ -42,21 +42,8 @@ export default function Edit() {
     setError,
     clearErrors,
     trigger,
-  } = useForm<Member>({
-    mode: 'onTouched',
-    defaultValues: {
-      nickname: data?.nickname,
-      email: data?.email,
-      education: data?.education,
-      history: data?.history,
-      description: data?.description,
-      instagram: data?.instagram,
-      behance: data?.behance,
-    },
-  });
+  } = useForm<Member>({ mode: 'onTouched' });
   const nickname = watch('nickname');
-
-  console.log(data);
 
   const [enabled, setEnabled] = useState<DuplicateCheck>({
     userId: '',
@@ -106,11 +93,17 @@ export default function Edit() {
   }, [profile]);
 
   const onSubmit = async (form: Member) => {
-    const { nickname, instagram, behance, education, history, description } =
-      form;
-    console.log(form);
-    if (!nickname) return;
-    if (!userInfo) return;
+    const {
+      nickname,
+      instagram,
+      behance,
+      education,
+      history,
+      description,
+      telephone,
+    } = form;
+    if (!nickname || !userInfo || !telephone) return;
+
     if (!isValidate.nickname && userInfo.nickname !== form.nickname) {
       setError('nickname', {
         type: 'need nickname duplicate',
@@ -123,7 +116,7 @@ export default function Edit() {
 
     formData.append('nickname', nickname);
     formData.append('email', data?.email!);
-    formData.append('telephone', data?.telephone!);
+    formData.append('telephone', telephone);
 
     if (profile && profile?.length) {
       //유저가 프로필을 변환하였다면
@@ -240,6 +233,7 @@ export default function Edit() {
           type="text"
           label="닉네임"
           placeholder="닉네임을 입력해 주세요."
+          defaultValue={userInfo?.nickname}
           $error={!!errors.nickname}
           register={register('nickname', {
             required: true,
@@ -265,11 +259,27 @@ export default function Edit() {
 
       <Input
         type="text"
+        label="휴대폰 번호"
+        placeholder="-를 제외하고 입력해주세요."
+        $error={!!errors.telephone}
+        register={register('telephone', {
+          required: true,
+          pattern: {
+            value: /^01([0|1|6|7|8|9])[0-9]{4}[0-9]{4}$/g,
+            message: '휴대폰번호를 정확히 입력해주세요.',
+          },
+        })}
+        defaultValue={data?.telephone}
+      />
+
+      <Input
+        type="text"
         label="이메일"
         disabled
+        defaultValue={userInfo?.email}
         placeholder="이메일을 입력해 주세요."
         $error={!!errors.email}
-        className=" text-[#999999]"
+        className="disabled text-[#999999]"
       />
 
       {!isUser && (
@@ -277,6 +287,7 @@ export default function Edit() {
           <Input
             type="text"
             label="학력"
+            defaultValue={userInfo?.education}
             placeholder="학교와 학위, 전공 등을 입력해 주세요."
             $error={!!errors.education}
             register={register('education')}
@@ -287,6 +298,7 @@ export default function Edit() {
           <Input
             type="textarea"
             label="이력"
+            defaultValue={userInfo?.history}
             placeholder="이력을 작성해 주세요."
             $error={!!errors.history}
             register={register('history')}
@@ -296,6 +308,7 @@ export default function Edit() {
             type="textarea"
             label="작가소개"
             placeholder="소개를 작성해 주세요."
+            defaultValue={userInfo?.description}
             $error={!!errors.description}
             register={register('description')}
           />
