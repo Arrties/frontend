@@ -9,6 +9,16 @@ export class ArtworkApi {
     });
     return data;
   }
+
+  async deleteArtwork(artworkId: number) {
+    await instance.delete(`/art-works/${artworkId}`);
+  }
+
+  async getEditForm(artworkId: number) {
+    const { data } = await instance.get(`/art-works/edit/${artworkId}`);
+    return data;
+  }
+
   async getDetail(artWorkId: number): Promise<ArtworkDetail> {
     const { data } = await instance.get(`art-works/${artWorkId}`);
     return data;
