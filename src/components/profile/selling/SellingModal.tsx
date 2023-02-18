@@ -39,6 +39,7 @@ export default function SellingModal({
       router.push({ pathname: '/profile/selling/edit', query: { id: thisId } });
     } else {
       artworkApi.deleteArtwork(thisId);
+      router.replace('/profile/selling');
     }
   };
 
