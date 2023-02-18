@@ -53,15 +53,16 @@ export default function ExhibitionArts() {
     }
   };
 
-  if (isGenreModal)
+  if (isGenreModal) {
     return (
       <GenreModal
         genre={genre}
         setGenre={setGenre}
         onCloseModal={() => setIsGenreModal(false)}
+        isEmpty={artLists && artLists.length === 0}
       />
     );
-
+  }
   return (
     <Layout>
       {isExpansion ? (
