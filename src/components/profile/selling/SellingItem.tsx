@@ -23,7 +23,10 @@ export default function SellingItem({
       <SellingItemTag
         {...rest}
         onClick={() => {
-          router.push(`/auction/view?id=${sellingItem?.id}`);
+          router.push({
+            pathname: '/auction/view',
+            query: { id: sellingItem.id },
+          });
         }}
       >
         <article className="relative h-[100px] w-[82px] overflow-hidden rounded">
@@ -55,7 +58,15 @@ export default function SellingItem({
 
   if (sellingItem.auctionStatus === 'processing')
     return (
-      <SellingItemTag {...rest}>
+      <SellingItemTag
+        {...rest}
+        onClick={() => {
+          router.push({
+            pathname: '/auction/view',
+            query: { id: sellingItem.id },
+          });
+        }}
+      >
         <article className="relative h-[100px] w-[82px] overflow-hidden rounded">
           <Image
             alt="example"
@@ -86,7 +97,15 @@ export default function SellingItem({
     );
   if (sellingItem.auctionStatus === 'sales_success')
     return (
-      <SellingItemTag {...rest}>
+      <SellingItemTag
+        {...rest}
+        onClick={() => {
+          router.push({
+            pathname: '/auction/view',
+            query: { id: sellingItem.id },
+          });
+        }}
+      >
         <article className="relative h-[100px] w-[82px] overflow-hidden rounded">
           <Image
             alt="example"
@@ -118,7 +137,15 @@ export default function SellingItem({
 
   if (sellingItem.auctionStatus === 'sales_failed')
     return (
-      <SellingItemTag {...rest}>
+      <SellingItemTag
+        {...rest}
+        onClick={() => {
+          router.push({
+            pathname: '/auction/view',
+            query: { id: sellingItem.id },
+          });
+        }}
+      >
         <article className="relative h-[100px] w-[82px] overflow-hidden rounded">
           <Image
             alt="example"
