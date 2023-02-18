@@ -91,7 +91,6 @@ export default function Post() {
   } = useForm<Artwork>({
     mode: 'onTouched',
   });
-  console.log(errors);
 
   const handleImage = (e) => {
     clearErrors('image');
