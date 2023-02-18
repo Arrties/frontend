@@ -44,8 +44,8 @@ export default function PastAuctionList({
               auctionDateList.map((it, idx) => (
                 <tr key={idx}>
                   <td>{it.turn}</td>
-                  <td>{it.startDate.format('YYYY.MM.DD.hh:mm')}</td>
-                  <td>{it.endDate.format('YYYY.MM.DD.hh:mm')}</td>
+                  <td>{it.startDate.format('MM/DD H시m분')}</td>
+                  <td>{it.endDate.format('MM/DD H시m분')}</td>
                 </tr>
               ))}
           </tbody>
