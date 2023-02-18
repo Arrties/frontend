@@ -42,8 +42,21 @@ export default function Edit() {
     setError,
     clearErrors,
     trigger,
-  } = useForm<Member>({ mode: 'onTouched' });
+  } = useForm<Member>({
+    mode: 'onTouched',
+    defaultValues: {
+      nickname: data?.nickname,
+      email: data?.email,
+      education: data?.education,
+      history: data?.history,
+      description: data?.description,
+      instagram: data?.instagram,
+      behance: data?.behance,
+    },
+  });
   const nickname = watch('nickname');
+
+  console.log(data);
 
   const [enabled, setEnabled] = useState<DuplicateCheck>({
     userId: '',
@@ -227,7 +240,6 @@ export default function Edit() {
           type="text"
           label="닉네임"
           placeholder="닉네임을 입력해 주세요."
-          defaultValue={userInfo?.nickname}
           $error={!!errors.nickname}
           register={register('nickname', {
             required: true,
@@ -255,10 +267,9 @@ export default function Edit() {
         type="text"
         label="이메일"
         disabled
-        defaultValue={userInfo?.email}
         placeholder="이메일을 입력해 주세요."
         $error={!!errors.email}
-        className="disabled text-[#999999]"
+        className=" text-[#999999]"
       />
 
       {!isUser && (
@@ -266,7 +277,6 @@ export default function Edit() {
           <Input
             type="text"
             label="학력"
-            defaultValue={userInfo?.education}
             placeholder="학교와 학위, 전공 등을 입력해 주세요."
             $error={!!errors.education}
             register={register('education')}
@@ -277,7 +287,6 @@ export default function Edit() {
           <Input
             type="textarea"
             label="이력"
-            defaultValue={userInfo?.history}
             placeholder="이력을 작성해 주세요."
             $error={!!errors.history}
             register={register('history')}
@@ -287,7 +296,6 @@ export default function Edit() {
             type="textarea"
             label="작가소개"
             placeholder="소개를 작성해 주세요."
-            defaultValue={userInfo?.description}
             $error={!!errors.description}
             register={register('description')}
           />
