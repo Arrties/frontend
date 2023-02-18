@@ -1,5 +1,5 @@
-import React from 'react'
-import tw from 'tailwind-styled-components'
+import React from 'react';
+import tw from 'tailwind-styled-components';
 
 import type { UseFormRegisterReturn } from 'react-hook-form';
 interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
@@ -29,6 +29,11 @@ w-full h-[52px] placeholder-[#999999] text-[13px] rounded-[4px] ${(p) =>
   p.$error ? 'border-[#FF3120]' : 'border-[#D8D8D8]'} ${(p) =>
   p.$unit && 'pr-10'} appearance-none
   `;
+const TextAreaTag = tw.textarea<InputProps>`
+w-full h-[52px] placeholder-[#999999] text-[13px] rounded-[4px] ${(p) =>
+  p.$error ? 'border-[#FF3120]' : 'border-[#D8D8D8]'} ${(p) =>
+  p.$unit && 'pr-10'} appearance-none flex items-center min-h-[100px]
+  `;
 export default function Input({
   type = 'text',
   label,
@@ -37,6 +42,21 @@ export default function Input({
   unit,
   ...rest
 }: InputProps) {
+  if (type === 'textarea') {
+    return (
+      <InputBox className="my-1">
+        <Label>{label}</Label>
+        <TextAreaTag
+          type={type}
+          placeholder={placeholder}
+          $unit={unit}
+          {...register}
+          {...rest}
+        />
+        {unit && <span className="absolute right-4 bottom-4">{unit}</span>}
+      </InputBox>
+    );
+  }
   return (
     <InputBox className="my-1">
       <Label>{label}</Label>

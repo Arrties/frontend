@@ -275,7 +275,7 @@ export default function Edit() {
             <ErrorMessage message={errors.education.message} />
           )}
           <Input
-            type="text"
+            type="textarea"
             label="이력"
             defaultValue={userInfo?.history}
             placeholder="이력을 작성해 주세요."
@@ -284,7 +284,7 @@ export default function Edit() {
           />
           {errors.history && <ErrorMessage message={errors.history.message} />}
           <Input
-            type="text"
+            type="textarea"
             label="작가소개"
             placeholder="소개를 작성해 주세요."
             defaultValue={userInfo?.description}
