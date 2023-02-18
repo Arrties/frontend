@@ -7,35 +7,37 @@ import useGetMyArtWork from '@hooks/queries/artwork/useGetMyArtWork';
 import SellingItem from '@components/profile/selling/SellingItem';
 import { useRouter } from 'next/router';
 import None from '@components/common/None';
+import SellingModal from '@components/profile/selling/SellingModal';
+import artworkApi from '@apis/artwork/artworkApi';
 
 export default function Selling() {
   const router = useRouter();
   const [isModal, setIsModal] = useState<boolean>(false);
-  const handleOption = () => {
+  const [thisId, setThisId] = useState<number>(0);
+
+  const handleOption = (e) => {
+    e.stopPropagation();
+    setThisId(e.target.id);
     setIsModal(true);
   };
   const handleCloseModal = () => {
     setIsModal(false);
   };
-  const handleAccept = () => {
-    setIsModal(true);
-  };
+
   const {
     data: [registered, processing, sales_finished],
   } = useGetMyArtWork();
-  console.log(registered, processing, sales_finished);
   return (
     <Layout>
-      <Modal
-        isModal={isModal}
-        // isMain
-        onCloseModal={handleCloseModal}
-        // message="경매 중으로 넘어간 작품은 수정/삭제가 불가능 합니다."
-        message="아직 준비 중인 서비스입니다."
-        // denyMessage="수정"
-        className="top-5"
-        onAccept={handleAccept}
-      />
+      {isModal && (
+        <SellingModal
+          onCloseModal={handleCloseModal}
+          message="경매 중으로 넘어간 작품은 수정/삭제가 불가능 합니다."
+          className="top-5"
+          thisId={thisId}
+        />
+      )}
+
       <Navigate isRightButton={false} message="판매활동" />
       <Tab.Group>
         <Tab.List className="w-full text-14 ">
