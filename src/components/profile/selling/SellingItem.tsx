@@ -5,7 +5,7 @@ import tw from 'tailwind-styled-components';
 interface SellingItemProps {
   sellingItem: MyArtwork;
   [key: string]: any;
-  handleOption?: () => void;
+  handleOption?: (e) => void;
 }
 
 const SellingItemTag = tw.section<SellingItemProps>`
@@ -48,6 +48,7 @@ export default function SellingItem({
           height="18"
           className="absolute right-0 top-0 cursor-pointer"
           onClick={handleOption}
+          id={sellingItem.id + ''}
         />
       </SellingItemTag>
     );
