@@ -1,21 +1,17 @@
 import Layout from '@components/common/Layout';
-import Modal from '@components/common/Modal';
 import Navigate from '@components/common/Navigate';
 import React, { useState } from 'react';
 import { Tab } from '@headlessui/react';
 import useGetMyArtWork from '@hooks/queries/artwork/useGetMyArtWork';
 import SellingItem from '@components/profile/selling/SellingItem';
-import { useRouter } from 'next/router';
 import None from '@components/common/None';
 import SellingModal from '@components/profile/selling/SellingModal';
 
 export default function Selling() {
-  const router = useRouter();
   const [isModal, setIsModal] = useState<boolean>(false);
   const [thisId, setThisId] = useState<number>(0);
 
   const handleOption = (e) => {
-    console.log(1);
     e.stopPropagation();
     setThisId(e.target.id);
     setIsModal(true);
