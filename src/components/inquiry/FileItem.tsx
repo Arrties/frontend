@@ -5,7 +5,7 @@ import { makeBlob } from '@utils/makeBlob';
 interface FileItemForm {
   file: any;
   key: string;
-  idx: number;
+  idx?: number;
   handler: (name: string, size: number) => void;
 }
 
