@@ -1,19 +1,20 @@
-import Image from 'next/image'
-import React from 'react'
-import { makeBlob } from '@utils/makeBlob'
+import Image from 'next/image';
+import React from 'react';
+import { makeBlob } from '@utils/makeBlob';
 
 interface FileItemForm {
   file: any;
   key: string;
+  idx: number;
   handler: (name: string, size: number) => void;
 }
 
-export default function FileItem({ file, handler }: FileItemForm) {
+export default function FileItem({ file, handler, idx }: FileItemForm) {
   return (
-    <div className="w-[60px] h-[60px] border-[1px] border-[#DBDBDB] rounded ml-3 relative mb-2">
+    <div className="relative ml-3 mb-2 h-[60px] w-[60px] rounded border-[1px] border-[#DBDBDB]">
       <div
-        onClick={() => handler(file.name, file.size)}
-        className="w-[14px] h-[14px] bg-[#999999] rounded-full flex justify-center items-center absolute right-[-5px] top-[-5px] cursor-pointer"
+        onClick={() => handler(file.name || file.idx, file.size)}
+        className="absolute right-[-5px] top-[-5px] flex h-[14px] w-[14px] cursor-pointer items-center justify-center rounded-full bg-[#999999]"
       >
         <Image
           src="/svg/icons/icon_close_white.svg"
@@ -23,11 +24,11 @@ export default function FileItem({ file, handler }: FileItemForm) {
         />
       </div>
       <Image
-        src={makeBlob(file)}
-        alt={file.name}
+        src={file.hasOwnProperty('url') ? file.url : makeBlob(file)}
+        alt={file.name || idx}
         width={20}
         height={20}
-        className="w-full h-full"
+        className="h-full w-full"
       />
     </div>
   );

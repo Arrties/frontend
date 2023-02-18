@@ -1,7 +1,6 @@
 import ErrorMessage from '@components/common/ErrorMessage';
 import Input from '@components/common/Input';
 import Layout from '@components/common/Layout';
-import Modal from '@components/common/Modal';
 import Navigate from '@components/common/Navigate';
 import Select from '@components/common/Select';
 import GenreModal from '@components/home/post/GenreModal';
@@ -11,15 +10,15 @@ import FileItem from '@components/inquiry/FileItem';
 import Image from 'next/image';
 import React, { useEffect, useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { useRouter } from 'next/router';
 import { getToken } from '@utils/localStorage/token';
 import KeywordBox from '@components/common/KeywordBox';
 import usePostArtwork from '@hooks/mutations/usePostArtwork';
 import Loader from '@components/common/Loader';
 import { makeBlob } from '@utils/makeBlob';
 import useGetProfile from '@hooks/queries/useGetProfile';
-import { today } from '@utils/today';
-import { toBlob } from 'html-to-image';
-import { useRouter } from 'next/router';
+import { dataURLtoFile } from '@utils/dataURLtoFile';
+import Guarantee from '@components/auction/Guarantee';
 import useGetEditForm from '@hooks/queries/artwork/useGetEditForm';
 
 const ARTWORK_STATUS = [
@@ -57,35 +56,40 @@ const CANVAS_SIZE = [
   '500',
 ];
 
-export default function ArtworkEdit() {
+export default function Edit() {
   const router = useRouter();
-  const artWorkId = Number(router.query.id);
 
-  const { data: user } = useGetProfile();
+  const artWorkId = Number(router.query.id);
   const { data: editForm } = useGetEditForm(artWorkId);
+  const { data: user } = useGetProfile();
+
   const [isGuaranteeModal, setIsGuaranteeModal] = useState<boolean>(false);
   const [isKeywordModal, setIsKeywordModal] = useState<boolean>(false);
   const [isGenreModal, setIsGenreModal] = useState<boolean>(false);
-  const [isModal, setIsModal] = useState<boolean>(false);
   const [signature, setSignature] = useState<string>(editForm?.guaranteeImage);
   const [keywordList, setKeywordList] = useState<string[]>(editForm?.keywords);
   const [genre, setGenre] = useState<string>(editForm?.genre);
-  const [fileList, setFileList] = useState<File[]>([]);
-  const [responseData, setResponseData] = useState<{
-    artworkId: number;
-    turn: number;
-  }>({ artworkId: 0, turn: 0 });
-  const [isErrorModal, setIsErrorModal] = useState<boolean>(false);
-
-  console.log(editForm);
+  const [fileList, setFileList] = useState([
+    { url: editForm?.mainImage },
+    ...editForm?.images.map((image: string, idx: number) => {
+      return {
+        url: image,
+        idx: idx,
+      };
+    }),
+  ]);
 
   if (getToken().roles !== 'ROLE_ARTIST') {
     router.push('/home');
   }
 
-  const handleRemoveFile = (targetName: string): void => {
+  const handleRemoveFile = (targetIdx: string): void => {
     const newFileList = fileList.filter((file) => {
-      return file.name !== targetName;
+      if (file.hasOwnProperty('url')) {
+        return file.idx !== targetIdx;
+      } else {
+        return file.name !== targetIdx;
+      }
     });
     setFileList(newFileList);
     setValue('image', newFileList as any);
@@ -96,8 +100,11 @@ export default function ArtworkEdit() {
     setValue,
     watch,
     handleSubmit,
+    setError,
+    clearErrors,
     formState: { errors },
   } = useForm<Artwork>({
+    mode: 'onTouched',
     defaultValues: {
       title: editForm?.title,
       productionYear: editForm?.productionYear,
@@ -115,6 +122,7 @@ export default function ArtworkEdit() {
   });
 
   const handleImage = (e) => {
+    clearErrors('image');
     const files = e.target.files;
     if (fileList?.length <= 5 && fileList?.length + files?.length <= 5) {
       const newFileList: any = [];
@@ -137,10 +145,10 @@ export default function ArtworkEdit() {
     }
   }, [keywordList, setValue, genre, signature]);
 
-  const { mutate, isLoading: isLoadingPost } = usePostArtwork(setIsErrorModal);
+  const { mutate, isLoading: isLoadingPost } = usePostArtwork();
   const guaranteeRef = useRef<HTMLDivElement>(null);
 
-  const onSubmit = async (form: Artwork) => {
+  const onSubmit = (form: Artwork) => {
     const {
       title,
       productionYear,
@@ -155,9 +163,37 @@ export default function ArtworkEdit() {
       status,
       statusDescription,
     } = form;
-    const formData = new FormData();
 
-    const guarantee = await toBlob(guaranteeRef.current as HTMLDivElement);
+    if (fileList.length === 0) {
+      setError('image', {
+        type: 'required',
+        message: '작품 사진을 최소 한 장 이상 선택해주세요.',
+      });
+      return;
+    }
+    if (keywordList.length === 0) {
+      setError('keywords', {
+        type: 'required',
+        message: '태그를 최소 한 개 이상 선택해주세요.',
+      });
+      return;
+    }
+    if (genre === '') {
+      setError('genre', {
+        type: 'required',
+        message: '장르를 선택해주세요.',
+      });
+      return;
+    }
+    if (signature === '') {
+      setError('guaranteeImage', {
+        type: 'required',
+        message: '작가 서명을 입력해주세요.',
+      });
+      return;
+    }
+
+    const formData = new FormData();
 
     formData.append('title', title);
     formData.append('productionYear', productionYear + '');
@@ -173,10 +209,10 @@ export default function ArtworkEdit() {
     formData.append('statusDescription', statusDescription);
     formData.append('keywords', keywordList + '');
 
-    if (fileList.length == 1) {
-      formData.append('image', fileList[0]);
-    } else {
-      for (const i of fileList) {
+    for (const i of fileList) {
+      if (i.hasOwnProperty('url')) {
+        formData.append('prevImage', i.url);
+      } else {
         formData.append('image', i);
       }
     }
@@ -185,8 +221,9 @@ export default function ArtworkEdit() {
       formData.append('genre', genre);
     }
 
-    if (guarantee) {
-      formData.append('guaranteeImage', guarantee, 'image/png');
+    if (signature) {
+      const file = dataURLtoFile(signature, 'guaranteeImage');
+      formData.append('guaranteeImage', file);
     }
 
     mutate(formData);
@@ -223,27 +260,6 @@ export default function ArtworkEdit() {
   }
   return (
     <Layout>
-      <Modal
-        message={`${responseData?.turn}회 경매에 등록 완료되었습니다.
-마이페이지>판매활동>등록된 작품에서 작품내역을 확인해보세요.`}
-        isModal={isModal}
-        onCloseModal={() => {
-          router.replace(`/auction/view?id=${responseData.artworkId}`);
-        }}
-        onAccept={() => {
-          router.replace(`/auction/view?id=${responseData.artworkId}`);
-        }}
-      />
-      <Modal
-        message={`현재 예정된 중인 경매가 없습니다. 죄송합니다.`}
-        isModal={isErrorModal}
-        onCloseModal={() => {
-          setIsErrorModal(false);
-        }}
-        onAccept={() => {
-          setIsErrorModal(false);
-        }}
-      />
       <form className="w-full space-y-3" onSubmit={handleSubmit(onSubmit)}>
         <Navigate right_message="완료" />
         <div className="flex">
@@ -267,6 +283,7 @@ export default function ArtworkEdit() {
                   handler={handleRemoveFile}
                   key={'' + idx}
                   file={file}
+                  idx={idx}
                 />
               ))}
             </div>
@@ -276,10 +293,15 @@ export default function ArtworkEdit() {
             type="file"
             id="fileImage"
             className="hidden"
-            {...register('image')}
             onChange={handleImage}
           />
         </div>
+        {errors.image && (
+          <ErrorMessage
+            className="mt-2"
+            message={'작품 이미지를 최소 한 장 이상 등록해주세요.'}
+          />
+        )}
         <div>
           <Input
             type="text"
@@ -287,7 +309,13 @@ export default function ArtworkEdit() {
             placeholder="작품명을 입력해주세요"
             register={register('title', { required: true })}
           />
-          <button onClick={() => setIsKeywordModal(true)} className="relative">
+          <button
+            onClick={() => {
+              clearErrors('keywords');
+              setIsKeywordModal(true);
+            }}
+            className="relative"
+          >
             <div className="flex h-[38px] w-[92px] items-center rounded-[4px] border border-[#D8D8D8] pl-3 text-[13px] text-[#999999]">
               태그추가
             </div>
@@ -305,14 +333,24 @@ export default function ArtworkEdit() {
               <KeywordBox text={name} key={name} focused />
             ))}
           </div>
+          {errors.keywords && (
+            <ErrorMessage message={errors.keywords.message} />
+          )}
         </div>
         <Input
           type="number"
           label="제작연도"
           min={2010}
           placeholder="숫자만 입력해주세요. ex)2022"
-          register={register('productionYear', { required: true })}
+          register={register('productionYear', {
+            required: true,
+            min: 2010,
+            max: 2023,
+          })}
         />
+        {errors.productionYear && (
+          <ErrorMessage message="제작년도를 확인해주세요." />
+        )}
         <div>
           <div className="flex justify-between">
             <label htmlFor="description" className="text-14 leading-8">
@@ -343,7 +381,12 @@ export default function ArtworkEdit() {
           placeholder="사용한 재료를 입력해주세요."
           register={register('material', { required: true })}
         />
-        <div onClick={() => setIsGenreModal(true)}>
+        <div
+          onClick={() => {
+            clearErrors('genre');
+            setIsGenreModal(true);
+          }}
+        >
           <label className="text-14 leading-8">장르</label>
           <div
             className={`flex h-[52px] w-full cursor-pointer items-center rounded-[4px] border border-[#D8D8D8] pl-3 text-[13px] ${
@@ -353,6 +396,7 @@ export default function ArtworkEdit() {
             {genre ? genre : '선택하기'}
           </div>
         </div>
+        {errors.genre && <ErrorMessage message={errors.genre.message} />}
         <Select
           name="frame"
           setValue={setValue}
@@ -422,7 +466,10 @@ export default function ArtworkEdit() {
         />
         <div
           className="w-full cursor-pointer"
-          onClick={() => setIsGuaranteeModal(true)}
+          onClick={() => {
+            clearErrors('guaranteeImage');
+            setIsGuaranteeModal(true);
+          }}
         >
           <label htmlFor="statusDetail" className="text-14 leading-8">
             작품 보증서
@@ -454,6 +501,9 @@ export default function ArtworkEdit() {
             </div>
           )}
         </div>
+        {errors.guaranteeImage && (
+          <ErrorMessage message={errors.guaranteeImage.message} />
+        )}
         {user &&
           watch('title') &&
           watch('productionYear') &&
@@ -462,75 +512,21 @@ export default function ArtworkEdit() {
           watch('height') &&
           watch('genre') &&
           signature && (
-            <div
-              ref={guaranteeRef}
-              className="m-auto min-w-[327px] flex-col items-center justify-center py-9"
-            >
-              <div className="text-center text-16 font-semibold tracking-[0.3em]">
-                작 품 보 증 서
-              </div>
-              <p className="text-center text-[8px] font-light tracking-[-0.05em] text-[#A5A5A5]">
-                CERTIFICATE OF AUTHENTICITY
-              </p>
-              <div className="relative mx-auto mt-7 h-[74px] w-[116px]">
-                <Image
-                  src={makeBlob(fileList[0])}
-                  fill
-                  className="object-cover"
-                  alt="artwork"
-                />
-              </div>
-              <div className="mt-3 flex justify-center text-11 leading-5">
-                <div className="flex-col font-semibold">
-                  <p>작가</p>
-                  <p>제목</p>
-                  <p>제작년도</p>
-                  <p>작품크기</p>
-                  <p>제작기법</p>
-                </div>
-                <div className="ml-12 flex-col">
-                  <p>{user?.nickname}</p>
-                  <p>{watch('title')}</p>
-                  <p>{watch('productionYear')}</p>
-                  <p>{`${watch('width')}x${watch('length')}x${watch(
-                    'height',
-                  )}cm`}</p>
-                  <p>{watch('genre')}</p>
-                </div>
-              </div>
-              <div className="mt-4 flex-col">
-                <div className="flex items-center justify-center">
-                  <Image src={signature} width={50} height={50} alt="artwork" />
-                </div>
-                <div className="mt-2 flex-col items-center justify-center">
-                  <div className="mx-auto w-[70px] border-t border-t-black pb-[3px]" />
-                  <div className="text-center text-[8px]  text-[#A5A5A5]">
-                    Artist Signature
-                  </div>
-                </div>
-              </div>
-              <ul className="mt-3 w-full list-none text-center text-[8px]">
-                <li className="w-full  text-black  before:mr-2  before:content-['\2022']">
-                  본 작품은 위에 서명한 작가의 작품임을 보증합니다.
-                </li>
-                <li className="w-full text-black  before:mr-2  before:content-['\2022']">
-                  본 작품은 일체의 모작, 위작이 아님을 보증합니다.
-                </li>
-                <li className="w-full text-black  before:mr-2  before:content-['\2022']">
-                  본 보증서는 작품 보증 이외 환불, 교환 등의 목적으로 사용이
-                  불가합니다.
-                </li>
-              </ul>
-              <p className="my-3 text-center text-[8px]">{today()}</p>
-              <div className="flex items-center justify-center text-brand">
-                <Image
-                  src="/svg/post/logo_small.svg"
-                  width={60}
-                  height={10}
-                  alt="logo"
-                />
-              </div>
-            </div>
+            <Guarantee
+              nickname={user.nickname}
+              title={watch('title')}
+              productionYear={watch('productionYear')}
+              width={watch('width')}
+              length={watch('length')}
+              height={watch('height')}
+              genre={watch('genre')}
+              guaranteeImage={signature}
+              mainImage={
+                fileList[0] && fileList[0].hasOwnProperty('url')
+                  ? fileList[0]?.url
+                  : fileList[0]
+              }
+            />
           )}
 
         <div className="relative h-[336px]">
