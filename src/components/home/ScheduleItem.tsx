@@ -37,8 +37,17 @@ export default React.memo(function ScheduleItem({
   auctionItem,
 }: ScheduleItemForm) {
   const router = useRouter();
-  const startDate: string = auctionItem?.startDate.format('YYYY.MM.DD');
-  const endDate: string = auctionItem?.endDate.format('YYYY.MM.DD');
+
+  let startDate: string = '';
+  let endDate: string = '';
+
+  if (auctionItem.status === 'terminated') {
+    startDate = auctionItem?.startDate.format('MM.DD');
+    endDate = auctionItem?.endDate.format('MM.DD');
+  } else {
+    startDate = auctionItem?.startDate.format('MM.DD hh시 mm분');
+    endDate = auctionItem?.endDate.format('MM.DD hh시 mm분');
+  }
 
   return (
     <div className="mt-5 flex justify-between ">
