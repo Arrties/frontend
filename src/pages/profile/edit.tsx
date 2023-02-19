@@ -166,7 +166,7 @@ export default function Edit() {
         handleLeftButton={handleLeftButton}
         handleRightButton={handleSubmit(onSubmit)}
       />
-      <label className="flex h-[150px] justify-center" htmlFor="image">
+      <label className="flex h-[120px] justify-center" htmlFor="image">
         {userInfo?.image ? (
           <div className="relative flex h-[99px] w-[99px] cursor-pointer items-center justify-center rounded-full bg-[#FFFFFF]            ">
             <Image
