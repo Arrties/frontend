@@ -1,5 +1,6 @@
 import Layout from '@components/common/Layout';
 import Navigate from '@components/common/Navigate';
+import None from '@components/common/None';
 import AuctionItem from '@components/exhibition/AuctionItem';
 import { useGetExhibition } from '@hooks/queries/useGetExhibition';
 import Image from 'next/image';
@@ -16,17 +17,7 @@ export default function Exhibition() {
             <AuctionItem key={idx} auctionList={auction} />
           ))
         ) : (
-          <div className="mt-[100%] flex flex-col items-center justify-center">
-            <Image
-              alt="auction"
-              src="/svg/icons/Tab/icon_exhibition.svg"
-              width="54"
-              height="54"
-            />
-            <p className="mt-3 text-16 font-medium text-[#999999]">
-              아직 진행중인 전시회가 없어요
-            </p>
-          </div>
+          <None path="exhibition" message="아직 진행중인 경매가 없어요" />
         )}
       </div>
     </Layout>

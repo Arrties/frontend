@@ -31,7 +31,6 @@ export default function Chatroom({ chatRoom }: ChatRoomProps) {
     });
   };
   const router = useRouter();
-  console.log(chatRoom?.lastMessage?.sendDate);
   return (
     <section
       className="relative flex h-[64px] cursor-pointer items-center border-b p-5 first:border-t"

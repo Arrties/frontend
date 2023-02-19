@@ -9,6 +9,7 @@ import Image from 'next/image';
 import React, { useEffect, useState } from 'react';
 import tw from 'tailwind-styled-components';
 import { useRouter } from 'next/router';
+import None from '@components/common/None';
 
 const ArtworkList = tw.div<defaultProps>`
   mb-32
@@ -47,17 +48,7 @@ export default function Auction() {
         />
         <div className="top-100px absolute inset-x-0 mx-auto  max-w-[420px] border-b border-brand" />
         {error && error.code === 'NOT_FOUND_AUCTION_PROCESSING' ? (
-          <div className="mt-[100%] flex flex-col items-center justify-center">
-            <Image
-              alt="auction"
-              src="/svg/icons/auction/icon_auction_gray.svg"
-              width="54"
-              height="54"
-            />
-            <p className="mt-3 text-16 font-medium text-[#999999]">
-              아직 진행중인 경매가 없어요
-            </p>
-          </div>
+          <None path="auctoin" message="아직 진행중인 경매가 없어요" />
         ) : (
           <>
             <section className="relative mb-7 mt-4 flex justify-between">
