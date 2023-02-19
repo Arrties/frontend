@@ -99,7 +99,7 @@ export default function Home() {
                 </div>
               </div>
             ) : (
-              <div className="relative mt-2 flex h-[120px] w-[500px] items-center ">
+              <div className="relative mt-2 flex h-[120px] w-[500px] cursor-pointer items-center">
                 <Image
                   alt="keyword"
                   src="/svg/icons/bg_home_banner.svg"
@@ -117,7 +117,7 @@ export default function Home() {
                     <br /> 작품을 추천 받아 보세요 &gt;
                   </p>
                   <p className="text-14">
-                    영서님 취향의 전시작품이 아직 없어요
+                    {userInfo?.nickname}님 취향의 전시작품이 아직 없어요
                   </p>
                 </div>
               </div>
