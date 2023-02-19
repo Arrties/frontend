@@ -48,7 +48,7 @@ export default function Auction() {
         />
         <div className="top-100px absolute inset-x-0 mx-auto  max-w-[420px] border-b border-brand" />
         {error && error.code === 'NOT_FOUND_AUCTION_PROCESSING' ? (
-          <None path="auctoin" message="아직 진행중인 경매가 없어요" />
+          <None path="auction" message="아직 진행중인 경매가 없어요" />
         ) : (
           <>
             <section className="relative mb-7 mt-4 flex justify-between">
