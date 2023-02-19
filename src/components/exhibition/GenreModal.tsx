@@ -7,6 +7,7 @@ interface GenreModalProps {
   onCloseModal: () => void;
   genre: string[];
   setGenre: Dispatch<SetStateAction<string[]>>;
+  isEmpty?: boolean;
   [key: string]: any;
 }
 
@@ -36,6 +37,7 @@ export default function GenreModal({
   onCloseModal,
   genre,
   setGenre,
+  isEmpty,
 }: GenreModalProps) {
   const onGenreClick = (name: string) => {
     const genreSelectedArr = [...genre];
@@ -71,6 +73,11 @@ export default function GenreModal({
           </div>
         ))}
       </div>
+      {isEmpty && (
+        <div className="mt-52 rounded-[8px] bg-[#191919] py-4 px-3 text-12 text-white">
+          관련 작품이 없어요.
+        </div>
+      )}
     </Layout>
   );
 }

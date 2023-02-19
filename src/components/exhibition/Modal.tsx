@@ -18,12 +18,12 @@ interface DefaultProps {
 }
 
 const ModalInner = tw.div<DefaultProps>`
-w-full h-auto m-auto rounded-[8px] backdrop-blur-[25.5px] p-5 transition  ${(
+w-full h-auto m-auto rounded-[8px] backdrop-blur-[25.5px] p-5 transition min-h-[220px] ${(
   p,
 ) =>
   p.$open
-    ? 'bg-gradient-to-r from-[#FFFFFF]/[.16] to-[#FFFFFF]/[.46] translate-y-[-420px]'
-    : 'bg-gradient-to-b from-[#FFFFFF]/[.16] to-[#FFFFFF]/[.46]'}
+    ? 'shadow-black shadow-md drop-shadow-2xl bg-white translate-y-[-420px] bg-gradient-to-b from-[#f5f1f1] via-[#e0dddd] to-[#f5f1f1]'
+    : 'shadow-black bg-gradient-to-b from-[#FFFFFF] to-[#d1d1d1] '}
 `;
 const ModalHeader = tw.div<DefaultProps>`
 text-[#424242] text-20 flex justify-between font-bold `;
@@ -78,7 +78,7 @@ export default function Modal({
         </ModalHeader>
         <EducationDiv>{education}</EducationDiv>
         <DescriptionDiv>{description}</DescriptionDiv>
-        <div className="flex w-full justify-evenly pt-4">
+        <div className="absolute inset-x-0 bottom-5 m-auto flex w-full justify-evenly pt-4">
           <ModalButton onClick={handleLeftButton}>작품 더보기</ModalButton>
           <ModalButton onClick={handleRightButton}>작가 프로필</ModalButton>
         </div>

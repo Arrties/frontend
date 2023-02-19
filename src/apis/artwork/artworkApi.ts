@@ -9,6 +9,25 @@ export class ArtworkApi {
     });
     return data;
   }
+
+  async patchArtwork(id: number, body: FormData): Promise<any> {
+    const { data } = await instance.patch(`/art-works/edit/${id}`, body, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
+    return data;
+  }
+
+  async deleteArtwork(artworkId: number) {
+    await instance.delete(`/art-works/${artworkId}`);
+  }
+
+  async getEditForm(artworkId: number) {
+    const { data } = await instance.get(`/art-works/edit/${artworkId}`);
+    return data;
+  }
+
   async getDetail(artWorkId: number): Promise<ArtworkDetail> {
     const { data } = await instance.get(`art-works/${artWorkId}`);
     return data;

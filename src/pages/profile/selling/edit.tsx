@@ -19,6 +19,8 @@ import { makeBlob } from '@utils/makeBlob';
 import useGetProfile from '@hooks/queries/useGetProfile';
 import { dataURLtoFile } from '@utils/dataURLtoFile';
 import Guarantee from '@components/auction/Guarantee';
+import useGetEditForm from '@hooks/queries/artwork/useGetEditForm';
+import usePatchArtwork from '@hooks/mutations/usePatchArtwork';
 
 const ARTWORK_STATUS = [
   { value: '매우 좋음' },
@@ -55,26 +57,42 @@ const CANVAS_SIZE = [
   '500',
 ];
 
-export default function Post() {
+export default function Edit() {
+  const router = useRouter();
+  const scrollRef: any = useRef();
+  const scrollToElement = () =>
+    scrollRef?.current?.scrollIntoView({ behavior: 'smooth' });
+
+  const artWorkId = Number(router.query.id);
+  const { data: editForm } = useGetEditForm(artWorkId);
+  const { data: user } = useGetProfile();
+
   const [isGuaranteeModal, setIsGuaranteeModal] = useState<boolean>(false);
   const [isKeywordModal, setIsKeywordModal] = useState<boolean>(false);
   const [isGenreModal, setIsGenreModal] = useState<boolean>(false);
   const [signature, setSignature] = useState<string>('');
-  const [keywordList, setKeywordList] = useState<string[]>([]);
-  const [genre, setGenre] = useState<string>('');
-  const [fileList, setFileList] = useState<File[]>([]);
-
-  const { data: user } = useGetProfile();
-
-  const router = useRouter();
+  const [keywordList, setKeywordList] = useState<string[]>(editForm?.keywords);
+  const [genre, setGenre] = useState<string>(editForm?.genre);
+  const [fileList, setFileList] = useState([
+    ...editForm?.images.map((image: string, idx: number) => {
+      return {
+        url: image,
+        idx: idx,
+      };
+    }),
+  ]);
 
   if (getToken().roles !== 'ROLE_ARTIST') {
     router.push('/home');
   }
 
-  const handleRemoveFile = (targetName: string): void => {
+  const handleRemoveFile = (targetIdx: string): void => {
     const newFileList = fileList.filter((file) => {
-      return file.name !== targetName;
+      if (file.hasOwnProperty('url')) {
+        return file.idx !== targetIdx;
+      } else {
+        return file.name !== targetIdx;
+      }
     });
     setFileList(newFileList);
     setValue('image', newFileList as any);
@@ -88,8 +106,23 @@ export default function Post() {
     setError,
     clearErrors,
     formState: { errors },
+    trigger,
   } = useForm<Artwork>({
     mode: 'onTouched',
+    defaultValues: {
+      title: editForm?.title,
+      productionYear: editForm?.productionYear,
+      description: editForm?.description,
+      material: editForm?.material,
+      frame: editForm?.frame,
+      width: editForm?.artWorkSize?.width,
+      length: editForm?.artWorkSize?.length,
+      height: editForm?.artWorkSize?.height,
+      size: editForm?.artWorkSize?.size,
+      price: editForm?.price,
+      status: editForm?.status,
+      statusDescription: editForm?.statusDescription,
+    },
   });
 
   const handleImage = (e) => {
@@ -116,7 +149,7 @@ export default function Post() {
     }
   }, [keywordList, setValue, genre, signature]);
 
-  const { mutate, isLoading: isLoadingPost } = usePostArtwork();
+  const { mutate, isLoading: isLoadingPost } = usePatchArtwork(artWorkId);
   const guaranteeRef = useRef<HTMLDivElement>(null);
 
   const onSubmit = (form: Artwork) => {
@@ -142,6 +175,7 @@ export default function Post() {
       });
       return;
     }
+
     if (keywordList.length === 0) {
       setError('keywords', {
         type: 'required',
@@ -156,6 +190,7 @@ export default function Post() {
       });
       return;
     }
+
     if (signature === '') {
       setError('guaranteeImage', {
         type: 'required',
@@ -180,20 +215,27 @@ export default function Post() {
     formData.append('statusDescription', statusDescription);
     formData.append('keywords', keywordList + '');
 
-    if (fileList.length == 1) {
-      formData.append('image', fileList[0]);
-    } else {
-      for (const i of fileList) {
+    for (const i of fileList) {
+      if (i.hasOwnProperty('url')) {
+        formData.append('prevImage', i.url);
+      } else {
         formData.append('image', i);
       }
     }
-
+    if (!fileList.some((file) => !file.hasOwnProperty('url'))) {
+      formData.append('image', new File([''], ''));
+    }
+    if (!fileList.some((file) => file.hasOwnProperty('url'))) {
+      formData.append('prevImage', '');
+    }
     if (genre) {
       formData.append('genre', genre);
     }
-
     if (signature) {
-      const file = dataURLtoFile(signature, 'guaranteeImage');
+      let file;
+
+      file = dataURLtoFile(signature, 'guaranteeImage');
+
       formData.append('guaranteeImage', file);
     }
 
@@ -254,6 +296,7 @@ export default function Post() {
                   handler={handleRemoveFile}
                   key={'' + idx}
                   file={file}
+                  idx={idx}
                 />
               ))}
             </div>
@@ -406,12 +449,11 @@ export default function Post() {
               type="number"
               placeholder="10"
               unit="호"
-              register={register('size', {
-                validate: (value) =>
-                  CANVAS_SIZE.includes(value) || '호수를 확인해주세요.',
-              })}
+              register={register('size')}
             />
-            {errors.size && <ErrorMessage message={errors.size.message} />}
+            {!CANVAS_SIZE.includes(watch('size')) && (
+              <ErrorMessage message={'호수를 확인해주세요.'} />
+            )}
           </article>
         </div>
         <Input
@@ -471,6 +513,7 @@ export default function Post() {
             </div>
           )}
         </div>
+        <input {...register('guaranteeImage')} className="h-0 w-0" />
         {errors.guaranteeImage && (
           <ErrorMessage message={errors.guaranteeImage.message} />
         )}
@@ -491,7 +534,11 @@ export default function Post() {
               height={watch('height')}
               genre={watch('genre')}
               guaranteeImage={signature}
-              mainImage={makeBlob(fileList[0])}
+              mainImage={
+                fileList[0] && fileList[0].hasOwnProperty('url')
+                  ? fileList[0]?.url
+                  : fileList[0]
+              }
             />
           )}
 

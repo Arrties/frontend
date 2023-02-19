@@ -27,7 +27,11 @@ export default React.memo(function Calendar({
     if (!!auctionList || !!pastAuctionList) {
       setAuctionDateList(
         [...auctionList, ...pastAuctionList].map((it) => {
-          return { startDate: it.startDate, endDate: it.endDate };
+          return {
+            startDate: it.startDate,
+            endDate: it.endDate,
+            status: it.status,
+          };
         }),
       );
     }
@@ -58,9 +62,9 @@ export default React.memo(function Calendar({
                   current.isSameOrAfter(it.startDate, 'days') &&
                   current.isSameOrBefore(it.endDate, 'days')
                 ) {
-                  if (moment().isAfter(it.endDate, 'days')) {
+                  if (moment().isAfter(it.endDate)) {
                     status = 'done';
-                  } else if (moment().isBefore(it.startDate, 'days')) {
+                  } else if (moment().isBefore(it.startDate)) {
                     status = 'expected';
                   } else {
                     status = 'proceeding';

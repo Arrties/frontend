@@ -36,11 +36,7 @@ const SwiperWrapper = styled.section`
 export default function Begin() {
   const swiperRef = useRef<any>(null);
   const router = useRouter();
-  useEffect(() => {
-    if (getLocalStorage('isVisited')) {
-      router.replace('/auth/login');
-    }
-  }, []);
+
   return (
     <Layout>
       <SwiperWrapper>

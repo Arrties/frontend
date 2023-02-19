@@ -96,7 +96,7 @@ export default function PickDetail() {
             {!member?.description &&
               !member?.history &&
               !member?.instagram &&
-              !member?.behance && <div>기입된 정보가 없습니다.</div>}
+              !member?.behance && <div>등록된 정보가 없습니다.</div>}
             {member?.description && (
               <div className="space-y-3 text-14">
                 <p className="font-semibold">소개</p>

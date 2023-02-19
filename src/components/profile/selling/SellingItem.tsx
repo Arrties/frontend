@@ -5,7 +5,7 @@ import tw from 'tailwind-styled-components';
 interface SellingItemProps {
   sellingItem: MyArtwork;
   [key: string]: any;
-  handleOption?: () => void;
+  handleOption?: (e) => void;
 }
 
 const SellingItemTag = tw.section<SellingItemProps>`
@@ -23,7 +23,10 @@ export default function SellingItem({
       <SellingItemTag
         {...rest}
         onClick={() => {
-          router.push(`/auction/view?id=${sellingItem?.id}`);
+          router.push({
+            pathname: '/auction/view',
+            query: { id: sellingItem.id },
+          });
         }}
       >
         <article className="relative h-[100px] w-[82px] overflow-hidden rounded">
@@ -48,13 +51,22 @@ export default function SellingItem({
           height="18"
           className="absolute right-0 top-0 cursor-pointer"
           onClick={handleOption}
+          id={sellingItem.id + ''}
         />
       </SellingItemTag>
     );
 
   if (sellingItem.auctionStatus === 'processing')
     return (
-      <SellingItemTag {...rest}>
+      <SellingItemTag
+        {...rest}
+        onClick={() => {
+          router.push({
+            pathname: '/auction/view',
+            query: { id: sellingItem.id },
+          });
+        }}
+      >
         <article className="relative h-[100px] w-[82px] overflow-hidden rounded">
           <Image
             alt="example"
@@ -85,7 +97,15 @@ export default function SellingItem({
     );
   if (sellingItem.auctionStatus === 'sales_success')
     return (
-      <SellingItemTag {...rest}>
+      <SellingItemTag
+        {...rest}
+        onClick={() => {
+          router.push({
+            pathname: '/auction/view',
+            query: { id: sellingItem.id },
+          });
+        }}
+      >
         <article className="relative h-[100px] w-[82px] overflow-hidden rounded">
           <Image
             alt="example"
@@ -117,7 +137,15 @@ export default function SellingItem({
 
   if (sellingItem.auctionStatus === 'sales_failed')
     return (
-      <SellingItemTag {...rest}>
+      <SellingItemTag
+        {...rest}
+        onClick={() => {
+          router.push({
+            pathname: '/auction/view',
+            query: { id: sellingItem.id },
+          });
+        }}
+      >
         <article className="relative h-[100px] w-[82px] overflow-hidden rounded">
           <Image
             alt="example"

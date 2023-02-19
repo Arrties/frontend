@@ -120,6 +120,14 @@ export default function Profile() {
                   priority
                   fill
                   className="object-cover"
+                  onClick={() => {
+                    router.push({
+                      pathname: '/profile/detail',
+                      query: {
+                        id: data?.id,
+                      },
+                    });
+                  }}
                 />
               ) : (
                 <Image

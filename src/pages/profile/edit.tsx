@@ -93,11 +93,17 @@ export default function Edit() {
   }, [profile]);
 
   const onSubmit = async (form: Member) => {
-    const { nickname, instagram, behance, education, history, description } =
-      form;
-    console.log(form);
-    if (!nickname) return;
-    if (!userInfo) return;
+    const {
+      nickname,
+      instagram,
+      behance,
+      education,
+      history,
+      description,
+      telephone,
+    } = form;
+    if (!nickname || !userInfo || !telephone) return;
+
     if (!isValidate.nickname && userInfo.nickname !== form.nickname) {
       setError('nickname', {
         type: 'need nickname duplicate',
@@ -110,7 +116,7 @@ export default function Edit() {
 
     formData.append('nickname', nickname);
     formData.append('email', data?.email!);
-    formData.append('telephone', data?.telephone!);
+    formData.append('telephone', telephone);
 
     if (profile && profile?.length) {
       //유저가 프로필을 변환하였다면
@@ -253,6 +259,21 @@ export default function Edit() {
 
       <Input
         type="text"
+        label="휴대폰 번호"
+        placeholder="-를 제외하고 입력해주세요."
+        $error={!!errors.telephone}
+        register={register('telephone', {
+          required: true,
+          pattern: {
+            value: /^01([0|1|6|7|8|9])[0-9]{4}[0-9]{4}$/g,
+            message: '휴대폰번호를 정확히 입력해주세요.',
+          },
+        })}
+        defaultValue={data?.telephone}
+      />
+
+      <Input
+        type="text"
         label="이메일"
         disabled
         defaultValue={userInfo?.email}
@@ -275,7 +296,7 @@ export default function Edit() {
             <ErrorMessage message={errors.education.message} />
           )}
           <Input
-            type="text"
+            type="textarea"
             label="이력"
             defaultValue={userInfo?.history}
             placeholder="이력을 작성해 주세요."
@@ -284,7 +305,7 @@ export default function Edit() {
           />
           {errors.history && <ErrorMessage message={errors.history.message} />}
           <Input
-            type="text"
+            type="textarea"
             label="작가소개"
             placeholder="소개를 작성해 주세요."
             defaultValue={userInfo?.description}
