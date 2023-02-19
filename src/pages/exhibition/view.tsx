@@ -11,10 +11,11 @@ import { useRef, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { useRouter } from 'next/router';
 import { useGetExhibitionItemList } from '@hooks/queries/useGetExhibition';
-import { EffectCoverflow, Pagination } from 'swiper';
+import { EffectCoverflow } from 'swiper';
+import useWindowSize from '@hooks/useWindowSize';
 
 const SwiperButtonDiv = tw.div<defaultProps>`
-bg-[rgba(153,153,153,0.24)] rounded-[10px] w-8 h-8 flex justify-center cursor-pointer
+bg-[rgba(153,153,153,0.24)] rounded-[10px] w-8 h-8 max-[400px]:w-7 max-[400px]:h-7 flex justify-center cursor-pointer
 `;
 
 export default function ExhibitionArts() {
@@ -28,6 +29,8 @@ export default function ExhibitionArts() {
 
   const router = useRouter();
   const id = Number(router.query.id);
+
+  const { height } = useWindowSize();
 
   const { data: artLists } = useGetExhibitionItemList(id, genre);
 
@@ -140,7 +143,7 @@ export default function ExhibitionArts() {
                   sizes="100vh"
                   className="absolute top-[240px] scale-[2.0] object-contain"
                 />
-                <div className="absolute top-[160px] mr-1 w-[95%]">
+                <div className="absolute top-[160px] mr-1 w-[95%] max-[400px]:top-[170px]">
                   <Image
                     src={art.image}
                     alt="image"
@@ -193,7 +196,7 @@ export default function ExhibitionArts() {
               </div>
             )}
             {modal && (
-              <div className="absolute bottom-[-80px] flex w-full flex-col justify-center">
+              <div className="absolute bottom-[-80px] flex w-full flex-col justify-center max-[380px]:bottom-[-150px]">
                 {!isOpen && (
                   <div className="m-auto mb-3 w-[22px]">
                     <Image
@@ -208,6 +211,7 @@ export default function ExhibitionArts() {
                 )}
                 <Modal
                   $open={isOpen}
+                  $height={height}
                   title={art.title}
                   education={art.education}
                   description={art.description}
