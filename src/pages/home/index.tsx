@@ -37,15 +37,14 @@ const KeywordSection = styled.section`
   display: flex;
   overflow-x: auto;
   white-space: nowrap;
+
   &::-webkit-scrollbar {
-    width: 5px;
+    width: 1px;
   }
   &::-webkit-scrollbar-thumb {
     background-color: #fc6554; /*스크롤바의 색상*/
     background-clip: padding-box;
-    border: 5px solid transparent;
-    border-top-left-radius: 50px;
-    border-bottom-right-radius: 50px;
+    border: 6px solid transparent;
   }
 `;
 
@@ -129,7 +128,7 @@ export default function Home() {
         <KeywordSection>
           {!!customizedArtwork?.artworks.length &&
             userInfo?.keywords?.map((keyword: string, idx: number) => (
-              <KeywordBox text={keyword} key={idx} />
+              <KeywordBox text={keyword} key={idx} className="mb-[6px]" />
             ))}
         </KeywordSection>
 

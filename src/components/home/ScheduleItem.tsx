@@ -42,11 +42,11 @@ export default React.memo(function ScheduleItem({
   let endDate: string = '';
 
   if (auctionItem.status === 'terminated') {
-    startDate = auctionItem?.startDate.format('MM.DD');
-    endDate = auctionItem?.endDate.format('MM.DD');
+    startDate = auctionItem?.startDate.format('M.D');
+    endDate = auctionItem?.endDate.format('M.D');
   } else {
-    startDate = auctionItem?.startDate.format('MM.DD hh시 mm분');
-    endDate = auctionItem?.endDate.format('MM.DD hh시 mm분');
+    startDate = auctionItem?.startDate.format('M월 D일 H시 m분');
+    endDate = auctionItem?.endDate.format('M월 D일 H시 m분');
   }
 
   return (
