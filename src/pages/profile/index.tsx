@@ -121,12 +121,16 @@ export default function Profile() {
                   fill
                   className="object-cover"
                   onClick={() => {
-                    router.push({
-                      pathname: '/profile/detail',
-                      query: {
-                        id: data?.id,
-                      },
-                    });
+                    if (isUser) {
+                      window.alert('작가 전환 후 이용할 수 있는 페이지입니다.');
+                    } else {
+                      router.push({
+                        pathname: '/profile/detail',
+                        query: {
+                          id: data?.id,
+                        },
+                      });
+                    }
                   }}
                 />
               ) : (
@@ -137,12 +141,16 @@ export default function Profile() {
                   height={100}
                   className="m-auto h-[27px] cursor-pointer rounded-full bg-[#EDEDED]"
                   onClick={() => {
-                    router.push({
-                      pathname: '/profile/detail',
-                      query: {
-                        id: data?.id,
-                      },
-                    });
+                    if (isUser) {
+                      window.alert('작가 전환 후 이용할 수 있는 페이지입니다.');
+                    } else {
+                      router.push({
+                        pathname: '/profile/detail',
+                        query: {
+                          id: data?.id,
+                        },
+                      });
+                    }
                   }}
                 />
               )}
