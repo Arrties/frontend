@@ -30,9 +30,9 @@ w-full h-[52px] placeholder-[#999999] text-[13px] rounded-[4px] ${(p) =>
   p.$unit && 'pr-10'} appearance-none
   `;
 const TextAreaTag = tw.textarea<InputProps>`
-w-full h-[52px] placeholder-[#999999] text-[13px] rounded-[4px] ${(p) =>
+w-full h-[20px] placeholder-[#999999] text-[13px] rounded-[4px] ${(p) =>
   p.$error ? 'border-[#FF3120]' : 'border-[#D8D8D8]'} ${(p) =>
-  p.$unit && 'pr-10'} appearance-none flex items-center min-h-[100px]
+  p.$unit && 'pr-10'} appearance-none flex items-center min-h-[70px]
   `;
 export default function Input({
   type = 'text',

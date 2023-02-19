@@ -16,6 +16,8 @@ import {
 import chatApi from '@apis/chat/chatApi';
 import useGetProfile from '@hooks/queries/useGetProfile';
 import { isUser } from '@utils/isUser';
+import moment from 'moment';
+import 'moment/locale/ko';
 
 interface ContentForm {
   message: string;
@@ -131,7 +133,13 @@ export default function ChatRoom() {
           <div className="px-5 text-16 ">
             {isUser ? artist?.name : member?.name}
           </div>
-          <div className="flex items-center text-12">응답시간 : 1시간 이내</div>
+          <div className="flex items-center text-12">
+            응답시간 :{' '}
+            {moment(
+              messages && messages[messages.length - 1].sendDate,
+              'YYYY-MM-DD-HH-mm-ss',
+            ).fromNow()}
+          </div>
           <Image
             src="/svg/icons/icon_option.svg"
             alt="option"
@@ -149,7 +157,10 @@ export default function ChatRoom() {
         ref={scrollRef}
       >
         <article className="flex h-[40px] items-center justify-center text-center text-14 font-bold text-[#767676]">
-          2022년 12월 23일
+          {moment(
+            messages && messages[0].sendDate,
+            'YYYY-MM-DD-HH-mm-ss',
+          ).format('YYYY년 MM월 DD일')}
         </article>
         <article className="mt-4">
           {messages &&
