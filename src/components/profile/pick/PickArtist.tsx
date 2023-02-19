@@ -18,7 +18,7 @@ w-full text-14 h-[98px] flex items-center cursor-pointer
 `;
 
 const PickArtistProfile = tw.div<DefaultProps>`
-w-[50px] mr-[10px] aspect-square flex justify-center items-center rounded-full border-[1px] border-[#999999]
+w-[50px] relative mr-[10px] rounded-full aspect-square flex justify-center items-center rounded-full border-[1px] border-[#999999]
 `;
 
 export default function PickArtist({
@@ -42,8 +42,10 @@ export default function PickArtist({
         <Image
           src={image || '/svg/icons/profile/icon_avatar.svg'}
           alt="avatar"
-          width={28}
-          height={28}
+          // width={28}
+          // height={28}
+          className="rounded-full object-cover"
+          fill
         />
       </PickArtistProfile>
       <span>{nickname}</span>
