@@ -26,7 +26,7 @@ const Line = tw.p`leading-5 pl-5`;
 
 const SwiperWrapper = styled.section`
   .swiper-wrapper {
-    height: 800px;
+    height: 700px;
   }
   .swiper-pagination-bullet-active {
     background-color: #fc6554;
@@ -123,7 +123,7 @@ export default function Begin() {
             </div>
           </SwiperSlide>
           <SwiperSlide>
-            <ImageWrapper className="mt-12">
+            <ImageWrapper className="mt-6">
               <Image
                 alt="begin"
                 src="/svg/begin/begin_04.svg"
@@ -144,7 +144,7 @@ export default function Begin() {
                 setLocalStorage('isVisited', true);
                 router.push('/auth/login');
               }}
-              className="fixed inset-x-0 bottom-[40px] m-auto w-full"
+              className="fixed inset-x-0 bottom-[50px] m-auto w-full"
               text="시작하기"
             />
           </SwiperSlide>

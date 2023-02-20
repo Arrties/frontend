@@ -101,14 +101,13 @@ function Login() {
 
   return (
     <Layout>
-      <div className="mt-[33%] w-full">
-        <div className="flex h-56 items-center justify-center">
+      <div className="mt-[10%] w-full">
+        <div className="flex h-40 items-center justify-center">
           <Image
-            alt=""
+            alt="logo"
             src="/svg/icons/icon_logo_main.svg"
             width="60"
-            height="0"
-            className="flex items-center justify-center text-center text-2xl font-light"
+            height="60"
           />
         </div>
         <form onSubmit={handleSubmit(onSubmit)}>
