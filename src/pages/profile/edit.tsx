@@ -13,6 +13,7 @@ import { makeBlob } from '@utils/makeBlob';
 import { useGetDuplicateCheck } from '@hooks/queries/useGetDuplicateCheck';
 import { usePatchArtist, usePatchUser } from '@hooks/mutations/usePatchMember';
 import Loader from '@components/common/Loader';
+import Toast from '@components/common/Toast';
 interface checkForm {
   nickname: boolean;
   email: boolean;
@@ -22,6 +23,7 @@ export default function Edit() {
     nickname: false,
     email: false,
   });
+  const [toast, setToast] = useState(false);
 
   const { data } = useGetProfile();
   const [userInfo, setUserInfo] = useState<Member | null>(null);
@@ -153,6 +155,12 @@ export default function Edit() {
 
   return (
     <Layout>
+      {!userInfo?.telephone && (
+        <Toast
+          text="전화번호 등록을 완료해야 서비스 이용이 가능합니다."
+          setToast={setToast}
+        />
+      )}
       <Navigate
         right_message="완료"
         left_message={
