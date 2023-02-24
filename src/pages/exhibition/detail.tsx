@@ -141,7 +141,7 @@ export default function ExhibitionArt() {
           ''
         )}
         {!!art && modal && (
-          <div className="absolute bottom-[-80px] z-50 flex w-full flex-col justify-center">
+          <div className="absolute bottom-[-80px] z-50 flex w-full flex-col justify-center max-[380px]:bottom-[-200px]">
             {!isOpen && (
               <div className="m-auto mb-3 w-[22px]">
                 <Image
