@@ -9,6 +9,7 @@ import { Swiper } from 'swiper/react';
 import { useState } from 'react';
 import { useRouter } from 'next/router';
 import { useGetExhibitionItem } from '@hooks/queries/useGetExhibition';
+import useWindowSize from '@hooks/useWindowSize';
 
 export default function ExhibitionArt() {
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -19,6 +20,8 @@ export default function ExhibitionArt() {
   const id = Number(router.query.id);
 
   const { data: art } = useGetExhibitionItem(id);
+
+  const { height } = useWindowSize();
 
   const onCloseModal = () => {
     setIsOpen(false);
@@ -153,6 +156,7 @@ export default function ExhibitionArt() {
             )}
             <Modal
               $open={isOpen}
+              $height={height}
               title={art.title}
               education={art.education}
               description={art.description}

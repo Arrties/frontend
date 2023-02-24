@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import tw from 'tailwind-styled-components';
 import { useRouter } from 'next/router';
+import styled from 'styled-components';
 
 interface ModalProps {
   id: number;
@@ -41,11 +42,27 @@ text-[#424242] text-20 flex justify-between font-bold `;
 const EducationDiv = tw.div<DefaultProps>`
 text-[#191919] text-14 pt-1`;
 
-const DescriptionDiv = tw.div<DefaultProps>`
-text-[#191919] text-14 pt-3`;
-
 const ModalButton = tw.div`
 bg-[#FFFFFF] rounded-[4px] text-[#191919] text-14 flex items-center justify-center cursor-pointer px-10 py-4 max-[400px]:px-8 max-[370px]:px-7
+`;
+
+const DescriptionDiv = styled.div`
+  font-size: 14px;
+  height: 135px;
+  overflow-y: auto;
+  padding-right: 15px;
+  ::-webkit-scrollbar {
+    width: 3px;
+  }
+  ::-webkit-scrollbar-track {
+    background-color: #ffffff;
+    border-radius: 30px;
+    width: 1px;
+  }
+  ::-webkit-scrollbar-thumb {
+    background-color: #191919;
+    border-radius: 30px;
+  }
 `;
 
 export default function Modal({
