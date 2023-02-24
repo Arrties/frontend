@@ -190,36 +190,40 @@ export default function Home() {
                 </div>
               ))}
         </section>
-        <PastAuction>
-          <div className="mb-5 flex flex-col">
-            <span className="text-14 text-[#767676]">아쉽지만 끝난</span>
-            <span className="text-20 font-bold text-[#191919]">
-              지난 경매 리스트
-            </span>
-          </div>
-          <Swiper
-            spaceBetween={20}
-            slidesPerGroup={1}
-            slidesPerView={1}
-            modules={[Pagination]}
-            pagination={true}
-            className="h-[360px]"
-          >
-            {!!pastAuctionList &&
-              makeThreeEach(pastAuctionList.reverse())?.map(
-                (auctionItem: AuctionList[], index: number) => (
-                  <SwiperSlide key={'' + index}>
-                    {auctionItem.map((auctionItem: AuctionList) => (
-                      <AuctionItem
-                        key={auctionItem.id}
-                        auctionItem={auctionItem}
-                      />
-                    ))}
-                  </SwiperSlide>
-                ),
-              )}
-          </Swiper>
-        </PastAuction>
+        {pastAuctionList?.length ? (
+          <PastAuction>
+            <div className="mb-5 flex flex-col">
+              <span className="text-14 text-[#767676]">아쉽지만 끝난</span>
+              <span className="text-20 font-bold text-[#191919]">
+                지난 경매 리스트
+              </span>
+            </div>
+            <Swiper
+              spaceBetween={20}
+              slidesPerGroup={1}
+              slidesPerView={1}
+              modules={[Pagination]}
+              pagination={true}
+              className="h-[360px]"
+            >
+              {!!pastAuctionList &&
+                makeThreeEach(pastAuctionList.reverse())?.map(
+                  (auctionItem: AuctionList[], index: number) => (
+                    <SwiperSlide key={'' + index}>
+                      {auctionItem.map((auctionItem: AuctionList) => (
+                        <AuctionItem
+                          key={auctionItem.id}
+                          auctionItem={auctionItem}
+                        />
+                      ))}
+                    </SwiperSlide>
+                  ),
+                )}
+            </Swiper>
+          </PastAuction>
+        ) : (
+          <div></div>
+        )}
         {isUser ||
         !auctionList?.filter((auction) => auction.status === 'scheduled')
           .length ? (
