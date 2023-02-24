@@ -48,7 +48,7 @@ bg-[#FFFFFF] rounded-[4px] text-[#191919] text-14 flex items-center justify-cent
 
 const DescriptionDiv = styled.div`
   font-size: 14px;
-  height: 135px;
+  max-height: 135px;
   overflow-y: auto;
   padding-right: 15px;
   ::-webkit-scrollbar {
