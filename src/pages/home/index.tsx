@@ -137,19 +137,21 @@ export default function Home() {
             modules={[Autoplay, Navigation, Scrollbar]}
             navigation
             scrollbar={{ draggable: true }}
-            slidesPerView={2.1}
+            slidesPerView={2}
             autoplay={{ delay: 5000, disableOnInteraction: false }}
           >
             {customizedArtwork?.artworks?.map(
               (art: KeywordArtwork, idx: number) => (
                 <SwiperSlide key={idx}>
-                  <ExhibitionItem
-                    image={art.image}
-                    education={art.education}
-                    title={art.title}
-                    id={art.id}
-                    pick={art.pick}
-                  />
+                  <div className="mr-5">
+                    <ExhibitionItem
+                      image={art.image}
+                      education={art.education}
+                      title={art.title}
+                      id={art.id}
+                      pick={art.pick}
+                    />
+                  </div>
                 </SwiperSlide>
               ),
             )}
