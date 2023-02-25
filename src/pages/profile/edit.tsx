@@ -161,10 +161,10 @@ export default function Edit() {
     }
   };
   useEffect(() => {
-    if (!userInfo?.telephone) {
+    if (userInfo && !userInfo?.telephone) {
       setToast(true);
     }
-  }, []);
+  }, [userInfo]);
   if (isPatchUserLoading || isPatchArtistLoading) return <Loader />;
 
   return (
