@@ -164,7 +164,7 @@ export default function Edit() {
     if (userInfo && !userInfo?.telephone) {
       setToast(true);
     }
-  }, []);
+  }, [userInfo]);
   if (isPatchUserLoading || isPatchArtistLoading) return <Loader />;
 
   return (
