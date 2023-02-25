@@ -18,6 +18,7 @@ interface checkForm {
   nickname: boolean;
   email: boolean;
 }
+
 export default function Edit() {
   const [isValidate, setIsValidate] = useState<checkForm>({
     nickname: false,
@@ -82,6 +83,15 @@ export default function Edit() {
   const handleLeftButton = () => {
     router.push('/profile');
   };
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setToast(false);
+    }, 2000);
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [setToast]);
 
   useEffect(() => {
     if (!profile) return;
@@ -150,12 +160,16 @@ export default function Edit() {
       });
     }
   };
-
+  useEffect(() => {
+    if (!userInfo?.telephone) {
+      setToast(true);
+    }
+  }, []);
   if (isPatchUserLoading || isPatchArtistLoading) return <Loader />;
 
   return (
     <Layout>
-      {!userInfo?.telephone && (
+      {toast && (
         <Toast
           text="전화번호 등록을 완료해야 서비스 이용이 가능합니다."
           setToast={setToast}
