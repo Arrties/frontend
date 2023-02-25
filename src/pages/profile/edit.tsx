@@ -161,7 +161,7 @@ export default function Edit() {
     }
   };
   useEffect(() => {
-    if (!userInfo?.telephone) {
+    if (userInfo && !userInfo?.telephone) {
       setToast(true);
     }
   }, []);
