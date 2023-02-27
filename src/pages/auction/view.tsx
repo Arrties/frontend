@@ -159,7 +159,9 @@ export default function View() {
           <article>
             <div>
               <div className="flex items-center justify-between">
-                <span className="text-18 font-semibold">{artWork?.title}</span>
+                <span className="max-w-[12rem] text-18 font-semibold">
+                  {artWork?.title}
+                </span>
                 {remaind > 0 ? (
                   !Number.isNaN(+days) && (
                     <span className="text-14">
