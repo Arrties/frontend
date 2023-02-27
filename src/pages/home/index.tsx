@@ -42,7 +42,7 @@ const KeywordSection = styled.section`
     width: 1px;
   }
   &::-webkit-scrollbar-thumb {
-    background-color: #fc6554; /*스크롤바의 색상*/
+    background-color: #fc6554;
     background-clip: padding-box;
     border: 6px solid transparent;
   }
@@ -51,10 +51,9 @@ const KeywordSection = styled.section`
 export default function Home() {
   const router = useRouter();
   const { data: customizedArtwork } = useGetCustomizedArtWork(1, 5) || {};
-  const { data: userInfo } = useGetProfile();
+  const { data: userInfo } = useGetProfile() || {};
   const { data: auctionList } = useGetAuction() || {};
   const { data: pastAuctionList } = useGetPastAuction() || {};
-
   return (
     <>
       <Layout>
