@@ -16,16 +16,12 @@
 }
 
 /* 데스크탑 우선 개발 */
+* {
+  font-size: 3.7vw;
+}
 
-@media (max-width: 768px) {
+@media (min-width: 420px) {
   * {
     font-size: 16px;
-  }
-}
-/* 모바일 우선 개발 */
-
-@media (min-width: 992px) {
-  * {
-    background: #c91919;
   }
 }
