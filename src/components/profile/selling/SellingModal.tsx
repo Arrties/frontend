@@ -20,7 +20,7 @@ const MainModalBackground = tw.div`
   fixed inset-0 bg-[#767676] opacity-60 backdrop-blur-3xl z-9
 `;
 const MainModalInner = tw.div<DefaultProps>`
-absolute z-10 w-full h-[202px] bottom-0 bg-[#fff] flex flex-col items-center justify-around
+absolute z-10 w-full h-[12.625rem] bottom-0 bg-[#fff] flex flex-col items-center justify-around
 `;
 const SelectEdit = tw.div`text-[#3478F6] w-full  grow border-b border-[#ebdede] flex justify-center items-center`;
 const SelectDelete = tw.div`text-[#FF3120] w-full  grow border-b border-[#ebdede]  flex justify-center items-center`;

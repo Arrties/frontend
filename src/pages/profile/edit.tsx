@@ -183,16 +183,16 @@ export default function Edit() {
         handleLeftButton={handleLeftButton}
         handleRightButton={handleSubmit(onSubmit)}
       />
-      <label className="flex h-[120px] justify-center" htmlFor="image">
+      <label className="flex h-[7.5rem] justify-center" htmlFor="image">
         {userInfo?.image ? (
-          <div className="relative flex h-[99px] w-[99px] cursor-pointer items-center justify-center rounded-full bg-[#FFFFFF]            ">
+          <div className="relative flex h-[6.1875rem] w-[6.1875rem] cursor-pointer items-center justify-center rounded-full bg-[#FFFFFF]            ">
             <Image
               src={userInfo?.image}
               className="rounded-full object-cover"
               fill
               alt="profile"
             />
-            <div className="absolute right-0 bottom-0 flex h-[26px] w-[26px] items-center justify-center rounded-full bg-[#575757]">
+            <div className="absolute right-0 bottom-0 flex h-[1.625rem] w-[1.625rem] items-center justify-center rounded-full bg-[#575757]">
               <Image
                 src="/svg/icons/camera.svg"
                 width="15"
@@ -202,14 +202,14 @@ export default function Edit() {
             </div>
           </div>
         ) : data?.image ? (
-          <div className="relative flex h-[99px] w-[99px] cursor-pointer items-center justify-center rounded-full bg-[#FFFFFF]            ">
+          <div className="relative flex h-[6.1875rem] w-[6.1875rem] cursor-pointer items-center justify-center rounded-full bg-[#FFFFFF]            ">
             <Image
               src={data?.image}
               className="rounded-full object-cover"
               fill
               alt="profile"
             />
-            <div className="absolute right-0 bottom-0 flex h-[26px] w-[26px] items-center justify-center rounded-full bg-[#575757]">
+            <div className="absolute right-0 bottom-0 flex h-[1.625rem] w-[1.625rem] items-center justify-center rounded-full bg-[#575757]">
               <Image
                 src="/svg/icons/camera.svg"
                 width="15"
@@ -219,14 +219,14 @@ export default function Edit() {
             </div>
           </div>
         ) : (
-          <div className=" relative flex h-[99px] w-[99px] cursor-pointer items-center justify-center rounded-full border-2 border-[#999999] bg-[#FFFFFF]">
+          <div className=" relative flex h-[6.1875rem] w-[6.1875rem] cursor-pointer items-center justify-center rounded-full border-2 border-[#999999] bg-[#FFFFFF]">
             <Image
               src="/svg/icons/avatar.svg"
               width="60"
               height="0"
               alt="profile"
             />
-            <div className="absolute right-0 bottom-0 flex h-[26px] w-[26px] items-center justify-center rounded-full bg-[#575757]">
+            <div className="absolute right-0 bottom-0 flex h-[1.625rem] w-[1.625rem] items-center justify-center rounded-full bg-[#575757]">
               <Image
                 src="/svg/icons/camera.svg"
                 width="15"
@@ -347,7 +347,7 @@ export default function Edit() {
                 {...register('instagram')}
                 id="instagram"
                 defaultValue={userInfo?.instagram}
-                className="h-[30px] w-[140px] indent-1 text-12 placeholder:text-[#999]"
+                className="h-[1.875rem] w-[8.75rem] indent-1 text-12 placeholder:text-[#999]"
               />
             </div>
             <div className="flex items-center">
@@ -365,7 +365,7 @@ export default function Edit() {
                 {...register('behance')}
                 id="behance"
                 defaultValue={userInfo?.behance}
-                className="h-[30px] w-[140px] indent-1 text-12 placeholder:text-[#999]"
+                className="h-[1.875rem] w-[8.75rem] indent-1 text-12 placeholder:text-[#999]"
               />
             </div>
           </article>

@@ -21,7 +21,7 @@ export default function SettingItem({ text, path }: SettingItemProps) {
   };
   return (
     <div
-      className="flex cursor-pointer justify-between border-b-[1px] border-[#F4F4F4] py-[14px] text-sm text-14 font-bold"
+      className="flex cursor-pointer justify-between border-b-[0.0625rem] border-[#F4F4F4] py-[0.875rem] text-sm text-14 font-bold"
       onClick={handleNavigate}
     >
       <span>{text}</span>

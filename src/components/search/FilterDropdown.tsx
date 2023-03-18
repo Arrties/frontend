@@ -17,7 +17,7 @@ export default function FilterDropdown({ setStatus }: FilterDropdownProps) {
     <div>
       <Menu as="div" className="relative">
         <div className="w-full">
-          <Menu.Button className="m-auto ml-0 flex w-[80px] items-center  justify-around rounded-[19px] border-[1px] border-[#DBDBDB] bg-white px-3 py-2 text-sm font-medium text-[#767676]">
+          <Menu.Button className="m-auto ml-0 flex w-[5rem] items-center  justify-around rounded-[1.1875rem] border-[0.0625rem] border-[#DBDBDB] bg-white px-3 py-2 text-sm font-medium text-[#767676]">
             정렬
             <Image
               src="/svg/icons/arrow_down.svg"
@@ -40,7 +40,7 @@ export default function FilterDropdown({ setStatus }: FilterDropdownProps) {
             <div className="px-1 py-1 ">
               <Menu.Item>
                 <button
-                  className="flex w-full items-center justify-between border-b-[1px] py-3 px-2 text-sm"
+                  className="flex w-full items-center justify-between border-b-[0.0625rem] py-3 px-2 text-sm"
                   onClick={() => {
                     setStatus([]);
                     setSelected([]);
@@ -61,7 +61,7 @@ export default function FilterDropdown({ setStatus }: FilterDropdownProps) {
               </Menu.Item>
               <Menu.Item>
                 <button
-                  className="flex w-full items-center justify-between border-b-[1px] py-3 px-2 text-sm"
+                  className="flex w-full items-center justify-between border-b-[0.0625rem] py-3 px-2 text-sm"
                   onClick={() => handleMenu('processing')}
                 >
                   경매중

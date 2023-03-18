@@ -34,10 +34,10 @@ export default function Select<T extends FieldValues>({
       <Listbox name={name} value={selected} onChange={setSelected}>
         {({ open }) => (
           <div className="relative text-12">
-            <Listbox.Button className="relative h-[52px] w-full cursor-pointer rounded-[4px]  border border-[#DBDBDB] focus-visible:border-[#DBDBDB]">
+            <Listbox.Button className="relative h-[3.25rem] w-full cursor-pointer rounded-[0.25rem]  border border-[#DBDBDB] focus-visible:border-[#DBDBDB]">
               <div className="p-3 text-left">{selected.value}</div>
               <div
-                className={`absolute right-[10px] bottom-[13px] ${
+                className={`absolute right-[0.625rem] bottom-[0.8125rem] ${
                   open && 'rotate-180 transform transition'
                 }`}
               >
@@ -60,7 +60,7 @@ export default function Select<T extends FieldValues>({
                   <Listbox.Option
                     key={optionIdx}
                     className={({ active }) =>
-                      `relative flex h-[52px] cursor-pointer items-center border border-[#DBDBDB] bg-white p-3 first:rounded-t-[4px] last:rounded-b-[4px] ${
+                      `relative flex h-[3.25rem] cursor-pointer items-center border border-[#DBDBDB] bg-white p-3 first:rounded-t-[0.25rem] last:rounded-b-[0.25rem] ${
                         active && 'font-semibold'
                       }`
                     }

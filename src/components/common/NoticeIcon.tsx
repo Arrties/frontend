@@ -14,7 +14,7 @@ interface NoticeIconProps {
 }
 
 const NoticeIconTag = tw.div<defaultProps>`
-flex w-[60px] justify-between 
+flex w-[3.75rem] justify-between 
 `;
 
 export default React.memo(function NoticeIcon({

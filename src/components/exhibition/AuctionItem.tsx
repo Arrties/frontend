@@ -18,7 +18,7 @@ export default function AuctionItem({ auctionList }: AuctionListProps) {
 
   return (
     <div
-      className="mb-5 flex cursor-pointer border-b-[1px] pb-6 last:mb-0"
+      className="mb-5 flex cursor-pointer border-b-[0.0625rem] pb-6 last:mb-0"
       onClick={() =>
         router.push({
           pathname: '/exhibition/view',
@@ -26,7 +26,7 @@ export default function AuctionItem({ auctionList }: AuctionListProps) {
         })
       }
     >
-      <div className="relative mr-2 h-[99px] w-[82px] rounded">
+      <div className="relative mr-2 h-[6.1875rem] w-[5.125rem] rounded">
         {auctionList.image ? (
           <Image
             src={auctionList.image}
@@ -48,11 +48,11 @@ export default function AuctionItem({ auctionList }: AuctionListProps) {
       </div>
       <div className="relative flex flex-col justify-center">
         {auctionList.status === 'processing' ? (
-          <span className="absolute top-0 flex h-[17px] w-[42px] items-center justify-center bg-[#FC6554] text-center text-10 text-[#FFFFFF]">
+          <span className="absolute top-0 flex h-[1.0625rem] w-[2.625rem] items-center justify-center bg-[#FC6554] text-center text-10 text-[#FFFFFF]">
             D-{remainedDay()}
           </span>
         ) : (
-          <span className="absolute top-0  flex h-[17px] w-[42px] items-center justify-center bg-[#191919] text-center text-10 text-[#FFFFFF]">
+          <span className="absolute top-0  flex h-[1.0625rem] w-[2.625rem] items-center justify-center bg-[#191919] text-center text-10 text-[#FFFFFF]">
             종료
           </span>
         )}

@@ -30,7 +30,7 @@ export default function SuccessBidItem({
         });
       }}
     >
-      <article className="relative h-[100px] w-[82px] overflow-hidden rounded">
+      <article className="relative h-[6.25rem] w-[5.125rem] overflow-hidden rounded">
         <Image
           alt="example"
           src={biddingItem?.mainImage || '/svg/example/example_picture_col.svg'}
@@ -46,7 +46,7 @@ export default function SuccessBidItem({
           <span className="text-14">{biddingItem?.title}</span>
           <span className="text-12"> | {biddingItem?.artistName}</span>
         </p>
-        <div className="mt-[1.5px]">
+        <div className="mt-[0.0938rem]">
           <p className="text-16 font-semibold text-brand">
             {biddingItem?.finalBiddingPrice}원
           </p>

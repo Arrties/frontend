@@ -36,7 +36,7 @@ interface DefaultProps {
 }
 
 const TabBox = tw.footer<DefaultProps>`
- fixed inset-x-0 bottom-0 bg-white max-w-[420px] flex justify-center z-50 py-2 inset-x-0 m-auto px-3
+ fixed inset-x-0 bottom-0 bg-white max-w-[26.25rem] flex justify-center z-50 py-2 inset-x-0 m-auto px-3
 `;
 
 const TabList = tw.div<DefaultProps>`flex w-full`;

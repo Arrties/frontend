@@ -38,13 +38,13 @@ export default function Selling() {
       <Navigate isRightButton={false} message="판매활동" />
       <Tab.Group>
         <Tab.List className="w-full text-14 ">
-          <Tab className="z-10 h-[52px] w-1/3 border-[#191919] text-16 font-medium ui-selected:border-b-[2px] ui-selected:text-[#191919] ui-not-selected:border-b ui-not-selected:border-[#EDEDED] ui-not-selected:text-[#999999] ">
+          <Tab className="z-10 h-[3.25rem] w-1/3 border-[#191919] text-16 font-medium ui-selected:border-b-[0.125rem] ui-selected:text-[#191919] ui-not-selected:border-b ui-not-selected:border-[#EDEDED] ui-not-selected:text-[#999999] ">
             등록된 작품
           </Tab>
-          <Tab className="z-10 h-[52px] w-1/3 border-[#191919] text-16 font-medium ui-selected:border-b-[2px] ui-selected:text-[#191919] ui-not-selected:border-b ui-not-selected:border-[#EDEDED] ui-not-selected:text-[#999999] ">
+          <Tab className="z-10 h-[3.25rem] w-1/3 border-[#191919] text-16 font-medium ui-selected:border-b-[0.125rem] ui-selected:text-[#191919] ui-not-selected:border-b ui-not-selected:border-[#EDEDED] ui-not-selected:text-[#999999] ">
             경매 중
           </Tab>
-          <Tab className="z-10 h-[52px] w-1/3 border-[#191919] text-16 font-medium ui-selected:border-b-[2px] ui-selected:text-[#191919] ui-not-selected:border-b ui-not-selected:border-[#EDEDED] ui-not-selected:text-[#999999] ">
+          <Tab className="z-10 h-[3.25rem] w-1/3 border-[#191919] text-16 font-medium ui-selected:border-b-[0.125rem] ui-selected:text-[#191919] ui-not-selected:border-b ui-not-selected:border-[#EDEDED] ui-not-selected:text-[#999999] ">
             경매 완료
           </Tab>
         </Tab.List>

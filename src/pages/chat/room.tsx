@@ -115,8 +115,8 @@ export default function ChatRoom() {
         denyMessage="나가기"
         onAccept={onAccept}
       />
-      <header className="fixed inset-x-0 top-0 mx-auto h-[145px] max-w-[420px] bg-[#FC6554]">
-        <article className="relative mt-[70px] flex w-full px-5 text-white">
+      <header className="fixed inset-x-0 top-0 mx-auto h-[9.0625rem] max-w-[26.25rem] bg-[#FC6554]">
+        <article className="relative mt-[4.375rem] flex w-full px-5 text-white">
           <Image
             src="/svg/icons/back_white.svg"
             alt="back"
@@ -150,10 +150,10 @@ export default function ChatRoom() {
         </article>
       </header>
       <section
-        className="overflow absolute inset-x-0 top-[120px] w-full  rounded-xl bg-white p-5"
+        className="overflow absolute inset-x-0 top-[7.5rem] w-full  rounded-xl bg-white p-5"
         ref={scrollRef}
       >
-        <article className="flex h-[40px] items-center justify-center text-center text-14 font-bold text-[#767676]">
+        <article className="flex h-[2.5rem] items-center justify-center text-center text-14 font-bold text-[#767676]">
           {messages &&
             messages.length > 0 &&
             moment(
@@ -174,19 +174,19 @@ export default function ChatRoom() {
         </article>
         <div className="h-20" />
       </section>
-      <div className="fixed inset-x-0 bottom-0 mx-auto flex h-[70px] w-full max-w-[420px] justify-center bg-white px-[20px]">
+      <div className="fixed inset-x-0 bottom-0 mx-auto flex h-[4.375rem] w-full max-w-[26.25rem] justify-center bg-white px-[1.25rem]">
         <form
-          className="flex h-[50px] w-full items-center rounded-[24.5px] px-[10px]"
+          className="flex h-[3.125rem] w-full items-center rounded-[1.5313rem] px-[0.625rem]"
           onSubmit={handleSubmit(onSubmit)}
         >
           <input
             type="text"
-            className="h-full w-full appearance-none rounded-[24.5px] border-none bg-[#F8F8FA] px-[20px]  text-14  font-semibold placeholder:text-[#999999] "
+            className="h-full w-full appearance-none rounded-[1.5313rem] border-none bg-[#F8F8FA] px-[1.25rem]  text-14  font-semibold placeholder:text-[#999999] "
             placeholder="메세지를 입력해주세요."
             {...register('message', { required: true })}
           />
           {watch('message') ? (
-            <button className="absolute right-[40px] cursor-pointer">
+            <button className="absolute right-[2.5rem] cursor-pointer">
               <Image alt="" src="/svg/icons/send.svg" width="22" height="0" />
             </button>
           ) : (
@@ -200,7 +200,7 @@ export default function ChatRoom() {
                   alt="picture"
                   width="25"
                   height="0"
-                  className="absolute right-[40px] cursor-pointer"
+                  className="absolute right-[2.5rem] cursor-pointer"
                 />
               </label>
               <input

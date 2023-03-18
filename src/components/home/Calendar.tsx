@@ -104,7 +104,7 @@ export default React.memo(function Calendar({
 
   return (
     <>
-      <div className="m-auto mt-3 flex h-[50px] items-center justify-center bg-[#F8F8FA]">
+      <div className="m-auto mt-3 flex h-[3.125rem] items-center justify-center bg-[#F8F8FA]">
         <button
           onClick={() => setDate(date.clone().subtract(1, 'month'))}
           className="absolute left-16"

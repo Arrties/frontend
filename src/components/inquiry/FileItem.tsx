@@ -11,10 +11,10 @@ interface FileItemForm {
 
 export default function FileItem({ file, handler, idx }: FileItemForm) {
   return (
-    <div className="relative ml-3 mb-2 h-[60px] w-[60px] rounded border-[1px] border-[#DBDBDB]">
+    <div className="relative ml-3 mb-2 h-[3.75rem] w-[3.75rem] rounded border-[0.0625rem] border-[#DBDBDB]">
       <div
         onClick={() => handler(file.name || file.idx, file.size)}
-        className="absolute right-[-5px] top-[-5px] flex h-[14px] w-[14px] cursor-pointer items-center justify-center rounded-full bg-[#999999]"
+        className="absolute right-[-0.3125rem] top-[-0.3125rem] flex h-[0.875rem] w-[0.875rem] cursor-pointer items-center justify-center rounded-full bg-[#999999]"
       >
         <Image
           src="/svg/icons/close_white.svg"

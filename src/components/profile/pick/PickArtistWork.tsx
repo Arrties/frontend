@@ -19,13 +19,13 @@ export default function PickArtistWork({
         src={image || '/svg/icons/.svg'}
         width="100"
         height="0"
-        className="aspect-square w-[82px] rounded"
+        className="aspect-square w-[5.125rem] rounded"
       />
 
       <div className="ml-5">
-        <p className="mb-[6px] text-14 font-medium">{title} </p>
+        <p className="mb-[0.375rem] text-14 font-medium">{title} </p>
         <div
-          className={`flex h-[17px] w-[52px] items-center justify-center text-[10px] text-white
+          className={`flex h-[1.0625rem] w-[3.25rem] items-center justify-center text-[0.625rem] text-white
           ${saleStatus === '입찰중' ? 'bg-[#4B9E77]' : 'bg-[#191919]'}`}
         >
           {saleStatus}

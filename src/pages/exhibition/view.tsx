@@ -15,7 +15,7 @@ import { EffectCoverflow } from 'swiper';
 import useWindowSize from '@hooks/useWindowSize';
 
 const SwiperButtonDiv = tw.div<defaultProps>`
-bg-[rgba(153,153,153,0.24)] rounded-[10px] w-8 h-8 max-[400px]:w-7 max-[400px]:h-7 flex justify-center cursor-pointer
+bg-[rgba(153,153,153,0.24)] rounded-[0.625rem] w-8 h-8 max-[25rem]:w-7 max-[25rem]:h-7 flex justify-center cursor-pointer
 `;
 
 export default function ExhibitionArts() {
@@ -76,7 +76,7 @@ export default function ExhibitionArts() {
           width={400}
           height={0}
           sizes="100vh"
-          className="absolute top-[240px] right-[-3px] scale-[2.0] object-contain"
+          className="absolute top-[15rem] right-[-0.1875rem] scale-[2.0] object-contain"
         />
       ) : (
         <Image
@@ -98,7 +98,7 @@ export default function ExhibitionArts() {
           />
         }
         handleRightButton={() => setIsGenreModal(true)}
-        className="absolute inset-0 mx-[24px] w-[calc(100%-48px)]"
+        className="absolute inset-0 mx-[1.5rem] w-[calc(100%-3rem)]"
       />
       <Swiper
         className="mySwiper absolute h-full"
@@ -107,7 +107,7 @@ export default function ExhibitionArts() {
         modules={[EffectCoverflow]}
       >
         {!isExpansion && !isOpen && (
-          <div className="absolute top-[330px] z-10 flex w-full justify-between">
+          <div className="absolute top-[20.625rem] z-10 flex w-full justify-between">
             <SwiperButtonDiv
               onClick={() => swiperRef.current.swiper.slidePrev()}
             >
@@ -141,9 +141,9 @@ export default function ExhibitionArts() {
                   width={400}
                   height={0}
                   sizes="100vh"
-                  className="absolute top-[240px] scale-[2.0] object-contain"
+                  className="absolute top-[15rem] scale-[2.0] object-contain"
                 />
-                <div className="absolute top-[160px] mr-1 w-[95%] max-[400px]:top-[170px]">
+                <div className="absolute top-[10rem] mr-1 w-[95%] max-[25rem]:top-[10.625rem]">
                   <Image
                     src={art.image}
                     alt="image"
@@ -151,7 +151,7 @@ export default function ExhibitionArts() {
                     height={0}
                     quality={100}
                   />
-                  <div className="absolute top-[10px] right-[10px]">
+                  <div className="absolute top-[0.625rem] right-[0.625rem]">
                     <Image
                       src="/svg/icons/maximize.svg"
                       alt="image"
@@ -172,9 +172,9 @@ export default function ExhibitionArts() {
                   width={400}
                   height={0}
                   sizes="100vh"
-                  className="absolute top-[140px] scale-[1.6] object-contain"
+                  className="absolute top-[8.75rem] scale-[1.6] object-contain"
                 />
-                <div className="absolute top-[135px] mr-1 w-[77%]">
+                <div className="absolute top-[8.4375rem] mr-1 w-[77%]">
                   <Image
                     src={art.image}
                     alt="image"
@@ -182,7 +182,7 @@ export default function ExhibitionArts() {
                     height={0}
                     quality={100}
                   />
-                  <div className="absolute top-[10px] right-[10px]">
+                  <div className="absolute top-[0.625rem] right-[0.625rem]">
                     <Image
                       src="/svg/icons/maximize.svg"
                       alt="image"
@@ -196,9 +196,9 @@ export default function ExhibitionArts() {
               </div>
             )}
             {modal && (
-              <div className="absolute bottom-[-80px] flex w-full flex-col justify-center max-[380px]:bottom-[-200px]">
+              <div className="absolute bottom-[-5rem] flex w-full flex-col justify-center max-[23.75rem]:bottom-[-12.5rem]">
                 {!isOpen && (
-                  <div className="m-auto mb-3 w-[22px]">
+                  <div className="m-auto mb-3 w-[1.375rem]">
                     <Image
                       alt="swipe"
                       src="/svg/icons/swipe_arrow.svg"

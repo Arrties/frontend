@@ -12,7 +12,7 @@ export default function FloatButton() {
       onClick={() => {
         router.push('/home/post');
       }}
-      className="insex-x-0 sticky bottom-16 z-50 m-auto mr-0 h-[72px] w-[72px] cursor-pointer "
+      className="insex-x-0 sticky bottom-16 z-50 m-auto mr-0 h-[4.5rem] w-[4.5rem] cursor-pointer "
     />
   );
 }

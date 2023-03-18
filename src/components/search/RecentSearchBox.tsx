@@ -13,7 +13,7 @@ interface DefaultProps {
 }
 
 const RecentKeywordBox = tw.li<DefaultProps>`
-border-b-[1px] border-[#EDEDED] text-[#767676] flex px-2 justify-between basis-[48.6%] p-0 cursor-pointer odd:mr-2 pb-1 mt-2
+border-b-[0.0625rem] border-[#EDEDED] text-[#767676] flex px-2 justify-between basis-[48.6%] p-0 cursor-pointer odd:mr-2 pb-1 mt-2
 `;
 
 export default function RecentSearchBox({

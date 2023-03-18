@@ -28,7 +28,7 @@ interface RightButtonProps extends DefaultProps {
 }
 
 const NavigateBox = tw.header<DefaultProps>`
-flex items-center relative h-[80px] pt-[20px]
+flex items-center relative h-[5rem] pt-[1.25rem]
 `;
 
 const LeftButton = tw.div<LeftButtonProps>`cursor-pointer z-10 absolute left-0

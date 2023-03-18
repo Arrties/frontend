@@ -44,7 +44,7 @@ export default function NoticeItem({ notice }: NoticeItemProps) {
   };
 
   return (
-    <li className="text-medium relative flex justify-between border-b-[1px] py-3 last:border-none">
+    <li className="text-medium relative flex justify-between border-b-[0.0625rem] py-3 last:border-none">
       <div className="flex">
         <Image
           alt="notice_icon"
@@ -60,9 +60,9 @@ export default function NoticeItem({ notice }: NoticeItemProps) {
             router.push(icon[title][1]);
           }}
         >
-          <p className="text-[12px] font-bold">{title}</p>
-          <p className="flex justify-between text-[14px]">{notice.message}</p>
-          <p className="text-[10px] text-[#999999]">{modifiedDate}</p>
+          <p className="text-[0.75rem] font-bold">{title}</p>
+          <p className="flex justify-between text-[0.875rem]">{notice.message}</p>
+          <p className="text-[0.625rem] text-[#999999]">{modifiedDate}</p>
         </section>
       </div>
       <Image

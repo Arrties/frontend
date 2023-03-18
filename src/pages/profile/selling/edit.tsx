@@ -277,7 +277,7 @@ export default function Edit() {
         <Navigate right_message="완료" />
         <div className="flex">
           <label htmlFor="fileImage">
-            <div className="mr-0 flex h-[60px] w-[60px] cursor-pointer flex-col items-center justify-center rounded border-[1px] border-[#DBDBDB]">
+            <div className="mr-0 flex h-[3.75rem] w-[3.75rem] cursor-pointer flex-col items-center justify-center rounded border-[0.0625rem] border-[#DBDBDB]">
               <Image
                 src="/svg/icons/camera_black.svg"
                 alt="camera"
@@ -329,10 +329,10 @@ export default function Edit() {
             }}
             className="relative"
           >
-            <div className="flex h-[38px] w-[92px] items-center rounded-[4px] border border-[#D8D8D8] pl-3 text-[13px] text-[#999999]">
+            <div className="flex h-[2.375rem] w-[5.75rem] items-center rounded-[0.25rem] border border-[#D8D8D8] pl-3 text-[0.8125rem] text-[#999999]">
               태그추가
             </div>
-            <div className="absolute left-[63px] bottom-0 flex h-full items-center">
+            <div className="absolute left-[3.9375rem] bottom-0 flex h-full items-center">
               <Image
                 src="/svg/icons/plus_gray.svg"
                 alt="tag"
@@ -384,7 +384,7 @@ export default function Edit() {
             id="content"
             maxLength={1000}
             placeholder="작품에 대해 자세히 기입해주세요."
-            className="h-[150px] w-full resize-none overflow-hidden rounded-[4px] border-[#D8D8D8] text-[13px] placeholder-[#999999] placeholder:text-14"
+            className="h-[9.375rem] w-full resize-none overflow-hidden rounded-[0.25rem] border-[#D8D8D8] text-[0.8125rem] placeholder-[#999999] placeholder:text-14"
             {...register('description', { required: true })}
           />
         </div>
@@ -402,7 +402,7 @@ export default function Edit() {
         >
           <label className="text-14 leading-8">장르</label>
           <div
-            className={`flex h-[52px] w-full cursor-pointer items-center rounded-[4px] border border-[#D8D8D8] pl-3 text-[13px] ${
+            className={`flex h-[3.25rem] w-full cursor-pointer items-center rounded-[0.25rem] border border-[#D8D8D8] pl-3 text-[0.8125rem] ${
               genre ? 'text-[#191919]' : 'text-[#999999]'
             }`}
           >
@@ -473,7 +473,7 @@ export default function Edit() {
           id="content"
           maxLength={1000}
           placeholder="작품상태에 대해 자세히 기입해주세요."
-          className="h-[150px] w-full resize-none overflow-hidden rounded-[4px] border-[#D8D8D8] text-[13px] placeholder-[#999999] placeholder:text-14  "
+          className="h-[9.375rem] w-full resize-none overflow-hidden rounded-[0.25rem] border-[#D8D8D8] text-[0.8125rem] placeholder-[#999999] placeholder:text-14  "
           {...register('statusDescription', { required: true })}
         />
         <div
@@ -488,19 +488,19 @@ export default function Edit() {
           </label>
           {signature ? (
             <div
-              className="flex h-[128px] w-full cursor-pointer items-center justify-center overflow-hidden rounded border border-[#DBDBDB] p-4"
+              className="flex h-[8rem] w-full cursor-pointer items-center justify-center overflow-hidden rounded border border-[#DBDBDB] p-4"
               onClick={() => setIsGuaranteeModal(true)}
             >
               <Image src={signature} width={163} height={91} alt="guarantee" />
             </div>
           ) : (
             <div className="relative">
-              <div className="flex h-[52px] w-full items-center rounded-[4px] border border-[#D8D8D8] pl-3 text-[13px] text-[#999999]">
+              <div className="flex h-[3.25rem] w-full items-center rounded-[0.25rem] border border-[#D8D8D8] pl-3 text-[0.8125rem] text-[#999999]">
                 전자 서명이 필요합니다.
               </div>
               <div
                 onClick={() => setIsGuaranteeModal(true)}
-                className="absolute right-4 bottom-0 flex h-[52px] cursor-pointer items-center"
+                className="absolute right-4 bottom-0 flex h-[3.25rem] cursor-pointer items-center"
               >
                 <Image
                   src="/svg/icons/pencil_gray.svg"
@@ -542,8 +542,8 @@ export default function Edit() {
             />
           )}
 
-        <div className="relative h-[336px]">
-          <div className="absolute -left-6 -bottom-10 h-[376px] w-[375px]">
+        <div className="relative h-[21rem]">
+          <div className="absolute -left-6 -bottom-10 h-[23.5rem] w-[23.4375rem]">
             <div className="mt-12 h-4 bg-[#F8F8FA]"></div>
             <div className="px-6 text-12">
               <p className="mt-8 font-medium">

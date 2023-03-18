@@ -25,7 +25,7 @@ export default React.memo(function ExhibitionItem({
   };
   return (
     <div
-      className="relative h-[197px] w-[158px] rounded max-[400px]:h-[175px] max-[400px]:w-[145px]"
+      className="relative h-[12.3125rem] w-[9.875rem] rounded max-[25rem]:h-[10.9375rem] max-[25rem]:w-[9.0625rem]"
       onClick={() => {
         router.push({
           pathname: '/exhibition/detail',

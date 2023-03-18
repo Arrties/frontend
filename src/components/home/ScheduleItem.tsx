@@ -15,7 +15,7 @@ ${({ status }) =>
     : status === 'processing'
     ? 'bg-brand'
     : 'bg-[#FFC961]'} 
-w-[52px] h-[52px] flex justify-center mr-3 rounded-l-[5px] drop-shadow-lg
+w-[3.25rem] h-[3.25rem] flex justify-center mr-3 rounded-l-[0.3125rem] drop-shadow-lg
 `;
 
 const NotificationBox = tw.div<ScheduleItemForm>`
@@ -25,7 +25,7 @@ ${({ status }) =>
     : status === 'processing'
     ? 'bg-brand'
     : 'bg-[#FFC961]'} 
-w-[26px] h-[26px] flex justify-center m-auto mx-0 rounded-full border-[1px] ${({
+w-[1.625rem] h-[1.625rem] flex justify-center m-auto mx-0 rounded-full border-[0.0625rem] ${({
   status,
 }) =>
   status === 'terminated'

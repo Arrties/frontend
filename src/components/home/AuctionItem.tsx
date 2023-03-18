@@ -17,7 +17,7 @@ export default React.memo(function AuctionItem({
   const endDate = auctionItem?.endDate.format('MM.DD');
   return (
     <div className="mb-5 flex last:mb-0" {...rest}>
-      <div className="relative mr-2 h-[90px] w-[82px] rounded">
+      <div className="relative mr-2 h-[5.625rem] w-[5.125rem] rounded">
         <Image
           src={auctionItem?.image || '/svg/icons/logo_main.svg'}
           alt="notification"

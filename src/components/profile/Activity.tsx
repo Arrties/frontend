@@ -16,7 +16,7 @@ interface DefaultProps {
 
 const ActivityBox = tw.div<DefaultProps>`
 bg-[#F8F8FA] rounded-lg  mt-4 flex flex-col justify-center items-center cursor-pointer aspect-[10/9]
-${(p) => (p.$isUser ? 'w-[calc(33%-12px)]' : 'w-[calc(25%-12px)]')}
+${(p) => (p.$isUser ? 'w-[calc(33%-0.75rem)]' : 'w-[calc(25%-0.75rem)]')}
 `;
 
 export default function Activity({ text, path, icon }: ActivityBoxProps) {
@@ -29,7 +29,7 @@ export default function Activity({ text, path, icon }: ActivityBoxProps) {
       }}
     >
       <Image src={icon} alt={`${icon}`} width={20} height={20} />
-      <span className="pt-[12px] text-12 text-[#767676] max-[400px]:pt-[6px]">
+      <span className="pt-[0.75rem] text-12 text-[#767676] max-[25rem]:pt-[0.375rem]">
         {text}
       </span>
     </ActivityBox>

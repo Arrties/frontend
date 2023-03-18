@@ -20,20 +20,20 @@ interface DefaultProps {
 }
 
 const ModalInner = tw.div<DefaultProps>`
-w-full h-auto m-auto rounded-[8px] backdrop-blur-[25.5px] p-5 transition ${(
+w-full h-auto m-auto rounded-[0.5rem] backdrop-blur-[1.5938rem] p-5 transition ${(
   p,
 ) =>
   p.$open && p.$height < 800 && p.$height > 700
-    ? 'bg-white translate-y-[-380px] bg-gradient-to-b from-[#f5f1f1] via-[#e0dddd] to-[#f5f1f1]'
+    ? 'bg-white translate-y-[-23.75rem] bg-gradient-to-b from-[#f5f1f1] via-[#e0dddd] to-[#f5f1f1]'
     : 'bg-gradient-to-b from-[#FFFFFF] to-[#d1d1d1]'} ${(p) =>
   p.$open && p.$height < 700
-    ? 'bg-white translate-y-[-310px] bg-gradient-to-b from-[#f5f1f1] via-[#e0dddd] to-[#f5f1f1]'
+    ? 'bg-white translate-y-[-19.375rem] bg-gradient-to-b from-[#f5f1f1] via-[#e0dddd] to-[#f5f1f1]'
     : 'bg-gradient-to-b from-[#FFFFFF] to-[#d1d1d1]'} ${(p) =>
   p.$open && p.$height > 800
-    ? 'bg-white translate-y-[-420px] bg-gradient-to-b from-[#f5f1f1] via-[#e0dddd] to-[#f5f1f1]'
+    ? 'bg-white translate-y-[-26.25rem] bg-gradient-to-b from-[#f5f1f1] via-[#e0dddd] to-[#f5f1f1]'
     : 'bg-gradient-to-b from-[#FFFFFF] to-[#d1d1d1]'} ${(p) =>
   p.$open && p.$height > 1100
-    ? ' bg-white translate-y-[-710px] bg-gradient-to-b from-[#f5f1f1] via-[#e0dddd] to-[#f5f1f1]'
+    ? ' bg-white translate-y-[-44.375rem] bg-gradient-to-b from-[#f5f1f1] via-[#e0dddd] to-[#f5f1f1]'
     : 'bg-gradient-to-b from-[#FFFFFF] to-[#d1d1d1]'}
 `;
 const ModalHeader = tw.div<DefaultProps>`
@@ -43,25 +43,25 @@ const EducationDiv = tw.div<DefaultProps>`
 text-[#191919] text-14 pt-1`;
 
 const ModalButton = tw.div`
-bg-[#FFFFFF] rounded-[4px] text-[#191919] text-14 flex items-center justify-center cursor-pointer px-10 py-4 max-[400px]:px-8 max-[370px]:px-7
+bg-[#FFFFFF] rounded-[0.25rem] text-[#191919] text-14 flex items-center justify-center cursor-pointer px-10 py-4 max-[25rem]:px-8 max-[23.125rem]:px-7
 `;
 
 const DescriptionDiv = styled.div`
-  font-size: 14px;
-  max-height: 135px;
+  font-size: 0.875rem;
+  max-height: 8.4375rem;
   overflow-y: auto;
-  padding-right: 15px;
+  padding-right: 0.9375rem;
   ::-webkit-scrollbar {
-    width: 3px;
+    width: 0.1875rem;
   }
   ::-webkit-scrollbar-track {
     background-color: #ffffff;
-    border-radius: 30px;
-    width: 1px;
+    border-radius: 1.875rem;
+    width: 0.0625rem;
   }
   ::-webkit-scrollbar-thumb {
     background-color: #191919;
-    border-radius: 30px;
+    border-radius: 1.875rem;
   }
 `;
 

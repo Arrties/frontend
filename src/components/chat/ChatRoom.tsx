@@ -33,10 +33,10 @@ export default function Chatroom({ chatRoom }: ChatRoomProps) {
   const router = useRouter();
   return (
     <section
-      className="relative flex h-[64px] cursor-pointer items-center border-b p-5 first:border-t"
+      className="relative flex h-[4rem] cursor-pointer items-center border-b p-5 first:border-t"
       onClick={handleChattingRoom}
     >
-      <div className="relative h-[49px] w-[49px]">
+      <div className="relative h-[3.0625rem] w-[3.0625rem]">
         <Image
           src={chatRoom?.otherMember?.image || '/svg/icons/avatar.svg'}
           alt="profile"
@@ -60,7 +60,7 @@ export default function Chatroom({ chatRoom }: ChatRoomProps) {
         <MessageBox>{chatRoom?.lastMessage?.content}</MessageBox>
       </article>
       {!!chatRoom.unreadCount && (
-        <article className="absolute right-16 flex h-[20px] w-[20px] items-center justify-center rounded-full bg-[#FC6554] text-12 text-[#FFF]">
+        <article className="absolute right-16 flex h-[1.25rem] w-[1.25rem] items-center justify-center rounded-full bg-[#FC6554] text-12 text-[#FFF]">
           {chatRoom?.unreadCount}
         </article>
       )}

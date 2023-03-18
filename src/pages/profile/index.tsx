@@ -17,7 +17,7 @@ interface defaultProps {
 }
 
 const WelcomeBox = tw.div<defaultProps>`
-bg-brand rounded-lg h-[90px] flex  items-center px-4
+bg-brand rounded-lg h-[5.625rem] flex  items-center px-4
 `;
 
 interface ActivityList {
@@ -112,7 +112,7 @@ export default function Profile() {
         />
         <section>
           <WelcomeBox>
-            <div className="relative flex h-[54px] w-[54px] items-center overflow-hidden rounded-full bg-[#EDEDED]">
+            <div className="relative flex h-[3.375rem] w-[3.375rem] items-center overflow-hidden rounded-full bg-[#EDEDED]">
               {data?.image ? (
                 <Image
                   src={data?.image}
@@ -139,7 +139,7 @@ export default function Profile() {
                   alt="user"
                   width={100}
                   height={100}
-                  className="m-auto h-[27px] cursor-pointer rounded-full bg-[#EDEDED]"
+                  className="m-auto h-[1.6875rem] cursor-pointer rounded-full bg-[#EDEDED]"
                   onClick={() => {
                     if (isUser) {
                       window.alert('작가 전환 후 이용할 수 있는 페이지입니다.');
@@ -179,7 +179,7 @@ export default function Profile() {
               onClick={() => {
                 router.push('/profile/register');
               }}
-              className="mt-4 flex cursor-pointer justify-between rounded border-[1px] border-brand p-4"
+              className="mt-4 flex cursor-pointer justify-between rounded border-[0.0625rem] border-brand p-4"
             >
               <div className="flex">
                 <Image
@@ -211,7 +211,7 @@ export default function Profile() {
             />
           ))}
         </section>
-        <DivisionBar className="absolute inset-x-0 m-auto mt-5 max-w-[420px]" />
+        <DivisionBar className="absolute inset-x-0 m-auto mt-5 max-w-[26.25rem]" />
         <section className="my-10">
           <div className="relative my-4 flex">
             <span className="text-14 font-bold text-[#191919]">취향 목록</span>
@@ -240,7 +240,7 @@ export default function Profile() {
                 onClick={() => {
                   router.push('/profile/keyword');
                 }}
-                className="flex h-[36px] w-[100px] items-center justify-center rounded-[19px] border-[1px] border-brand text-xs text-brand"
+                className="flex h-[2.25rem] w-[6.25rem] items-center justify-center rounded-[1.1875rem] border-[0.0625rem] border-brand text-xs text-brand"
               >
                 <div>
                   <Image
@@ -255,7 +255,7 @@ export default function Profile() {
             </div>
           )}
         </section>
-        <DivisionBar className="absolute inset-x-0 m-auto -mt-5 max-w-[420px]" />
+        <DivisionBar className="absolute inset-x-0 m-auto -mt-5 max-w-[26.25rem]" />
         <section>
           {SettingLists.map((setting: SettingList) => (
             <SettingItem

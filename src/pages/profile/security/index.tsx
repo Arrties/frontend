@@ -48,7 +48,7 @@ export default function Security() {
       />
       <section>
         <article
-          className="relative flex h-[60px] cursor-pointer items-center border-b text-14 font-bold"
+          className="relative flex h-[3.75rem] cursor-pointer items-center border-b text-14 font-bold"
           onClick={handlePassword}
         >
           <p>비밀번호 변경</p>
@@ -61,7 +61,7 @@ export default function Security() {
           />
         </article>
         <article
-          className="relative flex h-[60px] cursor-pointer items-center border-b text-14 font-bold"
+          className="relative flex h-[3.75rem] cursor-pointer items-center border-b text-14 font-bold"
           onClick={handleWithdrawal}
         >
           <p>회원 탈퇴</p>

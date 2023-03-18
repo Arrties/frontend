@@ -20,7 +20,7 @@ w-full flex items-center mt-5 mb-8
 `;
 
 const PickDetailProfile = tw.div<defaultProps>`
-w-[60px] mr-[10px] aspect-square flex justify-center items-center rounded-full border-[1px] border-[#999999] overflow-hidden relative
+w-[3.75rem] mr-[0.625rem] aspect-square flex justify-center items-center rounded-full border-[0.0625rem] border-[#999999] overflow-hidden relative
 `;
 
 export default function PickDetail() {
@@ -84,10 +84,10 @@ export default function PickDetail() {
 
       <Tab.Group>
         <Tab.List>
-          <Tab className="h-[52px] w-1/2 border-[#191919] text-16 font-bold ui-selected:border-b-[3px] ui-selected:text-[#191919] ui-not-selected:border-b ui-not-selected:border-[#EDEDED] ui-not-selected:text-[#999999] ">
+          <Tab className="h-[3.25rem] w-1/2 border-[#191919] text-16 font-bold ui-selected:border-b-[0.1875rem] ui-selected:text-[#191919] ui-not-selected:border-b ui-not-selected:border-[#EDEDED] ui-not-selected:text-[#999999] ">
             작가소개
           </Tab>
-          <Tab className="h-[52px] w-1/2 border-[#191919] text-16 font-bold ui-selected:border-b-[3px] ui-selected:text-[#191919] ui-not-selected:border-b ui-not-selected:border-[#EDEDED] ui-not-selected:text-[#999999] ">
+          <Tab className="h-[3.25rem] w-1/2 border-[#191919] text-16 font-bold ui-selected:border-b-[0.1875rem] ui-selected:text-[#191919] ui-not-selected:border-b ui-not-selected:border-[#EDEDED] ui-not-selected:text-[#999999] ">
             작품
           </Tab>
         </Tab.List>
@@ -120,7 +120,7 @@ export default function PickDetail() {
                       height={20}
                       alt="instagram"
                     />
-                    <p className="ml-[6px] text-14 leading-5">
+                    <p className="ml-[0.375rem] text-14 leading-5">
                       <a href={member?.instagram}>{member?.instagram}</a>
                     </p>
                   </div>
@@ -131,7 +131,7 @@ export default function PickDetail() {
                       height={20}
                       alt="behance"
                     />
-                    <p className="ml-[6px] text-14 leading-5">
+                    <p className="ml-[0.375rem] text-14 leading-5">
                       <a href={member?.behance}>{member?.behance}</a>
                     </p>
                   </div>

@@ -12,7 +12,7 @@ interface defaultProps {
 }
 
 const PickContainer = tw.div<defaultProps>`
-w-full flex-col divide-y-[1px] divide-[#EDEDED]
+w-full flex-col divide-y-[0.0625rem] divide-[#EDEDED]
 `;
 
 export default function Pick() {

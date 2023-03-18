@@ -5,7 +5,7 @@ interface DivisionBarProps {
 }
 
 const DivisionBarTag = tw.div`
-bg-[#F6F6F6] h-[8px] w-full
+bg-[#F6F6F6] h-[0.5rem] w-full
 `;
 
 export default function DivisionBar({ ...rest }: DivisionBarProps) {

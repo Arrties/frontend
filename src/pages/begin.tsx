@@ -17,16 +17,16 @@ interface defaultProps {
   [key: string]: any;
 }
 
-const ImageWrapper = tw.div<defaultProps>`h-[360px] pt-[100px] `;
+const ImageWrapper = tw.div<defaultProps>`h-[22.5rem] pt-[6.25rem] `;
 const Title = tw.p`
 text-18 font-bold mt-16 text-center
 `;
-const Content = tw.div<defaultProps>`text-[14px] font-bold text-[#767676] mt-2 leading-4 `;
+const Content = tw.div<defaultProps>`text-[0.875rem] font-bold text-[#767676] mt-2 leading-4 `;
 const Line = tw.p`leading-5 pl-5`;
 
 const SwiperWrapper = styled.section`
   .swiper-wrapper {
-    height: 700px;
+    height: 43.75rem;
   }
   .swiper-pagination-bullet-active {
     background-color: #fc6554;
@@ -144,7 +144,7 @@ export default function Begin() {
                 setLocalStorage('isVisited', true);
                 router.push('/auth/login');
               }}
-              className="fixed inset-x-0 bottom-[50px] m-auto w-full"
+              className="fixed inset-x-0 bottom-[3.125rem] m-auto w-full"
               text="시작하기"
             />
           </SwiperSlide>
