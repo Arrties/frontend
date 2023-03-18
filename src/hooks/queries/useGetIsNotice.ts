@@ -6,9 +6,7 @@ const useGetIsNotice = () => {
   return useQuery<IsNoticeForm, Error>(
     'useGetIsNotice',
     () => profileApi.getIsNotice(),
-    {
-      retry: false,
-    },
+    {},
   );
 };
 

@@ -26,7 +26,7 @@ export const useGetInfiniteArtWork = () => {
         if (lastPage.nextPage) return lastPage.current_page + 1;
         return undefined;
       },
-      retry: false,
+
       refetchOnWindowFocus: false,
     },
   );

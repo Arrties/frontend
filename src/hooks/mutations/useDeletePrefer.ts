@@ -63,7 +63,6 @@ const useDeletePrefer = (artWorkId: number, path: string) => {
     'useDeletePrefer',
     () => artworkApi.deletePrefer(artWorkId),
     {
-      retry: false,
       onMutate: async () => {
         await queryClient.cancelQueries({ queryKey: ['useDeletePrefer'] });
         const previousValue = queryClient.getQueryData([

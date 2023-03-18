@@ -7,7 +7,6 @@ const usePostInquiry = (formData: any) => {
     'usePostInquiry',
     () => profileApi.postInquiry(formData),
     {
-      retry: false,
       onSettled: () => {
         queryClient.invalidateQueries({
           queryKey: ['useGetInquiry'],

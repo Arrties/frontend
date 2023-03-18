@@ -3,7 +3,6 @@ import { useQuery } from 'react-query';
 
 const useGetBid = () => {
   return useQuery<BidArtwork, Error>('useGetBid', () => artworkApi.getBid(), {
-    retry: false,
     refetchOnWindowFocus: false,
   });
 };

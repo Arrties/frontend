@@ -57,7 +57,6 @@ const usePostPrefer = (artWorkId: number, path: string) => {
     'usePostPrefer',
     () => artworkApi.postPrefer(artWorkId),
     {
-      retry: false,
       onMutate: async () => {
         await queryClient.cancelQueries({ queryKey: ['usePostPrefer'] });
         const previousValue = queryClient.getQueryData([

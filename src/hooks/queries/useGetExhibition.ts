@@ -6,7 +6,6 @@ export const useGetExhibition = () => {
     'useGetExhibition',
     () => artworkApi.getExhibitionList(),
     {
-      retry: false,
       refetchOnWindowFocus: false,
     },
   );
@@ -38,7 +37,6 @@ export const useGetExhibitionItem = (artWorkId: number) => {
     ['useGetExhibitionItem', artWorkId],
     () => artworkApi.getExhibitionItem(artWorkId),
     {
-      retry: false,
       refetchOnWindowFocus: false,
       enabled: !isNaN(artWorkId),
     },

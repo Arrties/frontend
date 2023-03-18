@@ -7,7 +7,6 @@ const useGetAuction = () => {
     'useGetAuction',
     () => homeApi.getAuctionList(),
     {
-      retry: false,
       refetchOnWindowFocus: false,
       select: (data) => {
         return data.map((it: AuctionList) => {

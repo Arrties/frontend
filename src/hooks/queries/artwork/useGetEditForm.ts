@@ -3,7 +3,6 @@ import { useQuery } from 'react-query';
 
 const useGetEditForm = (id: number) => {
   return useQuery(['useGetEditForm', id], () => artworkApi.getEditForm(id), {
-    retry: false,
     refetchOnWindowFocus: false,
   });
 };

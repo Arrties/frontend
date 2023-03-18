@@ -7,7 +7,6 @@ const usePostPick = (artWorkId: number) => {
     'usePostPick',
     () => profileApi.postPick(artWorkId),
     {
-      retry: false,
       onMutate: async () => {
         await queryClient.cancelQueries({ queryKey: ['usePostPick'] });
         const previousValue = queryClient.getQueryData(['useGetPickDetail']);

@@ -6,7 +6,6 @@ const useGetChatRoom = (id: number) => {
     ['useGetChatRoom', id],
     () => chatApi.getChatRoom(id),
     {
-      retry: false,
       refetchOnWindowFocus: false,
       enabled: !isNaN(id),
     },

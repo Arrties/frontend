@@ -6,7 +6,6 @@ const useGetNowAuctionArtworkList = () => {
     'useGetNowAuctionArtworkList',
     () => auctionApi.getNowAuctionArtworkList(),
     {
-      retry: false,
       refetchOnWindowFocus: false,
       suspense: false,
       useErrorBoundary: false,

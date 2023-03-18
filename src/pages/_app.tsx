@@ -14,14 +14,15 @@ import { getToken } from '@utils/localStorage/token';
 import { pageview } from '@utils/gtag';
 import GoogleScript from '@components/GoogleScript';
 import MetaHead from '@components/MetaHead';
+
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      retry: 0,
+      retry: false,
       suspense: true,
       useErrorBoundary: true,
     },
-    mutations: { retry: 0, useErrorBoundary: true },
+    mutations: { retry: false, useErrorBoundary: true },
   },
 });
 const persistor = persistStore(store);

@@ -5,9 +5,7 @@ const useGetNotice = () => {
   return useQuery<Notice[], Error>(
     'useGetNotice',
     () => profileApi.getNotice(),
-    {
-      retry: false,
-    },
+    {},
   );
 };
 

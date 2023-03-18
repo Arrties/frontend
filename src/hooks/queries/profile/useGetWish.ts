@@ -6,7 +6,6 @@ const useGetWish = () => {
     'useGetWish',
     () => profileApi.getWish(),
     {
-      retry: false,
       refetchOnWindowFocus: false,
     },
   );

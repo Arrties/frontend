@@ -7,7 +7,6 @@ const useGetPastAuction = () => {
     'useGetPastAuction',
     () => homeApi.getPastAuctionList(),
     {
-      retry: false,
       refetchOnWindowFocus: false,
       select: (data) => {
         return data.map((it: AuctionList) => {
