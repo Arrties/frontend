@@ -71,7 +71,7 @@ export default function App({ Component, pageProps }: AppProps) {
   return loading ? (
     <Loader />
   ) : (
-    <div className="flex h-screen w-screen justify-center bg-slate-50 font-Pretendard">
+    <div className="flex h-screen w-screen justify-center bg-slate-50 ">
       <MetaHead />
       <GoogleScript />
       <Suspense fallback={<Loader />}>

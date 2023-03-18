@@ -1,11 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const LayoutBox = styled.div`
-  &::-webkit-scrollbar {
-    display: none;
-  }
-`;
+const LayoutBox = styled.div``;
 
 interface LayoutProps {
   children?: React.ReactNode;
