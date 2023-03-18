@@ -17,7 +17,7 @@ export default function FileItem({ file, handler, idx }: FileItemForm) {
         className="absolute right-[-5px] top-[-5px] flex h-[14px] w-[14px] cursor-pointer items-center justify-center rounded-full bg-[#999999]"
       >
         <Image
-          src="/svg/icons/icon_close_white.svg"
+          src="/svg/icons/close_white.svg"
           alt="close"
           width={15}
           height={15}

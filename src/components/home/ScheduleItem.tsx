@@ -54,7 +54,7 @@ export default React.memo(function ScheduleItem({
       <div className="flex">
         <ScheduleIconBox status={auctionItem.status}>
           <Image
-            src="/svg/icons/icon_calendar.svg"
+            src="/svg/icons/calendar.svg"
             alt="calendar"
             width={20}
             height={20}
@@ -83,7 +83,7 @@ export default React.memo(function ScheduleItem({
       </div>
       <NotificationBox status={auctionItem.status}>
         <Image
-          src={`/svg/icons/icon_notification_${
+          src={`/svg/icons/notification_${
             auctionItem.status === 'terminated' ? 'gray' : 'white'
           }.svg`}
           alt="notification"

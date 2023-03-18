@@ -23,7 +23,7 @@ export default function Toast({ setToast, text }: ToastProps) {
         <div className="flex h-[20px] w-[20px] items-center justify-center rounded bg-[#FC6554]">
           <Image
             alt="logo"
-            src="/svg/icons/icon_logo_brand.svg"
+            src="/svg/icons/logo_brand.svg"
             width="15"
             height="0"
           />

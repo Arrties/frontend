@@ -1,7 +1,7 @@
 import Input from '@components/common/Input';
 import Layout from '@components/common/Layout';
 import SearchItem from '@components/search/SearchItem';
-import back from '@public/svg/icons/icon_back.svg';
+import back from '@public/svg/icons/back.svg';
 import Image from 'next/image';
 import tw from 'tailwind-styled-components';
 import { useRouter } from 'next/router';

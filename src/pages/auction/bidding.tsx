@@ -121,7 +121,7 @@ export default function Bidding() {
             <p className="flex">
               <Image
                 alt=""
-                src="/svg/icons/icon_clock_black.svg"
+                src="/svg/icons/clock_black.svg"
                 width="17"
                 height="0"
               />
@@ -147,7 +147,7 @@ export default function Bidding() {
             <p className="flex">
               <Image
                 alt=""
-                src="/svg/icons/icon_clock_black.svg"
+                src="/svg/icons/clock_black.svg"
                 width="17"
                 height="0"
               />

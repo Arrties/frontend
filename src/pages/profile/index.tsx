@@ -31,13 +31,13 @@ let ActivityLists: ActivityList[] = [
   {
     id: '1',
     text: '관심목록',
-    icon: '/svg/icons/icon_heart.svg',
+    icon: '/svg/icons/heart.svg',
     path: '/profile/wish',
   },
   {
     id: '2',
     text: '나의 픽 작가',
-    icon: '/svg/icons/icon_book_mark.svg',
+    icon: '/svg/icons/book_mark.svg',
     path: '/profile/pick',
   },
 ];
@@ -48,7 +48,7 @@ ActivityLists = isUser
       {
         id: '3',
         text: '나의 경매',
-        icon: '/svg/icons/icon_bid.svg',
+        icon: '/svg/icons/bid.svg',
         path: '/profile/bid',
       },
     ]
@@ -57,13 +57,13 @@ ActivityLists = isUser
       {
         id: '3',
         text: '나의 경매',
-        icon: '/svg/icons/icon_bid.svg',
+        icon: '/svg/icons/bid.svg',
         path: '/profile/bid',
       },
       {
         id: '4',
         text: '판매 활동',
-        icon: '/svg/icons/icon_selling.svg',
+        icon: '/svg/icons/selling.svg',
         path: '/profile/selling',
       },
     ];
@@ -135,7 +135,7 @@ export default function Profile() {
                 />
               ) : (
                 <Image
-                  src="/svg/icons/profile/icon_avatar.svg"
+                  src="/svg/icons/profile/avatar.svg"
                   alt="user"
                   width={100}
                   height={100}
@@ -163,7 +163,7 @@ export default function Profile() {
             </div>
             <div className="absolute right-10">
               <Image
-                src="/svg/icons/icon_pencil.svg"
+                src="/svg/icons/pencil.svg"
                 alt="setting"
                 className=" cursor-pointer"
                 onClick={() => {
@@ -183,7 +183,7 @@ export default function Profile() {
             >
               <div className="flex">
                 <Image
-                  src="/svg/icons/icon_user.svg"
+                  src="/svg/icons/user.svg"
                   alt="avatar"
                   width={23}
                   height={23}
@@ -193,7 +193,7 @@ export default function Profile() {
                 </span>
               </div>
               <Image
-                src="/svg/icons/icon_arrow_black.svg"
+                src="/svg/icons/arrow_black.svg"
                 alt="arrow"
                 width={25}
                 height={25}
@@ -217,7 +217,7 @@ export default function Profile() {
             <span className="text-14 font-bold text-[#191919]">취향 목록</span>
             {data?.keywords && (
               <Image
-                src="/svg/icons/icon_pencil_gray_bright.svg"
+                src="/svg/icons/pencil_gray_bright.svg"
                 alt="edit_keywords"
                 width={16}
                 height={16}
@@ -244,7 +244,7 @@ export default function Profile() {
               >
                 <div>
                   <Image
-                    src="/svg/icons/icon_plus_pink.svg"
+                    src="/svg/icons/plus_pink.svg"
                     alt="plus"
                     width={10}
                     height={10}

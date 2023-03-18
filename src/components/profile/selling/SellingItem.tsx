@@ -46,7 +46,7 @@ export default function SellingItem({
         </article>
         <Image
           alt="option"
-          src="/svg/icons/icon_option_black.svg"
+          src="/svg/icons/option_black.svg"
           width="18"
           height="18"
           className="absolute right-0 top-0 cursor-pointer"

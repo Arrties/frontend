@@ -66,7 +66,7 @@ export default React.memo(function Navigate({
             <SideMessage>{left_message}</SideMessage>
           ) : (
             <Image
-              src="/svg/icons/icon_back.svg"
+              src="/svg/icons/back.svg"
               width={10}
               height={10}
               alt="back"
@@ -86,7 +86,7 @@ export default React.memo(function Navigate({
             </SideMessage>
           ) : (
             <Image
-              src="/svg/icons/icon_close.svg"
+              src="/svg/icons/close.svg"
               width={20}
               height={20}
               alt="close"

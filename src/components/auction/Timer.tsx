@@ -56,7 +56,7 @@ export default function Timer({ day, hour, minute, second }: TimerProps) {
     <div className="flex w-[100px] items-center justify-center rounded border border-brand px-2">
       <Image
         alt="clock"
-        src="/svg/icons/icon_clock_brand.svg"
+        src="/svg/icons/clock_brand.svg"
         width="14"
         height="14"
         className="mr-1"

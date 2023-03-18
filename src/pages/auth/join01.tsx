@@ -112,7 +112,7 @@ export default function Join01() {
                 handler={(e) => onChecked(e.target.checked, e.target.id)}
               />
               <Image
-                src="/svg/icons/icon_arrow.svg"
+                src="/svg/icons/arrow.svg"
                 alt="arrowBtn"
                 width={7}
                 height={0}
@@ -131,7 +131,7 @@ export default function Join01() {
                 handler={(e) => onChecked(e.target.checked, e.target.id)}
               />
               <Image
-                src="/svg/icons/icon_arrow.svg"
+                src="/svg/icons/arrow.svg"
                 alt="arrowBtn"
                 width={7}
                 height={0}
@@ -152,7 +152,7 @@ export default function Join01() {
                 handler={(e) => onCheckedPromotion(e.target.checked)}
               />
               <Image
-                src="/svg/icons/icon_arrow.svg"
+                src="/svg/icons/arrow.svg"
                 alt="arrowBtn"
                 width={7}
                 height={0}

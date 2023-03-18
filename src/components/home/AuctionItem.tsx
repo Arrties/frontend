@@ -19,7 +19,7 @@ export default React.memo(function AuctionItem({
     <div className="mb-5 flex last:mb-0" {...rest}>
       <div className="relative mr-2 h-[90px] w-[82px] rounded">
         <Image
-          src={auctionItem?.image || '/svg/icons/icon_logo_main.svg'}
+          src={auctionItem?.image || '/svg/icons/logo_main.svg'}
           alt="notification"
           fill
           className="rounded"

@@ -279,7 +279,7 @@ export default function Edit() {
           <label htmlFor="fileImage">
             <div className="mr-0 flex h-[60px] w-[60px] cursor-pointer flex-col items-center justify-center rounded border-[1px] border-[#DBDBDB]">
               <Image
-                src="/svg/icons/icon_camera_black.svg"
+                src="/svg/icons/camera_black.svg"
                 alt="camera"
                 width={17}
                 height={17}
@@ -334,7 +334,7 @@ export default function Edit() {
             </div>
             <div className="absolute left-[63px] bottom-0 flex h-full items-center">
               <Image
-                src="/svg/icons/icon_plus_gray.svg"
+                src="/svg/icons/plus_gray.svg"
                 alt="tag"
                 width={20}
                 height={20}
@@ -503,7 +503,7 @@ export default function Edit() {
                 className="absolute right-4 bottom-0 flex h-[52px] cursor-pointer items-center"
               >
                 <Image
-                  src="/svg/icons/icon_pencil_gray.svg"
+                  src="/svg/icons/pencil_gray.svg"
                   alt="setting"
                   className="cursor-pointer"
                   width="23"

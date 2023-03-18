@@ -58,7 +58,7 @@ export default function Register() {
       <section className="absolute inset-x-0 flex items-start bg-[#F8F8FA] px-4 py-6">
         <Image
           alt="speaker"
-          src="/svg/icons/icon_speaker.svg"
+          src="/svg/icons/speaker.svg"
           width="50"
           height="0"
           className="mr-1"
@@ -77,7 +77,7 @@ export default function Register() {
           <div className="my-3 flex h-[6rem] w-full items-center rounded-xl border border-[#DBDBDB] px-3">
             <Image
               alt="document_upload"
-              src="/svg/icons/icon_document_upload.svg"
+              src="/svg/icons/document_upload.svg"
               width="25"
               height="0"
               className="mr-3"
@@ -88,7 +88,7 @@ export default function Register() {
             </div>
             <Image
               alt="trash_can"
-              src="/svg/icons/icon_trash_can.svg"
+              src="/svg/icons/trash_can.svg"
               width="25"
               height="0"
               className="absolute right-7 mr-3 cursor-pointer"
@@ -100,7 +100,7 @@ export default function Register() {
             <label htmlFor="fileImage">
               <Image
                 alt="document_upload"
-                src="/svg/icons/icon_document_upload.svg"
+                src="/svg/icons/document_upload.svg"
                 width="25"
                 height="0"
               />

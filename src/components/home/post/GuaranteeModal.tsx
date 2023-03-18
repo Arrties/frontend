@@ -33,7 +33,7 @@ export default function GuaranteeModal({
             className="flex text-[#767676]"
           >
             <Image
-              src="/svg/icons/icon_reset.svg"
+              src="/svg/icons/reset.svg"
               alt="reset"
               width={17}
               height={17}

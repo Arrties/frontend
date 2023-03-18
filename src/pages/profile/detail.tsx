@@ -58,7 +58,7 @@ export default function PickDetail() {
             />
           ) : (
             <Image
-              src="/svg/icons/profile/icon_avatar.svg"
+              src="/svg/icons/profile/avatar.svg"
               alt="user"
               width={40}
               height={40}
@@ -73,7 +73,7 @@ export default function PickDetail() {
         {!isMine && (
           <Image
             alt="like"
-            src={`/svg/icons/icon_book_mark${pick ? '_focused' : ''}.svg`}
+            src={`/svg/icons/book_mark${pick ? '_focused' : ''}.svg`}
             width="20"
             height="0"
             className="absolute right-5 cursor-pointer"
@@ -115,7 +115,7 @@ export default function PickDetail() {
                 <div className="mt-3 flex flex-col">
                   <div className="mb-2 flex w-1/2 items-center">
                     <Image
-                      src="/svg/icons/icon_instagram_black.svg"
+                      src="/svg/icons/instagram_black.svg"
                       width={20}
                       height={20}
                       alt="instagram"
@@ -126,7 +126,7 @@ export default function PickDetail() {
                   </div>
                   <div className="flex w-1/2 items-center">
                     <Image
-                      src="/svg/icons/icon_behance_black.svg"
+                      src="/svg/icons/behance_black.svg"
                       width={20}
                       height={20}
                       alt="behance"

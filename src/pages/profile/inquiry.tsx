@@ -186,7 +186,7 @@ export default function Inquiry() {
                     <label htmlFor="fileImage">
                       <div className="mr-0 flex h-[60px] w-[60px] cursor-pointer flex-col items-center justify-center rounded border-[1px] border-[#DBDBDB]">
                         <Image
-                          src="/svg/icons/icon_camera_black.svg"
+                          src="/svg/icons/camera_black.svg"
                           alt="camera"
                           width={22}
                           height={18}

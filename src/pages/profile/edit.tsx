@@ -178,12 +178,7 @@ export default function Edit() {
       <Navigate
         right_message="완료"
         left_message={
-          <Image
-            alt="X"
-            src="/svg/icons/icon_close.svg"
-            width="18"
-            height="0"
-          />
+          <Image alt="X" src="/svg/icons/close.svg" width="18" height="0" />
         }
         handleLeftButton={handleLeftButton}
         handleRightButton={handleSubmit(onSubmit)}
@@ -199,7 +194,7 @@ export default function Edit() {
             />
             <div className="absolute right-0 bottom-0 flex h-[26px] w-[26px] items-center justify-center rounded-full bg-[#575757]">
               <Image
-                src="/svg/icons/icon_camera.svg"
+                src="/svg/icons/camera.svg"
                 width="15"
                 height="0"
                 alt="image"
@@ -216,7 +211,7 @@ export default function Edit() {
             />
             <div className="absolute right-0 bottom-0 flex h-[26px] w-[26px] items-center justify-center rounded-full bg-[#575757]">
               <Image
-                src="/svg/icons/icon_camera.svg"
+                src="/svg/icons/camera.svg"
                 width="15"
                 height="0"
                 alt="image"
@@ -226,14 +221,14 @@ export default function Edit() {
         ) : (
           <div className=" relative flex h-[99px] w-[99px] cursor-pointer items-center justify-center rounded-full border-2 border-[#999999] bg-[#FFFFFF]">
             <Image
-              src="/svg/icons/icon_avatar.svg"
+              src="/svg/icons/avatar.svg"
               width="60"
               height="0"
               alt="profile"
             />
             <div className="absolute right-0 bottom-0 flex h-[26px] w-[26px] items-center justify-center rounded-full bg-[#575757]">
               <Image
-                src="/svg/icons/icon_camera.svg"
+                src="/svg/icons/camera.svg"
                 width="15"
                 height="0"
                 alt="profileEdit"
@@ -340,7 +335,7 @@ export default function Edit() {
             <div className="flex items-center">
               <label htmlFor="instagram">
                 <Image
-                  src="/svg/icons/icon_instagram_gray.svg"
+                  src="/svg/icons/instagram_gray.svg"
                   width="20"
                   height="20"
                   className="mr-1"
@@ -358,7 +353,7 @@ export default function Edit() {
             <div className="flex items-center">
               <label htmlFor="behance">
                 <Image
-                  src="/svg/icons/icon_behance_gray.svg"
+                  src="/svg/icons/behance_gray.svg"
                   width="20"
                   height="20"
                   className="mr-1"

@@ -105,7 +105,7 @@ function Login() {
         <div className="flex h-40 items-center justify-center">
           <Image
             alt="logo"
-            src="/svg/icons/icon_logo_main.svg"
+            src="/svg/icons/logo_main.svg"
             width="60"
             height="60"
           />
@@ -178,7 +178,7 @@ function Login() {
               회원가입
             </Link>
             <Image
-              src="/svg/icons/icon_front.svg"
+              src="/svg/icons/front.svg"
               alt="join"
               width={12}
               height={12}

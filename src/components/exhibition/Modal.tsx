@@ -94,7 +94,7 @@ export default function Modal({
         <ModalHeader>
           <span>{title}</span>
           <Image
-            src="/svg/icons/icon_grayClose.svg"
+            src="/svg/icons/grayClose.svg"
             alt="close"
             width={20}
             height={20}

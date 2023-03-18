@@ -50,7 +50,7 @@ export default React.memo(function ExhibitionItem({
         </div>
       </div>
       <Image
-        src={`/svg/icons/icon_heart${pick ? '_filled' : ''}.svg`}
+        src={`/svg/icons/heart${pick ? '_filled' : ''}.svg`}
         alt="heart"
         width={30}
         height={30}

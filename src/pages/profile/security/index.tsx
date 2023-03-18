@@ -48,12 +48,12 @@ export default function Security() {
       />
       <section>
         <article
-          className="border-b h-[60px] flex items-center font-bold relative text-14 cursor-pointer"
+          className="relative flex h-[60px] cursor-pointer items-center border-b text-14 font-bold"
           onClick={handlePassword}
         >
           <p>비밀번호 변경</p>
           <Image
-            src="/svg/icons/icon_front.svg"
+            src="/svg/icons/front.svg"
             width="18"
             height="0"
             className="absolute right-0"
@@ -61,12 +61,12 @@ export default function Security() {
           />
         </article>
         <article
-          className="border-b h-[60px] flex items-center font-bold relative text-14 cursor-pointer"
+          className="relative flex h-[60px] cursor-pointer items-center border-b text-14 font-bold"
           onClick={handleWithdrawal}
         >
           <p>회원 탈퇴</p>
           <Image
-            src="/svg/icons/icon_front.svg"
+            src="/svg/icons/front.svg"
             width="18"
             height="0"
             className="absolute right-0"

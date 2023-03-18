@@ -91,7 +91,7 @@ export default function ExhibitionArts() {
       <Navigate
         right_message={
           <Image
-            src="/svg/icons/icon_filter.svg"
+            src="/svg/icons/filter.svg"
             alt="filter"
             width={20}
             height={20}
@@ -112,7 +112,7 @@ export default function ExhibitionArts() {
               onClick={() => swiperRef.current.swiper.slidePrev()}
             >
               <Image
-                src="/svg/icons/icon_back_white.svg"
+                src="/svg/icons/back_white.svg"
                 alt="back"
                 width={10}
                 height={0}
@@ -122,7 +122,7 @@ export default function ExhibitionArts() {
               onClick={() => swiperRef.current.swiper.slideNext()}
             >
               <Image
-                src="/svg/icons/icon_arrow_white.svg"
+                src="/svg/icons/arrow_white.svg"
                 alt="back"
                 width={10}
                 height={0}
@@ -153,7 +153,7 @@ export default function ExhibitionArts() {
                   />
                   <div className="absolute top-[10px] right-[10px]">
                     <Image
-                      src="/svg/icons/icon_maximize.svg"
+                      src="/svg/icons/maximize.svg"
                       alt="image"
                       width={25}
                       height={0}
@@ -184,7 +184,7 @@ export default function ExhibitionArts() {
                   />
                   <div className="absolute top-[10px] right-[10px]">
                     <Image
-                      src="/svg/icons/icon_maximize.svg"
+                      src="/svg/icons/maximize.svg"
                       alt="image"
                       width={25}
                       height={0}
@@ -201,7 +201,7 @@ export default function ExhibitionArts() {
                   <div className="m-auto mb-3 w-[22px]">
                     <Image
                       alt="swipe"
-                      src="/svg/icons/icon_swipe_arrow.svg"
+                      src="/svg/icons/swipe_arrow.svg"
                       width={20}
                       height={20}
                       className="cursor-pointer"

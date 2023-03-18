@@ -82,7 +82,7 @@ export default function View() {
               <Image
                 onClick={() => router.back()}
                 alt="back"
-                src="/svg/icons/auction/icon_arrow_black.svg"
+                src="/svg/icons/auction/arrow_black.svg"
                 width="24"
                 height="24"
                 className="cursor-pointer"
@@ -91,7 +91,7 @@ export default function View() {
                 <Image
                   onClick={handlePreferButton}
                   alt="prefer"
-                  src="/svg/icons/icon_heart_filled.svg"
+                  src="/svg/icons/heart_filled.svg"
                   width="24"
                   height="24"
                   className="cursor-pointer"
@@ -101,7 +101,7 @@ export default function View() {
                 <Image
                   onClick={handlePreferButton}
                   alt="prefer"
-                  src="/svg/icons/auction/icon_heart_black.svg"
+                  src="/svg/icons/auction/heart_black.svg"
                   width="24"
                   height="24"
                   className="cursor-pointer"
@@ -112,7 +112,7 @@ export default function View() {
             <>
               <Image
                 alt="back"
-                src="/svg/icons/auction/icon_arrow_white.svg"
+                src="/svg/icons/auction/arrow_white.svg"
                 width="24"
                 height="24"
                 className="cursor-pointer"
@@ -122,7 +122,7 @@ export default function View() {
                 <Image
                   onClick={handlePreferButton}
                   alt="prefer"
-                  src="/svg/icons/icon_heart_filled.svg"
+                  src="/svg/icons/heart_filled.svg"
                   width="24"
                   height="24"
                   className="cursor-pointer"
@@ -133,7 +133,7 @@ export default function View() {
                 <Image
                   onClick={handlePreferButton}
                   alt="prefer"
-                  src="/svg/icons/auction/icon_heart_white.svg"
+                  src="/svg/icons/auction/heart_white.svg"
                   width="24"
                   height="24"
                   className="cursor-pointer"
@@ -188,7 +188,7 @@ export default function View() {
                   <span className="flex rounded-md border border-[#999999] px-2 py-0.5 text-14 text-[#999999]">
                     <Image
                       alt="clock"
-                      src="/svg/icons/icon_clock_gray.svg"
+                      src="/svg/icons/clock_gray.svg"
                       width={16}
                       height={16}
                       className="mr-1"
@@ -255,7 +255,7 @@ export default function View() {
                   />
                 ) : (
                   <Image
-                    src="/svg/icons/profile/icon_avatar.svg"
+                    src="/svg/icons/profile/avatar.svg"
                     alt="user"
                     width={40}
                     height={40}

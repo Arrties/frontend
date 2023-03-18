@@ -177,7 +177,7 @@ export default function InquiryItem({ inquiry }: InquiryItemForm) {
                   <label htmlFor="fileImage">
                     <div className="mr-0 flex h-[60px] w-[60px] cursor-pointer flex-col items-center justify-center rounded border-[1px] border-[#DBDBDB]">
                       <Image
-                        src="/svg/icons/icon_camera_black.svg"
+                        src="/svg/icons/camera_black.svg"
                         alt="camera"
                         width={22}
                         height={18}
@@ -236,7 +236,7 @@ export default function InquiryItem({ inquiry }: InquiryItemForm) {
             <span className="text-14 font-bold">{inquiry.title}</span>
             <Disclosure.Button>
               <Image
-                src="/svg/icons/icon_arrow_down.svg"
+                src="/svg/icons/arrow_down.svg"
                 alt="arrow"
                 width={12}
                 height={12}
@@ -249,7 +249,7 @@ export default function InquiryItem({ inquiry }: InquiryItemForm) {
             <section className="flex">
               <div className="mr-2 flex h-6 w-6 items-center justify-center rounded-full bg-brand">
                 <Image
-                  src="/svg/icons/icon_search_white.svg"
+                  src="/svg/icons/search_white.svg"
                   alt="search"
                   width={16}
                   height={16}
@@ -261,7 +261,7 @@ export default function InquiryItem({ inquiry }: InquiryItemForm) {
               <section className="mt-3 flex">
                 <div className="mr-2 flex h-6 w-6 items-center justify-center rounded-full bg-brand">
                   <Image
-                    src="/svg/icons/icon_logo_brand.svg"
+                    src="/svg/icons/logo_brand.svg"
                     alt="logo"
                     width={16}
                     height={16}

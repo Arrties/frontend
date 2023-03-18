@@ -5,7 +5,7 @@ export default function FloatButton() {
   const router = useRouter();
   return (
     <Image
-      src="/svg/icons/icon_registration.svg"
+      src="/svg/icons/registration.svg"
       alt="register"
       width={80}
       height={0}

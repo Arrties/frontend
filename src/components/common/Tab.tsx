@@ -68,8 +68,8 @@ export default React.memo(function Tab() {
               <Image
                 src={
                   router.pathname.split('/')[1] === tabItem.name
-                    ? `/svg/icons/Tab/icon_${tabItem.name}_focus.svg`
-                    : `/svg/icons/Tab/icon_${tabItem.name}.svg`
+                    ? `/svg/icons/Tab/${tabItem.name}_focus.svg`
+                    : `/svg/icons/Tab/${tabItem.name}.svg`
                 }
                 className="mx-auto"
                 width={28}

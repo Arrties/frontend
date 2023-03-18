@@ -118,7 +118,7 @@ export default function ChatRoom() {
       <header className="fixed inset-x-0 top-0 mx-auto h-[145px] max-w-[420px] bg-[#FC6554]">
         <article className="relative mt-[70px] flex w-full px-5 text-white">
           <Image
-            src="/svg/icons/icon_back_white.svg"
+            src="/svg/icons/back_white.svg"
             alt="back"
             width="11"
             height="0"
@@ -138,7 +138,7 @@ export default function ChatRoom() {
                 ).fromNow()}
           </div>
           <Image
-            src="/svg/icons/icon_option.svg"
+            src="/svg/icons/option.svg"
             alt="option"
             width="3"
             height="0"
@@ -187,12 +187,7 @@ export default function ChatRoom() {
           />
           {watch('message') ? (
             <button className="absolute right-[40px] cursor-pointer">
-              <Image
-                alt=""
-                src="/svg/icons/icon_send.svg"
-                width="22"
-                height="0"
-              />
+              <Image alt="" src="/svg/icons/send.svg" width="22" height="0" />
             </button>
           ) : (
             <>
@@ -201,7 +196,7 @@ export default function ChatRoom() {
                 htmlFor="profileImage"
               >
                 <Image
-                  src="/svg/icons/icon_picture.svg"
+                  src="/svg/icons/picture.svg"
                   alt="picture"
                   width="25"
                   height="0"

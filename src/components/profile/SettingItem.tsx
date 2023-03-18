@@ -1,8 +1,8 @@
-import authApi from '@apis/auth/authApi'
-import arrow from '@public/svg/icons/icon_arrow_light_gray.svg'
-import Image from 'next/image'
-import { useRouter } from 'next/router'
-import { deleteToken } from '@utils/localStorage/token'
+import authApi from '@apis/auth/authApi';
+import arrow from '@public/svg/icons/arrow_light_gray.svg';
+import Image from 'next/image';
+import { useRouter } from 'next/router';
+import { deleteToken } from '@utils/localStorage/token';
 
 interface SettingItemProps {
   key: string;
@@ -21,7 +21,7 @@ export default function SettingItem({ text, path }: SettingItemProps) {
   };
   return (
     <div
-      className="flex justify-between text-sm py-[14px] cursor-pointer font-bold text-14 border-b-[1px] border-[#F4F4F4]"
+      className="flex cursor-pointer justify-between border-b-[1px] border-[#F4F4F4] py-[14px] text-sm text-14 font-bold"
       onClick={handleNavigate}
     >
       <span>{text}</span>

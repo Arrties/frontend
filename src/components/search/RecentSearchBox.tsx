@@ -29,7 +29,7 @@ export default function RecentSearchBox({
       <span onClick={() => handleRecentWord(data.word)}>{data.word}</span>
       <span className="ml-2 flex align-middle">
         <Image
-          src="/svg/icons/icon_grayClose.svg"
+          src="/svg/icons/grayClose.svg"
           alt="close"
           width={20}
           height={20}

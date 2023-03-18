@@ -109,12 +109,7 @@ export default React.memo(function Calendar({
           onClick={() => setDate(date.clone().subtract(1, 'month'))}
           className="absolute left-16"
         >
-          <Image
-            src="/svg/icons/icon_back.svg"
-            alt="back"
-            width={7}
-            height={7}
-          />
+          <Image src="/svg/icons/back.svg" alt="back" width={7} height={7} />
         </button>
         <span className="text-15 font-bold text-[#333333]">
           {date.format('MMMM YYYY')}
@@ -123,12 +118,7 @@ export default React.memo(function Calendar({
           onClick={() => setDate(date.clone().add(1, 'month'))}
           className="absolute right-16"
         >
-          <Image
-            src="/svg/icons/icon_next.svg"
-            alt="arrow"
-            width={8}
-            height={8}
-          />
+          <Image src="/svg/icons/next.svg" alt="arrow" width={8} height={8} />
         </button>
       </div>
       <table className="mt-3 w-full text-center">

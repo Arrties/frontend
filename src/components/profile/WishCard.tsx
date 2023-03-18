@@ -32,7 +32,7 @@ export default function WishCard({ wish }) {
       <div className="relative h-28  rounded-t-lg bg-gray-300">
         <Image
           className="rounded-t-lg object-cover"
-          src={wish?.image || '/svg/icons/icon_favorite.svg'}
+          src={wish?.image || '/svg/icons/favorite.svg'}
           alt="favorite"
           fill
         />
@@ -69,7 +69,7 @@ export default function WishCard({ wish }) {
 
       <Image
         alt="prefer"
-        src="/svg/icons/icon_heart_filled.svg"
+        src="/svg/icons/heart_filled.svg"
         width={20}
         height={20}
         className="absolute right-3 top-3"

@@ -16,7 +16,7 @@ export default function PickArtistWork({
     <div className="flex cursor-pointer items-center" {...rest}>
       <Image
         alt="artwork"
-        src={image || '/svg/icons/icon_.svg'}
+        src={image || '/svg/icons/.svg'}
         width="100"
         height="0"
         className="aspect-square w-[82px] rounded"

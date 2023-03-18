@@ -38,7 +38,7 @@ export default function Chatroom({ chatRoom }: ChatRoomProps) {
     >
       <div className="relative h-[49px] w-[49px]">
         <Image
-          src={chatRoom?.otherMember?.image || '/svg/icons/icon_avatar.svg'}
+          src={chatRoom?.otherMember?.image || '/svg/icons/avatar.svg'}
           alt="profile"
           fill
           className="rounded-full object-cover"
@@ -66,7 +66,7 @@ export default function Chatroom({ chatRoom }: ChatRoomProps) {
       )}
       <Image
         alt=""
-        src={chatRoom?.artWorkImage || '/svg/icons/icon_.svg'}
+        src={chatRoom?.artWorkImage || '/svg/icons/.svg'}
         width="30"
         height="0"
         className="absolute inset-y-0 right-5 my-auto h-10 w-10 rounded"

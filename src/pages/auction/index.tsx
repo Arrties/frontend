@@ -34,12 +34,7 @@ export default function Auction() {
       <Layout>
         <Navigate
           left_message={
-            <Image
-              alt="logo"
-              src="/svg/icons/icon_logo.svg"
-              width="90"
-              height="0"
-            />
+            <Image alt="logo" src="/svg/icons/logo.svg" width="90" height="0" />
           }
           handleLeftButton={() => {
             router.push('/home');
@@ -63,7 +58,7 @@ export default function Auction() {
                 >
                   <Image
                     alt="clock"
-                    src="/svg/icons/icon_clock_white.svg"
+                    src="/svg/icons/clock_white.svg"
                     width="14"
                     height="14"
                     className="mr-1.5"

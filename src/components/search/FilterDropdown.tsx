@@ -20,7 +20,7 @@ export default function FilterDropdown({ setStatus }: FilterDropdownProps) {
           <Menu.Button className="m-auto ml-0 flex w-[80px] items-center  justify-around rounded-[19px] border-[1px] border-[#DBDBDB] bg-white px-3 py-2 text-sm font-medium text-[#767676]">
             정렬
             <Image
-              src="/svg/icons/icon_arrow_down.svg"
+              src="/svg/icons/arrow_down.svg"
               alt="checked"
               width={12}
               height={10}
@@ -49,7 +49,7 @@ export default function FilterDropdown({ setStatus }: FilterDropdownProps) {
                   모두
                   {selected.length === 0 ? (
                     <Image
-                      src="/svg/icons/icon_checked_brand.svg"
+                      src="/svg/icons/checked_brand.svg"
                       alt="checked"
                       width={20}
                       height={20}
@@ -67,7 +67,7 @@ export default function FilterDropdown({ setStatus }: FilterDropdownProps) {
                   경매중
                   {selected.includes('processing') ? (
                     <Image
-                      src="/svg/icons/icon_checked_brand.svg"
+                      src="/svg/icons/checked_brand.svg"
                       alt="checked"
                       width={20}
                       height={20}
@@ -85,7 +85,7 @@ export default function FilterDropdown({ setStatus }: FilterDropdownProps) {
                   경매완료
                   {selected.includes('sales_success') ? (
                     <Image
-                      src="/svg/icons/icon_checked_brand.svg"
+                      src="/svg/icons/checked_brand.svg"
                       alt="checked"
                       width={20}
                       height={20}

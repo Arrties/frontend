@@ -40,7 +40,7 @@ export default function PickArtist({
     >
       <PickArtistProfile>
         <Image
-          src={image || '/svg/icons/profile/icon_avatar.svg'}
+          src={image || '/svg/icons/profile/avatar.svg'}
           alt="avatar"
           // width={28}
           // height={28}

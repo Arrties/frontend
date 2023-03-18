@@ -37,7 +37,7 @@ export default function AuctionItem({ auctionList }: AuctionListProps) {
           />
         ) : (
           <Image
-            src="/svg/icons/icon_logo_main.svg"
+            src="/svg/icons/logo_main.svg"
             alt="auction"
             width={100}
             height={100}

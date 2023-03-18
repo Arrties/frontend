@@ -93,7 +93,7 @@ export default function ExhibitionArt() {
               />
               <div className="absolute top-[10px] right-[10px] z-50">
                 <Image
-                  src="/svg/icons/icon_maximize.svg"
+                  src="/svg/icons/maximize.svg"
                   alt="image"
                   width={25}
                   height={0}
@@ -127,7 +127,7 @@ export default function ExhibitionArt() {
               />
               <div className="absolute top-[10px] right-[10px] z-50">
                 <Image
-                  src="/svg/icons/icon_maximize.svg"
+                  src="/svg/icons/maximize.svg"
                   alt="image"
                   width={25}
                   height={0}
@@ -146,7 +146,7 @@ export default function ExhibitionArt() {
               <div className="m-auto mb-3 w-[22px]">
                 <Image
                   alt="swipe"
-                  src="/svg/icons/icon_swipe_arrow.svg"
+                  src="/svg/icons/swipe_arrow.svg"
                   width={20}
                   height={20}
                   className="cursor-pointer"

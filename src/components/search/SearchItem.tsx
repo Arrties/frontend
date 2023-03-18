@@ -50,7 +50,7 @@ export default function SearchItem({ artwork }: ArtworkForm) {
         </div>
       </div>
       <Image
-        src={`/svg/icons/icon_heart${artwork.pick ? '_filled' : ''}.svg`}
+        src={`/svg/icons/heart${artwork.pick ? '_filled' : ''}.svg`}
         alt="heart"
         width={20}
         height={20}

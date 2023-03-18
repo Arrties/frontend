@@ -61,7 +61,7 @@ export default function Home() {
           left_message={
             <Image
               alt="logo"
-              src="/svg/icons/icon_logo.svg"
+              src="/svg/icons/logo.svg"
               width="90"
               height="90"
             />
@@ -90,7 +90,7 @@ export default function Home() {
                     전체보기
                   </span>
                   <Image
-                    src="/svg/icons/icon_arrow.svg"
+                    src="/svg/icons/arrow.svg"
                     alt="arrow"
                     width={6}
                     height={6}
