@@ -50,7 +50,7 @@ interface TabItemProps {
 
 export default React.memo(function Tab() {
   const router = useRouter();
-  const handleTabItem = (name) => {
+  const handleTabItem = (name: string) => {
     router.push(`/${name}`);
   };
   return (
