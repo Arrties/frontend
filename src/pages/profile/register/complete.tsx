@@ -19,7 +19,7 @@ export default function Complete() {
       <section className="relative flex h-[40rem] flex-col items-center justify-center text-center">
         <Image
           alt="congratulations"
-          src="/image/congratulations.png"
+          src="/png/congratulations.png"
           fill
           className="object-contain"
         />
