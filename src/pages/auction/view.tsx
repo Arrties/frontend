@@ -62,7 +62,7 @@ export default function View() {
     let observer;
     if (target && target.current) {
       observer = new IntersectionObserver(onIntersect, {
-        rootMargin: `0rem 0rem -${window.innerHeight - 64}px 0rem`,
+        rootMargin: `0px 0px -${window.innerHeight - 64}px 0px`,
       });
       observer.observe(target.current);
     }

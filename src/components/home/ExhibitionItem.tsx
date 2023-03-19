@@ -25,7 +25,7 @@ export default React.memo(function ExhibitionItem({
   };
   return (
     <div
-      className="relative h-[12.3125rem] w-[9.875rem] rounded max-[25rem]:h-[10.9375rem] max-[25rem]:w-[9.0625rem]"
+      className="max-[25rem]:h-[10.9375rem] max-[25rem]:w-[9.0625rem] relative h-[12.3125rem] w-[9.875rem] rounded"
       onClick={() => {
         router.push({
           pathname: '/exhibition/detail',
@@ -37,10 +37,8 @@ export default React.memo(function ExhibitionItem({
         src={image}
         alt="notification"
         fill
-        sizes="1000"
         priority
         className="rounded object-cover"
-        quality={100}
       />
 
       <div className="h-full w-full rounded bg-gradient-to-b from-[rgba(0,0,0,0)] via-[rgba(0,0,0,0)] to-[rgba(0,0,0,0.5)]">
