@@ -55,7 +55,7 @@ export default React.memo(function Tab() {
     <TabBox>
       <TabList>
         {TABLIST.map((tabItem: TabItemProps) => (
-          <TabItem tabItem={tabItem} />
+          <TabItem tabItem={tabItem} key={tabItem.id} />
         ))}
       </TabList>
     </TabBox>
