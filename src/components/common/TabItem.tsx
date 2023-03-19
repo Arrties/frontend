@@ -3,10 +3,11 @@ import { useRouter } from 'next/router';
 import Image from 'next/image';
 
 interface TabItemProps {
-  id: number;
-  name: string;
-  word: string;
-  [key: string]: any;
+  tabItem: {
+    id: number;
+    name: string;
+    word: string;
+  };
 }
 
 export default function TabItem({ tabItem }: TabItemProps) {
