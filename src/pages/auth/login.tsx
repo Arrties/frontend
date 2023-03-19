@@ -164,11 +164,11 @@ function Login() {
           </div>
           <p className="mt-3 w-full text-center text-12">
             계정을 잊으셨나요?&nbsp;
-            <Link className="text-[#0099FF]" href="/auth/id">
+            <Link className="text-12 text-[#0099FF]" href="/auth/id">
               ID찾기
             </Link>
             &nbsp;또는&nbsp;
-            <Link className="text-[#0099FF]" href="/auth/password">
+            <Link className="text-12 text-[#0099FF]" href="/auth/password">
               비밀번호 찾기
             </Link>
           </p>
