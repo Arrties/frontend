@@ -38,7 +38,7 @@ export const useGetExhibitionItem = (artWorkId: number) => {
     () => artworkApi.getExhibitionItem(artWorkId),
     {
       refetchOnWindowFocus: false,
-      enabled: !isNaN(artWorkId),
+      enabled: !!artWorkId,
     },
   );
 };
