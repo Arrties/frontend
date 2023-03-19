@@ -2,10 +2,8 @@ import artworkApi from '@apis/artwork/artworkApi';
 import { useQuery } from 'react-query';
 
 export const useGetExhibition = () => {
-  return useQuery<ExhibitionList[], Error>(
-    'useGetExhibition',
-    () => artworkApi.getExhibitionList(),
-    {},
+  return useQuery<ExhibitionList[], Error>('useGetExhibition', () =>
+    artworkApi.getExhibitionList(),
   );
 };
 
