@@ -68,7 +68,7 @@ export default function InquiryItem({ inquiry }: InquiryItemForm) {
     if (image.length) {
       for (let i = 0; i < image.length; i++) {
         formData.append('image', image[i]);
-        console.log(image[i]);
+        image[i];
       }
     } else {
       formData.append('image', new File([''], ''));

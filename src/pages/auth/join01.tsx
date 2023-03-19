@@ -180,7 +180,7 @@ export default function Join01() {
                     label="SMS 수신 동의(선택)"
                     isChecked={checkedTerm.includes('term4')}
                     handler={(e) => {
-                      console.log(e);
+                      e;
                       onChecked(e.target.checked, e.target.id);
                     }}
                   />

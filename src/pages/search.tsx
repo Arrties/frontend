@@ -93,7 +93,7 @@ export default function Search() {
   }, [router.query]);
 
   useEffect(() => {
-    console.log(page);
+    page;
     setValue(page + '');
     setSearchWord(page + '');
   }, [page]);

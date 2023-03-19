@@ -41,7 +41,7 @@ export default function PickDetail() {
       postPrefer();
     }
   };
-  console.log(member);
+  member;
 
   return (
     <Layout>
