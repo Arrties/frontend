@@ -53,7 +53,7 @@ const Querykey = {
   '/search': {
     getDataQuery: 'useGetSearch',
     convertFunc: (old, artWorkId: number) => {
-      old, artWorkId;
+      // old, artWorkId;
     },
   },
 };
