@@ -5,9 +5,7 @@ const useGetWish = () => {
   return useQuery<WishArtwork[], Error>(
     'useGetWish',
     () => profileApi.getWish(),
-    {
-      refetchOnWindowFocus: false,
-    },
+    {},
   );
 };
 

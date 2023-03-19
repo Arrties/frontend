@@ -21,7 +21,6 @@ export default function useGetMyArtWork() {
         return [registered, processing, sales_finished];
       },
       retry: 0,
-      refetchOnWindowFocus: false,
     },
   );
 }

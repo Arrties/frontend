@@ -5,9 +5,7 @@ export const useGetExhibition = () => {
   return useQuery<ExhibitionList[], Error>(
     'useGetExhibition',
     () => artworkApi.getExhibitionList(),
-    {
-      refetchOnWindowFocus: false,
-    },
+    {},
   );
 };
 
@@ -37,7 +35,6 @@ export const useGetExhibitionItem = (artWorkId: number) => {
     ['useGetExhibitionItem', artWorkId],
     () => artworkApi.getExhibitionItem(artWorkId),
     {
-      refetchOnWindowFocus: false,
       enabled: !!artWorkId,
     },
   );

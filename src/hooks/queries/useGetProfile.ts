@@ -7,7 +7,6 @@ const useGetProfile = () => {
     'useGetProfile',
     () => authApi.getMemberProfile(),
     {
-      refetchOnWindowFocus: false,
       onSuccess: (data) => {
         if (!data.telephone) {
           router.push('/profile/edit');

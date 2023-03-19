@@ -5,8 +5,6 @@ export default function useGetInquiry() {
   return useQuery<Inquiry[], Error>(
     'useGetInquiry',
     () => profileApi.getInquiry(),
-    {
-      refetchOnWindowFocus: false,
-    },
+    {},
   );
 }

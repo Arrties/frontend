@@ -6,7 +6,6 @@ const useGetDetail = (artWorkId: number) => {
     ['useGetDetail', artWorkId],
     () => artworkApi.getDetail(artWorkId),
     {
-      refetchOnWindowFocus: false,
       enabled: !isNaN(artWorkId),
     },
   );
