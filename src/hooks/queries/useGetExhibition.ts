@@ -15,7 +15,7 @@ export const useGetExhibitionItemList = (
     ['useGetExhibitionItems', auctionId],
     () => artworkApi.getExhibitionItemList(auctionId),
     {
-      enabled: !isNaN(auctionId),
+      enabled: !!auctionId,
       select: (arts) => {
         if (genres?.length === 0) {
           return arts;

@@ -6,7 +6,7 @@ const useGetDetail = (artWorkId: number) => {
     ['useGetDetail', artWorkId],
     () => artworkApi.getDetail(artWorkId),
     {
-      enabled: !isNaN(artWorkId),
+      enabled: !!artWorkId,
     },
   );
 };

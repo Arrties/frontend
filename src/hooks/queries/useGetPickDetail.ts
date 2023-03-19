@@ -9,7 +9,7 @@ const useGetPickDetail = (artistId: number) => {
     {
       retry: 0,
 
-      enabled: !isNaN(artistId),
+      enabled: !!artistId,
     },
   );
 };

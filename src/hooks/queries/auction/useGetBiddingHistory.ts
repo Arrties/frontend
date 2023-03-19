@@ -6,7 +6,7 @@ const useGetBiddingHistory = (artWorkId: number) => {
     ['useGetBiddingHistory', artWorkId],
     () => auctionApi.getBiddingHistory(artWorkId),
     {
-      enabled: !isNaN(artWorkId),
+      enabled: !!artWorkId,
     },
   );
 };

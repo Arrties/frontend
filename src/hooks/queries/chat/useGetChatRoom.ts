@@ -6,7 +6,7 @@ const useGetChatRoom = (id: number) => {
     ['useGetChatRoom', id],
     () => chatApi.getChatRoom(id),
     {
-      enabled: !isNaN(id),
+      enabled: !!id,
     },
   );
 };
