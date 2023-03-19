@@ -46,9 +46,9 @@ const Querykey = {
   },
   '/search': {
     getDataQuery: 'useGetSearch',
-    convertFunc: (old, artWorkId: number) => {
-      old, artWorkId;
-    },
+    // convertFunc: (old, artWorkId: number) => {
+    //   old, artWorkId
+    // },
   },
 };
 
