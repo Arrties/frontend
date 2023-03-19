@@ -43,7 +43,7 @@ export default function GenreSelect({
             id={genreObject.id}
             className={`${
               genre === genreObject.name ? 'border-brand' : 'border-[#CECECE]'
-            } w rounded flex-col text-black leading-5 px-3 py-[11px] justify-center items-center border cursor-pointer text-14 `}
+            } w cursor-pointer flex-col items-center justify-center rounded border px-3 py-[0.6875rem] text-14 leading-5 text-black `}
             onClick={() => onGenreClick(genreObject.name)}
           >
             <p>{genreObject.name}</p>
@@ -53,7 +53,7 @@ export default function GenreSelect({
         <div
           className={`${
             genre === '기타' ? 'border-brand' : 'border-[#CECECE]'
-          }  rounded flex text-black  px-3 py-[11px] justify-start items-center border cursor-pointer text-14 `}
+          }  flex cursor-pointer items-center  justify-start rounded border px-3 py-[0.6875rem] text-14 text-black `}
           onClick={() => onGenreClick('기타')}
         >
           기타
