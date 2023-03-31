@@ -12,23 +12,13 @@ import {
 } from '@tanstack/react-query';
 import type { AppProps } from 'next/app';
 import Loader from '@components/common/Loader';
-import { Suspense, useEffect, useState } from 'react';
+import React, { Suspense, useEffect, useState } from 'react';
 import { Router, useRouter } from 'next/router';
 import { getToken } from '@utils/localStorage/token';
 import { pageview } from '@utils/gtag';
 import GoogleScript from '@components/GoogleScript';
 import MetaHead from '@components/MetaHead';
 
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      retry: false,
-      suspense: true,
-      useErrorBoundary: true,
-    },
-    mutations: { retry: false, useErrorBoundary: true },
-  },
-});
 const persistor = persistStore(store);
 
 export default function App({ Component, pageProps }: AppProps) {
@@ -72,6 +62,20 @@ export default function App({ Component, pageProps }: AppProps) {
     };
   }, [router.events]);
 
+  const [queryClient] = React.useState(
+    () =>
+      new QueryClient({
+        defaultOptions: {
+          queries: {
+            retry: false,
+            suspense: true,
+            useErrorBoundary: true,
+          },
+          mutations: { retry: false, useErrorBoundary: true },
+        },
+      }),
+  );
+
   return loading ? (
     <Loader />
   ) : (
@@ -92,5 +96,5 @@ export default function App({ Component, pageProps }: AppProps) {
     </div>
   );
 }
-
+const queryClient = new QueryClient();
 export { queryClient };
