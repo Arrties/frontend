@@ -69,8 +69,5 @@
   "packageManager": "yarn@3.3.0",
   "resolutions": {
     "@storybook/{app}/webpack": "^5"
-  },
-  "msw": {
-    "workerDirectory": "public"
   }
 }
