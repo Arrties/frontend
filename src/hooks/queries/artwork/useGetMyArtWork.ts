@@ -1,9 +1,9 @@
 import artworkApi from '@apis/artwork/artworkApi';
-import { useQuery } from 'react-query';
+import { useQuery } from '@tanstack/react-query';
 
 export default function useGetMyArtWork() {
   return useQuery<MyArtwork[], Error, any>(
-    'useGetMyArtWork',
+    ['useGetMyArtWork'],
     () => artworkApi.getMyArtworkList(),
     {
       select: (data) => {

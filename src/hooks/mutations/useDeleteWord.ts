@@ -1,10 +1,10 @@
 import artworkApi from '@apis/artwork/artworkApi';
 import { queryClient } from 'pages/_app';
-import { useMutation } from 'react-query';
+import { useMutation } from '@tanstack/react-query';
 
 export const useDeleteWord = (wordId: number) => {
   return useMutation<any, Error>(
-    'useDeleteWord',
+    ['useDeleteWord'],
     () => artworkApi.deleteRecentWord(wordId),
     {
       onMutate: async () => {
@@ -29,7 +29,7 @@ export const useDeleteWord = (wordId: number) => {
 
 export const useDeleteAllWord = () => {
   return useMutation<any, Error>(
-    'useDeleteAllWord',
+    ['useDeleteAllWord'],
     () => artworkApi.deleteRecentAllWords(),
     {
       onMutate: async () => {

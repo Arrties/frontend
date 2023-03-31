@@ -1,8 +1,8 @@
 import profileApi from '@apis/profile/profileApi';
-import { useQuery } from 'react-query';
+import { useQuery } from '@tanstack/react-query';
 
 const useGetWish = () => {
-  return useQuery<WishArtwork[], Error>('useGetWish', () =>
+  return useQuery<WishArtwork[], Error>(['useGetWish'], () =>
     profileApi.getWish(),
   );
 };

@@ -1,9 +1,9 @@
 import auctionApi from '@apis/auction/auctionApi';
-import { useQuery } from 'react-query';
+import { useQuery } from '@tanstack/react-query';
 
 const useGetNowAuctionArtworkList = () => {
   return useQuery<NowAuctionArtworkList, Error>(
-    'useGetNowAuctionArtworkList',
+    ['useGetNowAuctionArtworkList'],
     () => auctionApi.getNowAuctionArtworkList(),
     {
       suspense: false,

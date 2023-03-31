@@ -1,6 +1,6 @@
 import artworkApi from '@apis/artwork/artworkApi';
 import { queryClient } from 'pages/_app';
-import { useMutation } from 'react-query';
+import { useMutation } from '@tanstack/react-query';
 
 const Querykey = {
   '/auction': {
@@ -60,7 +60,7 @@ const Querykey = {
 
 const useDeletePrefer = (artWorkId: number, path: string) => {
   return useMutation<any, Error>(
-    'useDeletePrefer',
+    ['useDeletePrefer'],
     () => artworkApi.deletePrefer(artWorkId),
     {
       onMutate: async () => {

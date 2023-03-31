@@ -1,8 +1,8 @@
 import artworkApi from '@apis/artwork/artworkApi';
-import { useQuery } from 'react-query';
+import { useQuery } from '@tanstack/react-query';
 
 export const useGetExhibition = () => {
-  return useQuery<ExhibitionList[], Error>('useGetExhibition', () =>
+  return useQuery<ExhibitionList[], Error>(['useGetExhibition'], () =>
     artworkApi.getExhibitionList(),
   );
 };

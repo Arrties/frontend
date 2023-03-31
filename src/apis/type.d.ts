@@ -2,7 +2,7 @@ import {
   UseInfiniteQueryOptions,
   UseMutationOptions,
   UseQueryOptions,
-} from 'react-query';
+} from '@tanstack/react-query';
 
 import { AxiosError } from 'axios';
 

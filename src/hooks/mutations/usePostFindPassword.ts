@@ -1,10 +1,10 @@
 import authApi from '@apis/auth/authApi';
 
-import { useMutation } from 'react-query';
+import { useMutation } from '@tanstack/react-query';
 
 const usePostFindPassword = () => {
   return useMutation(
-    'usePostFindPassword',
+    ['usePostFindPassword'],
     (email: string) => authApi.postNewPassword(email),
     {
       useErrorBoundary: false,

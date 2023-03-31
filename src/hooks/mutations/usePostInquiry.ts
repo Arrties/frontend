@@ -1,10 +1,10 @@
 import profileApi from '@apis/profile/profileApi';
 import { queryClient } from 'pages/_app';
-import { useMutation } from 'react-query';
+import { useMutation } from '@tanstack/react-query';
 
 const usePostInquiry = (formData: any) => {
   return useMutation<any, Error>(
-    'usePostInquiry',
+    ['usePostInquiry'],
     () => profileApi.postInquiry(formData),
     {
       onSettled: () => {

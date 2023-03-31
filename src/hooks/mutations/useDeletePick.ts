@@ -1,11 +1,11 @@
 import artworkApi from '@apis/artwork/artworkApi';
 import profileApi from '@apis/profile/profileApi';
 import { queryClient } from 'pages/_app';
-import { useMutation } from 'react-query';
+import { useMutation } from '@tanstack/react-query';
 
 const useDeletePick = (artistId: number) => {
   return useMutation<any, Error>(
-    'useDeletePick',
+    ['useDeletePick'],
     () => profileApi.deletePick(artistId),
     {
       onMutate: async () => {

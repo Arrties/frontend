@@ -1,5 +1,5 @@
 import homeApi from '@apis/home/homeApi';
-import { useInfiniteQuery } from 'react-query';
+import { useInfiniteQuery } from '@tanstack/react-query';
 
 interface InfiniteQueryProps {
   artworks: KeywordArtwork[];

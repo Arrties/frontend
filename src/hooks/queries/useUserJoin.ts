@@ -1,7 +1,7 @@
-import instance from '@apis/_axios/instance'
-import { useMutation } from 'react-query'
-import { useRouter } from 'next/router'
-import { useState } from 'react'
+import instance from '@apis/_axios/instance';
+import { useMutation } from '@tanstack/react-query';
+import { useRouter } from 'next/router';
+import { useState } from 'react';
 
 const useUserJoin = () => {
   const router = useRouter();

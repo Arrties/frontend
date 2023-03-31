@@ -4,8 +4,12 @@ import store from '@features/store';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import { persistStore } from 'redux-persist';
-import { QueryClient, QueryClientProvider } from 'react-query';
-
+// import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import {
+  Hydrate,
+  QueryClient,
+  QueryClientProvider,
+} from '@tanstack/react-query';
 import type { AppProps } from 'next/app';
 import Loader from '@components/common/Loader';
 import { Suspense, useEffect, useState } from 'react';
@@ -77,9 +81,11 @@ export default function App({ Component, pageProps }: AppProps) {
       <Suspense fallback={<Loader />}>
         <Provider store={store}>
           <QueryClientProvider client={queryClient}>
-            <PersistGate loading={null} persistor={persistor}>
-              <Component {...pageProps} />
-            </PersistGate>
+            <Hydrate state={pageProps.dehydratedState}>
+              <PersistGate loading={null} persistor={persistor}>
+                <Component {...pageProps} />
+              </PersistGate>
+            </Hydrate>
           </QueryClientProvider>
         </Provider>
       </Suspense>

@@ -1,8 +1,8 @@
 import artworkApi from '@apis/artwork/artworkApi';
-import { useQuery } from 'react-query';
+import { useQuery } from '@tanstack/react-query';
 
 export const useGetRecentSearch = () => {
-  return useQuery<RecentSearch[], Error>('useGetRecentSearch', () =>
+  return useQuery<RecentSearch[], Error>(['useGetRecentSearch'], () =>
     artworkApi.getRecentSearch(),
   );
 };
