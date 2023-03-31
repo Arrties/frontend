@@ -15,7 +15,7 @@ const refreshToken = async () => {
 };
 
 instance.interceptors.request.use(
-  (config) => {
+  (config:any) => {
     const token = getToken();
     config.headers = {
       ...config.headers,
