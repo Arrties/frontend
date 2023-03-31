@@ -11,7 +11,7 @@ interface defaultProps {
 }
 
 const WishContainer = tw.div<defaultProps>`
-w-full grid grid-cols-2 gap-x-[15px] gap-y-[23px]
+w-full grid grid-cols-2 gap-x-[0.9375rem] gap-y-[1.4375rem]
 `;
 
 export default function Wish() {

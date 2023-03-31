@@ -28,7 +28,7 @@ interface RightButtonProps extends DefaultProps {
 }
 
 const NavigateBox = tw.header<DefaultProps>`
-flex items-center relative h-[80px] pt-[20px]
+flex items-center relative h-[5rem] pt-[1.25rem]
 `;
 
 const LeftButton = tw.div<LeftButtonProps>`cursor-pointer z-10 absolute left-0
@@ -66,7 +66,7 @@ export default React.memo(function Navigate({
             <SideMessage>{left_message}</SideMessage>
           ) : (
             <Image
-              src="/svg/icons/icon_back.svg"
+              src="/svg/icons/back.svg"
               width={10}
               height={10}
               alt="back"
@@ -86,7 +86,7 @@ export default React.memo(function Navigate({
             </SideMessage>
           ) : (
             <Image
-              src="/svg/icons/icon_close.svg"
+              src="/svg/icons/close.svg"
               width={20}
               height={20}
               alt="close"

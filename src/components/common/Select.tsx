@@ -1,6 +1,6 @@
-import Image from 'next/image'
-import { Fragment, useEffect, useState } from 'react'
-import { Listbox, Transition } from '@headlessui/react'
+import Image from 'next/image';
+import { Fragment, useEffect, useState } from 'react';
+import { Listbox, Transition } from '@headlessui/react';
 
 import type {
   FieldPath,
@@ -34,15 +34,15 @@ export default function Select<T extends FieldValues>({
       <Listbox name={name} value={selected} onChange={setSelected}>
         {({ open }) => (
           <div className="relative text-12">
-            <Listbox.Button className="relative w-full h-[52px] cursor-pointer rounded-[4px]  border border-[#DBDBDB] focus-visible:border-[#DBDBDB]">
-              <div className="text-left p-3">{selected.value}</div>
+            <Listbox.Button className="relative h-[3.25rem] w-full cursor-pointer rounded-[0.25rem]  border border-[#DBDBDB] focus-visible:border-[#DBDBDB]">
+              <div className="p-3 text-left">{selected.value}</div>
               <div
-                className={`absolute right-[10px] bottom-[13px] ${
-                  open && 'transform rotate-180 transition'
+                className={`absolute right-[0.625rem] bottom-[0.8125rem] ${
+                  open && 'rotate-180 transform transition'
                 }`}
               >
                 <Image
-                  src="/svg/icons/icon_arrow_down_black.svg"
+                  src="/svg/icons/arrow_down_black.svg"
                   width={20}
                   height={20}
                   alt="close"
@@ -60,7 +60,7 @@ export default function Select<T extends FieldValues>({
                   <Listbox.Option
                     key={optionIdx}
                     className={({ active }) =>
-                      `first:rounded-t-[4px] cursor-pointer last:rounded-b-[4px] relative flex items-center p-3 border h-[52px] bg-white border-[#DBDBDB] ${
+                      `relative flex h-[3.25rem] cursor-pointer items-center border border-[#DBDBDB] bg-white p-3 first:rounded-t-[0.25rem] last:rounded-b-[0.25rem] ${
                         active && 'font-semibold'
                       }`
                     }

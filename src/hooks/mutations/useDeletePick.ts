@@ -8,7 +8,6 @@ const useDeletePick = (artistId: number) => {
     'useDeletePick',
     () => profileApi.deletePick(artistId),
     {
-      retry: false,
       onMutate: async () => {
         await queryClient.cancelQueries({ queryKey: ['useDeletePick'] });
         const previousValue = queryClient.getQueryData(['useGetPickDetail']);

@@ -68,7 +68,7 @@ export default function InquiryItem({ inquiry }: InquiryItemForm) {
     if (image.length) {
       for (let i = 0; i < image.length; i++) {
         formData.append('image', image[i]);
-        console.log(image[i]);
+        image[i];
       }
     } else {
       formData.append('image', new File([''], ''));
@@ -77,11 +77,11 @@ export default function InquiryItem({ inquiry }: InquiryItemForm) {
     setIsSelected(false);
   };
   return (
-    <div className="border-b-[1px] pb-6">
+    <div className="border-b-[0.0625rem] pb-6">
       <Disclosure>
         <div className="mt-5 flex justify-between">
           <div className="flex justify-start">
-            <span className="mr-2 w-[70px] rounded-[39px] border-[1px] border-[#DBDBDB] py-[1px] text-center text-12 font-semibold text-[#767676] ">
+            <span className="mr-2 w-[4.375rem] rounded-[2.4375rem] border-[0.0625rem] border-[#DBDBDB] py-[0.0625rem] text-center text-12 font-semibold text-[#767676] ">
               {inquiry.status === 'WAITING' ? '대기중' : '답변완료'}
             </span>
             <span className="text-14 text-[#999999]">{inquiry.date}</span>
@@ -133,7 +133,7 @@ export default function InquiryItem({ inquiry }: InquiryItemForm) {
                 maxLength={20}
                 defaultValue={inquiry.title}
                 placeholder="문의 제목을 입력해주세요."
-                className="h-[52px] w-full appearance-none rounded-[4px] border-[#D8D8D8] text-[13px] placeholder-[#999999]"
+                className="h-[3.25rem] w-full appearance-none rounded-[0.25rem] border-[#D8D8D8] text-[0.8125rem] placeholder-[#999999]"
                 {...register('title', {
                   required: true,
                 })}
@@ -165,7 +165,7 @@ export default function InquiryItem({ inquiry }: InquiryItemForm) {
                 maxLength={1000}
                 defaultValue={inquiry.content}
                 placeholder="정확한 상담을 위하여 자세한 문의사항을 작성 부탁드립니다."
-                className="h-[150px] w-full resize-none overflow-hidden rounded-[4px] border-[#D8D8D8] text-[13px] placeholder-[#999999] placeholder:absolute placeholder:text-14 "
+                className="h-[9.375rem] w-full resize-none overflow-hidden rounded-[0.25rem] border-[#D8D8D8] text-[0.8125rem] placeholder-[#999999] placeholder:absolute placeholder:text-14 "
                 {...register('content', {
                   required: true,
                 })}
@@ -175,9 +175,9 @@ export default function InquiryItem({ inquiry }: InquiryItemForm) {
               <div>
                 <div className="flex">
                   <label htmlFor="fileImage">
-                    <div className="mr-0 flex h-[60px] w-[60px] cursor-pointer flex-col items-center justify-center rounded border-[1px] border-[#DBDBDB]">
+                    <div className="mr-0 flex h-[3.75rem] w-[3.75rem] cursor-pointer flex-col items-center justify-center rounded border-[0.0625rem] border-[#DBDBDB]">
                       <Image
-                        src="/svg/icons/icon_camera_black.svg"
+                        src="/svg/icons/camera_black.svg"
                         alt="camera"
                         width={22}
                         height={18}
@@ -227,8 +227,8 @@ export default function InquiryItem({ inquiry }: InquiryItemForm) {
                 {...register('image')}
               />
             </section>
-            <section className="mt-[75px] w-full">
-              <Button type="submit" text="수정" className="h-[48px] w-full" />
+            <section className="mt-[4.6875rem] w-full">
+              <Button type="submit" text="수정" className="h-[3rem] w-full" />
             </section>
           </form>
         ) : (
@@ -236,7 +236,7 @@ export default function InquiryItem({ inquiry }: InquiryItemForm) {
             <span className="text-14 font-bold">{inquiry.title}</span>
             <Disclosure.Button>
               <Image
-                src="/svg/icons/icon_arrow_down.svg"
+                src="/svg/icons/arrow_down.svg"
                 alt="arrow"
                 width={12}
                 height={12}
@@ -249,25 +249,25 @@ export default function InquiryItem({ inquiry }: InquiryItemForm) {
             <section className="flex">
               <div className="mr-2 flex h-6 w-6 items-center justify-center rounded-full bg-brand">
                 <Image
-                  src="/svg/icons/icon_search_white.svg"
+                  src="/svg/icons/search_white.svg"
                   alt="search"
                   width={16}
                   height={16}
                 />
               </div>
-              <div className="w-[270px]">{inquiry.content}</div>
+              <div className="w-[16.875rem]">{inquiry.content}</div>
             </section>
             {inquiry.answer && (
               <section className="mt-3 flex">
                 <div className="mr-2 flex h-6 w-6 items-center justify-center rounded-full bg-brand">
                   <Image
-                    src="/svg/icons/icon_logo_brand.svg"
+                    src="/svg/icons/logo_brand.svg"
                     alt="logo"
                     width={16}
                     height={16}
                   />
                 </div>
-                <div className="w-[270px]">{inquiry.answer}</div>
+                <div className="w-[16.875rem]">{inquiry.answer}</div>
               </section>
             )}
           </div>

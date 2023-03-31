@@ -73,7 +73,7 @@ export default function Password() {
         {errors.password && <ErrorMessage message={errors.password.message} />}
         <Image
           alt="eye"
-          src={`/svg/icons/icon_eye${isShow ? '_on' : ''}.svg`}
+          src={`/svg/icons/eye${isShow ? '_on' : ''}.svg`}
           width="25"
           height="0"
           className="absolute right-2 top-12"
@@ -100,7 +100,7 @@ export default function Password() {
         )}
         <Image
           alt="eye"
-          src={`/svg/icons/icon_eye${isShowConfirm ? '_on' : ''}.svg`}
+          src={`/svg/icons/eye${isShowConfirm ? '_on' : ''}.svg`}
           width="25"
           height="0"
           className="absolute right-2 top-12"

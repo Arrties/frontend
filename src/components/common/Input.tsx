@@ -25,14 +25,16 @@ text-14 leading-8
 `;
 
 const InputTag = tw.input<InputProps>`
-w-full h-[52px] placeholder-[#999999] text-[13px] rounded-[4px] ${(p) =>
-  p.$error ? 'border-[#FF3120]' : 'border-[#D8D8D8]'} ${(p) =>
+w-full h-[3.25rem] placeholder-[#999999] text-[0.8125rem] rounded-[0.25rem] ${(
+  p,
+) => (p.$error ? 'border-[#FF3120]' : 'border-[#D8D8D8]')} ${(p) =>
   p.$unit && 'pr-10'} appearance-none
   `;
 const TextAreaTag = tw.textarea<InputProps>`
-w-full h-[20px] placeholder-[#999999] text-[13px] rounded-[4px] ${(p) =>
-  p.$error ? 'border-[#FF3120]' : 'border-[#D8D8D8]'} ${(p) =>
-  p.$unit && 'pr-10'} appearance-none flex items-center min-h-[70px]
+w-full h-[1.25rem] placeholder-[#999999] text-[0.8125rem] rounded-[0.25rem] ${(
+  p,
+) => (p.$error ? 'border-[#FF3120]' : 'border-[#D8D8D8]')} ${(p) =>
+  p.$unit && 'pr-10'} appearance-none flex items-center min-h-[4.375rem]
   `;
 export default function Input({
   type = 'text',

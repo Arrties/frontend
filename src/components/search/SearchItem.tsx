@@ -19,7 +19,7 @@ export default function SearchItem({ artwork }: ArtworkForm) {
     }
   };
   return (
-    <div className="relative h-[197px] w-[158px] rounded max-[400px]:h-[175px] max-[400px]:w-[145px]">
+    <div className="max-[25rem]:h-[10.9375rem] max-[25rem]:w-[9.0625rem] relative h-[12.3125rem] w-[9.875rem] rounded">
       <Image
         src={artwork.image}
         alt="notification"
@@ -44,13 +44,13 @@ export default function SearchItem({ artwork }: ArtworkForm) {
           <div className="text-14 font-bold">{artwork.title}</div>
           <div className="flex items-center text-12">
             {artwork.artistName}
-            <div className="mx-1 h-[10px] w-[1px] bg-white"></div>
+            <div className="mx-1 h-[0.625rem] w-[0.0625rem] bg-white"></div>
             {artwork.education}
           </div>
         </div>
       </div>
       <Image
-        src={`/svg/icons/icon_heart${artwork.pick ? '_filled' : ''}.svg`}
+        src={`/svg/icons/heart${artwork.pick ? '_filled' : ''}.svg`}
         alt="heart"
         width={20}
         height={20}

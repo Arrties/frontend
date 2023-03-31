@@ -84,12 +84,12 @@ export default function Inquiry() {
     if (image.length) {
       for (let i = 0; i < image.length; i++) {
         formData.append('image', image[i]);
-        console.log(image[i]);
+        image[i];
       }
     } else {
       formData.append('image', new File([''], ''));
     }
-    console.log(image);
+    image;
     setPostData(() => formData);
   };
   useEffect(() => {
@@ -111,10 +111,10 @@ export default function Inquiry() {
       />
       <Tab.Group selectedIndex={selectedIndex} onChange={setSelectedIndex}>
         <Tab.List>
-          <Tab className="h-[52px] w-1/2 border-[#191919] text-16 font-medium ui-selected:border-b-[2px] ui-selected:text-[#191919] ui-not-selected:border-b ui-not-selected:border-[#EDEDED] ui-not-selected:text-[#999999]">
+          <Tab className="h-[3.25rem] w-1/2 border-[#191919] text-16 font-medium ui-selected:border-b-[0.125rem] ui-selected:text-[#191919] ui-not-selected:border-b ui-not-selected:border-[#EDEDED] ui-not-selected:text-[#999999]">
             문의하기
           </Tab>
-          <Tab className="h-[52px] w-1/2 border-[#191919] text-16 font-medium ui-selected:border-b-[2px] ui-selected:text-[#191919] ui-not-selected:border-b ui-not-selected:border-[#EDEDED] ui-not-selected:text-[#999999]">
+          <Tab className="h-[3.25rem] w-1/2 border-[#191919] text-16 font-medium ui-selected:border-b-[0.125rem] ui-selected:text-[#191919] ui-not-selected:border-b ui-not-selected:border-[#EDEDED] ui-not-selected:text-[#999999]">
             문의내역확인
           </Tab>
         </Tab.List>
@@ -145,7 +145,7 @@ export default function Inquiry() {
                   type="text"
                   maxLength={20}
                   placeholder="문의 제목을 입력해주세요."
-                  className="h-[52px] w-full appearance-none rounded-[4px] border-[#D8D8D8] text-[13px] placeholder-[#999999]"
+                  className="h-[3.25rem] w-full appearance-none rounded-[0.25rem] border-[#D8D8D8] text-[0.8125rem] placeholder-[#999999]"
                   {...register('title', {
                     required: true,
                   })}
@@ -174,7 +174,7 @@ export default function Inquiry() {
                   id="content"
                   maxLength={1000}
                   placeholder="정확한 상담을 위하여 자세한 문의사항을 작성 부탁드립니다."
-                  className="h-[150px] w-full resize-none overflow-hidden rounded-[4px] border-[#D8D8D8] text-[13px] placeholder-[#999999] "
+                  className="h-[9.375rem] w-full resize-none overflow-hidden rounded-[0.25rem] border-[#D8D8D8] text-[0.8125rem] placeholder-[#999999] "
                   {...register('content', {
                     required: true,
                   })}
@@ -184,9 +184,9 @@ export default function Inquiry() {
                 <div>
                   <div className="flex">
                     <label htmlFor="fileImage">
-                      <div className="mr-0 flex h-[60px] w-[60px] cursor-pointer flex-col items-center justify-center rounded border-[1px] border-[#DBDBDB]">
+                      <div className="mr-0 flex h-[3.75rem] w-[3.75rem] cursor-pointer flex-col items-center justify-center rounded border-[0.0625rem] border-[#DBDBDB]">
                         <Image
-                          src="/svg/icons/icon_camera_black.svg"
+                          src="/svg/icons/camera_black.svg"
                           alt="camera"
                           width={22}
                           height={18}
@@ -238,16 +238,16 @@ export default function Inquiry() {
                   {...register('image')}
                 />
               </section>
-              <section className="mt-[75px] mb-[45px] flex w-full justify-between">
+              <section className="mt-[4.6875rem] mb-[2.8125rem] flex w-full justify-between">
                 <Button
                   kind="outlined"
                   text="취소"
-                  className="h-[48px] w-[46%]"
+                  className="h-[3rem] w-[46%]"
                 />
                 <Button
                   type="submit"
                   text="문의접수"
-                  className="h-[48px] w-[46%]"
+                  className="h-[3rem] w-[46%]"
                 />
               </section>
             </form>
@@ -258,12 +258,12 @@ export default function Inquiry() {
                 {data?.map((inquiry, idx) => (
                   <InquiryItem key={'' + idx} inquiry={inquiry} />
                 ))}
-                <div className="my-[14px] text-center text-14 text-[#999999]">
+                <div className="my-[0.875rem] text-center text-14 text-[#999999]">
                   최근 1년간 문의내역만 조회 가능합니다.
                 </div>
               </div>
             ) : (
-              <div className="m-auto mt-[200px] flex flex-col items-center justify-center text-14 text-[#999999]">
+              <div className="m-auto mt-[12.5rem] flex flex-col items-center justify-center text-14 text-[#999999]">
                 1:1문의 내역이 존재하지 않습니다.
               </div>
             )}

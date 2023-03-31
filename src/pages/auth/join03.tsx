@@ -36,7 +36,7 @@ function Join03() {
       {errorMessage && (
         <ErrorMessage
           message={errorMessage}
-          className="absolute left-[100px] top-[620px]"
+          className="absolute left-[6.25rem] top-[38.75rem]"
         />
       )}
       <div className=" text-20 ">
@@ -66,14 +66,14 @@ function Join03() {
       </section>
 
       <button
-        className="hover:brand-2 mt-[66px] mb-3 w-full text-xs font-normal text-[#999999] underline transition"
+        className="hover:brand-2 mt-[4.125rem] mb-3 w-full text-xs font-normal text-[#999999] underline transition"
         onClick={handleSkipButton}
       >
         다음에 할래요
       </button>
       <Button
         text="분석 시작"
-        className="mb-[34px] w-full"
+        className="mb-[2.125rem] w-full"
         onClick={handleNextButton}
       />
     </Layout>

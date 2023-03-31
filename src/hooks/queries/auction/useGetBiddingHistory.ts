@@ -6,9 +6,7 @@ const useGetBiddingHistory = (artWorkId: number) => {
     ['useGetBiddingHistory', artWorkId],
     () => auctionApi.getBiddingHistory(artWorkId),
     {
-      retry: false,
-      refetchOnWindowFocus: false,
-      enabled: !isNaN(artWorkId),
+      enabled: !!artWorkId,
     },
   );
 };

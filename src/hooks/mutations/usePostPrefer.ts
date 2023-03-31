@@ -46,9 +46,9 @@ const Querykey = {
   },
   '/search': {
     getDataQuery: 'useGetSearch',
-    convertFunc: (old, artWorkId: number) => {
-      console.log(old, artWorkId);
-    },
+    // convertFunc: (old, artWorkId: number) => {
+    //   old, artWorkId
+    // },
   },
 };
 
@@ -57,7 +57,6 @@ const usePostPrefer = (artWorkId: number, path: string) => {
     'usePostPrefer',
     () => artworkApi.postPrefer(artWorkId),
     {
-      retry: false,
       onMutate: async () => {
         await queryClient.cancelQueries({ queryKey: ['usePostPrefer'] });
         const previousValue = queryClient.getQueryData([

@@ -29,7 +29,7 @@ export default function SellingItem({
           });
         }}
       >
-        <article className="relative h-[100px] w-[82px] overflow-hidden rounded">
+        <article className="relative h-[6.25rem] w-[5.125rem] overflow-hidden rounded">
           <Image
             alt="example"
             src={sellingItem?.image || '/svg/example/example_picture_col.svg'}
@@ -46,7 +46,7 @@ export default function SellingItem({
         </article>
         <Image
           alt="option"
-          src="/svg/icons/icon_option_black.svg"
+          src="/svg/icons/option_black.svg"
           width="18"
           height="18"
           className="absolute right-0 top-0 cursor-pointer"
@@ -67,7 +67,7 @@ export default function SellingItem({
           });
         }}
       >
-        <article className="relative h-[100px] w-[82px] overflow-hidden rounded">
+        <article className="relative h-[6.25rem] w-[5.125rem] overflow-hidden rounded">
           <Image
             alt="example"
             src={sellingItem?.image || '/svg/example/example_picture_col.svg'}
@@ -83,7 +83,7 @@ export default function SellingItem({
             <span className="text-14">{sellingItem?.title}</span>
             <span className="text-12"> | {sellingItem?.artistName}</span>
           </p>
-          <div className="mt-[1.5px]">
+          <div className="mt-[0.0938rem]">
             {sellingItem.biddingStatus === null ? (
               <p className="text-16 font-semibold text-brand">입찰 없음</p>
             ) : (
@@ -106,7 +106,7 @@ export default function SellingItem({
           });
         }}
       >
-        <article className="relative h-[100px] w-[82px] overflow-hidden rounded">
+        <article className="relative h-[6.25rem] w-[5.125rem] overflow-hidden rounded">
           <Image
             alt="example"
             src={sellingItem?.image || '/svg/example/example_picture_col.svg'}
@@ -122,7 +122,7 @@ export default function SellingItem({
             <span className="text-14">{sellingItem?.title}</span>
             <span className="text-12"> | {sellingItem?.artistName}</span>
           </p>
-          <div className="mt-[1.5px]">
+          <div className="mt-[0.0938rem]">
             {sellingItem.biddingStatus === null ? (
               <p className="text-16 font-semibold text-brand">입찰 없음</p>
             ) : (
@@ -146,7 +146,7 @@ export default function SellingItem({
           });
         }}
       >
-        <article className="relative h-[100px] w-[82px] overflow-hidden rounded">
+        <article className="relative h-[6.25rem] w-[5.125rem] overflow-hidden rounded">
           <Image
             alt="example"
             src={sellingItem?.image || '/svg/example/example_picture_col.svg'}
@@ -162,7 +162,7 @@ export default function SellingItem({
             <span className="text-14">{sellingItem?.title}</span>
             <span className="text-12"> | {sellingItem?.artistName}</span>
           </p>
-          <div className="mt-[1.5px]">
+          <div className="mt-[0.0938rem]">
             {sellingItem.biddingStatus === null ? (
               <p className="text-16 font-semibold text-brand">입찰 없음</p>
             ) : (

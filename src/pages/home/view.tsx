@@ -60,10 +60,12 @@ export default function View() {
     <Layout>
       <Navigate isRightButton={false} />
       <div>
-        <p className="text-[14px] font-semibold text-[#767676]">
+        <p className="text-[0.875rem] font-semibold text-[#767676]">
           {userInfo?.nickname}님 취향의
         </p>
-        <p className="text-[20px] font-bold text-[#191919]">이번 주 전시작품</p>
+        <p className="text-[1.25rem] font-bold text-[#191919]">
+          이번 주 전시작품
+        </p>
       </div>
       <div className="mt-6 grid w-full grid-cols-2 content-center items-center justify-items-center gap-y-5">
         {artworkLists?.map((art) => (
@@ -77,9 +79,9 @@ export default function View() {
           />
         ))}
       </div>
-      <div ref={target} className="flex h-[100px] w-full justify-center">
+      <div ref={target} className="flex h-[6.25rem] w-full justify-center">
         {isLoaded && (
-          <div className="mt-5 flex h-[30px] items-center justify-center">
+          <div className="mt-5 flex h-[1.875rem] items-center justify-center">
             <div className="grid gap-2">
               <div className="flex items-center justify-center space-x-2">
                 <div className="h-3 w-3 animate-bounce1 rounded-full bg-brand"></div>

@@ -14,7 +14,7 @@ interface NoticeIconProps {
 }
 
 const NoticeIconTag = tw.div<defaultProps>`
-flex w-[60px] justify-between 
+flex w-[3.75rem] justify-between 
 `;
 
 export default React.memo(function NoticeIcon({
@@ -49,7 +49,7 @@ export default React.memo(function NoticeIcon({
       {isSearch ? (
         <Image
           alt="search"
-          src="/svg/icons/icon_search.svg"
+          src="/svg/icons/search.svg"
           width="22"
           height="22"
           onClick={() => {
@@ -64,7 +64,7 @@ export default React.memo(function NoticeIcon({
       )}
       <Image
         alt="notification"
-        src="/svg/icons/icon_notification.svg"
+        src="/svg/icons/notification.svg"
         width={22}
         height={22}
         onClick={() => {

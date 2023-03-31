@@ -14,7 +14,7 @@ export default function Modal({
   return (
     <>
       {isModal && term === 1 ? (
-        <div className="absolute inset-0 z-20 m-auto h-full w-full bg-white px-[24px]">
+        <div className="absolute inset-0 z-20 m-auto h-full w-full bg-white px-[1.5rem]">
           <Navigate
             message="아띠즈 이용약관 동의(필수)"
             isRightButton={false}
@@ -309,7 +309,7 @@ export default function Modal({
         <div></div>
       )}
       {isModal && term === 2 && (
-        <div className="absolute inset-0 z-20 m-auto h-full w-full bg-white px-[24px]">
+        <div className="absolute inset-0 z-20 m-auto h-full w-full bg-white px-[1.5rem]">
           <Navigate
             message="개인정보 수집과 이용에 동의(필수)"
             isRightButton={false}

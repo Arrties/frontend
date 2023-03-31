@@ -74,12 +74,12 @@ export default function Bidding() {
         message="응찰내역"
         handleRightButton={() => router.back()}
       />
-      <div className="top-100px absolute inset-x-0 mx-auto  max-w-[420px] border-b border-brand" />
+      <div className="top-6.25rem absolute inset-x-0 mx-auto  max-w-[26.25rem] border-b border-brand" />
       <section>
         <article className="mt-3">
           <div className="textd-16 font-medium">작품정보</div>
           <div className="mt-3 flex items-center">
-            <div className="relative h-[97px] w-[85px] overflow-hidden rounded-[4px]">
+            <div className="relative h-[6.0625rem] w-[5.3125rem] overflow-hidden rounded-[0.25rem]">
               {artWork?.image && (
                 <Image
                   alt="image"
@@ -93,11 +93,11 @@ export default function Bidding() {
               <p className="text-15 font-semibold leading-5">
                 {artWork?.title}
               </p>
-              <p className="mt-1 text-[12.44px] text-font-500">
+              <p className="mt-1 text-[0.7775rem] text-font-500">
                 {artWork?.artistName}
-                <span className="ml-[6px]">{artWork?.genre}</span>
+                <span className="ml-[0.375rem]">{artWork?.genre}</span>
               </p>
-              <div className="mt-3 text-[13px] font-medium text-font-500">
+              <div className="mt-3 text-[0.8125rem] font-medium text-font-500">
                 <p className="leading-5">
                   현재가
                   <span className="ml-2 text-brand">
@@ -116,12 +116,12 @@ export default function Bidding() {
             </div>
           </div>
         </article>
-        <article className="mt-5 flex h-[70px] items-center rounded-xl border border-[#D9D9D9]">
+        <article className="mt-5 flex h-[4.375rem] items-center rounded-xl border border-[#D9D9D9]">
           <div className="flex w-2/5 flex-col items-center border-r border-[#D9D9D9]">
             <p className="flex">
               <Image
                 alt=""
-                src="/svg/icons/icon_clock_black.svg"
+                src="/svg/icons/clock_black.svg"
                 width="17"
                 height="0"
               />
@@ -147,7 +147,7 @@ export default function Bidding() {
             <p className="flex">
               <Image
                 alt=""
-                src="/svg/icons/icon_clock_black.svg"
+                src="/svg/icons/clock_black.svg"
                 width="17"
                 height="0"
               />
@@ -188,7 +188,7 @@ export default function Bidding() {
             )}
             {biddingList && biddingList.length > 0 && (
               <>
-                <tr className="absolute -left-6 top-10 z-10 h-10 w-[calc(100%+48px)] bg-brand opacity-25" />
+                <tr className="absolute -left-6 top-10 z-10 h-10 w-[calc(100%+3rem)] bg-brand opacity-25" />
                 <tr className="h-10">
                   <td className="text-left">{biddingList[0].memberName}</td>
                   <td className="font-bold text-brand">
@@ -217,7 +217,7 @@ export default function Bidding() {
         </table>
       </section>
       <DivisionBar className="absolute inset-x-0 mx-auto mt-6" />
-      <form className="my-[55px]" onSubmit={handleSubmit(onSubmit)}>
+      <form className="my-[3.4375rem]" onSubmit={handleSubmit(onSubmit)}>
         <article>
           <p className="font-meduim text-16">응찰하기</p>
           <p className="mt-1 text-12 text-[#FF3120]">
@@ -228,7 +228,7 @@ export default function Bidding() {
           <div className="w-full">
             <input
               placeholder="금액을 입력해주세요."
-              className="placeholder:text-normal h-[42px] w-full  appearance-none rounded-[4px] border-[#D8D8D8] text-[13px] placeholder-[#999999] placeholder:text-14"
+              className="placeholder:text-normal h-[2.625rem] w-full  appearance-none rounded-[0.25rem] border-[#D8D8D8] text-[0.8125rem] placeholder-[#999999] placeholder:text-14"
               type="text"
               {...register('price', {
                 required: false,

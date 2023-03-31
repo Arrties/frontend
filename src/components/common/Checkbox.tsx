@@ -1,11 +1,11 @@
-import check from '@public/svg/icons/icon_checked.svg'
-import checkRadio from '@public/svg/icons/icon_radio_checked.svg'
-import unCheckRadio from '@public/svg/icons/icon_radio_unchecked.svg'
-import uncheck from '@public/svg/icons/icon_unchecked.svg'
-import Image from 'next/image'
-import React from 'react'
-import tw from 'tailwind-styled-components'
-import { useRef } from 'react'
+import check from '@public/svg/icons/checked.svg';
+import checkRadio from '@public/svg/icons/radio_checked.svg';
+import unCheckRadio from '@public/svg/icons/radio_unchecked.svg';
+import uncheck from '@public/svg/icons/unchecked.svg';
+import Image from 'next/image';
+import React from 'react';
+import tw from 'tailwind-styled-components';
+import { useRef } from 'react';
 
 interface defaultProps {
   [key: string]: any;

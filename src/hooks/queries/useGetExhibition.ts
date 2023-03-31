@@ -2,13 +2,8 @@ import artworkApi from '@apis/artwork/artworkApi';
 import { useQuery } from 'react-query';
 
 export const useGetExhibition = () => {
-  return useQuery<ExhibitionList[], Error>(
-    'useGetExhibition',
-    () => artworkApi.getExhibitionList(),
-    {
-      retry: false,
-      refetchOnWindowFocus: false,
-    },
+  return useQuery<ExhibitionList[], Error>('useGetExhibition', () =>
+    artworkApi.getExhibitionList(),
   );
 };
 
@@ -20,7 +15,7 @@ export const useGetExhibitionItemList = (
     ['useGetExhibitionItems', auctionId],
     () => artworkApi.getExhibitionItemList(auctionId),
     {
-      enabled: !isNaN(auctionId),
+      enabled: !!auctionId,
       select: (arts) => {
         if (genres?.length === 0) {
           return arts;
@@ -38,9 +33,7 @@ export const useGetExhibitionItem = (artWorkId: number) => {
     ['useGetExhibitionItem', artWorkId],
     () => artworkApi.getExhibitionItem(artWorkId),
     {
-      retry: false,
-      refetchOnWindowFocus: false,
-      enabled: !isNaN(artWorkId),
+      enabled: !!artWorkId,
     },
   );
 };

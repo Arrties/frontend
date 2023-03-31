@@ -17,7 +17,7 @@ interface defaultProps {
 }
 
 const WelcomeBox = tw.div<defaultProps>`
-bg-brand rounded-lg h-[90px] flex  items-center px-4
+bg-brand rounded-lg h-[5.625rem] flex  items-center px-4
 `;
 
 interface ActivityList {
@@ -31,13 +31,13 @@ let ActivityLists: ActivityList[] = [
   {
     id: '1',
     text: '관심목록',
-    icon: '/svg/icons/icon_heart.svg',
+    icon: '/svg/icons/heart.svg',
     path: '/profile/wish',
   },
   {
     id: '2',
     text: '나의 픽 작가',
-    icon: '/svg/icons/icon_book_mark.svg',
+    icon: '/svg/icons/book_mark.svg',
     path: '/profile/pick',
   },
 ];
@@ -48,7 +48,7 @@ ActivityLists = isUser
       {
         id: '3',
         text: '나의 경매',
-        icon: '/svg/icons/icon_bid.svg',
+        icon: '/svg/icons/bid.svg',
         path: '/profile/bid',
       },
     ]
@@ -57,13 +57,13 @@ ActivityLists = isUser
       {
         id: '3',
         text: '나의 경매',
-        icon: '/svg/icons/icon_bid.svg',
+        icon: '/svg/icons/bid.svg',
         path: '/profile/bid',
       },
       {
         id: '4',
         text: '판매 활동',
-        icon: '/svg/icons/icon_selling.svg',
+        icon: '/svg/icons/selling.svg',
         path: '/profile/selling',
       },
     ];
@@ -112,7 +112,7 @@ export default function Profile() {
         />
         <section>
           <WelcomeBox>
-            <div className="relative flex h-[54px] w-[54px] items-center overflow-hidden rounded-full bg-[#EDEDED]">
+            <div className="relative flex h-[3.375rem] w-[3.375rem] items-center overflow-hidden rounded-full bg-[#EDEDED]">
               {data?.image ? (
                 <Image
                   src={data?.image}
@@ -135,11 +135,11 @@ export default function Profile() {
                 />
               ) : (
                 <Image
-                  src="/svg/icons/profile/icon_avatar.svg"
+                  src="/svg/icons/profile/avatar.svg"
                   alt="user"
                   width={100}
                   height={100}
-                  className="m-auto h-[27px] cursor-pointer rounded-full bg-[#EDEDED]"
+                  className="m-auto h-[1.6875rem] cursor-pointer rounded-full bg-[#EDEDED]"
                   onClick={() => {
                     if (isUser) {
                       window.alert('작가 전환 후 이용할 수 있는 페이지입니다.');
@@ -163,7 +163,7 @@ export default function Profile() {
             </div>
             <div className="absolute right-10">
               <Image
-                src="/svg/icons/icon_pencil.svg"
+                src="/svg/icons/pencil.svg"
                 alt="setting"
                 className=" cursor-pointer"
                 onClick={() => {
@@ -179,11 +179,11 @@ export default function Profile() {
               onClick={() => {
                 router.push('/profile/register');
               }}
-              className="mt-4 flex cursor-pointer justify-between rounded border-[1px] border-brand p-4"
+              className="mt-4 flex cursor-pointer justify-between rounded border-[0.0625rem] border-brand p-4"
             >
               <div className="flex">
                 <Image
-                  src="/svg/icons/icon_user.svg"
+                  src="/svg/icons/user.svg"
                   alt="avatar"
                   width={23}
                   height={23}
@@ -193,7 +193,7 @@ export default function Profile() {
                 </span>
               </div>
               <Image
-                src="/svg/icons/icon_arrow_black.svg"
+                src="/svg/icons/arrow_black.svg"
                 alt="arrow"
                 width={25}
                 height={25}
@@ -211,13 +211,13 @@ export default function Profile() {
             />
           ))}
         </section>
-        <DivisionBar className="absolute inset-x-0 m-auto mt-5 max-w-[420px]" />
+        <DivisionBar className="absolute inset-x-0 m-auto mt-5 max-w-[26.25rem]" />
         <section className="my-10">
           <div className="relative my-4 flex">
             <span className="text-14 font-bold text-[#191919]">취향 목록</span>
             {data?.keywords && (
               <Image
-                src="/svg/icons/icon_pencil_gray_bright.svg"
+                src="/svg/icons/pencil_gray_bright.svg"
                 alt="edit_keywords"
                 width={16}
                 height={16}
@@ -240,11 +240,11 @@ export default function Profile() {
                 onClick={() => {
                   router.push('/profile/keyword');
                 }}
-                className="flex h-[36px] w-[100px] items-center justify-center rounded-[19px] border-[1px] border-brand text-xs text-brand"
+                className="flex h-[2.25rem] w-[6.25rem] items-center justify-center rounded-[1.1875rem] border-[0.0625rem] border-brand text-xs text-brand"
               >
                 <div>
                   <Image
-                    src="/svg/icons/icon_plus_pink.svg"
+                    src="/svg/icons/plus_pink.svg"
                     alt="plus"
                     width={10}
                     height={10}
@@ -255,7 +255,7 @@ export default function Profile() {
             </div>
           )}
         </section>
-        <DivisionBar className="absolute inset-x-0 m-auto -mt-5 max-w-[420px]" />
+        <DivisionBar className="absolute inset-x-0 m-auto -mt-5 max-w-[26.25rem]" />
         <section>
           {SettingLists.map((setting: SettingList) => (
             <SettingItem

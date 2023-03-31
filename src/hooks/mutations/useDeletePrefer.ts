@@ -27,7 +27,7 @@ const Querykey = {
   '/home/view': {
     getDataQuery: 'useInfiniteArtWork',
     convertFunc: (old, artWorkId: number) => {
-      console.log(old);
+      old;
       return {
         ...old,
         pages: old.pages.map((page) => {
@@ -53,7 +53,7 @@ const Querykey = {
   '/search': {
     getDataQuery: 'useGetSearch',
     convertFunc: (old, artWorkId: number) => {
-      console.log(old, artWorkId);
+      // old, artWorkId;
     },
   },
 };
@@ -63,7 +63,6 @@ const useDeletePrefer = (artWorkId: number, path: string) => {
     'useDeletePrefer',
     () => artworkApi.deletePrefer(artWorkId),
     {
-      retry: false,
       onMutate: async () => {
         await queryClient.cancelQueries({ queryKey: ['useDeletePrefer'] });
         const previousValue = queryClient.getQueryData([

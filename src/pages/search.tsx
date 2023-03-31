@@ -1,7 +1,7 @@
 import Input from '@components/common/Input';
 import Layout from '@components/common/Layout';
 import SearchItem from '@components/search/SearchItem';
-import back from '@public/svg/icons/icon_back.svg';
+import back from '@public/svg/icons/back.svg';
 import Image from 'next/image';
 import tw from 'tailwind-styled-components';
 import { useRouter } from 'next/router';
@@ -43,7 +43,7 @@ interface DefaultProps {
 }
 
 const SearchBox = tw.header<DefaultProps>`
-flex justify-between items-center font-semibold relative h-[64px] mt-7
+flex justify-between items-center font-semibold relative h-[4rem] mt-7
 `;
 
 export default function Search() {
@@ -93,7 +93,7 @@ export default function Search() {
   }, [router.query]);
 
   useEffect(() => {
-    console.log(page);
+    page;
     setValue(page + '');
     setSearchWord(page + '');
   }, [page]);
@@ -112,7 +112,7 @@ export default function Search() {
         </div>
         <form className="grow-[5]" onSubmit={handleSubmit(onSubmit)}>
           <Input
-            className="h-[42px] border-none bg-[#F1F1F5]"
+            className="h-[2.625rem] border-none bg-[#F1F1F5]"
             type="text"
             placeholder="검색어를 입력해주세요"
             value={value}
@@ -157,7 +157,7 @@ export default function Search() {
       )}
       {RecentWords && RecentWords.length > 0 && !page && (
         <div>
-          <section className="mt-[38px]">
+          <section className="mt-[2.375rem]">
             <div className="flex justify-between">
               <span className="text-base font-semibold">최근 검색어</span>
               <span
@@ -167,7 +167,7 @@ export default function Search() {
                 모두 지우기
               </span>
             </div>
-            <div className="mt-[15px]">
+            <div className="mt-[0.9375rem]">
               <ul className="m-auto flex flex-wrap">
                 {RecentWords?.map((word: RecentSearch, idx) => (
                   <RecentSearchBox

@@ -71,7 +71,7 @@ function Id() {
         <Button
           text="확인"
           type="submit"
-          className="absolute inset-x-0 bottom-[34px] m-auto w-[calc(100%-48px)]"
+          className="absolute inset-x-0 bottom-[2.125rem] m-auto w-[calc(100%-48px)]"
         />
       </form>
     </Layout>

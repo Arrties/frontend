@@ -20,7 +20,7 @@ w-full flex items-center mt-5 mb-8
 `;
 
 const PickDetailProfile = tw.div<defaultProps>`
-w-[60px] mr-[10px] aspect-square flex justify-center items-center rounded-full border-[1px] border-[#999999] overflow-hidden relative
+w-[3.75rem] mr-[0.625rem] aspect-square flex justify-center items-center rounded-full border-[0.0625rem] border-[#999999] overflow-hidden relative
 `;
 
 export default function PickDetail() {
@@ -41,7 +41,7 @@ export default function PickDetail() {
       postPrefer();
     }
   };
-  console.log(member);
+  member;
 
   return (
     <Layout>
@@ -58,7 +58,7 @@ export default function PickDetail() {
             />
           ) : (
             <Image
-              src="/svg/icons/profile/icon_avatar.svg"
+              src="/svg/icons/profile/avatar.svg"
               alt="user"
               width={40}
               height={40}
@@ -73,7 +73,7 @@ export default function PickDetail() {
         {!isMine && (
           <Image
             alt="like"
-            src={`/svg/icons/icon_book_mark${pick ? '_focused' : ''}.svg`}
+            src={`/svg/icons/book_mark${pick ? '_focused' : ''}.svg`}
             width="20"
             height="0"
             className="absolute right-5 cursor-pointer"
@@ -84,10 +84,10 @@ export default function PickDetail() {
 
       <Tab.Group>
         <Tab.List>
-          <Tab className="h-[52px] w-1/2 border-[#191919] text-16 font-bold ui-selected:border-b-[3px] ui-selected:text-[#191919] ui-not-selected:border-b ui-not-selected:border-[#EDEDED] ui-not-selected:text-[#999999] ">
+          <Tab className="h-[3.25rem] w-1/2 border-[#191919] text-16 font-bold ui-selected:border-b-[0.1875rem] ui-selected:text-[#191919] ui-not-selected:border-b ui-not-selected:border-[#EDEDED] ui-not-selected:text-[#999999] ">
             작가소개
           </Tab>
-          <Tab className="h-[52px] w-1/2 border-[#191919] text-16 font-bold ui-selected:border-b-[3px] ui-selected:text-[#191919] ui-not-selected:border-b ui-not-selected:border-[#EDEDED] ui-not-selected:text-[#999999] ">
+          <Tab className="h-[3.25rem] w-1/2 border-[#191919] text-16 font-bold ui-selected:border-b-[0.1875rem] ui-selected:text-[#191919] ui-not-selected:border-b ui-not-selected:border-[#EDEDED] ui-not-selected:text-[#999999] ">
             작품
           </Tab>
         </Tab.List>
@@ -115,23 +115,23 @@ export default function PickDetail() {
                 <div className="mt-3 flex flex-col">
                   <div className="mb-2 flex w-1/2 items-center">
                     <Image
-                      src="/svg/icons/icon_instagram_black.svg"
+                      src="/svg/icons/instagram_black.svg"
                       width={20}
                       height={20}
                       alt="instagram"
                     />
-                    <p className="ml-[6px] text-14 leading-5">
+                    <p className="ml-[0.375rem] text-14 leading-5">
                       <a href={member?.instagram}>{member?.instagram}</a>
                     </p>
                   </div>
                   <div className="flex w-1/2 items-center">
                     <Image
-                      src="/svg/icons/icon_behance_black.svg"
+                      src="/svg/icons/behance_black.svg"
                       width={20}
                       height={20}
                       alt="behance"
                     />
-                    <p className="ml-[6px] text-14 leading-5">
+                    <p className="ml-[0.375rem] text-14 leading-5">
                       <a href={member?.behance}>{member?.behance}</a>
                     </p>
                   </div>

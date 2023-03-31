@@ -25,15 +25,15 @@ export default function Guarantee({
   guaranteeImage,
 }: GuaranteeProps) {
   return (
-    <article className="relative h-[457px] w-full">
-      <div className="m-auto  min-w-[327px] flex-col items-center justify-center py-9">
+    <article className="relative h-[28.5625rem] w-full">
+      <div className="m-auto  min-w-[20.4375rem] flex-col items-center justify-center py-9">
         <div className="text-center text-16 font-semibold tracking-[0.3em]">
           작 품 보 증 서
         </div>
-        <p className="text-center text-[8px] font-light tracking-[-0.05em] text-[#A5A5A5]">
+        <p className="text-center text-[0.5rem] font-light tracking-[-0.05em] text-[#A5A5A5]">
           CERTIFICATE OF AUTHENTICITY
         </p>
-        <div className="relative mx-auto mt-7 h-[74px] w-[116px]">
+        <div className="relative mx-auto mt-7 h-[4.625rem] w-[7.25rem]">
           <Image src={mainImage} fill className="object-cover" alt="artwork" />
         </div>
         <div className="mt-3 flex justify-center text-11 leading-5">
@@ -60,13 +60,13 @@ export default function Guarantee({
             <Image src={guaranteeImage} width={50} height={50} alt="artwork" />
           </div>
           <div className="mt-2 flex-col items-center justify-center">
-            <div className="mx-auto w-[70px] border-t border-t-black pb-[3px]" />
-            <div className="text-center text-[8px]  text-[#A5A5A5]">
+            <div className="mx-auto w-[4.375rem] border-t border-t-black pb-[0.1875rem]" />
+            <div className="text-center text-[0.5rem]  text-[#A5A5A5]">
               Artist Signature
             </div>
           </div>
         </div>
-        <ul className="mt-3 w-full list-none text-center text-[8px]">
+        <ul className="mt-3 w-full list-none text-center text-[0.5rem]">
           <li className="w-full  text-black  before:mr-2  before:content-['\2022']">
             본 작품은 위에 서명한 작가의 작품임을 보증합니다.
           </li>
@@ -78,7 +78,7 @@ export default function Guarantee({
             불가합니다.
           </li>
         </ul>
-        <p className="my-3 text-center text-[8px]">{today()}</p>
+        <p className="my-3 text-center text-[0.5rem]">{today()}</p>
         <div className="flex items-center justify-center text-brand">
           <Image
             src="/svg/post/logo_small.svg"

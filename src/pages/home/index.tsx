@@ -32,19 +32,19 @@ const PastAuction = styled.section`
   }
 `;
 const KeywordSection = styled.section`
-  margin-top: 4px;
-  margin-bottom: 8px;
+  margin-top: 0.25rem;
+  margin-bottom: 0.5rem;
   display: flex;
   overflow-x: auto;
   white-space: nowrap;
 
   &::-webkit-scrollbar {
-    width: 1px;
+    width: 0.0625rem;
   }
   &::-webkit-scrollbar-thumb {
     background-color: #fc6554;
     background-clip: padding-box;
-    border: 6px solid transparent;
+    border: 0.375rem solid transparent;
   }
 `;
 
@@ -61,7 +61,7 @@ export default function Home() {
           left_message={
             <Image
               alt="logo"
-              src="/svg/icons/icon_logo.svg"
+              src="/svg/icons/logo.svg"
               width="90"
               height="90"
             />
@@ -71,7 +71,7 @@ export default function Home() {
           }}
           right_message={<NoticeIcon />}
         />
-        <DivisionBar className="absolute inset-x-0 m-auto -mt-1 h-[1px] max-w-[420px] bg-[#FC6554]" />
+        <DivisionBar className="absolute inset-x-0 m-auto -mt-1 h-[0.0625rem] max-w-[26.25rem] bg-[#FC6554]" />
         <section className="mt-3">
           <div className="relative flex justify-between">
             {customizedArtwork?.artworks.length ? (
@@ -90,7 +90,7 @@ export default function Home() {
                     전체보기
                   </span>
                   <Image
-                    src="/svg/icons/icon_arrow.svg"
+                    src="/svg/icons/arrow.svg"
                     alt="arrow"
                     width={6}
                     height={6}
@@ -98,7 +98,7 @@ export default function Home() {
                 </div>
               </div>
             ) : (
-              <div className="relative mt-2 flex h-[120px] w-[500px] cursor-pointer items-center">
+              <div className="relative mt-2 flex h-[7.5rem] w-[31.25rem] cursor-pointer items-center">
                 <Image
                   alt="keyword"
                   src="/svg/icons/bg_home_banner.svg"
@@ -127,7 +127,7 @@ export default function Home() {
         <KeywordSection>
           {!!customizedArtwork?.artworks.length &&
             userInfo?.keywords?.map((keyword: string, idx: number) => (
-              <KeywordBox text={keyword} key={idx} className="mb-[6px]" />
+              <KeywordBox text={keyword} key={idx} className="mb-[0.375rem]" />
             ))}
         </KeywordSection>
 
@@ -203,7 +203,7 @@ export default function Home() {
               slidesPerView={1}
               modules={[Pagination]}
               pagination={true}
-              className="h-[360px]"
+              className="h-[22.5rem]"
             >
               {!!pastAuctionList &&
                 makeThreeEach(pastAuctionList.reverse())?.map(

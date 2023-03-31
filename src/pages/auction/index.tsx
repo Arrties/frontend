@@ -34,49 +34,44 @@ export default function Auction() {
       <Layout>
         <Navigate
           left_message={
-            <Image
-              alt="logo"
-              src="/svg/icons/icon_logo.svg"
-              width="90"
-              height="0"
-            />
+            <Image alt="logo" src="/svg/icons/logo.svg" width="90" height="0" />
           }
           handleLeftButton={() => {
             router.push('/home');
           }}
           right_message={<NoticeIcon />}
         />
-        <div className="top-100px absolute inset-x-0 mx-auto  max-w-[420px] border-b border-brand" />
+        <div className="top-6.25rem absolute inset-x-0 mx-auto  max-w-[26.25rem] border-b border-brand" />
         {error && error.code === 'NOT_FOUND_AUCTION_PROCESSING' ? (
           <None path="auction" message="아직 진행중인 경매가 없어요" />
         ) : (
           <>
             <section className="relative mb-7 mt-4 flex justify-between">
               {data && (
-                <span className="text-[20px] font-bold">{`제 ${data?.turn}회 아띠즈 경매`}</span>
+                <span className="text-[1.25rem] font-bold">{`제 ${data?.turn}회 아띠즈 경매`}</span>
               )}
               {date && !Number.isNaN(+days) && (
                 <div
                   className={`flex ${
-                    +days >= 1 ? 'w-fit' : 'w-[100px]'
+                    +days >= 1 ? 'w-fit' : 'w-[6.25rem]'
                   } items-center justify-center rounded bg-brand px-2 text-white`}
                 >
                   <Image
                     alt="clock"
-                    src="/svg/icons/icon_clock_white.svg"
+                    src="/svg/icons/clock_white.svg"
                     width="14"
                     height="14"
                     className="mr-1.5"
                   />
                   {remaind < 0 ? (
-                    <span className="w-[66px] text-[14px] font-medium tracking-widest">
+                    <span className="w-[4.125rem] text-[0.875rem] font-medium tracking-widest">
                       00:00:00
                     </span>
                   ) : (
                     <span
                       className={`${
-                        +days >= 1 ? 'w-fit' : 'w-[66px]'
-                      } text-[14px] font-medium tracking-widest`}
+                        +days >= 1 ? 'w-fit' : 'w-[4.125rem]'
+                      } text-[0.875rem] font-medium tracking-widest`}
                     >
                       {+days >= 1
                         ? 'D-' + days

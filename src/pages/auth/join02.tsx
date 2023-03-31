@@ -153,7 +153,7 @@ export default function Join02() {
     <Layout>
       <Navigate message="회원가입" handleRightButton={handleRightButton} />
       <section className="mt-8">
-        <p className="mb-[12px]">
+        <p className="mb-[0.75rem]">
           <span className="text-brand">회원정보</span>를 입력해주세요
         </p>
       </section>
@@ -296,9 +296,9 @@ export default function Join02() {
           />
         </section>
 
-        <div className="h-[30px]" />
+        <div className="h-[1.875rem]" />
 
-        <Button text="확인" className="mb-[76px] w-full" />
+        <Button text="확인" className="mb-[4.75rem] w-full" />
       </form>
     </Layout>
   );

@@ -8,8 +8,8 @@ const useGetPickDetail = (artistId: number) => {
 
     {
       retry: 0,
-      refetchOnWindowFocus: false,
-      enabled: !isNaN(artistId),
+
+      enabled: !!artistId,
     },
   );
 };

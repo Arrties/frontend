@@ -16,7 +16,7 @@ const ModalInner = tw.div<defaultProps>`
   z-20 w-[calc(100%-48px)] h-fit absolute inset-0 m-auto
 `;
 const ModalMessage = tw.div<defaultProps>`
-h-fit bg-white text-[#191919] text-14 rounded-[4px] flex overflow-hidden   
+h-fit bg-white text-[#191919] text-14 rounded-[0.25rem] flex overflow-hidden   
 `;
 
 export default function AskPriceModal({
@@ -35,7 +35,7 @@ export default function AskPriceModal({
               경매 호가표 안내
             </div>
             <div className="w-full bg-[#F8F8FA]">
-              <div className="itmes-center flex h-[30px] w-full justify-center text-10 font-medium">
+              <div className="itmes-center flex h-[1.875rem] w-full justify-center text-10 font-medium">
                 <div className="flex  w-3/5 items-center justify-center">
                   현재가 구간 (원)
                 </div>
@@ -43,7 +43,7 @@ export default function AskPriceModal({
                   호가 단위 (원)
                 </div>
               </div>
-              <div className="itmes-center flex h-[30px] w-full justify-center border-t border-[#EDEDED] text-10  font-medium text-[#999999]">
+              <div className="itmes-center flex h-[1.875rem] w-full justify-center border-t border-[#EDEDED] text-10  font-medium text-[#999999]">
                 <div className="flex w-3/5 items-center justify-center border-r border-[#EDEDED]">
                   30만 미만
                 </div>
@@ -51,7 +51,7 @@ export default function AskPriceModal({
                   20,000원
                 </div>
               </div>
-              <div className="itmes-center flex h-[30px] w-full justify-center border-t border-[#EDEDED] text-10  font-medium text-[#999999]">
+              <div className="itmes-center flex h-[1.875rem] w-full justify-center border-t border-[#EDEDED] text-10  font-medium text-[#999999]">
                 <div className="flex w-3/5 items-center justify-center border-r border-[#EDEDED]">
                   30만 이상 ~ 100만 미만
                 </div>
@@ -59,7 +59,7 @@ export default function AskPriceModal({
                   50,000원
                 </div>
               </div>
-              <div className="itmes-center flex h-[30px] w-full justify-center border-t border-[#EDEDED] text-10  font-medium text-[#999999]">
+              <div className="itmes-center flex h-[1.875rem] w-full justify-center border-t border-[#EDEDED] text-10  font-medium text-[#999999]">
                 <div className="flex w-3/5 items-center justify-center border-r border-[#EDEDED]">
                   100만 이상 ~ 300만 미만
                 </div>
@@ -67,7 +67,7 @@ export default function AskPriceModal({
                   100,000원
                 </div>
               </div>
-              <div className="itmes-center flex h-[30px] w-full justify-center border-t border-[#EDEDED] text-10  font-medium text-[#999999]">
+              <div className="itmes-center flex h-[1.875rem] w-full justify-center border-t border-[#EDEDED] text-10  font-medium text-[#999999]">
                 <div className="flex w-3/5 items-center justify-center border-r border-[#EDEDED]">
                   300만 이상 ~ 500만 미만
                 </div>
@@ -75,7 +75,7 @@ export default function AskPriceModal({
                   200,000원
                 </div>
               </div>
-              <div className="itmes-center flex h-[30px] w-full justify-center border-t border-[#EDEDED] text-10  font-medium text-[#999999]">
+              <div className="itmes-center flex h-[1.875rem] w-full justify-center border-t border-[#EDEDED] text-10  font-medium text-[#999999]">
                 <div className="flex w-3/5 items-center justify-center border-r border-[#EDEDED]">
                   500만 이상 ~ 1000만 미만
                 </div>
@@ -83,7 +83,7 @@ export default function AskPriceModal({
                   500,000원
                 </div>
               </div>
-              <div className="itmes-center flex h-[30px] w-full justify-center border-t border-[#EDEDED] text-10  font-medium text-[#999999]">
+              <div className="itmes-center flex h-[1.875rem] w-full justify-center border-t border-[#EDEDED] text-10  font-medium text-[#999999]">
                 <div className="flex w-3/5 items-center justify-center border-r border-[#EDEDED]">
                   1000만 이상
                 </div>

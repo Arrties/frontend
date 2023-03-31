@@ -50,7 +50,7 @@ function Password() {
         }}
       />
       <section className="py-5">
-        <p className="text-[18px] font-semibold">
+        <p className="text-[1.125rem] font-semibold">
           소중한 개인정보를 위하여 <br />
           <span className="text-brand">본인확인</span>이 필요합니다.
         </p>
@@ -79,7 +79,7 @@ function Password() {
         <Button
           text="확인"
           type="submit"
-          className="absolute inset-x-0 bottom-[34px] m-auto w-[calc(100%-48px)]"
+          className="absolute inset-x-0 bottom-[2.125rem] m-auto w-[calc(100%-48px)]"
         />
       </form>
     </Layout>

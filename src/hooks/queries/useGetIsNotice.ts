@@ -3,12 +3,8 @@ import { IsNoticeForm } from '@apis/profile/profileApi.type';
 import { useQuery } from 'react-query';
 
 const useGetIsNotice = () => {
-  return useQuery<IsNoticeForm, Error>(
-    'useGetIsNotice',
-    () => profileApi.getIsNotice(),
-    {
-      retry: false,
-    },
+  return useQuery<IsNoticeForm, Error>('useGetIsNotice', () =>
+    profileApi.getIsNotice(),
   );
 };
 

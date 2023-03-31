@@ -23,7 +23,7 @@ export default function KakaoCallback() {
       })
       .then(() => router.push('/home'))
       .catch((err) => {
-        console.log(err);
+        err;
       });
   }, []);
 

@@ -60,9 +60,9 @@ export default function Admin() {
         <Input
           type="text"
           register={register('memberId')}
-          className="w-[170px]"
+          className="w-[10.625rem]"
         />
-        <Button text="작가 프로필 전환" className="w-[170px]" />
+        <Button text="작가 프로필 전환" className="w-[10.625rem]" />
       </form>
 
       <form
@@ -72,11 +72,11 @@ export default function Admin() {
         <p className=" text-[#9B111E]">지난 경매와 안곂치도록 주의해주세요</p>
         <p className="text-14">날짜 예시 : 2023-02-01T12:00:00</p>
         <article className="flex items-center">
-          <div className="w-[50px]">
+          <div className="w-[3.125rem]">
             <p className="text-center">turn</p>
             <Input type="text" register={register('turn')} />
           </div>
-          <div className="w-[250px]">
+          <div className="w-[15.625rem]">
             <p className="text-center">시작 날짜</p>
 
             <Input
@@ -85,7 +85,7 @@ export default function Admin() {
               defaultValue="2023-02-01T12:00:00"
             />
           </div>
-          <div className="w-[250px]">
+          <div className="w-[15.625rem]">
             <p className="text-center">종료 날짜</p>
             <Input
               type="text"
@@ -137,10 +137,10 @@ export default function Admin() {
               >
                 <Input
                   type="text"
-                  className="w-[250px]"
+                  className="w-[15.625rem]"
                   register={register(`answer-${ask.id}`)}
                 />
-                <Button text="답변" className="w-[70px]" />
+                <Button text="답변" className="w-[4.375rem]" />
               </form>
             </div>
           ))}

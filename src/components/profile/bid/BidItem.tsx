@@ -29,7 +29,7 @@ export default function BidItem({
         });
       }}
     >
-      <article className="relative h-[100px] w-[82px] overflow-hidden rounded">
+      <article className="relative h-[6.25rem] w-[5.125rem] overflow-hidden rounded">
         <Image
           alt="example"
           src={biddingItem?.mainImage || '/svg/example/example_picture_col.svg'}

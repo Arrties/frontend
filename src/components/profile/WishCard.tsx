@@ -32,16 +32,16 @@ export default function WishCard({ wish }) {
       <div className="relative h-28  rounded-t-lg bg-gray-300">
         <Image
           className="rounded-t-lg object-cover"
-          src={wish?.image || '/svg/icons/icon_favorite.svg'}
+          src={wish?.image || '/svg/icons/favorite.svg'}
           alt="favorite"
           fill
         />
       </div>
-      <div className="h-30 rounded-b-lg border-x-[1px] border-b-[1px] border-[#ededed] p-3">
-        <div className="flex w-[84px] text-[10px] text-white">
+      <div className="h-30 rounded-b-lg border-x-[0.0625rem] border-b-[0.0625rem] border-[#ededed] p-3">
+        <div className="flex w-[5.25rem] text-[0.625rem] text-white">
           {statusArr.map((status, idx) => (
             <div
-              className={`h-[17px] w-1/2 bg-[${
+              className={`h-[1.0625rem] w-1/2 bg-[${
                 status === '입찰중'
                   ? '#4B9E77'
                   : status === 'HOT'
@@ -58,7 +58,7 @@ export default function WishCard({ wish }) {
             </div>
           ))}
         </div>
-        <div className="pt-[6px]">
+        <div className="pt-[0.375rem]">
           <div className="text-14 leading-4">{wish.title}</div>
           <div className="text-12 leading-6">{wish.artist}</div>
           <div className="text-14 font-bold leading-6 ">
@@ -69,7 +69,7 @@ export default function WishCard({ wish }) {
 
       <Image
         alt="prefer"
-        src="/svg/icons/icon_heart_filled.svg"
+        src="/svg/icons/heart_filled.svg"
         width={20}
         height={20}
         className="absolute right-3 top-3"

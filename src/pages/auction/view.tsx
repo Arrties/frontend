@@ -73,7 +73,7 @@ export default function View() {
     <>
       <Layout>
         <div
-          className={`fixed inset-x-0 top-0 z-50 mx-auto flex h-24 w-full max-w-[420px] items-center justify-between px-5 ${
+          className={`fixed inset-x-0 top-0 z-50 mx-auto flex h-24 w-full max-w-[26.25rem] items-center justify-between px-5 ${
             isCardOver && 'bg-white'
           }`}
         >
@@ -82,7 +82,7 @@ export default function View() {
               <Image
                 onClick={() => router.back()}
                 alt="back"
-                src="/svg/icons/auction/icon_arrow_black.svg"
+                src="/svg/icons/auction/arrow_black.svg"
                 width="24"
                 height="24"
                 className="cursor-pointer"
@@ -91,7 +91,7 @@ export default function View() {
                 <Image
                   onClick={handlePreferButton}
                   alt="prefer"
-                  src="/svg/icons/icon_heart_filled.svg"
+                  src="/svg/icons/heart_filled.svg"
                   width="24"
                   height="24"
                   className="cursor-pointer"
@@ -101,7 +101,7 @@ export default function View() {
                 <Image
                   onClick={handlePreferButton}
                   alt="prefer"
-                  src="/svg/icons/auction/icon_heart_black.svg"
+                  src="/svg/icons/auction/heart_black.svg"
                   width="24"
                   height="24"
                   className="cursor-pointer"
@@ -112,7 +112,7 @@ export default function View() {
             <>
               <Image
                 alt="back"
-                src="/svg/icons/auction/icon_arrow_white.svg"
+                src="/svg/icons/auction/arrow_white.svg"
                 width="24"
                 height="24"
                 className="cursor-pointer"
@@ -122,7 +122,7 @@ export default function View() {
                 <Image
                   onClick={handlePreferButton}
                   alt="prefer"
-                  src="/svg/icons/icon_heart_filled.svg"
+                  src="/svg/icons/heart_filled.svg"
                   width="24"
                   height="24"
                   className="cursor-pointer"
@@ -133,7 +133,7 @@ export default function View() {
                 <Image
                   onClick={handlePreferButton}
                   alt="prefer"
-                  src="/svg/icons/auction/icon_heart_white.svg"
+                  src="/svg/icons/auction/heart_white.svg"
                   width="24"
                   height="24"
                   className="cursor-pointer"
@@ -173,8 +173,8 @@ export default function View() {
                         {
                           <span
                             className={`${
-                              +days >= 1 ? 'w-fit' : 'w-[66px]'
-                            } text-[14px] font-medium tracking-widest`}
+                              +days >= 1 ? 'w-fit' : 'w-[4.125rem]'
+                            } text-[0.875rem] font-medium tracking-widest`}
                           >
                             {+days >= 1
                               ? 'D-' + days
@@ -188,7 +188,7 @@ export default function View() {
                   <span className="flex rounded-md border border-[#999999] px-2 py-0.5 text-14 text-[#999999]">
                     <Image
                       alt="clock"
-                      src="/svg/icons/icon_clock_gray.svg"
+                      src="/svg/icons/clock_gray.svg"
                       width={16}
                       height={16}
                       className="mr-1"
@@ -200,7 +200,7 @@ export default function View() {
               <div className="mt-3 text-14">{artist?.artistEducation}</div>
             </div>
           </article>
-          <article className="space-y-3 py-8 text-14 leading-[14px]">
+          <article className="space-y-3 py-8 text-14 leading-[0.875rem]">
             <p>
               <span className="inline-block w-[6rem] text-[#767676]">
                 작가명
@@ -236,7 +236,7 @@ export default function View() {
             </p>
           </article>
           <div className="mt-8 border-y border-y-[#EDEDED] py-8">
-            <div className="flex w-[74px] flex-col items-center justify-center">
+            <div className="flex w-[4.625rem] flex-col items-center justify-center">
               <p className="w-full text-center font-medium">작가프로필</p>
               <div className="relative my-2 flex aspect-square w-[4rem] cursor-pointer items-center justify-center overflow-hidden rounded-full border  border-[#999999]">
                 {artist?.artistImage ? (
@@ -255,7 +255,7 @@ export default function View() {
                   />
                 ) : (
                   <Image
-                    src="/svg/icons/profile/icon_avatar.svg"
+                    src="/svg/icons/profile/avatar.svg"
                     alt="user"
                     width={40}
                     height={40}
@@ -316,8 +316,8 @@ export default function View() {
         </section>
       </Layout>
       {
-        <article className="absolute inset-x-0 bottom-0 mx-auto max-w-[420px]">
-          <div className="to-gray-10 h-[18px] bg-gradient-to-t from-white" />
+        <article className="absolute inset-x-0 bottom-0 mx-auto max-w-[26.25rem]">
+          <div className="to-gray-10 h-[1.125rem] bg-gradient-to-t from-white" />
           <div className="m-auto flex w-full gap-5 bg-white  px-6 pb-3 shadow-lg">
             <Button
               text="채팅하기"

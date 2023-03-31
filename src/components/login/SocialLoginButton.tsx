@@ -14,11 +14,11 @@ export interface SocialLoginButtonProps {
 const STATESTRING = randomString(20);
 
 const KaKaoButton = tw.div<SocialLoginButtonProps>`
-w-full h-[52px] flex items-center justify-center text-sm rounded-[4px] hover:opacity-90 border border-transparent hover:brand-2 bg-[#F9E000] px-0 text-white leading-3 font-normal
+w-full h-[3.25rem] flex items-center justify-center text-sm rounded-[0.25rem] hover:opacity-90 border border-transparent hover:brand-2 bg-[#F9E000] px-0 text-white leading-3 font-normal
 `;
 
 const NaverButton = tw.div<SocialLoginButtonProps>`
-w-full h-[52px] flex items-center justify-center text-sm rounded-[4px] hover:opacity-90 border border-transparent text-[#38B1E1E] hover:brand-2 bg-[#02C75A] px-0 text-white leading-3 font-normal
+w-full h-[3.25rem] flex items-center justify-center text-sm rounded-[0.25rem] hover:opacity-90 border border-transparent text-[#38B1E1E] hover:brand-2 bg-[#02C75A] px-0 text-white leading-3 font-normal
 `;
 
 export default function SocialLoginButton({

@@ -36,9 +36,9 @@ export default function PastAuctionList({
         <table>
           <tbody>
             <tr>
-              <th className="w-[50px]">회차</th>
-              <th className="w-[190px] ">시작일</th>
-              <th className="w-[190px]">종료일</th>
+              <th className="w-[3.125rem]">회차</th>
+              <th className="w-[11.875rem] ">시작일</th>
+              <th className="w-[11.875rem]">종료일</th>
             </tr>
             {!!auctionDateList &&
               auctionDateList.map((it, idx) => (

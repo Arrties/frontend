@@ -105,7 +105,7 @@ function Login() {
         <div className="flex h-40 items-center justify-center">
           <Image
             alt="logo"
-            src="/svg/icons/icon_logo_main.svg"
+            src="/svg/icons/logo_main.svg"
             width="60"
             height="60"
           />
@@ -121,7 +121,7 @@ function Login() {
             />
             {errors.userId && <ErrorMessage message={errors.userId.message} />}
           </div>
-          <div className="mt-[10px] flex flex-col justify-start">
+          <div className="mt-[0.625rem] flex flex-col justify-start">
             <Input
               type="password"
               id="password"
@@ -135,7 +135,7 @@ function Login() {
               <ErrorMessage message={errors.password.message} />
             )}
           </div>
-          <div className="mt-[14px] flex space-x-[22px]">
+          <div className="mt-[0.875rem] flex space-x-[1.375rem]">
             <CheckBox
               kind="radio"
               id="autoSave"
@@ -151,7 +151,7 @@ function Login() {
               handler={(e) => onChecked(e.target.checked, e.target.id)}
             />
           </div>
-          <div className="mt-[34px]">
+          <div className="mt-[2.125rem]">
             <Button text="로그인" className="w-full" />
           </div>
           <div className="mt-6 space-y-3">
@@ -164,21 +164,21 @@ function Login() {
           </div>
           <p className="mt-3 w-full text-center text-12">
             계정을 잊으셨나요?&nbsp;
-            <Link className="text-[#0099FF]" href="/auth/id">
+            <Link className="text-12 text-[#0099FF]" href="/auth/id">
               ID찾기
             </Link>
             &nbsp;또는&nbsp;
-            <Link className="text-[#0099FF]" href="/auth/password">
+            <Link className="text-12 text-[#0099FF]" href="/auth/password">
               비밀번호 찾기
             </Link>
           </p>
           <p className="mt-12 mb-9 flex w-full items-center justify-center text-12 ">
             <span className="text-[#999999]">아직 회원이 아니신가요?</span>
-            <Link className="ml-[2px]" href="/auth/join01">
+            <Link className="ml-[0.125rem]" href="/auth/join01">
               회원가입
             </Link>
             <Image
-              src="/svg/icons/icon_front.svg"
+              src="/svg/icons/front.svg"
               alt="join"
               width={12}
               height={12}

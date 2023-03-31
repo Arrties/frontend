@@ -66,7 +66,7 @@ export default function GenreModal({
               genre.includes(genreList.name)
                 ? 'border-brand text-brand'
                 : 'border-[#CECECE] text-black'
-            } w cursor-pointer rounded border px-3 py-[11px] text-center text-14 leading-5`}
+            } w cursor-pointer rounded border px-3 py-[0.6875rem] text-center text-14 leading-5`}
             onClick={() => onGenreClick(genreList.name)}
           >
             <p>{genreList.name}</p>
@@ -74,7 +74,7 @@ export default function GenreModal({
         ))}
       </div>
       {isEmpty && (
-        <div className="mt-52 rounded-[8px] bg-[#191919] py-4 px-3 text-12 text-white">
+        <div className="mt-52 rounded-[0.5rem] bg-[#191919] py-4 px-3 text-12 text-white">
           관련 작품이 없어요.
         </div>
       )}

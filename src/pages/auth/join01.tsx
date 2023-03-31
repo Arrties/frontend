@@ -19,7 +19,7 @@ interface DefaultProps {
 }
 
 const CheckBoxList = tw.li<DefaultProps>`
-pb-[18px] flex justify-between
+pb-[1.125rem] flex justify-between
 `;
 
 export default function Join01() {
@@ -93,7 +93,7 @@ export default function Join01() {
         handleRightButton={handleRightButton}
       />
       <form onSubmit={handleSubmit(onSubmit)} autoComplete="off">
-        <div className="mt-8 pb-[18px]">
+        <div className="mt-8 pb-[1.125rem]">
           <CheckBox
             id="selectAll"
             label="전체동의"
@@ -112,7 +112,7 @@ export default function Join01() {
                 handler={(e) => onChecked(e.target.checked, e.target.id)}
               />
               <Image
-                src="/svg/icons/icon_arrow.svg"
+                src="/svg/icons/arrow.svg"
                 alt="arrowBtn"
                 width={7}
                 height={0}
@@ -131,7 +131,7 @@ export default function Join01() {
                 handler={(e) => onChecked(e.target.checked, e.target.id)}
               />
               <Image
-                src="/svg/icons/icon_arrow.svg"
+                src="/svg/icons/arrow.svg"
                 alt="arrowBtn"
                 width={7}
                 height={0}
@@ -152,7 +152,7 @@ export default function Join01() {
                 handler={(e) => onCheckedPromotion(e.target.checked)}
               />
               <Image
-                src="/svg/icons/icon_arrow.svg"
+                src="/svg/icons/arrow.svg"
                 alt="arrowBtn"
                 width={7}
                 height={0}
@@ -180,7 +180,7 @@ export default function Join01() {
                     label="SMS 수신 동의(선택)"
                     isChecked={checkedTerm.includes('term4')}
                     handler={(e) => {
-                      console.log(e);
+                      e;
                       onChecked(e.target.checked, e.target.id);
                     }}
                   />
@@ -202,7 +202,7 @@ export default function Join01() {
             !(checkedTerm.includes('term1') && checkedTerm.includes('term2'))
           }
           text="확인"
-          className="absolute inset-x-0 bottom-[34px] m-auto"
+          className="absolute inset-x-0 bottom-[2.125rem] m-auto"
         />
       </form>
       <Modal

@@ -14,11 +14,11 @@ interface PickArtistForm {
 }
 
 const PickArtistContainer = tw.div<DefaultProps>`
-w-full text-14 h-[98px] flex items-center cursor-pointer
+w-full text-14 h-[6.125rem] flex items-center cursor-pointer
 `;
 
 const PickArtistProfile = tw.div<DefaultProps>`
-w-[50px] relative mr-[10px] rounded-full aspect-square flex justify-center items-center rounded-full border-[1px] border-[#999999]
+w-[3.125rem] relative mr-[0.625rem] rounded-full aspect-square flex justify-center items-center rounded-full border-[0.0625rem] border-[#999999]
 `;
 
 export default function PickArtist({
@@ -40,7 +40,7 @@ export default function PickArtist({
     >
       <PickArtistProfile>
         <Image
-          src={image || '/svg/icons/profile/icon_avatar.svg'}
+          src={image || '/svg/icons/profile/avatar.svg'}
           alt="avatar"
           // width={28}
           // height={28}
