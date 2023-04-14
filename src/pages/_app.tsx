@@ -13,7 +13,7 @@ import { Router, useRouter } from 'next/router';
 import { getToken } from '@utils/localStorage/token';
 import { pageview } from '@utils/gtag';
 import GoogleScript from '@components/GoogleScript';
-import MetaHead from '@components/MetaHead';
+import Head from 'next/head';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -72,7 +72,9 @@ export default function App({ Component, pageProps }: AppProps) {
     <Loader />
   ) : (
     <div className="flex h-screen w-screen justify-center bg-slate-50 ">
-      <MetaHead />
+      <Head>
+        <title>Atties</title>
+      </Head>
       <GoogleScript />
       <Suspense fallback={<Loader />}>
         <Provider store={store}>
