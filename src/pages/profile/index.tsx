@@ -96,7 +96,7 @@ export default function Profile() {
   const router = useRouter();
   const { data } = useGetProfile();
   const hasKeyword = !!data?.keywords?.length;
-  console.log(hasKeyword);
+  const hasImage = !!data?.image;
 
   return (
     <>
@@ -115,9 +115,9 @@ export default function Profile() {
         <section>
           <WelcomeBox>
             <div className="relative flex h-[3.375rem] w-[3.375rem] items-center overflow-hidden rounded-full bg-[#EDEDED]">
-              {data?.image ? (
+              {hasImage ? (
                 <Image
-                  src={data?.image}
+                  src={data.image}
                   alt="profile"
                   priority
                   fill
@@ -157,7 +157,7 @@ export default function Profile() {
                 />
               )}
             </div>
-            <div className="ml-3 flex flex-col  text-[#FFFFFF]">
+            <div className="ml-3 flex flex-col text-[#FFFFFF]">
               <span className="font-medium">
                 {data?.nickname ? data?.nickname : '회원'}님,
               </span>
