@@ -95,6 +95,8 @@ const SettingLists: SettingList[] = [
 export default function Profile() {
   const router = useRouter();
   const { data } = useGetProfile();
+  const hasKeyword = !!data?.keywords?.length;
+  console.log(hasKeyword);
 
   return (
     <>
@@ -215,7 +217,7 @@ export default function Profile() {
         <section className="my-10">
           <div className="relative my-4 flex">
             <span className="text-14 font-bold text-[#191919]">취향 목록</span>
-            {data?.keywords && (
+            {hasKeyword && (
               <Image
                 src="/svg/icons/pencil_gray_bright.svg"
                 alt="edit_keywords"
@@ -228,14 +230,14 @@ export default function Profile() {
               />
             )}
           </div>
-          {!!data?.keywords?.length ? (
+          {hasKeyword ? (
             <div className="mb-8 flex flex-wrap">
               {data?.keywords?.map((keyword: string, idx: number) => (
                 <KeywordBox text={keyword} key={idx} />
               ))}
             </div>
           ) : (
-            <div className="mt-6 mb-12 flex justify-center text-center">
+            <div className="mb-12 mt-6 flex justify-center text-center">
               <button
                 onClick={() => {
                   router.push('/profile/keyword');
@@ -270,4 +272,3 @@ export default function Profile() {
     </>
   );
 }
-//
