@@ -1,4 +1,4 @@
-import { useQuery } from 'react-query';
+import { useQuery } from '@tanstack/react-query';
 import chatApi from '@apis/chat/chatApi';
 
 const useGetChatRoom = (id: number) => {

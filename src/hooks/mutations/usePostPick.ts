@@ -1,10 +1,10 @@
 import profileApi from '@apis/profile/profileApi';
 import { queryClient } from 'pages/_app';
-import { useMutation } from 'react-query';
+import { useMutation } from '@tanstack/react-query';
 
 const usePostPick = (artWorkId: number) => {
   return useMutation<any, Error>(
-    'usePostPick',
+    ['usePostPick'],
     () => profileApi.postPick(artWorkId),
     {
       onMutate: async () => {

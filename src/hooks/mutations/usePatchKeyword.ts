@@ -1,10 +1,10 @@
 import profileApi from '@apis/profile/profileApi';
 import { Keyword, KeywordForm } from '@apis/profile/profileApi.type';
-import { useMutation } from 'react-query';
+import { useMutation } from '@tanstack/react-query';
 
 const usePatchKeyword = () => {
   return useMutation<Keyword[], Error, KeywordForm>(
-    'useKeywordMuation',
+    ['useKeywordMuation'],
     (data) => profileApi.patchKeyword(data),
   );
 };

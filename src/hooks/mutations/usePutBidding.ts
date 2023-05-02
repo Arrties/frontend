@@ -1,10 +1,10 @@
 import { queryClient } from 'pages/_app';
 import auctionApi from '@apis/auction/auctionApi';
-import { useMutation } from 'react-query';
+import { useMutation } from '@tanstack/react-query';
 
 const usePutBiddng = (artWorkId: number) => {
   return useMutation<any, Error, BiddingRequest>(
-    'usePutBiddng',
+    ['usePutBiddng'],
     ({ price }) => auctionApi.putBidding(artWorkId, price),
     {
       onSettled: () => {

@@ -115,7 +115,7 @@ export default postApi;
 🧭 **Example**
 
 ```tsx
-import { useQuery } from 'react-query';
+import { useQuery } from '@tanstack/react-query';
 import postApi from './PostApi.ts';
 import { QueryHookParams } from 'apis/type';
 import { QUERY_KEY } from 'constants/query-keys';
@@ -141,7 +141,7 @@ export const useGetPostsQuery = (
 🧭 **Example**
 
 ```tsx
-import { useMutation } from 'react-query';
+import { useMutation } from '@tanstack/react-query';
 import postApi from './PostApi.ts';
 import { MutationHookParams } from 'apis/type';
 export const useDeletePostMutation = (

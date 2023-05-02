@@ -1,8 +1,8 @@
 import artworkApi from '@apis/artwork/artworkApi';
-import { useQuery } from 'react-query';
+import { useQuery } from '@tanstack/react-query';
 
 const useGetBid = () => {
-  return useQuery<BidArtwork, Error>('useGetBid', () => artworkApi.getBid());
+  return useQuery<BidArtwork, Error>(['useGetBid'], () => artworkApi.getBid());
 };
 
 export default useGetBid;

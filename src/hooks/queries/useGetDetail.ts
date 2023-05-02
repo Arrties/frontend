@@ -1,5 +1,5 @@
 import artworkApi from '@apis/artwork/artworkApi';
-import { useQuery } from 'react-query';
+import { useQuery } from '@tanstack/react-query';
 
 const useGetDetail = (artWorkId: number) => {
   return useQuery<ArtworkDetail, Error>(

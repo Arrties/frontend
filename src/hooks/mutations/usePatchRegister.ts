@@ -1,8 +1,8 @@
 import profileApi from '@apis/profile/profileApi';
-import { useMutation } from 'react-query';
+import { useMutation } from '@tanstack/react-query';
 
 const usePatchResgister = () => {
-  return useMutation('usePatchResgister', (formData: FormData) =>
+  return useMutation(['usePatchResgister'], (formData: FormData) =>
     profileApi.patchProfile(formData),
   );
 };

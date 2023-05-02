@@ -1,9 +1,9 @@
-import { useQuery } from 'react-query';
+import { useQuery } from '@tanstack/react-query';
 import chatApi from '@apis/chat/chatApi';
 
 const useGetChatRoomList = () => {
   return useQuery<ChatRoomList, Error>(
-    'useGetChatRoomList',
+    ['useGetChatRoomList'],
     () => chatApi.getChatRoomList(),
     { retry: 0, refetchOnWindowFocus: false },
   );

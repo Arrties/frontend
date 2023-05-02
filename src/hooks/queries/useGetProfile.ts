@@ -1,10 +1,10 @@
-import { useQuery } from 'react-query';
+import { useQuery } from '@tanstack/react-query';
 import authApi from '@apis/auth/authApi';
 import { useRouter } from 'next/router';
 const useGetProfile = () => {
   const router = useRouter();
   return useQuery<Member, Error>(
-    'useGetProfile',
+    ['useGetProfile'],
     () => authApi.getMemberProfile(),
     {
       onSuccess: (data) => {
