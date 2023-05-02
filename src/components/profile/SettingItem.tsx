@@ -3,6 +3,7 @@ import arrow from '@public/svg/icons/arrow_light_gray.svg';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { deleteToken } from '@utils/localStorage/token';
+import React from 'react';
 
 interface SettingItemProps {
   key: string;
@@ -10,7 +11,10 @@ interface SettingItemProps {
   path: string;
 }
 
-export default function SettingItem({ text, path }: SettingItemProps) {
+export default React.memo(function SettingItem({
+  text,
+  path,
+}: SettingItemProps) {
   const router = useRouter();
   const handleNavigate = async () => {
     if (text === '로그아웃') {
@@ -21,7 +25,7 @@ export default function SettingItem({ text, path }: SettingItemProps) {
   };
   return (
     <div
-      className="flex cursor-pointer justify-between border-b-[0.0625rem] border-[#F4F4F4] py-[0.875rem] text-sm text-14 font-bold"
+      className="flex cursor-pointer justify-between border-b-[0.0625rem] border-[#F4F4F4] py-[0.875rem] text-14 text-sm font-bold"
       onClick={handleNavigate}
     >
       <span>{text}</span>
@@ -30,4 +34,4 @@ export default function SettingItem({ text, path }: SettingItemProps) {
       </button>
     </div>
   );
-}
+});

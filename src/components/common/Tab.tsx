@@ -48,7 +48,7 @@ interface TabItemProps {
   [key: string]: any;
 }
 
-export default React.memo(function Tab() {
+export default function Tab() {
   const router = useRouter();
 
   return (
@@ -60,4 +60,4 @@ export default React.memo(function Tab() {
       </TabList>
     </TabBox>
   );
-});
+}
